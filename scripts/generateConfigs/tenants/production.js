@@ -51,7 +51,6 @@ const productionTenants = {
     },
     gtmId: 'GTM-WN7C84',
     host: 'app.eu.sparkpost.com',
-    labsBase: 'https://api.eu.sparkpost.com/api/labs',
     siftScience: {
       accountPrefix: 'spceu-',
       id: '7c5f68d795'
@@ -82,7 +81,6 @@ const productionTenants = {
     },
     gtmId: 'GTM-WN7C84',
     host: 'app.sparkpost.com',
-    labsBase: 'https://api.sparkpost.com/api/labs',
     nextHost: 'phoenix-next-prd.sparkpost.com',
     originHost: 'phoenix-origin-prd.sparkpost.com',
     siftScience: {

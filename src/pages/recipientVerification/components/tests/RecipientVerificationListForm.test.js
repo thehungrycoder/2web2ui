@@ -6,20 +6,16 @@ import { RecipientVerificationListForm } from '../RecipientVerificationListForm'
 
 describe('RecipientVerificationListForm', () => {
   let props;
-  let formValues;
-  let csv;
+  let formValuesWithCsv;
 
   beforeEach(() => {
     props = {
       handleSubmit: jest.fn()
     };
-    formValues = {
-      name: 'Freddie II Jr',
-      id: 'fred-2-jr',
-      description: 'Royalty amongst the fredericks'
-    };
 
-    csv = 'email,metadata\nscratch@example.com,"{""flavor"":""vanilla""}"\n';
+    formValuesWithCsv = {
+      csv: 'email,foo@address.com\nbar@address.com\n'
+    };
   });
 
   it('defaults to create mode', () => {
@@ -52,38 +48,18 @@ describe('RecipientVerificationListForm', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should submit without recipients', async () => {
+  it('should submit csv', async () => {
     const onSubmit = jest.fn();
     const wrapper = shallow(<RecipientVerificationListForm onSubmit={onSubmit} {...props} />);
-    await wrapper.instance().preSubmit(formValues);
-    expect(onSubmit).toHaveBeenCalledWith(formValues);
-  });
-
-  it('should submit with recipients', async () => {
-    const formValuesWithCsv = { csv, ...formValues };
-    const parsedFormValues = {
-      recipients: [
-        {
-          address: {
-            email: 'scratch@example.com'
-          },
-          metadata: { flavor: 'vanilla' }
-        }
-      ],
-      ...formValues
-    };
-    const onSubmit = jest.fn();
-    const wrapper = shallow(<RecipientVerificationListForm onSubmit={onSubmit} {...props} />);
-    await wrapper.instance().preSubmit(formValuesWithCsv);
-    expect(onSubmit).toHaveBeenCalledWith(parsedFormValues);
+    await wrapper.instance().createForm(formValuesWithCsv);
+    expect(onSubmit).toHaveBeenCalledWith(formValuesWithCsv);
   });
 
   it('should throw on submit if CSV parsing fails', () => {
-    const csv = 'email,metadata\nscratchexample.com,"{""flavor"":""vanilla"""\n';
-    const formValuesWithCsv = { csv, ...formValues };
+    formValuesWithCsv.csv = 'email,metadata\nscratchexample.com,"{""flavor"":""vanilla"""\n';
     const onSubmit = jest.fn();
     const wrapper = shallow(<RecipientVerificationListForm onSubmit={onSubmit} {...props} />);
-    expect(wrapper.instance().preSubmit(formValuesWithCsv)).rejects.toMatchSnapshot();
+    expect(wrapper.instance().createForm(formValuesWithCsv)).rejects.toMatchSnapshot();
     expect(onSubmit).not.toHaveBeenCalled();
   });
 });

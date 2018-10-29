@@ -17,7 +17,7 @@ export class RecipientVerificationListForm extends Component {
     selectedTab: 0
   };
 
-  onSubmit = (fields) => {
+  createForm = (fields) => {
     const form_data = new FormData();
     form_data.append('upload', fields.csv);
     return this.props.createRecipientVerificationList(form_data);
@@ -50,7 +50,7 @@ export class RecipientVerificationListForm extends Component {
       //   {error ? this.renderError() : null}
       <Fragment>
         {error && this.renderCsvErrors()}
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <form onSubmit={handleSubmit(this.createForm)}>
           <Panel.Section>
             <p className={styles.Paragraph}>Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.</p>
             <Field

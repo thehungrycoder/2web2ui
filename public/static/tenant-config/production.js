@@ -25,7 +25,6 @@ window.SP.productionConfig = {
   },
   gaTag: 'UA-111136819-2',
   gtmId: 'GTM-P87NNJ4',
-  labsBase: 'http://api.sparkpost.test/api/labs',
   sentry: {
     projectId: 232588,
     publicKey: '63149b1565df4b7199db939a4410b47a'

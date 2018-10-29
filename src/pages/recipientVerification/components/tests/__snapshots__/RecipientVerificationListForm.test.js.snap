@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipientVerificationListForm defaults to create mode 1`] = `
+<Fragment>
+  <form>
+    <Panel.Section>
+      <p
+        className="Paragraph"
+      >
+        Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.
+      </p>
+      <Field
+        component={[Function]}
+        fileType="csv"
+        helpText={
+          <span>
+            You can download a 
+            <DownloadLink
+              href="example-recipient-verification-list.csv"
+            >
+              CSV template here
+            </DownloadLink>
+             to use when formatting your recipient list for upload.
+          </span>
+        }
+        label="Upload a list of email addresses to verify"
+        name="csv"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Verify Email Addresses
+      </Button>
+    </Panel.Section>
+  </form>
+</Fragment>
+`;
+
+exports[`RecipientVerificationListForm renders CSV errors 1`] = `
+<Fragment>
+  <Banner
+    status="danger"
+    title="CSV Format Errors"
+  >
+    <Error
+      error="Line 73: Too many notes"
+      key="0"
+    />
+    <Error
+      error="Line 247: Vanilla is unacceptable"
+      key="1"
+    />
+  </Banner>
+  <form>
+    <Panel.Section>
+      <p
+        className="Paragraph"
+      >
+        Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.
+      </p>
+      <Field
+        component={[Function]}
+        fileType="csv"
+        helpText={
+          <span>
+            You can download a 
+            <DownloadLink
+              href="example-recipient-verification-list.csv"
+            >
+              CSV template here
+            </DownloadLink>
+             to use when formatting your recipient list for upload.
+          </span>
+        }
+        label="Upload a list of email addresses to verify"
+        name="csv"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Verify Email Addresses
+      </Button>
+    </Panel.Section>
+  </form>
+</Fragment>
+`;
+
+exports[`RecipientVerificationListForm renders correctly in create mode 1`] = `
+<Fragment>
+  <form>
+    <Panel.Section>
+      <p
+        className="Paragraph"
+      >
+        Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.
+      </p>
+      <Field
+        component={[Function]}
+        fileType="csv"
+        helpText={
+          <span>
+            You can download a 
+            <DownloadLink
+              href="example-recipient-verification-list.csv"
+            >
+              CSV template here
+            </DownloadLink>
+             to use when formatting your recipient list for upload.
+          </span>
+        }
+        label="Upload a list of email addresses to verify"
+        name="csv"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Verify Email Addresses
+      </Button>
+    </Panel.Section>
+  </form>
+</Fragment>
+`;
+
+exports[`RecipientVerificationListForm renders correctly in edit mode 1`] = `
+<Fragment>
+  <form>
+    <Panel.Section>
+      <p
+        className="Paragraph"
+      >
+        Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.
+      </p>
+      <Field
+        component={[Function]}
+        fileType="csv"
+        helpText={
+          <span>
+            You can download a 
+            <DownloadLink
+              href="example-recipient-verification-list.csv"
+            >
+              CSV template here
+            </DownloadLink>
+             to use when formatting your recipient list for upload.
+          </span>
+        }
+        label="Upload a list of email addresses to verify"
+        name="csv"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Verify Email Addresses
+      </Button>
+    </Panel.Section>
+  </form>
+</Fragment>
+`;
+
+exports[`RecipientVerificationListForm should disable form elements on submit 1`] = `
+<Fragment>
+  <form>
+    <Panel.Section>
+      <p
+        className="Paragraph"
+      >
+        Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.
+      </p>
+      <Field
+        component={[Function]}
+        disabled={true}
+        fileType="csv"
+        helpText={
+          <span>
+            You can download a 
+            <DownloadLink
+              href="example-recipient-verification-list.csv"
+            >
+              CSV template here
+            </DownloadLink>
+             to use when formatting your recipient list for upload.
+          </span>
+        }
+        label="Upload a list of email addresses to verify"
+        name="csv"
+        required={true}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Verify Email Addresses
+      </Button>
+    </Panel.Section>
+  </form>
+</Fragment>
+`;
