@@ -1,6 +1,29 @@
 import React, { createContext, Component } from 'react';
 import moment from 'moment';
 
+/**
+ * PollContext
+ * A simple polling service that persists between route changes
+ * @prop startPolling func
+ * @prop stoptPolling func
+ *
+ * @example
+ * <PollContext.Consumer>
+ *   {({ startPolling, stopPolling }) =>(
+ *    <button onClick={() => startPolling(action)} />
+ *    <button onClick={() => stopPolling(action.key)} />
+ *   )}
+ * </PollContext.Consumer>
+ *
+ * Action model:
+ * {
+ *   key: 'identifier', A string to represent this action
+ *   interval: 1000, Time in ms between each poll
+ *   duration: 5000, Time in ms to stop polling
+ *   action: () => () The func to call at every interval until duration has reached
+ * }
+ */
+
 const defaultContext = {};
 const defaultAction = {
   interval: 1000,
@@ -11,9 +34,6 @@ export const PollContext = createContext(defaultContext);
 
 /**
  * PollContext Provider
- * A simple polling service that persists between route changes
- * @prop startPolling func
- * @prop stoptPolling func
  */
 class Poll extends Component {
   state = defaultContext;
