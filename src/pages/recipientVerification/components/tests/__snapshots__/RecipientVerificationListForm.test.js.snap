@@ -2,19 +2,8 @@
 
 exports[`RecipientVerificationListForm renders CSV errors 1`] = `
 <Fragment>
-  <Banner
-    status="danger"
-    title="CSV Format Errors"
-  >
-    <Error
-      error="Line 73: Too many notes"
-      key="0"
-    />
-    <Error
-      error="Line 247: Vanilla is unacceptable"
-      key="1"
-    />
-  </Banner>
+  Line 73: Too many notes
+  Line 247: Vanilla is unacceptable
   <form
     onSubmit={[Function]}
   >
@@ -158,29 +147,9 @@ Array [
       Symbol(impl): FormDataImpl {
         "_entries": Array [
           Object {
-            "name": "upload",
+            "name": "myupload",
             "value": "email,foo@address.com
 bar@address.com
-",
-          },
-        ],
-        Symbol(wrapper): [Circular],
-      },
-    },
-  ],
-]
-`;
-
-exports[`RecipientVerificationListForm should throw on submit if CSV parsing fails 1`] = `
-Array [
-  Array [
-    FormData {
-      Symbol(impl): FormDataImpl {
-        "_entries": Array [
-          Object {
-            "name": "upload",
-            "value": "email,metadata
-scratchexample.com,\\"{\\"\\"flavor\\"\\":\\"\\"vanilla\\"\\"\\"
 ",
           },
         ],
