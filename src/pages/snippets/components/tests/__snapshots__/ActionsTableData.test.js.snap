@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ActionsTableData renders actions popover 1`] = `
+exports[`ActionsTableData by default 1`] = `
 <ActionPopover
   actions={
     Array [
       Object {
         "Component": [Function],
-        "content": "Edit",
+        "content": "View",
         "section": 1,
         "to": "/snippets/edit/example-id",
       },
@@ -21,7 +21,7 @@ exports[`ActionsTableData renders actions popover 1`] = `
 />
 `;
 
-exports[`ActionsTableData renders actions popover with subaccount specific edit & delete links 1`] = `
+exports[`ActionsTableData with access to create 1`] = `
 <ActionPopover
   actions={
     Array [
@@ -29,7 +29,7 @@ exports[`ActionsTableData renders actions popover with subaccount specific edit 
         "Component": [Function],
         "content": "Edit",
         "section": 1,
-        "to": "/snippets/edit/example-id?subaccount=999",
+        "to": "/snippets/edit/example-id",
       },
       Object {
         "content": "Delete",
@@ -42,13 +42,13 @@ exports[`ActionsTableData renders actions popover with subaccount specific edit 
 />
 `;
 
-exports[`ActionsTableData renders actions popover without delete link 1`] = `
+exports[`ActionsTableData with subaccount 1`] = `
 <ActionPopover
   actions={
     Array [
       Object {
         "Component": [Function],
-        "content": "Edit",
+        "content": "View",
         "section": 1,
         "to": "/snippets/edit/example-id?subaccount=999",
       },
@@ -56,7 +56,7 @@ exports[`ActionsTableData renders actions popover without delete link 1`] = `
         "content": "Delete",
         "onClick": [Function],
         "section": 2,
-        "visible": false,
+        "visible": undefined,
       },
     ]
   }
