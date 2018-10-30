@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipient Verification Actions .uploadRecipientVerificationList when uploading csv 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "data": "csv-file",
+      },
+      "method": "POST",
+      "url": "labs/recipient-verification-api",
+    },
+    "type": "UPLOAD_RECIPIENT_VERIFICATION_LIST",
+  },
+]
+`;

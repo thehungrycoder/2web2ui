@@ -53,7 +53,7 @@ const uatTenants = {
   uat: {
     apiBase: 'https://api-uat.tst.sparkpost.com/api',
     bounceDomains: {
-      cnameValue: 'uat-public.mail.e.sparkpost.com',
+      cnameValue: 'uat-public.mail.e.sparkpost.com'
     },
     crossLinkTenant: 'spceu',
     featureFlags: {
