@@ -26,6 +26,7 @@ import {
   JoinPage,
   passwordReset,
   PremiumSupportPage,
+  RecipientVerificationPage,
   snippets
 } from 'src/pages';
 
@@ -41,7 +42,8 @@ import {
   isAws,
   isCustomBilling,
   isEnterprise,
-  isSelfServeBilling
+  isSelfServeBilling,
+  hasUiOption
 } from 'src/helpers/conditions/account';
 import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
@@ -658,6 +660,14 @@ const routes = [
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Send a Test Email (REST)',
     supportDocSearch: 'smtp'
+  },
+  {
+    path: '/recipient-verification',
+    component: RecipientVerificationPage,
+    condition: all(hasGrants('recipient-verification-api/manage'), hasUiOption('recipientverif')),
+    layout: App,
+    title: 'Recipient Email Verification',
+    supportDocsSearch: 'Recipient Verification'
   },
   {
     path: '/support/aws-premium',

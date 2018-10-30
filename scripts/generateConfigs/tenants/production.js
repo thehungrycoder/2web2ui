@@ -71,7 +71,7 @@ const productionTenants = {
   spc: {
     apiBase: 'https://api.sparkpost.com/api',
     bounceDomains: {
-      cnameValue: 'sparkpostmail.com',
+      cnameValue: 'sparkpostmail.com'
     },
     crossLinkTenant: 'spceu',
     featureFlags: {

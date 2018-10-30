@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipientVerificationListForm renders CSV errors 1`] = `
+<Fragment>
+  <form
+    onSubmit={[Function]}
+  >
+    <p
+      className="Paragraph"
+    >
+      Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.
+    </p>
+    <Field
+      component={[Function]}
+      fileType="csv"
+      helpText={
+        <span>
+          You can download a 
+          <DownloadLink
+            href="example-recipient-verification-list.csv"
+          >
+            CSV template here
+          </DownloadLink>
+           to use when formatting your recipient list for upload.
+        </span>
+      }
+      label="Upload a list of email addresses to verify"
+      name="csv"
+      required={true}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Verify Email Addresses
+    </Button>
+  </form>
+</Fragment>
+`;
+
+exports[`RecipientVerificationListForm renders correctly 1`] = `
+<Fragment>
+  <form
+    onSubmit={[Function]}
+  >
+    <p
+      className="Paragraph"
+    >
+      Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.
+    </p>
+    <Field
+      component={[Function]}
+      fileType="csv"
+      helpText={
+        <span>
+          You can download a 
+          <DownloadLink
+            href="example-recipient-verification-list.csv"
+          >
+            CSV template here
+          </DownloadLink>
+           to use when formatting your recipient list for upload.
+        </span>
+      }
+      label="Upload a list of email addresses to verify"
+      name="csv"
+      required={true}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Verify Email Addresses
+    </Button>
+  </form>
+</Fragment>
+`;
+
+exports[`RecipientVerificationListForm should disable form elements on submit 1`] = `
+<Fragment>
+  <form
+    onSubmit={[Function]}
+  >
+    <p
+      className="Paragraph"
+    >
+      Verify a list of your recipients by separating deliverable email addresses from rejected or undeliverable email addresses.
+    </p>
+    <Field
+      component={[Function]}
+      fileType="csv"
+      helpText={
+        <span>
+          You can download a 
+          <DownloadLink
+            href="example-recipient-verification-list.csv"
+          >
+            CSV template here
+          </DownloadLink>
+           to use when formatting your recipient list for upload.
+        </span>
+      }
+      label="Upload a list of email addresses to verify"
+      name="csv"
+      required={true}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Verify Email Addresses
+    </Button>
+  </form>
+</Fragment>
+`;
+
+exports[`RecipientVerificationListForm should submit csv 1`] = `
+Array [
+  Array [
+    FormData {
+      Symbol(impl): FormDataImpl {
+        "_entries": Array [
+          Object {
+            "name": "myupload",
+            "value": "email,foo@address.com
+bar@address.com
+",
+          },
+        ],
+        Symbol(wrapper): [Circular],
+      },
+    },
+  ],
+]
+`;
