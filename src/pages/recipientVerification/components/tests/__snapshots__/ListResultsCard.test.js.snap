@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListResultsCard renders correctly when completed 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    className="IconWrapper"
+  >
+    <InsertDriveFile
+      size={40}
+    />
+  </div>
+  <h6>
+    Verification Results
+  </h6>
+  <div
+    className="LoadingWrapper"
+  >
+    <LoadingSVG
+      small={true}
+    />
+  </div>
+  <LabelledValue
+    label="Uploaded"
+  >
+    <p
+      className="RightAlign"
+    >
+      Jan 18 1970, 3:04pm
+    </p>
+  </LabelledValue>
+  <LabelledValue
+    label="Status"
+  >
+    <h6
+      className="RightAlign"
+    >
+      Processing
+    </h6>
+  </LabelledValue>
+</Panel>
+`;
+
+exports[`ListResultsCard renders correctly when not completed 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    className="IconWrapper"
+  >
+    <InsertDriveFile
+      size={40}
+    />
+  </div>
+  <h6>
+    Verification Results
+  </h6>
+  <div
+    className="LoadingWrapper"
+  >
+    <LoadingSVG
+      small={true}
+    />
+  </div>
+  <LabelledValue
+    label="Uploaded"
+  >
+    <p
+      className="RightAlign"
+    >
+      Jan 18 1970, 3:04pm
+    </p>
+  </LabelledValue>
+  <LabelledValue
+    label="Status"
+  >
+    <h6
+      className="RightAlign"
+    >
+      Processing
+    </h6>
+  </LabelledValue>
+</Panel>
+`;

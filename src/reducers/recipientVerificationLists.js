@@ -1,29 +1,62 @@
 const initialState = {
-  list: [],
-  loading: false,
   singleResults: undefined,
-  errors: undefined
+  errors: undefined,
+  uploadLoading: false,
+  listResultsLoading: false,
+  listResults: null
 };
 
 export default (state = initialState, { meta, payload, type }) => {
   switch (type) {
-    case 'CREATE_RECIPIENT_VERIFICATION_LIST_PENDING':
-      return { ...state, loading: true };
+
+    // List Upload
+    case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_PENDING':
+      return { ...state, uploadLoading: true };
 
     case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_SUCCESS':
       return {
         ...state,
-        loading: false,
-        list: [ ...state.list, {
-          id: payload.id,
-          name: payload.name,
-          total_accepted_recipients: payload.total_accepted_recipients,
-          description: meta.data.description
-        }]
+        uploadLoading: false,
+        listResults: {
+          id: payload.list_id
+        }
       };
 
-    case 'CREATE_RECIPIENT_VERIFICATION_LIST_FAIL':
-      return { ...state, loading: false };
+    case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_FAIL':
+      return { ...state, uploadLoading: false };
+
+    // List Results
+    case 'GET_LATEST_PENDING':
+      return { ...state, listResultsLoading: true, listResults: null };
+
+    case 'GET_LATEST_ERROR':
+      return { ...state, listResultsLoading: false };
+
+    case 'GET_LATEST_SUCCESS':
+      return {
+        ...state,
+        listResultsLoading: false,
+        listResults: {
+          complete: payload.complete,
+          list_id: payload.list_id
+        }
+      };
+
+    case 'GET_JOB_PENDING':
+      return { ...state, listResultsLoading: true };
+
+    case 'GET_JOB_ERROR':
+      return { ...state, listResultsLoading: false };
+
+    case 'GET_JOB_SUCCESS':
+      return {
+        ...state,
+        listResultsLoading: false,
+        listResults: {
+          complete: payload.complete,
+          list_id: payload.list_id
+        }
+      };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_PENDING':
       return { ...state, singleResults: undefined, errors: undefined };

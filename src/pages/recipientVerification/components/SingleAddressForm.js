@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
-import styles from './RecipientVerificationPage.module.scss';
 import { required, maxLength } from 'src/helpers/validation';
 import { singleAddress } from 'src/actions/recipientVerificationLists';
 import SingleResult from './SingleResult';
@@ -21,7 +20,7 @@ export class SingleAddressForm extends Component {
     return (
       <Fragment>
         <form onSubmit={handleSubmit(this.singleAddressForm)}>
-          <p className={styles.Paragraph}>Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
+          <p>Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
           <Field
             name='address'
             component={TextFieldWrapper}
