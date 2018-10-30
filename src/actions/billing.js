@@ -84,8 +84,8 @@ export function updateCreditCard({ data, token, signature, meta = {}}) {
 
 export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
   const url = isAwsAccount
-    ? '/account/aws-marketplace/add-ons/dedicated_ips'
-    : '/account/add-ons/dedicated_ips';
+    ? '/v1/account/aws-marketplace/add-ons/dedicated_ips'
+    : '/v1/account/add-ons/dedicated_ips';
   const action = {
     type: 'ADD_DEDICATED_IPS',
     meta: {
