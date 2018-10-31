@@ -24,20 +24,21 @@ export default (state = initialState, { meta, payload, type }) => {
       return { ...state, loading: false };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_PENDING':
-      return { ...state, loading: true };
+      return { ...state, loading: true, valid: undefined };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_SUCCESS':
       return {
         ...state,
         loading: false,
         valid: payload.valid,
-        reason: payload.reason
+        reason: payload.reason,
+        email: meta.email
       };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_FAIL':
-      return { ...state, loading: false };
+      return { ...state, loading: false, valid: undefined };
 
     default:
-      return state;
+      return { ...state, valid: undefined };
   }
 };
