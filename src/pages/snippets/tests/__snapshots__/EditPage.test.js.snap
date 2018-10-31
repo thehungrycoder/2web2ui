@@ -1,0 +1,286 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditPage redirects with alert when load request fails 1`] = `
+<Connect(RedirectAndAlert)
+  alert={
+    Object {
+      "message": "Oh no!",
+      "type": "error",
+    }
+  }
+  to="/snippets"
+/>
+`;
+
+exports[`EditPage renders disabled form when submitting 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Snippets",
+      "to": "/snippets",
+    }
+  }
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Save Snippet",
+      "disabled": true,
+      "onClick": [Function],
+    }
+  }
+  title="Edit Snippet"
+>
+  <Form
+    onSubmit={[Function]}
+  >
+    <Grid>
+      <Grid.Column
+        lg={4}
+        xs={12}
+      >
+        <Panel>
+          <Panel.Section>
+            <Field
+              component={[Function]}
+              disabled={true}
+              label="Snippet Name"
+              name="name"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+            <Field
+              component={[Function]}
+              disabled={true}
+              helpText={<IdentifierHelpText />}
+              label="Snippet ID"
+              name="id"
+            />
+          </Panel.Section>
+          <Component
+            disabled={true}
+            newTemplate={false}
+          />
+        </Panel>
+      </Grid.Column>
+      <Grid.Column
+        lg={8}
+        xs={12}
+      >
+        <LoadableComponent
+          contentOnly={true}
+          readOnly={true}
+        />
+      </Grid.Column>
+    </Grid>
+  </Form>
+</Page>
+`;
+
+exports[`EditPage renders disabled form when user does not have authorization to modify snippets 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Snippets",
+      "to": "/snippets",
+    }
+  }
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Save Snippet",
+      "disabled": true,
+      "onClick": [Function],
+    }
+  }
+  title="Edit Snippet"
+>
+  <Form
+    onSubmit={[Function]}
+  >
+    <Grid>
+      <Grid.Column
+        lg={4}
+        xs={12}
+      >
+        <Panel>
+          <Panel.Section>
+            <Field
+              component={[Function]}
+              disabled={true}
+              label="Snippet Name"
+              name="name"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+            <Field
+              component={[Function]}
+              disabled={true}
+              helpText={<IdentifierHelpText />}
+              label="Snippet ID"
+              name="id"
+            />
+          </Panel.Section>
+          <Component
+            disabled={true}
+            newTemplate={false}
+          />
+        </Panel>
+      </Grid.Column>
+      <Grid.Column
+        lg={8}
+        xs={12}
+      >
+        <LoadableComponent
+          contentOnly={true}
+          readOnly={true}
+        />
+      </Grid.Column>
+    </Grid>
+  </Form>
+</Page>
+`;
+
+exports[`EditPage renders edit form 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Snippets",
+      "to": "/snippets",
+    }
+  }
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Save Snippet",
+      "disabled": undefined,
+      "onClick": [Function],
+    }
+  }
+  title="Edit Snippet"
+>
+  <Form
+    onSubmit={[Function]}
+  >
+    <Grid>
+      <Grid.Column
+        lg={4}
+        xs={12}
+      >
+        <Panel>
+          <Panel.Section>
+            <Field
+              component={[Function]}
+              label="Snippet Name"
+              name="name"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+            <Field
+              component={[Function]}
+              disabled={true}
+              helpText={<IdentifierHelpText />}
+              label="Snippet ID"
+              name="id"
+            />
+          </Panel.Section>
+          <Component
+            newTemplate={false}
+          />
+        </Panel>
+      </Grid.Column>
+      <Grid.Column
+        lg={8}
+        xs={12}
+      >
+        <LoadableComponent
+          contentOnly={true}
+        />
+      </Grid.Column>
+    </Grid>
+  </Form>
+</Page>
+`;
+
+exports[`EditPage renders loading 1`] = `<Loading />`;
+
+exports[`EditPage renders without subaccount section when account has no subaccounts 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Snippets",
+      "to": "/snippets",
+    }
+  }
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Save Snippet",
+      "disabled": undefined,
+      "onClick": [Function],
+    }
+  }
+  title="Edit Snippet"
+>
+  <Form
+    onSubmit={[Function]}
+  >
+    <Grid>
+      <Grid.Column
+        lg={4}
+        xs={12}
+      >
+        <Panel>
+          <Panel.Section>
+            <Field
+              component={[Function]}
+              label="Snippet Name"
+              name="name"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+            <Field
+              component={[Function]}
+              disabled={true}
+              helpText={<IdentifierHelpText />}
+              label="Snippet ID"
+              name="id"
+            />
+          </Panel.Section>
+        </Panel>
+      </Grid.Column>
+      <Grid.Column
+        lg={8}
+        xs={12}
+      >
+        <LoadableComponent
+          contentOnly={true}
+        />
+      </Grid.Column>
+    </Grid>
+  </Form>
+</Page>
+`;

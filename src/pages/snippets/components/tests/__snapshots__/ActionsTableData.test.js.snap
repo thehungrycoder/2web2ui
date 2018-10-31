@@ -7,13 +7,11 @@ exports[`ActionsTableData by default 1`] = `
       Object {
         "Component": [Function],
         "content": "View",
-        "section": 1,
         "to": "/snippets/edit/example-id",
       },
       Object {
         "content": "Delete",
         "onClick": [Function],
-        "section": 2,
         "visible": undefined,
       },
     ]
@@ -28,13 +26,11 @@ exports[`ActionsTableData with access to create 1`] = `
       Object {
         "Component": [Function],
         "content": "Edit",
-        "section": 1,
         "to": "/snippets/edit/example-id",
       },
       Object {
         "content": "Delete",
         "onClick": [Function],
-        "section": 2,
         "visible": true,
       },
     ]
@@ -49,13 +45,11 @@ exports[`ActionsTableData with subaccount 1`] = `
       Object {
         "Component": [Function],
         "content": "View",
-        "section": 1,
         "to": "/snippets/edit/example-id?subaccount=999",
       },
       Object {
         "content": "Delete",
         "onClick": [Function],
-        "section": 2,
         "visible": undefined,
       },
     ]

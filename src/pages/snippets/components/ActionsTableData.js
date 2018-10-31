@@ -9,12 +9,10 @@ const ActionsTableData = ({ canCreate, id, subaccount_id, toggleDelete }) => (
       {
         Component: PageLink,
         content: canCreate ? 'Edit' : 'View',
-        to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`,
-        section: 1
+        to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`
       },
       {
         content: 'Delete',
-        section: 2,
         visible: canCreate,
         onClick: () => toggleDelete(id, subaccount_id)
       }
