@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SingleAddressForm renders correctly 1`] = `
+<Fragment>
+  <form
+    onSubmit={[Function]}
+  >
+    <p
+      className="Paragraph"
+    >
+      Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
+    </p>
+    <Field
+      component={[Function]}
+      label="Enter an email address to verify"
+      name="address"
+      placeholder="eg. example@mail.com"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Verify Email Address
+    </Button>
+  </form>
+</Fragment>
+`;
+
+exports[`SingleAddressForm should disable form elements on submit 1`] = `
+<Fragment>
+  <form
+    onSubmit={[Function]}
+  >
+    <p
+      className="Paragraph"
+    >
+      Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
+    </p>
+    <Field
+      component={[Function]}
+      label="Enter an email address to verify"
+      name="address"
+      placeholder="eg. example@mail.com"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Verify Email Address
+    </Button>
+  </form>
+</Fragment>
+`;
+
+exports[`SingleAddressForm should submit single email address 1`] = `
+Array [
+  Array [
+    "foo@address.com",
+  ],
+]
+`;

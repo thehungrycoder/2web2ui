@@ -23,6 +23,20 @@ export default (state = initialState, { meta, payload, type }) => {
     case 'CREATE_RECIPIENT_VERIFICATION_LIST_FAIL':
       return { ...state, loading: false };
 
+    case 'SINGLE_RECIPIENT_VERIFICATION_PENDING':
+      return { ...state, loading: true };
+
+    case 'SINGLE_RECIPIENT_VERIFICATION_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        valid: payload.valid,
+        reason: payload.reason
+      };
+
+    case 'SINGLE_RECIPIENT_VERIFICATION_FAIL':
+      return { ...state, loading: false };
+
     default:
       return state;
   }

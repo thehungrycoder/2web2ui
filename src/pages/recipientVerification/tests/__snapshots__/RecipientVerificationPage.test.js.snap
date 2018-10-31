@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Page: Recipient Email Verification renders single email verification tab correctly when selected 1`] = `
+<Page
+  empty={Object {}}
+  title="Recipient Email Verification"
+>
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={1}
+    tabs={
+      Array [
+        Object {
+          "content": "Verify A List",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Verify a Single Address",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
+  <Panel>
+    <Panel.Section>
+      <Connect(ReduxForm) />
+    </Panel.Section>
+  </Panel>
+</Page>
+`;
+
 exports[`Page: Recipient Email Verification should render happy path 1`] = `
 <Page
   empty={Object {}}
