@@ -25,31 +25,30 @@ describe('Poll Provider', () => {
   });
 
   it('should render children with the correct state', () => {
-    expect(wrapper.children()).toMatchSnapshot();
-    expect(wrapper.state()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should start and finish polling', async () => {
-    const { startPolling } = wrapper.state();
+    const { startPolling } = wrapper.props().value;
     startPolling(testAction);
 
     // Check polling state
-    expect(wrapper.state().actions.testAction).toMatchSnapshot();
+    expect(wrapper.props().value.actions.testAction).toMatchSnapshot();
 
     // Simulate duration has reached
     mockMoment.diff = jest.fn().mockReturnValue(200);
     await delay(200);
 
     // Check done state
-    expect(wrapper.state().actions.testAction.status).toBe('done');
+    expect(wrapper.props().value.actions.testAction.status).toBe('done');
   });
 
   it('should start and stop polling when stopPolling is invoked', async () => {
-    const { startPolling, stopPolling } = wrapper.state();
+    const { startPolling, stopPolling } = wrapper.props().value;
     startPolling(testAction);
 
-    expect(wrapper.state().actions.testAction.status).toBe('polling');
+    expect(wrapper.props().value.actions.testAction.status).toBe('polling');
     stopPolling(testAction.key);
-    expect(wrapper.state().actions.testAction.status).toBe('stopped');
+    expect(wrapper.props().value.actions.testAction.status).toBe('stopped');
   });
 });

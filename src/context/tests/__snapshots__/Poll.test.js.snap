@@ -1,13 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Poll Provider should render children with the correct state 1`] = `"child"`;
-
-exports[`Poll Provider should render children with the correct state 2`] = `
-Object {
-  "actions": Object {},
-  "startPolling": [Function],
-  "stopPolling": [Function],
-}
+exports[`Poll Provider should render children with the correct state 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "actions": Object {},
+      "startPolling": [Function],
+      "stopPolling": [Function],
+    }
+  }
+>
+  child
+</ContextProvider>
 `;
 
 exports[`Poll Provider should start and finish polling 1`] = `

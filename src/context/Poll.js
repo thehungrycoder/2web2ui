@@ -24,7 +24,10 @@ import moment from 'moment';
  * }
  */
 
-const defaultContext = {};
+const defaultContext = {
+  actions: {}
+};
+
 const defaultAction = {
   interval: 1000,
   duration: 2000
@@ -37,14 +40,6 @@ export const PollContext = createContext(defaultContext);
  */
 class Poll extends Component {
   state = defaultContext;
-
-  componentDidMount() {
-    this.setState({
-      actions: {},
-      startPolling: this.start,
-      stopPolling: this.stop
-    });
-  }
 
   poll = (key) => {
     const { action, duration, startTime, interval, status } = this.state.actions[key];
@@ -90,8 +85,14 @@ class Poll extends Component {
   }
 
   render() {
+    const value = {
+      actions: this.state.actions,
+      startPolling: this.start,
+      stopPolling: this.stop
+    };
+
     return (
-      <PollContext.Provider value={this.state}>
+      <PollContext.Provider value={value}>
         {/* Only components that are rendered under this tree will be able to "consume" */}
         {this.props.children}
       </PollContext.Provider>
