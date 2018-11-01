@@ -17,10 +17,9 @@ exports[`Poll Provider should render children with the correct state 1`] = `
 exports[`Poll Provider should start and finish polling 1`] = `
 Object {
   "action": [MockFunction],
-  "duration": 200,
-  "interval": 100,
-  "key": "testAction",
-  "startTime": "2017-02-14T12:51:48.000Z",
+  "attempts": 0,
+  "interval": 50,
+  "maxAttempts": 5,
   "status": "polling",
 }
 `;

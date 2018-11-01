@@ -1,5 +1,4 @@
 import React, { createContext, Component } from 'react';
-import moment from 'moment';
 
 /**
  * PollContext
@@ -19,8 +18,8 @@ import moment from 'moment';
  * {
  *   key: 'identifier', A string to represent this action
  *   interval: 1000, Time in ms between each poll
- *   duration: 5000, Time in ms to stop polling
- *   action: () => () The func to call at every interval until duration has reached
+ *   maxAttempts: 10, Maximum number of times to poll. Default (-1) specifies no limit.
+ *   action: () => () The func to call at every interval
  * }
  */
 
@@ -30,7 +29,8 @@ const defaultContext = {
 
 const defaultAction = {
   interval: 1000,
-  duration: 2000
+  maxAttempts: -1,
+  attempts: 0
 };
 
 export const PollContext = createContext(defaultContext);
@@ -42,30 +42,25 @@ class Poll extends Component {
   state = defaultContext;
 
   poll = (key) => {
-    const { action, duration, startTime, interval, status } = this.state.actions[key];
+    const { action, interval, status, attempts, maxAttempts } = this.state.actions[key];
+    const attemptCount = attempts + 1;
 
     if (status === 'polling') {
       action();
+      this.setActionState(key, { attempts: attemptCount });
 
-      if (moment().diff(moment(startTime)) < duration) {
-        setTimeout(() => this.poll(key), (interval));
+      if (attemptCount < maxAttempts || maxAttempts === -1) {
+        setTimeout(() => this.poll(key), interval);
       } else {
         this.setActionState(key, { status: 'done' });
       }
     }
   }
 
-  start = (action) => {
-    const { key, interval } = action;
-
-    this.setActionState(key, {
-      ...defaultAction,
-      ...action,
-      startTime: moment(),
-      status: 'polling'
-    });
-
-    return setTimeout(() => this.poll(key), interval);
+  start = ({ key, ...args }) => {
+    const action = { ...defaultAction, ...args, status: 'polling' };
+    this.setActionState(key, action);
+    return setTimeout(() => this.poll(key), action.interval);
   };
 
   stop = (key) => {

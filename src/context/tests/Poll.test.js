@@ -2,7 +2,6 @@ import React from 'react';
 import Poll from '../Poll';
 import { shallow } from 'enzyme';
 import delay from 'src/__testHelpers__/delay';
-import { fn as mockMoment } from 'moment';
 
 describe('Poll Provider', () => {
   let wrapper;
@@ -10,18 +9,12 @@ describe('Poll Provider', () => {
   const testAction = {
     key: 'testAction',
     action: jest.fn(),
-    interval: 100,
-    duration: 200
+    interval: 50,
+    maxAttempts: 5
   };
 
   beforeEach(() => {
     wrapper = shallow(<Poll>child</Poll>);
-    Date.now = jest.fn(() => 1487076708000); // moment() uses Date.now
-    mockMoment.diff = jest.fn().mockReturnValue(0);
-  });
-
-  afterAll(() => {
-    mockMoment.format.mockReset();
   });
 
   it('should render children with the correct state', () => {
@@ -35,11 +28,11 @@ describe('Poll Provider', () => {
     // Check polling state
     expect(wrapper.props().value.actions.testAction).toMatchSnapshot();
 
-    // Simulate duration has reached
-    mockMoment.diff = jest.fn().mockReturnValue(200);
-    await delay(200);
+    await delay(300);
 
     // Check done state
+    expect(wrapper.props().value.actions.testAction.action.mock.calls).toHaveLength(5);
+    expect(wrapper.props().value.actions.testAction.attempts).toBe(5);
     expect(wrapper.props().value.actions.testAction.status).toBe('done');
   });
 
