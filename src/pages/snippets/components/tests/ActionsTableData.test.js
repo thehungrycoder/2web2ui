@@ -13,8 +13,5 @@ cases('ActionsTableData', ({ name, ...props }) => {
   'by default': {},
   'with subaccount': {
     subaccount_id: 999
-  },
-  'with access to create': {
-    canCreate: true
   }
 });

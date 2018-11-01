@@ -6,32 +6,12 @@ exports[`ActionsTableData by default 1`] = `
     Array [
       Object {
         "Component": [Function],
-        "content": "View",
-        "to": "/snippets/edit/example-id",
-      },
-      Object {
-        "content": "Delete",
-        "onClick": [Function],
-        "visible": undefined,
-      },
-    ]
-  }
-/>
-`;
-
-exports[`ActionsTableData with access to create 1`] = `
-<ActionPopover
-  actions={
-    Array [
-      Object {
-        "Component": [Function],
         "content": "Edit",
         "to": "/snippets/edit/example-id",
       },
       Object {
         "content": "Delete",
         "onClick": [Function],
-        "visible": true,
       },
     ]
   }
@@ -44,13 +24,12 @@ exports[`ActionsTableData with subaccount 1`] = `
     Array [
       Object {
         "Component": [Function],
-        "content": "View",
+        "content": "Edit",
         "to": "/snippets/edit/example-id?subaccount=999",
       },
       Object {
         "content": "Delete",
         "onClick": [Function],
-        "visible": undefined,
       },
     ]
   }
