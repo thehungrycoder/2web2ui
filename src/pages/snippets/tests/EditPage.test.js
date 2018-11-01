@@ -9,6 +9,7 @@ describe('EditPage', () => {
       getSnippet={() => {}}
       handleSubmit={(fn) => fn}
       hasSubaccounts={true}
+      id="test-snippet"
       {...props}
     />
   );
@@ -44,8 +45,8 @@ describe('EditPage', () => {
 
   it('requests snippet on mount', () => {
     const getSnippet = jest.fn();
-    subject({ getSnippet, id: 123, subaccountId: 345 });
-    expect(getSnippet).toHaveBeenCalledWith({ id: 123, subaccountId: 345 });
+    subject({ getSnippet, subaccountId: 345 });
+    expect(getSnippet).toHaveBeenCalledWith({ id: 'test-snippet', subaccountId: 345 });
   });
 
   it('clears snippet on unmount', () => {

@@ -37,6 +37,7 @@ export default class EditPage extends React.Component {
       error,
       handleSubmit,
       hasSubaccounts,
+      id,
       loading,
       submitting
     } = this.props;
@@ -52,7 +53,7 @@ export default class EditPage extends React.Component {
 
     return (
       <Page
-        title="Edit Snippet"
+        title={id}
         breadcrumbAction={{ Component: PageLink, content: 'Snippets', to: '/snippets' }}
         primaryAction={{
           Component: Button,
