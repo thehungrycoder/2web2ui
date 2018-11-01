@@ -37,7 +37,6 @@ export class SingleAddressForm extends Component {
             component={TextFieldWrapper}
             label='Email address'
             placeholder={'eg. example@mail.com'}
-            onChange={this.handleIdFill}
             validate={[required, maxLength(64)]}
             connectRight={<Button primary submit disabled={submitDisabled}>Verify Email Address</Button>}
           />
@@ -50,10 +49,7 @@ export class SingleAddressForm extends Component {
 
 const mapStateToProps = ({ recipientVerificationLists }) => ({
   errors: recipientVerificationLists.errors,
-  results: recipientVerificationLists.results,
-  email: recipientVerificationLists.email,
-  valid: recipientVerificationLists.valid,
-  reason: recipientVerificationLists.reason
+  singleResults: recipientVerificationLists.singleResults
 });
 
 const WrappedForm = reduxForm({ form: formName })(SingleAddressForm);

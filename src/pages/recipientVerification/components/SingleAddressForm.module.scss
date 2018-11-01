@@ -1,0 +1,18 @@
+
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Paragraph {
+  padding-right: spacing();
+}
+
+.email {
+  color: color(blue);
+}
+
+.validIcon {
+  color: color(green)
+}
+
+.invalidIcon {
+  color: color(red)
+}

@@ -2,30 +2,24 @@
 
 exports[`Recipient Verification Lists Reducer default 1`] = `
 Object {
-  "email": undefined,
   "errors": undefined,
   "list": Array [],
   "loading": false,
-  "results": false,
-  "valid": undefined,
+  "singleResults": undefined,
 }
 `;
 
 exports[`Recipient Verification Lists Reducer when ticket creation is pending 1`] = `
 Object {
-  "email": undefined,
   "errors": undefined,
   "list": Array [],
-  "loading": true,
-  "results": false,
+  "loading": false,
   "singleResults": undefined,
-  "valid": undefined,
 }
 `;
 
 exports[`Recipient Verification Lists Reducer when verification fails 1`] = `
 Object {
-  "email": undefined,
   "errors": Object {
     "meta": undefined,
     "payload": Object {
@@ -34,40 +28,32 @@ Object {
   },
   "list": Array [],
   "loading": false,
-  "results": false,
   "singleResults": undefined,
-  "valid": undefined,
 }
 `;
 
 exports[`Recipient Verification Lists Reducer when verification successfully returns invalid address 1`] = `
 Object {
-  "email": undefined,
   "errors": undefined,
   "list": Array [],
   "loading": false,
-  "results": false,
   "singleResults": Object {
     "email": "invalid@address.com",
     "reason": undefined,
     "valid": undefined,
   },
-  "valid": undefined,
 }
 `;
 
 exports[`Recipient Verification Lists Reducer when verification successfully returns valid address 1`] = `
 Object {
-  "email": undefined,
   "errors": undefined,
   "list": Array [],
   "loading": false,
-  "results": false,
   "singleResults": Object {
     "email": "valid@address.com",
     "reason": undefined,
     "valid": undefined,
   },
-  "valid": undefined,
 }
 `;

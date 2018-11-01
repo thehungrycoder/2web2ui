@@ -9,7 +9,7 @@ Array [
       },
       "method": "GET",
       "showErrorAlert": false,
-      "url": "labs/recipient-verification-api/[object Object]",
+      "url": "labs/recipient-verification-api/single/[object Object]",
     },
     "type": "SINGLE_RECIPIENT_VERIFICATION",
   },
