@@ -1,6 +1,10 @@
 const initialState = {
   list: [],
-  error: null
+  loading: false,
+  errors: undefined,
+  valid: undefined,
+  results: false,
+  email: undefined
 };
 
 export default (state = initialState, { meta, payload, type }) => {
@@ -24,21 +28,22 @@ export default (state = initialState, { meta, payload, type }) => {
       return { ...state, loading: false };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_PENDING':
-      return { ...state, loading: true, valid: undefined };
+      return { ...state, loading: true, results: false, errors: undefined, valid: undefined };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_SUCCESS':
       return {
         ...state,
         loading: false,
+        results: true,
         valid: payload.valid,
         reason: payload.reason,
         email: meta.email
       };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_FAIL':
-      return { ...state, loading: false, valid: undefined };
+      return { ...state, loading: false, results: false, errors: { payload, meta }, valid: undefined };
 
     default:
-      return { ...state, valid: undefined };
+      return { ...state };
   }
 };
