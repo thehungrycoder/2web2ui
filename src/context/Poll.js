@@ -8,10 +8,10 @@ import React, { createContext, Component } from 'react';
  *
  * @example
  * <PollContext.Consumer>
- *   {({ startPolling, stopPolling }) =>(
- *    <button onClick={() => startPolling(action)} />
+ *   {({ startPolling, stopPolling }) => [
+ *    <button onClick={() => startPolling(action)} />,
  *    <button onClick={() => stopPolling(action.key)} />
- *   )}
+ *   ]}
  * </PollContext.Consumer>
  *
  * Action model:
@@ -28,9 +28,9 @@ const defaultContext = {
 };
 
 const defaultAction = {
+  attempts: 0,
   interval: 1000,
-  maxAttempts: -1,
-  attempts: 0
+  maxAttempts: -1
 };
 
 export const PollContext = createContext(defaultContext);
@@ -40,6 +40,11 @@ export const PollContext = createContext(defaultContext);
  */
 class Poll extends Component {
   state = defaultContext;
+
+  isPolling = (key) => {
+    const { actions } = this.state;
+    return actions[key] && actions[key].status === 'polling';
+  }
 
   poll = (key) => {
     const { action, interval, status, attempts, maxAttempts } = this.state.actions[key];
@@ -59,12 +64,17 @@ class Poll extends Component {
 
   start = ({ key, ...args }) => {
     const action = { ...defaultAction, ...args, status: 'polling' };
-    this.setActionState(key, action);
-    return setTimeout(() => this.poll(key), action.interval);
+
+    if (!this.isPolling(key)) {
+      this.setActionState(key, action);
+      setTimeout(() => this.poll(key), action.interval);
+    }
   };
 
   stop = (key) => {
-    this.setActionState(key, { status: 'stopped' });
+    if (this.isPolling(key)) {
+      this.setActionState(key, { status: 'stopped' });
+    }
   };
 
   setActionState = (actionKey, values) => {
