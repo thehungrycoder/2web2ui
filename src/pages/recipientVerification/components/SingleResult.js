@@ -1,17 +1,35 @@
 import React, { Component, Fragment } from 'react';
+import { CheckCircleOutline, Warning } from '@sparkpost/matchbox-icons';
 import styles from './RecipientVerificationPage.module.scss';
+
+const validText = ' is a valid email address.';
+const invalidText = ' is NOT a valid email address.';
 
 export class SingleResult extends Component {
 
-  render() {
-    const { email, valid, reason } = this.props;
+  renderValid(email) {
+    return <p>
+      <CheckCircleOutline className={styles.validIcon}/>
+      <span className={styles.email}> {email}</span>
+      <span className={styles.Paragraph}>{validText}</span>
+    </p>;
+  }
 
-    return (
-      <Fragment>
-        <br/>
-        {(valid) ? <p className={styles.Paragraph}>{email} is a valid email address</p> : <p className={styles.Paragraph}>{email} is NOT a valid email address. {reason}</p>}
-      </Fragment>
-    );
+  renderInvalid(email, reason) {
+    return <p>
+      <Warning className={styles.invalidIcon}/>
+      <span className={styles.email}> {email}</span>
+      <span className={styles.Paragraph}>{invalidText} {reason}</span>
+    </p>;
+  }
+
+  render() {
+    const { valid, email, reason } = this.props;
+
+    return <Fragment>
+      <br/>
+      {(valid) ? this.renderValid(email) : this.renderInvalid(email, reason)}
+    </Fragment>;
   }
 }
 

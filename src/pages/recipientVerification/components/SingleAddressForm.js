@@ -24,7 +24,7 @@ export class SingleAddressForm extends Component {
   }
 
   render() {
-    const { pristine, email, results, valid, reason, submitting, handleSubmit, submitFailed } = this.props;
+    const { valid, email, reason, results, pristine, submitting, handleSubmit, submitFailed } = this.props;
     const submitDisabled = pristine || !valid || submitting;
 
     return (
