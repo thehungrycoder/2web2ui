@@ -1,4 +1,5 @@
 import React, { createContext, Component } from 'react';
+import _ from 'lodash';
 
 /**
  * PollContext
@@ -47,7 +48,7 @@ class Poll extends Component {
   }
 
   poll = (key) => {
-    const { action, interval, status, attempts, maxAttempts } = this.state.actions[key];
+    const { action, interval, status, attempts, maxAttempts } = _.get(this.state, `actions[${key}]`, {});
     const attemptCount = attempts + 1;
 
     if (status === 'polling') {

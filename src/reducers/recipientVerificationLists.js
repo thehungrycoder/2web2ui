@@ -3,7 +3,7 @@ const initialState = {
   errors: undefined,
   uploadLoading: false,
   listResultsLoading: false,
-  listResults: null
+  listResults: {}
 };
 
 export default (state = initialState, { meta, payload, type }) => {
@@ -18,7 +18,7 @@ export default (state = initialState, { meta, payload, type }) => {
         ...state,
         uploadLoading: false,
         listResults: {
-          id: payload.list_id
+          listId: payload.list_id
         }
       };
 
@@ -26,35 +26,36 @@ export default (state = initialState, { meta, payload, type }) => {
       return { ...state, uploadLoading: false };
 
     // List Results
-    case 'GET_LATEST_PENDING':
-      return { ...state, listResultsLoading: true, listResults: null };
+    case 'GET_LATEST_UPLOAD_PENDING':
+      return { ...state, listResultsLoading: true, listResults: {} };
 
-    case 'GET_LATEST_ERROR':
+    case 'GET_LATEST_UPLOAD_ERROR':
       return { ...state, listResultsLoading: false };
 
-    case 'GET_LATEST_SUCCESS':
+    case 'GET_LATEST_UPLOAD_SUCCESS':
       return {
         ...state,
         listResultsLoading: false,
         listResults: {
           complete: payload.complete,
-          list_id: payload.list_id
+          listId: payload.list_id
         }
       };
 
-    case 'GET_JOB_PENDING':
+    // List Polling
+    case 'GET_UPLOAD_STATUS_PENDING':
       return { ...state, listResultsLoading: true };
 
-    case 'GET_JOB_ERROR':
+    case 'GET_UPLOAD_STATUS_ERROR':
       return { ...state, listResultsLoading: false };
 
-    case 'GET_JOB_SUCCESS':
+    case 'GET_UPLOAD_STATUS_SUCCESS':
       return {
         ...state,
         listResultsLoading: false,
         listResults: {
           complete: payload.complete,
-          list_id: payload.list_id
+          listId: payload.list_id
         }
       };
 

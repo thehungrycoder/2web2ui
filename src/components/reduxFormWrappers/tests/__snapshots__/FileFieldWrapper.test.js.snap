@@ -7,7 +7,6 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
   <Label>
     Test File Input
      *
-     
   </Label>
   <div
     className="InputWrapper"
@@ -28,6 +27,7 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
       onDrop={[Function]}
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
+      style={Object {}}
     >
       <span
         className="Placeholder"
@@ -49,7 +49,6 @@ exports[`FileFieldWrapper renders file input 1`] = `
   <Label>
     Test File Input
      *
-     
   </Label>
   <div
     className="InputWrapper"
@@ -70,6 +69,7 @@ exports[`FileFieldWrapper renders file input 1`] = `
       onDrop={[Function]}
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
+      style={Object {}}
     >
       <span
         className="Placeholder"
@@ -91,11 +91,13 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
   <Label>
     Test File Input
      *
-     
-    <Error
-      error="Oh no!"
-      wrapper="span"
-    />
+    <span>
+       
+      <Error
+        error="Oh no!"
+        wrapper="span"
+      />
+    </span>
   </Label>
   <div
     className="InputWrapper"
@@ -116,6 +118,7 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
       onDrop={[Function]}
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
+      style={Object {}}
     >
       <span
         className="Placeholder"
@@ -137,7 +140,6 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
   <Label>
     Test File Input
      *
-     
   </Label>
   <div
     className="InputWrapper"
@@ -158,6 +160,7 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
       onDrop={[Function]}
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
+      style={Object {}}
     >
       <span
         className="Placeholder"
@@ -184,7 +187,6 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
   <Label>
     Test File Input
      *
-     
   </Label>
   <div
     className="InputWrapper"
@@ -205,6 +207,7 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
       onDrop={[Function]}
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
+      style={Object {}}
     >
       <span
         className="Placeholder"
@@ -226,7 +229,6 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
   <Label>
     Test File Input
      *
-     
   </Label>
   <div
     className="InputWrapper"
@@ -247,6 +249,7 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
       onDrop={[Function]}
       onFileDialogCancel={[Function]}
       preventDropOnDocument={true}
+      style={Object {}}
     >
       <span>
         test.csv

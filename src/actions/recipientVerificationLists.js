@@ -24,7 +24,7 @@ export function singleAddress(address) {
 
 export function getLatest() {
   return sparkpostApiRequest({
-    type: 'GET_LATEST',
+    type: 'GET_LATEST_UPLOAD',
     meta: {
       method: 'GET',
       url: 'labs/recipient-verification-api/latest'
@@ -32,24 +32,12 @@ export function getLatest() {
   })
 }
 
-// {
-//     "upload_timestamp": 1540588558,
-//     "list_id": "55169360-d964-11e8-908a-69a01fff9956",
-//     "complete": false,
-// }
-
-export function getJob(list_id) {
+export function getStatus(list_id) {
   return sparkpostApiRequest({
-    type: 'GET_JOB',
+    type: 'GET_UPLOAD_STATUS',
     meta: {
       method: 'GET',
       url: `labs/recipient-verification-api/get-job/${list_id}`
     }
   })
 }
-
-// {
-//     "upload_timestamp": 1540588558,
-//     "list_id": "55169360-d964-11e8-908a-69a01fff9956",
-//     "complete": false,
-// }

@@ -28,11 +28,11 @@ const ListResultsCard = ({ complete, upload_timestamp, file }) => {
       </div>
       <h6>Verification Results</h6>
       {loading}
-      <LabelledValue label='Uploaded'>
+      {/* <LabelledValue label='Uploaded'>
         <p className={styles.RightAlign}>
           {formatDateTime(upload_timestamp)}
         </p>
-      </LabelledValue>
+      </LabelledValue> */}
       <LabelledValue label='Status'>
         <h6 className={styles.RightAlign}>
           {complete ? 'Completed' : 'Processing'}
