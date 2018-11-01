@@ -8,8 +8,10 @@ cases('Recipient Verification Lists Reducer', (action) => {
   'when verification successfully returns invalid address': {
     type: 'SINGLE_RECIPIENT_VERIFICATION_SUCCESS',
     payload: {
-      valid: false,
-      reason: 'not valid because mx lookup failed'
+      singleResults: {
+        valid: false,
+        reason: 'not valid because mx lookup failed'
+      }
     },
     meta: {
       email: 'invalid@address.com'
@@ -18,7 +20,9 @@ cases('Recipient Verification Lists Reducer', (action) => {
   'when verification successfully returns valid address': {
     type: 'SINGLE_RECIPIENT_VERIFICATION_SUCCESS',
     payload: {
-      valid: true
+      singleResults: {
+        valid: true
+      }
     },
     meta: {
       email: 'valid@address.com'

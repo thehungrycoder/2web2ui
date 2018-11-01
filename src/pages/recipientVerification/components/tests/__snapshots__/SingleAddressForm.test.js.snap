@@ -96,14 +96,6 @@ Array [
 ]
 `;
 
-exports[`SingleAddressForm should hide results preSubmit 1`] = `
-Array [
-  Array [
-    "foo@address.com",
-  ],
-]
-`;
-
 exports[`SingleAddressForm should show errors if submit failed 1`] = `
 Array [
   Array [
@@ -113,14 +105,6 @@ Array [
 `;
 
 exports[`SingleAddressForm should submit single email address 1`] = `
-Array [
-  Array [
-    "foo@address.com",
-  ],
-]
-`;
-
-exports[`SingleAddressForm should toggle preSubmit when submitting 1`] = `
 Array [
   Array [
     "foo@address.com",

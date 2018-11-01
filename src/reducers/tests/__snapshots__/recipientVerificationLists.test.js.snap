@@ -18,6 +18,7 @@ Object {
   "list": Array [],
   "loading": true,
   "results": false,
+  "singleResults": undefined,
   "valid": undefined,
 }
 `;
@@ -34,30 +35,39 @@ Object {
   "list": Array [],
   "loading": false,
   "results": false,
+  "singleResults": undefined,
   "valid": undefined,
 }
 `;
 
 exports[`Recipient Verification Lists Reducer when verification successfully returns invalid address 1`] = `
 Object {
-  "email": "invalid@address.com",
+  "email": undefined,
   "errors": undefined,
   "list": Array [],
   "loading": false,
-  "reason": "not valid because mx lookup failed",
-  "results": true,
-  "valid": false,
+  "results": false,
+  "singleResults": Object {
+    "email": "invalid@address.com",
+    "reason": undefined,
+    "valid": undefined,
+  },
+  "valid": undefined,
 }
 `;
 
 exports[`Recipient Verification Lists Reducer when verification successfully returns valid address 1`] = `
 Object {
-  "email": "valid@address.com",
+  "email": undefined,
   "errors": undefined,
   "list": Array [],
   "loading": false,
-  "reason": undefined,
-  "results": true,
-  "valid": true,
+  "results": false,
+  "singleResults": Object {
+    "email": "valid@address.com",
+    "reason": undefined,
+    "valid": undefined,
+  },
+  "valid": undefined,
 }
 `;

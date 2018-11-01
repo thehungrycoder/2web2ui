@@ -24,7 +24,7 @@ export class SingleResult extends Component {
   }
 
   render() {
-    const { valid, email, reason } = this.props;
+    const { valid, email, reason } = this.props.singleResults;
 
     return <Fragment>
       <br/>
