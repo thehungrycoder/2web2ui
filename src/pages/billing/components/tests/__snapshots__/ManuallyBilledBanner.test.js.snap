@@ -29,15 +29,29 @@ exports[`ManuallyBilledBanner renders banner 1`] = `
 </Banner>
 `;
 
-exports[`ManuallyBilledBanner with custom subscription 1`] = `
+exports[`ManuallyBilledBanner with custom subscription and plan in Zuora 1`] = `
 <Banner
-  action={
-    Object {
-      "Component": [Function],
-      "content": "Enable Automatic Billing",
-      "to": "/account/billing/enable-automatic",
-    }
-  }
+  action={null}
+  status="info"
+  title="
+    Your current Custom plan includes 120,000 emails per year
+  "
+>
+  <p>
+    To make changes to your plan or billing information, please 
+    <Connect(SupportTicketLink)
+      issueId="general_issue"
+    >
+      submit a support ticket
+    </Connect(SupportTicketLink)>
+    .
+  </p>
+</Banner>
+`;
+
+exports[`ManuallyBilledBanner with custom subscription, plan not in Zuora 1`] = `
+<Banner
+  action={null}
   status="info"
   title="
     Your current Custom plan includes 120,000 emails per year
