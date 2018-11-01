@@ -37,4 +37,47 @@ describe('SingleAddressForm', () => {
     wrapper.find('form').simulate('submit', formValues);
     expect(props.singleAddress.mock.calls).toMatchSnapshot();
   });
+
+  it('should hide previous errors preSubmit', async () => {
+    props.submitFailed = false;
+    props.errors = {
+      payload: {
+        message: 'hide me'
+      }
+    };
+    wrapper.setProps(props);
+    wrapper.find('form').simulate('submit', formValues);
+    expect(props.singleAddress.mock.calls).toMatchSnapshot();
+  });
+
+  it('should show errors if submit failed', async () => {
+    props.submitFailed = true;
+    props.errors = {
+      payload: {
+        message: 'show me'
+      }
+    };
+    wrapper.setProps(props);
+    wrapper.find('form').simulate('submit', formValues);
+    expect(props.singleAddress.mock.calls).toMatchSnapshot();
+  });
+
+  it('should display invalid address result', async () => {
+    props.results = {
+      invalid: true,
+      reason: 'why'
+    };
+    wrapper.setProps(props);
+    wrapper.find('form').simulate('submit', formValues);
+    expect(props.singleAddress.mock.calls).toMatchSnapshot();
+  });
+
+  it('should display valid address result', async () => {
+    props.results = {
+      valid: true
+    };
+    wrapper.setProps(props);
+    wrapper.find('form').simulate('submit', formValues);
+    expect(props.singleAddress.mock.calls).toMatchSnapshot();
+  });
 });

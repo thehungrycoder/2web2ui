@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipient Verification Lists Reducer default 1`] = `
+Object {
+  "email": undefined,
+  "errors": undefined,
+  "list": Array [],
+  "loading": false,
+  "results": false,
+  "valid": undefined,
+}
+`;
+
+exports[`Recipient Verification Lists Reducer when ticket creation is pending 1`] = `
+Object {
+  "email": undefined,
+  "errors": undefined,
+  "list": Array [],
+  "loading": true,
+  "results": false,
+  "valid": undefined,
+}
+`;
+
+exports[`Recipient Verification Lists Reducer when verification fails 1`] = `
+Object {
+  "email": undefined,
+  "errors": Object {
+    "meta": undefined,
+    "payload": Object {
+      "message": "Oh no!",
+    },
+  },
+  "list": Array [],
+  "loading": false,
+  "results": false,
+  "valid": undefined,
+}
+`;
+
+exports[`Recipient Verification Lists Reducer when verification successfully returns invalid address 1`] = `
+Object {
+  "email": "invalid@address.com",
+  "errors": undefined,
+  "list": Array [],
+  "loading": false,
+  "reason": "not valid because mx lookup failed",
+  "results": true,
+  "valid": false,
+}
+`;
+
+exports[`Recipient Verification Lists Reducer when verification successfully returns valid address 1`] = `
+Object {
+  "email": "valid@address.com",
+  "errors": undefined,
+  "list": Array [],
+  "loading": false,
+  "reason": undefined,
+  "results": true,
+  "valid": true,
+}
+`;

@@ -12,7 +12,17 @@ exports[`SingleAddressForm renders correctly 1`] = `
     </p>
     <Field
       component={[Function]}
-      label="Enter an email address to verify"
+      connectRight={
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Verify Email Address
+        </Button>
+      }
+      label="Email address"
       name="address"
       placeholder="eg. example@mail.com"
       validate={
@@ -22,14 +32,6 @@ exports[`SingleAddressForm renders correctly 1`] = `
         ]
       }
     />
-    <Button
-      disabled={true}
-      primary={true}
-      size="default"
-      submit={true}
-    >
-      Verify Email Address
-    </Button>
   </form>
 </Fragment>
 `;
@@ -46,7 +48,17 @@ exports[`SingleAddressForm should disable form elements on submit 1`] = `
     </p>
     <Field
       component={[Function]}
-      label="Enter an email address to verify"
+      connectRight={
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Verify Email Address
+        </Button>
+      }
+      label="Email address"
       name="address"
       placeholder="eg. example@mail.com"
       validate={
@@ -56,19 +68,59 @@ exports[`SingleAddressForm should disable form elements on submit 1`] = `
         ]
       }
     />
-    <Button
-      disabled={true}
-      primary={true}
-      size="default"
-      submit={true}
-    >
-      Verify Email Address
-    </Button>
   </form>
 </Fragment>
 `;
 
+exports[`SingleAddressForm should display invalid address result 1`] = `
+Array [
+  Array [
+    "foo@address.com",
+  ],
+]
+`;
+
+exports[`SingleAddressForm should display valid address result 1`] = `
+Array [
+  Array [
+    "foo@address.com",
+  ],
+]
+`;
+
+exports[`SingleAddressForm should hide previous errors preSubmit 1`] = `
+Array [
+  Array [
+    "foo@address.com",
+  ],
+]
+`;
+
+exports[`SingleAddressForm should hide results preSubmit 1`] = `
+Array [
+  Array [
+    "foo@address.com",
+  ],
+]
+`;
+
+exports[`SingleAddressForm should show errors if submit failed 1`] = `
+Array [
+  Array [
+    "foo@address.com",
+  ],
+]
+`;
+
 exports[`SingleAddressForm should submit single email address 1`] = `
+Array [
+  Array [
+    "foo@address.com",
+  ],
+]
+`;
+
+exports[`SingleAddressForm should toggle preSubmit when submitting 1`] = `
 Array [
   Array [
     "foo@address.com",

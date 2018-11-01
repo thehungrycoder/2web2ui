@@ -9,18 +9,9 @@ import { singleAddress } from 'src/actions/recipientVerificationLists';
 import SingleResult from './SingleResult';
 
 const formName = 'singleAddressForm';
-let preSubmit;
 export class SingleAddressForm extends Component {
 
   singleAddressForm = (values) => this.props.singleAddress(values.address);
-
-  pageLoad = () => {
-    preSubmit = true;
-  };
-
-  componentDidMount() {
-    this.pageLoad();
-  }
 
   renderError() {
     return (
@@ -33,16 +24,12 @@ export class SingleAddressForm extends Component {
   }
 
   render() {
-    const { errors, pristine, email, results, valid, reason, submitting, handleSubmit } = this.props;
+    const { pristine, email, results, valid, reason, submitting, handleSubmit, submitFailed } = this.props;
     const submitDisabled = pristine || !valid || submitting;
-
-    if (submitting) {
-      preSubmit = false;
-    }
 
     return (
       <Fragment>
-        {errors && !preSubmit && this.renderError()}
+        {submitFailed && this.renderError()}
         <form onSubmit={handleSubmit(this.singleAddressForm)}>
           <p className={styles.Paragraph}>Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
           <Field
@@ -55,7 +42,7 @@ export class SingleAddressForm extends Component {
             connectRight={<Button primary submit disabled={submitDisabled}>Verify Email Address</Button>}
           />
         </form>
-        {results && !preSubmit && <SingleResult email={email} valid={valid} reason={reason}/>}
+        {results && <SingleResult email={email} valid={valid} reason={reason}/>}
       </Fragment>
     );
   }

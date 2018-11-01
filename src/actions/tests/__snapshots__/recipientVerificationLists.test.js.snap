@@ -4,7 +4,11 @@ exports[`Recipient Verification Actions .singleAddress when verifying a single a
 Array [
   Object {
     "meta": Object {
+      "email": Object {
+        "address": "foo@bar.com",
+      },
       "method": "GET",
+      "showErrorAlert": false,
       "url": "labs/recipient-verification-api/[object Object]",
     },
     "type": "SINGLE_RECIPIENT_VERIFICATION",
