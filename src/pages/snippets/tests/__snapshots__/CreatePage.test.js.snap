@@ -9,9 +9,7 @@ exports[`CreatePage .submitSnippet succeeds with a subaccount assignment 1`] = `
         "id": "example-snippet",
         "name": "Example Snippet",
         "sharedWithSubaccounts": false,
-        "subaccount": Object {
-          "id": "example-subaccount",
-        },
+        "subaccountId": "example-subaccount",
         "text": undefined,
       },
     ],
@@ -29,7 +27,7 @@ exports[`CreatePage .submitSnippet succeeds with content 1`] = `
         "id": "example-snippet",
         "name": "Example Snippet",
         "sharedWithSubaccounts": false,
-        "subaccount": undefined,
+        "subaccountId": undefined,
         "text": "testing...",
       },
     ],
@@ -47,7 +45,7 @@ exports[`CreatePage .submitSnippet succeeds with master account assignment 1`] =
         "id": "example-snippet",
         "name": "Example Snippet",
         "sharedWithSubaccounts": false,
-        "subaccount": undefined,
+        "subaccountId": undefined,
         "text": undefined,
       },
     ],
@@ -65,7 +63,7 @@ exports[`CreatePage .submitSnippet succeeds with shared subaccounts assignment 1
         "id": "example-snippet",
         "name": "Example Snippet",
         "sharedWithSubaccounts": true,
-        "subaccount": undefined,
+        "subaccountId": undefined,
         "text": undefined,
       },
     ],
@@ -117,16 +115,7 @@ exports[`CreatePage renders form 1`] = `
             />
             <Field
               component={[Function]}
-              helpText={
-                <React.Fragment>
-                  Use this unique identifier to 
-                  <ExternalLink
-                    to="https://developers.sparkpost.com/api/substitutions-reference/#header-snippets"
-                  >
-                    reference your snippet in a template
-                  </ExternalLink>
-                </React.Fragment>
-              }
+              helpText={<IdentifierHelpText />}
               label="Snippet ID"
               name="id"
               validate={
@@ -196,16 +185,7 @@ exports[`CreatePage renders form with subaccount assignment 1`] = `
             />
             <Field
               component={[Function]}
-              helpText={
-                <React.Fragment>
-                  Use this unique identifier to 
-                  <ExternalLink
-                    to="https://developers.sparkpost.com/api/substitutions-reference/#header-snippets"
-                  >
-                    reference your snippet in a template
-                  </ExternalLink>
-                </React.Fragment>
-              }
+              helpText={<IdentifierHelpText />}
               label="Snippet ID"
               name="id"
               validate={

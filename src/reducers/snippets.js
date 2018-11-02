@@ -1,13 +1,27 @@
 const initialState = {
   items: [], // cannot normalize, id is not unique, needs to consider subaccount_id
   loading: false,
-  deletePending: false
+  deletePending: false,
+  getPending: false
 };
 
 export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
     // this is ephemeral state that redux-form temporarily handles
     // case 'CREATE_SNIPPET_*':
+    // case 'UPDATE_SNIPPET_*':
+
+    case 'CLEAR_SNIPPET': {
+      const { getError, getPending, item, ...nextState } = state;
+      return nextState;
+    }
+
+    case 'GET_SNIPPET_FAIL':
+      return { ...state, getError: payload.error, getPending: false };
+    case 'GET_SNIPPET_PENDING':
+      return { ...state, getError: null, getPending: true };
+    case 'GET_SNIPPET_SUCCESS':
+      return { ...state, item: payload, getPending: false };
 
     case 'GET_SNIPPETS_FAIL':
       return { ...state, error: payload.error, loading: false };

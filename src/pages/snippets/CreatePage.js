@@ -4,14 +4,13 @@ import { Field, Form, reduxForm } from 'redux-form';
 import { Button, Grid, Page, Panel } from '@sparkpost/matchbox';
 import { createSnippet } from 'src/actions/snippets';
 import ContentEditor from 'src/components/contentEditor';
-import ExternalLink from 'src/components/externalLink/ExternalLink';
 import PageLink from 'src/components/pageLink';
 import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper';
 import SubaccountSection from 'src/components/subaccountSection';
-import { LINKS } from 'src/constants';
 import { slugify } from 'src/helpers/string';
 import { maxLength, required, slug } from 'src/helpers/validation';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
+import IdentifierHelpText from './components/IdentifierHelpText';
 
 export class CreatePage extends React.Component {
   componentDidUpdate() {
@@ -24,13 +23,19 @@ export class CreatePage extends React.Component {
     this.props.change('id', slugify(event.target.value));
   }
 
-  submitSnippet = ({ assignTo, content: { html, text } = {}, id, name, subaccount }) => (
+  submitSnippet = ({
+    assignTo,
+    content: { html, text } = {},
+    id,
+    name,
+    subaccount: { id: subaccountId } = {}
+  }) => (
     this.props.createSnippet({
       html,
       id,
       name,
       sharedWithSubaccounts: assignTo === 'shared',
-      subaccount,
+      subaccountId,
       text
     })
   )
@@ -65,15 +70,7 @@ export class CreatePage extends React.Component {
                     name="id"
                     component={TextFieldWrapper}
                     disabled={submitting}
-                    helpText={
-                      <React.Fragment>
-                        Use this unique identifier to {(
-                          <ExternalLink to={LINKS.SNIPPET_SUBSTITUTION_REFERENCE}>
-                            reference your snippet in a template
-                          </ExternalLink>
-                        )}
-                      </React.Fragment>
-                    }
+                    helpText={<IdentifierHelpText />}
                     label="Snippet ID"
                     validate={[required, slug, maxLength(64)]}
                   />
