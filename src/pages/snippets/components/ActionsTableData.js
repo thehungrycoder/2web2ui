@@ -3,19 +3,16 @@ import ActionPopover from 'src/components/actionPopover';
 import PageLink from 'src/components/pageLink';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
-const ActionsTableData = ({ id, subaccount_id, toggleDelete, canCreate }) => (
+const ActionsTableData = ({ id, subaccount_id, toggleDelete }) => (
   <ActionPopover
     actions={[
       {
         Component: PageLink,
         content: 'Edit',
-        to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`,
-        section: 1
+        to: `/snippets/edit/${id}${setSubaccountQuery(subaccount_id)}`
       },
       {
         content: 'Delete',
-        section: 2,
-        visible: canCreate,
         onClick: () => toggleDelete(id, subaccount_id)
       }
     ]}

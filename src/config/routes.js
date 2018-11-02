@@ -321,6 +321,14 @@ const routes = [
     supportDocSearch: 'snippet'
   },
   {
+    path: '/snippets/edit/:id',
+    component: snippets.EditPage,
+    condition: hasGrants('templates/view'),
+    layout: App,
+    title: 'Edit Snippet',
+    supportDocSearch: 'snippet'
+  },
+  {
     path: '/templates',
     component: templates.ListPage,
     condition: hasGrants('templates/view'),

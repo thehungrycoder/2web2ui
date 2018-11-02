@@ -118,6 +118,7 @@ describe('selectBillingInfo', () => {
       'canChangePlan',
       'canPurchaseIps',
       'currentPlan',
+      'onZuoraPlan',
       'plans',
       'isAWSAccount'
     ]);

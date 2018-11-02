@@ -2,6 +2,7 @@ import { any, all } from './compose';
 import _ from 'lodash';
 
 export const onPlan = (planCode) => ({ accountPlan }) => accountPlan.code === planCode;
+export const onZuoraPlan = ({ accountPlan }) => Boolean(accountPlan.billingId);
 export const onPlanWithStatus = (status) => ({ accountPlan }) => accountPlan.status === status;
 export const onServiceLevel = (level) => ({ account }) => account.service_level === level;
 export const isEnterprise = any(

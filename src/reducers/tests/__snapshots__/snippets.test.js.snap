@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Snippets Reducer CLEAR_SNIPPET 1`] = `Object {}`;
+
 exports[`Snippets Reducer DELETE_SNIPPET when fail 1`] = `
 Object {
   "deletePending": false,
@@ -53,10 +55,46 @@ Object {
 }
 `;
 
+exports[`Snippets Reducer GET_SNIPPET when fail 1`] = `
+Object {
+  "deletePending": false,
+  "getError": [Error: Oh no!],
+  "getPending": false,
+  "items": Array [],
+  "loading": false,
+}
+`;
+
+exports[`Snippets Reducer GET_SNIPPET when pending 1`] = `
+Object {
+  "deletePending": false,
+  "getError": null,
+  "getPending": true,
+  "items": Array [],
+  "loading": false,
+}
+`;
+
+exports[`Snippets Reducer GET_SNIPPET when success 1`] = `
+Object {
+  "deletePending": false,
+  "getPending": false,
+  "item": Array [
+    Object {
+      "id": "example-snippet",
+      "name": "Example Snippet",
+    },
+  ],
+  "items": Array [],
+  "loading": false,
+}
+`;
+
 exports[`Snippets Reducer GET_SNIPPETS when fail 1`] = `
 Object {
   "deletePending": false,
   "error": [Error: Oh no!],
+  "getPending": false,
   "items": Array [],
   "loading": false,
 }
@@ -66,6 +104,7 @@ exports[`Snippets Reducer GET_SNIPPETS when pending 1`] = `
 Object {
   "deletePending": false,
   "error": null,
+  "getPending": false,
   "items": Array [],
   "loading": true,
 }
@@ -74,6 +113,7 @@ Object {
 exports[`Snippets Reducer GET_SNIPPETS when success 1`] = `
 Object {
   "deletePending": false,
+  "getPending": false,
   "items": Array [
     Object {
       "id": "example-snippet",

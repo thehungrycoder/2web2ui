@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Poll Provider should not start if its already polling 1`] = `
+Object {
+  "action": [MockFunction] {
+    "calls": Array [
+      Array [],
+    ],
+    "results": undefined,
+  },
+  "attempts": 1,
+  "interval": 50,
+  "maxAttempts": 2,
+  "status": "polling",
+}
+`;
+
+exports[`Poll Provider should not stop if it isnt polling 1`] = `Object {}`;
+
+exports[`Poll Provider should render children with the correct state 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "actions": Object {},
+      "startPolling": [Function],
+      "stopPolling": [Function],
+    }
+  }
+>
+  child
+</ContextProvider>
+`;
+
+exports[`Poll Provider should start and finish polling 1`] = `
+Object {
+  "action": [MockFunction] {
+    "calls": Array [
+      Array [],
+      Array [],
+    ],
+    "results": undefined,
+  },
+  "attempts": 2,
+  "interval": 50,
+  "maxAttempts": 2,
+  "status": "done",
+}
+`;
+
+exports[`Poll Provider should start and stop polling when stopPolling is invoked 1`] = `
+Object {
+  "action": [MockFunction],
+  "attempts": 0,
+  "interval": 50,
+  "maxAttempts": 2,
+  "status": "stopped",
+}
+`;

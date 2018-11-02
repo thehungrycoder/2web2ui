@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IdentifierHelpText renders message with link 1`] = `
+<Fragment>
+  Use this unique identifier to 
+  <ExternalLink
+    to="https://developers.sparkpost.com/api/substitutions-reference/#header-snippets"
+  >
+    reference your snippet in a template
+  </ExternalLink>
+</Fragment>
+`;

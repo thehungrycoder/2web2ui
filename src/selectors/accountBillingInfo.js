@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import { isAws, isCustomBilling, isSelfServeBilling, onPlan } from 'src/helpers/conditions/account';
+import { isAws, isCustomBilling, isSelfServeBilling, onPlan, onZuoraPlan } from 'src/helpers/conditions/account';
 import { selectCondition } from './accessConditionState';
 
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
@@ -12,6 +12,7 @@ const selectIsCustomBilling = selectCondition(isCustomBilling);
 const selectIsSelfServeBilling = selectCondition(isSelfServeBilling);
 const selectIsCcFree1 = selectCondition(onPlan('ccfree1'));
 const selectIsFree1 = selectCondition(onPlan('free1'));
+const selectOnZuoraPlan = selectCondition(onZuoraPlan);
 
 export const currentSubscriptionSelector = (state) => state.account.subscription;
 
@@ -89,14 +90,16 @@ export const selectBillingInfo = createSelector(
     canChangePlanSelector,
     canPurchaseIps,
     currentPlanSelector,
+    selectOnZuoraPlan,
     selectVisiblePlans,
     selectIsAws
   ],
-  (canUpdateBillingInfo, canChangePlan, canPurchaseIps, currentPlan, plans, isAWSAccount) => ({
+  (canUpdateBillingInfo, canChangePlan, canPurchaseIps, currentPlan, onZuoraPlan, plans, isAWSAccount) => ({
     canUpdateBillingInfo,
     canChangePlan,
     canPurchaseIps,
     currentPlan,
+    onZuoraPlan,
     plans,
     isAWSAccount
   })
