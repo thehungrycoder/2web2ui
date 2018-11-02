@@ -20,6 +20,21 @@ export default class EditPage extends React.Component {
     this.props.clearSnippet();
   }
 
+  secondaryActions = [
+    {
+      Component: PageLink,
+      content: 'Duplicate',
+      to: {
+        pathname: '/snippets/create',
+        state: {
+          id: this.props.id,
+          subaccountId: this.props.subaccountId
+        }
+      },
+      visible: () => this.props.canModify
+    }
+  ]
+
   submitSnippet = ({
     content: { html, text } = {},
     id,
@@ -61,6 +76,9 @@ export default class EditPage extends React.Component {
           disabled,
           onClick: handleSubmit(this.submitSnippet)
         }}
+        secondaryActions={
+          this.secondaryActions.filter(({ visible = () => true }) => visible())
+        }
       >
         <Form onSubmit={this.submitSnippet}>
           <Grid>
