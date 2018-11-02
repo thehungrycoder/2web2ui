@@ -12,61 +12,50 @@ export class ListResults extends Component {
 
   componentDidMount() {
     this.props.getLatest();
-    // this.props.getStatus('0db99090-de13-11e8-9b7f-312603a5b28c');
   }
 
-  isPolling = (id) => _.get(this.props, `actions[${id}].status`) === 'polling';
-
-  componentDidUpdate({ latest: prevLatest }) {
-    const { latest, getStatus, startPolling, stopPolling } = this.props;
-
+  componentDidUpdate({ latestId: prevLatestId }) {
+    const { latestId, results, getStatus, startPolling, stopPolling } = this.props;
 
     // Start polling when a new list ID is recieved, which changes when either:
-    // - Upload view first mounts and latest results are not complete
+    // - Upload view first mounts
     // - Form is resubmitted
+    if (prevLatestId !== latestId) {
+      stopPolling(prevLatestId); // Stop any previous polling instances
 
-    if (latest.listId && !latest.complete && prevLatest.listId !== latest.listId) {
-
-      // Stop any previous polling instances
-      if (prevLatest.listId && this.isPolling(prevLatest.listId)) {
-        stopPolling(prevLatest.listId);
-      }
-
-      // Start new poll
-      if (!this.isPolling(latest.listId)) {
+      if (!results.complete) {
+        getStatus(latestId);
         startPolling({
-          key: latest.listId,
-          action: () => getStatus(latest.listId),
-          interval: 5000,
+          key: latestId,
+          action: () => getStatus(latestId),
+          interval: 2000,
           maxAttempts: 200
         });
       }
     }
 
     // Stop current polling when complete
-    if (latest.complete && this.isPolling(latest.listId)) {
-      stopPolling(latest.listId);
+    if (results.complete) {
+      stopPolling(latestId);
     }
   }
 
   componentWillUnmount() {
-    const { stopPolling, latest } = this.props;
-    if (this.isPolling(latest.listId)) {
-      stopPolling(latest.listId);
-    }
+    const { stopPolling, latestId } = this.props;
+    stopPolling(latestId);
   }
 
   render() {
-    const { latest } = this.props;
+    const { results } = this.props;
 
-    if (_.isEmpty(latest)) {
+    if (_.isEmpty(results)) {
       return null;
     }
 
     return (
       <Grid>
         <Grid.Column xs={12} md={6} lg={4}>
-          <ListResultsCard {...latest} />
+          <ListResultsCard {...results} />
         </Grid.Column>
       </Grid>
     );
@@ -74,9 +63,14 @@ export class ListResults extends Component {
 }
 
 
-const mapStateToProps = ({ recipientVerificationLists }) => ({
-  latest: recipientVerificationLists.listResults,
-  loading: recipientVerificationLists.listResultsLoading
-});
+const mapStateToProps = ({ recipientVerificationLists }) => {
+  const latestId = recipientVerificationLists.latest;
+
+  return {
+    latestId,
+    results: recipientVerificationLists.listResults[latestId] || {},
+    loading: recipientVerificationLists.listResultsLoading
+  };
+};
 
 export default connect(mapStateToProps, { getLatest, getStatus })(withContext(PollContext, ListResults));

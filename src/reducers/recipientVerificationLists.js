@@ -3,7 +3,8 @@ const initialState = {
   errors: undefined,
   uploadLoading: false,
   listResultsLoading: false,
-  listResults: {}
+  listResults: {},
+  latest: null
 };
 
 export default (state = initialState, { meta, payload, type }) => {
@@ -17,9 +18,7 @@ export default (state = initialState, { meta, payload, type }) => {
       return {
         ...state,
         uploadLoading: false,
-        listResults: {
-          listId: payload.list_id
-        }
+        latest: payload.list_id
       };
 
     case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_FAIL':
@@ -27,7 +26,7 @@ export default (state = initialState, { meta, payload, type }) => {
 
     // List Results
     case 'GET_LATEST_UPLOAD_PENDING':
-      return { ...state, listResultsLoading: true, listResults: {} };
+      return { ...state, listResultsLoading: true, listResults: {}};
 
     case 'GET_LATEST_UPLOAD_ERROR':
       return { ...state, listResultsLoading: false };
@@ -36,26 +35,31 @@ export default (state = initialState, { meta, payload, type }) => {
       return {
         ...state,
         listResultsLoading: false,
+        latest: payload.list_id,
         listResults: {
-          complete: payload.complete,
-          listId: payload.list_id
+          ...state.listResults,
+          [payload.list_id]: {
+            complete: payload.complete
+          }
         }
       };
 
     // List Polling
-    case 'GET_UPLOAD_STATUS_PENDING':
+    case 'GET_LIST_STATUS_PENDING':
       return { ...state, listResultsLoading: true };
 
-    case 'GET_UPLOAD_STATUS_ERROR':
+    case 'GET_LIST_STATUS_ERROR':
       return { ...state, listResultsLoading: false };
 
-    case 'GET_UPLOAD_STATUS_SUCCESS':
+    case 'GET_LIST_STATUS_SUCCESS':
       return {
         ...state,
         listResultsLoading: false,
         listResults: {
-          complete: payload.complete,
-          listId: payload.list_id
+          ...state.listResults,
+          [payload.list_id]: {
+            complete: payload.complete
+          }
         }
       };
 

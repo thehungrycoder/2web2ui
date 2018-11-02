@@ -29,15 +29,15 @@ export function getLatest() {
       method: 'GET',
       url: 'labs/recipient-verification-api/latest'
     }
-  })
+  });
 }
 
 export function getStatus(list_id) {
   return sparkpostApiRequest({
-    type: 'GET_UPLOAD_STATUS',
+    type: 'GET_LIST_STATUS',
     meta: {
       method: 'GET',
       url: `labs/recipient-verification-api/get-job/${list_id}`
     }
-  })
+  });
 }
