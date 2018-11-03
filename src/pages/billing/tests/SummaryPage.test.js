@@ -11,7 +11,7 @@ describe('Page: BillingSummaryPage', () => {
       account: {
         subscription: {}
       },
-      billingInfo: {},
+      billingInfo: { onZuoraPlan: true },
       loading: false,
       sendingIps: {
         list: []

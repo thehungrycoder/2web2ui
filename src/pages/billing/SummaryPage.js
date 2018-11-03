@@ -33,7 +33,7 @@ export class BillingSummaryPage extends Component {
       <Page title='Billing'>
         <ConditionSwitch>
           <SuspendedForBilling condition={isSuspendedForBilling} account={account} />
-          <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} />
+          <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} onZuoraPlan={billingInfo.onZuoraPlan} />
           <BillingSummary condition={defaultCase} account={account} {...billingInfo} invoices={invoices} sendingIps={sendingIps} />
         </ConditionSwitch>
       </Page>

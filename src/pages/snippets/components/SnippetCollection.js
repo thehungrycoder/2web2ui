@@ -13,69 +13,56 @@ const filterBoxConfig = {
   itemToStringKeys: ['name', 'id', 'subaccount_id']
 };
 
-export class SnippetCollection extends Component {
-
-  getColumns() {
-    const { HEADERS } = this;
-
-    const columns = this.props.hasSubaccounts
-      ? [HEADERS.name, HEADERS.subaccount, HEADERS.updateAt, HEADERS.actions]
-      : [HEADERS.name, HEADERS.updateAt, HEADERS.actions];
-
-    return columns;
-  }
-
-  getRowData = (data) => {
-    const { toggleDelete, canCreate, hasSubaccounts } = this.props;
-    const actionsData = { ...data, toggleDelete, canCreate };
-
-    if (hasSubaccounts) {
-      return [
-        <NameTableData {...data} />,
-        <SubaccountTableData {...data} />,
-        <UpdatedAtTableData {...data} />,
-        <ActionsTableData {...actionsData} />
-      ];
+export default class SnippetCollection extends Component {
+  columns = [
+    {
+      component: NameTableData,
+      header: {
+        label: 'Name',
+        sortKey: ({ id, name }) => (name || id).toLowerCase() // name may not be present
+      }
+    },
+    {
+      component: SubaccountTableData,
+      header: {
+        label: 'Subaccount',
+        sortKey: ({ subaccount_id, shared_with_subaccounts }) => (
+          subaccount_id || shared_with_subaccounts
+        )
+      },
+      visible: () => this.props.hasSubaccounts
+    },
+    {
+      component: UpdatedAtTableData,
+      header: {
+        label: 'Last Updated',
+        sortKey: ({ created_at, updated_at }) => updated_at || created_at
+      }
+    },
+    {
+      component: (props) => <ActionsTableData {...props} toggleDelete={this.props.toggleDelete} />,
+      header: null,
+      visible: () => this.props.canCreate
     }
+  ]
 
-    return [
-      <NameTableData {...data} />,
-      <UpdatedAtTableData {...data} />,
-      <ActionsTableData {...actionsData} />
-    ];
-  }
+  renderRow = (columns) => (props) => (
+    columns.map(({ component: Component }) => <Component {...props} />)
+  )
 
   render() {
     const { snippets } = this.props;
+    const visibleColumns = this.columns.filter(({ visible = () => true }) => visible());
+
     return (
       <TableCollection
-        columns={this.getColumns()}
+        columns={visibleColumns.map(({ header }) => header)}
         rows={snippets}
-        getRowData={this.getRowData}
-        defaultSortColumn={this.HEADERS.name.sortKey}
+        getRowData={this.renderRow(visibleColumns)}
+        defaultSortColumn={this.columns[0].header.sortKey}
         filterBox={filterBoxConfig}
         pagination
       />
     );
   }
-
-  HEADERS = {
-    actions: null, // placeholder for the column
-    name: {
-      label: 'Name',
-      sortKey: ({ id, name }) => (name || id).toLowerCase() // name may not be present
-    },
-    subaccount: {
-      label: 'Subaccount',
-      sortKey: ({ subaccount_id, shared_with_subaccounts }) => (
-        subaccount_id || shared_with_subaccounts
-      )
-    },
-    updateAt: {
-      label: 'Last Updated',
-      sortKey: ({ created_at, updated_at }) => updated_at || created_at
-    }
-  }
 }
-
-export default SnippetCollection;

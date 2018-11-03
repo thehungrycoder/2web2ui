@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Snippet Actions .clearSnippet by default 1`] = `
+Array [
+  Object {
+    "type": "CLEAR_SNIPPET",
+  },
+]
+`;
+
 exports[`Snippet Actions .createSnippet when assigned to master account 1`] = `
 Array [
   Object {
@@ -15,7 +23,7 @@ Array [
       },
       "headers": Object {},
       "method": "POST",
-      "url": "/v1/snippets",
+      "url": "/labs/snippets",
     },
     "type": "CREATE_SNIPPET",
   },
@@ -37,7 +45,7 @@ Array [
       },
       "headers": Object {},
       "method": "POST",
-      "url": "/v1/snippets",
+      "url": "/labs/snippets",
     },
     "type": "CREATE_SNIPPET",
   },
@@ -61,7 +69,7 @@ Array [
         "x-msys-subaccount": "example-subaccount",
       },
       "method": "POST",
-      "url": "/v1/snippets",
+      "url": "/labs/snippets",
     },
     "type": "CREATE_SNIPPET",
   },
@@ -83,7 +91,7 @@ Array [
       },
       "headers": Object {},
       "method": "POST",
-      "url": "/v1/snippets",
+      "url": "/labs/snippets",
     },
     "type": "CREATE_SNIPPET",
   },
@@ -100,7 +108,7 @@ Array [
       },
       "headers": Object {},
       "method": "DELETE",
-      "url": "/snippets/test-snippet",
+      "url": "/labs/snippets/test-snippet",
     },
     "type": "DELETE_SNIPPET",
   },
@@ -119,9 +127,45 @@ Array [
         "x-msys-subaccount": 101,
       },
       "method": "DELETE",
-      "url": "/snippets/test-snippet",
+      "url": "/labs/snippets/test-snippet",
     },
     "type": "DELETE_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .getSnippet with id 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "context": Object {
+        "id": 123,
+        "subaccountId": undefined,
+      },
+      "headers": Object {},
+      "method": "GET",
+      "url": "/labs/snippets/123",
+    },
+    "type": "GET_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .getSnippet with id and subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "context": Object {
+        "id": 123,
+        "subaccountId": 456,
+      },
+      "headers": Object {
+        "x-msys-subaccount": 456,
+      },
+      "method": "GET",
+      "url": "/labs/snippets/123",
+    },
+    "type": "GET_SNIPPET",
   },
 ]
 `;
@@ -131,9 +175,95 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "url": "/v1/snippets",
+      "url": "/labs/snippets",
     },
     "type": "GET_SNIPPETS",
+  },
+]
+`;
+
+exports[`Snippet Actions .updateSnippet when assigned to master account 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "html": undefined,
+          "text": "Testing...",
+        },
+        "name": "Test Snippet",
+        "shared_with_subaccounts": false,
+      },
+      "headers": Object {},
+      "method": "PUT",
+      "url": "/labs/snippets/test-snippet",
+    },
+    "type": "UPDATE_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .updateSnippet when shared with all subaccounts 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "html": undefined,
+          "text": "Testing...",
+        },
+        "name": "Test Snippet",
+        "shared_with_subaccounts": true,
+      },
+      "headers": Object {},
+      "method": "PUT",
+      "url": "/labs/snippets/test-snippet",
+    },
+    "type": "UPDATE_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .updateSnippet with a subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "html": undefined,
+          "text": "Testing...",
+        },
+        "name": "Test Snippet",
+        "shared_with_subaccounts": false,
+      },
+      "headers": Object {
+        "x-msys-subaccount": "example-subaccount",
+      },
+      "method": "PUT",
+      "url": "/labs/snippets/test-snippet",
+    },
+    "type": "UPDATE_SNIPPET",
+  },
+]
+`;
+
+exports[`Snippet Actions .updateSnippet with html and text content 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "html": "<p>Testing...</p>",
+          "text": "Testing...",
+        },
+        "name": "Test Snippet",
+        "shared_with_subaccounts": false,
+      },
+      "headers": Object {},
+      "method": "PUT",
+      "url": "/labs/snippets/test-snippet",
+    },
+    "type": "UPDATE_SNIPPET",
   },
 ]
 `;
