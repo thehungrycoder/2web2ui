@@ -6,7 +6,7 @@
 }
 
 .email {
-  color: color(blue);
+  color: color(blue, dark);
 }
 
 .validIcon {
@@ -15,4 +15,9 @@
 
 .invalidIcon {
   color: color(red)
+}
+
+.IconWrapper {
+  display: inline-block;
+  padding-right: spacing(small);
 }
