@@ -142,7 +142,7 @@
     "jest-in-case": "^1.0.2",
     "jest-junit": "^5.1.0",
     "lint-staged": "^8.0.0",
-    "mdx-loader": "^2.0.0",
+    "mdx-loader": "^1.1.0",
     "mdxc": "^1.1.1",
     "moment-timezone": "^0.5.14",
     "node-sass": "^4.9.3",
