@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteSnippetLink redirects with an alert when deleted 1`] = `
+<Redirect
+  push={true}
+  to="/snippets"
+/>
+`;
+
+exports[`DeleteSnippetLink renders unstyled link 1`] = `
+<UnstyledLink
+  onClick={[Function]}
+>
+  Delete
+</UnstyledLink>
+`;

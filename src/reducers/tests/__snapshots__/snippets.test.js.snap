@@ -4,6 +4,7 @@ exports[`Snippets Reducer CLEAR_SNIPPET 1`] = `Object {}`;
 
 exports[`Snippets Reducer DELETE_SNIPPET when fail 1`] = `
 Object {
+  "deleteError": [Error: Oh no!],
   "deletePending": false,
   "items": Array [
     Object {
@@ -19,6 +20,7 @@ Object {
 
 exports[`Snippets Reducer DELETE_SNIPPET when pending 1`] = `
 Object {
+  "deleteError": null,
   "deletePending": true,
   "items": Array [
     Object {
@@ -62,6 +64,7 @@ Object {
   "getPending": false,
   "items": Array [],
   "loading": false,
+  "snippet": null,
 }
 `;
 
@@ -72,6 +75,7 @@ Object {
   "getPending": true,
   "items": Array [],
   "loading": false,
+  "snippet": null,
 }
 `;
 
@@ -87,6 +91,7 @@ Object {
   ],
   "items": Array [],
   "loading": false,
+  "snippet": null,
 }
 `;
 
@@ -97,6 +102,7 @@ Object {
   "getPending": false,
   "items": Array [],
   "loading": false,
+  "snippet": null,
 }
 `;
 
@@ -107,6 +113,7 @@ Object {
   "getPending": false,
   "items": Array [],
   "loading": true,
+  "snippet": null,
 }
 `;
 
@@ -121,5 +128,6 @@ Object {
     },
   ],
   "loading": false,
+  "snippet": null,
 }
 `;

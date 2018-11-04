@@ -2,7 +2,7 @@ const initialState = {
   items: [], // cannot normalize, id is not unique, needs to consider subaccount_id
   loading: false,
   deletePending: false,
-  getPending: false
+  getPending: false,
   snippet: null
 };
 
@@ -39,9 +39,9 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, snippet: payload, loading: false };
 
     case 'DELETE_SNIPPET_FAIL':
-      return { ...state, deletePending: false };
+      return { ...state, deleteError: payload.error, deletePending: false };
     case 'DELETE_SNIPPET_PENDING':
-      return { ...state, deletePending: true };
+      return { ...state, deleteError: null, deletePending: true };
     case 'DELETE_SNIPPET_SUCCESS':
       return {
         ...state,

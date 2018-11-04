@@ -3,7 +3,7 @@ import ActionPopover from 'src/components/actionPopover';
 import PageLink from 'src/components/pageLink';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
-const ActionsTableData = ({ id, subaccount_id: subaccountId, toggleDelete }) => (
+const ActionsTableData = ({ id, subaccount_id: subaccountId, openDeleteModal }) => (
   <ActionPopover
     actions={[
       {
@@ -21,7 +21,7 @@ const ActionsTableData = ({ id, subaccount_id: subaccountId, toggleDelete }) => 
       },
       {
         content: 'Delete',
-        onClick: () => toggleDelete(id, subaccountId)
+        onClick: () => openDeleteModal({ id, subaccountId })
       }
     ]}
   />

@@ -8,6 +8,7 @@ import PageLink from 'src/components/pageLink';
 import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper';
 import SubaccountSection from 'src/components/subaccountSection';
 import { maxLength, required } from 'src/helpers/validation';
+import DeleteSnippetLink from './components/DeleteSnippetLink';
 import IdentifierHelpText from './components/IdentifierHelpText';
 
 export default class EditPage extends React.Component {
@@ -21,6 +22,14 @@ export default class EditPage extends React.Component {
   }
 
   secondaryActions = [
+    {
+      Component: (props) => (
+        <DeleteSnippetLink {...props} id={this.props.id} subaccountId={this.props.subaccountId} />
+      ),
+      content: 'Delete',
+      to: '/', // needed to render Component
+      visible: () => this.props.canModify
+    },
     {
       Component: PageLink,
       content: 'Duplicate',

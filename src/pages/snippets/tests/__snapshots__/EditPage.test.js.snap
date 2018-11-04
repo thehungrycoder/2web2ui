@@ -34,6 +34,12 @@ exports[`EditPage renders disabled form when submitting 1`] = `
     Array [
       Object {
         "Component": [Function],
+        "content": "Delete",
+        "to": "/",
+        "visible": [Function],
+      },
+      Object {
+        "Component": [Function],
         "content": "Duplicate",
         "to": Object {
           "pathname": "/snippets/create",
@@ -191,6 +197,12 @@ exports[`EditPage renders edit form 1`] = `
     Array [
       Object {
         "Component": [Function],
+        "content": "Delete",
+        "to": "/",
+        "visible": [Function],
+      },
+      Object {
+        "Component": [Function],
         "content": "Duplicate",
         "to": Object {
           "pathname": "/snippets/create",
@@ -274,6 +286,12 @@ exports[`EditPage renders without subaccount section when account has no subacco
   }
   secondaryActions={
     Array [
+      Object {
+        "Component": [Function],
+        "content": "Delete",
+        "to": "/",
+        "visible": [Function],
+      },
       Object {
         "Component": [Function],
         "content": "Duplicate",
