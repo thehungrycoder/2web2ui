@@ -17,7 +17,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state, props) => {
-  const { id, subaccountId } = props.location.state;
+  const { id, subaccountId } = props.location.state || {};
 
   if (id) { // for duplicating
     const snippet = state.snippets.item || {};
