@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, Form } from 'redux-form';
 import { Button, Grid, Page, Panel } from '@sparkpost/matchbox';
 import ContentEditor from 'src/components/contentEditor';
+import CopyField from 'src/components/copyField';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink';
@@ -115,6 +116,13 @@ export default class EditPage extends React.Component {
                 {hasSubaccounts && (
                   <SubaccountSection newTemplate={false} disabled={disabled} />
                 )}
+              </Panel>
+              <Panel sectioned>
+                <CopyField
+                  label="Code Example"
+                  helpText="Copy and use this code in your templates"
+                  value={`{{ render_snippet("${id}") }}`}
+                />
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>
