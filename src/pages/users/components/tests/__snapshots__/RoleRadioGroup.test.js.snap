@@ -13,7 +13,7 @@ exports[`Component: RoleRadioGroup should render disabled 1`] = `
     Array [
       Object {
         "disabled": true,
-        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting",
+        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting.",
         "label": <strong>
           Admin
         </strong>,
@@ -21,7 +21,7 @@ exports[`Component: RoleRadioGroup should render disabled 1`] = `
       },
       Object {
         "disabled": true,
-        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them",
+        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them.",
         "label": <strong>
           Reporting
         </strong>,
@@ -46,7 +46,7 @@ exports[`Component: RoleRadioGroup should render super user 1`] = `
     Array [
       Object {
         "disabled": false,
-        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting",
+        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting.",
         "label": <strong>
           Admin
         </strong>,
@@ -54,7 +54,7 @@ exports[`Component: RoleRadioGroup should render super user 1`] = `
       },
       Object {
         "disabled": false,
-        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them",
+        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them.",
         "label": <strong>
           Reporting
         </strong>,
@@ -86,7 +86,7 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
     Array [
       Object {
         "disabled": false,
-        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting",
+        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting.",
         "label": <strong>
           Admin
         </strong>,
@@ -94,7 +94,7 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
       },
       Object {
         "disabled": false,
-        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them",
+        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them.",
         "label": <strong>
           Reporting
         </strong>,

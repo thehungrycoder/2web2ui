@@ -41,6 +41,7 @@ exports[`Page: Users Edit should disable single sign-on checkbox and display ins
               >
                 account's settings
               </PageLink>
+              .
             </span>
           }
           label="Enable single sign-on authentication for this user"
@@ -112,9 +113,7 @@ exports[`Page: Users Edit should not allow current user to delete 1`] = `
           disabled={false}
           helpText={
             <span>
-              Enabling single sign-on will remove your password. 
-              <br />
-              To use password again, you'll need to reset it from Log In page
+              Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.
             </span>
           }
           label="Enable single sign-on authentication for this user"
@@ -204,9 +203,7 @@ exports[`Page: Users Edit should render correctly by default 1`] = `
           disabled={false}
           helpText={
             <span>
-              Enabling single sign-on will remove your password. 
-              <br />
-              To use password again, you'll need to reset it from Log In page
+              Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.
             </span>
           }
           label="Enable single sign-on authentication for this user"
@@ -282,9 +279,7 @@ exports[`Page: Users Edit should show a delete modal 1`] = `
           disabled={false}
           helpText={
             <span>
-              Enabling single sign-on will remove your password. 
-              <br />
-              To use password again, you'll need to reset it from Log In page
+              Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.
             </span>
           }
           label="Enable single sign-on authentication for this user"
