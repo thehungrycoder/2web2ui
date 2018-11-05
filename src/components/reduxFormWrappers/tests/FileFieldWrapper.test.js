@@ -41,6 +41,11 @@ cases('FileFieldWrapper', (props) => {
   },
   'renders file input with help message': {
     helpText: 'Ask Google!'
+  },
+  'renders with a hidden label': {
+    labelHidden: true,
+    required: true,
+    label: 'a label'
   }
 });
 
