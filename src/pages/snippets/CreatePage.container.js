@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { clearSnippet, createSnippet, getSnippet } from 'src/actions/snippets';
+import { slugify, tagAsCopy } from 'src/helpers/string';
 import { hasSubaccounts, selectSubaccountFromId } from 'src/selectors/subaccounts';
 import CreatePage from './CreatePage';
 
@@ -20,6 +21,7 @@ const mapStateToProps = (state, props) => {
 
   if (id) { // for duplicating
     const snippet = state.snippets.item || {};
+    const name = tagAsCopy(snippet.name);
     const assignTo = subaccountId
       ? 'subaccount'
       : snippet.shared_with_subaccounts ? 'shared' : 'master';
@@ -29,8 +31,8 @@ const mapStateToProps = (state, props) => {
       initialValues: {
         ...snippet,
         assignTo,
-        id: `${snippet.id}-copy`,
-        name: `${snippet.name} Copy`,
+        id: slugify(name),
+        name,
         subaccount: selectSubaccountFromId(state, subaccountId)
       },
       loading: state.snippets.getPending,

@@ -90,3 +90,15 @@ export function decodeBase64(str) {
 export function trimWhitespaces(str = '') {
   return str.trim();
 }
+
+export const tagAsCopy = (str) => {
+  const copyRegex = / Copy( \d+)?$/;
+  const matches = copyRegex.exec(str);
+
+  if (matches === null) {
+    return `${str} Copy`;
+  }
+
+  const count = parseInt(matches[1] || 0);
+  return str.replace(copyRegex, ` Copy ${count + 1}`);
+};
