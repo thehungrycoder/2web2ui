@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Recipient Verification Actions .singleAddress when verifying a single address 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "email": Object {
+        "address": "foo@bar.com",
+      },
+      "method": "GET",
+      "url": "labs/recipient-verification-api/single/[object Object]",
+    },
+    "type": "SINGLE_RECIPIENT_VERIFICATION",
+  },
+]
+`;
+
 exports[`Recipient Verification Actions .uploadRecipientVerificationList when uploading csv 1`] = `
 Array [
   Object {

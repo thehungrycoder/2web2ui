@@ -1,42 +1,47 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import styles from './RecipientVerificationPage.module.scss';
 import { required, maxLength } from 'src/helpers/validation';
+import { singleAddress } from 'src/actions/recipientVerificationLists';
+import SingleResult from './SingleResult';
 
 const formName = 'singleAddressForm';
-
 export class SingleAddressForm extends Component {
 
+  singleAddressForm = (values) => this.props.singleAddress(values.address);
+
   render() {
-    const { pristine, valid, submitting, handleSubmit } = this.props;
+    const { singleResults, valid, pristine, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
+    const buttonContent = (submitting) ? 'Verifying...' : 'Verify Email Address';
 
     return (
       <Fragment>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(this.singleAddressForm)}>
           <p className={styles.Paragraph}>Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
           <Field
-            name='name'
+            name='address'
             component={TextFieldWrapper}
-            label='Enter an email address to verify'
+            label='Email address'
             placeholder={'eg. example@mail.com'}
-            onChange={this.handleIdFill}
             validate={[required, maxLength(64)]}
+            connectRight={<Button primary submit disabled={submitDisabled}>{buttonContent}</Button>}
           />
-          <Button primary submit disabled={submitDisabled}>Verify Email Address</Button>
         </form>
+        {singleResults && <SingleResult singleResults={singleResults}/>}
       </Fragment>
     );
   }
 }
 
-const WrappedForm = reduxForm({ form: formName })(SingleAddressForm);
-
-const mapStateToProps = (state, props) => ({
-  initialValues: props.editMode ? state.recipientLists.current : {}
+const mapStateToProps = ({ recipientVerificationLists }) => ({
+  errors: recipientVerificationLists.errors,
+  singleResults: recipientVerificationLists.singleResults
 });
 
-export default connect(mapStateToProps)(WrappedForm);
+const WrappedForm = reduxForm({ form: formName })(SingleAddressForm);
+
+export default connect(mapStateToProps, { singleAddress })(WrappedForm);

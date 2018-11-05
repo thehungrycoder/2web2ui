@@ -10,3 +10,14 @@ export function uploadRecipientVerificationList(data) {
     }
   });
 }
+
+export function singleAddress(address) {
+  return sparkpostApiRequest({
+    type: 'SINGLE_RECIPIENT_VERIFICATION',
+    meta: {
+      method: 'GET',
+      url: `labs/recipient-verification-api/single/${address}`,
+      email: address
+    }
+  });
+}
