@@ -64,5 +64,11 @@ describe('ListResults', () => {
       expect(props.stopPolling).toHaveBeenCalledTimes(1);
       expect(props.stopPolling).toHaveBeenCalledWith(testComplete.listId);
     });
+
+    it('should stop polling on unmount', () => {
+      wrapper.setProps({ latestId: testComplete.listId });
+      wrapper.unmount();
+      expect(props.stopPolling).toHaveBeenCalledWith(testComplete.listId);
+    });
   });
 });

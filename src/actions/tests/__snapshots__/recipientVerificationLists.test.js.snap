@@ -15,6 +15,30 @@ Array [
 ]
 `;
 
+exports[`Recipient Verification Actions .getLatest when getting latest list upload 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "labs/recipient-verification-api/latest",
+    },
+    "type": "GET_LATEST_UPLOAD",
+  },
+]
+`;
+
+exports[`Recipient Verification Actions .getStatus when getting status of a list job 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "labs/recipient-verification-api/get-job/12345",
+    },
+    "type": "GET_LIST_STATUS",
+  },
+]
+`;
+
 exports[`Recipient Verification Actions .uploadRecipientVerificationList when uploading csv 1`] = `
 Array [
   Object {
