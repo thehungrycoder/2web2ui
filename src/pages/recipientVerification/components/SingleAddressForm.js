@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
-import { TextFieldWrapper, ApiErrorBanner } from 'src/components';
+import { TextFieldWrapper } from 'src/components';
 import styles from './RecipientVerificationPage.module.scss';
 import { required, maxLength } from 'src/helpers/validation';
 import { singleAddress } from 'src/actions/recipientVerificationLists';
@@ -12,16 +12,6 @@ const formName = 'singleAddressForm';
 export class SingleAddressForm extends Component {
 
   singleAddressForm = (values) => this.props.singleAddress(values.address);
-
-  renderError() {
-    return (
-      <ApiErrorBanner
-        errorDetails={this.props.errors.payload.message}
-        message="Sorry, we ran into an error verifying your email address."
-        reload={this.pageLoad}
-      />
-    );
-  }
 
   render() {
     const { singleResults, valid, pristine, submitting, handleSubmit } = this.props;
