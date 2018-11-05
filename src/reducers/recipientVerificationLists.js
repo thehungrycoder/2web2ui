@@ -1,6 +1,5 @@
 const initialState = {
-  singleResults: undefined,
-  errors: undefined,
+  singleResults: null,
   uploadLoading: false,
   listResultsLoading: false,
   listResults: {},
@@ -63,8 +62,9 @@ export default (state = initialState, { meta, payload, type }) => {
         }
       };
 
+    // Single Recipient
     case 'SINGLE_RECIPIENT_VERIFICATION_PENDING':
-      return { ...state, singleResults: undefined, errors: undefined };
+      return { ...state, singleResults: null };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_SUCCESS':
       return {
@@ -77,7 +77,7 @@ export default (state = initialState, { meta, payload, type }) => {
       };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_FAIL':
-      return { ...state, singleResults: undefined, errors: { payload, meta }};
+      return { ...state, singleResults: null };
 
     default:
       return { ...state };

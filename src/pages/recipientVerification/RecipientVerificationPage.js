@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import { Page, Tabs, Panel } from '@sparkpost/matchbox';
 import RecipientVerificationListForm from './components/RecipientVerificationListForm';
@@ -42,4 +41,4 @@ export class RecipientVerificationPage extends Component {
   }
 }
 
-export default connect(undefined)(RecipientVerificationPage);
+export default RecipientVerificationPage;

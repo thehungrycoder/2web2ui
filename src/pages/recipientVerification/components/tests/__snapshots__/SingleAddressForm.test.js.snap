@@ -5,9 +5,7 @@ exports[`SingleAddressForm renders correctly 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <p
-      className="Paragraph"
-    >
+    <p>
       Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
     </p>
     <Field
@@ -41,9 +39,7 @@ exports[`SingleAddressForm should disable form elements on submit 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <p
-      className="Paragraph"
-    >
+    <p>
       Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
     </p>
     <Field

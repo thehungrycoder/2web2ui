@@ -37,7 +37,6 @@ export class SingleAddressForm extends Component {
 }
 
 const mapStateToProps = ({ recipientVerificationLists }) => ({
-  errors: recipientVerificationLists.errors,
   singleResults: recipientVerificationLists.singleResults
 });
 

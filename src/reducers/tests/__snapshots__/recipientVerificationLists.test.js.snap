@@ -2,58 +2,48 @@
 
 exports[`Recipient Verification Lists Reducer default 1`] = `
 Object {
-  "errors": undefined,
-  "list": Array [],
-  "loading": false,
-  "singleResults": undefined,
+  "latest": null,
+  "listResults": Object {},
+  "listResultsLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
 }
 `;
 
-exports[`Recipient Verification Lists Reducer when ticket creation is pending 1`] = `
+exports[`Recipient Verification Lists Reducer when verification is pending 1`] = `
 Object {
-  "errors": undefined,
-  "list": Array [],
-  "loading": false,
-  "singleResults": undefined,
-}
-`;
-
-exports[`Recipient Verification Lists Reducer when verification fails 1`] = `
-Object {
-  "errors": Object {
-    "meta": undefined,
-    "payload": Object {
-      "message": "Oh no!",
-    },
-  },
-  "list": Array [],
-  "loading": false,
-  "singleResults": undefined,
+  "latest": null,
+  "listResults": Object {},
+  "listResultsLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
 }
 `;
 
 exports[`Recipient Verification Lists Reducer when verification successfully returns invalid address 1`] = `
 Object {
-  "errors": undefined,
-  "list": Array [],
-  "loading": false,
+  "latest": null,
+  "listResults": Object {},
+  "listResultsLoading": false,
   "singleResults": Object {
     "email": "invalid@address.com",
     "reason": undefined,
     "valid": undefined,
   },
+  "uploadLoading": false,
 }
 `;
 
 exports[`Recipient Verification Lists Reducer when verification successfully returns valid address 1`] = `
 Object {
-  "errors": undefined,
-  "list": Array [],
-  "loading": false,
+  "latest": null,
+  "listResults": Object {},
+  "listResultsLoading": false,
   "singleResults": Object {
     "email": "valid@address.com",
     "reason": undefined,
     "valid": undefined,
   },
+  "uploadLoading": false,
 }
 `;
