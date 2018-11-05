@@ -72,48 +72,6 @@ exports[`CreatePage .submitSnippet succeeds with shared subaccounts assignment 1
 }
 `;
 
-exports[`CreatePage duplicate succeeds master account 1`] = `
-Object {
-  "assignTo": "master",
-  "content": Object {
-    "html": "hello",
-    "text": "world",
-  },
-  "id": "testid-copy",
-  "name": "Testing Snippets Copy",
-  "subaccount": undefined,
-}
-`;
-
-exports[`CreatePage duplicate succeeds shared with subaccounts 1`] = `
-Object {
-  "assignTo": "shared",
-  "content": Object {
-    "html": "hello",
-    "text": "world",
-  },
-  "id": "testid-copy",
-  "name": "Testing Snippets Copy",
-  "subaccount": undefined,
-}
-`;
-
-exports[`CreatePage duplicate succeeds subaccount 1`] = `
-Object {
-  "assignTo": "subaccount",
-  "content": Object {
-    "html": "hello",
-    "text": "world",
-  },
-  "id": "testid-copy",
-  "name": "Testing Snippets Copy",
-  "subaccount": Object {
-    "id": 101,
-    "name": "bestsub",
-  },
-}
-`;
-
 exports[`CreatePage renders form 1`] = `
 <Page
   breadcrumbAction={
@@ -169,79 +127,6 @@ exports[`CreatePage renders form 1`] = `
               }
             />
           </Panel.Section>
-        </Panel>
-      </Grid.Column>
-      <Grid.Column
-        lg={8}
-        xs={12}
-      >
-        <LoadableComponent
-          contentOnly={true}
-        />
-      </Grid.Column>
-    </Grid>
-  </Form>
-</Page>
-`;
-
-exports[`CreatePage renders form with subaccount assignment 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Snippets",
-      "to": "/snippets",
-    }
-  }
-  empty={Object {}}
-  primaryAction={
-    Object {
-      "Component": [Function],
-      "content": "Create Snippet",
-      "onClick": [Function],
-    }
-  }
-  title="New Snippet"
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <Grid>
-      <Grid.Column
-        lg={4}
-        xs={12}
-      >
-        <Panel>
-          <Panel.Section>
-            <Field
-              component={[Function]}
-              label="Snippet Name"
-              name="name"
-              onChange={[Function]}
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-            <Field
-              component={[Function]}
-              helpText={<IdentifierHelpText />}
-              label="Snippet ID"
-              name="id"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Panel.Section>
-          <Component
-            newTemplate={true}
-          />
         </Panel>
       </Grid.Column>
       <Grid.Column

@@ -1,32 +1,27 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Field, Form, reduxForm } from 'redux-form';
+import { Field, Form } from 'redux-form';
 import { Button, Grid, Page, Panel } from '@sparkpost/matchbox';
-import { createSnippet, getSnippet } from 'src/actions/snippets';
-import { getSubaccount } from 'src/actions/subaccounts';
 import ContentEditor from 'src/components/contentEditor';
 import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink';
 import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper';
 import SubaccountSection from 'src/components/subaccountSection';
 import { slugify } from 'src/helpers/string';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { maxLength, required, slug } from 'src/helpers/validation';
-import { hasSubaccounts, selectSubaccountFromId } from 'src/selectors/subaccounts';
 import IdentifierHelpText from './components/IdentifierHelpText';
 
-export class CreatePage extends React.Component {
+export default class CreatePage extends React.Component {
   componentDidMount() {
-    // Sent here via duplicate button
-    if (this.props.location.state) {
-      const { id, subaccount_id } = this.props.location.state;
-      this.props.getSnippet({ id, subaccountId: subaccount_id });
+    const { snippetToDuplicate, getSnippet } = this.props;
+
+    if (snippetToDuplicate) {
+      getSnippet(snippetToDuplicate);
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.submitSucceeded) {
-      this.props.history.push('/snippets');
-    }
+  componentWillUnmount() {
+    this.props.clearSnippet(); // loaded for duplicate
   }
 
   fillIdField = (event) => {
@@ -47,11 +42,13 @@ export class CreatePage extends React.Component {
       sharedWithSubaccounts: assignTo === 'shared',
       subaccountId,
       text
+    }).then(() => {
+      this.props.history.push(`/snippets/edit/${id}${setSubaccountQuery(subaccountId)}`);
     })
   )
 
   render() {
-    const { handleSubmit, hasSubaccounts, submitting, loading } = this.props;
+    const { snippetToDuplicate, handleSubmit, hasSubaccounts, loading, submitting } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -59,7 +56,7 @@ export class CreatePage extends React.Component {
 
     return (
       <Page
-        title="New Snippet"
+        title={snippetToDuplicate ? 'Duplicate Snippet' : 'New Snippet'}
         breadcrumbAction={{ Component: PageLink, content: 'Snippets', to: '/snippets' }}
         primaryAction={{
           Component: Button,
@@ -101,41 +98,3 @@ export class CreatePage extends React.Component {
     );
   }
 }
-
-const formOptions = {
-  form: 'createSnippetForm',
-  enableReinitialize: true
-};
-
-const mapDispatchToProps = {
-  createSnippet,
-  getSnippet,
-  getSubaccount
-};
-
-const mapStateToProps = (state, props) => ({
-  hasSubaccounts: hasSubaccounts(state),
-  initialValues: getInitialValues(state, props),
-  loading: state.snippets.loading
-});
-
-export const getInitialValues = (state, props) => {
-  if (state.snippets.snippet) {
-    const { id, name, content, shared_with_subaccounts } = state.snippets.snippet;
-    const { subaccount_id } = props.location.state;
-
-    return {
-      id: `${id}-copy`,
-      name: `${name} Copy`,
-      subaccount: selectSubaccountFromId(state, subaccount_id),
-      assignTo: subaccount_id ? 'subaccount' : shared_with_subaccounts ? 'shared' : 'master',
-      content
-    };
-  } else {
-    return {
-      assignTo: 'master'
-    };
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(CreatePage));

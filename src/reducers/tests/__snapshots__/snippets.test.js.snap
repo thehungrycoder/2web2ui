@@ -64,7 +64,6 @@ Object {
   "getPending": false,
   "items": Array [],
   "loading": false,
-  "snippet": null,
 }
 `;
 
@@ -75,7 +74,6 @@ Object {
   "getPending": true,
   "items": Array [],
   "loading": false,
-  "snippet": null,
 }
 `;
 
@@ -91,7 +89,6 @@ Object {
   ],
   "items": Array [],
   "loading": false,
-  "snippet": null,
 }
 `;
 
@@ -102,7 +99,6 @@ Object {
   "getPending": false,
   "items": Array [],
   "loading": false,
-  "snippet": null,
 }
 `;
 
@@ -113,7 +109,6 @@ Object {
   "getPending": false,
   "items": Array [],
   "loading": true,
-  "snippet": null,
 }
 `;
 
@@ -128,6 +123,5 @@ Object {
     },
   ],
   "loading": false,
-  "snippet": null,
 }
 `;
