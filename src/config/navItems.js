@@ -113,5 +113,11 @@ export default [
     labs: true,
     divider: true,
     icon: NotificationsActive
+  },
+  {
+    label: 'Snippets',
+    to: '/snippets',
+    labs: true,
+    icon: Code
   }
 ];
