@@ -26,6 +26,7 @@ export class SingleAddressForm extends Component {
   render() {
     const { singleResults, valid, pristine, submitting, handleSubmit, submitFailed } = this.props;
     const submitDisabled = pristine || !valid || submitting;
+    const buttonContent = (submitting) ? 'Verifying...' : 'Verify Email Address';
 
     return (
       <Fragment>
@@ -38,7 +39,7 @@ export class SingleAddressForm extends Component {
             label='Email address'
             placeholder={'eg. example@mail.com'}
             validate={[required, maxLength(64)]}
-            connectRight={<Button primary submit disabled={submitDisabled}>Verify Email Address</Button>}
+            connectRight={<Button primary submit disabled={submitDisabled}>{buttonContent}</Button>}
           />
         </form>
         {singleResults && <SingleResult singleResults={singleResults}/>}

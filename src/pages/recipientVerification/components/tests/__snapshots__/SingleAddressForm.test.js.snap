@@ -55,7 +55,7 @@ exports[`SingleAddressForm should disable form elements on submit 1`] = `
           size="default"
           submit={true}
         >
-          Verify Email Address
+          Verifying...
         </Button>
       }
       label="Email address"
