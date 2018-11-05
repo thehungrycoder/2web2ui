@@ -48,12 +48,15 @@ export default class EditPage extends React.Component {
     content: { html, text } = {},
     id,
     name,
-    subaccount: { id: subaccountId } = {},
+    subaccount,
     shared_with_subaccounts: sharedWithSubaccounts
-  }) => (
-    this.props.updateSnippet({ html, id, name, sharedWithSubaccounts, subaccountId, text })
-      .then(() => this.props.showAlert({ type: 'success', message: 'Snippet saved' }))
-  )
+  }) => {
+    // must handle when subaccount is set to null by SubaccountSection
+    const subaccountId = subaccount ? subaccount.id : undefined;
+
+    return this.props.updateSnippet({ html, id, name, sharedWithSubaccounts, subaccountId, text })
+      .then(() => this.props.showAlert({ type: 'success', message: 'Snippet saved' }));
+  }
 
   render() {
     const {

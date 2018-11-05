@@ -33,9 +33,12 @@ export default class CreatePage extends React.Component {
     content: { html, text } = {},
     id,
     name,
-    subaccount: { id: subaccountId } = {}
-  }) => (
-    this.props.createSnippet({
+    subaccount
+  }) => {
+    // must handle when subaccount is set to null by SubaccountSection
+    const subaccountId = subaccount ? subaccount.id : undefined;
+
+    return this.props.createSnippet({
       html,
       id,
       name,
@@ -44,8 +47,8 @@ export default class CreatePage extends React.Component {
       text
     }).then(() => {
       this.props.history.push(`/snippets/edit/${id}${setSubaccountQuery(subaccountId)}`);
-    })
-  )
+    });
+  }
 
   render() {
     const { snippetToDuplicate, handleSubmit, hasSubaccounts, loading, submitting } = this.props;
