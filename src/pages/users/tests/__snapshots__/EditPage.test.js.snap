@@ -41,6 +41,7 @@ exports[`Page: Users Edit should disable single sign-on checkbox and display ins
               >
                 account's settings
               </PageLink>
+              .
             </span>
           }
           label="Enable single sign-on authentication for this user"
@@ -110,7 +111,11 @@ exports[`Page: Users Edit should not allow current user to delete 1`] = `
         <Field
           component={[Function]}
           disabled={false}
-          helpText={false}
+          helpText={
+            <span>
+              Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.
+            </span>
+          }
           label="Enable single sign-on authentication for this user"
           name="is_sso"
           type="checkbox"
@@ -196,7 +201,11 @@ exports[`Page: Users Edit should render correctly by default 1`] = `
         <Field
           component={[Function]}
           disabled={false}
-          helpText={false}
+          helpText={
+            <span>
+              Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.
+            </span>
+          }
           label="Enable single sign-on authentication for this user"
           name="is_sso"
           type="checkbox"
@@ -268,7 +277,11 @@ exports[`Page: Users Edit should show a delete modal 1`] = `
         <Field
           component={[Function]}
           disabled={false}
-          helpText={false}
+          helpText={
+            <span>
+              Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.
+            </span>
+          }
           label="Enable single sign-on authentication for this user"
           name="is_sso"
           type="checkbox"
