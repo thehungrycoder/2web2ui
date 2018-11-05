@@ -28,8 +28,7 @@ export class ListResults extends Component {
         startPolling({
           key: latestId,
           action: () => getStatus(latestId),
-          interval: 2000,
-          maxAttempts: 200
+          interval: 5000
         });
       }
     }

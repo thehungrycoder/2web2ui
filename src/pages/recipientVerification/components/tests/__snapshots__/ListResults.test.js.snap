@@ -5,9 +5,8 @@ Array [
   Array [
     Object {
       "action": [Function],
-      "interval": 2000,
+      "interval": 5000,
       "key": "123",
-      "maxAttempts": 200,
     },
   ],
 ]
