@@ -9,19 +9,19 @@ describe('ListResultsCard', () => {
   beforeEach(() => {
     props = {
       complete: false,
-      upload_timestamp: 1541092618,
-      file: 'no file'
+      uploaded: 1541092618,
+      rejectedUrl: 'testfile.csv'
     };
 
     wrapper = shallow(<ListResultsCard {...props} />);
   });
 
-  it('renders correctly when not completed', () => {
+  it('renders correctly when not complete', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly when completed', () => {
-    wrapper.setProps({ completed: true });
+  it('renders correctly when complete', () => {
+    wrapper.setProps({ complete: true });
     expect(wrapper).toMatchSnapshot();
   });
 });

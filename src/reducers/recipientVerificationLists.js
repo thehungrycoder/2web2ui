@@ -38,7 +38,9 @@ export default (state = initialState, { meta, payload, type }) => {
         listResults: {
           ...state.listResults,
           [payload.list_id]: {
-            complete: payload.complete
+            complete: payload.complete,
+            uploaded: payload.upload_timestamp,
+            rejectedUrl: payload.rejected_external_url
           }
         }
       };
@@ -57,7 +59,9 @@ export default (state = initialState, { meta, payload, type }) => {
         listResults: {
           ...state.listResults,
           [payload.list_id]: {
-            complete: payload.complete
+            complete: payload.complete,
+            uploaded: payload.upload_timestamp,
+            rejectedUrl: payload.rejected_external_url
           }
         }
       };

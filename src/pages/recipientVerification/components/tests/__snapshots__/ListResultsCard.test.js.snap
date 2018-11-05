@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListResultsCard renders correctly when completed 1`] = `
+exports[`ListResultsCard renders correctly when complete 1`] = `
 <Panel
   sectioned={true}
 >
   <div
-    className="IconWrapper"
+    className="IconWrapper Complete"
   >
-    <InsertDriveFile
+    <CheckCircleOutline
       size={40}
     />
   </div>
@@ -15,12 +15,8 @@ exports[`ListResultsCard renders correctly when completed 1`] = `
     Verification Results
   </h6>
   <div
-    className="LoadingWrapper"
-  >
-    <LoadingSVG
-      small={true}
-    />
-  </div>
+    className="Spacer"
+  />
   <LabelledValue
     label="Uploaded"
   >
@@ -36,13 +32,21 @@ exports[`ListResultsCard renders correctly when completed 1`] = `
     <h6
       className="RightAlign"
     >
-      Processing
+      Completed
     </h6>
   </LabelledValue>
+  <DownloadLink
+    color="orange"
+    component={[Function]}
+    fullWidth={true}
+    to="testfile.csv"
+  >
+    Download Rejected Recipients
+  </DownloadLink>
 </Panel>
 `;
 
-exports[`ListResultsCard renders correctly when not completed 1`] = `
+exports[`ListResultsCard renders correctly when not complete 1`] = `
 <Panel
   sectioned={true}
 >
