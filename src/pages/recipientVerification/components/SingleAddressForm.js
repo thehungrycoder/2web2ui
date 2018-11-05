@@ -24,13 +24,12 @@ export class SingleAddressForm extends Component {
   }
 
   render() {
-    const { singleResults, valid, pristine, submitting, handleSubmit, submitFailed } = this.props;
+    const { singleResults, valid, pristine, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
     const buttonContent = (submitting) ? 'Verifying...' : 'Verify Email Address';
 
     return (
       <Fragment>
-        {submitFailed && this.renderError()}
         <form onSubmit={handleSubmit(this.singleAddressForm)}>
           <p className={styles.Paragraph}>Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
           <Field
