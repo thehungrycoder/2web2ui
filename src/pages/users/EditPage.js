@@ -83,8 +83,8 @@ export class EditPage extends Component {
     }
 
     const ssoHelpText = isAccountSingleSignOnEnabled
-      ? <span>Enabling single sign-on will remove your password. <br/>To use password again, you'll need to reset it from Log In page</span>
-      : <span>Single sign-on has not been configured for your account. Enable in your <PageLink to="/account/settings">account's settings</PageLink></span>;
+      ? <span>Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.</span>
+      : <span>Single sign-on has not been configured for your account. Enable in your <PageLink to="/account/settings">account's settings</PageLink>.</span>;
 
     return (
       <Page
