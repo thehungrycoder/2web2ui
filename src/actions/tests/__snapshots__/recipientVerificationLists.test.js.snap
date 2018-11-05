@@ -8,7 +8,6 @@ Array [
         "address": "foo@bar.com",
       },
       "method": "GET",
-      "showErrorAlert": false,
       "url": "labs/recipient-verification-api/single/[object Object]",
     },
     "type": "SINGLE_RECIPIENT_VERIFICATION",
