@@ -2,9 +2,10 @@
 
 exports[`Recipient Verification Lists Reducer default 1`] = `
 Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
   "latest": null,
-  "listResults": Object {},
-  "listResultsLoading": false,
+  "latestJobLoading": false,
   "singleResults": null,
   "uploadLoading": false,
 }
@@ -12,9 +13,10 @@ Object {
 
 exports[`Recipient Verification Lists Reducer when verification is pending 1`] = `
 Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
   "latest": null,
-  "listResults": Object {},
-  "listResultsLoading": false,
+  "latestJobLoading": false,
   "singleResults": null,
   "uploadLoading": false,
 }
@@ -22,9 +24,10 @@ Object {
 
 exports[`Recipient Verification Lists Reducer when verification successfully returns invalid address 1`] = `
 Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
   "latest": null,
-  "listResults": Object {},
-  "listResultsLoading": false,
+  "latestJobLoading": false,
   "singleResults": Object {
     "email": "invalid@address.com",
     "reason": undefined,
@@ -36,9 +39,10 @@ Object {
 
 exports[`Recipient Verification Lists Reducer when verification successfully returns valid address 1`] = `
 Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
   "latest": null,
-  "listResults": Object {},
-  "listResultsLoading": false,
+  "latestJobLoading": false,
   "singleResults": Object {
     "email": "valid@address.com",
     "reason": undefined,
