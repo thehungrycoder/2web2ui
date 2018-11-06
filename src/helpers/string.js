@@ -99,6 +99,6 @@ export const tagAsCopy = (str) => {
     return `${str} Copy`;
   }
 
-  const count = parseInt(matches[1] || 0);
+  const count = parseInt(matches[1] || 1);
   return str.replace(copyRegex, ` Copy ${count + 1}`);
 };

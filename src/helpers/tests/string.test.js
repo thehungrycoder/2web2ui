@@ -142,10 +142,10 @@ describe('tagAsCopy', () => {
   });
 
   it('should append count to tag', () => {
-    expect(tagAsCopy('Example Copy')).toEqual('Example Copy 1');
+    expect(tagAsCopy('Example Copy')).toEqual('Example Copy 2');
   });
 
   it('should increment count', () => {
-    expect(tagAsCopy('Example Copy 1')).toEqual('Example Copy 2');
+    expect(tagAsCopy('Example Copy 2')).toEqual('Example Copy 3');
   });
 });
