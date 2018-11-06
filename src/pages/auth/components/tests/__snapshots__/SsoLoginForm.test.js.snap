@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Fragment>
+  <form>
+    <Field
+      autoFocus={true}
+      component={[Function]}
+      errorInLabel={true}
+      id="username"
+      label="Email or Username"
+      name="username"
+      normalize={[Function]}
+      placeholder="email@example.com"
+      validate={[Function]}
+    />
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Log In
+    </Button>
+  </form>
+</Fragment>
+`;
+
+exports[`should render during login 1`] = `
+<Fragment>
+  <form>
+    <Field
+      autoFocus={true}
+      component={[Function]}
+      errorInLabel={true}
+      id="username"
+      label="Email or Username"
+      name="username"
+      normalize={[Function]}
+      placeholder="email@example.com"
+      validate={[Function]}
+    />
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Logging In
+    </Button>
+  </form>
+</Fragment>
+`;

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should redirect after login 1`] = `<withRouter(Connect(RedirectAfterLogin)) />`;
+
+exports[`should redirect if tfa disnabled 1`] = `
+<Redirect
+  push={false}
+  to="/auth"
+/>
+`;
+
+exports[`should render 1`] = `
+<Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Two-factor Authentication"
+  >
+    <Connect(ReduxForm) />
+  </Panel>
+</Fragment>
+`;

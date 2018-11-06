@@ -1,11 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AuthPage tests renders correctly 1`] = `
-<Connect(LoginPanel)
-  handleSubmit={[Function]}
-  ssoEnabled={false}
-  title="Log In"
->
+<Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Log In"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
   <Panel.Footer
     left={false}
     right={
@@ -18,37 +24,30 @@ exports[`AuthPage tests renders correctly 1`] = `
       </small>
     }
   />
-</Connect(LoginPanel)>
+</Fragment>
 `;
 
-exports[`AuthPage tests renders correctly when there is a login error 1`] = `
-<Connect(LoginPanel)
-  handleSubmit={[Function]}
-  loginError="uh oh!"
-  ssoEnabled={false}
-  title="Log In"
->
-  <Panel.Footer
-    left={false}
-    right={
-      <small>
-        <PageLink
-          to="/auth/sso"
-        >
-          Single Sign-On
-        </PageLink>
-      </small>
-    }
-  />
-</Connect(LoginPanel)>
+exports[`AuthPage tests should redirect after login 1`] = `<withRouter(Connect(RedirectAfterLogin)) />`;
+
+exports[`AuthPage tests should redirect to TFA iff enabled 1`] = `
+<Redirect
+  push={false}
+  to="/auth/tfa"
+/>
 `;
 
 exports[`AuthPage tests should show link to join when has_signup feature flag exists 1`] = `
-<Connect(LoginPanel)
-  handleSubmit={[Function]}
-  ssoEnabled={false}
-  title="Log In"
->
+<Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Log In"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
   <Panel.Footer
     left={
       <div>
@@ -74,5 +73,5 @@ exports[`AuthPage tests should show link to join when has_signup feature flag ex
       </small>
     }
   />
-</Connect(LoginPanel)>
+</Fragment>
 `;
