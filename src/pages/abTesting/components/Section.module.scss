@@ -6,4 +6,13 @@
   @media screen and (min-width: breakpoint(medium)) {
     margin-top: rem(-42);
   }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none; 
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 }

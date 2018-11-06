@@ -136,7 +136,7 @@ export class EditMode extends Component {
 
         <Section title='Variants'>
           <Section.Left>
-            <VariantsContent test={test} />
+            <VariantsContent formValues={formValues} />
           </Section.Left>
           <Section.Right>
             <VariantsFields formValues={formValues} disabled={submitting} subaccountId={subaccountId} />
