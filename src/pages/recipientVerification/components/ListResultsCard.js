@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import { Panel, Button } from '@sparkpost/matchbox';
 import { InsertDriveFile, CheckCircleOutline } from '@sparkpost/matchbox-icons';
@@ -6,22 +6,36 @@ import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { LoadingSVG } from 'src/components/loading/Loading';
 import { formatDateTime } from 'src/helpers/date';
+import TimeAgo from 'react-timeago';
+import moment from 'moment';
 import styles from './ListResultsCard.module.scss';
 
-const ListResultsCard = ({ complete, uploaded, rejectedUrl }) => {
+const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
+  if (complete === 'unknown') {
+    return (
+      <Panel>
+        <div className={styles.LoadingWrapper}><LoadingSVG small /></div>
+      </Panel>
+    );
+  }
+
+  const uploadDate = moment.unix(uploaded);
+  const expiration = moment(uploadDate).add(1, 'week');
+
   const Icon = complete
     ? CheckCircleOutline
     : InsertDriveFile;
 
-  const loading = !complete
-    ? <div className={styles.LoadingWrapper}><LoadingSVG small /></div>
+  const proccessing = !complete
+    ? <div className={styles.ProcessingWrapper}><LoadingSVG small /></div>
     : <div className={styles.Spacer}/>;
 
-  const download = complete
-    ? <DownloadLink component={Button} to={rejectedUrl} fullWidth color='orange'>
-        Download Rejected Recipients
-    </DownloadLink>
-    : null;
+  const download = complete && (
+    <Fragment>
+      <small>This download will expire <TimeAgo date={expiration} /></small>
+      <DownloadLink component={Button} to={rejectedUrl} fullWidth color='orange'>Download Rejected Recipients</DownloadLink>
+    </Fragment>
+  );
 
   return (
     <Panel sectioned>
@@ -29,11 +43,11 @@ const ListResultsCard = ({ complete, uploaded, rejectedUrl }) => {
         <Icon size={40} />
       </div>
       <h6>Verification Results</h6>
-      {loading}
+      {proccessing}
       {uploaded && (
         <LabelledValue label='Uploaded'>
-          <p className={styles.RightAlign}>
-            {formatDateTime(uploaded)}
+          <p className={classnames(styles.RightAlign, styles.NoWrap)}>
+            {formatDateTime(uploadDate)}
           </p>
         </LabelledValue>
       )}

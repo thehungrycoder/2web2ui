@@ -24,4 +24,9 @@ describe('ListResultsCard', () => {
     wrapper.setProps({ complete: true });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correctly when loading and status is unknown', () => {
+    wrapper = shallow(<ListResultsCard />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

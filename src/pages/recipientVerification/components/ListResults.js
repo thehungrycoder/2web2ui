@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { showAlert } from 'src/actions/globalAlert';
 import { Grid } from '@sparkpost/matchbox';
 import { PollContext } from 'src/context/Poll';
 import withContext from 'src/context/withContext';
 
 import ListResultsCard from './ListResultsCard';
-import { getLatest, getStatus } from 'src/actions/recipientVerificationLists';
+import { getLatestJob, getJobStatus } from 'src/actions/recipientVerificationLists';
 import _ from 'lodash';
 
 export class ListResults extends Component {
 
   componentDidMount() {
-    this.props.getLatest();
+    this.props.getLatestJob();
   }
 
   componentDidUpdate({ latestId: prevLatestId }) {
-    const { latestId, results, getStatus, startPolling, stopPolling } = this.props;
+    const { latestId, results, startPolling, stopPolling } = this.props;
 
     // Start polling when a new list ID is recieved, which changes when either:
     // - Upload view first mounts
@@ -24,10 +25,10 @@ export class ListResults extends Component {
       stopPolling(prevLatestId); // Stop any previous polling instances
 
       if (!results.complete) {
-        getStatus(latestId);
+        this.handlePoll(latestId);
         startPolling({
           key: latestId,
-          action: () => getStatus(latestId),
+          action: () => this.handlePoll(latestId),
           interval: 5000
         });
       }
@@ -44,16 +45,29 @@ export class ListResults extends Component {
     stopPolling(latestId);
   }
 
-  render() {
-    const { results } = this.props;
+  handlePoll = (id) => {
+    const { showAlert, getJobStatus } = this.props;
+    return getJobStatus(id).then(({ complete }) => {
+      if (complete) {
+        showAlert({
+          type: 'success',
+          message: 'Recipient Processing Complete',
+          dedupeId: id
+        });
+      }
+    });
+  }
 
-    if (_.isEmpty(results)) {
+  render() {
+    const { results, loading } = this.props;
+
+    if (!loading && _.isEmpty(results)) {
       return null;
     }
 
     return (
       <Grid>
-        <Grid.Column xs={12} md={6} lg={4}>
+        <Grid.Column xs={12} md={6} lg={5}>
           <ListResultsCard {...results} />
         </Grid.Column>
       </Grid>
@@ -67,9 +81,9 @@ const mapStateToProps = ({ recipientVerificationLists }) => {
 
   return {
     latestId,
-    results: recipientVerificationLists.listResults[latestId] || {},
-    loading: recipientVerificationLists.listResultsLoading
+    results: recipientVerificationLists.jobResults[latestId] || {},
+    loading: recipientVerificationLists.jobResultsLoading
   };
 };
 
-export default connect(mapStateToProps, { getLatest, getStatus })(withContext(PollContext, ListResults));
+export default connect(mapStateToProps, { getLatestJob, getJobStatus, showAlert })(withContext(PollContext, ListResults));

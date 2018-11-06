@@ -6,6 +6,7 @@ import { DownloadLink } from 'src/components';
 import { required, maxFileSize } from 'src/helpers/validation';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import { uploadRecipientVerificationList } from 'src/actions/recipientVerificationLists';
+import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
 import exampleRecipientVerificationListPath from './example-recipient-verification-list.csv';
 
@@ -13,10 +14,15 @@ const formName = 'recipientVerificationListForm';
 
 export class RecipientVerificationListForm extends Component {
 
-  createForm = (fields) => {
+  handleUpload = (fields) => {
+    const { uploadRecipientVerificationList, showAlert, reset } = this.props;
     const form_data = new FormData();
+
     form_data.append('myupload', fields.csv);
-    return this.props.uploadRecipientVerificationList(form_data);
+    return uploadRecipientVerificationList(form_data).then(() => {
+      showAlert({ type: 'success', message: 'Recipients Uploaded' });
+      reset(formName);
+    });
   }
 
   render() {
@@ -24,21 +30,19 @@ export class RecipientVerificationListForm extends Component {
     const submitDisabled = pristine || !valid || submitting;
 
     const headerContent = 'Verify a list of your recipients by separating out rejected or undeliverable email addresses.';
-    const uploadHint = 'Upload a list of email addresses to verify';
     const uploadValidators = [required, maxFileSize(config.maxRecipVerifUploadSizeBytes)];
     const buttonContent = (submitting) ? 'Uploading...' : 'Verify Email Addresses';
 
     return (
       <Grid>
         <Grid.Column xs={12} md={8}>
-          <form onSubmit={handleSubmit(this.createForm)}>
+          <form onSubmit={handleSubmit(this.handleUpload)}>
             <p>{headerContent}</p>
             <Field
               component={FileFieldWrapper}
               disabled={submitting}
               fileType='csv'
               helpText={<span>Download a <DownloadLink href={exampleRecipientVerificationListPath}>CSV template here</DownloadLink> to use when formatting list.</span>}
-              label={uploadHint}
               name='csv'
               validate={uploadValidators}
               labelHidden
@@ -58,4 +62,4 @@ export class RecipientVerificationListForm extends Component {
 
 const WrappedForm = reduxForm({ form: formName })(RecipientVerificationListForm);
 
-export default connect(null, { uploadRecipientVerificationList })(WrappedForm);
+export default connect(null, { uploadRecipientVerificationList, showAlert })(WrappedForm);

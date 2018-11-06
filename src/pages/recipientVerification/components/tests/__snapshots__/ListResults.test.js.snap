@@ -12,10 +12,22 @@ Array [
 ]
 `;
 
+exports[`ListResults polling starts shows an alert when polling results are complete 1`] = `
+Array [
+  Array [
+    Object {
+      "dedupeId": "123",
+      "message": "Recipient Processing Complete",
+      "type": "success",
+    },
+  ],
+]
+`;
+
 exports[`ListResults renders Results Card with latest results 1`] = `
 <Grid>
   <Grid.Column
-    lg={4}
+    lg={5}
     md={6}
     xs={12}
   >

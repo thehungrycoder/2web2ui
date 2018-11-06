@@ -21,9 +21,9 @@ exports[`ListResultsCard renders correctly when complete 1`] = `
     label="Uploaded"
   >
     <p
-      className="RightAlign"
+      className="RightAlign NoWrap"
     >
-      Jan 18 1970, 3:04pm
+      Nov 1 2018, 1:16pm
     </p>
   </LabelledValue>
   <LabelledValue
@@ -35,6 +35,18 @@ exports[`ListResultsCard renders correctly when complete 1`] = `
       Completed
     </h6>
   </LabelledValue>
+  <small>
+    This download will expire 
+    <TimeAgo
+      component="time"
+      date={"2018-11-08T18:16:58.000Z"}
+      formatter={[Function]}
+      live={true}
+      maxPeriod={Infinity}
+      minPeriod={0}
+      now={[Function]}
+    />
+  </small>
   <DownloadLink
     color="orange"
     component={[Function]}
@@ -43,6 +55,18 @@ exports[`ListResultsCard renders correctly when complete 1`] = `
   >
     Download Rejected Recipients
   </DownloadLink>
+</Panel>
+`;
+
+exports[`ListResultsCard renders correctly when loading and status is unknown 1`] = `
+<Panel>
+  <div
+    className="LoadingWrapper"
+  >
+    <LoadingSVG
+      small={true}
+    />
+  </div>
 </Panel>
 `;
 
@@ -61,7 +85,7 @@ exports[`ListResultsCard renders correctly when not complete 1`] = `
     Verification Results
   </h6>
   <div
-    className="LoadingWrapper"
+    className="ProcessingWrapper"
   >
     <LoadingSVG
       small={true}
@@ -71,9 +95,9 @@ exports[`ListResultsCard renders correctly when not complete 1`] = `
     label="Uploaded"
   >
     <p
-      className="RightAlign"
+      className="RightAlign NoWrap"
     >
-      Jan 18 1970, 3:04pm
+      Nov 1 2018, 1:16pm
     </p>
   </LabelledValue>
   <LabelledValue

@@ -2,8 +2,8 @@ import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import {
   uploadRecipientVerificationList,
   singleAddress,
-  getLatest,
-  getStatus
+  getLatestJob,
+  getJobStatus
 } from '../recipientVerificationLists';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest');
@@ -31,17 +31,17 @@ describe('Recipient Verification Actions', () => {
     }
   ]);
 
-  snapshotActionCases('.getLatest', [
+  snapshotActionCases('.getLatestJob', [
     {
       name: 'when getting latest list upload',
-      action: () => getLatest()
+      action: () => getLatestJob()
     }
   ]);
 
-  snapshotActionCases('.getStatus', [
+  snapshotActionCases('.getJobStatus', [
     {
       name: 'when getting status of a list job',
-      action: () => getStatus('12345')
+      action: () => getJobStatus('12345')
     }
   ]);
 });

@@ -22,9 +22,9 @@ export function singleAddress(address) {
   });
 }
 
-export function getLatest() {
+export function getLatestJob() {
   return sparkpostApiRequest({
-    type: 'GET_LATEST_UPLOAD',
+    type: 'GET_LATEST_JOB',
     meta: {
       method: 'GET',
       url: 'labs/recipient-verification-api/latest'
@@ -32,9 +32,9 @@ export function getLatest() {
   });
 }
 
-export function getStatus(list_id) {
+export function getJobStatus(list_id) {
   return sparkpostApiRequest({
-    type: 'GET_LIST_STATUS',
+    type: 'GET_JOB_STATUS',
     meta: {
       method: 'GET',
       url: `labs/recipient-verification-api/get-job/${list_id}`

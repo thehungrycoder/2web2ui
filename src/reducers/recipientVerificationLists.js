@@ -1,8 +1,9 @@
 const initialState = {
   singleResults: null,
   uploadLoading: false,
-  listResultsLoading: false,
-  listResults: {},
+  latestJobLoading: false,
+  jobResultsLoading: false,
+  jobResults: {},
   latest: null
 };
 
@@ -24,19 +25,19 @@ export default (state = initialState, { meta, payload, type }) => {
       return { ...state, uploadLoading: false };
 
     // List Results
-    case 'GET_LATEST_UPLOAD_PENDING':
-      return { ...state, listResultsLoading: true, listResults: {}};
+    case 'GET_LATEST_JOB_PENDING':
+      return { ...state, latestJobLoading: true, jobResults: {}};
 
-    case 'GET_LATEST_UPLOAD_ERROR':
-      return { ...state, listResultsLoading: false };
+    case 'GET_LATEST_JOB_ERROR':
+      return { ...state, latestJobLoading: false };
 
-    case 'GET_LATEST_UPLOAD_SUCCESS':
+    case 'GET_LATEST_JOB_SUCCESS':
       return {
         ...state,
-        listResultsLoading: false,
+        jobResultsLoading: false,
         latest: payload.list_id,
-        listResults: {
-          ...state.listResults,
+        jobResults: {
+          ...state.jobResults,
           [payload.list_id]: {
             complete: payload.complete,
             uploaded: payload.upload_timestamp,
@@ -46,18 +47,18 @@ export default (state = initialState, { meta, payload, type }) => {
       };
 
     // List Polling
-    case 'GET_LIST_STATUS_PENDING':
-      return { ...state, listResultsLoading: true };
+    case 'GET_JOB_STATUS_PENDING':
+      return { ...state, jobResultsLoading: true };
 
-    case 'GET_LIST_STATUS_ERROR':
-      return { ...state, listResultsLoading: false };
+    case 'GET_JOB_STATUS_ERROR':
+      return { ...state, jobResultsLoading: false };
 
-    case 'GET_LIST_STATUS_SUCCESS':
+    case 'GET_JOB_STATUS_SUCCESS':
       return {
         ...state,
-        listResultsLoading: false,
-        listResults: {
-          ...state.listResults,
+        jobResultsLoading: false,
+        jobResults: {
+          ...state.jobResults,
           [payload.list_id]: {
             complete: payload.complete,
             uploaded: payload.upload_timestamp,

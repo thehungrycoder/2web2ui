@@ -20,17 +20,18 @@ describe('ListResults', () => {
     props = {
       latestId: null,
       results: {},
-      getLatest: jest.fn(),
-      getStatus: jest.fn(),
+      getLatestJob: jest.fn(),
+      getJobStatus: jest.fn(() => Promise.resolve({ complete: false })),
       startPolling: jest.fn(),
-      stopPolling: jest.fn()
+      stopPolling: jest.fn(),
+      showAlert: jest.fn()
     };
 
     wrapper = shallow(<ListResults {...props} />);
   });
 
   it('gets latest results on mount', () => {
-    expect(props.getLatest).toHaveBeenCalled();
+    expect(props.getLatestJob).toHaveBeenCalled();
   });
 
   it('renders correctly with no latest results', () => {
@@ -43,17 +44,18 @@ describe('ListResults', () => {
   });
 
   describe('polling', () => {
-    it('starts polling when recieving new list id', () => {
+    it('starts polling when recieving new list id', async () => {
       wrapper.setProps({ results: testNotComplete, latestId: testNotComplete.listId });
+      await expect(props.getJobStatus).toHaveBeenCalledWith(testNotComplete.listId);
       expect(props.stopPolling).toHaveBeenCalledTimes(1);
-      expect(props.getStatus).toHaveBeenCalledWith(testNotComplete.listId);
       expect(props.startPolling.mock.calls).toMatchSnapshot();
+      expect(props.showAlert).not.toHaveBeenCalled();
     });
 
     it('should not start polling if new list id is complete', () => {
       wrapper.setProps({ results: testComplete, latestId: testComplete.listId });
       expect(props.stopPolling).toHaveBeenCalled();
-      expect(props.getStatus).not.toHaveBeenCalled();
+      expect(props.getJobStatus).not.toHaveBeenCalled();
       expect(props.startPolling).not.toHaveBeenCalled();
     });
 
@@ -69,6 +71,13 @@ describe('ListResults', () => {
       wrapper.setProps({ latestId: testComplete.listId });
       wrapper.unmount();
       expect(props.stopPolling).toHaveBeenCalledWith(testComplete.listId);
+    });
+
+    it('starts shows an alert when polling results are complete', async () => {
+      props.getJobStatus.mockReturnValue(Promise.resolve({ complete: true }));
+      wrapper.setProps({ results: testNotComplete, latestId: testNotComplete.listId });
+      await expect(props.getJobStatus).toHaveBeenCalledWith(testNotComplete.listId);
+      expect(props.showAlert.mock.calls).toMatchSnapshot();
     });
   });
 });
