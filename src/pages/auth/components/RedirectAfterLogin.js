@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
-export class LoginRedirect extends Component {
-  componentDidMount () {
+export class RedirectAfterLogin extends Component {
+  componentDidMount() {
     const { loggedIn } = this.props.auth;
     if (loggedIn) {
       this.redirect();
@@ -13,7 +13,7 @@ export class LoginRedirect extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     const { loggedIn } = nextProps.auth;
 
     if (loggedIn) {
@@ -22,7 +22,7 @@ export class LoginRedirect extends Component {
     }
   }
 
-  redirect (nextProps) {
+  redirect(nextProps) {
     // Passes location state through '/' or '/auth'
     // DefaultRedirect component handles protected routes
     const defaultRoute = { ...this.props.location, pathname: DEFAULT_REDIRECT_ROUTE };
@@ -30,7 +30,7 @@ export class LoginRedirect extends Component {
     this.props.history.push(route);
   }
 
-  render () {
+  render() {
     return null;
   }
 
@@ -40,4 +40,4 @@ const mapStateToProps = ({ auth }) => ({
   auth
 });
 
-export default withRouter(connect(mapStateToProps)(LoginRedirect));
+export default withRouter(connect(mapStateToProps)(RedirectAfterLogin));

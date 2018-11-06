@@ -5,6 +5,7 @@ import {
   apiKeys,
   AccountSettingsPage,
   AuthPage,
+  TfaPage,
   SsoAuthPage,
   SSOPage,
   billing,
@@ -50,7 +51,7 @@ import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
 import App from 'src/components/layout/App';
 
-import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
+import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, TFA_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
 /**
  *  Angular UI Grant List:
@@ -101,6 +102,12 @@ const routes = [
     public: true,
     component: AuthPage,
     title: 'Log In'
+  },
+  {
+    path: TFA_ROUTE,
+    public: true,
+    component: TfaPage,
+    title: 'Two-factor Authentication'
   },
   {
     path: SSO_AUTH_ROUTE,

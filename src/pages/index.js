@@ -1,6 +1,7 @@
 export { default as AccountSettingsPage } from './account/AccountSettingsPage';
 export { default as AlertsPage } from './alerts/AlertsPage';
 export { default as AuthPage } from './auth/AuthPage';
+export { default as TfaPage } from './auth/TfaPage';
 export { default as SsoAuthPage } from './auth/SsoAuthPage';
 export { default as billing } from './billing';
 export { default as DashboardPage } from './dashboard/DashboardPage';
