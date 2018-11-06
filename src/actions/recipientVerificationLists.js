@@ -5,7 +5,7 @@ export function uploadRecipientVerificationList(data) {
     type: 'UPLOAD_RECIPIENT_VERIFICATION_LIST',
     meta: {
       method: 'POST',
-      url: 'labs/recipient-verification-api',
+      url: 'labs/recipient-verification',
       data
     }
   });
@@ -16,7 +16,7 @@ export function singleAddress(address) {
     type: 'SINGLE_RECIPIENT_VERIFICATION',
     meta: {
       method: 'GET',
-      url: `labs/recipient-verification-api/single/${address}`,
+      url: `labs/recipient-verification/single/${address}`,
       email: address
     }
   });
