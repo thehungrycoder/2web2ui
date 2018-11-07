@@ -20,6 +20,7 @@ import _ from 'lodash';
  *   key: 'identifier', A string to represent this action
  *   interval: 1000, Time in ms between each poll
  *   maxAttempts: 10, Maximum number of times to poll. Default (-1) specifies no limit.
+ *   maxConsecutiveErrors: If action is a promise, the number of attempts before being stopped
  *   action: () => () The func to call at every interval
  * }
  */
