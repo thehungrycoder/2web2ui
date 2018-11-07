@@ -111,18 +111,7 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
   >
     <Left>
       <VariantsContent
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "draft",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 1,
-          }
-        }
+        formValues="test values"
       />
     </Left>
     <Right>
@@ -239,18 +228,7 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
   >
     <Left>
       <VariantsContent
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "scheduled",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 1,
-          }
-        }
+        formValues="test values"
       />
     </Left>
     <Right>

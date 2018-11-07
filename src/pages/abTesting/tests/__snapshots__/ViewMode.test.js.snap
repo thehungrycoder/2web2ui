@@ -130,6 +130,7 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
   >
     <Left>
       <VariantsContent
+        formValues={Object {}}
         test={
           Object {
             "default_template": Object {
@@ -307,6 +308,7 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
   >
     <Left>
       <VariantsContent
+        formValues={Object {}}
         test={
           Object {
             "default_template": Object {
@@ -472,6 +474,7 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
   >
     <Left>
       <VariantsContent
+        formValues={Object {}}
         test={
           Object {
             "default_template": Object {
