@@ -13,7 +13,7 @@ function orderDesc(a, b) {
   return b.value - a.value;
 }
 
-function identity() {
+function identity(){
   return _.first(arguments);
 }
 
