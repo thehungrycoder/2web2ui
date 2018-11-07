@@ -37,19 +37,20 @@ Object {
     "calls": Array [
       Array [],
       Array [],
+      Array [],
     ],
     "results": undefined,
   },
-  "attempts": 2,
+  "attempts": 3,
   "consecutiveErrors": 0,
   "interval": 50,
   "maxAttempts": 3,
   "maxConsecutiveErrors": 2,
-  "status": "polling",
+  "status": "done",
 }
 `;
 
-exports[`Poll Provider should start and stop polling when stopPolling is invoked 1`] = `
+exports[`Poll Provider should stop and not continue polling when stopPolling is invoked 1`] = `
 Object {
   "action": [MockFunction],
   "attempts": 0,

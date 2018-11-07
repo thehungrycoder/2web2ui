@@ -29,15 +29,19 @@ describe('Poll Provider', () => {
     startPolling(testAction);
     await next();
     await next();
-
+    await next();
     expect(wrapper.state('actions').testAction).toMatchSnapshot();
   });
 
-  it('should start and stop polling when stopPolling is invoked', async () => {
+  it('should stop and not continue polling when stopPolling is invoked', async () => {
     const { startPolling, stopPolling } = wrapper.props().value;
     startPolling(testAction);
     stopPolling(testAction.key);
-    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+    const actions = wrapper.state('actions').testAction;
+    expect(actions).toMatchSnapshot();
+
+    await next();
+    expect(wrapper.state('actions').testAction).toBe(actions);
   });
 
   it('should not stop if it isnt polling', async () => {
