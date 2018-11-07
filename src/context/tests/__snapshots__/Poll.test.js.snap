@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Poll Provider should increment consecutive errors 1`] = `
+Object {
+  "action": [MockFunction] {
+    "calls": Array [
+      Array [],
+    ],
+    "results": undefined,
+  },
+  "attempts": 1,
+  "consecutiveErrors": 1,
+  "interval": 50,
+  "maxAttempts": 3,
+  "status": "polling",
+}
+`;
+
 exports[`Poll Provider should not start if its already polling 1`] = `
 Object {
   "action": [MockFunction] {
@@ -9,8 +25,9 @@ Object {
     "results": undefined,
   },
   "attempts": 1,
+  "consecutiveErrors": 0,
   "interval": 50,
-  "maxAttempts": 2,
+  "maxAttempts": 3,
   "status": "polling",
 }
 `;
@@ -31,6 +48,39 @@ exports[`Poll Provider should render children with the correct state 1`] = `
 </ContextProvider>
 `;
 
+exports[`Poll Provider should reset error count on a success 1`] = `
+Object {
+  "action": [MockFunction] {
+    "calls": Array [
+      Array [],
+    ],
+    "results": undefined,
+  },
+  "attempts": 1,
+  "consecutiveErrors": 1,
+  "interval": 50,
+  "maxAttempts": 3,
+  "status": "polling",
+}
+`;
+
+exports[`Poll Provider should reset error count on a success 2`] = `
+Object {
+  "action": [MockFunction] {
+    "calls": Array [
+      Array [],
+      Array [],
+    ],
+    "results": undefined,
+  },
+  "attempts": 2,
+  "consecutiveErrors": 0,
+  "interval": 50,
+  "maxAttempts": 3,
+  "status": "polling",
+}
+`;
+
 exports[`Poll Provider should start and finish polling 1`] = `
 Object {
   "action": [MockFunction] {
@@ -41,9 +91,10 @@ Object {
     "results": undefined,
   },
   "attempts": 2,
+  "consecutiveErrors": 0,
   "interval": 50,
-  "maxAttempts": 2,
-  "status": "done",
+  "maxAttempts": 3,
+  "status": "polling",
 }
 `;
 
@@ -51,8 +102,27 @@ exports[`Poll Provider should start and stop polling when stopPolling is invoked
 Object {
   "action": [MockFunction],
   "attempts": 0,
+  "consecutiveErrors": 0,
   "interval": 50,
-  "maxAttempts": 2,
+  "maxAttempts": 3,
   "status": "stopped",
+}
+`;
+
+exports[`Poll Provider should stop polling when consecutive errors is more than 2 1`] = `
+Object {
+  "action": [MockFunction] {
+    "calls": Array [
+      Array [],
+      Array [],
+      Array [],
+    ],
+    "results": undefined,
+  },
+  "attempts": 3,
+  "consecutiveErrors": 3,
+  "interval": 50,
+  "maxAttempts": 3,
+  "status": "failed",
 }
 `;

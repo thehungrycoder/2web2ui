@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import { Panel, Button } from '@sparkpost/matchbox';
 import { InsertDriveFile, CheckCircleOutline } from '@sparkpost/matchbox-icons';
@@ -6,7 +6,6 @@ import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { LoadingSVG } from 'src/components/loading/Loading';
 import { formatDateTime } from 'src/helpers/date';
-import TimeAgo from 'react-timeago';
 import moment from 'moment';
 import styles from './ListResultsCard.module.scss';
 
@@ -19,9 +18,6 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
     );
   }
 
-  const uploadDate = moment.unix(uploaded);
-  const expiration = moment(uploadDate).add(1, 'week');
-
   const Icon = complete
     ? CheckCircleOutline
     : InsertDriveFile;
@@ -31,10 +27,7 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
     : <div className={styles.Spacer}/>;
 
   const download = complete && (
-    <Fragment>
-      <small>This download will expire <TimeAgo date={expiration} /></small>
-      <DownloadLink component={Button} to={rejectedUrl} fullWidth color='orange'>Download Rejected Recipients</DownloadLink>
-    </Fragment>
+    <DownloadLink component={Button} to={rejectedUrl} fullWidth color='orange'>Download Rejected Recipients</DownloadLink>
   );
 
   return (
@@ -47,7 +40,7 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
       {uploaded && (
         <LabelledValue label='Uploaded'>
           <p className={classnames(styles.RightAlign, styles.NoWrap)}>
-            {formatDateTime(uploadDate)}
+            {formatDateTime(moment.unix(uploaded))}
           </p>
         </LabelledValue>
       )}

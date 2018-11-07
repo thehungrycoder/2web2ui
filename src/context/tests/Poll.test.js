@@ -8,9 +8,9 @@ describe('Poll Provider', () => {
 
   const testAction = {
     key: 'testAction',
-    action: jest.fn(),
+    action: jest.fn(() => Promise.resolve()),
     interval: 50,
-    maxAttempts: 2
+    maxAttempts: 3
   };
 
   beforeEach(() => {
@@ -22,12 +22,12 @@ describe('Poll Provider', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should start and finish polling', () => {
+  it('should start and finish polling', async () => {
     const { startPolling } = wrapper.props().value;
 
     startPolling(testAction);
-    next();
-    next();
+    await next();
+    await next();
 
     expect(wrapper.state('actions').testAction).toMatchSnapshot();
   });
@@ -48,8 +48,37 @@ describe('Poll Provider', () => {
   it('should not start if its already polling', async () => {
     const { startPolling } = wrapper.props().value;
     startPolling(testAction);
-    next();
+    await next();
     startPolling(testAction);
+    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+  });
+
+  it('should increment consecutive errors', async () => {
+    const { startPolling } = wrapper.props().value;
+    testAction.action.mockReturnValue(Promise.reject('error'));
+    startPolling(testAction);
+    await next();
+    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+  });
+
+  it('should reset error count on a success', async () => {
+    const { startPolling } = wrapper.props().value;
+    testAction.action.mockReturnValue(Promise.reject('error'));
+    startPolling(testAction);
+    await next();
+    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+    testAction.action.mockReturnValue(Promise.resolve('no error'));
+    await next();
+    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+  });
+
+  it('should stop polling when consecutive errors is more than 2', async () => {
+    const { startPolling } = wrapper.props().value;
+    testAction.action.mockReturnValue(Promise.reject('error'));
+    startPolling(testAction);
+    await next();
+    await next();
+    await next();
     expect(wrapper.state('actions').testAction).toMatchSnapshot();
   });
 });

@@ -17,7 +17,7 @@ Array [
   Array [
     Object {
       "dedupeId": "123",
-      "message": "Recipient Processing Complete",
+      "message": "Recipient Verification Results Ready",
       "type": "success",
     },
   ],

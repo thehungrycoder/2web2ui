@@ -67,12 +67,6 @@ describe('ListResults', () => {
       expect(props.stopPolling).toHaveBeenCalledWith(testComplete.listId);
     });
 
-    it('should stop polling on unmount', () => {
-      wrapper.setProps({ latestId: testComplete.listId });
-      wrapper.unmount();
-      expect(props.stopPolling).toHaveBeenCalledWith(testComplete.listId);
-    });
-
     it('starts shows an alert when polling results are complete', async () => {
       props.getJobStatus.mockReturnValue(Promise.resolve({ complete: true }));
       wrapper.setProps({ results: testNotComplete, latestId: testNotComplete.listId });

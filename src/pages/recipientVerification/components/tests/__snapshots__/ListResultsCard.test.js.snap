@@ -35,18 +35,6 @@ exports[`ListResultsCard renders correctly when complete 1`] = `
       Completed
     </h6>
   </LabelledValue>
-  <small>
-    This download will expire 
-    <TimeAgo
-      component="time"
-      date={"2018-11-08T18:16:58.000Z"}
-      formatter={[Function]}
-      live={true}
-      maxPeriod={Infinity}
-      minPeriod={0}
-      now={[Function]}
-    />
-  </small>
   <DownloadLink
     color="orange"
     component={[Function]}

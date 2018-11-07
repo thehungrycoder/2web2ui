@@ -40,18 +40,13 @@ export class ListResults extends Component {
     }
   }
 
-  componentWillUnmount() {
-    const { stopPolling, latestId } = this.props;
-    stopPolling(latestId);
-  }
-
   handlePoll = (id) => {
     const { showAlert, getJobStatus } = this.props;
     return getJobStatus(id).then(({ complete }) => {
       if (complete) {
         showAlert({
           type: 'success',
-          message: 'Recipient Processing Complete',
+          message: 'Recipient Verification Results Ready',
           dedupeId: id
         });
       }

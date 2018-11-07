@@ -31,7 +31,8 @@ const defaultContext = {
 const defaultAction = {
   attempts: 0,
   interval: 1000,
-  maxAttempts: -1
+  maxAttempts: -1,
+  consecutiveErrors: 0
 };
 
 export const PollContext = createContext(defaultContext);
@@ -47,19 +48,33 @@ class Poll extends Component {
     return actions[key] && actions[key].status === 'polling';
   }
 
-  poll = (key) => {
-    const { action, interval, status, attempts, maxAttempts } = _.get(this.state, `actions[${key}]`, {});
+  poll = async (key) => {
+    const { action, interval, status, attempts, maxAttempts, consecutiveErrors } = _.get(this.state, `actions[${key}]`, {});
+
     const attemptCount = attempts + 1;
+    let errCount = 0;
 
-    if (status === 'polling') {
-      action();
-      this.setActionState(key, { attempts: attemptCount });
+    if (status !== 'polling') {
+      return;
+    }
 
-      if (attemptCount < maxAttempts || maxAttempts === -1) {
-        setTimeout(() => this.poll(key), interval);
-      } else {
-        this.setActionState(key, { status: 'done' });
+    try {
+      await action();
+    } catch (error) {
+      errCount = consecutiveErrors + 1;
+
+      if (errCount > 2) {
+        this.setActionState(key, { attempts: attemptCount, consecutiveErrors: errCount, status: 'failed' });
+        return;
       }
+    }
+
+    this.setActionState(key, { attempts: attemptCount, consecutiveErrors: errCount });
+
+    if (attemptCount < maxAttempts || maxAttempts === -1) {
+      setTimeout(() => this.poll(key), interval);
+    } else {
+      this.setActionState(key, { status: 'done' });
     }
   }
 
