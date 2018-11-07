@@ -10,7 +10,8 @@ describe('Poll Provider', () => {
     key: 'testAction',
     action: jest.fn(() => Promise.resolve()),
     interval: 50,
-    maxAttempts: 3
+    maxAttempts: 3,
+    maxConsecutiveErrors: 2
   };
 
   beforeEach(() => {
@@ -40,9 +41,10 @@ describe('Poll Provider', () => {
   });
 
   it('should not stop if it isnt polling', async () => {
-    const { stopPolling } = wrapper.props().value;
-    stopPolling(testAction.key);
-    expect(wrapper.state('actions')).toMatchSnapshot();
+    const { startPolling, stopPolling } = wrapper.props().value;
+    startPolling(testAction);
+    stopPolling('different-key');
+    expect(wrapper.state('actions').testAction.status).toBe('polling');
   });
 
   it('should not start if its already polling', async () => {
@@ -58,7 +60,7 @@ describe('Poll Provider', () => {
     testAction.action.mockReturnValue(Promise.reject('error'));
     startPolling(testAction);
     await next();
-    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+    expect(wrapper.state('actions').testAction.consecutiveErrors).toBe(1);
   });
 
   it('should reset error count on a success', async () => {
@@ -66,10 +68,10 @@ describe('Poll Provider', () => {
     testAction.action.mockReturnValue(Promise.reject('error'));
     startPolling(testAction);
     await next();
-    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+    expect(wrapper.state('actions').testAction.consecutiveErrors).toBe(1);
     testAction.action.mockReturnValue(Promise.resolve('no error'));
     await next();
-    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+    expect(wrapper.state('actions').testAction.consecutiveErrors).toBe(0);
   });
 
   it('should stop polling when consecutive errors is more than 2', async () => {

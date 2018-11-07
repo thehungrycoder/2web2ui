@@ -32,7 +32,8 @@ const defaultAction = {
   attempts: 0,
   interval: 1000,
   maxAttempts: -1,
-  consecutiveErrors: 0
+  consecutiveErrors: 0,
+  maxConsecutiveErrors: 2
 };
 
 export const PollContext = createContext(defaultContext);
@@ -49,7 +50,7 @@ class Poll extends Component {
   }
 
   poll = async (key) => {
-    const { action, interval, status, attempts, maxAttempts, consecutiveErrors } = _.get(this.state, `actions[${key}]`, {});
+    const { action, interval, status, attempts, maxAttempts, consecutiveErrors, maxConsecutiveErrors } = _.get(this.state, `actions[${key}]`, {});
 
     const attemptCount = attempts + 1;
     let errCount = 0;
@@ -63,7 +64,7 @@ class Poll extends Component {
     } catch (error) {
       errCount = consecutiveErrors + 1;
 
-      if (errCount > 2) {
+      if (errCount > maxConsecutiveErrors) {
         this.setActionState(key, { attempts: attemptCount, consecutiveErrors: errCount, status: 'failed' });
         return;
       }
