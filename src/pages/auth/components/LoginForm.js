@@ -9,7 +9,7 @@ import { Button } from '@sparkpost/matchbox';
 
 export class LoginForm extends Component {
   render() {
-    const { loginPending, pristine, ssoEnabled, handleSubmit } = this.props;
+    const { loginPending, ssoEnabled, handleSubmit } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -46,7 +46,7 @@ export class LoginForm extends Component {
         />
         }
 
-        <Button primary submit disabled={loginPending || pristine}>
+        <Button primary submit disabled={loginPending}>
           {loginPending ? 'Logging In' : 'Log In'}
         </Button>
       </form>
