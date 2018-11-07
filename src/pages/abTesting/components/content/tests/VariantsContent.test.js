@@ -12,4 +12,10 @@ describe('Variants Content Component', () => {
   it('should render help content', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render help content with percent disclaimer', () => {
+    const formValues = { audience_selection: 'percent' };
+    wrapper = shallow(<VariantsContent formValues={formValues} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
