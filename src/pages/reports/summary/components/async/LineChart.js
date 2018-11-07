@@ -13,6 +13,10 @@ function orderDesc(a, b) {
   return b.value - a.value;
 }
 
+function identity() {
+  return _.first(arguments);
+}
+
 export default class SpLineChart extends React.Component {
   renderLines() {
     const { lines = []} = this.props;
@@ -78,11 +82,11 @@ export default class SpLineChart extends React.Component {
       data,
       lines = [],
       syncId,
-      xTickFormatter = _.identity,
-      yTickFormatter = _.identity,
+      xTickFormatter = identity, //for some(?) reason using just _.identity doesn't work in npm test in ci mode
+      yTickFormatter = identity,
       yScale = 'linear', // eslint-disable-line
-      tooltipLabelFormatter = _.identity,
-      tooltipValueFormatter = _.identity,
+      tooltipLabelFormatter = identity,
+      tooltipValueFormatter = identity,
       showXAxis,
       yLabel
     } = this.props;
