@@ -4,7 +4,9 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import CancellationPanel from './components/CancellationPanel';
 import SingleSignOnPanel from './components/SingleSignOnPanel';
-
+import EnforceTfaPanel from './components/EnforceTfaPanel';
+import { AccessControl } from 'src/components/auth';
+import { hasUiOption } from 'src/helpers/conditions/account';
 
 export function AccountSettingsPage({ currentUser }) {
   return (
@@ -15,6 +17,9 @@ export function AccountSettingsPage({ currentUser }) {
         </LabelledValue>
       </Panel>
       <SingleSignOnPanel />
+      <AccessControl condition={hasUiOption('tfaRequired')}>
+        <EnforceTfaPanel />
+      </AccessControl>
       <CancellationPanel />
     </Page>
   );
