@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LineChart:  should render 1`] = `
+exports[`LineChart should render 1`] = `
 <div
   className="sp-linechart-wrapper"
 >
@@ -12,6 +12,24 @@ exports[`LineChart:  should render 1`] = `
     <LineChart
       barCategoryGap="10%"
       barGap={4}
+      data={
+        Array [
+          Object {
+            "count_accepted": 9525,
+            "count_bounce": 1064,
+            "count_rendered": 5637,
+            "count_targeted": 10856,
+            "ts": "2018-11-06T10:00:00-05:00",
+          },
+          Object {
+            "count_accepted": 9428,
+            "count_bounce": 1143,
+            "count_rendered": 5628,
+            "count_targeted": 10914,
+            "ts": "2018-11-06T11:00:00-05:00",
+          },
+        ]
+      }
       layout="horizontal"
       margin={
         Object {
@@ -23,6 +41,7 @@ exports[`LineChart:  should render 1`] = `
       }
       reverseStackOrder={false}
       stackOffset="none"
+      syncId="summaryChart"
     >
       <CartesianGrid
         fill="none"
@@ -47,7 +66,7 @@ exports[`LineChart:  should render 1`] = `
           ]
         }
         height={30}
-        hide={true}
+        hide={false}
         interval="preserveEnd"
         mirror={false}
         orientation="bottom"
@@ -132,6 +151,8 @@ exports[`LineChart:  should render 1`] = `
   </ResponsiveContainer>
   <span
     className="sp-linechart-yLabel"
-  />
+  >
+    Count
+  </span>
 </div>
 `;
