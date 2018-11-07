@@ -43,6 +43,7 @@ Object {
     "test-user-one": Object {
       "access": "reporting",
       "is_sso": undefined,
+      "tfa_enabled": undefined,
       "username": "test-user-one",
     },
     "test-user-two": Object {
@@ -64,6 +65,7 @@ Object {
     "test-user-one": Object {
       "access": undefined,
       "is_sso": true,
+      "tfa_enabled": undefined,
       "username": "test-user-one",
     },
     "test-user-two": Object {
