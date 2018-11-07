@@ -1,4 +1,4 @@
-import CreatePage from './CreatePage';
+import CreatePage from './CreatePage.container';
 import EditPage from './EditPage.container';
 import ListPage from './ListPage.container';
 

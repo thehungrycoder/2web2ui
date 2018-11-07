@@ -8,6 +8,7 @@ import PageLink from 'src/components/pageLink';
 import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper';
 import SubaccountSection from 'src/components/subaccountSection';
 import { maxLength, required } from 'src/helpers/validation';
+import DeleteSnippetLink from './components/DeleteSnippetLink';
 import IdentifierHelpText from './components/IdentifierHelpText';
 
 export default class EditPage extends React.Component {
@@ -20,16 +21,42 @@ export default class EditPage extends React.Component {
     this.props.clearSnippet();
   }
 
+  secondaryActions = [
+    {
+      Component: (props) => (
+        <DeleteSnippetLink {...props} id={this.props.id} subaccountId={this.props.subaccountId} />
+      ),
+      content: 'Delete',
+      to: '/', // needed to render Component
+      visible: () => this.props.canModify
+    },
+    {
+      Component: PageLink,
+      content: 'Duplicate',
+      to: {
+        pathname: '/snippets/create',
+        state: {
+          id: this.props.id,
+          subaccountId: this.props.subaccountId
+        }
+      },
+      visible: () => this.props.canModify
+    }
+  ]
+
   submitSnippet = ({
     content: { html, text } = {},
     id,
     name,
-    subaccount: { id: subaccountId } = {},
+    subaccount,
     shared_with_subaccounts: sharedWithSubaccounts
-  }) => (
-    this.props.updateSnippet({ html, id, name, sharedWithSubaccounts, subaccountId, text })
-      .then(() => this.props.showAlert({ type: 'success', message: 'Snippet saved' }))
-  )
+  }) => {
+    // must handle when subaccount is set to null by SubaccountSection
+    const subaccountId = subaccount ? subaccount.id : undefined;
+
+    return this.props.updateSnippet({ html, id, name, sharedWithSubaccounts, subaccountId, text })
+      .then(() => this.props.showAlert({ type: 'success', message: 'Snippet saved' }));
+  }
 
   render() {
     const {
@@ -61,6 +88,9 @@ export default class EditPage extends React.Component {
           disabled,
           onClick: handleSubmit(this.submitSnippet)
         }}
+        secondaryActions={
+          this.secondaryActions.filter(({ visible = () => true }) => visible())
+        }
       >
         <Form onSubmit={this.submitSnippet}>
           <Grid>

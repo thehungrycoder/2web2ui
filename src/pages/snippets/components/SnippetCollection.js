@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
-// Components
-import { TableCollection } from 'src/components';
+import { TableCollection } from 'src/components/collection';
 import ActionsTableData from './ActionsTableData';
+import DeleteSnippetModal from './DeleteSnippetModal.container';
 import NameTableData from './NameTableData';
 import SubaccountTableData from './SubaccountTableData';
 import UpdatedAtTableData from './UpdatedAtTableData';
@@ -40,14 +39,14 @@ export default class SnippetCollection extends Component {
       }
     },
     {
-      component: (props) => <ActionsTableData {...props} toggleDelete={this.props.toggleDelete} />,
+      component: ActionsTableData,
       header: null,
       visible: () => this.props.canCreate
     }
   ]
 
-  renderRow = (columns) => (props) => (
-    columns.map(({ component: Component }) => <Component {...props} />)
+  renderRow = (columns, parentProps) => (props) => (
+    columns.map(({ component: Component }) => <Component {...parentProps} {...props} />)
   )
 
   render() {
@@ -55,14 +54,18 @@ export default class SnippetCollection extends Component {
     const visibleColumns = this.columns.filter(({ visible = () => true }) => visible());
 
     return (
-      <TableCollection
-        columns={visibleColumns.map(({ header }) => header)}
-        rows={snippets}
-        getRowData={this.renderRow(visibleColumns)}
-        defaultSortColumn={this.columns[0].header.sortKey}
-        filterBox={filterBoxConfig}
-        pagination
-      />
+      <DeleteSnippetModal>
+        {({ open: openDeleteModal }) => (
+          <TableCollection
+            columns={visibleColumns.map(({ header }) => header)}
+            rows={snippets}
+            getRowData={this.renderRow(visibleColumns, { openDeleteModal })}
+            defaultSortColumn={this.columns[0].header.sortKey}
+            filterBox={filterBoxConfig}
+            pagination
+          />
+        )}
+      </DeleteSnippetModal>
     );
   }
 }
