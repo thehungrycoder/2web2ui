@@ -46,11 +46,28 @@ export function abTestDuration(value, formValues) {
 }
 
 export function abTestDistribution(value, formValues) {
-  const { default_template, variants } = formValues;
+  const { default_template, audience_selection, variants } = formValues;
 
-  if (value === 'percent') {
-    const total = _.reduce(variants, (sum, variant = { percent: 0 }) => sum + parseFloat(variant.percent), parseFloat(default_template.percent));
-    return total === 100 ? undefined : 'Total distribution must equal 100%';
+  // only validate if audience selection is percent and all fields are filled
+  if (audience_selection === 'percent') {
+    let missingValues;
+
+    if (!default_template.percent) {
+      missingValues = true;
+    }
+
+    _.forEach(variants, (variant = {}) => {
+      if (!variant.percent) {
+        missingValues = true;
+      }
+    });
+
+    if (missingValues) {
+      return;
+    }
+
+    const total = _.reduce(variants, (sum, variant = { percent: 0 }) => sum + parseFloat(variant.percent || 0), parseFloat(default_template.percent || 0));
+    return total === 100 ? undefined : `Total distribution must equal 100%. Current: ${total}%`;
   }
 }
 
