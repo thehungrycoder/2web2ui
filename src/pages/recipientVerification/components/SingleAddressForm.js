@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
-import { required, maxLength } from 'src/helpers/validation';
+import { required, email, maxLength } from 'src/helpers/validation';
 import { singleAddress } from 'src/actions/recipientVerificationLists';
 import SingleResult from './SingleResult';
 
@@ -26,7 +26,7 @@ export class SingleAddressForm extends Component {
             component={TextFieldWrapper}
             label='Email address'
             placeholder={'eg. example@mail.com'}
-            validate={[required, maxLength(64)]}
+            validate={[required, email, maxLength(254)]}
             normalize={(value = '') => value.trim()}
             connectRight={<Button primary submit disabled={submitDisabled}>{buttonContent}</Button>}
           />

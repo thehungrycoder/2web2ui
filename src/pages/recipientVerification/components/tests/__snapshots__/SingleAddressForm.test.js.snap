@@ -28,6 +28,7 @@ exports[`SingleAddressForm renders correctly 1`] = `
         Array [
           [Function],
           [Function],
+          [Function],
         ]
       }
     />
@@ -61,6 +62,7 @@ exports[`SingleAddressForm should disable form elements on submit 1`] = `
       placeholder="eg. example@mail.com"
       validate={
         Array [
+          [Function],
           [Function],
           [Function],
         ]
