@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { authenticate } from 'src/actions/auth';
 import { PageLink, CenteredLogo } from 'src/components';
 import { Panel } from '@sparkpost/matchbox';
 
 import config from 'src/config';
 import LoginForm from './components/LoginForm';
+import RedirectBeforeLogin from './components/RedirectBeforeLogin';
 import RedirectAfterLogin from './components/RedirectAfterLogin';
 import { TFA_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
@@ -25,7 +25,7 @@ export class AuthPage extends React.Component {
     }
 
     if (tfaEnabled) {
-      return <Redirect to={TFA_ROUTE} />;
+      return <RedirectBeforeLogin to={TFA_ROUTE} />;
     }
 
     return <React.Fragment>
