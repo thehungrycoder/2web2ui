@@ -69,11 +69,14 @@ const cases = {
   },
   abTestDistribution: {
     good: [
-      ['sample_size', {}],
-      ['percent', { default_template: { percent: 50 }, variants: [{ percent: 50 }]}],
-      ['percent', { default_template: { percent: 50 }, variants: [{ percent: 50 }, undefined]}]
+      [null, { audience_selection: 'sample_size' }],
+      [null, { audience_selection: 'percent', default_template: {}, variants: []}],
+      [null, { audience_selection: 'percent', default_template: { percent: 50 }, variants: [{ percent: 50 }]}],
+      [null, { audience_selection: 'percent', default_template: { percent: 50 }, variants: [{ percent: 50 }, undefined]}]
     ],
-    bad: [['percent', { default_template: { percent: 75 }, variants: [{ percent: 75 }]}]],
+    bad: [
+      [null, { audience_selection: 'percent', default_template: { percent: 75 }, variants: [{ percent: 75 }]}]
+    ],
     multiArg: true
   },
   json: {

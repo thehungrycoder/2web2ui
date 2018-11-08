@@ -53,7 +53,7 @@ export function abTestDistribution(value, formValues) {
     let missingValues;
 
     if (!default_template.percent) {
-      missingValues = true;
+      return;
     }
 
     _.forEach(variants, (variant = {}) => {
