@@ -26,21 +26,4 @@ describe('Component: RedirectAfterLogin', () => {
       })
     );
   });
-
-  it('redirects to desired route based on router state', () => {
-    const props = {
-      location: {
-        state: {
-          redirectAfterLogin: '/path'
-        }
-      }
-    };
-
-    expect(
-      subject(props)
-        .find('Redirect')
-        .first()
-        .prop('to')
-    ).toEqual(props.location.state.redirectAfterLogin);
-  });
 });

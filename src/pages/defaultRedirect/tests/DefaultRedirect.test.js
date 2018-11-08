@@ -7,7 +7,6 @@ jest.mock('src/config', () => ({
 }));
 
 describe('Component: DefaultRedirect', () => {
-
   let props;
   let wrapper;
   let instance;
@@ -38,14 +37,20 @@ describe('Component: DefaultRedirect', () => {
   });
 
   it('should redirect after login', () => {
-    wrapper.setProps({ location: { state: { redirectAfterLogin: '/test/redirect/after/login' }}});
+    const location = {
+      state: {
+        redirectAfterLogin: {
+          pathname: '/test/redirect/after/login',
+          search: '?query-muh-thangs',
+          hash: '#cornbeef'
+        }
+      }
+    };
+    wrapper.setProps({ location });
     props.history.replace.mockClear();
     instance.handleRedirect();
     expect(props.history.replace).toHaveBeenCalledTimes(1);
-    expect(props.history.replace).toHaveBeenCalledWith({
-      pathname: '/test/redirect/after/login',
-      state: { redirectAfterLogin: '/test/redirect/after/login' }
-    });
+    expect(props.history.replace).toHaveBeenCalledWith(location.state.redirectAfterLogin);
   });
 
   it('should do nothing if no redirect after login and not ready', () => {
@@ -94,5 +99,4 @@ describe('Component: DefaultRedirect', () => {
     instance.componentDidUpdate();
     expect(instance.handleRedirect).toHaveBeenCalledTimes(1);
   });
-
 });
