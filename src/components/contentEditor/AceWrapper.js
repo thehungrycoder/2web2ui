@@ -17,6 +17,11 @@ const AceWrapper = ({
   meta: { error, active, submitFailed }
 }) => (
   <div>
+    {submitFailed && !active && error && (
+      <div className={styles.ErrorWrapper}>
+        <Error error={error} />
+      </div>
+    )}
     <AceEditor
       mode={mode}
       value={input.value}
@@ -40,7 +45,6 @@ const AceWrapper = ({
       }}
       editorProps={{ $blockScrolling: Infinity }}
     />
-    {submitFailed && !active && error ? <span className={styles.Error}><Error error={error}/></span> : null}
   </div>
 );
 

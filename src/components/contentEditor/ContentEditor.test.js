@@ -22,6 +22,11 @@ describe('ContentEditor', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render editor with an action', () => {
+    wrapper.setProps({ action: <a>Click Here</a> });
+    expect(wrapper.exists('.Action')).toEqual(true);
+  });
+
   it('should select tabs', () => {
     wrapper.find('Tabs').props().tabs[1].onClick();
     expect(wrapper.state().selectedTab).toBe(1);

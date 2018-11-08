@@ -40,7 +40,6 @@ class ContentEditor extends React.Component {
     this.setState({ selectedTab: index });
   }
 
-
   // note, create/update snippet requests will fail if either part only contains whitespace
   normalize = (value = '') => {
     if (value.trim() === '') {
@@ -75,6 +74,9 @@ class ContentEditor extends React.Component {
     return (
       <div className={styles.EditorSection}>
         <Tabs selected={selectedTab} tabs={tabs} />
+        {this.props.action && (
+          <div className={styles.Action}>{this.props.action}</div>
+        )}
         <Panel className={styles.EditorPanel}>
           <Field
             component={AceWrapper}
