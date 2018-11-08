@@ -5,7 +5,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
-import { updateSubscription, getBillingCountries } from 'src/actions/billing';
+import { updateSubscription, getBillingCountries, checkPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
@@ -52,27 +52,34 @@ export class ChangePlanForm extends Component {
   };
 
   onSubmit = (values) => {
-    const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
+    const { account, billing, updateSubscription, billingCreate, billingUpdate, checkPromoCode, showAlert, history } = this.props;
     const oldCode = account.subscription.code;
     const newCode = values.planpicker.code;
     const isDowngradeToFree = values.planpicker.isFree;
+
 
     const newValues = values.card && !isDowngradeToFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
 
-    // decides which action to be taken based on
-    // if it's aws account, it already has billing and if you use a saved CC
-    let action;
-    if (this.props.isAws) {
-      action = updateSubscription({ code: newCode });
-    } else if (account.billing) {
-      action = this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
-    } else {
-      action = billingCreate(newValues); // creates Zuora account
+
+    let maybeCheckPromoCode = Promise.reject();
+    if (values.promoCode) {
+      maybeCheckPromoCode = checkPromoCode(values.promoCode, newCode);
     }
 
-    return action
+    return maybeCheckPromoCode
+      .then(() => {
+        // decides which action to be taken based on
+        // if it's aws account, it already has billing and if you use a saved CC
+        if (this.props.isAws) {
+          return updateSubscription({ code: newCode });
+        } else if (account.billing) {
+          return (this.state.useSavedCC || isDowngradeToFree) ? updateSubscription({ code: newCode, promoCode: values.promoCode }) : billingUpdate(newValues);
+        } else {
+          return billingCreate(newValues); // creates Zuora account
+        }
+      })
       .then(() => history.push('/account/billing'))
       .then(() => {
         conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
@@ -176,6 +183,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount };
+const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, checkPromoCode, showAlert, getPlans, getBillingCountries, fetchAccount };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));

@@ -1,12 +1,26 @@
 import React from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
+
+import { Field } from 'redux-form';
 import config from 'src/config';
 import { getPlanPrice } from 'src/helpers/billing';
+import { TextFieldWrapper } from 'src/components';
 import PlanPrice from 'src/components/billing/PlanPrice';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 import Brightback from 'src/components/brightback/Brightback';
 
 export class Confirmation extends React.Component {
+  renderPromoCodeTextField() {
+    const { selected = {}} = this.props;
+    if (!selected.isFree) {
+      return <Field
+        label='Promo Code (optional)'
+        name='promoCode'
+        component={TextFieldWrapper}
+      />;
+    }
+  }
+
   renderSelectedPlanMarkup() {
     const { current = {}, selected = {}} = this.props;
 
@@ -90,6 +104,9 @@ export class Confirmation extends React.Component {
       <Panel>
         <Panel.Section>
           {this.renderCurrentPlanMarkup()}
+        </Panel.Section>
+        <Panel.Section>
+          {this.renderPromoCodeTextField()}
         </Panel.Section>
         <Panel.Section>
           {this.renderSelectedPlanMarkup()}

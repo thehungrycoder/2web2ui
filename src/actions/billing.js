@@ -22,14 +22,14 @@ export function syncSubscription({ meta = {}} = {}) {
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code, meta = {}}) {
+export function updateSubscription({ code, promoCode, meta = {}}) {
   return (dispatch, getState) => dispatch(
     sparkpostApiRequest({
       type: 'UPDATE_SUBSCRIPTION',
       meta: {
         method: 'PUT',
         url: isAws(getState()) ? '/v1/account/aws-marketplace/subscription' : '/v1/account/subscription',
-        data: { code },
+        data: { code, promoCode },
         ...meta,
         onSuccess: meta.onSuccess ? meta.onSuccess : () => fetchAccount({ include: 'usage,billing' })
       }
@@ -140,6 +140,21 @@ export function getBillingCountries() {
       url: '/v1/account/countries',
       params: {
         filter: 'billing'
+      }
+    }
+  });
+}
+
+
+export function checkPromoCode(promoCode, billingId) {
+  return sparkpostApiRequest({
+    type: 'CHECK_PROMO_CODE',
+    meta: {
+      method: 'GET',
+      url: '/v1/account/subscription/promos',
+      params: {
+        promoCode,
+        billingId
       }
     }
   });
