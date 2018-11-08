@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SingleResult renders correctly when not valid 1`] = `
+<Fragment>
+  <br />
+  <p>
+    <span
+      className="IconWrapper"
+    >
+      <Warning
+        className="invalidIcon"
+        size={33}
+      />
+    </span>
+    <strong
+      className="email"
+    >
+       
+      test@fail.com
+    </strong>
+    <span>
+       is NOT a valid email address. invalid domain.
+    </span>
+  </p>
+</Fragment>
+`;
+
+exports[`SingleResult renders correctly when valid 1`] = `
+<Fragment>
+  <br />
+  <p>
+    <span
+      className="IconWrapper"
+    >
+      <CheckCircleOutline
+        className="validIcon"
+        size={33}
+      />
+    </span>
+    <strong
+      className="email"
+    >
+       
+      test@test.com
+    </strong>
+    <span>
+       is a valid email address.
+    </span>
+  </p>
+</Fragment>
+`;
