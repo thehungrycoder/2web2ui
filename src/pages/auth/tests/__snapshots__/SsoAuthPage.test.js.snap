@@ -26,62 +26,6 @@ exports[`SsoAuthPage tests renders correctly 1`] = `
 </Fragment>
 `;
 
-exports[`SsoAuthPage tests should display sso error message from url 1`] = `
-<Fragment>
-  <CenteredLogo />
-  <Panel
-    accent={true}
-    sectioned={true}
-    title="Single Sign-On"
-  >
-    <Error
-      error="Oh no!"
-    />
-    <Connect(ReduxForm)
-      loginError="Oh no!"
-      onSubmit={[Function]}
-    />
-  </Panel>
-  <Panel.Footer
-    left={
-      <small>
-        <PageLink
-          to="/auth"
-        >
-          Not looking for single sign-on?
-        </PageLink>
-      </small>
-    }
-  />
-</Fragment>
-`;
+exports[`SsoAuthPage tests should display sso error message from url 1`] = `"Oh no!"`;
 
-exports[`SsoAuthPage tests should throw error when ssoUser is false 1`] = `
-<Fragment>
-  <CenteredLogo />
-  <Panel
-    accent={true}
-    sectioned={true}
-    title="Single Sign-On"
-  >
-    <Error
-      error="User is not set up to use single sign-on"
-    />
-    <Connect(ReduxForm)
-      loginError="User is not set up to use single sign-on"
-      onSubmit={[Function]}
-    />
-  </Panel>
-  <Panel.Footer
-    left={
-      <small>
-        <PageLink
-          to="/auth"
-        >
-          Not looking for single sign-on?
-        </PageLink>
-      </small>
-    }
-  />
-</Fragment>
-`;
+exports[`SsoAuthPage tests should throw error when ssoUser is false 1`] = `"User is not set up to use single sign-on"`;

@@ -3,20 +3,27 @@ import { shallow } from 'enzyme';
 
 import { SsoLoginForm } from '../SsoLoginForm';
 
-function subject(props) {
-  return shallow(<SsoLoginForm {...props} />);
-}
 
-it('should render', () => {
-  expect(subject()).toMatchSnapshot();
-});
+describe('Component: SsoLoginForm', () => {
+  function subject(props) {
+    return shallow(<SsoLoginForm {...props} />);
+  }
 
-it('should render during login', () => {
-  expect(subject({ loginPending: true })).toMatchSnapshot();
-});
+  it('should render', () => {
+    expect(subject()).toMatchSnapshot();
+  });
 
-it('calls onSubmit', () => {
-  const handleSubmit = jest.fn();
-  subject({ handleSubmit }).find('form').first().simulate('submit');
-  expect(handleSubmit).toHaveBeenCalledTimes(1);
+  it('should render during login', () => {
+    expect(subject({ loginPending: true })).toMatchSnapshot();
+  });
+
+  it('calls onSubmit', () => {
+    const handleSubmit = jest.fn();
+    subject({ handleSubmit }).find('form').first().simulate('submit');
+    expect(handleSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders errors', () => {
+    expect(subject({ loginError: 'asplode' })).toMatchSnapshot();
+  });
 });

@@ -2,6 +2,8 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import { SsoAuthPage } from '../SsoAuthPage';
+import SsoLoginForm from '../components/SsoLoginForm';
+import RedirectAfterLogin from '../components/RedirectAfterLogin';
 
 describe('SsoAuthPage tests', () => {
   const baseProps = {
@@ -18,10 +20,15 @@ describe('SsoAuthPage tests', () => {
     expect(subject()).toMatchSnapshot();
   });
 
+  it('should redirect if already logged in', () => {
+    const wrapper = subject({ auth: { loggedIn: true }});
+    expect(wrapper.find(RedirectAfterLogin)).toHaveLength(1);
+  });
+
   it('should throw error when ssoUser is false', () => {
     const wrapper = subject({ auth: { ssoUser: false }});
     wrapper.setState({ submitted: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find(SsoLoginForm).first().prop('loginError')).toMatchSnapshot();
   });
 
   it('should sso check on submit', () => {
@@ -38,7 +45,8 @@ describe('SsoAuthPage tests', () => {
   });
 
   it('should display sso error message from url', () => {
-    expect(subject({ location: { search: `?error=${btoa('Oh no!')}` }})).toMatchSnapshot();
+    const wrapper = subject({ location: { search: `?error=${btoa('Oh no!')}` }});
+    expect(wrapper.find(SsoLoginForm).first().prop('loginError')).toMatchSnapshot();
   });
 
   it('should set submitting state on submit of loginSubmit', () => {

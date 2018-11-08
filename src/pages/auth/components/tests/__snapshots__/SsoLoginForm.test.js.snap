@@ -1,6 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render 1`] = `
+exports[`Component: SsoLoginForm renders errors 1`] = `
+<Fragment>
+  <Error
+    error="asplode"
+  />
+  <form>
+    <Field
+      autoFocus={true}
+      component={[Function]}
+      errorInLabel={true}
+      id="username"
+      label="Email or Username"
+      name="username"
+      normalize={[Function]}
+      placeholder="email@example.com"
+      validate={[Function]}
+    />
+    <Button
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Log In
+    </Button>
+  </form>
+</Fragment>
+`;
+
+exports[`Component: SsoLoginForm should render 1`] = `
 <Fragment>
   <form>
     <Field
@@ -25,7 +53,7 @@ exports[`should render 1`] = `
 </Fragment>
 `;
 
-exports[`should render during login 1`] = `
+exports[`Component: SsoLoginForm should render during login 1`] = `
 <Fragment>
   <form>
     <Field
