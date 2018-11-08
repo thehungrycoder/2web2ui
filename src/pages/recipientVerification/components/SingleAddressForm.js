@@ -27,6 +27,7 @@ export class SingleAddressForm extends Component {
             label='Email address'
             placeholder={'eg. example@mail.com'}
             validate={[required, maxLength(64)]}
+            normalize={(value = '') => value.trim()}
             connectRight={<Button primary submit disabled={submitDisabled}>{buttonContent}</Button>}
           />
         </form>

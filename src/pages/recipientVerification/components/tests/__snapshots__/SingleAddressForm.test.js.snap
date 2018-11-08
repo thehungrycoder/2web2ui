@@ -22,6 +22,7 @@ exports[`SingleAddressForm renders correctly 1`] = `
       }
       label="Email address"
       name="address"
+      normalize={[Function]}
       placeholder="eg. example@mail.com"
       validate={
         Array [
@@ -56,6 +57,7 @@ exports[`SingleAddressForm should disable form elements on submit 1`] = `
       }
       label="Email address"
       name="address"
+      normalize={[Function]}
       placeholder="eg. example@mail.com"
       validate={
         Array [

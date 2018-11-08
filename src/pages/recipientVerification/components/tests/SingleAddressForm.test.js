@@ -80,4 +80,8 @@ describe('SingleAddressForm', () => {
     wrapper.find('form').simulate('submit', formValues);
     expect(props.singleAddress.mock.calls).toMatchSnapshot();
   });
+
+  it('should trim email value', () => {
+    expect(wrapper.find('Field').props().normalize('  test  ')).toBe('test');
+  });
 });
