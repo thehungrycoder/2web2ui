@@ -261,12 +261,11 @@ exports[`FileFieldWrapper renders with a hidden label 1`] = `
   <div
     className="InputWrapper"
   >
-    <t
+    <n
       accept=".csv"
       activeClassName="DropzoneActive"
       className="Dropzone"
       disableClick={false}
-      disablePreview={true}
       disabled={false}
       disabledClassName="DropzoneDisabled"
       getDataTransferItems={[Function]}
@@ -287,7 +286,7 @@ exports[`FileFieldWrapper renders with a hidden label 1`] = `
           Drag a file here, or click to browse
         </span>
       </span>
-    </t>
+    </n>
   </div>
 </fieldset>
 `;
