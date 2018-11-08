@@ -5,16 +5,13 @@
 
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
-import _ from 'lodash';
 import moment from 'moment';
 import './LineChart.scss';
 
+const identity = (a) => a;
+
 function orderDesc(a, b) {
   return b.value - a.value;
-}
-
-function identity(){
-  return _.first(arguments);
 }
 
 export default class SpLineChart extends React.Component {
@@ -82,7 +79,7 @@ export default class SpLineChart extends React.Component {
       data,
       lines = [],
       syncId,
-      xTickFormatter = identity, //for some(?) reason using just _.identity doesn't work in npm test in ci mode
+      xTickFormatter = identity,
       yTickFormatter = identity,
       yScale = 'linear', // eslint-disable-line
       tooltipLabelFormatter = identity,
