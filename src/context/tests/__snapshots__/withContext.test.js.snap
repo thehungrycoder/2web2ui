@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withContext HoC should render with context props 1`] = `
+<Provider>
+  <WithContext(TestComponent)>
+    <TestComponent
+      test="123"
+    >
+      <div>
+        123
+      </div>
+    </TestComponent>
+  </WithContext(TestComponent)>
+</Provider>
+`;
+
+exports[`withContext HoC should render with context props and additional props 1`] = `
+<Provider>
+  <WithContext(TestComponent)
+    anotherProp={456}
+  >
+    <TestComponent
+      anotherProp={456}
+      test="123"
+    >
+      <div>
+        123
+      </div>
+    </TestComponent>
+  </WithContext(TestComponent)>
+</Provider>
+`;
