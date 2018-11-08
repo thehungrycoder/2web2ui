@@ -19,7 +19,7 @@ exports[`SingleResult renders correctly when not valid 1`] = `
       test@fail.com
     </strong>
     <span>
-       is NOT a valid email address. invalid domain.
+       is NOT a valid recipient. invalid domain.
     </span>
   </p>
 </Fragment>
@@ -44,7 +44,7 @@ exports[`SingleResult renders correctly when valid 1`] = `
       test@test.com
     </strong>
     <span>
-       is a valid email address.
+       is a valid recipient.
     </span>
   </p>
 </Fragment>
