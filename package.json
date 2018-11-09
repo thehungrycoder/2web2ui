@@ -4,7 +4,7 @@
   "private": true,
   "package-lock": true,
   "engines": {
-    "npm": ">=5.3"
+    "npm": ">=6.4.1"
   },
   "scripts": {
     "start": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
