@@ -62,7 +62,7 @@ export default class EditPage extends React.Component {
   render() {
     const {
       canModify,
-      error,
+      loadingError,
       handleSubmit,
       hasSubaccounts,
       id,
@@ -71,8 +71,13 @@ export default class EditPage extends React.Component {
     } = this.props;
     const disabled = !canModify || submitting;
 
-    if (error) {
-      return <RedirectAndAlert to="/snippets" alert={{ type: 'error', message: error.message }} />;
+    if (loadingError) {
+      return (
+        <RedirectAndAlert
+          to="/snippets"
+          alert={{ type: 'error', message: `Unable to load ${id} snippet` }}
+        />
+      );
     }
 
     if (loading) {

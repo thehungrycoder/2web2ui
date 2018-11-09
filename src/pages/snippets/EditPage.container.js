@@ -25,10 +25,10 @@ const mapStateToProps = (state, props) => {
 
   return {
     canModify: hasGrants('templates/modify')(state),
-    error: state.snippets.getError,
     hasSubaccounts: hasSubaccounts(state),
     id,
     loading: state.snippets.getPending,
+    loadingError: state.snippets.getError,
     subaccountId,
     initialValues: {
       ...state.snippets.item,
