@@ -37,7 +37,7 @@ describe('A/B Test Create Page', () => {
     await wrapper.instance().create({ id: 'woooooooow', subaccount: { id: 1 }, default_variant: { id: 'ok' }});
     expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
       type: 'success',
-      message: 'A/B test created'
+      message: 'A/B test draft created'
     });
     expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/ab-testing/woooooooow/1?subaccount=1');
   });
@@ -46,7 +46,7 @@ describe('A/B Test Create Page', () => {
     await wrapper.instance().create({ id: 'woooooooow' });
     expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
       type: 'success',
-      message: 'A/B test created'
+      message: 'A/B test draft created'
     });
     expect(wrapper.instance().props.history.push).toHaveBeenCalledWith('/ab-testing/woooooooow/1');
   });
