@@ -42,7 +42,9 @@ export default class ImportSnippetPanel extends React.Component {
             Find a snippet, copy the code, and paste it in your template.
           </p>
           <Typeahead
-            itemToString={({ id, name }) => `${name || slugToFriendly(id)} (${id})`}
+            itemToString={(snippet) => (
+              snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
+            )}
             label="Snippet"
             onChange={this.handleChange}
             placeholder="Type to search..."
