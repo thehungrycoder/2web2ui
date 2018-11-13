@@ -29,22 +29,22 @@ export default class FileFieldWrapper extends Component {
   }
 
   render() {
-    const { disabled, fileType, helpText, input, label, meta, required } = this.props;
+    const { disabled, fileType, helpText, input, label, meta, required, style = {}, labelHidden, placeholder = 'Drag a file here, or click to browse' } = this.props;
     const filename = _.get(input, 'value.name');
     const acceptedTypes = fileType ? `.${fileType}` : '';
 
     return (
       <fieldset className={styles.Field}>
         <Label id={input.id}>
-          {label}{required && ' *'}
-          {' '}
-          {(meta.touched && meta.error) ? <Error error={meta.error} wrapper='span' /> : null}
+          {!labelHidden ? label: null}{!labelHidden && required ? ' *' : null}
+          {(meta.touched && meta.error) ? <span>{' '}<Error error={meta.error} wrapper='span' /></span> : null}
         </Label>
         <div className={styles.InputWrapper}>
           <Dropzone
             accept={acceptedTypes}
             activeClassName={styles.DropzoneActive}
             className={styles.Dropzone}
+            style={style}
             disabledClassName={styles.DropzoneDisabled}
             disablePreview
             disabled={disabled}
@@ -57,7 +57,7 @@ export default class FileFieldWrapper extends Component {
           >
             {(filename && !meta.error)
               ? <span>{shrinkToFit(filename, 50)}</span>
-              : <span className={styles.Placeholder}><FileUpload /><span>Drag a file here, or click to browse</span></span>}
+              : <span className={styles.Placeholder}><FileUpload /><span>{placeholder}</span></span>}
           </Dropzone>
         </div>
         {helpText ? <div className={styles.Help}>{helpText}</div> : null}

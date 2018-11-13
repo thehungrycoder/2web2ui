@@ -28,17 +28,6 @@ exports[`ListPage renders page with error banner 1`] = `
     message="Sorry, we seem to have had some trouble loading your snippets."
     reload={[Function]}
   />
-  <DeleteModal
-    content={
-      <p>
-        The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.
-      </p>
-    }
-    onCancel={[Function]}
-    onDelete={[Function]}
-    open={false}
-    title="Are you sure you want to delete this snippet?"
-  />
 </Page>
 `;
 
@@ -74,18 +63,6 @@ exports[`ListPage renders page with snippet collection 1`] = `
         },
       ]
     }
-    toggleDelete={[Function]}
-  />
-  <DeleteModal
-    content={
-      <p>
-        The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.
-      </p>
-    }
-    onCancel={[Function]}
-    onDelete={[Function]}
-    open={false}
-    title="Are you sure you want to delete this snippet?"
   />
 </Page>
 `;
@@ -115,18 +92,6 @@ exports[`ListPage renders page without primary action button 1`] = `
         },
       ]
     }
-    toggleDelete={[Function]}
-  />
-  <DeleteModal
-    content={
-      <p>
-        The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.
-      </p>
-    }
-    onCancel={[Function]}
-    onDelete={[Function]}
-    open={false}
-    title="Are you sure you want to delete this snippet?"
   />
 </Page>
 `;
@@ -163,18 +128,6 @@ exports[`ListPage renders page without subaccount column 1`] = `
         },
       ]
     }
-    toggleDelete={[Function]}
-  />
-  <DeleteModal
-    content={
-      <p>
-        The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.
-      </p>
-    }
-    onCancel={[Function]}
-    onDelete={[Function]}
-    open={false}
-    title="Are you sure you want to delete this snippet?"
   />
 </Page>
 `;

@@ -1,0 +1,33 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.LoadingWrapper {
+  padding: rem(100) 0 rem(100);
+  text-align: center;
+}
+
+.ProcessingWrapper {
+  padding: spacing() 0 spacing(larger);
+  text-align: center;
+}
+
+.IconWrapper {
+  position: absolute;
+  right: spacing();
+  top: spacing();
+
+  &.Complete {
+    color: color(green, dark);
+  }
+}
+
+.RightAlign {
+  text-align: right;
+}
+
+.Spacer {
+  height: rem(37);
+}
+
+.NoWrap {
+  white-space: nowrap;
+}

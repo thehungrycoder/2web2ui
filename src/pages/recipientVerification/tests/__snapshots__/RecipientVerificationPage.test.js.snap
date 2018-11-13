@@ -57,5 +57,6 @@ exports[`Page: Recipient Email Verification should render happy path 1`] = `
       <Connect(ReduxForm) />
     </Panel.Section>
   </Panel>
+  <Connect(WithContext(ListResults)) />
 </Page>
 `;

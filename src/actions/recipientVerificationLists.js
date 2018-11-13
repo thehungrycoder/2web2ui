@@ -21,3 +21,23 @@ export function singleAddress(address) {
     }
   });
 }
+
+export function getLatestJob() {
+  return sparkpostApiRequest({
+    type: 'GET_LATEST_JOB',
+    meta: {
+      method: 'GET',
+      url: 'labs/recipient-verification-api/latest'
+    }
+  });
+}
+
+export function getJobStatus(list_id) {
+  return sparkpostApiRequest({
+    type: 'GET_JOB_STATUS',
+    meta: {
+      method: 'GET',
+      url: `labs/recipient-verification-api/get-job/${list_id}`
+    }
+  });
+}

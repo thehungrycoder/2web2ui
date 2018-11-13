@@ -30,6 +30,28 @@ exports[`EditPage renders disabled form when submitting 1`] = `
       "onClick": [Function],
     }
   }
+  secondaryActions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Delete",
+        "to": "/",
+        "visible": [Function],
+      },
+      Object {
+        "Component": [Function],
+        "content": "Duplicate",
+        "to": Object {
+          "pathname": "/snippets/create",
+          "state": Object {
+            "id": "test-snippet",
+            "subaccountId": undefined,
+          },
+        },
+        "visible": [Function],
+      },
+    ]
+  }
   title="test-snippet"
 >
   <Form
@@ -100,6 +122,7 @@ exports[`EditPage renders disabled form when user does not have authorization to
       "onClick": [Function],
     }
   }
+  secondaryActions={Array []}
   title="test-snippet"
 >
   <Form
@@ -170,6 +193,28 @@ exports[`EditPage renders edit form 1`] = `
       "onClick": [Function],
     }
   }
+  secondaryActions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Delete",
+        "to": "/",
+        "visible": [Function],
+      },
+      Object {
+        "Component": [Function],
+        "content": "Duplicate",
+        "to": Object {
+          "pathname": "/snippets/create",
+          "state": Object {
+            "id": "test-snippet",
+            "subaccountId": undefined,
+          },
+        },
+        "visible": [Function],
+      },
+    ]
+  }
   title="test-snippet"
 >
   <Form
@@ -238,6 +283,28 @@ exports[`EditPage renders without subaccount section when account has no subacco
       "disabled": undefined,
       "onClick": [Function],
     }
+  }
+  secondaryActions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Delete",
+        "to": "/",
+        "visible": [Function],
+      },
+      Object {
+        "Component": [Function],
+        "content": "Duplicate",
+        "to": Object {
+          "pathname": "/snippets/create",
+          "state": Object {
+            "id": "test-snippet",
+            "subaccountId": undefined,
+          },
+        },
+        "visible": [Function],
+      },
+    ]
   }
   title="test-snippet"
 >

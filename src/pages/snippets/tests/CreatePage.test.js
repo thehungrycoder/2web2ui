@@ -1,7 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import cases from 'jest-in-case';
-import { CreatePage } from '../CreatePage';
+import Loading from 'src/components/loading';
+import SubaccountSection from 'src/components/subaccountSection';
+import CreatePage from '../CreatePage';
 
 describe('CreatePage', () => {
   const subject = (props) => shallow(
@@ -13,36 +15,54 @@ describe('CreatePage', () => {
   });
 
   it('renders form with subaccount assignment', () => {
-    expect(subject({ hasSubaccounts: true })).toMatchSnapshot();
+    const wrapper = subject({ hasSubaccounts: true });
+    expect(wrapper.find(SubaccountSection).exists()).toEqual(true);
   });
 
-  it('redirects when submit succeeds', () => {
-    const props = {
-      history: {
-        push: jest.fn()
+  it('renders form to duplicate snippet', () => {
+    const getSnippet = jest.fn();
+    const wrapper = subject({
+      getSnippet,
+      snippetToDuplicate: {
+        id: 'duplicate-snippet',
+        subaccountId: '123'
       }
-    };
+    });
 
-    const wrapper = subject(props);
-    wrapper.setProps({ submitSucceeded: true });
-
-    expect(props.history.push).toHaveBeenCalledWith('/snippets');
+    expect(getSnippet).toHaveBeenCalledWith({ id: 'duplicate-snippet', subaccountId: '123' });
+    expect(wrapper.prop('title')).toEqual('Duplicate Snippet');
   });
 
-  it('triggers create snippet action when primary action is clicked', () => {
-    const props = {
-      createSnippet: jest.fn(() => Promise.resolve())
-    };
-    const wrapper = subject(props);
+  it('renders spinner when loading snippet to duplicate', () => {
+    const wrapper = subject({ loading: true });
+    expect(wrapper.find(Loading).exists()).toEqual(true);
+  });
 
-    wrapper.prop('primaryAction').onClick({});
-    expect(props.createSnippet).toHaveBeenCalled();
+  it('clears loaded snippet on unmount', () => {
+    const clearSnippet = jest.fn();
+    const wrapper = subject({ clearSnippet });
+
+    wrapper.instance().componentWillUnmount();
+
+    expect(clearSnippet).toHaveBeenCalled();
+  });
+
+  it('redirects to edit page after create suceeds', async () => {
+    const createSnippet = jest.fn(() => Promise.resolve());
+    const historyPush = jest.fn();
+    const wrapper = subject({ createSnippet, history: { push: historyPush }});
+
+    await wrapper.prop('primaryAction').onClick({ id: 'test-snippet', subaccount: { id: 123 }});
+
+    expect(createSnippet).toHaveBeenCalled();
+    expect(historyPush).toHaveBeenCalledWith('/snippets/edit/test-snippet?subaccount=123');
   });
 
   describe('.submitSnippet', () => {
     cases('succeeds', ({ name, ...values }) => {
       const createSnippet = jest.fn(() => Promise.resolve());
-      const wrapper = subject({ createSnippet });
+      const historyPush = jest.fn();
+      const wrapper = subject({ createSnippet, history: { push: historyPush }});
 
       wrapper.prop('primaryAction').onClick({
         ...values,

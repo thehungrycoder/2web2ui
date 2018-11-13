@@ -1,32 +1,75 @@
 const initialState = {
-  list: [],
-  loading: false,
-  singleResults: undefined,
-  errors: undefined
+  singleResults: null,
+  uploadLoading: false,
+  latestJobLoading: false,
+  jobResultsLoading: false,
+  jobResults: {},
+  latest: null
 };
 
 export default (state = initialState, { meta, payload, type }) => {
   switch (type) {
-    case 'CREATE_RECIPIENT_VERIFICATION_LIST_PENDING':
-      return { ...state, loading: true };
+
+    // List Upload
+    case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_PENDING':
+      return { ...state, uploadLoading: true };
 
     case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_SUCCESS':
       return {
         ...state,
-        loading: false,
-        list: [ ...state.list, {
-          id: payload.id,
-          name: payload.name,
-          total_accepted_recipients: payload.total_accepted_recipients,
-          description: meta.data.description
-        }]
+        uploadLoading: false,
+        latest: payload.list_id
       };
 
-    case 'CREATE_RECIPIENT_VERIFICATION_LIST_FAIL':
-      return { ...state, loading: false };
+    case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_FAIL':
+      return { ...state, uploadLoading: false };
 
+    // List Results
+    case 'GET_LATEST_JOB_PENDING':
+      return { ...state, latestJobLoading: true, jobResults: {}};
+
+    case 'GET_LATEST_JOB_ERROR':
+      return { ...state, latestJobLoading: false };
+
+    case 'GET_LATEST_JOB_SUCCESS':
+      return {
+        ...state,
+        jobResultsLoading: false,
+        latest: payload.list_id,
+        jobResults: {
+          ...state.jobResults,
+          [payload.list_id]: {
+            complete: payload.complete,
+            uploaded: payload.upload_timestamp,
+            rejectedUrl: payload.rejected_external_url
+          }
+        }
+      };
+
+    // List Polling
+    case 'GET_JOB_STATUS_PENDING':
+      return { ...state, jobResultsLoading: true };
+
+    case 'GET_JOB_STATUS_ERROR':
+      return { ...state, jobResultsLoading: false };
+
+    case 'GET_JOB_STATUS_SUCCESS':
+      return {
+        ...state,
+        jobResultsLoading: false,
+        jobResults: {
+          ...state.jobResults,
+          [payload.list_id]: {
+            complete: payload.complete,
+            uploaded: payload.upload_timestamp,
+            rejectedUrl: payload.rejected_external_url
+          }
+        }
+      };
+
+    // Single Recipient
     case 'SINGLE_RECIPIENT_VERIFICATION_PENDING':
-      return { ...state, singleResults: undefined, errors: undefined };
+      return { ...state, singleResults: null };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_SUCCESS':
       return {
@@ -39,7 +82,7 @@ export default (state = initialState, { meta, payload, type }) => {
       };
 
     case 'SINGLE_RECIPIENT_VERIFICATION_FAIL':
-      return { ...state, singleResults: undefined, errors: { payload, meta }};
+      return { ...state, singleResults: null };
 
     default:
       return { ...state };
