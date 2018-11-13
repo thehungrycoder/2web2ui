@@ -33,17 +33,13 @@ export class ListResults extends Component {
         });
       }
     }
-
-    // Stop current polling when complete
-    if (results.complete) {
-      stopPolling(latestId);
-    }
   }
 
   handlePoll = (id) => {
-    const { showAlert, getJobStatus } = this.props;
+    const { showAlert, getJobStatus, stopPolling } = this.props;
     return getJobStatus(id).then(({ complete }) => {
       if (complete) {
+        stopPolling(id);
         showAlert({
           type: 'success',
           message: 'Recipient Validation Results Ready',
