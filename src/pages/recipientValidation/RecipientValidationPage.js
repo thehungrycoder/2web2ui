@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
 import { Page, Tabs, Panel } from '@sparkpost/matchbox';
-import RecipientVerificationListForm from './components/RecipientVerificationListForm';
+import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
 import ListResults from './components/ListResults';
 
 const tabs = [
-  { content: 'Verify A List' },
-  { content: 'Verify a Single Address' }
+  { content: 'Validate A List' },
+  { content: 'Validate a Single Address' }
 ];
 
-export class RecipientVerificationPage extends Component {
+export class RecipientValidationPage extends Component {
   state = {
     selectedTab: 0
   };
@@ -24,7 +24,7 @@ export class RecipientVerificationPage extends Component {
 
     return (
       <Page
-        title='Recipient Email Verification'>
+        title='Recipient Email Validation'>
         <Tabs
           selected={selectedTab}
           connectBelow={true}
@@ -32,7 +32,7 @@ export class RecipientVerificationPage extends Component {
         />
         <Panel>
           <Panel.Section>
-            {selectedTab === 1 ? <SingleAddressForm /> : <RecipientVerificationListForm />}
+            {selectedTab === 1 ? <SingleAddressForm /> : <ListForm />}
           </Panel.Section>
         </Panel>
         {selectedTab === 0 && <ListResults />}
@@ -41,4 +41,4 @@ export class RecipientVerificationPage extends Component {
   }
 }
 
-export default RecipientVerificationPage;
+export default RecipientValidationPage;

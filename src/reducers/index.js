@@ -24,7 +24,7 @@ import metrics from './metrics';
 import notifications from './notifications';
 import passwordReset from './passwordReset';
 import recipientLists from './recipientLists';
-import recipientVerificationLists from './recipientVerificationLists';
+import recipientValidation from './recipientValidation';
 import reportOptions from './reportOptions';
 import sendingDomains from './sendingDomains';
 import sendingIps from './sendingIps';
@@ -67,7 +67,7 @@ const appReducer = combineReducers({
   passwordReset,
   reportOptions,
   recipientLists,
-  recipientVerificationLists,
+  recipientValidation,
   sendingDomains,
   sendingIps,
   snippets,

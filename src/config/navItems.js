@@ -65,8 +65,8 @@ export default [
         to: '/lists/suppressions'
       },
       {
-        label: 'Recipient Verification',
-        to: '/recipient-verification'
+        label: 'Recipient Validation',
+        to: '/recipient-validation'
       }
     ]
   },

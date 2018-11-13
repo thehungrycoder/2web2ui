@@ -11,17 +11,17 @@ export default (state = initialState, { meta, payload, type }) => {
   switch (type) {
 
     // List Upload
-    case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_PENDING':
+    case 'UPLOAD_RECIPIENT_VALIDATION_LIST_PENDING':
       return { ...state, uploadLoading: true };
 
-    case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_SUCCESS':
+    case 'UPLOAD_RECIPIENT_VALIDATION_LIST_SUCCESS':
       return {
         ...state,
         uploadLoading: false,
         latest: payload.list_id
       };
 
-    case 'UPLOAD_RECIPIENT_VERIFICATION_LIST_FAIL':
+    case 'UPLOAD_RECIPIENT_VALIDATION_LIST_FAIL':
       return { ...state, uploadLoading: false };
 
     // List Results
@@ -68,10 +68,10 @@ export default (state = initialState, { meta, payload, type }) => {
       };
 
     // Single Recipient
-    case 'SINGLE_RECIPIENT_VERIFICATION_PENDING':
+    case 'SINGLE_RECIPIENT_VALIDATION_PENDING':
       return { ...state, singleResults: null };
 
-    case 'SINGLE_RECIPIENT_VERIFICATION_SUCCESS':
+    case 'SINGLE_RECIPIENT_VALIDATION_SUCCESS':
       return {
         ...state,
         singleResults: {
@@ -81,7 +81,7 @@ export default (state = initialState, { meta, payload, type }) => {
         }
       };
 
-    case 'SINGLE_RECIPIENT_VERIFICATION_FAIL':
+    case 'SINGLE_RECIPIENT_VALIDATION_FAIL':
       return { ...state, singleResults: null };
 
     default:

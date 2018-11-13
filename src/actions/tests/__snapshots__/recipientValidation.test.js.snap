@@ -5,7 +5,7 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "url": "labs/recipient-verification-api/get-job/12345",
+      "url": "v1/recipient-validation/get-job/12345",
     },
     "type": "GET_JOB_STATUS",
   },
@@ -17,7 +17,7 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "url": "labs/recipient-verification-api/latest",
+      "url": "v1/recipient-validation/latest",
     },
     "type": "GET_LATEST_JOB",
   },
@@ -34,12 +34,12 @@ Array [
       "method": "GET",
       "url": "v1/recipient-validation/single/[object Object]",
     },
-    "type": "SINGLE_RECIPIENT_VERIFICATION",
+    "type": "SINGLE_RECIPIENT_VALIDATION",
   },
 ]
 `;
 
-exports[`Recipient Verification Actions .uploadRecipientVerificationList when uploading csv 1`] = `
+exports[`Recipient Verification Actions .uploadList when uploading csv 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -49,7 +49,7 @@ Array [
       "method": "POST",
       "url": "v1/recipient-validation",
     },
-    "type": "UPLOAD_RECIPIENT_VERIFICATION_LIST",
+    "type": "UPLOAD_RECIPIENT_VALIDATION_LIST",
   },
 ]
 `;

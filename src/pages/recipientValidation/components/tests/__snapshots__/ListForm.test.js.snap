@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RecipientVerificationListForm renders CSV errors 1`] = `
+exports[`ListForm renders CSV errors 1`] = `
 <Grid>
   <Grid.Column
     md={8}
@@ -10,7 +10,7 @@ exports[`RecipientVerificationListForm renders CSV errors 1`] = `
       onSubmit={[Function]}
     >
       <p>
-        Verify a list of your recipients by separating out rejected or undeliverable email addresses.
+        Validate a list of your recipients by separating out rejected or undeliverable email addresses.
       </p>
       <Field
         component={[Function]}
@@ -19,7 +19,7 @@ exports[`RecipientVerificationListForm renders CSV errors 1`] = `
           <span>
             Download a 
             <DownloadLink
-              href="example-recipient-verification-list.csv"
+              href="example-recipient-validation-list.csv"
             >
               CSV template here
             </DownloadLink>
@@ -49,14 +49,14 @@ exports[`RecipientVerificationListForm renders CSV errors 1`] = `
         size="default"
         submit={true}
       >
-        Verify Email Addresses
+        Validate Email Addresses
       </Button>
     </form>
   </Grid.Column>
 </Grid>
 `;
 
-exports[`RecipientVerificationListForm renders correctly 1`] = `
+exports[`ListForm renders correctly 1`] = `
 <Grid>
   <Grid.Column
     md={8}
@@ -66,7 +66,7 @@ exports[`RecipientVerificationListForm renders correctly 1`] = `
       onSubmit={[Function]}
     >
       <p>
-        Verify a list of your recipients by separating out rejected or undeliverable email addresses.
+        Validate a list of your recipients by separating out rejected or undeliverable email addresses.
       </p>
       <Field
         component={[Function]}
@@ -75,7 +75,7 @@ exports[`RecipientVerificationListForm renders correctly 1`] = `
           <span>
             Download a 
             <DownloadLink
-              href="example-recipient-verification-list.csv"
+              href="example-recipient-validation-list.csv"
             >
               CSV template here
             </DownloadLink>
@@ -105,14 +105,14 @@ exports[`RecipientVerificationListForm renders correctly 1`] = `
         size="default"
         submit={true}
       >
-        Verify Email Addresses
+        Validate Email Addresses
       </Button>
     </form>
   </Grid.Column>
 </Grid>
 `;
 
-exports[`RecipientVerificationListForm should disable form elements on submit 1`] = `
+exports[`ListForm should disable form elements on submit 1`] = `
 <Grid>
   <Grid.Column
     md={8}
@@ -122,7 +122,7 @@ exports[`RecipientVerificationListForm should disable form elements on submit 1`
       onSubmit={[Function]}
     >
       <p>
-        Verify a list of your recipients by separating out rejected or undeliverable email addresses.
+        Validate a list of your recipients by separating out rejected or undeliverable email addresses.
       </p>
       <Field
         component={[Function]}
@@ -131,7 +131,7 @@ exports[`RecipientVerificationListForm should disable form elements on submit 1`
           <span>
             Download a 
             <DownloadLink
-              href="example-recipient-verification-list.csv"
+              href="example-recipient-validation-list.csv"
             >
               CSV template here
             </DownloadLink>
@@ -161,14 +161,14 @@ exports[`RecipientVerificationListForm should disable form elements on submit 1`
         size="default"
         submit={true}
       >
-        Verify Email Addresses
+        Validate Email Addresses
       </Button>
     </form>
   </Grid.Column>
 </Grid>
 `;
 
-exports[`RecipientVerificationListForm should submit csv 1`] = `
+exports[`ListForm should submit csv 1`] = `
 Array [
   Array [
     FormData {
@@ -188,7 +188,7 @@ bar@address.com
 ]
 `;
 
-exports[`RecipientVerificationListForm should submit csv 2`] = `
+exports[`ListForm should submit csv 2`] = `
 Array [
   Array [
     Object {

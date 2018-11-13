@@ -5,21 +5,21 @@ import { Button, Grid } from '@sparkpost/matchbox';
 import { DownloadLink } from 'src/components';
 import { required, maxFileSize, fileExtension } from 'src/helpers/validation';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
-import { uploadRecipientVerificationList } from 'src/actions/recipientVerificationLists';
+import { uploadList } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
-import exampleRecipientVerificationListPath from './example-recipient-verification-list.csv';
+import exampleRecipientValidationListPath from './example-recipient-validation-list.csv';
 
-const formName = 'recipientVerificationListForm';
+const formName = 'recipientValidationListForm';
 
-export class RecipientVerificationListForm extends Component {
+export class ListForm extends Component {
 
   handleUpload = (fields) => {
-    const { uploadRecipientVerificationList, showAlert, reset } = this.props;
+    const { uploadList, showAlert, reset } = this.props;
     const form_data = new FormData();
 
     form_data.append('myupload', fields.csv);
-    return uploadRecipientVerificationList(form_data).then(() => {
+    return uploadList(form_data).then(() => {
       showAlert({ type: 'success', message: 'Recipients Uploaded' });
       reset(formName);
     });
@@ -29,9 +29,9 @@ export class RecipientVerificationListForm extends Component {
     const { pristine, valid, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
 
-    const headerContent = 'Verify a list of your recipients by separating out rejected or undeliverable email addresses.';
+    const headerContent = 'Validate a list of your recipients by separating out rejected or undeliverable email addresses.';
     const uploadValidators = [required, fileExtension('csv'), maxFileSize(config.maxRecipVerifUploadSizeBytes)];
-    const buttonContent = (submitting) ? 'Uploading...' : 'Verify Email Addresses';
+    const buttonContent = (submitting) ? 'Uploading...' : 'Validate Email Addresses';
 
     return (
       <Grid>
@@ -42,7 +42,7 @@ export class RecipientVerificationListForm extends Component {
               component={FileFieldWrapper}
               disabled={submitting}
               fileType='csv'
-              helpText={<span>Download a <DownloadLink href={exampleRecipientVerificationListPath}>CSV template here</DownloadLink> to use when formatting list.</span>}
+              helpText={<span>Download a <DownloadLink href={exampleRecipientValidationListPath}>CSV template here</DownloadLink> to use when formatting list.</span>}
               name='csv'
               validate={uploadValidators}
               labelHidden
@@ -60,6 +60,6 @@ export class RecipientVerificationListForm extends Component {
   }
 }
 
-const WrappedForm = reduxForm({ form: formName })(RecipientVerificationListForm);
+const WrappedForm = reduxForm({ form: formName })(ListForm);
 
-export default connect(null, { uploadRecipientVerificationList, showAlert })(WrappedForm);
+export default connect(null, { uploadList, showAlert })(WrappedForm);
