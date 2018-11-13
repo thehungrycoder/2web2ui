@@ -16,23 +16,3 @@ exports[`Variants Content Component should render help content 1`] = `
   </p>
 </div>
 `;
-
-exports[`Variants Content Component should render help content with percent disclaimer 1`] = `
-<div>
-  <p>
-    The templates you've selected will appear here, along with their results once this test concludes.
-  </p>
-  <p>
-    Total percentage value for all variants must equal 100%.
-  </p>
-  <p>
-    If you need to create a new template, 
-    <PageLink
-      to="/templates"
-    >
-      head over to the templates page
-    </PageLink>
-    .
-  </p>
-</div>
-`;

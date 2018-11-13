@@ -110,9 +110,7 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
     title="Variants"
   >
     <Left>
-      <VariantsContent
-        formValues="test values"
-      />
+      <VariantsContent />
     </Left>
     <Right>
       <VariantsFields
@@ -227,9 +225,7 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
     title="Variants"
   >
     <Left>
-      <VariantsContent
-        formValues="test values"
-      />
+      <VariantsContent />
     </Left>
     <Right>
       <VariantsFields
