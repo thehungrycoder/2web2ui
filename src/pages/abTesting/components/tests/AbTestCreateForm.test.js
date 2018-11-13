@@ -49,7 +49,7 @@ describe('A/B Test Create Form Component', () => {
 
   describe('submit button props', () => {
     it('should render submit text', () => {
-      expect(wrapper.find('Button').props().children).toEqual('Create New Test');
+      expect(wrapper.find('Button').props().children).toEqual('Continue');
     });
 
     it('should render submitting text', () => {

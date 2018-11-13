@@ -30,7 +30,7 @@ export class CreatePage extends Component {
 
     return createAbTestDraft({ abTest, subaccount: subaccountId })
       .then(() => {
-        showAlert({ type: 'success', message: 'A/B test created' });
+        showAlert({ type: 'success', message: 'A/B test draft created' });
         history.push(`/ab-testing/${abTest.id}/1${setSubaccountQuery(subaccountId)}`);
       });
   }
