@@ -67,7 +67,7 @@ exports[`Template EditPage should render correctly 1`] = `
       xs={12}
     >
       <LoadableComponent
-        action={<ImportSnippetLink />}
+        action={<Connect(ImportSnippetLink) />}
         readOnly={false}
       />
     </Grid.Column>

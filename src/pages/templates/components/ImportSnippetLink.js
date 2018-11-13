@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal } from '@sparkpost/matchbox';
+import { hasUiOption } from 'src/helpers/conditions/account';
 import ImportSnippetPanel from './ImportSnippetPanel.container';
 
-class ImportSnippetLink extends React.Component {
+export class ImportSnippetLink extends React.Component {
   state = {
     isOpen: false
   }
@@ -16,6 +18,12 @@ class ImportSnippetLink extends React.Component {
   }
 
   render() {
+    const { isFeatureToggledOn } = this.props;
+
+    if (!isFeatureToggledOn) {
+      return null;
+    }
+
     return (
       <React.Fragment>
         <Button color="orange" flat={true} onClick={this.handleOpen}>Import Snippets</Button>
@@ -27,4 +35,8 @@ class ImportSnippetLink extends React.Component {
   }
 }
 
-export default ImportSnippetLink;
+const mapStateToProps = (state) => ({
+  isFeatureToggledOn: hasUiOption('snippet')(state)
+});
+
+export default connect(mapStateToProps)(ImportSnippetLink);

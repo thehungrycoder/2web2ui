@@ -1,9 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ImportSnippetLink from '../ImportSnippetLink';
+import { ImportSnippetLink } from '../ImportSnippetLink';
 
 describe('ImportSnippetLink', () => {
-  const subject = (props = {}) => shallow(<ImportSnippetLink {...props} />);
+  const subject = (props = {}) => shallow(
+    <ImportSnippetLink isFeatureToggledOn={true} {...props} />
+  );
 
   it('renders link and closed modal', () => {
     expect(subject()).toMatchSnapshot();
