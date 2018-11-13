@@ -30,7 +30,7 @@ export class RecipientVerificationListForm extends Component {
     const submitDisabled = pristine || !valid || submitting;
 
     const headerContent = 'Verify a list of your recipients by separating out rejected or undeliverable email addresses.';
-    const fileTypes = ['txt','csv'];
+    const fileTypes = ['.txt','.csv'];
     const uploadValidators = [required, maxFileSize(config.maxRecipVerifUploadSizeBytes)];
     const buttonContent = (submitting) ? 'Uploading...' : 'Verify Email Addresses';
 
@@ -42,7 +42,7 @@ export class RecipientVerificationListForm extends Component {
             <Field
               component={FileFieldWrapper}
               disabled={submitting}
-              fileType={fileTypes}
+              fileTypes={fileTypes}
               helpText={<span>Download a <DownloadLink href={exampleRecipientVerificationListPath}>CSV template here</DownloadLink> to use when formatting list.</span>}
               name='csv'
               validate={uploadValidators}
