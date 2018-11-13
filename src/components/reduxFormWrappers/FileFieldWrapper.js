@@ -49,7 +49,6 @@ export default class FileFieldWrapper extends Component {
             className={styles.Dropzone}
             style={style}
             disabledClassName={styles.DropzoneDisabled}
-            disablePreview
             disabled={disabled}
             id={input.id}
             multiple={false}

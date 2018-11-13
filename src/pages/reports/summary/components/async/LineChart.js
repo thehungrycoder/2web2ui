@@ -5,9 +5,10 @@
 
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
-import _ from 'lodash';
 import moment from 'moment';
 import './LineChart.scss';
+
+const identity = (a) => a;
 
 function orderDesc(a, b) {
   return b.value - a.value;
@@ -78,11 +79,11 @@ export default class SpLineChart extends React.Component {
       data,
       lines = [],
       syncId,
-      xTickFormatter = _.identity,
-      yTickFormatter = _.identity,
+      xTickFormatter = identity,
+      yTickFormatter = identity,
       yScale = 'linear', // eslint-disable-line
-      tooltipLabelFormatter = _.identity,
-      tooltipValueFormatter = _.identity,
+      tooltipLabelFormatter = identity,
+      tooltipValueFormatter = identity,
       showXAxis,
       yLabel
     } = this.props;
@@ -95,8 +96,8 @@ export default class SpLineChart extends React.Component {
             <XAxis
               tickFormatter={xTickFormatter}
               ticks={this.getXTicks()}
-              scale='utcTime'
               dataKey='ts'
+              scale='auto'
               interval='preserveEnd'
               height={30}
               hide={!showXAxis} />

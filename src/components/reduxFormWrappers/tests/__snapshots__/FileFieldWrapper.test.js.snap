@@ -11,12 +11,11 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
   <div
     className="InputWrapper"
   >
-    <t
+    <n
       accept=".csv"
       activeClassName="DropzoneActive"
       className="Dropzone"
       disableClick={false}
-      disablePreview={true}
       disabled={true}
       disabledClassName="DropzoneDisabled"
       getDataTransferItems={[Function]}
@@ -37,7 +36,7 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
           Drag a file here, or click to browse
         </span>
       </span>
-    </t>
+    </n>
   </div>
 </fieldset>
 `;
@@ -53,12 +52,11 @@ exports[`FileFieldWrapper renders file input 1`] = `
   <div
     className="InputWrapper"
   >
-    <t
+    <n
       accept=".csv"
       activeClassName="DropzoneActive"
       className="Dropzone"
       disableClick={false}
-      disablePreview={true}
       disabled={false}
       disabledClassName="DropzoneDisabled"
       getDataTransferItems={[Function]}
@@ -79,7 +77,7 @@ exports[`FileFieldWrapper renders file input 1`] = `
           Drag a file here, or click to browse
         </span>
       </span>
-    </t>
+    </n>
   </div>
 </fieldset>
 `;
@@ -102,12 +100,11 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
   <div
     className="InputWrapper"
   >
-    <t
+    <n
       accept=".csv"
       activeClassName="DropzoneActive"
       className="Dropzone"
       disableClick={false}
-      disablePreview={true}
       disabled={false}
       disabledClassName="DropzoneDisabled"
       getDataTransferItems={[Function]}
@@ -128,7 +125,7 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
           Drag a file here, or click to browse
         </span>
       </span>
-    </t>
+    </n>
   </div>
 </fieldset>
 `;
@@ -144,12 +141,11 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
   <div
     className="InputWrapper"
   >
-    <t
+    <n
       accept=".csv"
       activeClassName="DropzoneActive"
       className="Dropzone"
       disableClick={false}
-      disablePreview={true}
       disabled={false}
       disabledClassName="DropzoneDisabled"
       getDataTransferItems={[Function]}
@@ -170,7 +166,7 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
           Drag a file here, or click to browse
         </span>
       </span>
-    </t>
+    </n>
   </div>
   <div
     className="Help"
@@ -232,12 +228,11 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
   <div
     className="InputWrapper"
   >
-    <t
+    <n
       accept=""
       activeClassName="DropzoneActive"
       className="Dropzone"
       disableClick={false}
-      disablePreview={true}
       disabled={false}
       disabledClassName="DropzoneDisabled"
       getDataTransferItems={[Function]}
@@ -258,7 +253,7 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
           Drag a file here, or click to browse
         </span>
       </span>
-    </t>
+    </n>
   </div>
 </fieldset>
 `;
@@ -274,12 +269,11 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
   <div
     className="InputWrapper"
   >
-    <t
+    <n
       accept=".csv"
       activeClassName="DropzoneActive"
       className="Dropzone"
       disableClick={false}
-      disablePreview={true}
       disabled={false}
       disabledClassName="DropzoneDisabled"
       getDataTransferItems={[Function]}
@@ -295,7 +289,7 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
       <span>
         test.csv
       </span>
-    </t>
+    </n>
   </div>
 </fieldset>
 `;
@@ -308,12 +302,11 @@ exports[`FileFieldWrapper renders with a hidden label 1`] = `
   <div
     className="InputWrapper"
   >
-    <t
+    <n
       accept=".csv"
       activeClassName="DropzoneActive"
       className="Dropzone"
       disableClick={false}
-      disablePreview={true}
       disabled={false}
       disabledClassName="DropzoneDisabled"
       getDataTransferItems={[Function]}
@@ -334,7 +327,7 @@ exports[`FileFieldWrapper renders with a hidden label 1`] = `
           Drag a file here, or click to browse
         </span>
       </span>
-    </t>
+    </n>
   </div>
 </fieldset>
 `;

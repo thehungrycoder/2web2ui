@@ -24,9 +24,7 @@ Object {
 exports[`Component: Typeahead should render ok by default 1`] = `
 <Downshift
   defaultHighlightedIndex={null}
-  defaultInputValue=""
   defaultIsOpen={false}
-  defaultSelectedItem={null}
   environment={[Window]}
   getA11yStatusMessage={[Function]}
   itemToString={[Function]}
@@ -36,8 +34,10 @@ exports[`Component: Typeahead should render ok by default 1`] = `
   onSelect={[Function]}
   onStateChange={[Function]}
   onUserAction={[Function]}
+  scrollIntoView={[Function]}
   selectedItemChanged={[Function]}
   stateReducer={[Function]}
+  suppressRefError={false}
 >
   <Component />
 </Downshift>
