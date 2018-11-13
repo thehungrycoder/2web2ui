@@ -69,7 +69,7 @@ export class PlanPicker extends Component {
       <Downshift
         onChange={onChange}
         itemToString={(item) => (item ? item.code : '')} // prevents the downshift console warning
-        defaultSelectedItem={(value && value.code) ? value : plans[0]} >
+        initialSelectedItem={(value && value.code) ? value : plans[0]} >
         {this.planFn}
       </Downshift>
     );

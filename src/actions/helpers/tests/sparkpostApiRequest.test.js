@@ -24,8 +24,6 @@ describe('Helper: SparkPost API Request', () => {
 
   let mockStore;
 
-  expect.hasAssertions();
-
   beforeEach(() => {
     state = { auth: { loggedIn: true, token: 'TEST-TOKEN' }, account: { status: 'active' }};
     mockStore = createMockStore(state);
