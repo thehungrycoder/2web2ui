@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button, Grid } from '@sparkpost/matchbox';
 import { DownloadLink } from 'src/components';
-import { required, maxFileSize, fileExtension } from 'src/helpers/validation';
+import { required, maxFileSize, fileExtensions } from 'src/helpers/validation';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import { uploadRecipientVerificationList } from 'src/actions/recipientVerificationLists';
 import { showAlert } from 'src/actions/globalAlert';
@@ -28,10 +28,10 @@ export class RecipientVerificationListForm extends Component {
   render() {
     const { pristine, valid, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
-    const acceptedFileTypes = ['csv','txt'];
 
     const headerContent = 'Verify a list of your recipients by separating out rejected or undeliverable email addresses.';
-    const uploadValidators = [required, fileExtension(acceptedFileTypes), maxFileSize(config.maxRecipVerifUploadSizeBytes)];
+    const fileTypes = ['txt','csv'];
+    const uploadValidators = [required, fileExtensions(fileTypes), maxFileSize(config.maxRecipVerifUploadSizeBytes)];
     const buttonContent = (submitting) ? 'Uploading...' : 'Verify Email Addresses';
 
     return (
@@ -42,7 +42,7 @@ export class RecipientVerificationListForm extends Component {
             <Field
               component={FileFieldWrapper}
               disabled={submitting}
-              fileType='csv'
+              fileType={fileTypes}
               helpText={<span>Download a <DownloadLink href={exampleRecipientVerificationListPath}>CSV template here</DownloadLink> to use when formatting list.</span>}
               name='csv'
               validate={uploadValidators}

@@ -87,6 +87,15 @@ export const fileExtension = _.memoize(function fileExtension(extension) {
   return (file) => !file || regex.test(file.name) ? undefined : `Must be a .${extension} file`;
 });
 
+export const fileExtensions = (file) => _.memoize(function fileExtensions(extensions) {
+  const acceptedType = _.map(extensions, (extension) => {
+    const regex = RegExp(`.${extension}$`);
+    const passedRegex = regex.test(file.name);
+    return { passedRegex, extension };
+  });
+  return !file || _.some(acceptedType, 'passedRegex') ? undefined : `File must end with one of the following extensions: .${extensions}`;
+});
+
 export const maxLength = _.memoize(function maxLength(length) {
   return (value) => (value && value.trim().length > length) ? `Must be ${length} characters or less` : undefined;
 });
