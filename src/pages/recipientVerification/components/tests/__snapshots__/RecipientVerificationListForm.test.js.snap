@@ -44,7 +44,6 @@ exports[`RecipientVerificationListForm renders CSV errors 1`] = `
           Array [
             [Function],
             [Function],
-            [Function],
           ]
         }
       />
@@ -105,7 +104,6 @@ exports[`RecipientVerificationListForm renders correctly 1`] = `
           Array [
             [Function],
             [Function],
-            [Function],
           ]
         }
       />
@@ -164,7 +162,6 @@ exports[`RecipientVerificationListForm should disable form elements on submit 1`
         }
         validate={
           Array [
-            [Function],
             [Function],
             [Function],
           ]

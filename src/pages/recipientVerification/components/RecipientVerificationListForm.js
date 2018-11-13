@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button, Grid } from '@sparkpost/matchbox';
 import { DownloadLink } from 'src/components';
-import { required, maxFileSize, fileExtensions } from 'src/helpers/validation';
+import { required, maxFileSize } from 'src/helpers/validation';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import { uploadRecipientVerificationList } from 'src/actions/recipientVerificationLists';
 import { showAlert } from 'src/actions/globalAlert';
@@ -31,7 +31,7 @@ export class RecipientVerificationListForm extends Component {
 
     const headerContent = 'Verify a list of your recipients by separating out rejected or undeliverable email addresses.';
     const fileTypes = ['txt','csv'];
-    const uploadValidators = [required, fileExtensions(fileTypes), maxFileSize(config.maxRecipVerifUploadSizeBytes)];
+    const uploadValidators = [required, maxFileSize(config.maxRecipVerifUploadSizeBytes)];
     const buttonContent = (submitting) ? 'Uploading...' : 'Verify Email Addresses';
 
     return (
