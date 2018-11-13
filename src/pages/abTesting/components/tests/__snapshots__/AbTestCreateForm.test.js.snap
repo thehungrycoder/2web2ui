@@ -74,7 +74,7 @@ exports[`A/B Test Create Form Component should render correctly 1`] = `
       size="default"
       submit={true}
     >
-      Create New Test
+      Continue
     </Button>
   </Panel.Section>
 </form>
@@ -164,7 +164,7 @@ exports[`A/B Test Create Form Component should render when no available template
       size="default"
       submit={true}
     >
-      Create New Test
+      Continue
     </Button>
   </Panel.Section>
 </form>
