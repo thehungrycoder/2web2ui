@@ -4,34 +4,11 @@ import ApiErrorBanner from 'src/components/apiErrorBanner';
 import { Templates } from 'src/components/images';
 import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink';
-import { DeleteModal } from 'src/components';
 import SnippetCollection from './components/SnippetCollection';
 
 export default class ListPage extends React.Component {
-
-  state = {
-    showDeleteModal: false,
-    snippetToDelete: {}
-  }
-
   componentDidMount() {
     this.props.getSnippets();
-  }
-
-  toggleDelete = (id, subaccount_id) => {
-    this.setState({
-      showDeleteModal: !this.state.showDeleteModal,
-      snippetToDelete: { id, subaccountId: subaccount_id }
-    });
-  }
-
-  handleDelete = () => {
-    const { id, subaccountId } = this.state.snippetToDelete;
-
-    return this.props.deleteSnippet({ id, subaccountId }).then(() => {
-      this.props.showAlert({ type: 'success', message: 'Snippet deleted' });
-      this.toggleDelete();
-    });
   }
 
   renderError() {
@@ -49,16 +26,15 @@ export default class ListPage extends React.Component {
     const { snippets, hasSubaccounts, canCreate } = this.props;
     return (
       <SnippetCollection
-        snippets={snippets}
-        toggleDelete={this.toggleDelete}
-        hasSubaccounts={hasSubaccounts}
         canCreate={canCreate}
+        hasSubaccounts={hasSubaccounts}
+        snippets={snippets}
       />
     );
   }
 
   render() {
-    const { canCreate, error, loading, snippets, deletePending } = this.props;
+    const { canCreate, error, loading, snippets } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -80,14 +56,6 @@ export default class ListPage extends React.Component {
         }}
       >
         {error ? this.renderError() : this.renderCollection()}
-        <DeleteModal
-          open={this.state.showDeleteModal}
-          title='Are you sure you want to delete this snippet?'
-          content={<p>The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates. This cannot be undone.</p>}
-          onDelete={this.handleDelete}
-          onCancel={this.toggleDelete}
-          isPending={deletePending}
-        />
       </Page>
     );
   }

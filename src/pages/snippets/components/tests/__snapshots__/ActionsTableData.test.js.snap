@@ -10,6 +10,17 @@ exports[`ActionsTableData by default 1`] = `
         "to": "/snippets/edit/example-id",
       },
       Object {
+        "Component": [Function],
+        "content": "Duplicate",
+        "to": Object {
+          "pathname": "/snippets/create",
+          "state": Object {
+            "id": "example-id",
+            "subaccountId": undefined,
+          },
+        },
+      },
+      Object {
         "content": "Delete",
         "onClick": [Function],
       },
@@ -26,6 +37,17 @@ exports[`ActionsTableData with subaccount 1`] = `
         "Component": [Function],
         "content": "Edit",
         "to": "/snippets/edit/example-id?subaccount=999",
+      },
+      Object {
+        "Component": [Function],
+        "content": "Duplicate",
+        "to": Object {
+          "pathname": "/snippets/create",
+          "state": Object {
+            "id": "example-id",
+            "subaccountId": 999,
+          },
+        },
       },
       Object {
         "content": "Delete",

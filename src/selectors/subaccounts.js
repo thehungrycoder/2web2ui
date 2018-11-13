@@ -34,3 +34,12 @@ export const selectSubaccountFromQuery = createSelector(
 );
 
 export const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
+
+/*
+ * Selects subaccount object from ID
+ */
+export const getSubaccountId = (state, id) => id;
+export const selectSubaccountFromId = createSelector(
+  [getSubaccounts, getSubaccountId],
+  (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
+);

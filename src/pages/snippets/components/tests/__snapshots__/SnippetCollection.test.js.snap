@@ -1,27 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SnippetCollection renders a table collection row 1`] = `
+exports[`SnippetCollection renders a table collection row with modal callback 1`] = `
 Array [
   <NameTableData
     id="test-snippet"
+    openDeleteModal={[MockFunction]}
   />,
   <SubaccountTableData
     id="test-snippet"
+    openDeleteModal={[MockFunction]}
   />,
   <UpdatedAtTableData
     id="test-snippet"
+    openDeleteModal={[MockFunction]}
   />,
-  <component
+  <ActionsTableData
     id="test-snippet"
+    openDeleteModal={[MockFunction]}
   />,
 ]
-`;
-
-exports[`SnippetCollection renders actions table data with toggleDelete callback 1`] = `
-<ActionsTableData
-  id="test-snippet"
-  toggleDelete={[MockFunction]}
-/>
 `;
 
 exports[`SnippetCollection renders table collection 1`] = `
@@ -30,95 +27,6 @@ exports[`SnippetCollection renders table collection 1`] = `
     Array [
       Object {
         "label": "Name",
-        "sortKey": [Function],
-      },
-      Object {
-        "label": "Last Updated",
-        "sortKey": [Function],
-      },
-    ]
-  }
-  defaultSortColumn={[Function]}
-  defaultSortDirection="asc"
-  filterBox={
-    Object {
-      "exampleModifiers": Array [
-        "id",
-        "name",
-      ],
-      "itemToStringKeys": Array [
-        "name",
-        "id",
-        "subaccount_id",
-      ],
-      "show": true,
-    }
-  }
-  getRowData={[Function]}
-  pagination={true}
-  rows={
-    Array [
-      Object {
-        "id": "test-snippet",
-      },
-    ]
-  }
-/>
-`;
-
-exports[`SnippetCollection renders table collection with actions column 1`] = `
-<TableCollection
-  columns={
-    Array [
-      Object {
-        "label": "Name",
-        "sortKey": [Function],
-      },
-      Object {
-        "label": "Last Updated",
-        "sortKey": [Function],
-      },
-      null,
-    ]
-  }
-  defaultSortColumn={[Function]}
-  defaultSortDirection="asc"
-  filterBox={
-    Object {
-      "exampleModifiers": Array [
-        "id",
-        "name",
-      ],
-      "itemToStringKeys": Array [
-        "name",
-        "id",
-        "subaccount_id",
-      ],
-      "show": true,
-    }
-  }
-  getRowData={[Function]}
-  pagination={true}
-  rows={
-    Array [
-      Object {
-        "id": "test-snippet",
-      },
-    ]
-  }
-/>
-`;
-
-exports[`SnippetCollection renders table collection with subaccount column 1`] = `
-<TableCollection
-  columns={
-    Array [
-      Object {
-        "label": "Name",
-        "sortKey": [Function],
-      },
-      Object {
-        "label": "Subaccount",
         "sortKey": [Function],
       },
       Object {

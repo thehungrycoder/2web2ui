@@ -7,7 +7,11 @@ describe('Loading Component', () => {
   describe('Circle', () => {
     it('should render - no props', () => {
       const wrapper = render(<LoadingSVG />);
+      expect(wrapper).toMatchSnapshot();
+    });
 
+    it('should render - small', () => {
+      const wrapper = render(<LoadingSVG small />);
       expect(wrapper).toMatchSnapshot();
     });
 

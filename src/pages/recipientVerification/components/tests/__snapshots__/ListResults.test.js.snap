@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListResults polling starts polling when recieving new list id 1`] = `
+Array [
+  Array [
+    Object {
+      "action": [Function],
+      "interval": 5000,
+      "key": "123",
+    },
+  ],
+]
+`;
+
+exports[`ListResults polling starts shows an alert when polling results are complete 1`] = `
+Array [
+  Array [
+    Object {
+      "dedupeId": "123",
+      "message": "Recipient Verification Results Ready",
+      "type": "success",
+    },
+  ],
+]
+`;
+
+exports[`ListResults renders Results Card with latest results 1`] = `
+<Grid>
+  <Grid.Column
+    lg={5}
+    md={6}
+    xs={12}
+  >
+    <ListResultsCard
+      complete={false}
+      listId="123"
+    />
+  </Grid.Column>
+</Grid>
+`;

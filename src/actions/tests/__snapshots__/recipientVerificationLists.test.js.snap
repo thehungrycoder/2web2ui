@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Recipient Verification Actions .getJobStatus when getting status of a list job 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "labs/recipient-verification-api/get-job/12345",
+    },
+    "type": "GET_JOB_STATUS",
+  },
+]
+`;
+
+exports[`Recipient Verification Actions .getLatestJob when getting latest list upload 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "labs/recipient-verification-api/latest",
+    },
+    "type": "GET_LATEST_JOB",
+  },
+]
+`;
+
 exports[`Recipient Verification Actions .singleAddress when verifying a single address 1`] = `
 Array [
   Object {
