@@ -36,7 +36,7 @@ exports[`ImportSnippetPanel renders panel 1`] = `
     </Label>
     <CopyField
       hideCopy={false}
-      value="{{ render_snippet('example-id') }}"
+      value="{{ render_snippet( \\"example-id\\" ) }}"
     />
   </Panel.Section>
   <Panel.Section>

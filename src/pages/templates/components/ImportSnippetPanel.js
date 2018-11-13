@@ -55,7 +55,7 @@ export default class ImportSnippetPanel extends React.Component {
           />
           <Label>Snippet Code</Label>
           <CopyField
-            value={`{{ render_snippet('${this.state.snippetId || 'example-id'}') }}`}
+            value={`{{ render_snippet( "${this.state.snippetId || 'example-id'}" ) }}`}
           />
         </Panel.Section>
         <Panel.Section>

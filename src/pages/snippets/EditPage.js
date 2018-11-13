@@ -126,7 +126,7 @@ export default class EditPage extends React.Component {
                 <CopyField
                   label="Code Example"
                   helpText="Copy and use this code in your templates"
-                  value={`{{ render_snippet("${id}") }}`}
+                  value={`{{ render_snippet( "${id}" ) }}`}
                 />
               </Panel>
             </Grid.Column>
