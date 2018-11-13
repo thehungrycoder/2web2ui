@@ -14,10 +14,10 @@ exports[`RecipientVerificationListForm renders CSV errors 1`] = `
       </p>
       <Field
         component={[Function]}
-        fileType={
+        fileTypes={
           Array [
-            "txt",
-            "csv",
+            ".txt",
+            ".csv",
           ]
         }
         helpText={
@@ -74,10 +74,10 @@ exports[`RecipientVerificationListForm renders correctly 1`] = `
       </p>
       <Field
         component={[Function]}
-        fileType={
+        fileTypes={
           Array [
-            "txt",
-            "csv",
+            ".txt",
+            ".csv",
           ]
         }
         helpText={
@@ -134,10 +134,10 @@ exports[`RecipientVerificationListForm should disable form elements on submit 1`
       </p>
       <Field
         component={[Function]}
-        fileType={
+        fileTypes={
           Array [
-            "txt",
-            "csv",
+            ".txt",
+            ".csv",
           ]
         }
         helpText={
