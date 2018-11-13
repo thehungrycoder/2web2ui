@@ -187,7 +187,7 @@ exports[`FileFieldWrapper renders file input with multiple allowed file types 1`
   <div
     className="InputWrapper"
   >
-    <t
+    <n
       accept={
         Array [
           ".txt,.csv",
@@ -196,7 +196,6 @@ exports[`FileFieldWrapper renders file input with multiple allowed file types 1`
       activeClassName="DropzoneActive"
       className="Dropzone"
       disableClick={false}
-      disablePreview={true}
       disabled={false}
       disabledClassName="DropzoneDisabled"
       getDataTransferItems={[Function]}
@@ -212,7 +211,7 @@ exports[`FileFieldWrapper renders file input with multiple allowed file types 1`
       <span>
         test.txt
       </span>
-    </t>
+    </n>
   </div>
 </fieldset>
 `;
