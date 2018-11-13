@@ -6,7 +6,7 @@ cache:
     - build # shows bundle size diff per file/chunk
     - "$HOME/.npm" # to avoid fetching modules from npm every time
 before_install: npm install -g greenkeeper-lockfile@1
-install: npm install --loglevel http # change to npm ci when travis runs npm 5.7+ (currently 5.6)
+install: npm ci --loglevel http
 before_script: greenkeeper-lockfile-update
 script: npm run test-ci && npm run build && npm run coveralls
 after_script: greenkeeper-lockfile-upload
