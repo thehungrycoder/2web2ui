@@ -8,7 +8,7 @@ Array [
         "address": "foo@bar.com",
       },
       "method": "GET",
-      "url": "v1/recipient-validation/[object Object]",
+      "url": "v1/recipient-validation/single/[object Object]",
     },
     "type": "SINGLE_RECIPIENT_VERIFICATION",
   },

@@ -16,7 +16,7 @@ export function singleAddress(address) {
     type: 'SINGLE_RECIPIENT_VERIFICATION',
     meta: {
       method: 'GET',
-      url: `v1/recipient-validation/${address}`,
+      url: `v1/recipient-validation/single/${address}`,
       email: address
     }
   });
