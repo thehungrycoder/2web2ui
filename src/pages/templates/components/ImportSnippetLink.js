@@ -36,7 +36,7 @@ export class ImportSnippetLink extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  isFeatureToggledOn: hasUiOption('snippet')(state)
+  isFeatureToggledOn: hasUiOption('snippets')(state)
 });
 
 export default connect(mapStateToProps)(ImportSnippetLink);
