@@ -75,8 +75,8 @@ export class AbTestCreateForm extends Component {
             label={'Select this test\'s default template'}
             placeholder='Type to search'
             helpText={templates.length > 0
-              ? <span>We will send this template by default when the test is not running. This template must be published. If you need to create a new template, <UnstyledLink component={Link} to='/templates'>head over to the templates page</UnstyledLink>.</span>
-              : <span>No available templates.  <UnstyledLink component={Link} to='/templates'>Head over to the templates page to set some up</UnstyledLink>.</span>
+              ? <span>Only published templates are available. This template will be sent when the test is not running. If you need to create a new template, <UnstyledLink component={Link} to='/templates'>head over to the templates page</UnstyledLink>.</span>
+              : <span>No published templates available.  <UnstyledLink component={Link} to='/templates'>Head over to the templates page to set some up</UnstyledLink>.</span>
             }
             errorInLabel
             validate={[required, abTestDefaultTemplate]}
