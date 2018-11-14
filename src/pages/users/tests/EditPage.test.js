@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EditPage } from '../EditPage';
+import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 
 describe('Page: Users Edit', () => {
   let props;
@@ -60,11 +61,6 @@ describe('Page: Users Edit', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should disable single sign-on checkbox and display instructions', () => {
-    wrapper.setProps({ isAccountSingleSignOnEnabled: false });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should not allow current user to delete', () => {
     wrapper.setProps({
       user: {
@@ -84,7 +80,10 @@ describe('Page: Users Edit', () => {
 
   it('should update a user', async () => {
     await instance.handleUserUpdate({ is_sso: true, access: 'admin' });
-    expect(props.updateUser).toHaveBeenCalledWith('test-user', { is_sso: true, access_level: 'admin' });
+    expect(props.updateUser).toHaveBeenCalledWith('test-user', {
+      is_sso: true,
+      access_level: 'admin'
+    });
   });
 
   it('should delete a user', async () => {
@@ -95,5 +94,24 @@ describe('Page: Users Edit', () => {
   it('should redirect after delete or if user does not exist', () => {
     wrapper.setProps({ user: undefined });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should show a disable-tfa modal', () => {
+    instance.toggleTfaModal();
+    expect(
+      wrapper
+        .find(ConfirmationModal)
+        .first()
+        .prop('open')
+    ).toEqual(true);
+  });
+
+  it('should disable tfa', () => {
+    wrapper
+      .find(ConfirmationModal)
+      .first()
+      .prop('onConfirm')();
+    expect(props.updateUser).toHaveBeenCalledTimes(1);
+    expect(props.updateUser.mock.calls[0][1]).toMatchObject({ tfa_enabled: false });
   });
 });

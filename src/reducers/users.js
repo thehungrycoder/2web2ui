@@ -27,8 +27,14 @@ export default (state = initialState, action) => {
     case 'LIST_USERS_SUCCESS':
       return { ...initialState, entities: reduceUsers(action.payload) };
 
+    case 'UPDATE_USER_PENDING':
+      return { ...state, updatePending: true };
+
+    case 'UPDATE_USER_FAIL':
+      return { ...state, updatePending: false };
+
     case 'UPDATE_USER_SUCCESS': {
-      const { access_level, is_sso, username } = action.meta.data;
+      const { access_level, is_sso, tfa_enabled, username } = action.meta.data;
       const user = fp.get(username)(state.entities);
 
       if (fp.isUndefined(user)) { return state; } // ignore
@@ -36,7 +42,8 @@ export default (state = initialState, action) => {
       return fp.set(['entities', username], {
         ...state.entities[username],
         access: access_level,
-        is_sso
+        is_sso,
+        tfa_enabled
       })(state);
     }
 
