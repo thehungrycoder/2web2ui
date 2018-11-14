@@ -4,11 +4,19 @@ import ImportSnippetPanel from '../ImportSnippetPanel';
 
 describe('ImportSnippetPanel', () => {
   const subject = (props = {}) => shallow(
-    <ImportSnippetPanel getSnippets={() => {}} {...props} />
+    <ImportSnippetPanel
+      getSnippets={() => {}}
+      snippets={[{ id: 'test-snippet', name: 'Test Snippet' }]}
+      {...props}
+    />
   );
 
   it('renders panel', () => {
     expect(subject()).toMatchSnapshot();
+  });
+
+  it('renders panel with no snippets', () => {
+    expect(subject({ snippets: []})).toMatchSnapshot();
   });
 
   it('requests snippets on mount', () => {

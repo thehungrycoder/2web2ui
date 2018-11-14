@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Label, Panel } from '@sparkpost/matchbox';
 import CopyField from 'src/components/copyField';
 import ExternalLink from 'src/components/externalLink';
+import PageLink from 'src/components/pageLink';
 import PanelLoading from 'src/components/panelLoading';
 import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';
 import { LINKS } from 'src/constants';
@@ -42,12 +43,22 @@ export default class ImportSnippetPanel extends React.Component {
             Find a snippet, copy the code, and paste it in your template.
           </p>
           <Typeahead
+            disabled={snippets.length === 0}
+            helpText={
+              snippets.length === 0 ? (
+                <span>
+                   You have not created a snippet. {
+                    <PageLink to="/snippets/create">Create your first snippet</PageLink>
+                  }
+                </span>
+              ) : ''
+            }
             itemToString={(snippet) => (
               snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
             )}
             label="Snippet"
             onChange={this.handleChange}
-            placeholder="Type to search..."
+            placeholder={snippets.length === 0 ? '' : 'Type to search...'}
             renderItem={({ id, name }) => (
               <TypeaheadItem id={id} label={name || slugToFriendly(id)} />
             )}
