@@ -1,17 +1,11 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { Page, Panel, Button } from '@sparkpost/matchbox';
-import { updateUser, listUsers, deleteUser } from 'src/actions/users';
-import { getAccountSingleSignOnDetails } from 'src/actions/accountSingleSignOn';
+import { Page } from '@sparkpost/matchbox';
 import DeleteModal from 'src/components/modals/DeleteModal';
+import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import { Loading } from 'src/components/loading/Loading';
-import PageLink from 'src/components/pageLink/PageLink';
-import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
-import { selectUserById } from 'src/selectors/users';
-import RoleRadioGroup from './components/RoleRadioGroup';
+import EditForm from './components/EditForm';
 
 const breadcrumbAction = {
   content: 'Users',
@@ -21,7 +15,8 @@ const breadcrumbAction = {
 
 export class EditPage extends Component {
   state = {
-    showDelete: false
+    showDelete: false,
+    showDisableTfa: false
   };
 
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
@@ -29,14 +24,26 @@ export class EditPage extends Component {
   deleteUser = () => {
     const user = this.props.match.params.id;
     return this.props.deleteUser(user);
-  }
+  };
 
   handleUserUpdate = ({ access: access_level, is_sso }) => {
-    const { updateUser } = this.props;
+    const { updateUser, user } = this.props;
     const username = this.props.match.params.id;
 
-    return updateUser(username, { access_level, is_sso });
-  }
+    return updateUser(username, { access_level, is_sso, tfa_enabled: user.tfa_enabled });
+  };
+
+  toggleTfaModal = () => this.setState({ showDisableTfa: !this.state.showDisableTfa });
+
+  handleDisableTfa = () => {
+    const { user, updateUser } = this.props;
+    const username = this.props.match.params.id;
+    return updateUser(username, {
+      access_level: user.access,
+      is_sso: user.is_sso,
+      tfa_enabled: false
+    }).then(this.toggleTfaModal);
+  };
 
   componentDidMount() {
     if (_.isEmpty(this.props.accountSingleSignOn)) {
@@ -56,6 +63,7 @@ export class EditPage extends Component {
       isAccountSingleSignOnEnabled,
       loadingError,
       submitting,
+      updatePending,
       user,
       users
     } = this.props;
@@ -80,72 +88,63 @@ export class EditPage extends Component {
         content: 'Delete',
         onClick: this.toggleDelete
       });
-    }
 
-    const ssoHelpText = isAccountSingleSignOnEnabled
-      ? <span>Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.</span>
-      : <span>Single sign-on has not been configured for your account. Enable in your <PageLink to="/account/settings">account's settings</PageLink>.</span>;
+      if (user.tfa_enabled) {
+        secondaryActions.push({
+          content: 'Disable Two-Factor Authentication',
+          onClick: this.toggleTfaModal
+        });
+      }
+    }
 
     return (
       <Page
         title={user.email}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={secondaryActions}>
-        <Panel>
-          <form onSubmit={handleSubmit(this.handleUserUpdate)}>
-            <Panel.Section>
-              <Field
-                name="access"
-                disabled={user.isCurrentUser}
-                allowSuperUser={currentUser.access === 'superuser'}
-                component={RoleRadioGroup}
-              />
-            </Panel.Section>
-            <Panel.Section>
-              <Field
-                component={CheckboxWrapper}
-                disabled={!isAccountSingleSignOnEnabled}
-                helpText={ssoHelpText}
-                label='Enable single sign-on authentication for this user'
-                name='is_sso'
-                type="checkbox"
-              />
-            </Panel.Section>
-            <Panel.Section>
-              <Button primary disabled={submitting} submit>{'Update user'}</Button>
-            </Panel.Section>
-          </form>
-        </Panel>
+        secondaryActions={secondaryActions}
+      >
+        <EditForm
+          onSubmit={() => handleSubmit(this.handleUserUpdate)}
+          user={user}
+          currentUser={currentUser}
+          isAccountSingleSignOnEnabled={isAccountSingleSignOnEnabled}
+          submitting={submitting}
+        />
+
         <DeleteModal
           onDelete={this.deleteUser}
           onCancel={this.toggleDelete}
           open={this.state.showDelete}
-          content={<p><span>User "</span><span>{this.props.match.params.id}</span><span>" will no longer be able to log in or access this SparkPost account. All API keys associated with this user will be transferred to you.</span></p>}
+          content={
+            <p>
+              <span>User "</span>
+              <span>{this.props.match.params.id}</span>
+              <span>
+                " will no longer be able to log in or access this SparkPost account. All API keys
+                associated with this user will be transferred to you.
+              </span>
+            </p>
+          }
           title="Are you sure you want to delete this user?"
+        />
+        <ConfirmationModal
+          open={this.state.showDisableTfa}
+          title="Are you sure you want to disable two-factor authentication for this user?"
+          content={
+            <p>
+              Disabling two-factor authentication will also delete their two-factor backup codes.
+              The next time they log in, they'll have to use their password or single sign-on if
+              available.
+            </p>
+          }
+          onConfirm={this.handleDisableTfa}
+          onCancel={this.toggleTfaModal}
+          confirming={updatePending}
+          confirmVerb={updatePending ? 'Disabling' : 'Disable'}
         />
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state, props) => {
-  const user = selectUserById(state, props.match.params.id);
-
-  return {
-    accountSingleSignOn: state.accountSingleSignOn,
-    currentUser: state.currentUser,
-    isAccountSingleSignOnEnabled: state.accountSingleSignOn.enabled,
-    loadingError: state.users.error,
-    user,
-    users: state.users.entities,
-    initialValues: {
-      access: _.get(user, 'access'),
-      is_sso: _.get(user, 'is_sso')
-    }
-  };
-};
-
-const mapDispatchToProps = { updateUser, listUsers, deleteUser, getAccountSingleSignOnDetails };
-const formOptions = { form: 'userEditForm', enableReinitialize: true };
-
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(EditPage));
+export default EditPage;
