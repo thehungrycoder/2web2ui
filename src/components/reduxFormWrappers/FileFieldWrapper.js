@@ -29,14 +29,17 @@ export default class FileFieldWrapper extends Component {
   }
 
   render() {
-    const { disabled, fileType, helpText, input, label, meta, required, style = {}, labelHidden, placeholder = 'Drag a file here, or click to browse' } = this.props;
+    const { disabled, fileType, fileTypes = [], helpText, input, label, meta, required, style = {}, labelHidden, placeholder = 'Drag a file here, or click to browse' } = this.props;
     const filename = _.get(input, 'value.name');
-    const acceptedTypes = fileType ? `.${fileType}` : '';
+    let acceptedTypes = fileType ? `.${fileType}` : '';
+    if (fileTypes.length) {
+      acceptedTypes = fileTypes;
+    }
 
     return (
       <fieldset className={styles.Field}>
         <Label id={input.id}>
-          {!labelHidden ? label: null}{!labelHidden && required ? ' *' : null}
+          {!labelHidden && label}{!labelHidden && required && ' *'}
           {(meta.touched && meta.error) ? <span>{' '}<Error error={meta.error} wrapper='span' /></span> : null}
         </Label>
         <div className={styles.InputWrapper}>
