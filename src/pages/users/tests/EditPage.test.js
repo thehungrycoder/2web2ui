@@ -10,7 +10,7 @@ describe('Page: Users Edit', () => {
 
   beforeEach(() => {
     props = {
-      handleSubmit: jest.fn(),
+      handleSubmit: jest.fn((handler) => handler),
       loadingError: false,
       listUsers: jest.fn(),
       deleteUser: jest.fn(() => Promise.resolve()),
