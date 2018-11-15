@@ -19,7 +19,7 @@ describe('EditPage', () => {
   });
 
   it('redirects with alert when load request fails', () => {
-    const wrapper = subject({ error: new Error('Oh no!') });
+    const wrapper = subject({ loadingError: new Error('Oh no!') });
     expect(wrapper).toMatchSnapshot();
   });
 

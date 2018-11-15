@@ -33,7 +33,9 @@ exports[`Template CreatePage Duplicate Template should render correctly 1`] = `
       lg={8}
       xs={12}
     >
-      <LoadableComponent />
+      <LoadableComponent
+        action={<Connect(ImportSnippetLink) />}
+      />
     </Grid.Column>
   </Grid>
 </Page>
@@ -72,7 +74,9 @@ exports[`Template CreatePage New Template should render correctly 1`] = `
       lg={8}
       xs={12}
     >
-      <LoadableComponent />
+      <LoadableComponent
+        action={<Connect(ImportSnippetLink) />}
+      />
     </Grid.Column>
   </Grid>
 </Page>

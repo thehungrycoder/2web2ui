@@ -20,8 +20,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "auditmated"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
@@ -98,7 +97,6 @@
   },
   "devDependencies": {
     "@mdx-js/mdx": "^0.15.0",
-    "auditmated": "^0.1.2",
     "autoprefixer": "^9.0.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",

@@ -4,7 +4,7 @@ exports[`EditPage redirects with alert when load request fails 1`] = `
 <Connect(RedirectAndAlert)
   alert={
     Object {
-      "message": "Oh no!",
+      "message": "Unable to load test-snippet snippet",
       "type": "error",
     }
   }
@@ -89,6 +89,16 @@ exports[`EditPage renders disabled form when submitting 1`] = `
             newTemplate={false}
           />
         </Panel>
+        <Panel
+          sectioned={true}
+        >
+          <CopyField
+            helpText="Copy and use this code in your templates"
+            hideCopy={false}
+            label="Code Example"
+            value="{{ render_snippet( \\"test-snippet\\" ) }}"
+          />
+        </Panel>
       </Grid.Column>
       <Grid.Column
         lg={8}
@@ -158,6 +168,16 @@ exports[`EditPage renders disabled form when user does not have authorization to
           <Component
             disabled={true}
             newTemplate={false}
+          />
+        </Panel>
+        <Panel
+          sectioned={true}
+        >
+          <CopyField
+            helpText="Copy and use this code in your templates"
+            hideCopy={false}
+            label="Code Example"
+            value="{{ render_snippet( \\"test-snippet\\" ) }}"
           />
         </Panel>
       </Grid.Column>
@@ -250,6 +270,16 @@ exports[`EditPage renders edit form 1`] = `
             newTemplate={false}
           />
         </Panel>
+        <Panel
+          sectioned={true}
+        >
+          <CopyField
+            helpText="Copy and use this code in your templates"
+            hideCopy={false}
+            label="Code Example"
+            value="{{ render_snippet( \\"test-snippet\\" ) }}"
+          />
+        </Panel>
       </Grid.Column>
       <Grid.Column
         lg={8}
@@ -337,6 +367,16 @@ exports[`EditPage renders without subaccount section when account has no subacco
               name="id"
             />
           </Panel.Section>
+        </Panel>
+        <Panel
+          sectioned={true}
+        >
+          <CopyField
+            helpText="Copy and use this code in your templates"
+            hideCopy={false}
+            label="Code Example"
+            value="{{ render_snippet( \\"test-snippet\\" ) }}"
+          />
         </Panel>
       </Grid.Column>
       <Grid.Column

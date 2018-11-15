@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImportSnippetPanel renders loading panel 1`] = `
+<PanelLoading
+  minHeight="400px"
+/>
+`;
+
+exports[`ImportSnippetPanel renders panel 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "component": [Function],
+        "content": "Learn More",
+        "to": "https://developers.sparkpost.com/api/substitutions-reference/#header-snippets",
+      },
+    ]
+  }
+  title="Import snippets in this template"
+>
+  <Panel.Section>
+    <p>
+      Find a snippet, copy the code, and paste it in your template.
+    </p>
+    <Typeahead
+      disabled={false}
+      helpText=""
+      itemToString={[Function]}
+      label="Snippet"
+      onChange={[Function]}
+      placeholder="Type to search..."
+      renderItem={[Function]}
+      results={
+        Array [
+          Object {
+            "id": "test-snippet",
+            "name": "Test Snippet",
+          },
+        ]
+      }
+    />
+    <Label>
+      Snippet Code
+    </Label>
+    <CopyField
+      hideCopy={false}
+      value="{{ render_snippet( \\"example-id\\" ) }}"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+    >
+      Done
+    </Button>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`ImportSnippetPanel renders panel with no snippets 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "component": [Function],
+        "content": "Learn More",
+        "to": "https://developers.sparkpost.com/api/substitutions-reference/#header-snippets",
+      },
+    ]
+  }
+  title="Import snippets in this template"
+>
+  <Panel.Section>
+    <p>
+      Find a snippet, copy the code, and paste it in your template.
+    </p>
+    <Typeahead
+      disabled={true}
+      helpText={
+        <span>
+          You have not created a snippet. 
+          <PageLink
+            to="/snippets/create"
+          >
+            Create your first snippet
+          </PageLink>
+        </span>
+      }
+      itemToString={[Function]}
+      label="Snippet"
+      onChange={[Function]}
+      placeholder=""
+      renderItem={[Function]}
+      results={Array []}
+    />
+    <Label>
+      Snippet Code
+    </Label>
+    <CopyField
+      hideCopy={false}
+      value="{{ render_snippet( \\"example-id\\" ) }}"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Button
+      primary={true}
+      size="default"
+    >
+      Done
+    </Button>
+  </Panel.Section>
+</Panel>
+`;

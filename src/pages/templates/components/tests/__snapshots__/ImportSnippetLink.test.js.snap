@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImportSnippetLink renders link and closed modal 1`] = `
+<Fragment>
+  <Button
+    color="orange"
+    flat={true}
+    onClick={[Function]}
+    size="default"
+  >
+    Import Snippets
+  </Button>
+  <Modal
+    onClose={[Function]}
+    open={false}
+  >
+    <Connect(ImportSnippetPanel)
+      onClose={[Function]}
+    />
+  </Modal>
+</Fragment>
+`;
