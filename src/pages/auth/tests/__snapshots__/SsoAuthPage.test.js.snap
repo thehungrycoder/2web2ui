@@ -1,11 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SsoAuthPage tests renders correctly 1`] = `
-<Connect(LoginPanel)
-  handleSubmit={[Function]}
-  ssoEnabled={true}
-  title="Single Sign-On"
->
+<Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Single Sign-On"
+  >
+    <Connect(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </Panel>
   <Panel.Footer
     left={
       <small>
@@ -17,47 +23,9 @@ exports[`SsoAuthPage tests renders correctly 1`] = `
       </small>
     }
   />
-</Connect(LoginPanel)>
+</Fragment>
 `;
 
-exports[`SsoAuthPage tests should display sso error message from url 1`] = `
-<Connect(LoginPanel)
-  handleSubmit={[Function]}
-  loginError="Oh no!"
-  ssoEnabled={true}
-  title="Single Sign-On"
->
-  <Panel.Footer
-    left={
-      <small>
-        <PageLink
-          to="/auth"
-        >
-          Not looking for single sign-on?
-        </PageLink>
-      </small>
-    }
-  />
-</Connect(LoginPanel)>
-`;
+exports[`SsoAuthPage tests should display sso error message from url 1`] = `"Oh no!"`;
 
-exports[`SsoAuthPage tests should throw error when ssoUser is false 1`] = `
-<Connect(LoginPanel)
-  handleSubmit={[Function]}
-  loginError="User is not set up to use single sign-on"
-  ssoEnabled={true}
-  title="Single Sign-On"
->
-  <Panel.Footer
-    left={
-      <small>
-        <PageLink
-          to="/auth"
-        >
-          Not looking for single sign-on?
-        </PageLink>
-      </small>
-    }
-  />
-</Connect(LoginPanel)>
-`;
+exports[`SsoAuthPage tests should throw error when ssoUser is false 1`] = `"User is not set up to use single sign-on"`;

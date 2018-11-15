@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Two-factor Authentication"
+  >
+    <Connect(ReduxForm) />
+  </Panel>
+</Fragment>
+`;

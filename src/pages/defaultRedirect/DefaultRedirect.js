@@ -18,13 +18,13 @@ export class DefaultRedirect extends Component {
 
   handleRedirect() {
     const { location, history, currentUser, ready } = this.props;
-    const { state: routerState = {}} = location;
+    const { state: routerState = {}, ...locationWithoutState } = location;
     const allowedAccessLevels = ['reporting', 'heroku', 'azure'];
 
     // if there is a redirect route set on state, we can
     // redirect there before access condition state is ready
     if (routerState.redirectAfterLogin) {
-      history.replace({ ...location, pathname: routerState.redirectAfterLogin });
+      history.replace({ ...locationWithoutState, ...routerState.redirectAfterLogin });
       return;
     }
 
