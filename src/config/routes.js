@@ -27,7 +27,7 @@ import {
   JoinPage,
   passwordReset,
   PremiumSupportPage,
-  RecipientVerificationPage,
+  RecipientValidationPage,
   snippets
 } from 'src/pages';
 
@@ -677,12 +677,12 @@ const routes = [
     supportDocSearch: 'smtp'
   },
   {
-    path: '/recipient-verification',
-    component: RecipientVerificationPage,
-    condition: all(hasGrants('recipient-verification-api/manage'), hasUiOption('recipientverif')),
+    path: '/recipient-validation',
+    component: RecipientValidationPage,
+    condition: all(hasGrants('recipient-validation/manage'), hasUiOption('recipient_validation')),
     layout: App,
-    title: 'Recipient Email Verification',
-    supportDocsSearch: 'Recipient Verification'
+    title: 'Recipient Email Validation',
+    supportDocsSearch: 'Recipient Validation'
   },
   {
     path: '/support/aws-premium',

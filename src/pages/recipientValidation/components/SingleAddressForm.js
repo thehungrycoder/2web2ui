@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Button } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required, email, maxLength } from 'src/helpers/validation';
-import { singleAddress } from 'src/actions/recipientVerificationLists';
+import { singleAddress } from 'src/actions/recipientValidation';
 import SingleResult from './SingleResult';
 
 const formName = 'singleAddressForm';
@@ -15,12 +15,12 @@ export class SingleAddressForm extends Component {
   render() {
     const { singleResults, valid, pristine, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
-    const buttonContent = (submitting) ? 'Verifying...' : 'Verify Email Address';
+    const buttonContent = (submitting) ? 'Validating...' : 'Validate';
 
     return (
       <Fragment>
         <form onSubmit={handleSubmit(this.singleAddressForm)}>
-          <p>Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
+          <p>Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
           <Field
             name='address'
             component={TextFieldWrapper}
@@ -37,8 +37,8 @@ export class SingleAddressForm extends Component {
   }
 }
 
-const mapStateToProps = ({ recipientVerificationLists }) => ({
-  singleResults: recipientVerificationLists.singleResults
+const mapStateToProps = ({ recipientValidation }) => ({
+  singleResults: recipientValidation.singleResults
 });
 
 const WrappedForm = reduxForm({ form: formName })(SingleAddressForm);

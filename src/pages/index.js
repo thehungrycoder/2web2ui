@@ -27,5 +27,5 @@ export { default as DefaultRedirect } from './defaultRedirect/DefaultRedirect';
 export { default as SmtpPage } from './smtp/SmtpPage';
 export { default as passwordReset } from './passwordReset';
 export { default as PremiumSupportPage } from './support/PremiumSupportPage';
-export { default as RecipientVerificationPage } from './recipientVerification/RecipientVerificationPage';
+export { default as RecipientValidationPage } from './recipientValidation/RecipientValidationPage';
 export { default as snippets } from './snippets';

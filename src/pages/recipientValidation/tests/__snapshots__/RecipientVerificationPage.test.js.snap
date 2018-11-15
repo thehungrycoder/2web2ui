@@ -3,7 +3,7 @@
 exports[`Page: Recipient Email Verification renders single email verification tab correctly when selected 1`] = `
 <Page
   empty={Object {}}
-  title="Recipient Email Verification"
+  title="Recipient Email Validation"
 >
   <Tabs
     color="orange"
@@ -12,11 +12,11 @@ exports[`Page: Recipient Email Verification renders single email verification ta
     tabs={
       Array [
         Object {
-          "content": "Verify A List",
+          "content": "Validate A List",
           "onClick": [Function],
         },
         Object {
-          "content": "Verify a Single Address",
+          "content": "Validate a Single Address",
           "onClick": [Function],
         },
       ]
@@ -33,7 +33,7 @@ exports[`Page: Recipient Email Verification renders single email verification ta
 exports[`Page: Recipient Email Verification should render happy path 1`] = `
 <Page
   empty={Object {}}
-  title="Recipient Email Verification"
+  title="Recipient Email Validation"
 >
   <Tabs
     color="orange"
@@ -42,11 +42,11 @@ exports[`Page: Recipient Email Verification should render happy path 1`] = `
     tabs={
       Array [
         Object {
-          "content": "Verify A List",
+          "content": "Validate A List",
           "onClick": [Function],
         },
         Object {
-          "content": "Verify a Single Address",
+          "content": "Validate a Single Address",
           "onClick": [Function],
         },
       ]

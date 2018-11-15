@@ -2,9 +2,9 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import { RecipientVerificationListForm } from '../RecipientVerificationListForm';
+import { ListForm } from '../ListForm';
 
-describe('RecipientVerificationListForm', () => {
+describe('ListForm', () => {
   let props;
   let formValuesWithCsv;
   let wrapper;
@@ -12,12 +12,12 @@ describe('RecipientVerificationListForm', () => {
   beforeEach(() => {
     props = {
       handleSubmit: jest.fn((a) => a),
-      uploadRecipientVerificationList: jest.fn(() => Promise.resolve()),
+      uploadList: jest.fn(() => Promise.resolve()),
       reset: jest.fn(),
       showAlert: jest.fn()
     };
 
-    wrapper = shallow(<RecipientVerificationListForm {...props} />);
+    wrapper = shallow(<ListForm {...props} />);
 
     formValuesWithCsv = {
       csv: 'email,foo@address.com\nbar@address.com\n'
@@ -47,8 +47,8 @@ describe('RecipientVerificationListForm', () => {
   it('should submit csv', async () => {
     wrapper.setProps(props);
     wrapper.find('form').simulate('submit', formValuesWithCsv);
-    await expect(props.uploadRecipientVerificationList.mock.calls).toMatchSnapshot();
-    expect(props.reset).toHaveBeenCalledWith('recipientVerificationListForm');
+    await expect(props.uploadList.mock.calls).toMatchSnapshot();
+    expect(props.reset).toHaveBeenCalledWith('recipientValidationListForm');
     expect(props.showAlert.mock.calls).toMatchSnapshot();
   });
 });
