@@ -4,7 +4,7 @@ import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { Add } from '@sparkpost/matchbox-icons';
 import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { TemplateTypeaheadWrapper } from 'src/components/reduxFormWrappers';
-import { required, integer, minNumber, maxNumber } from 'src/helpers/validation';
+import { required, integer, minNumber, maxNumber, abTestDistribution } from 'src/helpers/validation';
 
 import styles from './VariantsFields.module.scss';
 
@@ -14,7 +14,7 @@ export const PercentField = ({ namespace, ...props }) => (
     label='Percent of total'
     type='number'
     suffix='%'
-    validate={[required, minNumber(1), maxNumber(100)]}
+    validate={[required, minNumber(1), maxNumber(100), abTestDistribution]}
     component={TextFieldWrapper} {...props} />
 );
 
@@ -55,7 +55,7 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
               />
             </Grid.Column>
             <Grid.Column>
-              <CountField namespace={variant} disabled={disabled} />
+              <CountField namespace={variant} disabled={disabled}/>
             </Grid.Column>
           </Grid>
         </Panel.Section>
@@ -89,7 +89,7 @@ const VariantsFields = ({ disabled, formValues, subaccountId }) => {
             />
           </Grid.Column>
           <Grid.Column>
-            <CountField namespace='default_template' disabled={disabled} />
+            <CountField namespace='default_template' disabled={disabled}/>
           </Grid.Column>
         </Grid>
       </Panel>
