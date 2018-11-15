@@ -104,7 +104,7 @@ export class EditPage extends Component {
         secondaryActions={secondaryActions}
       >
         <EditForm
-          onSubmit={() => handleSubmit(this.handleUserUpdate)}
+          onSubmit={handleSubmit(this.handleUserUpdate)}
           user={user}
           currentUser={currentUser}
           isAccountSingleSignOnEnabled={isAccountSingleSignOnEnabled}
