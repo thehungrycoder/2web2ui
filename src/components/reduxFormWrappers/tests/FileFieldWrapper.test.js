@@ -30,6 +30,16 @@ cases('FileFieldWrapper', (props) => {
       }
     }
   },
+  'renders file input with multiple allowed file types': {
+    fileType: undefined,
+    fileTypes: ['.txt,.csv'],
+    input: {
+      value: {
+        name: 'test.txt',
+        size: 999
+      }
+    }
+  },
   'renders disabled file input': {
     disabled: true
   },
@@ -41,6 +51,11 @@ cases('FileFieldWrapper', (props) => {
   },
   'renders file input with help message': {
     helpText: 'Ask Google!'
+  },
+  'renders with a hidden label': {
+    labelHidden: true,
+    required: true,
+    label: 'a label'
   }
 });
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a downloadable link 1`] = `
+exports[`DownloadLink renders a downloadable link 1`] = `
 <a
   download={true}
   href="/path/to/click.me"
@@ -8,4 +8,15 @@ exports[`renders a downloadable link 1`] = `
 >
   Click Me
 </a>
+`;
+
+exports[`DownloadLink renders with a custom component 1`] = `
+<TestComponent
+  download={true}
+  href="/path/to/click.me"
+  pass="through"
+  referrerPolicy="origin"
+>
+  Click Me 2
+</TestComponent>
 `;

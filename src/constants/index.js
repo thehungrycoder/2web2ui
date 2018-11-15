@@ -73,7 +73,8 @@ export const FORMS = {
   LOGIN: 'loginForm',
   JOIN: 'joinForm',
   JOIN_PLAN: 'joinPlanForm',
-  JOIN_SENDING_DOMAIN: 'joinSendingDomainForm'
+  JOIN_SENDING_DOMAIN: 'joinSendingDomainForm',
+  EDIT_USER: 'userEditForm'
 };
 
 export const ANALYTICS_CREATE_ACCOUNT = 'create account';

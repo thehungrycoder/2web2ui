@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListResultsCard renders correctly when complete 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    className="IconWrapper Complete"
+  >
+    <CheckCircleOutline
+      size={40}
+    />
+  </div>
+  <h6>
+    Verification Results
+  </h6>
+  <div
+    className="Spacer"
+  />
+  <LabelledValue
+    label="Uploaded"
+  >
+    <p
+      className="RightAlign NoWrap"
+    >
+      Nov 1 2018, 1:16pm
+    </p>
+  </LabelledValue>
+  <LabelledValue
+    label="Status"
+  >
+    <h6
+      className="RightAlign"
+    >
+      Completed
+    </h6>
+  </LabelledValue>
+  <DownloadLink
+    color="orange"
+    component={[Function]}
+    fullWidth={true}
+    to="testfile.csv"
+  >
+    Download Rejected Recipients
+  </DownloadLink>
+</Panel>
+`;
+
+exports[`ListResultsCard renders correctly when loading and status is unknown 1`] = `
+<Panel>
+  <div
+    className="LoadingWrapper"
+  >
+    <LoadingSVG
+      small={true}
+    />
+  </div>
+</Panel>
+`;
+
+exports[`ListResultsCard renders correctly when not complete 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    className="IconWrapper"
+  >
+    <InsertDriveFile
+      size={40}
+    />
+  </div>
+  <h6>
+    Verification Results
+  </h6>
+  <div
+    className="ProcessingWrapper"
+  >
+    <LoadingSVG
+      small={true}
+    />
+  </div>
+  <LabelledValue
+    label="Uploaded"
+  >
+    <p
+      className="RightAlign NoWrap"
+    >
+      Nov 1 2018, 1:16pm
+    </p>
+  </LabelledValue>
+  <LabelledValue
+    label="Status"
+  >
+    <h6
+      className="RightAlign"
+    >
+      Processing
+    </h6>
+  </LabelledValue>
+</Panel>
+`;

@@ -4,8 +4,6 @@ import { shallow } from 'enzyme';
 
 describe('Component: Tracking Domains Create Page', () => {
 
-  expect.hasAssertions();
-
   it('should handle the submit', () => {
     const historyMock = {
       push: jest.fn()

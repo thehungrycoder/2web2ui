@@ -29,7 +29,7 @@ export class AbTestCreateForm extends Component {
     } = this.props;
 
     const disabled = pristine || submitting;
-    const submitText = submitting ? 'Submitting...' : 'Create New Test';
+    const submitText = submitting ? 'Submitting...' : 'Continue';
 
     return (
       <form onSubmit={handleSubmit}>

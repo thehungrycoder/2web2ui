@@ -12,7 +12,9 @@ describe('RecipientVerificationListForm', () => {
   beforeEach(() => {
     props = {
       handleSubmit: jest.fn((a) => a),
-      uploadRecipientVerificationList: jest.fn()
+      uploadRecipientVerificationList: jest.fn(() => Promise.resolve()),
+      reset: jest.fn(),
+      showAlert: jest.fn()
     };
 
     wrapper = shallow(<RecipientVerificationListForm {...props} />);
@@ -45,6 +47,8 @@ describe('RecipientVerificationListForm', () => {
   it('should submit csv', async () => {
     wrapper.setProps(props);
     wrapper.find('form').simulate('submit', formValuesWithCsv);
-    expect(props.uploadRecipientVerificationList.mock.calls).toMatchSnapshot();
+    await expect(props.uploadRecipientVerificationList.mock.calls).toMatchSnapshot();
+    expect(props.reset).toHaveBeenCalledWith('recipientVerificationListForm');
+    expect(props.showAlert.mock.calls).toMatchSnapshot();
   });
 });

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteSnippetModal renders modal and link 1`] = `
+<Fragment>
+  <a
+    onClick={[Function]}
+  >
+    Delete
+  </a>
+  <DeleteModal
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this snippet?"
+  >
+    <p>
+      The snippet will be immediately and permanently removed. All substitution references will need to be manually removed from templates.
+    </p>
+  </DeleteModal>
+</Fragment>
+`;

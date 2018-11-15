@@ -28,13 +28,7 @@ cases('Recipient Verification Lists Reducer', (action) => {
       email: 'valid@address.com'
     }
   },
-  'when ticket creation is pending': {
+  'when verification is pending': {
     type: 'SINGLE_RECIPIENT_VERIFICATION_PENDING'
-  },
-  'when verification fails': {
-    type: 'SINGLE_RECIPIENT_VERIFICATION_FAIL',
-    payload: {
-      message: 'Oh no!'
-    }
   }
 });

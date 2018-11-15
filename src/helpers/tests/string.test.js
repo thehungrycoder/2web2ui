@@ -1,6 +1,6 @@
 import {
   snakeToFriendly, snakeToCamel, slugify, slugToFriendly, shrinkToFit, stringToArray,
-  stringifyTypeaheadfilter, stripTags, decodeBase64, trimWhitespaces
+  stringifyTypeaheadfilter, stripTags, decodeBase64, tagAsCopy, trimWhitespaces
 } from '../string';
 
 describe('snakeToFrindly', () => {
@@ -133,5 +133,19 @@ describe('trimWhitespaces', () => {
     expect(trimWhitespaces('hello')).toEqual('hello');
     expect(trimWhitespaces('hello there')).toEqual('hello there');
     expect(trimWhitespaces(undefined)).toEqual('');
+  });
+});
+
+describe('tagAsCopy', () => {
+  it('should append copy tag', () => {
+    expect(tagAsCopy('Example')).toEqual('Example Copy');
+  });
+
+  it('should append count to tag', () => {
+    expect(tagAsCopy('Example Copy')).toEqual('Example Copy 2');
+  });
+
+  it('should increment count', () => {
+    expect(tagAsCopy('Example Copy 2')).toEqual('Example Copy 3');
   });
 });
