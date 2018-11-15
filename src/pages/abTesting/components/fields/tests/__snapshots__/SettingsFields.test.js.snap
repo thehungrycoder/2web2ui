@@ -104,7 +104,6 @@ exports[`Settings Fields Component should disable fields correctly 1`] = `
             },
           ]
         }
-        validate={[Function]}
       />
     </Panel.Section>
   </Panel>
@@ -210,7 +209,6 @@ exports[`Settings Fields Component should render correctly 1`] = `
             },
           ]
         }
-        validate={[Function]}
       />
     </Panel.Section>
   </Panel>

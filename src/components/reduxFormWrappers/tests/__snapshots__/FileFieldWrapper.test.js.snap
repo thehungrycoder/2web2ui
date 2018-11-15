@@ -176,6 +176,46 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
 </fieldset>
 `;
 
+exports[`FileFieldWrapper renders file input with multiple allowed file types 1`] = `
+<fieldset
+  className="Field"
+>
+  <Label>
+    Test File Input
+     *
+  </Label>
+  <div
+    className="InputWrapper"
+  >
+    <n
+      accept={
+        Array [
+          ".txt,.csv",
+        ]
+      }
+      activeClassName="DropzoneActive"
+      className="Dropzone"
+      disableClick={false}
+      disabled={false}
+      disabledClassName="DropzoneDisabled"
+      getDataTransferItems={[Function]}
+      inputProps={Object {}}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+      style={Object {}}
+    >
+      <span>
+        test.txt
+      </span>
+    </n>
+  </div>
+</fieldset>
+`;
+
 exports[`FileFieldWrapper renders file input with no specified type 1`] = `
 <fieldset
   className="Field"
