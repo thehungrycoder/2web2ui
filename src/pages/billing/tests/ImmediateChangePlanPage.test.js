@@ -59,12 +59,12 @@ describe('Component: ImmediateChangePlanPage', () => {
 
   it('should render while changing plan', () => {
     wrapper.setState({ loading: LOAD_STATE.PENDING });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.exists('Loading')).toBe(true);
   });
 
   it('should render after plan changed', () => {
     wrapper.setState({ loading: LOAD_STATE.SUCCESS });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.exists('PageLink')).toBe(true);
   });
 
   it('should render after plan change failed', async () => {
@@ -72,7 +72,16 @@ describe('Component: ImmediateChangePlanPage', () => {
     props.updateSubscription.mockRejectedValue(new Error('oopsie'));
     wrapper = shallow(<ImmediateChangePlanPage {...props} />);
     await wrapper;
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.exists('ApiErrorBanner')).toBe(true);
+  });
+
+  it('should display the API error after plan change failed', async () => {
+    const errMsg = 'oopsie';
+    props.immediatePlanChange = 'so-very-free';
+    props.updateSubscription.mockRejectedValue(new Error(errMsg));
+    wrapper = shallow(<ImmediateChangePlanPage {...props} />);
+    await wrapper;
+    expect(wrapper.find('ApiErrorBanner').first().prop('errorDetails')).toEqual(errMsg);
   });
 
   it('should allow retries after failure', () => {
