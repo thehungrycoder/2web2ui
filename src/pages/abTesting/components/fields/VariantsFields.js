@@ -47,7 +47,7 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
               <Field
                 name={`${variant}.template_object`}
                 component={TemplateTypeaheadWrapper}
-                label='Select a template'
+                label='Select a published template'
                 placeholder='Type to search'
                 validate={required}
                 disabled={disabled}
@@ -81,7 +81,7 @@ const VariantsFields = ({ disabled, formValues, subaccountId }) => {
             <Field
               name='default_template.template_object'
               component={TemplateTypeaheadWrapper}
-              label='Select a default template'
+              label='Select a published template'
               placeholder='Type to search'
               validate={required}
               disabled={disabled}

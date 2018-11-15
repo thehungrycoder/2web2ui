@@ -29,7 +29,7 @@ exports[`Variants Fields Component Field Array should render 1 field with disabl
         <Field
           component={[Function]}
           disabled={false}
-          label="Select a template"
+          label="Select a published template"
           name="variant[1].template_object"
           placeholder="Type to search"
           validate={[Function]}
@@ -87,7 +87,7 @@ exports[`Variants Fields Component Field Array should render 20 fields with disa
         <Field
           component={[Function]}
           disabled={false}
-          label="Select a template"
+          label="Select a published template"
           name="variant[1].template_object"
           placeholder="Type to search"
           validate={[Function]}
@@ -128,7 +128,7 @@ exports[`Variants Fields Component Field Array should render 20 fields with disa
         <Field
           component={[Function]}
           disabled={false}
-          label="Select a template"
+          label="Select a published template"
           name="variant[2].template_object"
           placeholder="Type to search"
           validate={[Function]}
@@ -186,7 +186,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
         <Field
           component={[Function]}
           disabled={false}
-          label="Select a template"
+          label="Select a published template"
           name="variant[1].template_object"
           placeholder="Type to search"
           validate={[Function]}
@@ -227,7 +227,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
         <Field
           component={[Function]}
           disabled={false}
-          label="Select a template"
+          label="Select a published template"
           name="variant[2].template_object"
           placeholder="Type to search"
           validate={[Function]}
@@ -285,7 +285,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
         <Field
           component={[Function]}
           disabled={false}
-          label="Select a template"
+          label="Select a published template"
           name="variant[1].template_object"
           placeholder="Type to search"
           validate={[Function]}
@@ -326,7 +326,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
         <Field
           component={[Function]}
           disabled={false}
-          label="Select a template"
+          label="Select a published template"
           name="variant[2].template_object"
           placeholder="Type to search"
           validate={[Function]}
@@ -405,7 +405,7 @@ exports[`Variants Fields Component should render percent audience selection corr
       <Grid.Column>
         <Field
           component={[Function]}
-          label="Select a default template"
+          label="Select a published template"
           name="default_template.template_object"
           placeholder="Type to search"
           validate={[Function]}
@@ -451,7 +451,7 @@ exports[`Variants Fields Component should render sample size audience selection 
       <Grid.Column>
         <Field
           component={[Function]}
-          label="Select a default template"
+          label="Select a published template"
           name="default_template.template_object"
           placeholder="Type to search"
           validate={[Function]}
