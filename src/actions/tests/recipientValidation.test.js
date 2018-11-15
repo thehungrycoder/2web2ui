@@ -1,19 +1,19 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import {
-  uploadRecipientVerificationList,
+  uploadList,
   singleAddress,
   getLatestJob,
   getJobStatus
-} from '../recipientVerificationLists';
+} from '../recipientValidation';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 
 describe('Recipient Verification Actions', () => {
-  snapshotActionCases('.uploadRecipientVerificationList', [
+  snapshotActionCases('.uploadList', [
     {
       name: 'when uploading csv',
       action: () => (
-        uploadRecipientVerificationList({
+        uploadList({
           data: 'csv-file'
         })
       )

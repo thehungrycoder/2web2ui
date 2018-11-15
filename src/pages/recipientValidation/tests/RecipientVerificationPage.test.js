@@ -1,13 +1,13 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { RecipientVerificationPage } from '../RecipientVerificationPage';
+import { RecipientValidationPage } from '../RecipientValidationPage';
 
 describe('Page: Recipient Email Verification', () => {
   let wrapper;
   let instance;
 
   beforeEach(() => {
-    wrapper = shallow(<RecipientVerificationPage/>);
+    wrapper = shallow(<RecipientValidationPage />);
     instance = wrapper.instance();
   });
 

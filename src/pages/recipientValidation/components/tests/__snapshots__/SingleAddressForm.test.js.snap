@@ -6,7 +6,7 @@ exports[`SingleAddressForm renders correctly 1`] = `
     onSubmit={[Function]}
   >
     <p>
-      Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
+      Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
     </p>
     <Field
       component={[Function]}
@@ -17,7 +17,7 @@ exports[`SingleAddressForm renders correctly 1`] = `
           size="default"
           submit={true}
         >
-          Verify Email Address
+          Validate
         </Button>
       }
       label="Email address"
@@ -42,7 +42,7 @@ exports[`SingleAddressForm should disable form elements on submit 1`] = `
     onSubmit={[Function]}
   >
     <p>
-      Verify an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
+      Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
     </p>
     <Field
       component={[Function]}
@@ -53,7 +53,7 @@ exports[`SingleAddressForm should disable form elements on submit 1`] = `
           size="default"
           submit={true}
         >
-          Verifying...
+          Validating...
         </Button>
       }
       label="Email address"

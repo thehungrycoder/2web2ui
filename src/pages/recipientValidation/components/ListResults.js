@@ -6,7 +6,7 @@ import { PollContext } from 'src/context/Poll';
 import withContext from 'src/context/withContext';
 
 import ListResultsCard from './ListResultsCard';
-import { getLatestJob, getJobStatus } from 'src/actions/recipientVerificationLists';
+import { getLatestJob, getJobStatus } from 'src/actions/recipientValidation';
 import _ from 'lodash';
 
 export class ListResults extends Component {
@@ -46,7 +46,7 @@ export class ListResults extends Component {
       if (complete) {
         showAlert({
           type: 'success',
-          message: 'Recipient Verification Results Ready',
+          message: 'Recipient Validation Results Ready',
           dedupeId: id
         });
       }
@@ -71,13 +71,13 @@ export class ListResults extends Component {
 }
 
 
-const mapStateToProps = ({ recipientVerificationLists }) => {
-  const latestId = recipientVerificationLists.latest;
+const mapStateToProps = ({ recipientValidation }) => {
+  const latestId = recipientValidation.latest;
 
   return {
     latestId,
-    results: recipientVerificationLists.jobResults[latestId] || {},
-    loading: recipientVerificationLists.jobResultsLoading
+    results: recipientValidation.jobResults[latestId] || {},
+    loading: recipientValidation.jobResultsLoading
   };
 };
 
