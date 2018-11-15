@@ -8,7 +8,7 @@ import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper'
 import { uploadList } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
-import exampleRecipientVerificationListPath from './example-recipient-validation-list.csv';
+import exampleRecipientValidationListPath from './example-recipient-validation-list.csv';
 
 const formName = 'recipientValidationListForm';
 
@@ -29,10 +29,10 @@ export class ListForm extends Component {
     const { pristine, valid, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
 
-    const headerContent = 'Verify a list of your recipients by separating out rejected or undeliverable email addresses.';
+    const headerContent = 'Validate a list of your recipients by separating out rejected or undeliverable email addresses.';
     const fileTypes = ['.txt','.csv'];
     const uploadValidators = [required, maxFileSize(config.maxRecipVerifUploadSizeBytes)];
-    const buttonContent = (submitting) ? 'Uploading...' : 'Verify Email Addresses';
+    const buttonContent = (submitting) ? 'Uploading...' : 'Validate Email Addresses';
 
     return (
       <Grid>
@@ -43,7 +43,7 @@ export class ListForm extends Component {
               component={FileFieldWrapper}
               disabled={submitting}
               fileTypes={fileTypes}
-              helpText={<span>Download a <DownloadLink href={exampleRecipientVerificationListPath}>CSV template here</DownloadLink> to use when formatting list.</span>}
+              helpText={<span>Download a <DownloadLink href={exampleRecipientValidationListPath}>CSV template here</DownloadLink> to use when formatting list.</span>}
               name='csv'
               validate={uploadValidators}
               labelHidden
