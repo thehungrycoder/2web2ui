@@ -8,7 +8,7 @@ exports[`Component: ImmediateChangePlanPage should render after plan change fail
     className="ErrorBanner"
   >
     <ApiErrorBanner
-      errorDetails="Kapow"
+      errorDetails="oopsie"
       message="Sorry, we had some trouble updating your subscription."
       reload={[Function]}
     />

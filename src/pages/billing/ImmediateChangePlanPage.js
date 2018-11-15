@@ -53,10 +53,6 @@ export class ImmediateChangePlanPage extends Component {
       });
   }
 
-  getLoadState() {
-    return Number(this.state.loading);
-  }
-
   renderSuccess() {
     return <div className={styles.MessageInnards}>
       <h1>Your subscription has been updated.</h1>

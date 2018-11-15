@@ -67,8 +67,11 @@ describe('Component: ImmediateChangePlanPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render after plan change failed', () => {
-    wrapper.setState({ loading: LOAD_STATE.FAILURE, error: { message: 'Kapow' }});
+  it('should render after plan change failed', async () => {
+    props.immediatePlanChange = 'so-very-free';
+    props.updateSubscription.mockRejectedValue(new Error('oopsie'));
+    wrapper = shallow(<ImmediateChangePlanPage {...props} />);
+    await wrapper;
     expect(wrapper).toMatchSnapshot();
   });
 
