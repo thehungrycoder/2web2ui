@@ -32,6 +32,14 @@ describe('Conversion tracking', () => {
     });
   });
 
+  describe('trackDowngradeToFree', () => {
+    it('should emit a downgrade trackFormSuccess event', () => {
+      conversions.trackDowngradeToFree('free-my-orca');
+      expect(analytics.trackFormSuccess).toHaveBeenCalledTimes(1);
+      expect(analytics.trackFormSuccess.mock.calls[0]).toMatchSnapshot();
+    });
+  });
+
   describe('trackAddonPurchase', () => {
     const addon = 'Shiny Addonington';
 

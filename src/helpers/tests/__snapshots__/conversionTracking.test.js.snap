@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Conversion tracking trackDowngradeToFree should emit a downgrade trackFormSuccess event 1`] = `
+Array [
+  "downgrade",
+  Object {
+    "form_type": "downgrade",
+    "plan_key": "free-my-orca",
+  },
+]
+`;
