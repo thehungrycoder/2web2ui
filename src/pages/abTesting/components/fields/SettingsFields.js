@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { TextFieldWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
-import { numberBetween, integer, minNumber, abTestDistribution } from 'src/helpers/validation';
+import { numberBetween, integer, minNumber } from 'src/helpers/validation';
 
 const SettingsFields = ({ disabled, formValues = {}}) => (
   <div>
@@ -74,7 +74,6 @@ const SettingsFields = ({ disabled, formValues = {}}) => (
           grid={{ xs: 6 }}
           component={RadioGroup}
           label={'How should we distribute this test\'s variants?'}
-          validate={abTestDistribution}
           options={[
             { label: 'By Percent', value: 'percent' },
             { label: 'By Number of Messages', value: 'sample_size' }
