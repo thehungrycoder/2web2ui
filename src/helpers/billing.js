@@ -5,7 +5,7 @@ import Payment from 'payment';
 import qs from 'query-string';
 
 export function formatDataForCors(values) {
-  const { email, planpicker, card, billingAddress } = values;
+  const { email, planpicker, card, billingAddress, discountId } = values;
 
   // For CORS Endpoint + sift
   const corsData = {
@@ -47,7 +47,8 @@ export function formatDataForCors(values) {
         city: null,
         country: billingAddress.country // must send country so gateway knows which AVS rules to apply
       }
-    }
+    },
+    discountId: discountId
   };
 
   return { corsData, billingData };
@@ -182,5 +183,10 @@ export function prepareCardInfo({ expCombined, ...cardInfo }) {
 
 export function stripImmediatePlanChange(search) {
   const { immediatePlanChange, ...options } = qs.parse(search);
-  return qs.stringify(options)
+  return qs.stringify(options);
+}
+
+export function verifyPromoCode(value) {
+  return Promise.resolve({ 'message': 'it worked' });
+  //return checkPromoCode(value);
 }

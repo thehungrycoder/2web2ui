@@ -2,22 +2,31 @@ import React from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
 
 import { Field } from 'redux-form';
+import { connect } from 'react-redux';
 import config from 'src/config';
 import { getPlanPrice } from 'src/helpers/billing';
 import { TextFieldWrapper } from 'src/components';
 import PlanPrice from 'src/components/billing/PlanPrice';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 import Brightback from 'src/components/brightback/Brightback';
+import { checkPromoCode } from 'src/actions/billing';
 
 export class Confirmation extends React.Component {
+
+  onPromoCodeBlur(event, value) {
+    return this.props.checkPromoCode(value);
+  }
+
   renderPromoCodeTextField() {
-    const { selected = {}} = this.props;
+    const { selected = {}, promoCodeDescription } = this.props;
     if (!selected.isFree) {
-      return <Field
+      return <div><Field
         label='Promo Code (optional)'
         name='promoCode'
         component={TextFieldWrapper}
-      />;
+        onBlur={this.onPromoCodeBlur.bind(this)}
+      />
+      <small>{promoCodeDescription}</small></div>;
     }
   }
 
@@ -135,4 +144,8 @@ export class Confirmation extends React.Component {
   }
 }
 
-export default Confirmation;
+//export default Confirmation;
+const mapStateToProps = (state) => ({
+  promoCodeDescription: state.billing.promoCodeDescription || ''
+});
+export default connect(mapStateToProps, { checkPromoCode })(Confirmation);

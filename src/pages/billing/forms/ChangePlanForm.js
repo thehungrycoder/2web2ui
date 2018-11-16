@@ -62,14 +62,14 @@ export class ChangePlanForm extends Component {
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
 
-
-    let maybeCheckPromoCode = Promise.reject();
+    let maybeCheckPromoCode = Promise.resolve({});
     if (values.promoCode) {
-      maybeCheckPromoCode = checkPromoCode(values.promoCode, newCode);
+      maybeCheckPromoCode = checkPromoCode(values.promoCode, values.planpicker.billingId);
     }
 
     return maybeCheckPromoCode
-      .then(() => {
+      .then(({ discountId }) => {
+        newValues.discountId = discountId;
         // decides which action to be taken based on
         // if it's aws account, it already has billing and if you use a saved CC
         if (this.props.isAws) {
