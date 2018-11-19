@@ -38,6 +38,7 @@ export class Item extends Component {
 
   renderItem = ({ mobile }) => {
     const {
+      beta,
       to,
       icon: Icon,
       label,
@@ -55,6 +56,18 @@ export class Item extends Component {
       this.state.open && styles.isOpen,
       mobile && styles.mobile
     );
+
+    if (beta) {
+      return (
+        <li>
+          {divider ? (<hr className={styles.hr}/>) : null}
+          <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
+            {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>}
+            {label} <div style={{ float: 'right' }}><Tag color='orange'>BETA</Tag></div>
+          </Link>
+        </li>
+      );
+    }
 
     if (labs) {
       return (
