@@ -12,7 +12,7 @@ exports[`ListResultsCard renders correctly when complete 1`] = `
     />
   </div>
   <h6>
-    Verification Results
+    Validation Results
   </h6>
   <div
     className="Spacer"
@@ -70,7 +70,7 @@ exports[`ListResultsCard renders correctly when not complete 1`] = `
     />
   </div>
   <h6>
-    Verification Results
+    Validation Results
   </h6>
   <div
     className="ProcessingWrapper"

@@ -22,7 +22,7 @@ exports[`ListForm renders CSV errors 1`] = `
         }
         helpText={
           <span>
-            Download a 
+            File must be a line delimited list of addresses. Download a 
             <DownloadLink
               href="example-recipient-validation-list.csv"
             >
@@ -33,7 +33,7 @@ exports[`ListForm renders CSV errors 1`] = `
         }
         labelHidden={true}
         name="csv"
-        placeholder="Drag a CSV here, or click to browse"
+        placeholder="Drag a line delimited CSV here, or click to browse"
         style={
           Object {
             "paddingBottom": "3rem",
@@ -82,7 +82,7 @@ exports[`ListForm renders correctly 1`] = `
         }
         helpText={
           <span>
-            Download a 
+            File must be a line delimited list of addresses. Download a 
             <DownloadLink
               href="example-recipient-validation-list.csv"
             >
@@ -93,7 +93,7 @@ exports[`ListForm renders correctly 1`] = `
         }
         labelHidden={true}
         name="csv"
-        placeholder="Drag a CSV here, or click to browse"
+        placeholder="Drag a line delimited CSV here, or click to browse"
         style={
           Object {
             "paddingBottom": "3rem",
@@ -142,7 +142,7 @@ exports[`ListForm should disable form elements on submit 1`] = `
         }
         helpText={
           <span>
-            Download a 
+            File must be a line delimited list of addresses. Download a 
             <DownloadLink
               href="example-recipient-validation-list.csv"
             >
@@ -153,7 +153,7 @@ exports[`ListForm should disable form elements on submit 1`] = `
         }
         labelHidden={true}
         name="csv"
-        placeholder="Drag a CSV here, or click to browse"
+        placeholder="Drag a line delimited CSV here, or click to browse"
         style={
           Object {
             "paddingBottom": "3rem",

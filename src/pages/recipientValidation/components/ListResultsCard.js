@@ -35,7 +35,7 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
       <div className={classnames(styles.IconWrapper, complete && styles.Complete)}>
         <Icon size={40} />
       </div>
-      <h6>Verification Results</h6>
+      <h6>Validation Results</h6>
       {proccessing}
       {uploaded && (
         <LabelledValue label='Uploaded'>
