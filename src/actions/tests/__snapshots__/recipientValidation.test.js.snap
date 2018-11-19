@@ -5,7 +5,7 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "url": "v1/recipient-validation/get-job/12345",
+      "url": "v1/recipient-validation/job/12345",
     },
     "type": "GET_JOB_STATUS",
   },

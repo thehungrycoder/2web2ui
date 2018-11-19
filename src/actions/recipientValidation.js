@@ -37,7 +37,7 @@ export function getJobStatus(list_id) {
     type: 'GET_JOB_STATUS',
     meta: {
       method: 'GET',
-      url: `v1/recipient-validation/get-job/${list_id}`
+      url: `v1/recipient-validation/job/${list_id}`
     }
   });
 }
