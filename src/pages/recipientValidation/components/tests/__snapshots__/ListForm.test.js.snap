@@ -22,18 +22,18 @@ exports[`ListForm renders CSV errors 1`] = `
         }
         helpText={
           <span>
-            File must be a line delimited list of addresses. Download a 
+            You can download an 
             <DownloadLink
               href="example-recipient-validation-list.csv"
             >
-              CSV template here
+              example file here
             </DownloadLink>
-             to use when formatting list.
+             to use when formatting your list of addresses for upload.
           </span>
         }
         labelHidden={true}
         name="csv"
-        placeholder="Drag a line delimited CSV here, or click to browse"
+        placeholder="Drag a file here, or click to browse"
         style={
           Object {
             "paddingBottom": "3rem",
@@ -82,18 +82,18 @@ exports[`ListForm renders correctly 1`] = `
         }
         helpText={
           <span>
-            File must be a line delimited list of addresses. Download a 
+            You can download an 
             <DownloadLink
               href="example-recipient-validation-list.csv"
             >
-              CSV template here
+              example file here
             </DownloadLink>
-             to use when formatting list.
+             to use when formatting your list of addresses for upload.
           </span>
         }
         labelHidden={true}
         name="csv"
-        placeholder="Drag a line delimited CSV here, or click to browse"
+        placeholder="Drag a file here, or click to browse"
         style={
           Object {
             "paddingBottom": "3rem",
@@ -142,18 +142,18 @@ exports[`ListForm should disable form elements on submit 1`] = `
         }
         helpText={
           <span>
-            File must be a line delimited list of addresses. Download a 
+            You can download an 
             <DownloadLink
               href="example-recipient-validation-list.csv"
             >
-              CSV template here
+              example file here
             </DownloadLink>
-             to use when formatting list.
+             to use when formatting your list of addresses for upload.
           </span>
         }
         labelHidden={true}
         name="csv"
-        placeholder="Drag a line delimited CSV here, or click to browse"
+        placeholder="Drag a file here, or click to browse"
         style={
           Object {
             "paddingBottom": "3rem",

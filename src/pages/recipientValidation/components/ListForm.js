@@ -43,11 +43,11 @@ export class ListForm extends Component {
               component={FileFieldWrapper}
               disabled={submitting}
               fileTypes={fileTypes}
-              helpText={<span>File must be a line delimited list of addresses. Download a <DownloadLink href={exampleRecipientValidationListPath}>CSV template here</DownloadLink> to use when formatting list.</span>}
+              helpText={<span>You can download an <DownloadLink href={exampleRecipientValidationListPath}>example file here</DownloadLink> to use when formatting your list of addresses for upload.</span>}
               name='csv'
               validate={uploadValidators}
               labelHidden
-              placeholder='Drag a line delimited CSV here, or click to browse'
+              placeholder='Drag a file here, or click to browse'
               style={{
                 paddingTop: '3rem',
                 paddingBottom: '3rem'
