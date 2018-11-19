@@ -55,19 +55,18 @@ export class ReportOptions extends Component {
         {reportOptions.filters.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{item.type}: {item.value}</Tag>)}
       </Panel.Section>
       : null;
-  }
+  };
 
   handleFilterRemove = (index) => {
     this.props.removeFilter(index);
-  }
+  };
 
   handleTypeaheadSelect = (item) => {
     this.props.addFilters([item]);
-  }
+  };
 
   render() {
     const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions, roundToPrecision } = this.props;
-
     return (
       <Panel>
         <Panel.Section >
@@ -85,6 +84,7 @@ export class ReportOptions extends Component {
             </Grid.Column>
             <Grid.Column xs={8} md={4} xl={5}>
               <Typeahead
+                reportOptions={reportOptions}
                 placeholder='Filter by domain, campaign, etc'
                 onSelect={this.handleTypeaheadSelect}
                 items={typeaheadCache}

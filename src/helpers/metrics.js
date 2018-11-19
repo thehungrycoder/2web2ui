@@ -19,14 +19,13 @@ const FILTER_KEY_MAP = {
 
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
-export function getQueryFromOptions({ from, to, metrics, filters = []}) {
+export function getQueryFromOptions({ from, to, metrics, filters = [], match = '' }, isForTypeAhead) {
   from = moment(from);
   to = moment(to);
 
   const apiMetricsKeys = getKeysFromMetrics(metrics);
   const delimiter = getDelimiter(filters);
-
-  return {
+  const options = {
     metrics: apiMetricsKeys.join(delimiter),
     precision: getPrecision(from, to),
     from: from.format(apiDateFormat),
@@ -35,6 +34,14 @@ export function getQueryFromOptions({ from, to, metrics, filters = []}) {
     ...getFilterSets(filters, delimiter),
     timezone: getLocalTimezone()
   };
+  if (match.length > 0) {
+    options.match = match;
+  }
+  //deliverability endpoint also uses this helper function but validator prevents limit values over 1k
+  if (isForTypeAhead) {
+    options.limit = 100000;
+  }
+  return options;
 }
 
 export function pushToKey(obj, key, value) {

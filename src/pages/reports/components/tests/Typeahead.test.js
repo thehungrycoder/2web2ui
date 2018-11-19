@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Typeahead from '../Typeahead';
+import { Typeahead } from '../Typeahead';
 // import _ from 'lodash';
 
 describe('Component: Typeahead', () => {
@@ -12,6 +12,7 @@ describe('Component: Typeahead', () => {
       items: [{ type: 'X', value: 'cross' }, { type: 'X', value: 'treasure' }],
       matches: [],
       onSelect: jest.fn(),
+      refreshTypeaheadCache: jest.fn(),
       placeholder: ''
     };
 

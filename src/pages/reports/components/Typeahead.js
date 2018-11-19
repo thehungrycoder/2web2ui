@@ -2,22 +2,24 @@ import React, { Component } from 'react';
 import Downshift from 'downshift';
 import classnames from 'classnames';
 import _ from 'lodash';
-
+import { refreshTypeaheadCache } from 'src/actions/reportOptions';
 import sortMatch from 'src/helpers/sortMatch';
 import { TextField, ActionList } from '@sparkpost/matchbox';
 import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 function flattenItem({ type, value }) {
   return `${type}:${value}`;
 }
 
-class Typeahead extends Component {
+export class Typeahead extends Component {
   state = {
     inputValue: '',
     matches: [],
     calculatingMatches: false
-  }
+  };
 
   updateMatches = (pattern) => {
     let matches;
@@ -37,10 +39,19 @@ class Typeahead extends Component {
     this.setState({ matches, calculatingMatches: false });
   };
 
+  updateLookAhead = (pattern) => {
+    const options = { ...this.props.reportOptions };
+    options.match = pattern;
+    this.props.refreshTypeaheadCache(options).then(() => {
+      this.updateMatchesDebounced(pattern);
+    });
+  };
+
   updateMatchesDebounced = _.debounce(this.updateMatches, 250);
+  updateLookAheadDebounced = _.debounce(this.updateLookAhead, 250);
 
   handleFieldChange = (e) => {
-    this.updateMatchesDebounced(e.target.value);
+    this.updateLookAheadDebounced(e.target.value);
   };
 
   // Pass only item selection events to mask the
@@ -98,4 +109,10 @@ class Typeahead extends Component {
   }
 }
 
-export default Typeahead;
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = {
+  refreshTypeaheadCache
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Typeahead));

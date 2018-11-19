@@ -77,11 +77,6 @@ exports[`Component: Typeahead should update matches on field change 1`] = `
 Object {
   "calculatingMatches": false,
   "inputValue": "",
-  "matches": Array [
-    Object {
-      "type": "X",
-      "value": "cross",
-    },
-  ],
+  "matches": Array [],
 }
 `;

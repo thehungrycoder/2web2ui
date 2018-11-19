@@ -56,7 +56,7 @@ export function initTypeaheadCache() {
 }
 
 export function refreshTypeaheadCache(options) {
-  const params = getQueryFromOptions(options);
+  const params = getQueryFromOptions(options, true);
   return (dispatch) => {
     const requests = metricLists.map((list) => dispatch(list(params)));
     return Promise.all(requests);
