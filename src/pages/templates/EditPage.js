@@ -7,6 +7,7 @@ import ContentEditor from 'src/components/contentEditor';
 import Form from './components/containers/Form.container';
 import { DeleteModal, Loading } from 'src/components';
 import { Grid, Page } from '@sparkpost/matchbox';
+import ImportSnippetLink from './components/ImportSnippetLink';
 
 export default class EditPage extends Component {
   state = {
@@ -130,7 +131,7 @@ export default class EditPage extends Component {
             <Form name={formName} subaccountId={subaccountId} readOnly={!canModify} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <ContentEditor readOnly={!canModify} />
+            <ContentEditor readOnly={!canModify} action={canModify && <ImportSnippetLink />} />
           </Grid.Column>
         </Grid>
         <DeleteModal

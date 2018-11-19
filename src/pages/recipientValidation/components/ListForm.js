@@ -29,10 +29,10 @@ export class ListForm extends Component {
     const { pristine, valid, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
 
-    const headerContent = 'Verify a list of your recipients by separating out rejected or undeliverable email addresses.';
+    const headerContent = 'Validate a list of your recipients by separating out rejected or undeliverable email addresses.';
     const fileTypes = ['.txt','.csv'];
     const uploadValidators = [required, maxFileSize(config.maxRecipVerifUploadSizeBytes)];
-    const buttonContent = (submitting) ? 'Uploading...' : 'Verify Email Addresses';
+    const buttonContent = (submitting) ? 'Uploading...' : 'Validate Email Addresses';
 
     return (
       <Grid>
@@ -43,11 +43,11 @@ export class ListForm extends Component {
               component={FileFieldWrapper}
               disabled={submitting}
               fileTypes={fileTypes}
-              helpText={<span>Download a <DownloadLink href={exampleRecipientValidationListPath}>CSV template here</DownloadLink> to use when formatting list.</span>}
+              helpText={<span>You can download an <DownloadLink href={exampleRecipientValidationListPath}>example file here</DownloadLink> to use when formatting your list of addresses for upload.</span>}
               name='csv'
               validate={uploadValidators}
               labelHidden
-              placeholder='Drag a CSV here, or click to browse'
+              placeholder='Drag a file here, or click to browse'
               style={{
                 paddingTop: '3rem',
                 paddingBottom: '3rem'

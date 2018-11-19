@@ -5,6 +5,7 @@ import {
   apiKeys,
   AccountSettingsPage,
   AuthPage,
+  TfaPage,
   SsoAuthPage,
   SSOPage,
   billing,
@@ -50,7 +51,7 @@ import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
 import App from 'src/components/layout/App';
 
-import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
+import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, TFA_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
 /**
  *  Angular UI Grant List:
@@ -101,6 +102,12 @@ const routes = [
     public: true,
     component: AuthPage,
     title: 'Log In'
+  },
+  {
+    path: TFA_ROUTE,
+    public: true,
+    component: TfaPage,
+    title: 'Two-factor Authentication'
   },
   {
     path: SSO_AUTH_ROUTE,
@@ -307,7 +314,7 @@ const routes = [
   {
     path: '/snippets',
     component: snippets.ListPage,
-    condition: hasGrants('templates/view'),
+    condition: all(hasGrants('templates/view'), hasUiOption('snippets')),
     layout: App,
     title: 'Snippets',
     supportDocSearch: 'snippet'
@@ -315,7 +322,7 @@ const routes = [
   {
     path: '/snippets/create',
     component: snippets.CreatePage,
-    condition: hasGrants('templates/modify'),
+    condition: all(hasGrants('templates/modify'), hasUiOption('snippets')),
     layout: App,
     title: 'New Snippet',
     supportDocSearch: 'snippet'
@@ -323,7 +330,7 @@ const routes = [
   {
     path: '/snippets/edit/:id',
     component: snippets.EditPage,
-    condition: hasGrants('templates/view'),
+    condition: all(hasGrants('templates/view'), hasUiOption('snippets')),
     layout: App,
     title: 'Edit Snippet',
     supportDocSearch: 'snippet'

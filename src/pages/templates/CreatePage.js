@@ -7,6 +7,7 @@ import Form from './components/containers/Form.container';
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import ImportSnippetLink from './components/ImportSnippetLink';
 
 export default class CreatePage extends Component {
   componentDidMount() {
@@ -53,7 +54,7 @@ export default class CreatePage extends Component {
             <Form newTemplate name={formName} subaccountId={subaccountId}/>
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <ContentEditor />
+            <ContentEditor action={<ImportSnippetLink />} />
           </Grid.Column>
         </Grid>
       </Page>

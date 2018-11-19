@@ -1,9 +1,8 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Error {
-  position: absolute;
-  z-index: 1;
-  top: rem(-40);
-  right: spacing();
-  line-height: rem(15);
+.ErrorWrapper {
+  background: rgba(color(red, dark), 0.06);
+  font-size: 0;
+  line-height: normal;
+  padding: spacing();
 }

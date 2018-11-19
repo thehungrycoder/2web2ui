@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Typeahead render function renders a typeahead item 1`] = `
+<div
+  className="Item"
+>
+  Example Label
+  <span
+    className="id"
+  >
+    example-id
+  </span>
+</div>
+`;
+
 exports[`Typeahead render function should render the list 1`] = `
 <div
   className="Typeahead"

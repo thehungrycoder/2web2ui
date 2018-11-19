@@ -1,121 +1,145 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<form
-  onSubmit={[MockFunction]}
->
-  <Field
-    autoFocus={true}
-    component={[Function]}
-    errorInLabel={true}
-    id="username"
-    label="Email or Username"
-    name="username"
-    normalize={[Function]}
-    placeholder="email@example.com"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    helpText={
-      <PageLink
-        to="/forgot-password"
-      >
-        Forgot your password?
-      </PageLink>
-    }
-    id="password"
-    label="Password"
-    name="password"
-    placeholder="••••••••"
-    type="password"
-  />
-  <Field
-    component={[Function]}
-    id="rememberMe"
-    label="Keep me logged in"
-    name="rememberMe"
-  />
-  <Button
-    disabled={false}
-    primary={true}
-    size="default"
-    submit={true}
-  >
-    Log In
-  </Button>
-</form>
+<Fragment>
+  <form>
+    <Field
+      autoFocus={true}
+      component={[Function]}
+      errorInLabel={true}
+      id="username"
+      label="Email or Username"
+      name="username"
+      normalize={[Function]}
+      placeholder="email@example.com"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      helpText={
+        <PageLink
+          to="/forgot-password"
+        >
+          Forgot your password?
+        </PageLink>
+      }
+      id="password"
+      label="Password"
+      name="password"
+      placeholder="••••••••"
+      type="password"
+    />
+    <Field
+      component={[Function]}
+      id="rememberMe"
+      label="Keep me logged in"
+      name="rememberMe"
+    />
+    <Button
+      disabled={false}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Log In
+    </Button>
+  </form>
+</Fragment>
 `;
 
 exports[`renders correctly when logging in 1`] = `
-<form
-  onSubmit={[MockFunction]}
->
-  <Field
-    autoFocus={true}
-    component={[Function]}
-    errorInLabel={true}
-    id="username"
-    label="Email or Username"
-    name="username"
-    normalize={[Function]}
-    placeholder="email@example.com"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    helpText={
-      <PageLink
-        to="/forgot-password"
-      >
-        Forgot your password?
-      </PageLink>
-    }
-    id="password"
-    label="Password"
-    name="password"
-    placeholder="••••••••"
-    type="password"
-  />
-  <Field
-    component={[Function]}
-    id="rememberMe"
-    label="Keep me logged in"
-    name="rememberMe"
-  />
-  <Button
-    disabled={true}
-    primary={true}
-    size="default"
-    submit={true}
-  >
-    Logging In
-  </Button>
-</form>
+<Fragment>
+  <form>
+    <Field
+      autoFocus={true}
+      component={[Function]}
+      errorInLabel={true}
+      id="username"
+      label="Email or Username"
+      name="username"
+      normalize={[Function]}
+      placeholder="email@example.com"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      helpText={
+        <PageLink
+          to="/forgot-password"
+        >
+          Forgot your password?
+        </PageLink>
+      }
+      id="password"
+      label="Password"
+      name="password"
+      placeholder="••••••••"
+      type="password"
+    />
+    <Field
+      component={[Function]}
+      id="rememberMe"
+      label="Keep me logged in"
+      name="rememberMe"
+    />
+    <Button
+      disabled={true}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Logging In
+    </Button>
+  </form>
+</Fragment>
 `;
 
-exports[`renders correctly when ssoEnabled is true 1`] = `
-<form
-  onSubmit={[MockFunction]}
->
-  <Field
-    autoFocus={true}
-    component={[Function]}
-    errorInLabel={true}
-    id="username"
-    label="Email or Username"
-    name="username"
-    normalize={[Function]}
-    placeholder="email@example.com"
-    validate={[Function]}
+exports[`renders errors 1`] = `
+<Fragment>
+  <Error
+    error="asplode"
   />
-  <Button
-    disabled={false}
-    primary={true}
-    size="default"
-    submit={true}
-  >
-    Log In
-  </Button>
-</form>
+  <form>
+    <Field
+      autoFocus={true}
+      component={[Function]}
+      errorInLabel={true}
+      id="username"
+      label="Email or Username"
+      name="username"
+      normalize={[Function]}
+      placeholder="email@example.com"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      helpText={
+        <PageLink
+          to="/forgot-password"
+        >
+          Forgot your password?
+        </PageLink>
+      }
+      id="password"
+      label="Password"
+      name="password"
+      placeholder="••••••••"
+      type="password"
+    />
+    <Field
+      component={[Function]}
+      id="rememberMe"
+      label="Keep me logged in"
+      name="rememberMe"
+    />
+    <Button
+      disabled={false}
+      primary={true}
+      size="default"
+      submit={true}
+    >
+      Log In
+    </Button>
+  </form>
+</Fragment>
 `;

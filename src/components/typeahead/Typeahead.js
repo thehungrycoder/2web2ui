@@ -8,6 +8,13 @@ import styles from './Typeahead.module.scss';
 
 const cx = classnames.bind(styles);
 
+export const TypeaheadItem = ({ id, label }) => (
+  <div className={styles.Item}>
+    {label}
+    <span className={styles.id}>{id}</span>
+  </div>
+);
+
 export class Typeahead extends Component {
   static defaultProps = {
     name: 'subaccount'

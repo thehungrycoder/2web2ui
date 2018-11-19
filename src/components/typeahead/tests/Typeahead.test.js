@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { Typeahead } from '../Typeahead';
+import { Typeahead, TypeaheadItem } from '../Typeahead';
 
 const results = [
   'apples',
@@ -85,6 +85,11 @@ describe('Typeahead', () => {
       };
       wrapper.instance().handleStateChange(null, ds);
       expect(ds.setHighlightedIndex).toHaveBeenCalledWith(0);
+    });
+
+    it('renders a typeahead item', () => {
+      const wrapper = shallow(<TypeaheadItem id="example-id" label="Example Label" />);
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });

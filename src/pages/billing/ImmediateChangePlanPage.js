@@ -42,19 +42,15 @@ export class ImmediateChangePlanPage extends Component {
   }
 
   handleImmediatePlanChange = () => {
-    const { billing, oldCode, immediatePlanChange: newCode, updateSubscription } = this.props;
+    const { immediatePlanChange: newCode, updateSubscription } = this.props;
     this.setState({ loading: LOAD_STATE.PENDING });
     return updateSubscription({ code: newCode })
       .then(() => {
-        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
+        conversions.trackDowngradeToFree(newCode);
         this.setState({ loading: LOAD_STATE.SUCCESS });
       }, (error) => {
         this.setState({ loading: LOAD_STATE.FAILURE, error });
       });
-  }
-
-  getLoadState() {
-    return Number(this.state.loading);
   }
 
   renderSuccess() {
@@ -90,11 +86,7 @@ export class ImmediateChangePlanPage extends Component {
 
 const mapStateToProps = (state, props) => {
   const { immediatePlanChange } = qs.parse(props.location.search);
-  return {
-    billing: state.billing,
-    oldCode: state.account.subscription.code,
-    immediatePlanChange
-  };
+  return { immediatePlanChange };
 };
 
 const mapDispatchToProps = {

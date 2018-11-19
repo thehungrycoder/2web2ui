@@ -1,5 +1,12 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.Action {
+  margin: rem(12) spacing() 0 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 .EditorPanel {
   height: 93%;
   margin-bottom: 0;

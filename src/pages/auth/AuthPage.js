@@ -1,35 +1,49 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from 'src/actions/auth';
-import { PageLink } from 'src/components';
+import { PageLink, CenteredLogo } from 'src/components';
 import { Panel } from '@sparkpost/matchbox';
 
 import config from 'src/config';
-import LoginPanel from './components/LoginPanel';
-import { SSO_AUTH_ROUTE } from 'src/constants';
+import LoginForm from './components/LoginForm';
+import RedirectBeforeLogin from './components/RedirectBeforeLogin';
+import RedirectAfterLogin from './components/RedirectAfterLogin';
+import { TFA_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
-export class AuthPage extends Component {
+export class AuthPage extends React.Component {
   loginSubmit = ({ username, password, rememberMe }) => {
     this.props.authenticate(username, password, rememberMe);
   }
 
-  render () {
-    const { auth } = this.props;
+  render() {
+    const { loggedIn, tfaEnabled } = this.props;
+
     const hasSignup = (config.featureFlags || {}).has_signup;
 
-    return (
-      <LoginPanel title={'Log In'} ssoEnabled={false} loginError={auth.errorDescription} handleSubmit={this.loginSubmit}>
-        <Panel.Footer
-          left={hasSignup && <div><small>Don't have an account? <PageLink to="/join">Sign up</PageLink>.</small><br /></div>}
-          right={<small><PageLink to={SSO_AUTH_ROUTE}>Single Sign-On</PageLink></small>}
-        />
-      </LoginPanel>
-    );
+    if (loggedIn) {
+      return <RedirectAfterLogin />;
+    }
+
+    if (tfaEnabled) {
+      return <RedirectBeforeLogin to={TFA_ROUTE} />;
+    }
+
+    return <React.Fragment>
+      <CenteredLogo />
+      <Panel sectioned accent title='Log In'>
+        <LoginForm onSubmit={this.loginSubmit} />
+      </Panel>
+      <Panel.Footer
+        left={hasSignup && <div><small>Don't have an account? <PageLink to="/join">Sign up</PageLink>.</small><br /></div>}
+        right={<small><PageLink to={SSO_AUTH_ROUTE}>Single Sign-On</PageLink></small>}
+      />
+    </React.Fragment>;
   }
 }
 
-const mapStateToProps = ({ auth }) => ({
-  auth
+const mapStateToProps = ({ auth, tfa }) => ({
+  loggedIn: auth.loggedIn,
+  tfaEnabled: tfa.enabled
 });
 
 export default connect(mapStateToProps, { authenticate })(AuthPage);
