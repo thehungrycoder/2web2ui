@@ -43,7 +43,7 @@ export const PollContext = createContext(defaultContext);
 /**
  * PollContext Provider
  */
-class Poll extends Component {
+export class Poll extends Component {
   state = defaultContext;
 
   isPolling = (key) => {

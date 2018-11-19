@@ -1,5 +1,5 @@
 import React from 'react';
-import Poll from '../Poll';
+import { Poll } from '../Poll';
 import { shallow } from 'enzyme';
 
 describe('Poll Provider', () => {
@@ -16,7 +16,7 @@ describe('Poll Provider', () => {
 
   beforeEach(() => {
     window.setTimeout = jest.fn((fn) => next = fn);
-    wrapper = shallow(<Poll>child</Poll>);
+    wrapper = shallow(<Poll loggedIn={true}>child</Poll>);
   });
 
   it('should render children with the correct state', () => {
