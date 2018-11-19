@@ -66,7 +66,8 @@ export default [
       },
       {
         label: 'Recipient Validation',
-        to: '/recipient-validation'
+        to: '/recipient-validation',
+        beta: true
       }
     ]
   },
