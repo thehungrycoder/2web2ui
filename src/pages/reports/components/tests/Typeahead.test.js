@@ -12,7 +12,7 @@ describe('Component: Typeahead', () => {
       items: [{ type: 'X', value: 'cross' }, { type: 'X', value: 'treasure' }],
       matches: [],
       onSelect: jest.fn(),
-      refreshTypeaheadCache: jest.fn(),
+      refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
       placeholder: ''
     };
 
@@ -24,9 +24,9 @@ describe('Component: Typeahead', () => {
   });
 
   it('should update matches on field change', () => {
-    const { handleFieldChange, updateMatchesDebounced } = wrapper.instance();
+    const { handleFieldChange, updateLookAheadDebounced } = wrapper.instance();
     handleFieldChange({ target: { value: 'cros' }});
-    updateMatchesDebounced.flush(); // forces debounced calls to execute
+    updateLookAheadDebounced.flush(); // forces debounced calls to execute
     expect(wrapper.state()).toMatchSnapshot();
   });
 

@@ -44,7 +44,7 @@ describe('Action Creator: Report Options', () => {
 
     it('should dispatch 4 actions', () => {
       reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-      expect(dispatchMock).toHaveBeenCalledTimes(4);
+      expect(dispatchMock).toHaveBeenCalledTimes(3);
       expect(listTemplates).toHaveBeenCalledTimes(1);
       expect(listSubaccounts).toHaveBeenCalledTimes(1);
       expect(listSendingDomains).toHaveBeenCalledTimes(1);
@@ -57,36 +57,10 @@ describe('Action Creator: Report Options', () => {
 
       reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
 
-      expect(dispatchMock).toHaveBeenCalledTimes(1);
+      expect(dispatchMock).toHaveBeenCalledTimes(0);
       expect(listTemplates).not.toHaveBeenCalled();
       expect(listSubaccounts).not.toHaveBeenCalled();
       expect(listSendingDomains).not.toHaveBeenCalled();
-    });
-
-    it('should skip call to refreshTypeaheadCache if any of the metrics lists are not empty', () => {
-      testState.templates.list.push('template');
-      testState.subaccounts.list.push('subaccount');
-      testState.sendingDomains.list.push('sending-domain');
-
-      testState.metrics.campaigns.push('campaign');
-      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-
-      testState.metrics.campaigns = [];
-
-      testState.metrics.domains.push('domain');
-      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-
-      testState.metrics.domains = [];
-
-      testState.metrics.sendingIps.push('sendingIp');
-      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-
-      testState.metrics.sendingIps = [];
-
-      testState.metrics.ipPools.push('pool');
-      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-
-      expect(dispatchMock).not.toHaveBeenCalled();
     });
 
   });

@@ -4,12 +4,7 @@ exports[`Component: Typeahead should produce matches on search 1`] = `
 Object {
   "calculatingMatches": false,
   "inputValue": "",
-  "matches": Array [
-    Object {
-      "type": "X",
-      "value": "cross",
-    },
-  ],
+  "matches": Array [],
 }
 `;
 
@@ -48,21 +43,10 @@ exports[`Component: Typeahead should render with matches 1`] = `
   className="Typeahead"
 >
   <div
-    className="List open"
+    className="List"
   >
     <ActionList
-      actions={
-        Array [
-          Object {
-            "className": "",
-            "content": <TypeaheadItem
-              helpText="X"
-              value="cross"
-            />,
-            "highlighted": true,
-          },
-        ]
-      }
+      actions={Array []}
       groupByKey="section"
     />
   </div>
@@ -75,7 +59,7 @@ exports[`Component: Typeahead should render with matches 1`] = `
 
 exports[`Component: Typeahead should update matches on field change 1`] = `
 Object {
-  "calculatingMatches": false,
+  "calculatingMatches": true,
   "inputValue": "",
   "matches": Array [],
 }
