@@ -133,10 +133,6 @@ export function getDuration(dates, unit = 'hours') {
   return moment(to).diff(moment(from), unit);
 }
 
-export function isStartTimeAfterNow({ from }) {
-  return moment().isBefore(moment(from));
-}
-
 export function formatDate(date, FORMAT = config.dateFormat) {
   return moment(date).format(FORMAT);
 }

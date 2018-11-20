@@ -9,7 +9,6 @@ import {
   formatTime,
   formatDateTime,
   isSameDate,
-  isStartTimeAfterNow,
   getLocalTimezone,
   formatInputDate,
   formatInputTime,
@@ -294,16 +293,6 @@ describe('Date helpers', () => {
 
     it('returns the duration between two dates in days', () => {
       expect(getDuration({ from: '2017-12-18T00:00:00', to: '2017-12-19T00:00:00' }, 'days')).toEqual(1);
-    });
-  });
-
-  describe('isStartTimeAfterNow', () => {
-    it('returns false if start time is before now', () => {
-      expect(isStartTimeAfterNow({ from: '2000-12-18T00:00:00' })).toEqual(false);
-    });
-
-    it('returns true if start time is after now', () => {
-      expect(isStartTimeAfterNow({ from: '2040-12-18T00:00:00' })).toEqual(true);
     });
   });
 });
