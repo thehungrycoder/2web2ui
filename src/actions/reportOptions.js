@@ -21,18 +21,14 @@ const metricLists = [
 
 /**
  * Returns a thunk that initializes the non-metric lists used
- * for populating the typeahead cache (metrics lists are populated
- * during date range refreshes)
+ * for populating the typeahead cache.
  *
  * The thunk skips calling any of the lists that already have values
  * in the redux store
  */
 export function initTypeaheadCache() {
   return (dispatch, getState) => {
-    const { templates, subaccounts, sendingDomains, metrics, reportOptions } = getState();
-    const allCachesEmpty = ['domains', 'campaigns', 'sendingIps', 'ipPools'].every((cache) => (
-      metrics[cache].length === 0
-    ));
+    const { templates, subaccounts, sendingDomains } = getState();
     const requests = [];
 
     if (templates.list.length === 0) {
@@ -47,14 +43,14 @@ export function initTypeaheadCache() {
       requests.push(dispatch(listSendingDomains()));
     }
 
-    if (allCachesEmpty) {
-      requests.push(dispatch(refreshTypeaheadCache(reportOptions)));
-    }
-
     return Promise.all(requests);
   };
 }
 
+/**
+ * Refreshes the typeahead cache with the metrics lists. This occurs dynamically
+ * whenever the user types in the search field but with a debounce
+ */
 export function refreshTypeaheadCache(options) {
   const params = getQueryFromOptions(options, true);
   return (dispatch) => {

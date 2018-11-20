@@ -24,30 +24,31 @@ export class Typeahead extends Component {
   updateMatches = (pattern) => {
     let matches;
 
-    this.setState({ calculatingMatches: true });
-
-    if (!pattern || pattern.length < 2) {
-      matches = [];
-    } else {
+    if (this.state.calculatingMatches) {
       const { items, selected = []} = this.props;
       const flatSelected = selected.map(flattenItem);
       matches = sortMatch(items, pattern, (i) => i.value)
         .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
         .slice(0, 100);
+      this.setState({ matches, calculatingMatches: false });
     }
-
-    this.setState({ matches, calculatingMatches: false });
   };
 
   updateLookAhead = (pattern) => {
-    const options = { ...this.props.reportOptions };
-    options.match = pattern;
-    this.props.refreshTypeaheadCache(options).then(() => {
-      this.updateMatchesDebounced(pattern);
-    });
+
+    if (!pattern || pattern.length < 2) {
+      const matches = [];
+      this.setState({ matches, calculatingMatches: false });
+    } else {
+      this.setState({ calculatingMatches: true });
+      const options = { ...this.props.reportOptions };
+      options.match = pattern;
+      this.props.refreshTypeaheadCache(options).then(() => {
+        this.updateMatches(pattern);
+      });
+    }
   };
 
-  updateMatchesDebounced = _.debounce(this.updateMatches, 250);
   updateLookAheadDebounced = _.debounce(this.updateLookAhead, 250);
 
   handleFieldChange = (e) => {
