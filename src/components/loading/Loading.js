@@ -14,13 +14,13 @@ Loading.displayName = 'Loading';
 /**
  * Circle Animation
  */
-export const LoadingSVG = ({ className = '', small = false }) => (
+export const LoadingSVG = ({ className = '', small = false, circleClassName = '' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="25 25 50 50"
     className={classnames(styles.CircleWrapper, small && styles.Small, className)} >
     <circle
-      className={styles.Circle}
+      className={classnames(styles.Circle, circleClassName)}
       cx="50" cy="50" r="20"
       vectorEffect="non-scaling-stroke" />
   </svg>

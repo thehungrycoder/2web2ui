@@ -52,6 +52,11 @@ exports[`Component: Typeahead should render with matches 1`] = `
   </div>
   <TextField
     resize="both"
+    suffix={
+      <TypeaheadLoading
+        isCalculating={false}
+      />
+    }
     type="text"
   />
 </div>

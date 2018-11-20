@@ -9,6 +9,7 @@ import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import TypeaheadLoading from './TypeaheadLoading';
 
 function flattenItem({ type, value }) {
   return `${type}:${value}`;
@@ -20,32 +21,36 @@ export class Typeahead extends Component {
     matches: [],
     calculatingMatches: false
   };
+  unresolvedPromisesList = [];
 
   updateMatches = (pattern) => {
     let matches;
-
+    this.unresolvedPromisesList.pop();
     if (this.state.calculatingMatches) {
       const { items, selected = []} = this.props;
       const flatSelected = selected.map(flattenItem);
       matches = sortMatch(items, pattern, (i) => i.value)
         .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
         .slice(0, 100);
-      this.setState({ matches, calculatingMatches: false });
+      this.setState({ matches });
+      if (this.unresolvedPromisesList.length === 0) {
+        this.setState({ calculatingMatches: false });
+      }
     }
   };
 
   updateLookAhead = (pattern) => {
-
+    this.setState({ calculatingMatches: true });
     if (!pattern || pattern.length < 2) {
       const matches = [];
       this.setState({ matches, calculatingMatches: false });
     } else {
-      this.setState({ calculatingMatches: true });
+      this.unresolvedPromisesList.push(true);
       const options = { ...this.props.reportOptions };
       options.match = pattern;
-      this.props.refreshTypeaheadCache(options).then(() => {
-        this.updateMatches(pattern);
-      });
+      return this.props.refreshTypeaheadCache(options).then(() =>
+        this.updateMatches(pattern)
+      );
     }
   };
 
@@ -90,7 +95,6 @@ export class Typeahead extends Component {
     }));
 
     const listClasses = classnames(styles.List, isOpen && mappedMatches.length && styles.open);
-
     return (
       <div className={styles.Typeahead}>
         <div className={listClasses}><ActionList actions={mappedMatches} /></div>
@@ -98,7 +102,9 @@ export class Typeahead extends Component {
           placeholder,
           onFocus: clearSelection,
           onChange: this.handleFieldChange
-        })} />
+        })}
+        suffix={<TypeaheadLoading isCalculating = {this.state.calculatingMatches} />}
+        />
       </div>
     );
   };
