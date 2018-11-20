@@ -61,10 +61,10 @@ export default class ManualEntryForm extends Component {
     const from = parseDatetime(this.state.fromDate, this.state.fromTime);
     const to = parseDatetime(this.state.toDate, this.state.toTime);
     // allow for prop-level override of "now" (DI, etc.)
-    const { now, roundToPrecision } = this.props;
+    const { now, roundToPrecision, preventFuture } = this.props;
 
     try {
-      const { to: roundedTo, from: roundedFrom } = getValidDateRange({ from, to, now, roundToPrecision });
+      const { to: roundedTo, from: roundedFrom } = getValidDateRange({ from, to, now, roundToPrecision, preventFuture });
       return this.props.selectDates({ to: roundedTo.toDate(), from: roundedFrom.toDate() }, () => {
         if (e && e.key === 'Enter') {
           this.props.onEnter(e);

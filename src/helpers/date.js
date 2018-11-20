@@ -19,6 +19,7 @@ export const relativeDateOptionsIndexed = relativeDateOptions.reduce((result, { 
 }, {});
 
 export const getRelativeDateOptions = (ranges) => relativeDateOptions.filter((item) => ranges.includes(item.value));
+
 /**
  * Takes a date string and returns the end of that day (11:59PM)
  *

@@ -134,9 +134,9 @@ function ceilMoment(time, roundInt = 1, precision = 'minutes') {
  * @param roundToPrecision
  * @return {*}
  */
-export function getValidDateRange({ from, to, now = moment(), roundToPrecision }) {
-  // If we're not rounding, just check that 'to' is before 'now'
-  const nonRoundCondition = () => roundToPrecision ? true : to.isBefore(now);
+export function getValidDateRange({ from, to, now = moment(), roundToPrecision, preventFuture }) {
+  // If we're not rounding, check to see if we want to prevent future dates. if not, prevent past dates.
+  const nonRoundCondition = () => roundToPrecision ? true : preventFuture ? to.isBefore(now) : from.isAfter(now);
   const validDates = _.every(_.map([from, to, now], (date) => moment.isMoment(date) && date.isValid()));
 
   if (validDates && from.isBefore(to) && nonRoundCondition()) {

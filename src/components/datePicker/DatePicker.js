@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 225] */
+/* eslint max-lines: ["error", 235] */
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, getRelativeDateOptions, getNextHour, isSameDate } from 'src/helpers/date';
@@ -146,6 +146,7 @@ export default class AppDatePicker extends Component {
       textFieldProps = {},
       dateFieldFormat,
       roundToPrecision,
+      preventFuture,
       showPresets = true,
       error,
       left
@@ -195,7 +196,15 @@ export default class AppDatePicker extends Component {
           {...datePickerProps}
         />
 
-        <ManualEntryForm selectDates={this.handleFormDates} onEnter={this.handleKeyDown} to={to} from={from} roundToPrecision={roundToPrecision}/>
+        <ManualEntryForm
+          selectDates={this.handleFormDates}
+          onEnter={this.handleKeyDown}
+          to={to}
+          from={from}
+          roundToPrecision={roundToPrecision}
+          preventFuture={preventFuture}
+        />
+
         <Button primary onClick={this.handleSubmit} className={styles.Apply}>Apply</Button>
         <Button onClick={this.cancelDatePicker}>Cancel</Button>
         <WindowEvent event='keydown' handler={this.handleKeyDown} />
