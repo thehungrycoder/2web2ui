@@ -1,6 +1,8 @@
 import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import { login } from 'src/actions/auth';
+import { usernameSelector } from 'src/selectors/currentUser';
+import { authTokenSelector } from 'src/selectors/auth';
 
 export function getTfaStatusBeforeLoggedIn({ username, token }) {
   return sparkpostRequest({
@@ -62,12 +64,17 @@ export function clearBackupCodes() {
 
 export function getTfaSecret() {
   return (dispatch, getState) => {
-    const { currentUser } = getState();
+    const state = getState();
+    const username = usernameSelector(state);
+    const authToken = authTokenSelector(state);
     return dispatch(sparkpostApiRequest({
       type: 'GET_TFA_SECRET',
       meta: {
         method: 'PUT',
-        url: `/v1/users/${currentUser.username}/two-factor`,
+        url: `/v1/users/${username}/two-factor`,
+        headers: {
+          Authorization: authToken
+        },
         data: {
           enabled: true
         }
@@ -86,12 +93,18 @@ export function getTfaSecret() {
  */
 export function toggleTfa(data) {
   return (dispatch, getState) => {
-    const { currentUser } = getState();
+    const state = getState();
+    const username = usernameSelector(getState());
+    const authToken = authTokenSelector(state);
     return dispatch(sparkpostApiRequest({
       type: 'TFA_TOGGLE',
       meta: {
         method: 'PUT',
-        url: `/v1/users/${currentUser.username}/two-factor`,
+        url: `/v1/users/${username}/two-factor`,
+        headers: {
+          Authorization: authToken
+        },
+        showErrorAlert: false,
         data
       }
     })).catch(() => {

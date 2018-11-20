@@ -58,15 +58,12 @@ export function authenticate(username, password, rememberMe = false) {
         // Start website auth token cookie setup process
         dispatch(websiteAuth.authenticate(username, password, rememberMe));
 
-        return Promise.all([ authData, getTfaStatusBeforeLoggedIn({ username, token: authData.access_token })]);
+        return Promise.all([authData, getTfaStatusBeforeLoggedIn({ username, token: authData.access_token })]);
       })
-      .then(([ authData, tfaResponse]) => {
-        // if tfa enabled must avoid logging in
-        if (tfaResponse.data.results.enabled) {
-          dispatch({
-            type: 'TFA_ENABLED_ON_LOGIN',
-            payload: authData
-          });
+      .then(([authData, tfaResponse]) => {
+        const tfaAction = actOnTfaStatus(tfaResponse, authData);
+        if (tfaAction) {
+          dispatch(tfaAction);
         } else {
           dispatch(login({ authData, saveCookie: true }));
         }
@@ -86,6 +83,17 @@ export function authenticate(username, password, rememberMe = false) {
         });
       });
   };
+}
+
+function actOnTfaStatus(tfaResponse, authData) {
+  const { enabled, required } = tfaResponse.data.results;
+  if (enabled) {
+    return { type: 'TFA_ENABLED_ON_LOGIN', payload: authData };
+  }
+  if (required) {
+    return { type: 'TFA_REQUIRED_ON_LOGIN', payload: authData };
+  }
+  return null;
 }
 
 export function confirmPassword(username, password) {
