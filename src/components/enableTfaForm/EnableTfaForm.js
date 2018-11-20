@@ -18,17 +18,22 @@ export class EnableTfaForm extends React.Component {
     this.props.getTfaSecret();
   }
 
+  componentDidUpdate(prevProps) {
+    const { togglePending, toggleError, showAlert, afterEnable } = this.props;
+    // If we just finished a toggle operation without an error, hit the afterEnable callback.
+    if (prevProps.togglePending && !togglePending && !toggleError) {
+      showAlert({ type: 'success', message: 'Two-factor authentication enabled' });
+      afterEnable();
+    }
+  }
+
   handleInputChange = ({ target }) => {
     this.setState({ code: target.value });
   };
 
   onEnable = () => {
-    const { toggleTfa, afterEnable } = this.props;
-    const enableIt = toggleTfa({ enabled: true, code: this.state.code });
-    if (afterEnable) {
-      enableIt.then(this.props.afterEnable);
-    }
-    return enableIt;
+    const { toggleTfa } = this.props;
+    return toggleTfa({ enabled: true, code: this.state.code });
   };
 
   renderForm() {
@@ -112,9 +117,8 @@ export class EnableTfaForm extends React.Component {
 
 EnableTfaForm.propTypes = EnableTfaFormPropTypes;
 
-const mapStateToProps = ({ currentUser, tfa }) => ({
+const mapStateToProps = ({ tfa }) => ({
   ...tfa,
-  username: currentUser.username,
   enabled: tfa.enabled === true
 });
 
@@ -122,6 +126,7 @@ export default connect(
   mapStateToProps,
   {
     getTfaSecret,
-    toggleTfa
+    toggleTfa,
+    showAlert
   }
 )(EnableTfaForm);
