@@ -9,7 +9,6 @@ describe('Brightback Component', () => {
     )),
     condition: true,
     enabled: true,
-    hasBrightbackOption: true,
     prepBrightback: jest.fn((a) => a),
     data: {
       test: 'data'
@@ -22,12 +21,6 @@ describe('Brightback Component', () => {
     const wrapper = shallow(<Brightback {...props}/>);
     expect(wrapper).toMatchSnapshot();
     expect(props.prepBrightback).toHaveBeenCalledWith(props.data);
-  });
-
-  it('should pass correct props without the UI option', () => {
-    const wrapper = shallow(<Brightback {...props} hasBrightbackOption={false} />);
-    expect(wrapper).toMatchSnapshot();
-    expect(props.prepBrightback).not.toHaveBeenCalled();
   });
 
   it('should pass correct props without valid account data', () => {
