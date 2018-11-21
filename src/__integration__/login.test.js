@@ -4,7 +4,7 @@ import AuthPage from 'src/pages/auth/AuthPage';
 import axios from 'axios';
 const axiosMock = axios.create();
 
-test('Complete Login Form', async () => {
+test('Login Page: Basic Auth', async () => {
 
   const form = await setupForm(<AuthPage />, { authenticated: false });
 
@@ -18,4 +18,3 @@ test('Complete Login Form', async () => {
 
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });
-
