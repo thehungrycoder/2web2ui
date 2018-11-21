@@ -59,20 +59,14 @@ describe('EnableTfaModal tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should toggleTfa on enable', () => {
-    instance.enable('code');
-    expect(instance.props.toggleTfa).toHaveBeenCalledWith({ enabled: true, code: 'code' });
-  });
-
   it('should refresh backup code status after enable', () => {
-    instance.enable('code');
+    instance.onEnable();
     expect(instance.props.getTfaBackupStatus).toHaveBeenCalled();
   });
 
   it('should toggleTfa on disable', () => {
     instance.disable('pw');
     expect(instance.props.toggleTfa).toHaveBeenCalledWith({ enabled: false, password: 'pw' });
-
   });
 
   it('should generate back codes on request', () => {

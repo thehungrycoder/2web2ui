@@ -8,6 +8,7 @@ describe('AuthPage tests', () => {
   const baseProps = {
     loggedIn: false,
     tfaEnabled: false,
+    tfaRequired: false,
     authenticate: jest.fn()
   };
 
@@ -19,7 +20,6 @@ describe('AuthPage tests', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  // move to LoginForm
   it('should show link to join when has_signup feature flag exists', () => {
     config.featureFlags = { has_signup: true };
     expect(subject()).toMatchSnapshot();
@@ -38,5 +38,9 @@ describe('AuthPage tests', () => {
 
   it('should redirect to TFA iff enabled', () => {
     expect(subject({ tfaEnabled: true })).toMatchSnapshot();
+  });
+
+  it('should redirect to enable-tfa iff required', () => {
+    expect(subject({ tfaRequired: true })).toMatchSnapshot();
   });
 });

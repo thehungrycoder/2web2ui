@@ -22,6 +22,17 @@ describe('Action Creator: Auth', () => {
     refreshToken: 'adfa012342342'
   };
 
+  function mockGetTfaStatus(enabled, required) {
+    getTfaStatusBeforeLoggedIn.mockResolvedValue({
+      data: {
+        results: {
+          enabled,
+          required
+        }
+      }
+    });
+  }
+
   beforeEach(() => {
     dispatchMock = jest.fn((a) => Promise.resolve(a));
 
@@ -38,6 +49,8 @@ describe('Action Creator: Auth', () => {
         username: 'bar'
       }
     }));
+
+    websiteAuth.authenticate.mockReturnValue({ type: 'WEBSITE_AUTH' });
 
   });
 
@@ -79,27 +92,22 @@ describe('Action Creator: Auth', () => {
     });
 
     it('should update TFA to enabled if user is TFA', async () => {
-      getTfaStatusBeforeLoggedIn.mockImplementation(() => Promise.resolve({
-        data: {
-          results: {
-            enabled: true
-          }
-        }
-      }));
+      mockGetTfaStatus(true, false);
 
       const thunk = authActions.authenticate('bar', 'pw', true);
       await thunk(dispatchMock, getStateMock);
       expect(dispatchMock.mock.calls).toMatchSnapshot();
     });
 
+    it('should update TFA to required', async () => {
+      mockGetTfaStatus(false, true);
+      const thunk = authActions.authenticate('bar', 'pw', true);
+      await thunk(dispatchMock, getStateMock);
+      expect(dispatchMock.mock.calls).toMatchSnapshot();
+    });
+
     it('should login if user is not TFA', async () => {
-      getTfaStatusBeforeLoggedIn.mockImplementation(() => Promise.resolve({
-        data: {
-          results: {
-            enabled: false
-          }
-        }
-      }));
+      mockGetTfaStatus(false, false);
 
       const thunk = authActions.authenticate('bar', 'pw', true);
       await thunk(dispatchMock, getStateMock);

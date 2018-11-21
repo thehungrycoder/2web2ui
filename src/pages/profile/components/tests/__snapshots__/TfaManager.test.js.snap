@@ -35,15 +35,10 @@ exports[`EnableTfaModal tests should render correctly 1`] = `
     open={false}
   />
   <EnableTfaModal
-    enable={[Function]}
     enabled={false}
-    getSecret={[MockFunction]}
     onClose={[Function]}
+    onEnable={[Function]}
     open={false}
-    secret="shhh"
-    toggleError={false}
-    togglePending={false}
-    username="kevin-mitnick"
   />
   <DisableTfaModal
     disable={[Function]}
@@ -102,15 +97,10 @@ exports[`EnableTfaModal tests should show a message about 0 codes 1`] = `
     open={false}
   />
   <EnableTfaModal
-    enable={[MockFunction]}
     enabled={true}
-    getSecret={[MockFunction]}
     onClose={[MockFunction]}
+    onEnable={[MockFunction]}
     open={false}
-    secret="shhh"
-    toggleError={false}
-    togglePending={false}
-    username="kevin-mitnick"
   />
   <DisableTfaModal
     disable={[MockFunction]}
@@ -170,15 +160,10 @@ exports[`EnableTfaModal tests should toggle status text when enabled 1`] = `
     open={false}
   />
   <EnableTfaModal
-    enable={[MockFunction]}
     enabled={true}
-    getSecret={[MockFunction]}
     onClose={[MockFunction]}
+    onEnable={[MockFunction]}
     open={false}
-    secret="shhh"
-    toggleError={false}
-    togglePending={false}
-    username="kevin-mitnick"
   />
   <DisableTfaModal
     disable={[MockFunction]}
