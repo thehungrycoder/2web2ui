@@ -27,9 +27,8 @@ export async function setupForm(tree, { authenticated = true } = { }) {
 
   if (authenticated) {
     login(store);
+    setReady(store);
   }
-
-  setReady(store);
 
   const mounted = mount(
     <Provider store={store}>

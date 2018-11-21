@@ -27,7 +27,7 @@ Array [
   Array [
     Object {
       "headers": Object {
-        "Authorization": undefined,
+        "Authorization": "mock-access-token",
       },
       "method": "GET",
       "url": "/v1/users/test-username/two-factor",
@@ -37,7 +37,7 @@ Array [
     Object {
       "data": undefined,
       "headers": Object {
-        "Authorization": undefined,
+        "Authorization": "mock-access-token",
       },
       "method": "get",
       "params": Object {},
@@ -49,7 +49,7 @@ Array [
     Object {
       "data": undefined,
       "headers": Object {
-        "Authorization": undefined,
+        "Authorization": "mock-access-token",
       },
       "method": "get",
       "params": undefined,
@@ -61,7 +61,7 @@ Array [
     Object {
       "data": undefined,
       "headers": Object {
-        "Authorization": undefined,
+        "Authorization": "mock-access-token",
       },
       "method": "get",
       "params": undefined,
@@ -73,7 +73,7 @@ Array [
     Object {
       "data": undefined,
       "headers": Object {
-        "Authorization": undefined,
+        "Authorization": "mock-access-token",
       },
       "method": "get",
       "params": Object {
