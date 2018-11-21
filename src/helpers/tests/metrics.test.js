@@ -251,11 +251,19 @@ describe('metrics helpers', () => {
         to: moment('2018-02-15'),
         now: moment('2018-02-00'),
         roundToPrecision: false
+      },
+      {
+        name: 'when from is before now (without rounding)',
+        from: moment('2018-01-15'),
+        to: moment('2018-03-15'),
+        now: moment('2018-02-15'),
+        roundToPrecision: false,
+        preventFuture: false
       }
     ];
 
-    cases('should throw error', ({ from, to, now, roundToPrecision = true }) => {
-      const getInvalidDateRange = () => metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision });
+    cases('should throw error', ({ from, to, now, roundToPrecision = true, preventFuture = true }) => {
+      const getInvalidDateRange = () => metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision, preventFuture });
       expect(getInvalidDateRange).toThrowErrorMatchingSnapshot();
     }, invalidCases);
 
@@ -264,7 +272,7 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-16T11:59Z');
       const now = moment('2018-02-01T11:00Z');
 
-      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true, preventFuture: true });
       expect(validRange).toEqual({ from, to: to.endOf('minute') });
     });
 
@@ -281,7 +289,7 @@ describe('metrics helpers', () => {
       const from = moment('2018-01-15T11:00Z');
       const to = moment('2018-01-16T11:59Z');
 
-      const validRange = metricsHelpers.getValidDateRange({ from, to, roundToPrecision: true });
+      const validRange = metricsHelpers.getValidDateRange({ from, to, roundToPrecision: true, preventFuture: true });
       expect(validRange).toEqual({ from, to: to.endOf('minute') });
     });
 
@@ -290,7 +298,7 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-19T11:59Z'); // would use day precision if valid
       const now = moment('2018-01-15T11:23Z'); // will instead use minute precision
 
-      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true, preventFuture: true });
       expect(validRange).toEqual({ from, to: now });
     });
 
@@ -299,7 +307,7 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-17T10:59Z');
       const now = moment('2018-01-16T11:23Z');
 
-      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true, preventFuture: true });
       expect(validRange.from).toEqual(from);
       expect(validRange.to.toISOString()).toEqual(moment('2018-01-16T11:59Z').endOf('minute').toISOString());
     });
@@ -309,7 +317,7 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-19T11:27Z');
       const now = moment('2018-01-19T11:23Z');
 
-      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true });
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true, preventFuture: true });
       expect(validRange.from).toEqual(from);
       expect(validRange.to.toISOString()).toEqual(moment('2018-01-19T11:59Z').endOf('minute').toISOString());
     });

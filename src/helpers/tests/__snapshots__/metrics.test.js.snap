@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`metrics helpers getValidDateRange should throw error when from is before now (without rounding) 1`] = `"Invalid date range selected"`;
+
 exports[`metrics helpers getValidDateRange should throw error when to is after now (without rounding) 1`] = `"Invalid date range selected"`;
 
 exports[`metrics helpers getValidDateRange should throw error when to is after now 1`] = `"Invalid date range selected"`;
