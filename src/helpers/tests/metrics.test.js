@@ -273,7 +273,7 @@ describe('metrics helpers', () => {
       const to = moment('2018-01-16T11:33Z');
       const now = moment('2018-02-01T11:33Z');
 
-      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: false });
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: false, preventFuture: true });
       expect(validRange).toEqual({ from, to });
     });
 
