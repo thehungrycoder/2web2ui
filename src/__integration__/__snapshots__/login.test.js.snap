@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Complete Login Form 1`] = `
+exports[`Login Page: Basic Auth 1`] = `
 Array [
   Array [
     Object {
