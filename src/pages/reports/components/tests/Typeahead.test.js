@@ -9,11 +9,12 @@ describe('Component: Typeahead', () => {
 
   beforeEach(() => {
     props = {
-      items: [{ type: 'X', value: 'cross' }, { type: 'X', value: 'treasure' }],
+      items: [{ type: 'X', value: 'cross' }, { type: 'X', value: 'treasure' }, { type: 'Campaign', value: 'crossing' }],
       matches: [],
       onSelect: jest.fn(),
       refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
-      placeholder: ''
+      placeholder: '',
+      lastPattern: null
     };
 
     wrapper = shallow(<Typeahead {...props} />);
@@ -23,27 +24,40 @@ describe('Component: Typeahead', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should update matches on field change', () => {
+  it('should trigger updateLookAhead functon on field change', () => {
+    expect(wrapper.state().calculatingMatches).toEqual(false);
     const { handleFieldChange, updateLookAheadDebounced } = wrapper.instance();
     handleFieldChange({ target: { value: 'cros' }});
     updateLookAheadDebounced.flush(); // forces debounced calls to execute
-    expect(wrapper.state()).toMatchSnapshot();
+    expect(wrapper.state().calculatingMatches).toEqual(true);
+    expect(wrapper.state().lastPattern).toEqual('cros');
   });
 
   it('should produce matches on search', () => {
     const value = 'cross';
-    wrapper.instance().updateMatches(value);
-    expect(wrapper.state()).toMatchSnapshot();
+    wrapper.instance().updateLookAhead(value).then(() => {
+      expect(wrapper.state().calculatingMatches).toEqual(false);
+      expect(wrapper.state()).toMatchSnapshot();
+    });
   });
 
   it('should produce no matches on empty query', () => {
     const value = '';
-    wrapper.instance().updateMatches(value);
+    wrapper.instance().updateLookAhead(value).then(() => {
+      expect(wrapper.state().calculatingMatches).toEqual(false);
+      expect(wrapper.state()).toMatchSnapshot();
+    });
+  });
+
+  it('should first show matches that do not use the metrics API calls', () => {
+    const value = 'cross';
+    props.refreshTypeaheadCache = jest.fn(() => Promise.reject());
+    wrapper.instance().updateLookAhead(value);
     expect(wrapper.state()).toMatchSnapshot();
   });
 
   it('should render with matches', () => {
-    const value = 'cross';
+    const value = 'cros';
     const downshiftHelpers = {
       getInputProps: jest.fn(),
       getItemProps: jest.fn(),
@@ -53,14 +67,13 @@ describe('Component: Typeahead', () => {
       highlightedIndex: 0,
       clearSelection: jest.fn()
     };
-
-    wrapper.instance().updateMatches(value);
     const TypeaheadRender = wrapper.instance().onTypeahead;
-    expect(shallow(<TypeaheadRender {...downshiftHelpers} {...props} />)).toMatchSnapshot();
+    wrapper.instance().updateLookAhead(value).then(() =>
+      expect(shallow(<TypeaheadRender {...downshiftHelpers} {...props} />)).toMatchSnapshot());
   });
 
   it('should call onSelect on change', () => {
-    const value = { type: 'X', value: 'treasure' };
+    const value = { type: 'Template', value: 'treasure' };
     wrapper.instance().handleDownshiftChange(value);
     expect(props.onSelect).toHaveBeenCalledWith(value);
   });

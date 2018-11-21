@@ -11,6 +11,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TypeaheadLoading from './TypeaheadLoading';
 
+const TYPES_METRICS = ['Campaign', 'Recipient Domain', 'IP Pool', 'Sending IP'];
+
 function flattenItem({ type, value }) {
   return `${type}:${value}`;
 }
@@ -19,38 +21,52 @@ export class Typeahead extends Component {
   state = {
     inputValue: '',
     matches: [],
-    calculatingMatches: false
+    calculatingMatches: false,
+    lastPattern: null
   };
-  unresolvedPromisesList = [];
 
+  //Updates matches for Templates, Sending domains, subaccounts, and anything not in `TYPES_METRICS`.
   updateMatches = (pattern) => {
-    let matches;
-    this.unresolvedPromisesList.pop();
-    if (this.state.calculatingMatches) {
+    const { items, selected = []} = this.props;
+    const flatSelected = selected.map(flattenItem);
+    const matches = sortMatch(items, pattern, (i) => i.value)
+      .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })) && !TYPES_METRICS.includes(type))
+      .slice(0, 100);
+    this.setState({ matches });
+  };
+
+  //Updates matches for Campaign, Recipient Domain, IP Pool, and Sending Domain after the metrics api call.
+  //Then concatonates the metrics matches to the previous matches.
+  updateMatchesAsync = (pattern) => {
+    //Only update the matches if the user is still waiting for results this is the last queued call.
+    if (this.state.calculatingMatches && pattern === this.state.lastPattern) {
       const { items, selected = []} = this.props;
       const flatSelected = selected.map(flattenItem);
-      matches = sortMatch(items, pattern, (i) => i.value)
-        .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
+      let matches = sortMatch(items, pattern, (i) => i.value)
+        .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })) && TYPES_METRICS.includes(type))
         .slice(0, 100);
-      this.setState({ matches });
-      if (this.unresolvedPromisesList.length === 0) {
-        this.setState({ calculatingMatches: false });
-      }
+      const currentMatches = this.state.matches;
+      matches = _.concat(currentMatches, matches);
+      this.setState({ matches, calculatingMatches: false, lastPattern: null });
     }
   };
 
+  // Updates the matches with the local templates, sending domains, subaccounts then
+  // makes the metrics api calls and appends to the matches.
   updateLookAhead = (pattern) => {
     this.setState({ calculatingMatches: true });
     if (!pattern || pattern.length < 2) {
       const matches = [];
-      this.setState({ matches, calculatingMatches: false });
+      this.setState({ matches, calculatingMatches: false, lastPattern: null });
+      return Promise.resolve();
     } else {
-      this.unresolvedPromisesList.push(true);
+      this.setState({ lastPattern: pattern });//This sets the last queued pattern
       const options = { ...this.props.reportOptions };
       options.match = pattern;
-      return this.props.refreshTypeaheadCache(options).then(() =>
-        this.updateMatches(pattern)
-      );
+      this.updateMatches(pattern);
+      return this.props.refreshTypeaheadCache(options).then(() => {
+        this.updateMatchesAsync(pattern);
+      });
     }
   };
 
