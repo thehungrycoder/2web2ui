@@ -99,11 +99,24 @@ describe('Action Creator: Auth', () => {
       expect(dispatchMock.mock.calls).toMatchSnapshot();
     });
 
+    it('should return auth status on login success', async () => {
+      const thunk = authActions.authenticate('bar', 'pw', true);
+      const result = await thunk(dispatchMock, getStateMock);
+      expect(result).toMatchObject({ auth: true, tfaRequired: false });
+    });
+
     it('should update TFA to required', async () => {
       mockGetTfaStatus(false, true);
       const thunk = authActions.authenticate('bar', 'pw', true);
       await thunk(dispatchMock, getStateMock);
       expect(dispatchMock.mock.calls).toMatchSnapshot();
+    });
+
+    it('should return tfa required status', async () => {
+      mockGetTfaStatus(false, true);
+      const thunk = authActions.authenticate('bar', 'pw', true);
+      const result = await thunk(dispatchMock, getStateMock);
+      expect(result).toMatchObject({ tfaRequired: true });
     });
 
     it('should login if user is not TFA', async () => {
@@ -115,18 +128,32 @@ describe('Action Creator: Auth', () => {
     });
 
     it('should dispatch a failed login if login fails', async () => {
-      sparkpostLogin.mockImplementation(() => Promise.reject({
+      sparkpostLogin.mockRejectedValue({
         response: {
           data: {
             error_description: 'login failed'
           }
         }
-      }));
+      });
 
       const thunk = authActions.authenticate('bar', 'pw', true);
       await thunk(dispatchMock, getStateMock);
       expect(dispatchMock.mock.calls).toMatchSnapshot();
 
+    });
+
+    it('should return auth status on login failure', async () => {
+      sparkpostLogin.mockRejectedValue({
+        response: {
+          data: {
+            error_description: 'login failed'
+          }
+        }
+      });
+
+      const thunk = authActions.authenticate('bar', 'pw', true);
+      const result = await thunk(dispatchMock, getStateMock);
+      expect(result).toMatchObject({ auth: false });
     });
   });
 
