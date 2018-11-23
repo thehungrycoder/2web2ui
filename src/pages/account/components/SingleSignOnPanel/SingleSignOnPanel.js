@@ -17,7 +17,7 @@ export class SingleSignOnPanel extends React.Component {
   }
 
   renderContents() {
-    const { loading, provider } = this.props;
+    const { loading, provider, tfaRequired } = this.props;
 
     if (loading) {
       return <PanelLoading minHeight="130px" />;
@@ -25,8 +25,16 @@ export class SingleSignOnPanel extends React.Component {
 
     return (
       <React.Fragment>
-        <ProviderSection provider={provider} />
-        <StatusSection {...this.props} />
+        {tfaRequired && (
+          <Panel.Section>
+            <p>
+              Single sign-on is not available while two-factor authentication is required on this
+              account.
+            </p>
+          </Panel.Section>
+        )}
+        <ProviderSection readOnly={tfaRequired} provider={provider} />
+        <StatusSection readOnly={tfaRequired} {...this.props} />
       </React.Fragment>
     );
   }
@@ -35,12 +43,14 @@ export class SingleSignOnPanel extends React.Component {
     return (
       <Panel
         title="Single Sign-On"
-        actions={[{
-          color: 'orange',
-          component: ExternalLink,
-          content: 'Learn More',
-          to: LINKS.SSO_GUIDE
-        }]}
+        actions={[
+          {
+            color: 'orange',
+            component: ExternalLink,
+            content: 'Learn More',
+            to: LINKS.SSO_GUIDE
+          }
+        ]}
       >
         {this.renderContents()}
       </Panel>
@@ -58,4 +68,7 @@ const mapStateToProps = ({ account, accountSingleSignOn }) => ({
   tfaRequired: account.tfa_required
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleSignOnPanel);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleSignOnPanel);

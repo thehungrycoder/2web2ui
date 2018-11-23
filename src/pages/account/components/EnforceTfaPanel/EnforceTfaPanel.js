@@ -1,13 +1,15 @@
 import React from 'react';
+import { Panel } from '@sparkpost/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import ConfirmationModal from 'src/components/modals/ConfirmationModal';
+import { ConfirmationModal } from 'src/components/modals';
 import TogglePanel from './TogglePanel';
+import ExternalLink from 'src/components/externalLink/ExternalLink';
+import { LINKS } from 'src/constants';
 
 export class EnforceTFAPanel extends React.Component {
   state = {
     enforced: false,
     updating: false,
-    disableSsoModal: false,
     enableModal: false,
     disableModal: false
   };
@@ -17,27 +19,13 @@ export class EnforceTFAPanel extends React.Component {
   }
 
   toggleTfaRequired = () => {
-    const { ssoEnabled, tfaRequired } = this.props;
+    const { tfaRequired } = this.props;
 
     if (tfaRequired) {
       this.setState({ disableModal: true });
-    } else if (ssoEnabled) {
-      // Offer to disable SSO before requiring TFA
-      this.setState({ disableSsoModal: true });
     } else {
       this.setState({ enableModal: true });
     }
-  };
-
-  disableSso = () => {
-    this.props
-      .updateAccountSingleSignOn({ enabled: false })
-      .then(() => {
-        this.setState({
-          disableSsoModal: false,
-          enableModal: true
-        });
-      });
   };
 
   setTfaRequired = (value) => {
@@ -48,43 +36,38 @@ export class EnforceTFAPanel extends React.Component {
 
   onCancel = () =>
     this.setState({
-      disableSsoModal: false,
       enableModal: false,
       disableModal: false
     });
 
   render() {
-    const { loading, tfaRequired, tfaUpdatePending, ssoUpdatePending } = this.props;
-
-    const { disableSsoModal, enableModal, disableModal } = this.state;
+    const { loading, tfaRequired, tfaUpdatePending, ssoEnabled } = this.props;
+    const { enableModal, disableModal } = this.state;
 
     if (loading) {
       return <PanelLoading />;
     }
 
     return (
-      <React.Fragment>
-        <TogglePanel tfaRequired={tfaRequired} toggleTfaRequired={this.toggleTfaRequired} />
-        <ConfirmationModal
-          open={disableSsoModal}
-          confirming={ssoUpdatePending}
-          title="Single sign-on must be disabled before enforcing two-factor authentication on this account. Disable?"
-          content={
-            <React.Fragment>
-              <p>
-                For users to perform two-factor authentication, they must log in directly and not
-                through a single sign-on identity provider.
-              </p>
-              <p>
-                After disabling single sign-on, you will be prompted to enforce two-factor
-                authentication account-wide.
-              </p>
-            </React.Fragment>
+      <Panel
+        title="Two-factor Authentication"
+        actions={[
+          {
+            color: 'orange',
+            content: 'Learn more',
+            component: ExternalLink,
+            to: LINKS.MANDATORY_TFA
           }
-          confirmVerb="Disable Single Sign-on"
-          onCancel={this.onCancel}
-          onConfirm={this.disableSso}
-        />
+        ]}
+      >
+        {ssoEnabled && (
+          <Panel.Section>
+            <p>
+              Mandatory two-factor authentication is not available while single sign-on is enabled.
+            </p>
+          </Panel.Section>
+        )}
+        <TogglePanel readOnly={ssoEnabled} tfaRequired={tfaRequired} toggleTfaRequired={this.toggleTfaRequired} />
         <ConfirmationModal
           open={enableModal}
           confirming={tfaUpdatePending}
@@ -127,7 +110,7 @@ export class EnforceTFAPanel extends React.Component {
           onCancel={this.onCancel}
           onConfirm={() => this.setTfaRequired(false)}
         />
-      </React.Fragment>
+      </Panel>
     );
   }
 }
