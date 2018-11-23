@@ -62,11 +62,9 @@ describe('Component: EnforceTfaPanel', () => {
     const updateAccountSingleSignOn = jest.fn().mockResolvedValue();
     const wrapper = subject({ ssoEnabled: true, updateAccountSingleSignOn });
     wrapper.instance().disableSso();
-    expect(updateAccountSingleSignOn).toHaveBeenCalledWith({
-      cert: baseProps.ssoCert,
-      provider: baseProps.ssoProvider,
-      enabled: false
-    });
+    expect(updateAccountSingleSignOn).toHaveBeenCalledWith(
+      expect.objectContaining({ enabled: false })
+    );
   });
 
   cases('offers to enable/disable TFA required', ({ tfaRequired, modal }) => {

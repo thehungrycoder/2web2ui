@@ -30,13 +30,8 @@ export class EnforceTFAPanel extends React.Component {
   };
 
   disableSso = () => {
-    const { ssoCert, ssoProvider } = this.props;
     this.props
-      .updateAccountSingleSignOn({
-        cert: ssoCert,
-        provider: ssoProvider,
-        enabled: false
-      })
+      .updateAccountSingleSignOn({ enabled: false })
       .then(() => {
         this.setState({
           disableSsoModal: false,
@@ -59,12 +54,7 @@ export class EnforceTFAPanel extends React.Component {
     });
 
   render() {
-    const {
-      loading,
-      tfaRequired,
-      tfaUpdatePending,
-      ssoUpdatePending
-    } = this.props;
+    const { loading, tfaRequired, tfaUpdatePending, ssoUpdatePending } = this.props;
 
     const { disableSsoModal, enableModal, disableModal } = this.state;
 
@@ -74,10 +64,7 @@ export class EnforceTFAPanel extends React.Component {
 
     return (
       <React.Fragment>
-        <TogglePanel
-          tfaRequired={tfaRequired}
-          toggleTfaRequired={this.toggleTfaRequired}
-        />
+        <TogglePanel tfaRequired={tfaRequired} toggleTfaRequired={this.toggleTfaRequired} />
         <ConfirmationModal
           open={disableSsoModal}
           confirming={ssoUpdatePending}
@@ -85,12 +72,12 @@ export class EnforceTFAPanel extends React.Component {
           content={
             <React.Fragment>
               <p>
-                For users to perform two-factor authentication, they must log in
-                directly and not through a single sign-on identity provider.
+                For users to perform two-factor authentication, they must log in directly and not
+                through a single sign-on identity provider.
               </p>
               <p>
-                After disabling single sign-on, you will be prompted to enforce
-                two-factor authentication account-wide.
+                After disabling single sign-on, you will be prompted to enforce two-factor
+                authentication account-wide.
               </p>
             </React.Fragment>
           }
@@ -105,16 +92,16 @@ export class EnforceTFAPanel extends React.Component {
           content={
             <React.Fragment>
               <p>
-                Enforcing two-factor authentication account-wide will have the
-                following effects:
+                Enforcing two-factor authentication account-wide will have the following effects:
               </p>
               <ul>
                 <li>
-                  All users without two-factor authentication enabled will be
-                  forced to login to the UI again and enable it on login.
+                  All users without two-factor authentication enabled will be forced to login to the
+                  UI again and enable it on login.
                 </li>
                 <li>
-                  All users will be sent an email informing them of this change.
+                  All users without two-factor authentication enabled will be sent an email
+                  informing them of this change.
                 </li>
               </ul>
             </React.Fragment>
@@ -129,12 +116,11 @@ export class EnforceTFAPanel extends React.Component {
           content={
             <React.Fragment>
               <p>
-                Making two-factor authentication optional will allow users to
-                manage their own two-factor authentication settings.
+                Making two-factor authentication optional will allow users to manage their own
+                two-factor authentication settings.
               </p>
               <p>
-                Note: This will <em>not</em> disable two-factor authentication
-                for any user.
+                Note: This will <em>not</em> disable two-factor authentication for any user.
               </p>
             </React.Fragment>
           }

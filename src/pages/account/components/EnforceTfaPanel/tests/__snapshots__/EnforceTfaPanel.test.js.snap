@@ -36,7 +36,7 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
             All users without two-factor authentication enabled will be forced to login to the UI again and enable it on login.
           </li>
           <li>
-            All users will be sent an email informing them of this change.
+            All users without two-factor authentication enabled will be sent an email informing them of this change.
           </li>
         </ul>
       </React.Fragment>
