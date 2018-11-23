@@ -3,9 +3,13 @@ import { shallow } from 'enzyme';
 import StatusSection from '../StatusSection';
 
 describe('StatusSection', () => {
-  const subject = (props = {}) => (
-    shallow(<StatusSection provider="https://sso.sparkpost.com/redirect" {...props} />)
-  );
+  const subject = (props = {}) => {
+    const baseProps = {
+      provider: 'https://sso.sparkpost.com/redirect',
+      readOnly: false
+    };
+    return shallow(<StatusSection {...baseProps} {...props} />);
+  };
 
   it('renders nothing when not provisioned', () => {
     const wrapper = subject({ provider: null });
@@ -19,6 +23,11 @@ describe('StatusSection', () => {
 
   it('renders when disabled', () => {
     const wrapper = subject({ enabled: false });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders when readOnly', () => {
+    const wrapper = subject({ readOnly: true });
     expect(wrapper).toMatchSnapshot();
   });
 

@@ -7,10 +7,7 @@ import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 describe('Component: EnforceTfaPanel', () => {
   const baseProps = {
     loading: false,
-    ssoUpdatePending: false,
     ssoEnabled: false,
-    ssoCert: 'ssoCert',
-    ssoProvider: 'ssoProvider',
     tfaRequired: false,
     tfaUpdatePending: false,
     getAccountSingleSignOnDetails: () => {},
@@ -26,7 +23,6 @@ describe('Component: EnforceTfaPanel', () => {
     return wrapper.find(ConfirmationModal).filterWhere((node) => node.prop('title').includes(titleSubstr));
   }
 
-  const ssoModal = (wrapper) => modalWithTitle(wrapper, 'Single sign-on');
   const enableModal = (wrapper) => modalWithTitle(wrapper, 'enforce two-factor');
   const disableModal = (wrapper) => modalWithTitle(wrapper, 'make two-factor authentication optional');
 
@@ -44,27 +40,8 @@ describe('Component: EnforceTfaPanel', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('offers to disable SSO if enabled', () => {
-    const wrapper = subject({ ssoEnabled: true });
-    expect(ssoModal(wrapper).prop('open')).toEqual(false);
-    wrapper.instance().toggleTfaRequired();
-    expect(ssoModal(wrapper).prop('open')).toEqual(true);
-  });
-
-  it('cancels SSO modal', () => {
-    const wrapper = subject({ ssoEnabled: true });
-    wrapper.instance().toggleTfaRequired();
-    ssoModal(wrapper).prop('onCancel')();
-    expect(ssoModal(wrapper).prop('open')).toEqual(false);
-  });
-
-  it('disables SSO', () => {
-    const updateAccountSingleSignOn = jest.fn().mockResolvedValue();
-    const wrapper = subject({ ssoEnabled: true, updateAccountSingleSignOn });
-    wrapper.instance().disableSso();
-    expect(updateAccountSingleSignOn).toHaveBeenCalledWith(
-      expect.objectContaining({ enabled: false })
-    );
+  it('renders with sso enabled', () => {
+    expect(subject({ ssoEnabled: true })).toMatchSnapshot();
   });
 
   cases('offers to enable/disable TFA required', ({ tfaRequired, modal }) => {

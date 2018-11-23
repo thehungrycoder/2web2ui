@@ -1,28 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
-<Fragment>
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "component": [Function],
+        "content": "Learn more",
+        "to": "https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/",
+      },
+    ]
+  }
+  title="Two-factor Authentication"
+>
   <Component
+    readOnly={false}
     tfaRequired={false}
     toggleTfaRequired={[Function]}
-  />
-  <ConfirmationModal
-    confirmVerb="Disable Single Sign-on"
-    confirming={false}
-    content={
-      <React.Fragment>
-        <p>
-          For users to perform two-factor authentication, they must log in directly and not through a single sign-on identity provider.
-        </p>
-        <p>
-          After disabling single sign-on, you will be prompted to enforce two-factor authentication account-wide.
-        </p>
-      </React.Fragment>
-    }
-    onCancel={[Function]}
-    onConfirm={[Function]}
-    open={false}
-    title="Single sign-on must be disabled before enforcing two-factor authentication on this account. Disable?"
   />
   <ConfirmationModal
     confirming={false}
@@ -67,11 +62,81 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
     open={false}
     title="Are you sure you want to make two-factor authentication optional for this account?"
   />
-</Fragment>
+</Panel>
 `;
 
 exports[`Component: EnforceTfaPanel renders loading state 1`] = `
 <PanelLoading
   minHeight="400px"
 />
+`;
+
+exports[`Component: EnforceTfaPanel renders with sso enabled 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "component": [Function],
+        "content": "Learn more",
+        "to": "https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/",
+      },
+    ]
+  }
+  title="Two-factor Authentication"
+>
+  <Panel.Section>
+    <p>
+      Mandatory two-factor authentication is not available while single sign-on is enabled.
+    </p>
+  </Panel.Section>
+  <Component
+    readOnly={true}
+    tfaRequired={false}
+    toggleTfaRequired={[Function]}
+  />
+  <ConfirmationModal
+    confirming={false}
+    content={
+      <React.Fragment>
+        <p>
+          Enforcing two-factor authentication account-wide will have the following effects:
+        </p>
+        <ul>
+          <li>
+            All users without two-factor authentication enabled will be forced to login to the UI again and enable it on login.
+          </li>
+          <li>
+            All users without two-factor authentication enabled will be sent an email informing them of this change.
+          </li>
+        </ul>
+      </React.Fragment>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to enforce two-factor authentication for this account?"
+  />
+  <ConfirmationModal
+    confirming={false}
+    content={
+      <React.Fragment>
+        <p>
+          Making two-factor authentication optional will allow users to manage their own two-factor authentication settings.
+        </p>
+        <p>
+          Note: This will 
+          <em>
+            not
+          </em>
+           disable two-factor authentication for any user.
+        </p>
+      </React.Fragment>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to make two-factor authentication optional for this account?"
+  />
+</Panel>
 `;
