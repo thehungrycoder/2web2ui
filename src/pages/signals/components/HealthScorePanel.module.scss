@@ -1,0 +1,34 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.HealthScoresLines {
+  table thead th {
+    background-color: color(gray, 9);
+    padding-bottom: spacing(small);
+    padding-top: spacing(small);
+  }
+
+  table tbody td:nth-child(2) {
+    padding: 0 spacing();
+  }
+
+  :global {
+    .recharts-tooltip-wrapper {  // prevent next spark line from overlapping
+      z-index: 1;
+    }
+  }
+}
+
+.PanelAction {
+  display: inline-block;
+  font-weight: lighter;
+  margin-left: spacing();
+
+  * {
+    margin-left: spacing(small);
+  }
+}
+
+.Tooltip {
+  text-align: center;
+  width: rem(200);
+}

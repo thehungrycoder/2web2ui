@@ -130,6 +130,8 @@
     "eslint-plugin-lodash": "^2.5.0",
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "faker": "^4.1.0",
+    "faker-structures": "0.0.3",
     "file-loader": "^2.0.0",
     "fs-extra": "^6.0.0",
     "html-webpack-plugin": "^2.30.1",

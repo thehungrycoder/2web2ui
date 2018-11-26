@@ -1,0 +1,15 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.SpamTrapHits {
+  margin-top: 80px;
+
+  table thead th {
+    background-color: color(gray, 9);
+    padding-bottom: spacing(small);
+    padding-top: spacing(small);
+  }
+
+  table tbody td:nth-child(2) {
+    padding: 0 spacing();
+  }
+}

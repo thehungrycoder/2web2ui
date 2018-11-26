@@ -31,12 +31,14 @@ import {
   snippets
 } from 'src/pages';
 
-import LogoutPage from 'src/pages/logout/LogoutPage';
+import SignalsOverviewPage from 'src/pages/signals/OverviewPage';
 
+import LogoutPage from 'src/pages/logout/LogoutPage';
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
 import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
+
 
 import { hasGrants, all, not } from 'src/helpers/conditions';
 import {
@@ -691,6 +693,13 @@ const routes = [
     title: 'Support | Request Premium Support',
     layout: App,
     supportDocSearch: 'upgrade plan'
+  },
+  {
+    path: '/signals',
+    component: SignalsOverviewPage,
+    layout: App,
+    supportDocSearch: 'signals',
+    title: 'Signals'
   },
   {
     path: '/logout',
