@@ -12,7 +12,7 @@ debugLog('DEBUG MODE ON');
 export default (request) => {
   const { method, url } = request;
   // const directory = url.toLowerCase().replace(/\//g, '_').replace(/^_/, '');
-  const responsePath = `/${url}/${method}`.replace('//', '/');
+  const responsePath = `/${url}/${method.toLowerCase()}`.replace('//', '/');
   let storedResponse;
 
   try {
