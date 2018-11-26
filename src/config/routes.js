@@ -28,7 +28,8 @@ import {
   passwordReset,
   PremiumSupportPage,
   RecipientValidationPage,
-  snippets
+  snippets,
+  signals
 } from 'src/pages';
 
 import LogoutPage from 'src/pages/logout/LogoutPage';
@@ -251,6 +252,13 @@ const routes = [
     layout: App,
     title: 'Message History',
     supportDocSearch: 'event'
+  },
+  {
+    path: '/signals',
+    component: signals.OverviewPage,
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
   },
   {
     path: '/account/security',

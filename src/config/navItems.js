@@ -42,6 +42,11 @@ export default [
     ]
   },
   {
+    label: 'Signals',
+    to: '/signals',
+    icon: Code
+  },
+  {
     label: 'Templates',
     to: '/templates',
     icon: Code
