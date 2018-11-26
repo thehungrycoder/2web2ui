@@ -58,7 +58,12 @@ export class Poll extends Component {
     const attemptCount = attempts + 1;
     let errCount = 0;
 
-    if (status !== 'polling' || !loggedIn) {
+    if (status !== 'polling') {
+      return;
+    }
+
+    if (!loggedIn) {
+      this.setActionState(key, { status: 'done' });
       return;
     }
 

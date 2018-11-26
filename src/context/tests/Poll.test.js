@@ -87,4 +87,12 @@ describe('Poll Provider', () => {
     await next();
     expect(wrapper.state('actions').testAction).toMatchSnapshot();
   });
+
+  it('should stop polling if not logged in', async () => {
+    const { startPolling } = wrapper.props().value;
+    startPolling(testAction);
+    wrapper.setProps({ loggedIn: false });
+    await next();
+    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+  });
 });
