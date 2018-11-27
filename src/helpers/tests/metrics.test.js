@@ -29,6 +29,21 @@ describe('metrics helpers', () => {
     expect(actual).toMatchSnapshot();
   });
 
+  it('should return options with limit and match keys if given', () => {
+    const actual = metricsHelpers.getQueryFromOptions({
+      from: '2017-12-18T00:00Z',
+      to: '2017-12-18T11:00Z',
+      metrics: [
+        { key: 'count_bounce' }
+      ],
+      filters: [],
+      match: 'foo',
+      limit: 1000
+    });
+
+    expect(actual).toMatchSnapshot();
+  });
+
   it('should pushToKey', () => {
     const actual = metricsHelpers.pushToKey({ foo: 'bar', baz: 'bot' }, 'test', 'value');
     expect(actual).toMatchSnapshot();
