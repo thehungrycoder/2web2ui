@@ -6,12 +6,6 @@ exports[`Brightback Component should pass correct props when passed condition is
 </div>
 `;
 
-exports[`Brightback Component should pass correct props without the UI option 1`] = `
-<div>
-  test
-</div>
-`;
-
 exports[`Brightback Component should pass correct props without valid account data 1`] = `
 <div>
   test
