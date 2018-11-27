@@ -18,3 +18,19 @@ test('Login Page: Basic Auth', async () => {
 
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });
+
+test('Login Page: Basic Auth w/ Remember-Me', async () => {
+
+  const form = await setupForm(<AuthPage />, { authenticated: false });
+
+  form.fill([
+    { name: 'username', value: 'test-username' },
+    { name: 'password', value: 'test-password' },
+    { type: 'checkbox', name: 'rememberMe', value: true }
+  ]);
+
+  axiosMock.mockClear();
+  await form.submit();
+
+  expect(axiosMock.mock.calls).toMatchSnapshot();
+});
