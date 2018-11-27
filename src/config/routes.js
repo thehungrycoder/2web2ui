@@ -314,7 +314,7 @@ const routes = [
   {
     path: '/snippets',
     component: snippets.ListPage,
-    condition: all(hasGrants('templates/view'), hasUiOption('snippets')),
+    condition: hasGrants('templates/view'),
     layout: App,
     title: 'Snippets',
     supportDocSearch: 'snippet'
@@ -322,7 +322,7 @@ const routes = [
   {
     path: '/snippets/create',
     component: snippets.CreatePage,
-    condition: all(hasGrants('templates/modify'), hasUiOption('snippets')),
+    condition: hasGrants('templates/modify'),
     layout: App,
     title: 'New Snippet',
     supportDocSearch: 'snippet'
@@ -330,7 +330,7 @@ const routes = [
   {
     path: '/snippets/edit/:id',
     component: snippets.EditPage,
-    condition: all(hasGrants('templates/view'), hasUiOption('snippets')),
+    condition: hasGrants('templates/view'),
     layout: App,
     title: 'Edit Snippet',
     supportDocSearch: 'snippet'
