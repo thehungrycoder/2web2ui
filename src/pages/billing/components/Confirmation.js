@@ -5,6 +5,7 @@ import { getPlanPrice } from 'src/helpers/billing';
 import PlanPrice from 'src/components/billing/PlanPrice';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 import Brightback from 'src/components/brightback/Brightback';
+import styles from './Confirmation.module.scss';
 
 export class Confirmation extends React.Component {
   renderSelectedPlanMarkup() {
@@ -14,7 +15,7 @@ export class Confirmation extends React.Component {
       ? <p>Select a plan on the left to update your subscription</p>
       : <div>
         <small>New Plan</small>
-        <h5><PlanPrice plan={selected}/></h5>
+        <h5><PlanPrice className={styles.MainLabel} plan={selected}/></h5>
       </div>;
   }
 
