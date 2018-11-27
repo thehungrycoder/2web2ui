@@ -54,6 +54,38 @@ exports[`PlanPrice renders correctly 1`] = `
 </span>
 `;
 
+exports[`PlanPrice renders correctly for CSM inclusion 1`] = `
+<span
+  className="notranslate"
+>
+  <span
+    className="MainLabel"
+  >
+    <strong>
+      50,000
+    </strong>
+     emails/month
+    <span>
+       at 
+      <strong>
+        $
+        9
+      </strong>
+      /
+      mo
+    </span>
+  </span>
+  <span
+    className="SupportLabel"
+  />
+  <span
+    className="SupportLabel"
+  >
+    Customer Success Manager included.
+  </span>
+</span>
+`;
+
 exports[`PlanPrice renders correctly for free plan 1`] = `
 <span
   className="notranslate"

@@ -10,7 +10,7 @@ class Plan extends React.Component {
 
     return (
       <a className={className} {...rest} >
-        <PlanPrice plan={plan} showOverage={true} showIp={true} className={styles.MainLabel} />
+        <PlanPrice plan={plan} showOverage showIp showCsm className={styles.MainLabel} />
       </a>
     );
   }

@@ -66,5 +66,9 @@ describe('PlanPrice', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-
+  it('renders correctly for CSM inclusion', () => {
+    plan.includesCsm = true;
+    wrapper.setProps({ plan, showCsm: true });
+    expect(wrapper).toMatchSnapshot();
+  });
 });
