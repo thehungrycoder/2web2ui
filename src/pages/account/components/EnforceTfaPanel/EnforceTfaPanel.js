@@ -8,7 +8,6 @@ import { LINKS } from 'src/constants';
 
 export class EnforceTFAPanel extends React.Component {
   state = {
-    enforced: false,
     updating: false,
     enableModal: false,
     disableModal: false
