@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: TogglePanel should render 1`] = `
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      xs={11}
+    >
+      <LabelledValue
+        label="Status"
+      >
+        <h6>
+          Optional
+        </h6>
+        <p>
+          Each user can manage their own two-factor authentication settings.
+        </p>
+      </LabelledValue>
+    </Grid.Column>
+    <Grid.Column
+      xs={1}
+    >
+      <Toggle
+        checked={false}
+        id="enforceTfa"
+        onChange={[Function]}
+      />
+    </Grid.Column>
+  </Grid>
+</Panel.Section>
+`;

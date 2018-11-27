@@ -56,3 +56,41 @@ exports[`SingleSignOnPanel renders with provider and status section 1`] = `
   />
 </Panel>
 `;
+
+exports[`SingleSignOnPanel renders with tfaRequired 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "component": [Function],
+        "content": "Learn More",
+        "to": "https://www.sparkpost.com/docs/my-account-and-profile/sso",
+      },
+    ]
+  }
+  title="Single Sign-On"
+>
+  <Panel.Section>
+    <p>
+      Single sign-on is not available while two-factor authentication is required on this account.
+    </p>
+  </Panel.Section>
+  <ProviderSection
+    readOnly={true}
+  />
+  <StatusSection
+    getAccountSingleSignOnDetails={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
+    readOnly={true}
+    tfaRequired={true}
+    updateAccountSingleSignOn={[MockFunction]}
+  />
+</Panel>
+`;

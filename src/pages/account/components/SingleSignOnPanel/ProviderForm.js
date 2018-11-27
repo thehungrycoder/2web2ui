@@ -55,16 +55,16 @@ export class ProviderForm extends React.Component {
               To complete setup with your Identity Provider (IdP), you will need to provide the
               following callback URL.
             </p>
-            <p>
+            <div>
               <CopyField value={`${config.apiBase}/v1/users/saml/consume`} />
-            </p>
+            </div>
           </Panel.Section>
           <Panel.Section className={styles.step}>
             <h6>Step 2: Upload your Security Assertion Markup Language (SAML)</h6>
             <p>
               This is a configuration file that can be downloaded from your IdP.
             </p>
-            <p>
+            <div>
               <Field
                 component={FileFieldWrapper}
                 disabled={submitting}
@@ -77,7 +77,7 @@ export class ProviderForm extends React.Component {
                 type="file"
                 validate={[required, fileExtension('xml'), maxFileSize(config.apiRequestBodyMaxSizeBytes)]}
               />
-            </p>
+            </div>
           </Panel.Section>
           <Panel.Section>
             <Button primary disabled={submitting} type="submit">Provision SSO</Button>

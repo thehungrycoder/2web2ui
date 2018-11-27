@@ -17,13 +17,14 @@ export class ProviderSection extends React.Component {
   }
 
   render() {
-    const { provider } = this.props;
+    const { readOnly, provider } = this.props;
 
     return (
       <Panel.Section
         actions={[{
           color: 'orange',
           content: 'Provision SSO',
+          disabled: readOnly,
           onClick: this.openModal
         }]}
       >

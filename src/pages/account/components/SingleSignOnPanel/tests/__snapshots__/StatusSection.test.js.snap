@@ -43,7 +43,7 @@ exports[`StatusSection renders when disabled 1`] = `
       Object {
         "color": "orange",
         "content": "Enable SSO",
-        "disabled": undefined,
+        "disabled": false,
         "onClick": [Function],
       },
     ]
@@ -78,7 +78,7 @@ exports[`StatusSection renders when enabled 1`] = `
       Object {
         "color": "orange",
         "content": "Disable SSO",
-        "disabled": undefined,
+        "disabled": false,
         "onClick": [Function],
       },
     ]
@@ -98,6 +98,41 @@ exports[`StatusSection renders when enabled 1`] = `
         <ArrowForward />
       </PageLink>
     </p>
+  </LabelledValue>
+  <ConfirmationModal
+    confirmVerb="Disable"
+    content={
+      <p>
+        This will disable Single Sign-On for all your users.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to disable Single Sign-On?"
+  />
+</Panel.Section>
+`;
+
+exports[`StatusSection renders when readOnly 1`] = `
+<Panel.Section
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": "Enable SSO",
+        "disabled": true,
+        "onClick": [Function],
+      },
+    ]
+  }
+>
+  <LabelledValue
+    label="Status"
+  >
+    <h6>
+      Disabled
+    </h6>
   </LabelledValue>
   <ConfirmationModal
     confirmVerb="Disable"
