@@ -29,6 +29,7 @@ describe('Component: Typeahead', () => {
     const { handleFieldChange, updateLookAheadDebounced } = wrapper.instance();
     handleFieldChange({ target: { value: 'cros' }});
     updateLookAheadDebounced.flush(); // forces debounced calls to execute
+    expect(props.refreshTypeaheadCache).toHaveBeenCalledTimes(1);
     expect(wrapper.state().calculatingMatches).toEqual(true);
     expect(wrapper.state().lastPattern).toEqual('cros');
   });

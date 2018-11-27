@@ -25,7 +25,7 @@ export class Typeahead extends Component {
     lastPattern: null
   };
 
-  //Updates matches for Templates, Sending domains, subaccounts, and anything not in `TYPES_METRICS`.
+  //Updates matches for Templates, Sending Domains, Subaccounts, and anything not in `TYPES_METRICS`.
   updateMatches = (pattern) => {
     const { items, selected = []} = this.props;
     const flatSelected = selected.map(flattenItem);
@@ -35,11 +35,11 @@ export class Typeahead extends Component {
     this.setState({ matches });
   };
 
-  //Updates matches for Campaign, Recipient Domain, IP Pool, and Sending Domain after the metrics api call.
-  //Then concatonates the metrics matches to the previous matches.
+  // Updates matches for Campaign, Recipient Domain, IP Pool, and Sending IP after the metrics api call,
+  // then concatenates the metrics matches to the previous matches.
   updateMatchesAsync = (pattern) => {
-    //Only update the matches if the user is still waiting for results this is the last queued call.
-    if (this.state.calculatingMatches && pattern === this.state.lastPattern) {
+    // Only update the matches if this is the last call.
+    if (pattern === this.state.lastPattern) {
       const { items, selected = []} = this.props;
       const flatSelected = selected.map(flattenItem);
       let matches = sortMatch(items, pattern, (i) => i.value)
@@ -51,18 +51,16 @@ export class Typeahead extends Component {
     }
   };
 
-  // Updates the matches with the local templates, sending domains, subaccounts then
+  // Updates the matches with the already-loaded templates, sending domains, subaccounts then
   // makes the metrics api calls and appends to the matches.
   updateLookAhead = (pattern) => {
     this.setState({ calculatingMatches: true });
     if (!pattern || pattern.length < 2) {
-      const matches = [];
-      this.setState({ matches, calculatingMatches: false, lastPattern: null });
+      this.setState({ matches: [], calculatingMatches: false, lastPattern: null });
       return Promise.resolve();
     } else {
       this.setState({ lastPattern: pattern });//This sets the last queued pattern
-      const options = { ...this.props.reportOptions };
-      options.match = pattern;
+      const options = { ...this.props.reportOptions, match: pattern, limit: 1000 };
       this.updateMatches(pattern);
       return this.props.refreshTypeaheadCache(options).then(() => {
         this.updateMatchesAsync(pattern);

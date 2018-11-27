@@ -19,7 +19,7 @@ const FILTER_KEY_MAP = {
 
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
-export function getQueryFromOptions({ from, to, metrics, filters = [], match = '' }, isForTypeAhead) {
+export function getQueryFromOptions({ from, to, metrics, filters = [], match = '', limit }) {
   from = moment(from);
   to = moment(to);
 
@@ -37,9 +37,8 @@ export function getQueryFromOptions({ from, to, metrics, filters = [], match = '
   if (match.length > 0) {
     options.match = match;
   }
-  //deliverability endpoint also uses this helper function but validator prevents limit values over 1k
-  if (isForTypeAhead) {
-    options.limit = 100000;
+  if (limit) {
+    options.limit = limit;
   }
   return options;
 }

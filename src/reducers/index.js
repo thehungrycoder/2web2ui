@@ -38,6 +38,7 @@ import users from './users';
 import tfa from './tfa';
 import tfaBackupCodes from './tfaBackupCodes';
 import trackingDomains from './trackingDomains';
+import typeahead from './typeahead';
 import webhooks from './webhooks';
 import websiteAuth from './websiteAuth';
 
@@ -79,6 +80,7 @@ const appReducer = combineReducers({
   tfa,
   tfaBackupCodes,
   trackingDomains,
+  typeahead,
   users,
   webhooks,
   websiteAuth

@@ -10,6 +10,7 @@ import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
 import { getRelativeDates } from 'src/helpers/date';
 import { getQueryFromOptions } from 'src/helpers/metrics';
+import _ from 'lodash';
 
 // array of all lists that need to be re-filtered when time changes
 const metricLists = [
@@ -42,20 +43,48 @@ export function initTypeaheadCache() {
     if (sendingDomains.list.length === 0) {
       requests.push(dispatch(listSendingDomains()));
     }
-
     return Promise.all(requests);
   };
 }
 
 /**
  * Refreshes the typeahead cache with the metrics lists. This occurs dynamically
- * whenever the user types in the search field but with a debounce
+ * whenever the user types in the search field but with a debounce.
+ *
+ * It will first try to pull the data from cache, if it exists and the time range is the same.
+ * If there is no cache entry, it will make the api calls and add the results to the cache.
  */
 export function refreshTypeaheadCache(options) {
-  const params = getQueryFromOptions(options, true);
-  return (dispatch) => {
-    const requests = metricLists.map((list) => dispatch(list(params)));
-    return Promise.all(requests);
+  const params = getQueryFromOptions(options);
+  return (dispatch, getState) => {
+    const { typeAhead } = getState();
+    const { to: cachedTo, from: cachedFrom, cache } = typeAhead;
+    const { match, to: currentTo, from: currentFrom } = options;
+
+    if (cachedFrom === currentFrom && cachedTo === currentTo && cache[match]) {
+      dispatch({
+        type: 'UPDATE_METRICS_FROM_CACHE',
+        payload: cache[match]
+      });
+      return Promise.resolve();
+    } else {
+      const requests = metricLists.map((list) => dispatch(list(params)));
+
+      return Promise.all(requests).then((arrayOfMetrics) => {
+        // Flattens the array from array of metrics objects to an object with each metric as a key
+        const metricsList = _.reduce(arrayOfMetrics, (accumulator, metric) => _.assign(accumulator, metric), {});
+        const payload = {
+          from: currentFrom,
+          to: currentTo,
+          itemToCache: { [match]: metricsList }
+        };
+
+        dispatch({
+          type: 'UPDATE_TYPEAHEAD_METRICS_CACHE',
+          payload
+        });
+      });
+    }
   };
 }
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { addFilters, removeFilter, refreshReportOptions, refreshTypeaheadCache, initTypeaheadCache } from 'src/actions/reportOptions';
@@ -9,7 +8,6 @@ import { Grid, Panel, Tag } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
-import { isSameDate } from 'src/helpers/date';
 import styles from './ReportOptions.module.scss';
 
 const RELATIVE_DATE_OPTIONS = [
@@ -29,22 +27,6 @@ export class ReportOptions extends Component {
 
     // initial typeahead cache load
     this.props.initTypeaheadCache();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!_.isEqual(prevProps.reportOptions, this.props.reportOptions)) {
-      this.maybeRefreshFilterTypeaheadCache(prevProps.reportOptions);
-    }
-  }
-
-  maybeRefreshFilterTypeaheadCache(prev) {
-    const current = this.props.reportOptions;
-    const datesAreDifferent = !isSameDate(prev.from, current.from) || !isSameDate(prev.to, current.to);
-    const rangesAreDifferent = prev.relativeRange !== current.relativeRange;
-
-    if (rangesAreDifferent || (current.relativeRange === 'custom' && datesAreDifferent)) {
-      this.props.refreshTypeaheadCache(current);
-    }
   }
 
   renderActiveFilters = () => {
