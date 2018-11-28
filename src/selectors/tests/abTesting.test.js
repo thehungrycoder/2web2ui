@@ -6,8 +6,8 @@ describe('Selectors: abTesting', () => {
   let props;
 
   beforeEach(() => {
-    mockMoment.add = jest.fn().mockReturnValue({ toDate: () => '2010-01-08T12:00:00.000Z' });
-    mockMoment.toDate = jest.fn().mockReturnValue('2010-01-01T12:00:00.000Z');
+    mockMoment.add = jest.fn(() => ({ toDate: () => '2010-01-08T12:00:00.000Z' }));
+    mockMoment.toDate = jest.fn(() => '2010-01-01T12:00:00.000Z');
 
     state = {
       abTesting: {

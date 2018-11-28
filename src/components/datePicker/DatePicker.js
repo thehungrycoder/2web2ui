@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 235] */
+/* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
 import { getStartOfDay, getEndOfDay, getRelativeDateOptions, getNextHour, isSameDate } from 'src/helpers/date';

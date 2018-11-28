@@ -251,14 +251,6 @@ describe('metrics helpers', () => {
         to: moment('2018-02-15'),
         now: moment('2018-02-00'),
         roundToPrecision: false
-      },
-      {
-        name: 'when from is before now (without rounding)',
-        from: moment('2018-01-15'),
-        to: moment('2018-03-15'),
-        now: moment('2018-02-15'),
-        roundToPrecision: false,
-        preventFuture: false
       }
     ];
 
@@ -320,6 +312,15 @@ describe('metrics helpers', () => {
       const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: true, preventFuture: true });
       expect(validRange.from).toEqual(from);
       expect(validRange.to.toISOString()).toEqual(moment('2018-01-19T11:59Z').endOf('minute').toISOString());
+    });
+
+    it('should allow past or future dates if preventFuture is false', () => {
+      const from = moment('2018-01-19T12:00Z');
+      const now = moment('2018-01-20T12:00Z');
+      const to = moment('2018-01-21T12:00Z');
+
+      const validRange = metricsHelpers.getValidDateRange({ from, to, now, roundToPrecision: false, preventFuture: false });
+      expect(validRange).toEqual({ from, to });
     });
   });
 });
