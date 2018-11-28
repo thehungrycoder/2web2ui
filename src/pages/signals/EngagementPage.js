@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Page from './components/SignalsPage';
 
-class EngagementPage extends Component {
+export class EngagementPage extends Component {
   render() {
     return (
       <Page>

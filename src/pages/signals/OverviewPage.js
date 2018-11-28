@@ -1,17 +1,23 @@
-import React, { Component } from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import React, { Component, Fragment } from 'react';
 import Page from './components/SignalsPage';
-import HealthScoreSummary from './components/HealthScoreSummary';
-import SpamTrapsSummary from './components/SpamTrapsSummary';
-import EngagementSummary from './components/EngagementSummary';
+import SummaryTable from './components/SummaryTable';
+import FacetFilter from './components/filters/FacetFilter';
+import DateFilter from './components/filters/DateFilter';
+import SubaccountFilter from './components/filters/SubaccountFilter';
 
-class OverviewPage extends Component {
+export class OverviewPage extends Component {
   render() {
     return (
-      <Page>
-        <HealthScoreSummary />
-        <SpamTrapsSummary />
-        <EngagementSummary />
+      <Page primaryArea={
+        <Fragment>
+          <SubaccountFilter />
+          <DateFilter />
+          <FacetFilter />
+        </Fragment>
+      }>
+        <SummaryTable title='Health Score' />
+        <SummaryTable title='Spam Traps' />
+        <SummaryTable title='Engagement Cohort' />
       </Page>
     );
   }

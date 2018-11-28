@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Page from './components/SignalsPage';
 
-class SpamTrapsPage extends Component {
+export class SpamTrapsPage extends Component {
   render() {
     return (
       <Page>
