@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Join Form: Complete Registration 1`] = `
+Array [
+  Array [
+    Object {
+      "data": Object {
+        "creation_params": Object {},
+        "email": "test-email@example.com",
+        "first_name": "Firsty",
+        "last_name": "Lasty",
+        "password": "test-password",
+        "recaptcha_response": "test-recaptcha-response",
+        "recaptcha_type": "invisible",
+        "salesforce_data": Object {
+          "email_opt_out": true,
+        },
+        "sfdcid": undefined,
+        "tou_accepted": true,
+      },
+      "headers": undefined,
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/v1/account",
+    },
+  ],
+]
+`;
+
+exports[`Join Form: Complete Registration w/ email opt-in 1`] = `
+Array [
+  Array [
+    Object {
+      "data": Object {
+        "creation_params": Object {},
+        "email": "test-email@example.com",
+        "first_name": "Firsty",
+        "last_name": "Lasty",
+        "password": "test-password",
+        "recaptcha_response": "test-recaptcha-response",
+        "recaptcha_type": "invisible",
+        "salesforce_data": Object {
+          "email_opt_out": false,
+        },
+        "sfdcid": undefined,
+        "tou_accepted": true,
+      },
+      "headers": undefined,
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/v1/account",
+    },
+  ],
+]
+`;
