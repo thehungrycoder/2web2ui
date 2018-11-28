@@ -11,7 +11,7 @@ const OPTIONS = [
 
 const FacetFilter = (props) => (
   <div className={styles.FacetFilter}>
-    <Select options={OPTIONS} defaultValue={''} />
+    <Select options={OPTIONS} />
   </div>
 );
 
