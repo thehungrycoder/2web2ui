@@ -1,69 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Typeahead should first show matches that do not use the metrics API calls 1`] = `
-Object {
-  "calculatingMatches": true,
-  "inputValue": "",
-  "lastPattern": "cross",
-  "matches": Array [
-    Object {
-      "type": "X",
-      "value": "cross",
-    },
-  ],
-}
-`;
-
-exports[`Component: Typeahead should produce matches on search 1`] = `
-Object {
-  "calculatingMatches": false,
-  "inputValue": "",
-  "lastPattern": null,
-  "matches": Array [
-    Object {
-      "type": "X",
-      "value": "cross",
-    },
-    Object {
-      "type": "Campaign",
-      "value": "crossing",
-    },
-  ],
-}
-`;
-
-exports[`Component: Typeahead should produce no matches on empty query 1`] = `
-Object {
-  "calculatingMatches": false,
-  "inputValue": "",
-  "lastPattern": null,
-  "matches": Array [],
-}
-`;
-
-exports[`Component: Typeahead should render ok by default 1`] = `
-<Downshift
-  defaultHighlightedIndex={null}
-  defaultIsOpen={false}
-  environment={[Window]}
-  getA11yStatusMessage={[Function]}
-  itemToString={[Function]}
-  onChange={[Function]}
-  onInputValueChange={[Function]}
-  onOuterClick={[Function]}
-  onSelect={[Function]}
-  onStateChange={[Function]}
-  onUserAction={[Function]}
-  scrollIntoView={[Function]}
-  selectedItemChanged={[Function]}
-  stateReducer={[Function]}
-  suppressRefError={false}
->
-  <Component />
-</Downshift>
-`;
-
-exports[`Component: Typeahead should render with matches 1`] = `
+exports[`Component: Typeahead should finally render with both synchronous and async matches 1`] = `
 <div
   className="Typeahead"
 >
@@ -97,11 +34,70 @@ exports[`Component: Typeahead should render with matches 1`] = `
   <TextField
     resize="both"
     suffix={
-      <TypeaheadLoading
-        isCalculating={false}
+      <Loading
+        hidden={true}
+        isForTypeahead={true}
       />
     }
     type="text"
   />
 </div>
+`;
+
+exports[`Component: Typeahead should first show synchronous matches 1`] = `
+<div
+  className="Typeahead"
+>
+  <div
+    className="List open"
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "className": "",
+            "content": <TypeaheadItem
+              helpText="X"
+              value="cross"
+            />,
+            "highlighted": true,
+          },
+        ]
+      }
+      groupByKey="section"
+    />
+  </div>
+  <TextField
+    resize="both"
+    suffix={
+      <Loading
+        hidden={false}
+        isForTypeahead={true}
+      />
+    }
+    type="text"
+  />
+</div>
+`;
+
+exports[`Component: Typeahead should render ok by default 1`] = `
+<Downshift
+  defaultHighlightedIndex={null}
+  defaultIsOpen={false}
+  environment={[Window]}
+  getA11yStatusMessage={[Function]}
+  itemToString={[Function]}
+  onChange={[Function]}
+  onInputValueChange={[Function]}
+  onOuterClick={[Function]}
+  onSelect={[Function]}
+  onStateChange={[Function]}
+  onUserAction={[Function]}
+  scrollIntoView={[Function]}
+  selectedItemChanged={[Function]}
+  stateReducer={[Function]}
+  suppressRefError={false}
+>
+  <Component />
+</Downshift>
 `;

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isSameDate } from 'src/helpers/date';
 
 const initialState = {
   from: null,
@@ -12,11 +12,11 @@ export default (state = initialState, action) => {
     case 'UPDATE_TYPEAHEAD_METRICS_CACHE': {
       const { to, from, itemToCache } = action.payload;
       // If the dates are different, replace the existing cache with the new item to cache
-      if (to !== state.to || from !== state.from) {
+      if (!isSameDate(state.from, from) || !isSameDate(state.to, to)) {
         return { ...state, to, from, cache: itemToCache };
       }
       // else, append the new item to the cache
-      const cache = _.assign(state.cache, itemToCache);
+      const cache = { ...state.cache, ...itemToCache };
       return { ...state, cache };
     }
 

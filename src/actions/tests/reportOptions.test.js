@@ -34,7 +34,7 @@ describe('Action Creator: Report Options', () => {
       sendingDomains: {
         list: []
       },
-      typeAhead: {
+      typeahead: {
         from: null,
         to: null,
         cache: {}
@@ -79,7 +79,7 @@ describe('Action Creator: Report Options', () => {
   });
 
   it('should load metrics lists for the typeahead from cache if exists', () => {
-    testState.typeAhead = {
+    testState.typeahead = {
       from: 'date1',
       to: 'date2',
       cache: {

@@ -29,7 +29,7 @@ describe('metrics helpers', () => {
     expect(actual).toMatchSnapshot();
   });
 
-  it('should return options with limit and match keys if given', () => {
+  it('should return options with limit key if given limit as a parameter', () => {
     const actual = metricsHelpers.getQueryFromOptions({
       from: '2017-12-18T00:00Z',
       to: '2017-12-18T11:00Z',
@@ -37,11 +37,24 @@ describe('metrics helpers', () => {
         { key: 'count_bounce' }
       ],
       filters: [],
-      match: 'foo',
       limit: 1000
     });
 
-    expect(actual).toMatchSnapshot();
+    expect(actual).toMatchObject({ limit: 1000 });
+  });
+
+  it('should return options with match key if given match as a parameter', () => {
+    const actual = metricsHelpers.getQueryFromOptions({
+      from: '2017-12-18T00:00Z',
+      to: '2017-12-18T11:00Z',
+      metrics: [
+        { key: 'count_bounce' }
+      ],
+      filters: [],
+      match: 'foo'
+    });
+
+    expect(actual).toMatchObject({ match: 'foo' });
   });
 
   it('should pushToKey', () => {

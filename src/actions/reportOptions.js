@@ -57,8 +57,8 @@ export function initTypeaheadCache() {
 export function refreshTypeaheadCache(options) {
   const params = getQueryFromOptions(options);
   return (dispatch, getState) => {
-    const { typeAhead } = getState();
-    const { to: cachedTo, from: cachedFrom, cache } = typeAhead;
+    const { typeahead } = getState();
+    const { to: cachedTo, from: cachedFrom, cache } = typeahead;
     const { match, to: currentTo, from: currentFrom } = options;
 
     if (cachedFrom === currentFrom && cachedTo === currentTo && cache[match]) {
@@ -67,24 +67,24 @@ export function refreshTypeaheadCache(options) {
         payload: cache[match]
       });
       return Promise.resolve();
-    } else {
-      const requests = metricLists.map((list) => dispatch(list(params)));
-
-      return Promise.all(requests).then((arrayOfMetrics) => {
-        // Flattens the array from array of metrics objects to an object with each metric as a key
-        const metricsList = _.reduce(arrayOfMetrics, (accumulator, metric) => _.assign(accumulator, metric), {});
-        const payload = {
-          from: currentFrom,
-          to: currentTo,
-          itemToCache: { [match]: metricsList }
-        };
-
-        dispatch({
-          type: 'UPDATE_TYPEAHEAD_METRICS_CACHE',
-          payload
-        });
-      });
     }
+
+    const requests = metricLists.map((list) => dispatch(list(params)));
+    return Promise.all(requests).then((arrayOfMetrics) => {
+      // Flattens the array from array of metrics objects to an object with each metric as a key
+      const metricsList = _.reduce(arrayOfMetrics, (accumulator, metric) => _.assign(accumulator, metric), {});
+      const payload = {
+        from: currentFrom,
+        to: currentTo,
+        itemToCache: { [match]: metricsList }
+      };
+
+      dispatch({
+        type: 'UPDATE_TYPEAHEAD_METRICS_CACHE',
+        payload
+      });
+    });
+
   };
 }
 

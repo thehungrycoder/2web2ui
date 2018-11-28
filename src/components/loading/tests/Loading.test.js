@@ -1,8 +1,21 @@
 import React from 'react';
-import { LoadingSVG, LoadingLogoSVG } from '../Loading';
+import { Loading, LoadingSVG, LoadingLogoSVG } from '../Loading';
 import { render } from 'enzyme';
 
 describe('Loading Component', () => {
+
+  describe('Loading animation', () => {
+
+    it('should not render hidden is true', () => {
+      const wrapper = render(<Loading hidden = {true}/>);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render when calculating', () => {
+      const wrapper = render(<Loading hidden = {false} isForTypeahead={true}/>);
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
 
   describe('Circle', () => {
     it('should render - no props', () => {

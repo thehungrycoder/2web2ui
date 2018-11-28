@@ -32,6 +32,24 @@ exports[`Loading Component Circle should render - small 1`] = `
 </svg>
 `;
 
+exports[`Loading Component Loading animation should not render hidden is true 1`] = `null`;
+
+exports[`Loading Component Loading animation should render when calculating 1`] = `
+<svg
+  class="CircleWrapper XSmall"
+  viewBox="25 25 50 50"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    class="SmallCircle"
+    cx="50"
+    cy="50"
+    r="20"
+    vector-effect="non-scaling-stroke"
+  />
+</svg>
+`;
+
 exports[`Loading Component Logo should render - no props 1`] = `
 <svg
   class="Logo"

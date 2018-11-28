@@ -70,6 +70,9 @@ export const CROSS_LINK_MAP = {
   [SPC_EU_TENANT]: { label: 'EU', url: LINKS.SPC_EU_URL }
 };
 
+export const TYPEAHEAD_LIMIT = 100;
+export const METRICS_API_LIMIT = 1000;
+
 export const FORMS = {
   LOGIN: 'loginForm',
   SSO: 'ssoLoginForm',

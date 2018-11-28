@@ -39,19 +39,6 @@ Object {
 }
 `;
 
-exports[`metrics helpers should return options with limit and match keys if given 1`] = `
-Object {
-  "delimiter": ",",
-  "from": "2017-12-17T19:00",
-  "limit": 1000,
-  "match": "foo",
-  "metrics": "count_bounce",
-  "precision": "hour",
-  "timezone": "Mock/Timezone",
-  "to": "2017-12-18T06:00",
-}
-`;
-
 exports[`metrics helpers should compute keys during transform 1`] = `
 Array [
   Object {

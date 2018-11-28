@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Downshift from 'downshift';
 import classnames from 'classnames';
 import _ from 'lodash';
+import { METRICS_API_LIMIT, TYPEAHEAD_LIMIT } from '../../../constants';
 import { refreshTypeaheadCache } from 'src/actions/reportOptions';
 import sortMatch from 'src/helpers/sortMatch';
 import { TextField, ActionList } from '@sparkpost/matchbox';
 import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import TypeaheadLoading from './TypeaheadLoading';
+import { Loading } from 'src/components';
 
 const TYPES_METRICS = ['Campaign', 'Recipient Domain', 'IP Pool', 'Sending IP'];
 
@@ -25,30 +25,19 @@ export class Typeahead extends Component {
     lastPattern: null
   };
 
-  //Updates matches for Templates, Sending Domains, Subaccounts, and anything not in `TYPES_METRICS`.
-  updateMatches = (pattern) => {
+  //Gets all filter items that match the pattern with possible whitelisting and blacklisting of types
+  getMatches = ({ pattern, whiteListTypes, blackListTypes }) => {
     const { items, selected = []} = this.props;
     const flatSelected = selected.map(flattenItem);
-    const matches = sortMatch(items, pattern, (i) => i.value)
-      .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })) && !TYPES_METRICS.includes(type))
-      .slice(0, 100);
-    this.setState({ matches });
-  };
-
-  // Updates matches for Campaign, Recipient Domain, IP Pool, and Sending IP after the metrics api call,
-  // then concatenates the metrics matches to the previous matches.
-  updateMatchesAsync = (pattern) => {
-    // Only update the matches if this is the last call.
-    if (pattern === this.state.lastPattern) {
-      const { items, selected = []} = this.props;
-      const flatSelected = selected.map(flattenItem);
-      let matches = sortMatch(items, pattern, (i) => i.value)
-        .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })) && TYPES_METRICS.includes(type))
-        .slice(0, 100);
-      const currentMatches = this.state.matches;
-      matches = _.concat(currentMatches, matches);
-      this.setState({ matches, calculatingMatches: false, lastPattern: null });
+    let matches = sortMatch(items, pattern, (i) => i.value)
+      .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })));
+    if (whiteListTypes) {
+      matches = matches.filter(({ type }) => whiteListTypes.includes(type));
     }
+    if (blackListTypes) {
+      matches = matches.filter(({ type }) => !blackListTypes.includes(type));
+    }
+    return matches;
   };
 
   // Updates the matches with the already-loaded templates, sending domains, subaccounts then
@@ -60,10 +49,14 @@ export class Typeahead extends Component {
       return Promise.resolve();
     } else {
       this.setState({ lastPattern: pattern });//This sets the last queued pattern
-      const options = { ...this.props.reportOptions, match: pattern, limit: 1000 };
-      this.updateMatches(pattern);
+      const options = { ...this.props.reportOptions, match: pattern, limit: METRICS_API_LIMIT };
+      const synchronousMatches = this.getMatches({ pattern, blackListTypes: TYPES_METRICS });
+      this.setState({ matches: synchronousMatches });
+
       return this.props.refreshTypeaheadCache(options).then(() => {
-        this.updateMatchesAsync(pattern);
+        const asyncMatches = this.getMatches({ pattern, whiteListTypes: TYPES_METRICS });
+        const matches = _.concat(synchronousMatches , asyncMatches).slice(0,TYPEAHEAD_LIMIT);
+        this.setState({ matches, calculatingMatches: false, lastPattern: null });
       });
     }
   };
@@ -117,7 +110,7 @@ export class Typeahead extends Component {
           onFocus: clearSelection,
           onChange: this.handleFieldChange
         })}
-        suffix={<TypeaheadLoading isCalculating = {this.state.calculatingMatches} />}
+        suffix={<Loading hidden = {!this.state.calculatingMatches} isForTypeahead={true}/>}
         />
       </div>
     );
@@ -130,10 +123,8 @@ export class Typeahead extends Component {
   }
 }
 
-const mapStateToProps = () => ({});
-
 const mapDispatchToProps = {
   refreshTypeaheadCache
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Typeahead));
+export default connect(null, mapDispatchToProps)(Typeahead);

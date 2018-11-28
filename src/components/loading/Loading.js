@@ -5,7 +5,15 @@ import styles from './Loading.module.scss';
 /**
  * A centered loading animation
  */
-export const Loading = function Loading() {
+export const Loading = function Loading({ isForTypeahead, hidden }) {
+  if (hidden) {
+    return null;
+  }
+
+  if (isForTypeahead) {
+    return <LoadingSVG circleClassName = {styles.SmallCircle} xSmall = {true}/>;
+  }
+
   return <LoadingSVG className={styles.Center}/>;
 };
 
@@ -14,13 +22,13 @@ Loading.displayName = 'Loading';
 /**
  * Circle Animation
  */
-export const LoadingSVG = ({ className = '', small = false, circleClassName = '' }) => (
+export const LoadingSVG = ({ className = '', small = false, xSmall = false, circleClassName = styles.Circle }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="25 25 50 50"
-    className={classnames(styles.CircleWrapper, small && styles.Small, className)} >
+    className={classnames(styles.CircleWrapper, small && styles.Small, xSmall && styles.XSmall, className)} >
     <circle
-      className={classnames(styles.Circle, circleClassName)}
+      className={circleClassName}
       cx="50" cy="50" r="20"
       vectorEffect="non-scaling-stroke" />
   </svg>

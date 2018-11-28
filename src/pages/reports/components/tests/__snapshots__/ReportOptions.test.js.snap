@@ -46,7 +46,7 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
         xl={5}
         xs={8}
       >
-        <withRouter(Connect(Typeahead))
+        <Connect(Typeahead)
           items={Array []}
           onSelect={[Function]}
           placeholder="Filter by domain, campaign, etc"
@@ -134,7 +134,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
         xl={5}
         xs={8}
       >
-        <withRouter(Connect(Typeahead))
+        <Connect(Typeahead)
           items={Array []}
           onSelect={[Function]}
           placeholder="Filter by domain, campaign, etc"
