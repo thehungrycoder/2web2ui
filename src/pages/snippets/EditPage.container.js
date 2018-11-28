@@ -4,6 +4,7 @@ import qs from 'query-string';
 import { showAlert } from 'src/actions/globalAlert';
 import { clearSnippet, getSnippet, updateSnippet } from 'src/actions/snippets';
 import { hasGrants } from 'src/helpers/conditions';
+import { hasUiOption } from 'src/helpers/conditions/account';
 import { hasSubaccounts, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import EditPage from './EditPage';
 
@@ -34,7 +35,8 @@ const mapStateToProps = (state, props) => {
       ...state.snippets.item,
       subaccount_id: subaccountId, // remove once provided by state
       subaccount: selectSubaccountFromQuery(state, props) // for SubaccountSection
-    }
+    },
+    isAmpLive: hasUiOption('amp_html')(state)
   };
 };
 

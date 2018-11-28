@@ -9,9 +9,11 @@ export const createSnippet = ({
   name,
   sharedWithSubaccounts = false,
   subaccountId,
-  text
-}) => (
-  sparkpostApiRequest({
+  text,
+  amp_html,
+  isAmpLive
+}) => {
+  const opts = {
     type: 'CREATE_SNIPPET',
     meta: {
       method: 'POST',
@@ -28,8 +30,14 @@ export const createSnippet = ({
         shared_with_subaccounts: subaccountId ? false : sharedWithSubaccounts
       }
     }
-  })
-);
+  };
+
+  if (isAmpLive) {
+    opts.meta.data.content.amp_html = amp_html;
+  }
+
+  return sparkpostApiRequest(opts);
+};
 
 export const getSnippet = ({ id, subaccountId }) => (
   sparkpostApiRequest({
@@ -71,9 +79,11 @@ export const updateSnippet = ({
   name,
   sharedWithSubaccounts = false,
   subaccountId,
-  text
-}) => (
-  sparkpostApiRequest({
+  text,
+  amp_html,
+  isAmpLive
+}) => {
+  const opts = {
     type: 'UPDATE_SNIPPET',
     meta: {
       method: 'PUT',
@@ -89,5 +99,11 @@ export const updateSnippet = ({
         shared_with_subaccounts: subaccountId ? false : sharedWithSubaccounts
       }
     }
-  })
-);
+  };
+
+  if (isAmpLive) {
+    opts.meta.data.content.amp_html = amp_html;
+  }
+
+  return sparkpostApiRequest(opts);
+};

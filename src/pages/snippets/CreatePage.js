@@ -30,28 +30,31 @@ export default class CreatePage extends React.Component {
 
   submitSnippet = ({
     assignTo,
-    content: { html, text } = {},
+    content: { html, text, amp_html } = {},
     id,
     name,
     subaccount
   }) => {
     // must handle when subaccount is set to null by SubaccountSection
     const subaccountId = subaccount ? subaccount.id : undefined;
+    const { createSnippet, history, isAmpLive } = this.props;
 
-    return this.props.createSnippet({
+    return createSnippet({
       html,
       id,
       name,
       sharedWithSubaccounts: assignTo === 'shared',
       subaccountId,
-      text
+      text,
+      amp_html,
+      isAmpLive
     }).then(() => {
-      this.props.history.push(`/snippets/edit/${id}${setSubaccountQuery(subaccountId)}`);
+      history.push(`/snippets/edit/${id}${setSubaccountQuery(subaccountId)}`);
     });
   }
 
   render() {
-    const { snippetToDuplicate, handleSubmit, hasSubaccounts, loading, submitting } = this.props;
+    const { snippetToDuplicate, handleSubmit, hasSubaccounts, loading, submitting, isAmpLive } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -93,7 +96,7 @@ export default class CreatePage extends React.Component {
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>
-              <ContentEditor contentOnly={true} />
+              <ContentEditor contentOnly={true} isAmpLive={isAmpLive} />
             </Grid.Column>
           </Grid>
         </Form>
