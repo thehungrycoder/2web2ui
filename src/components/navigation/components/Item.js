@@ -38,6 +38,7 @@ export class Item extends Component {
 
   renderItem = ({ mobile }) => {
     const {
+      beta,
       to,
       icon: Icon,
       label,
@@ -55,39 +56,38 @@ export class Item extends Component {
       this.state.open && styles.isOpen,
       mobile && styles.mobile
     );
+    let releaseTag;
 
-    if (labs) {
+    if (children) {
       return (
         <li>
-          {divider ? (<hr className={styles.hr}/>) : null}
-          <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
-            {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>}
-            {label} <div style={{ float: 'right' }}><Tag color='blue'>LABS</Tag></div>
-          </Link>
+          <a onClick={() => this.handleParentClick()} className={linkClasses}>
+            <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>
+            {label}
+            <ChevronLeft className={styles.chevron} />
+          </a>
+          {this.renderChildren()}
         </li>
       );
     }
 
+    if (beta) {
+      releaseTag = <Tag color="orange">BETA</Tag>;
+    }
+
+    if (labs) {
+      releaseTag = <Tag color="blue">LABS</Tag>;
+    }
+
     return (
-      <span>
-        {children ? (
-          <li>
-            <a onClick={() => this.handleParentClick()} className={linkClasses}>
-              <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>
-              {label}
-              <ChevronLeft className={styles.chevron} />
-            </a>
-            {this.renderChildren()}
-          </li>
-        ) : (
-          <li>
-            <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
-              {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>}
-              {label}
-            </Link>
-          </li>
-        )}
-      </span>
+      <li>
+        {divider && <hr className={styles.divider}/>}
+        <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
+          {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>}
+          {label}
+          {releaseTag && <div className={styles.releaseTag}>{releaseTag}</div>}
+        </Link>
+      </li>
     );
   }
 
