@@ -256,6 +256,31 @@ const routes = [
   {
     path: '/signals',
     component: signals.OverviewPage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/health-score',
+    component: signals.HealthScorePage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/spam-traps',
+    component: signals.SpamTrapsPage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement-cohort',
+    component: signals.EngagementPage,
+    condition: hasUiOption('signals'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
