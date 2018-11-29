@@ -94,7 +94,7 @@ export function getTfaSecret() {
 export function toggleTfa(data) {
   return (dispatch, getState) => {
     const state = getState();
-    const username = usernameSelector(getState());
+    const username = usernameSelector(state);
     const authToken = authTokenSelector(state);
     return dispatch(sparkpostApiRequest({
       type: 'TFA_TOGGLE',

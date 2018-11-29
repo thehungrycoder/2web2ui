@@ -118,7 +118,7 @@ export class TfaManager extends Component {
 
 }
 
-const mapStateToProps = ({ currentUser, tfa, tfaBackupCodes }) => ({
+const mapStateToProps = ({ tfa, tfaBackupCodes }) => ({
   ...tfa,
   statusUnknown: tfa.enabled === null,
   enabled: tfa.enabled === true,

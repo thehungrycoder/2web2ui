@@ -8,6 +8,7 @@ import styles from './EnableTfaForm.module.scss';
 import { getTfaSecret, toggleTfa } from 'src/actions/tfa';
 import { showAlert } from 'src/actions/globalAlert';
 import EnableTfaFormPropTypes from './EnableTfaForm.propTypes';
+import { usernameSelector } from 'src/selectors/currentUser';
 
 export class EnableTfaForm extends React.Component {
   state = {
@@ -117,9 +118,10 @@ export class EnableTfaForm extends React.Component {
 
 EnableTfaForm.propTypes = EnableTfaFormPropTypes;
 
-const mapStateToProps = ({ tfa }) => ({
-  ...tfa,
-  enabled: tfa.enabled === true
+const mapStateToProps = (state) => ({
+  ...state.tfa,
+  username: usernameSelector(state),
+  enabled: state.tfa.enabled === true
 });
 
 export default connect(
