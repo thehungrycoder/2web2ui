@@ -5,7 +5,30 @@ import JoinPage from '../pages/join/JoinPage';
 
 const axiosMock = axios.create();
 
-jest.mock('react-recaptcha');
+jest.mock('react-recaptcha', () => {
+  const React = require('react');
+
+  class MockRecaptcha extends React.Component {
+
+    reset = () => true;
+
+    componentDidMount() {
+      if (this.props.onloadCallback) {
+        this.props.onloadCallback();
+      }
+    }
+
+    execute = () => {
+      if (this.props.verifyCallback) {
+        this.props.verifyCallback('test-recaptcha-response');
+      }
+    };
+
+    render = () => true;
+  }
+
+  return MockRecaptcha;
+});
 
 test('Join Form: Complete Registration', async () => {
 
