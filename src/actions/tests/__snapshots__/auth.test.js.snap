@@ -26,7 +26,9 @@ Array [
     },
   ],
   Array [
-    undefined,
+    Object {
+      "type": "WEBSITE_AUTH",
+    },
   ],
   Array [
     [Function],
@@ -42,7 +44,9 @@ Array [
     },
   ],
   Array [
-    undefined,
+    Object {
+      "type": "WEBSITE_AUTH",
+    },
   ],
   Array [
     Object {
@@ -51,6 +55,30 @@ Array [
         "username": "bar",
       },
       "type": "TFA_ENABLED_ON_LOGIN",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Auth authenticate tests should update TFA to required 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "LOGIN_PENDING",
+    },
+  ],
+  Array [
+    Object {
+      "type": "WEBSITE_AUTH",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "access_token": "foo",
+        "username": "bar",
+      },
+      "type": "TFA_REQUIRED_ON_LOGIN",
     },
   ],
 ]

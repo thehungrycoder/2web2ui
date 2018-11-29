@@ -1,20 +1,29 @@
 const initialState = { enabled: null, pending: false };
 
+function extractAuthFromAction(state, action) {
+  const {
+    access_token: token,
+    username = state.username,
+    refresh_token: refreshToken
+  } = action.payload;
+  return { token, username, refreshToken };
+}
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'TFA_ENABLED_ON_LOGIN': {
-      const {
-        access_token: token,
-        username = state.username,
-        refresh_token: refreshToken
-      } = action.payload;
-
       return {
         ...state,
-        token,
-        username,
-        refreshToken,
+        ...extractAuthFromAction(state, action),
         enabled: true
+      };
+    }
+
+    case 'TFA_REQUIRED_ON_LOGIN': {
+      return {
+        ...state,
+        ...extractAuthFromAction(state, action),
+        required: true
       };
     }
 

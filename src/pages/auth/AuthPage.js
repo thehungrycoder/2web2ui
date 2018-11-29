@@ -8,7 +8,7 @@ import config from 'src/config';
 import LoginForm from './components/LoginForm';
 import RedirectBeforeLogin from './components/RedirectBeforeLogin';
 import RedirectAfterLogin from './components/RedirectAfterLogin';
-import { TFA_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
+import { TFA_ROUTE, ENABLE_TFA_AUTH_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
 export class AuthPage extends React.Component {
   loginSubmit = ({ username, password, rememberMe }) => {
@@ -16,7 +16,7 @@ export class AuthPage extends React.Component {
   }
 
   render() {
-    const { loggedIn, tfaEnabled } = this.props;
+    const { loggedIn, tfaEnabled, tfaRequired } = this.props;
 
     const hasSignup = (config.featureFlags || {}).has_signup;
 
@@ -26,6 +26,10 @@ export class AuthPage extends React.Component {
 
     if (tfaEnabled) {
       return <RedirectBeforeLogin to={TFA_ROUTE} />;
+    }
+
+    if (tfaRequired) {
+      return <RedirectBeforeLogin to={ENABLE_TFA_AUTH_ROUTE} />;
     }
 
     return <React.Fragment>
@@ -43,7 +47,8 @@ export class AuthPage extends React.Component {
 
 const mapStateToProps = ({ auth, tfa }) => ({
   loggedIn: auth.loggedIn,
-  tfaEnabled: tfa.enabled
+  tfaEnabled: tfa.enabled,
+  tfaRequired: tfa.required
 });
 
 export default connect(mapStateToProps, { authenticate })(AuthPage);

@@ -35,6 +35,12 @@ exports[`AuthPage tests should redirect to TFA iff enabled 1`] = `
 />
 `;
 
+exports[`AuthPage tests should redirect to enable-tfa iff required 1`] = `
+<withRouter()
+  to="/auth/enable-tfa"
+/>
+`;
+
 exports[`AuthPage tests should show link to join when has_signup feature flag exists 1`] = `
 <Fragment>
   <CenteredLogo />

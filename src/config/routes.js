@@ -5,6 +5,7 @@ import {
   apiKeys,
   AccountSettingsPage,
   AuthPage,
+  EnableTfaPage,
   TfaPage,
   SsoAuthPage,
   SSOPage,
@@ -50,8 +51,9 @@ import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
 import App from 'src/components/layout/App';
+import LargeForm from 'src/components/layout/LargeForm';
 
-import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, TFA_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
+import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, TFA_ROUTE, SSO_AUTH_ROUTE, ENABLE_TFA_AUTH_ROUTE } from 'src/constants';
 
 /**
  *  Angular UI Grant List:
@@ -120,6 +122,13 @@ const routes = [
     public: true,
     component: SSOPage,
     title: 'Single Sign-On'
+  },
+  {
+    path: ENABLE_TFA_AUTH_ROUTE,
+    public: true,
+    component: EnableTfaPage,
+    layout: LargeForm,
+    title: 'Enable TFA'
   },
   {
     path: '/register',
