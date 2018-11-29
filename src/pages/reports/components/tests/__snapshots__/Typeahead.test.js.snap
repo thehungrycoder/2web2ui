@@ -44,7 +44,7 @@ exports[`Component: Typeahead should finally render with both synchronous and as
 </div>
 `;
 
-exports[`Component: Typeahead should first show synchronous matches 1`] = `
+exports[`Component: Typeahead should first show synchronous matches while waiting for async calls to finish 1`] = `
 <div
   className="Typeahead"
 >
@@ -72,6 +72,31 @@ exports[`Component: Typeahead should first show synchronous matches 1`] = `
     suffix={
       <Loading
         hidden={false}
+        isForTypeahead={true}
+      />
+    }
+    type="text"
+  />
+</div>
+`;
+
+exports[`Component: Typeahead should not make any api requests nor have any matches with a pattern <2 characters 1`] = `
+<div
+  className="Typeahead"
+>
+  <div
+    className="List"
+  >
+    <ActionList
+      actions={Array []}
+      groupByKey="section"
+    />
+  </div>
+  <TextField
+    resize="both"
+    suffix={
+      <Loading
+        hidden={true}
         isForTypeahead={true}
       />
     }

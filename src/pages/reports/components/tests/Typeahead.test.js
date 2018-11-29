@@ -72,14 +72,28 @@ describe('Component: Typeahead', () => {
     expect(result).toEqual([]);
   });
 
-  it('should first show synchronous matches', () => {
-    wrapper.instance().updateLookAhead('cross');
-    expect(renderTypeahead(wrapper, 'cross')).toMatchSnapshot();
+  it('should first show synchronous matches while waiting for async calls to finish', () => {
+    const input = 'cross';
+    wrapper.instance().updateLookAhead(input);
+    expect(wrapper.state().calculatingMatches).toEqual(true);
+    expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
   });
 
-  it('should finally render with both synchronous and async matches', () => wrapper.instance().updateLookAhead('cross').then(() => {
-    expect(renderTypeahead(wrapper, 'cross')).toMatchSnapshot();
-  }));
+  it('should not make any api requests nor have any matches with a pattern <2 characters', () => {
+    const input = 'c';
+    return wrapper.instance().updateLookAhead(input).then(() => {
+      expect(props.refreshTypeaheadCache).not.toHaveBeenCalled();
+      expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
+    });
+
+  });
+
+  it('should finally render with both synchronous and async matches', () => {
+    const input = 'cross';
+    return wrapper.instance().updateLookAhead(input).then(() => {
+      expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
+    });
+  });
 
   it('should call onSelect on change', () => {
     const value = { type: 'Template', value: 'treasure' };
