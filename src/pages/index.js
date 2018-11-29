@@ -14,6 +14,7 @@ export { default as JoinPage } from './join/JoinPage';
 export { default as reports } from './reports';
 export { default as recipientLists } from './recipientLists';
 export { default as sendingDomains } from './sendingDomains';
+export { default as signals } from './signals';
 export { default as suppressions } from './suppressions';
 export { default as subaccounts } from './subaccounts';
 export { default as templates } from './templates';

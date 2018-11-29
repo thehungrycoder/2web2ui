@@ -29,7 +29,8 @@ import {
   passwordReset,
   PremiumSupportPage,
   RecipientValidationPage,
-  snippets
+  snippets,
+  signals
 } from 'src/pages';
 
 import LogoutPage from 'src/pages/logout/LogoutPage';
@@ -260,6 +261,38 @@ const routes = [
     layout: App,
     title: 'Message History',
     supportDocSearch: 'event'
+  },
+  {
+    path: '/signals',
+    component: signals.OverviewPage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/health-score',
+    component: signals.HealthScorePage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/spam-traps',
+    component: signals.SpamTrapsPage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement-cohort',
+    component: signals.EngagementPage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
   },
   {
     path: '/account/security',

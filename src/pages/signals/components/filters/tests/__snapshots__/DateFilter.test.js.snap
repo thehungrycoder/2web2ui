@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DateFilter Component renders correctly 1`] = `
+<div
+  className="DateFilter"
+>
+  <Select
+    options={
+      Array [
+        "Last 7 Days",
+        "Last 14 Days",
+        "Last 30 Days",
+        "Last 90 Days",
+      ]
+    }
+  />
+</div>
+`;

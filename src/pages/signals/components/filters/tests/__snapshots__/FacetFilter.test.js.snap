@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FacetFilter Component renders correctly 1`] = `
+<div
+  className="FacetFilter"
+>
+  <Select
+    options={
+      Array [
+        "No Breakdown",
+        "By Sending Domain",
+        "By IP Pool",
+        "By Campaign",
+      ]
+    }
+  />
+</div>
+`;

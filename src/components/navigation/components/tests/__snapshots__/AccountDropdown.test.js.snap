@@ -75,7 +75,6 @@ exports[`AccountDropdown should render correctly 1`] = `
           "to": "link2",
         },
         Object {
-          "component": [Function],
           "content": <React.Fragment>
             link3
              
@@ -83,6 +82,7 @@ exports[`AccountDropdown should render correctly 1`] = `
           "external": undefined,
           "label": "link3",
           "onClick": [Function],
+          "to": undefined,
         },
         Object {
           "component": [Function],
