@@ -61,12 +61,15 @@ export function authenticate(username, password, rememberMe = false) {
         return Promise.all([authData, getTfaStatusBeforeLoggedIn({ username, token: authData.access_token })]);
       })
       .then(([authData, tfaResponse]) => {
-        const tfaAction = actOnTfaStatus(tfaResponse, authData);
+        const { enabled: tfaEnabled, required: tfaRequired } = tfaResponse.data.results;
+        const tfaAction = actOnTfaStatus(tfaEnabled, tfaRequired, authData);
         if (tfaAction) {
           dispatch(tfaAction);
         } else {
           dispatch(login({ authData, saveCookie: true }));
         }
+
+        return { auth: true, tfaRequired };
       })
       .catch((err) => {
         const { response = {}} = err;
@@ -81,16 +84,17 @@ export function authenticate(username, password, rememberMe = false) {
             errorDescription
           }
         });
+
+        return { auth: false };
       });
   };
 }
 
-function actOnTfaStatus(tfaResponse, authData) {
-  const { enabled, required } = tfaResponse.data.results;
-  if (enabled) {
+function actOnTfaStatus(tfaEnabled, tfaRequired, authData) {
+  if (tfaEnabled) {
     return { type: 'TFA_ENABLED_ON_LOGIN', payload: authData };
   }
-  if (required) {
+  if (tfaRequired) {
     return { type: 'TFA_REQUIRED_ON_LOGIN', payload: authData };
   }
   return null;

@@ -10,12 +10,12 @@ exports[`Page: RegisterPage happy path render 1`] = `
     <Panel.Section>
       <p>
         <small>
-          jose@zamora.io
+          jose@example.com
            invited you to join their SparkPost account.
         </small>
       </p>
       <Connect(ReduxForm)
-        email="appteam@sparkpost.com"
+        email="newperson@example.com"
         onSubmit={[Function]}
       />
     </Panel.Section>

@@ -11,29 +11,39 @@ import RegisterUserForm from './RegisterUserForm';
 
 import { registerUser, checkInviteToken } from 'src/actions/users';
 import { authenticate } from 'src/actions/auth';
-import { DEFAULT_REDIRECT_ROUTE, AUTH_ROUTE } from 'src/constants';
+import { ENABLE_TFA_AUTH_ROUTE, DEFAULT_REDIRECT_ROUTE, AUTH_ROUTE } from 'src/constants';
 
 export class RegisterPage extends Component {
 
   onSubmit = (values) => {
     const { username, password } = values;
-    return this.props.registerUser(this.props.token, values)
-      .then(() => this.props.authenticate(username, password)
-        .then(() => this.props.history.push(DEFAULT_REDIRECT_ROUTE))
-        .catch((error) => {
-          // user was created but auth failed, redirect to /auth
-          this.props.history.push(AUTH_ROUTE);
-          ErrorTracker.report('sign-in', error);
-        }))
+    const { token, registerUser } = this.props;
+    return registerUser(token, values)
+      .then(() => this.authAndRedirect(username, password))
       .catch((error) => ErrorTracker.report('register-user', error));
   }
 
+  authAndRedirect = (username, password) => {
+    const { authenticate, history } = this.props;
+    return authenticate(username, password)
+      .then((authResult) => {
+        if (authResult.tfaRequired) {
+          return history.push(ENABLE_TFA_AUTH_ROUTE);
+        }
+        return history.push(DEFAULT_REDIRECT_ROUTE);
+      })
+      .catch((error) => {
+        // user was created but auth failed, redirect to /auth
+        history.push(AUTH_ROUTE);
+        ErrorTracker.report('sign-in', error);
+      });
+  }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.checkInviteToken(this.props.token);
   }
 
-  renderRegisterPanel () {
+  renderRegisterPanel() {
     const { invite, loading } = this.props;
 
     if (loading) {
@@ -56,7 +66,7 @@ export class RegisterPage extends Component {
     );
   }
 
-  render () {
+  render() {
     const { token } = this.props;
 
     if (token === undefined) {
@@ -76,7 +86,7 @@ export class RegisterPage extends Component {
   }
 }
 
-function mapStateToProps ({ auth, users }, props) {
+function mapStateToProps({ auth, users }, props) {
   return {
     token: qs.parse(props.location.search).token,
     invite: users.invite,
