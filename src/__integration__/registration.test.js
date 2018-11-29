@@ -43,7 +43,8 @@ test('Join Form: Complete Registration', async () => {
   ]);
 
   axiosMock.mockClear();
-  await form.mounted.find('Button').first().simulate('click');
+  form.mounted.find('Button').first().simulate('click');
+  await form.submit();
 
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });
@@ -62,8 +63,8 @@ test('Join Form: Complete Registration w/ email opt-in', async () => {
   ]);
 
   axiosMock.mockClear();
-
   form.mounted.find('Button').first().simulate('click');
+  await form.submit();
 
   expect(axiosMock.mock.calls).toMatchSnapshot();
 });
