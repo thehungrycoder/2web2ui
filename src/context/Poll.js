@@ -1,4 +1,5 @@
 import React, { createContext, Component } from 'react';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 
 /**
@@ -42,7 +43,7 @@ export const PollContext = createContext(defaultContext);
 /**
  * PollContext Provider
  */
-class Poll extends Component {
+export class Poll extends Component {
   state = defaultContext;
 
   isPolling = (key) => {
@@ -51,12 +52,18 @@ class Poll extends Component {
   }
 
   poll = async (key) => {
+    const { loggedIn } = this.props;
     const { action, interval, status, attempts, maxAttempts, consecutiveErrors, maxConsecutiveErrors } = _.get(this.state, `actions[${key}]`, {});
 
     const attemptCount = attempts + 1;
     let errCount = 0;
 
     if (status !== 'polling') {
+      return;
+    }
+
+    if (!loggedIn) {
+      this.setActionState(key, { status: 'done' });
       return;
     }
 
@@ -123,4 +130,5 @@ class Poll extends Component {
   }
 }
 
-export default Poll;
+const mapStateToProps = ({ auth }) => ({ loggedIn: auth.loggedIn });
+export default connect(mapStateToProps)(Poll);

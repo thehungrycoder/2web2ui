@@ -59,19 +59,12 @@ describe('ListResults', () => {
       expect(props.startPolling).not.toHaveBeenCalled();
     });
 
-    it('should stop polling when new results are complete', () => {
-      wrapper.setProps({ latestId: testComplete.listId });
-      jest.clearAllMocks();
-      wrapper.setProps({ results: testComplete });
-      expect(props.stopPolling).toHaveBeenCalledTimes(1);
-      expect(props.stopPolling).toHaveBeenCalledWith(testComplete.listId);
-    });
-
     it('starts shows an alert when polling results are complete', async () => {
       props.getJobStatus.mockReturnValue(Promise.resolve({ complete: true }));
       wrapper.setProps({ results: testNotComplete, latestId: testNotComplete.listId });
       await expect(props.getJobStatus).toHaveBeenCalledWith(testNotComplete.listId);
       expect(props.showAlert.mock.calls).toMatchSnapshot();
+      expect(props.stopPolling).toHaveBeenCalledWith(testNotComplete.listId);
     });
   });
 });

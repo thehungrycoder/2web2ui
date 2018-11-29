@@ -1,5 +1,5 @@
 import React from 'react';
-import Poll from '../Poll';
+import { Poll } from '../Poll';
 import { shallow } from 'enzyme';
 
 describe('Poll Provider', () => {
@@ -16,7 +16,7 @@ describe('Poll Provider', () => {
 
   beforeEach(() => {
     window.setTimeout = jest.fn((fn) => next = fn);
-    wrapper = shallow(<Poll>child</Poll>);
+    wrapper = shallow(<Poll loggedIn={true}>child</Poll>);
   });
 
   it('should render children with the correct state', () => {
@@ -84,6 +84,14 @@ describe('Poll Provider', () => {
     startPolling(testAction);
     await next();
     await next();
+    await next();
+    expect(wrapper.state('actions').testAction).toMatchSnapshot();
+  });
+
+  it('should stop polling if not logged in', async () => {
+    const { startPolling } = wrapper.props().value;
+    startPolling(testAction);
+    wrapper.setProps({ loggedIn: false });
     await next();
     expect(wrapper.state('actions').testAction).toMatchSnapshot();
   });
