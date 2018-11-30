@@ -16,7 +16,7 @@ exports[`Loading Component Circle should render - no props 1`] = `
 </svg>
 `;
 
-exports[`Loading Component Circle should render - small 1`] = `
+exports[`Loading Component Circle should render a specific size (small) 1`] = `
 <svg
   class="CircleWrapper Small"
   viewBox="25 25 50 50"
@@ -32,16 +32,14 @@ exports[`Loading Component Circle should render - small 1`] = `
 </svg>
 `;
 
-exports[`Loading Component Loading animation should not render hidden is true 1`] = `null`;
-
-exports[`Loading Component Loading animation should render when calculating 1`] = `
+exports[`Loading Component Circle should render a specific style (center) 1`] = `
 <svg
-  class="CircleWrapper XSmall"
+  class="CircleWrapper Center"
   viewBox="25 25 50 50"
   xmlns="http://www.w3.org/2000/svg"
 >
   <circle
-    class="SmallCircle"
+    class="Circle"
     cx="50"
     cy="50"
     r="20"

@@ -1,21 +1,8 @@
 import React from 'react';
-import { Loading, LoadingSVG, LoadingLogoSVG } from '../Loading';
+import { LoadingSVG, LoadingLogoSVG } from '../Loading';
 import { render } from 'enzyme';
 
 describe('Loading Component', () => {
-
-  describe('Loading animation', () => {
-
-    it('should not render hidden is true', () => {
-      const wrapper = render(<Loading hidden = {true}/>);
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('should render when calculating', () => {
-      const wrapper = render(<Loading hidden = {false} isForTypeahead={true}/>);
-      expect(wrapper).toMatchSnapshot();
-    });
-  });
 
   describe('Circle', () => {
     it('should render - no props', () => {
@@ -23,8 +10,13 @@ describe('Loading Component', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should render - small', () => {
-      const wrapper = render(<LoadingSVG small />);
+    it('should render a specific size (small)', () => {
+      const wrapper = render(<LoadingSVG size = 'Small' />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render a specific style (center)', () => {
+      const wrapper = render(<LoadingSVG className = 'Center' />);
       expect(wrapper).toMatchSnapshot();
     });
 

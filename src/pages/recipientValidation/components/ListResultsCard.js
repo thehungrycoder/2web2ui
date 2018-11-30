@@ -13,7 +13,7 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
   if (complete === 'unknown') {
     return (
       <Panel>
-        <div className={styles.LoadingWrapper}><LoadingSVG small /></div>
+        <div className={styles.LoadingWrapper}><LoadingSVG size='Small' /></div>
       </Panel>
     );
   }
@@ -23,7 +23,7 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
     : InsertDriveFile;
 
   const proccessing = !complete
-    ? <div className={styles.ProcessingWrapper}><LoadingSVG small /></div>
+    ? <div className={styles.ProcessingWrapper}><LoadingSVG size='Small' /></div>
     : <div className={styles.Spacer}/>;
 
   const download = complete && (

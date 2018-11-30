@@ -40,9 +40,9 @@
   }
 
   &.XSmall {
-    width: 23px;
-    height: 23px;
-    animation: rotate 1s linear infinite;
+    width: 25px;
+    height: 25px;
+    animation: rotate 800ms linear infinite;
   }
 }
 
@@ -60,17 +60,12 @@
     stroke-dasharray: 100 100;
     animation: dash-small 1.5s ease-in-out infinite;
   }
-}
 
-.SmallCircle {
-  stroke: color(orange);
-  stroke-width: 2px;
-  stroke-linecap: round;
-
-  stroke-dasharray: 150 200;
-  stroke-dashoffset: -10;
-  animation: dash 1.5s ease-in-out infinite;
-
+  .XSmall & {
+    stroke-width: 2.3px;
+    stroke-dasharray: 100 100;
+    animation: dash-small 1.5s ease-in-out infinite;
+  }
 }
 
 @keyframes dash {

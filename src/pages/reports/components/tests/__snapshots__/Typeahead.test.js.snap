@@ -42,9 +42,8 @@ exports[`Component: Typeahead should append new matches 1`] = `
   <TextField
     resize="both"
     suffix={
-      <Loading
-        hidden={true}
-        isForTypeahead={true}
+      <MatchesLoading
+        isLoading={false}
       />
     }
     type="text"
@@ -86,9 +85,8 @@ exports[`Component: Typeahead should first show synchronous matches while waitin
   <TextField
     resize="both"
     suffix={
-      <Loading
-        hidden={false}
-        isForTypeahead={true}
+      <MatchesLoading
+        isLoading={true}
       />
     }
     type="text"
@@ -111,9 +109,8 @@ exports[`Component: Typeahead should not make any api requests nor have any matc
   <TextField
     resize="both"
     suffix={
-      <Loading
-        hidden={true}
-        isForTypeahead={true}
+      <MatchesLoading
+        isLoading={false}
       />
     }
     type="text"

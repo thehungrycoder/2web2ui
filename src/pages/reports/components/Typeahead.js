@@ -9,11 +9,13 @@ import { TextField, ActionList } from '@sparkpost/matchbox';
 import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';
 import { connect } from 'react-redux';
-import { Loading } from 'src/components';
+import { LoadingSVG } from 'src/components';
 
 function flattenItem({ type, value }) {
   return `${type}:${value}`;
 }
+const MatchesLoading = ({ isLoading }) => (isLoading) ? <LoadingSVG size='XSmall' /> : null;
+
 
 export class Typeahead extends Component {
   state = {
@@ -22,6 +24,7 @@ export class Typeahead extends Component {
     calculatingMatches: false,
     lastPattern: null
   };
+
 
   /**
    * Returns all matches that match a pattern.
@@ -127,7 +130,7 @@ export class Typeahead extends Component {
           onFocus: clearSelection,
           onChange: this.handleFieldChange
         })}
-        suffix={<Loading hidden = {!this.state.calculatingMatches} isForTypeahead={true}/>}
+        suffix={<MatchesLoading isLoading={this.state.calculatingMatches}/>}
         />
       </div>
     );
