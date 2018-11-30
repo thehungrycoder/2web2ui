@@ -6,6 +6,19 @@ describe('Component: Typeahead', () => {
   let props;
   let wrapper;
   let downshiftHelpers;
+  const defaultCrossMatches = [{ type: 'X', value: 'cross' }, { type: 'Campaign', value: 'crossing' }];
+
+  const simulateMetricsAPICallChanges = (lastPattern) => {
+    const newProps = {
+      ...props,
+      items: [{ type: 'Z', value: 'crossed' }]
+    };
+    wrapper = shallow(<Typeahead {...newProps} />);
+    wrapper.setState({
+      matches: defaultCrossMatches,
+      lastPattern
+    });
+  };
 
   beforeEach(() => {
     props = {
@@ -51,19 +64,13 @@ describe('Component: Typeahead', () => {
   it('should produce matches on search', () => {
     const pattern = 'cross';
     const result = wrapper.instance().getMatches({ pattern });
-    expect(result).toEqual([{ type: 'X', value: 'cross' }, { type: 'Campaign', value: 'crossing' }]);
+    expect(result).toEqual(defaultCrossMatches);
   });
 
-  it('should produce whitelisted matches on search', () => {
+  it('should produce correct matches after excluding items', () => {
     const pattern = 'cross';
-    const result = wrapper.instance().getMatches({ pattern, whiteListTypes: ['Campaign']});
+    const result = wrapper.instance().getMatches({ pattern, excludedItems: [{ type: 'X', value: 'cross' }]});
     expect(result).toEqual([{ type: 'Campaign', value: 'crossing' }]);
-  });
-
-  it('should produce blacklisted matches on search', () => {
-    const pattern = 'cross';
-    const result = wrapper.instance().getMatches({ pattern, blackListTypes: ['Campaign']});
-    expect(result).toEqual([{ type: 'X', value: 'cross' }]);
   });
 
   it('should produce no matches on empty query', () => {
@@ -88,11 +95,18 @@ describe('Component: Typeahead', () => {
 
   });
 
-  it('should finally render with both synchronous and async matches', () => {
+  it('should append new matches', () => {
     const input = 'cross';
-    return wrapper.instance().updateLookAhead(input).then(() => {
-      expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
-    });
+    simulateMetricsAPICallChanges(input);
+    wrapper.instance().appendNewMatches(input);
+    expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
+  });
+
+  it('should not append new matches if the pattern is not the most recent', () => {
+    const input = 'cros';
+    simulateMetricsAPICallChanges('cross');
+    wrapper.instance().appendNewMatches(input);
+    expect(wrapper.state('matches')).toEqual(defaultCrossMatches);
   });
 
   it('should call onSelect on change', () => {

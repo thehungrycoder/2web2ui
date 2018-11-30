@@ -11,8 +11,6 @@ import styles from './Typeahead.module.scss';
 import { connect } from 'react-redux';
 import { Loading } from 'src/components';
 
-const TYPES_METRICS = ['Campaign', 'Recipient Domain', 'IP Pool', 'Sending IP'];
-
 function flattenItem({ type, value }) {
   return `${type}:${value}`;
 }
@@ -25,23 +23,36 @@ export class Typeahead extends Component {
     lastPattern: null
   };
 
-  //Gets all filter items that match the pattern with possible whitelisting and blacklisting of types
-  getMatches = ({ pattern, whiteListTypes, blackListTypes }) => {
+  /**
+   * Returns all matches that match a pattern.
+   *
+   * If excludedItems is passed, it then takes the matches and
+   * filters out any items that already exist in excludedItems
+   */
+  getMatches = ({ pattern, excludedItems }) => {
     const { items, selected = []} = this.props;
     const flatSelected = selected.map(flattenItem);
     let matches = sortMatch(items, pattern, (i) => i.value)
-      .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })));
-    if (whiteListTypes) {
-      matches = matches.filter(({ type }) => whiteListTypes.includes(type));
-    }
-    if (blackListTypes) {
-      matches = matches.filter(({ type }) => !blackListTypes.includes(type));
+      .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
+      .slice(0,TYPEAHEAD_LIMIT * 2);
+
+    if (excludedItems) {
+      const isInExcludedItems = function (item) {
+        return excludedItems.some((excludedItem) => _.isEqual(item, excludedItem));
+      };
+      matches = matches.filter((item) => !isInExcludedItems(item));
     }
     return matches;
   };
 
-  // Updates the matches with the already-loaded templates, sending domains, subaccounts then
-  // makes the metrics api calls and appends to the matches.
+  /**
+   * The lookahead/typeahead only activates when there are at least 2 characters.
+   * If there are, it finds matches within the currently loaded items.
+   * Then it makes the metrics api calls to load new items, filters those
+   * items for matches while excluding results that already exits, and finally
+   * appending the results to the existing matches
+   *
+   */
   updateLookAhead = (pattern) => {
     this.setState({ calculatingMatches: true });
     if (!pattern || pattern.length < 2) {
@@ -50,17 +61,23 @@ export class Typeahead extends Component {
     } else {
       this.setState({ lastPattern: pattern });//This sets the last queued pattern
       const options = { ...this.props.reportOptions, match: pattern, limit: METRICS_API_LIMIT };
-      const synchronousMatches = this.getMatches({ pattern, blackListTypes: TYPES_METRICS });
-      this.setState({ matches: synchronousMatches });
+      this.setState({ matches: this.getMatches({ pattern }) });
 
-      return this.props.refreshTypeaheadCache(options).then(() => {
-        const asyncMatches = this.getMatches({ pattern, whiteListTypes: TYPES_METRICS });
-        const matches = _.concat(synchronousMatches , asyncMatches).slice(0,TYPEAHEAD_LIMIT);
-        this.setState({ matches, calculatingMatches: false, lastPattern: null });
-      });
+      return this.props.refreshTypeaheadCache(options).then(() =>
+        this.appendNewMatches(pattern)
+      );
     }
   };
 
+  //Appends the new metrics items only if the pattern is last in the queue
+  appendNewMatches = (pattern) => {
+    if (pattern === this.state.lastPattern) {
+      const currentMatches = this.state.matches;
+      const asyncMatches = this.getMatches({ pattern, excludedItems: currentMatches });
+      const matches = _.concat(currentMatches, asyncMatches).slice(0, TYPEAHEAD_LIMIT);
+      this.setState({ matches, calculatingMatches: false, lastPattern: null });
+    }
+  };
   updateLookAheadDebounced = _.debounce(this.updateLookAhead, 250);
 
   handleFieldChange = (e) => {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Typeahead should finally render with both synchronous and async matches 1`] = `
+exports[`Component: Typeahead should append new matches 1`] = `
 <div
   className="Typeahead"
 >
@@ -23,6 +23,14 @@ exports[`Component: Typeahead should finally render with both synchronous and as
             "content": <TypeaheadItem
               helpText="Campaign"
               value="crossing"
+            />,
+            "highlighted": false,
+          },
+          Object {
+            "className": "",
+            "content": <TypeaheadItem
+              helpText="Z"
+              value="crossed"
             />,
             "highlighted": false,
           },
@@ -61,6 +69,14 @@ exports[`Component: Typeahead should first show synchronous matches while waitin
               value="cross"
             />,
             "highlighted": true,
+          },
+          Object {
+            "className": "",
+            "content": <TypeaheadItem
+              helpText="Campaign"
+              value="crossing"
+            />,
+            "highlighted": false,
           },
         ]
       }

@@ -70,27 +70,27 @@ describe('Action Creator: Report Options', () => {
 
   });
 
-  it('should refresh the metrics lists for the typeahead cache if the results are not cached', () => {
-    reportOptions.refreshTypeaheadCache({ match: 'foo' })(dispatchMock, getStateMock);
+  it('should refresh the metrics lists for the typeahead cache if the results are not cached', async () => {
+    await reportOptions.refreshTypeaheadCache({ match: 'foo' })(dispatchMock, getStateMock);
     expect(metrics.fetchMetricsDomains).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsCampaigns).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsSendingIps).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsIpPools).toHaveBeenCalledTimes(1);
   });
 
-  it('should load metrics lists for the typeahead from cache if exists', () => {
+  it('should load metrics lists for the typeahead from cache if exists', async () => {
     testState.typeahead = {
-      from: 'date1',
-      to: 'date2',
       cache: {
         foo: ['foobar']
       }
     };
-    reportOptions.refreshTypeaheadCache({ match: 'foo', from: 'date1', to: 'date2' })(dispatchMock, getStateMock);
+    isSameDate.mockImplementation(() => true);
+    await reportOptions.refreshTypeaheadCache({ match: 'foo' })(dispatchMock, getStateMock);
     expect(metrics.fetchMetricsDomains).not.toHaveBeenCalled();
     expect(metrics.fetchMetricsCampaigns).not.toHaveBeenCalled();
     expect(metrics.fetchMetricsSendingIps).not.toHaveBeenCalled();
     expect(metrics.fetchMetricsIpPools).not.toHaveBeenCalled();
+
   });
 
   it('should add multiple filters', () => {

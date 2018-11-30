@@ -10,6 +10,7 @@ import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
 import { getRelativeDates } from 'src/helpers/date';
 import { getQueryFromOptions } from 'src/helpers/metrics';
+import { isSameDate } from 'src/helpers/date';
 import _ from 'lodash';
 
 // array of all lists that need to be re-filtered when time changes
@@ -60,15 +61,13 @@ export function refreshTypeaheadCache(options) {
     const { typeahead } = getState();
     const { to: cachedTo, from: cachedFrom, cache } = typeahead;
     const { match, to: currentTo, from: currentFrom } = options;
-
-    if (cachedFrom === currentFrom && cachedTo === currentTo && cache[match]) {
+    if (isSameDate(cachedFrom, currentFrom) && isSameDate(cachedTo, currentTo) && cache[match]) {
       dispatch({
         type: 'UPDATE_METRICS_FROM_CACHE',
         payload: cache[match]
       });
       return Promise.resolve();
     }
-
     const requests = metricLists.map((list) => dispatch(list(params)));
     return Promise.all(requests).then((arrayOfMetrics) => {
       // Flattens the array from array of metrics objects to an object with each metric as a key
