@@ -43,12 +43,24 @@ describe('ContentEditor', () => {
   });
 
   it('should set syntax validation correctly', () => {
+    wrapper.instance().handleTab(0);
+    wrapper.update();
+    expect(wrapper.find('Field').props().name).toBe('content.html');
+    expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+
     wrapper.instance().handleTab(1);
     wrapper.update();
+    expect(wrapper.find('Field').props().name).toBe('content.text');
     expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
 
     wrapper.instance().handleTab(2);
     wrapper.update();
+    expect(wrapper.find('Field').props().name).toBe('content.amp_html');
+    expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+
+    wrapper.instance().handleTab(3);
+    wrapper.update();
+    expect(wrapper.find('Field').props().name).toBe('testData');
     expect(wrapper.find('Field').props().syntaxValidation).toBe(true);
   });
 
@@ -92,10 +104,6 @@ describe('ContentEditor', () => {
 
     it('returns required validation message with whitespace', () => {
       expect(subject({ html: '     ' })).toMatch(/required/);
-    });
-
-    it('returns required validation message with null', () => {
-      expect(subject({ html: null })).toMatch(/required/);
     });
   });
 

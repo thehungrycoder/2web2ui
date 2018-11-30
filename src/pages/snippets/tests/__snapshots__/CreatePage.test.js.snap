@@ -5,8 +5,10 @@ exports[`CreatePage .submitSnippet succeeds with a subaccount assignment 1`] = `
   "calls": Array [
     Array [
       Object {
+        "amp_html": undefined,
         "html": undefined,
         "id": "example-snippet",
+        "isAmpLive": false,
         "name": "Example Snippet",
         "sharedWithSubaccounts": false,
         "subaccountId": "example-subaccount",
@@ -23,8 +25,10 @@ exports[`CreatePage .submitSnippet succeeds with content 1`] = `
   "calls": Array [
     Array [
       Object {
+        "amp_html": "<span>amped</span>",
         "html": "<p>testing...</p>",
         "id": "example-snippet",
+        "isAmpLive": true,
         "name": "Example Snippet",
         "sharedWithSubaccounts": false,
         "subaccountId": undefined,
@@ -41,8 +45,10 @@ exports[`CreatePage .submitSnippet succeeds with master account assignment 1`] =
   "calls": Array [
     Array [
       Object {
+        "amp_html": undefined,
         "html": undefined,
         "id": "example-snippet",
+        "isAmpLive": false,
         "name": "Example Snippet",
         "sharedWithSubaccounts": false,
         "subaccountId": undefined,
@@ -59,8 +65,10 @@ exports[`CreatePage .submitSnippet succeeds with shared subaccounts assignment 1
   "calls": Array [
     Array [
       Object {
+        "amp_html": undefined,
         "html": undefined,
         "id": "example-snippet",
+        "isAmpLive": false,
         "name": "Example Snippet",
         "sharedWithSubaccounts": true,
         "subaccountId": undefined,
