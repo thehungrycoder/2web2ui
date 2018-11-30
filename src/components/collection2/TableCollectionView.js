@@ -14,7 +14,7 @@ const TableWrapper = (props) => (
 
 const TableBody = (props) => <tbody>{props.children}</tbody>;
 
-const TableCollectionView = ({ rowComponent, headerComponent, columns, rows }) => {
+const TableCollectionView = ({ rowComponent, headerComponent, columns, rows, ...rest }) => {
   const HeaderComponent = headerComponent ? headerComponent : () => <TableHeader columns={columns} onSort={() => {}} />;
   const TableRow = rowComponent ? rowComponent : Table.Row;
 
@@ -24,7 +24,7 @@ const TableCollectionView = ({ rowComponent, headerComponent, columns, rows }) =
       headerComponent={HeaderComponent}
       bodyWrapper={TableBody}
       rowComponent={TableRow}
-      {...this.props}
+      {...rest}
       rows={rows}
     />
   );
