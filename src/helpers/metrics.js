@@ -136,10 +136,10 @@ function ceilMoment(time, roundInt = 1, precision = 'minutes') {
  */
 export function getValidDateRange({ from, to, now = moment(), roundToPrecision, preventFuture }) {
   // If we're not rounding, check to see if we want to prevent future dates. if not, we're good.
-  const nonRoundCondition = () => roundToPrecision ? true : preventFuture ? to.isBefore(now) : true;
+  const nonRoundCondition = roundToPrecision || !preventFuture || to.isBefore(now);
   const validDates = _.every(_.map([from, to, now], (date) => moment.isMoment(date) && date.isValid()));
 
-  if (validDates && from.isBefore(to) && nonRoundCondition()) {
+  if (validDates && from.isBefore(to) && nonRoundCondition) {
     if (!roundToPrecision) { return { from, to }; }
     // Use the user's rounded 'to' input if it's less than or equal to 'now' rounded up to the nearest precision,
     // otherwise use the valid range and precision of floor(from) to ceil(now).
