@@ -27,14 +27,14 @@ export class Typeahead extends Component {
    * Returns all matches that match a pattern.
    *
    * If excludedItems is passed, it then takes the matches and
-   * filters out any items that already exist in excludedItems
+   * filters out any items that already exist in excludedItems.
    */
   getMatches = ({ pattern, excludedItems }) => {
     const { items, selected = []} = this.props;
     const flatSelected = selected.map(flattenItem);
     let matches = sortMatch(items, pattern, (i) => i.value)
       .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
-      .slice(0,TYPEAHEAD_LIMIT * 2);
+      .slice(0,TYPEAHEAD_LIMIT);
 
     if (excludedItems) {
       const isInExcludedItems = function (item) {
@@ -50,23 +50,23 @@ export class Typeahead extends Component {
    * If there are, it finds matches within the currently loaded items.
    * Then it makes the metrics api calls to load new items, filters those
    * items for matches while excluding results that already exits, and finally
-   * appending the results to the existing matches
+   * appending the results to the existing matches.
    *
    */
   updateLookAhead = (pattern) => {
-    this.setState({ calculatingMatches: true });
     if (!pattern || pattern.length < 2) {
       this.setState({ matches: [], calculatingMatches: false, lastPattern: null });
       return Promise.resolve();
-    } else {
-      this.setState({ lastPattern: pattern });//This sets the last queued pattern
-      const options = { ...this.props.reportOptions, match: pattern, limit: METRICS_API_LIMIT };
-      this.setState({ matches: this.getMatches({ pattern }) });
-
-      return this.props.refreshTypeaheadCache(options).then(() =>
-        this.appendNewMatches(pattern)
-      );
     }
+
+    this.setState({ calculatingMatches: true });
+    this.setState({ lastPattern: pattern });//This sets the last queued pattern
+    this.setState({ matches: this.getMatches({ pattern }) });
+
+    const options = { ...this.props.reportOptions, match: pattern, limit: METRICS_API_LIMIT };
+    return this.props.refreshTypeaheadCache(options).then(() =>
+      this.appendNewMatches(pattern)
+    );
   };
 
   //Appends the new metrics items only if the pattern is last in the queue
