@@ -61,6 +61,24 @@ describe('Snippet Actions', () => {
           text: 'Testing...'
         })
       )
+    },
+    {
+      name: 'excluding amp_html',
+      action: () => (
+        createSnippet({
+          html: '<p>Testing...</p>',
+          amp_html: '<p>AMP Testing...</p>'
+        })
+      )
+    },
+    {
+      name: 'with amp_html',
+      action: () => (
+        createSnippet({
+          amp_html: '<p>AMP Testing...</p>',
+          isAmpLive: true
+        })
+      )
     }
   ]);
 
@@ -143,6 +161,24 @@ describe('Snippet Actions', () => {
           id: 'test-snippet',
           name: 'Test Snippet',
           text: 'Testing...'
+        })
+      )
+    },
+    {
+      name: 'excluding amp_html',
+      action: () => (
+        updateSnippet({
+          html: '<p>Testing...</p>',
+          amp_html: '<p>AMP Testing...</p>'
+        })
+      )
+    },
+    {
+      name: 'with amp_html',
+      action: () => (
+        updateSnippet({
+          amp_html: '<p>AMP Testing...</p>',
+          isAmpLive: true
         })
       )
     }
