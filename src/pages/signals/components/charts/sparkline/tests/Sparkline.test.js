@@ -9,6 +9,7 @@ describe('Sparkline Component', () => {
   beforeEach(() => {
     props = {
       data: [{ value: 1, date: new Date('2010-01-01T12:00:00.000Z') },{ value: 2 },{ value: 3 }],
+      domain: [0,3],
       height: 50,
       width: 100,
       stroke: '#huh',
@@ -18,7 +19,7 @@ describe('Sparkline Component', () => {
     wrapper = shallow(<Sparkline {...props}/>);
   });
 
-  it('renders correctly with default props', () => {
+  it('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
 

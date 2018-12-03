@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ResponsiveContainer, LineChart, Line, Tooltip } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, Tooltip, YAxis } from 'recharts';
 import TooltipWrapper from '../tooltip/Tooltip';
 import _ from 'lodash';
 
@@ -12,11 +12,12 @@ class Sparkline extends Component {
   };
 
   render() {
-    const { data, height, width, dataKey, dot, activeDot, stroke, onClick } = this.props;
+    const { data, height, width, dataKey, dot, domain, activeDot, stroke, onClick } = this.props;
 
     return (
       <ResponsiveContainer height={height} width={width}>
         <LineChart data={data} onClick={onClick}>
+          <YAxis hide dataKey={dataKey} type='number' domain={domain} />
           <Line
             activeDot={activeDot}
             dataKey={dataKey}
@@ -38,8 +39,9 @@ class Sparkline extends Component {
 
 Sparkline.defaultProps = {
   dataKey: 'value',
+  domain: [0, 100],
   dot: false,
-  height: 30,
+  height: 25,
   stroke: '#000000',
   tooltipContent: _.noop,
   width: '100%'
