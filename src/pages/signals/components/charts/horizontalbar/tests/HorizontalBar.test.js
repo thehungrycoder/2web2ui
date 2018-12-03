@@ -26,4 +26,9 @@ describe('HorizontalBar Component', () => {
     wrapper.find('Bar').simulate('click');
     expect(props.onClick).toHaveBeenCalled();
   });
+
+  it('should render custom bar shape', () => {
+    const shape = wrapper.find('Bar').props().shape({ extra: 'prop' });
+    expect(shape).toMatchSnapshot();
+  });
 });

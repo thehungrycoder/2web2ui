@@ -138,3 +138,26 @@ exports[`HorizontalBar Component renders correctly 1`] = `
   </BarChart>
 </ResponsiveContainer>
 `;
+
+exports[`HorizontalBar Component should render custom bar shape 1`] = `
+<Rectangle
+  animationBegin={0}
+  animationDuration={1500}
+  animationEasing="ease"
+  extra="prop"
+  height={0}
+  isAnimationActive={false}
+  isUpdateAnimationActive={false}
+  radius={
+    Array [
+      0,
+      4,
+      4,
+      0,
+    ]
+  }
+  width={0}
+  x={0}
+  y={0}
+/>
+`;
