@@ -72,7 +72,7 @@ export default class PreviewPage extends Component {
   }
 
   render() {
-    const { canSendEmail, mode, preview, returnPath, template } = this.props;
+    const { canSendEmail, mode, preview, returnPath, template, isAmpLive } = this.props;
     const { loading, loadingError, sending, to, validationError } = this.state;
 
     if (loading) {
@@ -117,7 +117,7 @@ export default class PreviewPage extends Component {
           }
           <TextField disabled label="From" value={name ? `${name} <${email}>` : email} />
           <TextField disabled label="Subject" value={preview.subject} />
-          <PreviewPanel html={preview.html} text={preview.text} />
+          <PreviewPanel html={preview.html} text={preview.text} amp_html={preview.amp_html} isAmpLive={isAmpLive} />
         </Panel>
       </Page>
     );

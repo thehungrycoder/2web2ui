@@ -8,12 +8,14 @@ import styles from './PreviewPanel.module.scss';
 export default class PreviewPanel extends Component {
   static defaultProps = {
     html: '',
-    text: ''
+    text: '',
+    amp_html: ''
   }
 
   static propTypes = {
     html: PropTypes.string,
-    text: PropTypes.string
+    text: PropTypes.string,
+    amp_html: PropTypes.string
   }
 
   state = {
@@ -25,14 +27,18 @@ export default class PreviewPanel extends Component {
   }
 
   render() {
+    const { isAmpLive } = this.props;
     const tabs = [
       { content: 'HTML', onClick: this.onChange },
       { content: 'Text', onClick: this.onChange }
     ];
 
-    const selectedTabIndex = tabs.findIndex(({ content }) => content === this.state.contentType);
+    if (isAmpLive) {
+      tabs.push({ content: 'AMP HTML', onClick: this.onChange });
+    }
 
-    const contentType = this.state.contentType.toLowerCase();
+    const selectedTabIndex = tabs.findIndex(({ content }) => content === this.state.contentType);
+    const contentType = this.state.contentType.toLowerCase().replace(' ', '_');
 
     // Must wrap text content in <p> to apply style and must be a string for injecting into iframe
     const content = contentType === 'text'
