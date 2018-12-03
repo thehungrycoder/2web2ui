@@ -54,9 +54,9 @@ export class TfaManager extends Component {
   }
 
   render() {
-    const { enabled, required } = this.props;
+    const { statusUnknown, enabled, required } = this.props;
 
-    if (this.props.statusUnknown) {
+    if (statusUnknown) {
       return <PanelLoading minHeight='100px' />;
     }
 
@@ -118,10 +118,11 @@ export class TfaManager extends Component {
 
 }
 
-const mapStateToProps = ({ tfa, tfaBackupCodes }) => ({
+const mapStateToProps = ({ account, tfa, tfaBackupCodes }) => ({
   ...tfa,
   statusUnknown: tfa.enabled === null,
   enabled: tfa.enabled === true,
+  required: account.tfa_required,
   backupCodes: tfaBackupCodes
 });
 

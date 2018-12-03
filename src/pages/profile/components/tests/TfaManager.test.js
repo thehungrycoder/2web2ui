@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { TfaManager } from '../TfaManager';
-import _ from 'lodash';
 
 describe('EnableTfaModal tests', () => {
   let wrapper;
@@ -17,6 +16,7 @@ describe('EnableTfaModal tests', () => {
       generateBackupCodes: jest.fn().mockImplementation(() => Promise.resolve(null)),
       toggleTfa: jest.fn().mockImplementation(() => Promise.resolve(null)),
       enabled: false,
+      required: false,
       secret: 'shhh',
       username: 'kevin-mitnick',
       togglePending: false,
@@ -27,8 +27,6 @@ describe('EnableTfaModal tests', () => {
 
     wrapper = shallow(<TfaManager {...props} />);
     instance = wrapper.instance();
-    _.functions(instance).forEach((f) => jest.spyOn(instance, f));
-    jest.spyOn(instance, 'setState');
   });
 
   it('should render correctly', () => {
@@ -37,7 +35,7 @@ describe('EnableTfaModal tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should show panel loading while status uknown', () => {
+  it('should show panel loading while status unknown', () => {
     wrapper.setProps({ statusUnknown: true });
     expect(wrapper).toMatchSnapshot();
   });
@@ -80,15 +78,23 @@ describe('EnableTfaModal tests', () => {
   });
 
   it('should close modal when closing backup modal', () => {
+    jest.spyOn(instance, 'closeModals');
     wrapper.find('BackupCodesModal').simulate('close');
     expect(instance.closeModals).toHaveBeenCalled();
   });
 
   it('should close enable modal on close', () => {
     wrapper.find('EnableTfaModal').simulate('close');
-    expect(instance.setState).toHaveBeenCalledWith({ openModal: null });
+    expect(wrapper.state('openModal')).toEqual(null);
     wrapper.find('DisableTfaModal').simulate('close');
-    expect(instance.setState).toHaveBeenCalledWith({ openModal: null });
+    expect(wrapper.state('openModal')).toEqual(null);
+  });
+
+  it('should not allow disable when required', () => {
+    wrapper.setProps({ enabled: true, required: true });
+    const actions = wrapper.find('Panel').props().actions;
+    expect(actions).toHaveLength(1);
+    expect(actions[0].content).not.toContain('Disable');
   });
 });
 

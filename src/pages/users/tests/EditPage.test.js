@@ -28,7 +28,8 @@ describe('Page: Users Edit', () => {
       users: {
         'current-user': { access: 'admin', email: 'current-user@test.com', name: 'current-user' },
         'test-user': { access: 'admin', email: 'test-user@test.com', name: 'test-user' }
-      }
+      },
+      tfaRequired: false
     };
     wrapper = shallow(<EditPage {...props} />);
     instance = wrapper.instance();
@@ -113,5 +114,12 @@ describe('Page: Users Edit', () => {
       .prop('onConfirm')();
     expect(props.updateUser).toHaveBeenCalledTimes(1);
     expect(props.updateUser.mock.calls[0][1]).toMatchObject({ tfa_enabled: false });
+  });
+
+  it('should allow TFA disabling when mandatory', () => {
+    wrapper.setProps({ tfaRequired: true });
+    const actions = wrapper.find('Page').props().secondaryActions;
+    expect(actions).toHaveLength(1);
+    expect(actions[0].content).not.toContain('Disable');
   });
 });

@@ -15,11 +15,7 @@ exports[`AccountSettingsPage renders 1`] = `
     </LabelledValue>
   </Panel>
   <Connect(SingleSignOnPanel) />
-  <Connect(AccessControl)
-    condition={[Function]}
-  >
-    <Connect(EnforceTFAPanel) />
-  </Connect(AccessControl)>
+  <Connect(EnforceTFAPanel) />
   <Connect(CancellationPanel) />
 </Page>
 `;
