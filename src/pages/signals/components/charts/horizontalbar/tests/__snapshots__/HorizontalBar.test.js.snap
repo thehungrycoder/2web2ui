@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HorizontalBar Component renders correctly 1`] = `
+<ResponsiveContainer
+  debounce={0}
+  height={50}
+  width={100}
+>
+  <BarChart
+    barCategoryGap={0}
+    barGap={0}
+    barSize={50}
+    data={
+      Array [
+        Object {
+          "fill": "blue",
+          "value": 50,
+        },
+      ]
+    }
+    layout="vertical"
+    margin={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+      }
+    }
+    reverseStackOrder={false}
+    stackOffset="none"
+  >
+    <YAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      dataKey="date"
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={0}
+      hide={true}
+      mirror={false}
+      orientation="left"
+      padding={
+        Object {
+          "bottom": 0,
+          "top": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tickCount={5}
+      type="category"
+      width={60}
+      yAxisId={0}
+    />
+    <XAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      dataKey="value"
+      domain={
+        Array [
+          0,
+          100,
+        ]
+      }
+      height={30}
+      hide={true}
+      mirror={false}
+      orientation="bottom"
+      padding={
+        Object {
+          "left": 0,
+          "right": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tickCount={5}
+      type="number"
+      width={0}
+      xAxisId={0}
+    />
+    <Bar
+      animationBegin={0}
+      animationDuration={400}
+      animationEasing="ease"
+      data={Array []}
+      dataKey="value"
+      hide={false}
+      isAnimationActive={false}
+      layout="vertical"
+      legendType="rect"
+      minPointSize={0}
+      onAnimationEnd={[Function]}
+      onAnimationStart={[Function]}
+      onClick={[MockFunction]}
+      shape={[Function]}
+      xAxisId={0}
+      yAxisId={0}
+    />
+    <Tooltip
+      active={false}
+      animationDuration={400}
+      animationEasing="ease"
+      contentStyle={Object {}}
+      coordinate={
+        Object {
+          "x": 0,
+          "y": 0,
+        }
+      }
+      cursor={false}
+      cursorStyle={Object {}}
+      filterNull={true}
+      isAnimationActive={false}
+      itemSorter={[Function]}
+      itemStyle={Object {}}
+      labelStyle={Object {}}
+      offset={10}
+      separator=" : "
+      useTranslate3d={false}
+      viewBox={
+        Object {
+          "x1": 0,
+          "x2": 0,
+          "y1": 0,
+          "y2": 0,
+        }
+      }
+      wrapperStyle={Object {}}
+    />
+  </BarChart>
+</ResponsiveContainer>
+`;
