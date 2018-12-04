@@ -4,6 +4,9 @@ import SummaryTable from './components/SummaryTable';
 import FacetFilter from './components/filters/FacetFilter';
 import DateFilter from './components/filters/DateFilter';
 import SubaccountFilter from './components/filters/SubaccountFilter';
+import { Panel } from '@sparkpost/matchbox';
+import Calculation from './components/viewControls/Calculation';
+import ChartType from './components/viewControls/ChartType';
 
 export class OverviewPage extends Component {
   render() {
@@ -18,6 +21,20 @@ export class OverviewPage extends Component {
         <SummaryTable title='Health Score' />
         <SummaryTable title='Spam Traps' />
         <SummaryTable title='Engagement Cohort' />
+
+        <Panel>
+          <Panel.Section>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Calculation
+                initialSelected='absolute'
+                // onChange={(n) => console.log(n)}
+              />
+              <ChartType
+                // onChange={(n) => console.log(n)}
+              />
+            </div>
+          </Panel.Section>
+        </Panel>
       </Page>
     );
   }
