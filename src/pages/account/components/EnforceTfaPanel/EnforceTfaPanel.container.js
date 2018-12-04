@@ -5,21 +5,25 @@ import {
   updateAccountSingleSignOn
 } from 'src/actions/accountSingleSignOn';
 
+import { logout } from 'src/actions/auth';
+
 import { update as updateAccount } from 'src/actions/account';
 
 import EnforceTfaPanel from './EnforceTfaPanel';
 
-const mapStateToProps = ({ accountSingleSignOn, account }) => ({
+const mapStateToProps = ({ accountSingleSignOn, account, tfa }) => ({
   loading: accountSingleSignOn.loading,
   ssoEnabled: accountSingleSignOn.enabled,
   tfaRequired: account.tfa_required,
-  tfaUpdatePending: account.updateLoading
+  tfaUpdatePending: account.updateLoading,
+  tfaEnabled: tfa.enabled === true
 });
 
 const mapDispatchToProps = {
   getAccountSingleSignOnDetails,
   updateAccountSingleSignOn,
-  updateAccount
+  updateAccount,
+  logout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnforceTfaPanel);

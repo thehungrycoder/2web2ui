@@ -12,7 +12,8 @@ describe('Component: EnforceTfaPanel', () => {
     tfaUpdatePending: false,
     getAccountSingleSignOnDetails: () => {},
     updateAccountSingleSignOn: () => {},
-    updateAccount: () => {}
+    updateAccount: () => {},
+    logout: jest.fn()
   };
 
   function subject(props) {

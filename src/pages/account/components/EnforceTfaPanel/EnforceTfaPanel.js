@@ -28,8 +28,13 @@ export class EnforceTFAPanel extends React.Component {
   };
 
   setTfaRequired = (value) => {
+    const { tfaEnabled } = this.props;
     this.props.updateAccount({ tfa_required: value }).then(() => {
-      this.setState({ enableModal: false, disableModal: false });
+      if (value && !tfaEnabled) {
+        this.props.logout();
+      } else {
+        this.setState({ enableModal: false, disableModal: false });
+      }
     });
   };
 
