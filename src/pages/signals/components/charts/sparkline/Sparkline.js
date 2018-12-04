@@ -45,7 +45,7 @@ class Sparkline extends Component {
 
 Sparkline.propTypes = {
   tooltipContent: PropTypes.func,
-  timeSeries: PropTypes.array,
+  timeSeries: PropTypes.array.isRequired,
   yKey: PropTypes.string,
   yRange: PropTypes.array
 };
