@@ -45,7 +45,7 @@ export class EnforceTFAPanel extends React.Component {
     });
 
   render() {
-    const { loading, tfaRequired, tfaUpdatePending, ssoEnabled } = this.props;
+    const { loading, tfaRequired, tfaUpdatePending, ssoEnabled, tfaEnabled } = this.props;
     const { enableModal, disableModal } = this.state;
 
     if (loading) {
@@ -91,6 +91,11 @@ export class EnforceTFAPanel extends React.Component {
                   informing them of this change.
                 </li>
               </ul>
+              {!tfaEnabled && (
+                <p>
+                  You don't have two-factor authentication set up. Enforcing will log you out.
+                </p>
+              )}
             </React.Fragment>
           }
           onCancel={this.onCancel}
