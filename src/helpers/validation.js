@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
-import { getDuration, isStartTimeAfterNow } from 'src/helpers/date';
+import { getDuration } from 'src/helpers/date';
 import { isEmailAddress, isEmailLocalPart, isRecipientEmailAddress } from 'src/helpers/email';
 import { domainRegex, slugRegex } from './regex';
 import isURL from 'validator/lib/isURL';
@@ -65,10 +65,6 @@ export function abTestDistribution(value, formValues) {
     const total = _.reduce(variants, (sum, variant) => sum + parseFloat(variant.percent), parseFloat(default_template.percent));
     return total === 100 ? undefined : `Total distribution must equal 100%. Current: ${total}%`;
   }
-}
-
-export function startTimeAfterNow(value) {
-  return isStartTimeAfterNow(value) ? undefined : 'Start date cannot be in the past';
 }
 
 export function startTimeBeforeEndTime(value) {
