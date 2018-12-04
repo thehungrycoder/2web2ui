@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ControlGroup from './ControlGroup';
+import { ShowChart, BarChart } from '@sparkpost/matchbox-icons';
 
 const options = {
-  line: 'Line',
-  bar: 'Bar'
+  line: <ShowChart/>,
+  bar: <BarChart/>
 };
 
 const ChartType = (props) => (

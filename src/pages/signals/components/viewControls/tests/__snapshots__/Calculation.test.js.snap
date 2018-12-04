@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals View Calculation Component renders correctly 1`] = `
+<ControlGroup
+  initialSelected="absolute"
+  onChange={[MockFunction]}
+  options={
+    Object {
+      "absolute": "Absolute",
+      "relative": "Relative",
+    }
+  }
+/>
+`;

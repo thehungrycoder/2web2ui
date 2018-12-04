@@ -4,7 +4,7 @@ import ControlGroup from './ControlGroup';
 
 const options = {
   absolute: 'Absolute',
-  relative: <span>testing a node Relative</span>
+  relative: 'Relative'
 };
 
 const Calculation = (props) => (
