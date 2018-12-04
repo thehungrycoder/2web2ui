@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SingleSignOnPanel } from '../';
+import { SingleSignOnPanel } from '../SingleSignOnPanel';
 
 describe('SingleSignOnPanel', () => {
   let props;
@@ -28,6 +28,11 @@ describe('SingleSignOnPanel', () => {
       updateError: 'Oh no!',
       updatedAt: '2018-09-11T19:39:06+00:00'
     });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders with tfaRequired', () => {
+    wrapper.setProps({ tfaRequired: true });
     expect(wrapper).toMatchSnapshot();
   });
 

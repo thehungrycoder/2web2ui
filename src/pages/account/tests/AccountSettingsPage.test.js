@@ -3,14 +3,17 @@ import { shallow } from 'enzyme';
 import { AccountSettingsPage } from '../AccountSettingsPage';
 
 describe('AccountSettingsPage', () => {
-  it('renders', () => {
-    const props = {
-      currentUser: {
-        customer: 123123
-      }
-    };
-    const wrapper = shallow(<AccountSettingsPage {...props} />);
+  const baseProps = {
+    currentUser: {
+      customer: 123123
+    }
+  };
 
-    expect(wrapper).toMatchSnapshot();
+  function subject(props) {
+    return shallow(<AccountSettingsPage {...baseProps} {...props} />);
+  }
+
+  it('renders', () => {
+    expect(subject()).toMatchSnapshot();
   });
 });

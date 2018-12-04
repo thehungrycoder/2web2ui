@@ -1,0 +1,19 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.TooltipWrapper {
+  background: color(gray, 1);
+  box-shadow: shadow(deep);
+  border-radius: border-radius(large);
+  min-width: 150px;
+  user-select: none;
+}
+
+.TooltipDate, .TooltipContent {
+  padding: spacing(small) spacing();
+  color: color(gray, 10);
+}
+
+.TooltipDate {
+  font-size: rem(15);
+  border-bottom: 1px solid darken(color(gray, 1), 5);
+}

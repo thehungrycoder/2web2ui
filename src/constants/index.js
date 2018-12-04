@@ -3,6 +3,7 @@ export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
 export const SIGN_UP_ROUTE = '/join';
 export const AUTH_ROUTE = '/auth';
 export const TFA_ROUTE = '/auth/tfa';
+export const ENABLE_TFA_AUTH_ROUTE = '/auth/enable-tfa';
 export const SSO_AUTH_ROUTE = '/auth/sso';
 
 export const COOKIE_DOMAIN = '.sparkpost.com';
@@ -53,7 +54,8 @@ export const LINKS = {
   SSO_GUIDE: 'https://www.sparkpost.com/docs/my-account-and-profile/sso',
   ALERTS_DOCS: 'https://developers.sparkpost.com/api/alerts/#alerts-post-create-an-alert',
   ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2',
-  SNIPPET_SUBSTITUTION_REFERENCE: 'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets'
+  SNIPPET_SUBSTITUTION_REFERENCE: 'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets',
+  MANDATORY_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/'
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];

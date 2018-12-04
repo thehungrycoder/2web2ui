@@ -19,6 +19,7 @@ const mapStateToProps = (state, props) => {
     user,
     users: state.users.entities,
     updatePending: state.users.updatePending,
+    tfaRequired: state.account.tfa_required,
     initialValues: {
       access: _.get(user, 'access'),
       is_sso: _.get(user, 'is_sso')

@@ -2,12 +2,15 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import * as ErrorTracker from 'src/helpers/errorTracker';
 import { RegisterPage } from '../RegisterPage';
-import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
+import { ENABLE_TFA_AUTH_ROUTE, DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
 // mocks
 const checkInviteToken = jest.fn();
 const registerUser = jest.fn(() => Promise.resolve());
-const authenticate = jest.fn(() => Promise.resolve());
+const authenticate = jest.fn().mockResolvedValue({
+  auth: true,
+  tfaRequired: false
+});
 const historyPush = jest.fn();
 const report = jest.fn();
 
@@ -19,8 +22,8 @@ describe('Page: RegisterPage', () => {
     token: 'tokerino',
     invite: {
       error: null,
-      from: 'jose@zamora.io',
-      email: 'appteam@sparkpost.com'
+      from: 'jose@example.com',
+      email: 'newperson@example.com'
     },
     loading: false,
     history: {
@@ -64,14 +67,23 @@ describe('Page: RegisterPage', () => {
       password: 'values'
     };
 
-    test('success', async() => {
+    test('success', async () => {
       await wrapper.instance().onSubmit(values);
       expect(registerUser).toHaveBeenCalledWith(props.token, values);
       expect(authenticate).toHaveBeenCalledWith(values.username, values.password);
       expect(historyPush).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
     });
 
-    test('authenticate user fail', async() => {
+    test('tfa required', async () => {
+      authenticate.mockResolvedValue({
+        auth: true,
+        tfaRequired: true
+      });
+      await wrapper.instance().onSubmit(values);
+      expect(historyPush).toHaveBeenCalledWith(ENABLE_TFA_AUTH_ROUTE);
+    });
+
+    test('authenticate user fail', async () => {
       const error = { message: 'n0o0o0o0' };
       authenticate.mockReturnValue(Promise.reject(error));
       await wrapper.instance().onSubmit(values);
@@ -80,7 +92,7 @@ describe('Page: RegisterPage', () => {
       expect(report).toHaveBeenCalledWith('sign-in', error);
     });
 
-    test('register user fail', async() => {
+    test('register user fail', async () => {
       const error = { message: 'n0o0o0o0' };
       registerUser.mockReturnValue(Promise.reject(error));
       await wrapper.instance().onSubmit(values);

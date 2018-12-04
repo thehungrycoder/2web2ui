@@ -62,6 +62,18 @@ Object {
 }
 `;
 
+exports[`Poll Provider should stop polling if not logged in 1`] = `
+Object {
+  "action": [MockFunction],
+  "attempts": 0,
+  "consecutiveErrors": 0,
+  "interval": 50,
+  "maxAttempts": 3,
+  "maxConsecutiveErrors": 2,
+  "status": "done",
+}
+`;
+
 exports[`Poll Provider should stop polling when consecutive errors is more than 2 1`] = `
 Object {
   "action": [MockFunction] {
