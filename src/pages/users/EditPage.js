@@ -65,7 +65,8 @@ export class EditPage extends Component {
       submitting,
       updatePending,
       user,
-      users
+      users,
+      tfaRequired
     } = this.props;
 
     if (loadingError) {
@@ -89,7 +90,7 @@ export class EditPage extends Component {
         onClick: this.toggleDelete
       });
 
-      if (user.tfa_enabled) {
+      if (user.tfa_enabled && !tfaRequired) {
         secondaryActions.push({
           content: 'Disable Two-Factor Authentication',
           onClick: this.toggleTfaModal

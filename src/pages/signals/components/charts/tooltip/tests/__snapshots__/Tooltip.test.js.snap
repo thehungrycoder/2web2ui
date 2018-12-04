@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sparkline Component renders correctly 1`] = `
+<div
+  className="TooltipWrapper"
+>
+  <div
+    className="TooltipDate"
+  >
+    Jan 1 2010
+  </div>
+  <div
+    className="TooltipContent"
+  >
+    test
+  </div>
+</div>
+`;
+
+exports[`Sparkline Component renders correctly without date 1`] = `
+<div
+  className="TooltipWrapper"
+>
+  <div
+    className="TooltipContent"
+  >
+    test
+  </div>
+</div>
+`;

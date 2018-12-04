@@ -1,12 +1,13 @@
 import * as selectors from '../abTesting';
+import { fn as mockMoment } from 'moment';
 
 describe('Selectors: abTesting', () => {
   let state;
   let props;
 
   beforeEach(() => {
-    const mockNow = new Date('2010-01-01T12:00:00.000Z');
-    global.Date = jest.fn(() => mockNow);
+    mockMoment.add = jest.fn(() => ({ toDate: () => '2010-01-08T12:00:00.000Z' }));
+    mockMoment.toDate = jest.fn(() => '2010-01-01T12:00:00.000Z');
 
     state = {
       abTesting: {
@@ -54,6 +55,11 @@ describe('Selectors: abTesting', () => {
         }
       }
     };
+  });
+
+  afterAll(() => {
+    mockMoment.add.mockReset();
+    mockMoment.toDate.mockReset();
   });
 
   it('should selects ID and version from router params', () => {

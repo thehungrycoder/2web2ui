@@ -4,7 +4,7 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import CancellationPanel from './components/CancellationPanel';
 import SingleSignOnPanel from './components/SingleSignOnPanel';
-
+import EnforceTfaPanel from './components/EnforceTfaPanel';
 
 export function AccountSettingsPage({ currentUser }) {
   return (
@@ -15,6 +15,7 @@ export function AccountSettingsPage({ currentUser }) {
         </LabelledValue>
       </Panel>
       <SingleSignOnPanel />
+      <EnforceTfaPanel />
       <CancellationPanel />
     </Page>
   );

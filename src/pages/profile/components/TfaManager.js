@@ -28,8 +28,10 @@ export class TfaManager extends Component {
     this.closeModals();
   };
 
-  enable = (code) => this.props.toggleTfa({ enabled: true, code })
-    .then(this.props.getTfaBackupStatus);
+  onEnable = () => {
+    this.closeModals();
+    this.props.getTfaBackupStatus();
+  }
 
   disable = (password) => this.props.toggleTfa({ enabled: false, password });
 
@@ -52,9 +54,9 @@ export class TfaManager extends Component {
   }
 
   render() {
-    const { enabled } = this.props;
+    const { statusUnknown, enabled, required } = this.props;
 
-    if (this.props.statusUnknown) {
+    if (statusUnknown) {
       return <PanelLoading minHeight='100px' />;
     }
 
@@ -73,11 +75,15 @@ export class TfaManager extends Component {
       content: 'Generate New Backup Codes',
       onClick: () => this.setState({ openModal: 'backupCodes' }),
       color: 'orange'
-    }, {
-      content: 'Disable 2FA',
-      onClick: () => this.setState({ openModal: 'disable' }),
-      color: 'orange'
     }];
+
+    if (!required) {
+      enabledActions.push({
+        content: 'Disable 2FA',
+        onClick: () => this.setState({ openModal: 'disable' }),
+        color: 'orange'
+      });
+    }
 
     return (
       <Panel sectioned title='Two-factor Authentication' actions={enabled ? enabledActions : disabledActions}>
@@ -95,13 +101,8 @@ export class TfaManager extends Component {
         <EnableTfaModal
           open={this.state.openModal === 'enable'}
           onClose={this.closeModals}
-          enable={this.enable}
-          secret={this.props.secret}
-          getSecret={this.props.getTfaSecret}
-          username={this.props.username}
-          togglePending={this.props.togglePending}
-          toggleError={this.props.toggleError}
           enabled={enabled}
+          onEnable={this.onEnable}
         />
         <DisableTfaModal
           open={this.state.openModal === 'disable'}
@@ -117,11 +118,11 @@ export class TfaManager extends Component {
 
 }
 
-const mapStateToProps = ({ currentUser, tfa, tfaBackupCodes }) => ({
+const mapStateToProps = ({ account, tfa, tfaBackupCodes }) => ({
   ...tfa,
-  username: currentUser.username,
   statusUnknown: tfa.enabled === null,
   enabled: tfa.enabled === true,
+  required: account.tfa_required,
   backupCodes: tfaBackupCodes
 });
 

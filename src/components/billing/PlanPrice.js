@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { getPlanPrice } from 'src/helpers/billing';
 import styles from './PlanPrice.module.scss';
 
-const PlanPrice = ({ plan, showOverage = false, showIp = false, ...rest }) => {
+const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false, ...rest }) => {
   if (_.isEmpty(plan)) {
     return null;
   }
@@ -18,6 +18,8 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, ...rest }) => {
     ? 'First dedicated IP address is free'
     : null;
 
+  const displayCsm = showCsm && plan.includesCsm;
+
   return (
     <span className='notranslate'>
       <span className={styles.MainLabel} {...rest}>
@@ -27,9 +29,9 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, ...rest }) => {
       </span>
       <span className={styles.SupportLabel}>
         {showOverage && overage}
-
         {showIp && ip}
       </span>
+      {displayCsm && <span className={styles.SupportLabel}>Customer Success Manager included.</span>}
     </span>
   );
 };

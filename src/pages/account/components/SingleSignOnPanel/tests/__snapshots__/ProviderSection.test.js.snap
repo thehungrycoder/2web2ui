@@ -7,6 +7,7 @@ exports[`ProviderSection renders when not provisioned 1`] = `
       Object {
         "color": "orange",
         "content": "Provision SSO",
+        "disabled": false,
         "onClick": [Function],
       },
     ]
@@ -37,6 +38,7 @@ exports[`ProviderSection renders when provisioned 1`] = `
       Object {
         "color": "orange",
         "content": "Provision SSO",
+        "disabled": false,
         "onClick": [Function],
       },
     ]

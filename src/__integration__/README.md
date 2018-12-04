@@ -21,9 +21,8 @@ As axios is fully mocked by default during tests, if you need certain calls to l
 
 #### Mock response example
 
-A GET call to `/account/something` can be mocked by adding a file in the following location: `http-responses/_account_something/get.js`.
+A GET call to `/account/something` can be mocked by adding a file in the following location: `http-responses/account/something/get.js`.
 
-* Slashes in the URL should be replaced with an underscore, even the initial opening slash.
 * The file name should be the lowercased method, so get.js, put.js, etc.
 * The file should have one default export which should be a function that returns the response object
 * You can respond to request headers, query params, subsequent calls, etc. inside of the response function, which is given the entire request object (method, url, params, etc)

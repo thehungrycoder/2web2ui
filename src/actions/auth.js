@@ -58,18 +58,18 @@ export function authenticate(username, password, rememberMe = false) {
         // Start website auth token cookie setup process
         dispatch(websiteAuth.authenticate(username, password, rememberMe));
 
-        return Promise.all([ authData, getTfaStatusBeforeLoggedIn({ username, token: authData.access_token })]);
+        return Promise.all([authData, getTfaStatusBeforeLoggedIn({ username, token: authData.access_token })]);
       })
-      .then(([ authData, tfaResponse]) => {
-        // if tfa enabled must avoid logging in
-        if (tfaResponse.data.results.enabled) {
-          dispatch({
-            type: 'TFA_ENABLED_ON_LOGIN',
-            payload: authData
-          });
+      .then(([authData, tfaResponse]) => {
+        const { enabled: tfaEnabled, required: tfaRequired } = tfaResponse.data.results;
+        const tfaAction = actOnTfaStatus(tfaEnabled, tfaRequired, authData);
+        if (tfaAction) {
+          dispatch(tfaAction);
         } else {
           dispatch(login({ authData, saveCookie: true }));
         }
+
+        return { auth: true, tfaRequired };
       })
       .catch((err) => {
         const { response = {}} = err;
@@ -84,8 +84,20 @@ export function authenticate(username, password, rememberMe = false) {
             errorDescription
           }
         });
+
+        return { auth: false };
       });
   };
+}
+
+function actOnTfaStatus(tfaEnabled, tfaRequired, authData) {
+  if (tfaEnabled) {
+    return { type: 'TFA_ENABLED_ON_LOGIN', payload: authData };
+  }
+  if (tfaRequired) {
+    return { type: 'TFA_REQUIRED_ON_LOGIN', payload: authData };
+  }
+  return null;
 }
 
 export function confirmPassword(username, password) {

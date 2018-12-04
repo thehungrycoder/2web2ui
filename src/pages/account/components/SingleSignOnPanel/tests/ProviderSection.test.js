@@ -2,9 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ProviderForm from '../ProviderForm';
 import { ProviderSection } from '../ProviderSection';
+import { Panel } from '@sparkpost/matchbox';
 
 describe('ProviderSection', () => {
-  const subject = (props = {}) => shallow(<ProviderSection {...props} />);
+  function subject(props) {
+    const baseProps = { readOnly: false };
+    return shallow(<ProviderSection {...baseProps} {...props} />);
+  }
 
   it('renders when not provisioned', () => {
     const wrapper = subject();
@@ -17,6 +21,10 @@ describe('ProviderSection', () => {
     });
 
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('obeys readOnly', () => {
+    expect(subject({ readOnly: true }).find(Panel.Section).prop('actions')[0].disabled).toEqual(true);
   });
 
   it('opens modal when action button is clicked', () => {

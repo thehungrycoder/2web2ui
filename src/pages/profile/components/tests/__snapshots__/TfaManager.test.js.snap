@@ -35,15 +35,10 @@ exports[`EnableTfaModal tests should render correctly 1`] = `
     open={false}
   />
   <EnableTfaModal
-    enable={[Function]}
     enabled={false}
-    getSecret={[MockFunction]}
     onClose={[Function]}
+    onEnable={[Function]}
     open={false}
-    secret="shhh"
-    toggleError={false}
-    togglePending={false}
-    username="kevin-mitnick"
   />
   <DisableTfaModal
     disable={[Function]}
@@ -97,25 +92,20 @@ exports[`EnableTfaModal tests should show a message about 0 codes 1`] = `
   <BackupCodesModal
     activeCount={0}
     clearCodes={[MockFunction]}
-    generate={[MockFunction]}
-    onClose={[MockFunction]}
+    generate={[Function]}
+    onClose={[Function]}
     open={false}
   />
   <EnableTfaModal
-    enable={[MockFunction]}
     enabled={true}
-    getSecret={[MockFunction]}
-    onClose={[MockFunction]}
+    onClose={[Function]}
+    onEnable={[Function]}
     open={false}
-    secret="shhh"
-    toggleError={false}
-    togglePending={false}
-    username="kevin-mitnick"
   />
   <DisableTfaModal
-    disable={[MockFunction]}
+    disable={[Function]}
     enabled={true}
-    onClose={[MockFunction]}
+    onClose={[Function]}
     open={false}
     toggleError={false}
     togglePending={false}
@@ -123,7 +113,7 @@ exports[`EnableTfaModal tests should show a message about 0 codes 1`] = `
 </Panel>
 `;
 
-exports[`EnableTfaModal tests should show panel loading while status uknown 1`] = `
+exports[`EnableTfaModal tests should show panel loading while status unknown 1`] = `
 <PanelLoading
   minHeight="100px"
 />
@@ -165,25 +155,20 @@ exports[`EnableTfaModal tests should toggle status text when enabled 1`] = `
   <BackupCodesModal
     activeCount={1}
     clearCodes={[MockFunction]}
-    generate={[MockFunction]}
-    onClose={[MockFunction]}
+    generate={[Function]}
+    onClose={[Function]}
     open={false}
   />
   <EnableTfaModal
-    enable={[MockFunction]}
     enabled={true}
-    getSecret={[MockFunction]}
-    onClose={[MockFunction]}
+    onClose={[Function]}
+    onEnable={[Function]}
     open={false}
-    secret="shhh"
-    toggleError={false}
-    togglePending={false}
-    username="kevin-mitnick"
   />
   <DisableTfaModal
-    disable={[MockFunction]}
+    disable={[Function]}
     enabled={true}
-    onClose={[MockFunction]}
+    onClose={[Function]}
     open={false}
     toggleError={false}
     togglePending={false}

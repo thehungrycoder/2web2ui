@@ -15,6 +15,7 @@ exports[`AccountSettingsPage renders 1`] = `
     </LabelledValue>
   </Panel>
   <Connect(SingleSignOnPanel) />
+  <Connect(EnforceTFAPanel) />
   <Connect(CancellationPanel) />
 </Page>
 `;

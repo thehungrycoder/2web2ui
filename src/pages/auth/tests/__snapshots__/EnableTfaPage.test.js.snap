@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: EnableTfaPage should render correctly 1`] = `
+<Fragment>
+  <Panel
+    accent={true}
+    sectioned={true}
+    title="Enable Two Factor Authentication"
+  >
+    <Panel.Section>
+      Your administrator requires all users on this account to use two factor authentication.
+    </Panel.Section>
+    <Connect(EnableTfaForm)
+      afterEnable={[Function]}
+    />
+  </Panel>
+</Fragment>
+`;

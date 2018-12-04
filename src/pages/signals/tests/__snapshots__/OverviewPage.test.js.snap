@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Overview Page renders correctly 1`] = `
+<SignalsPage
+  primaryArea={
+    <React.Fragment>
+      <SubaccountFilter />
+      <DateFilter />
+      <FacetFilter />
+    </React.Fragment>
+  }
+>
+  <SummaryTable
+    title="Health Score"
+  />
+  <SummaryTable
+    title="Spam Traps"
+  />
+  <SummaryTable
+    title="Engagement Cohort"
+  />
+</SignalsPage>
+`;

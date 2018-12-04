@@ -5,6 +5,7 @@ import {
   apiKeys,
   AccountSettingsPage,
   AuthPage,
+  EnableTfaPage,
   TfaPage,
   SsoAuthPage,
   SSOPage,
@@ -28,7 +29,8 @@ import {
   passwordReset,
   PremiumSupportPage,
   RecipientValidationPage,
-  snippets
+  snippets,
+  signals
 } from 'src/pages';
 
 import LogoutPage from 'src/pages/logout/LogoutPage';
@@ -50,8 +52,9 @@ import { isHeroku, isAzure } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
 import App from 'src/components/layout/App';
+import LargeForm from 'src/components/layout/LargeForm';
 
-import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, TFA_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
+import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, TFA_ROUTE, SSO_AUTH_ROUTE, ENABLE_TFA_AUTH_ROUTE } from 'src/constants';
 
 /**
  *  Angular UI Grant List:
@@ -120,6 +123,13 @@ const routes = [
     public: true,
     component: SSOPage,
     title: 'Single Sign-On'
+  },
+  {
+    path: ENABLE_TFA_AUTH_ROUTE,
+    public: true,
+    component: EnableTfaPage,
+    layout: LargeForm,
+    title: 'Enable TFA'
   },
   {
     path: '/register',
@@ -253,6 +263,38 @@ const routes = [
     supportDocSearch: 'event'
   },
   {
+    path: '/signals',
+    component: signals.OverviewPage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/health-score',
+    component: signals.HealthScorePage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/spam-traps',
+    component: signals.SpamTrapsPage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement-cohort',
+    component: signals.EngagementPage,
+    condition: hasUiOption('signals'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
     path: '/account/security',
     redirect: '/account/profile'
   },
@@ -314,7 +356,7 @@ const routes = [
   {
     path: '/snippets',
     component: snippets.ListPage,
-    condition: all(hasGrants('templates/view'), hasUiOption('snippets')),
+    condition: hasGrants('templates/view'),
     layout: App,
     title: 'Snippets',
     supportDocSearch: 'snippet'
@@ -322,7 +364,7 @@ const routes = [
   {
     path: '/snippets/create',
     component: snippets.CreatePage,
-    condition: all(hasGrants('templates/modify'), hasUiOption('snippets')),
+    condition: hasGrants('templates/modify'),
     layout: App,
     title: 'New Snippet',
     supportDocSearch: 'snippet'
@@ -330,7 +372,7 @@ const routes = [
   {
     path: '/snippets/edit/:id',
     component: snippets.EditPage,
-    condition: all(hasGrants('templates/view'), hasUiOption('snippets')),
+    condition: hasGrants('templates/view'),
     layout: App,
     title: 'Edit Snippet',
     supportDocSearch: 'snippet'

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubaccountFilter Component renders correctly 1`] = `
+<div
+  className="SubaccountFilter"
+>
+  <Popover
+    bottom={true}
+    left={true}
+    right={true}
+    sectioned={true}
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+    trigger={
+      <Trigger
+        label="Master & All Subaccounts"
+      />
+    }
+  />
+</div>
+`;

@@ -17,7 +17,7 @@
     padding: rem(56) spacing(larger) spacing(larger);
   }
 
-  .form & {
+  .form &, .largeForm & {
     display: flex;
     align-items: center;
     width: 100%;
@@ -30,6 +30,12 @@
   .form & {
     flex: 1 0 0;
     max-width: rem(520);
+    margin: 0 auto;
+  }
+
+  .largeForm & {
+    flex: 1 0 0;
+    max-width: rem(700);
     margin: 0 auto;
   }
 

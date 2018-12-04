@@ -17,12 +17,12 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
       <p>
         To complete setup with your Identity Provider (IdP), you will need to provide the following callback URL.
       </p>
-      <p>
+      <div>
         <CopyField
           hideCopy={false}
           value="http://fake-api-test-host.com/v1/users/saml/consume"
         />
-      </p>
+      </div>
     </Panel.Section>
     <Panel.Section
       className="step"
@@ -33,7 +33,7 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
       <p>
         This is a configuration file that can be downloaded from your IdP.
       </p>
-      <p>
+      <div>
         <Field
           component={[Function]}
           disabled={true}
@@ -52,7 +52,7 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
             ]
           }
         />
-      </p>
+      </div>
     </Panel.Section>
     <Panel.Section>
       <Button
@@ -92,12 +92,12 @@ exports[`ProviderForm renders form 1`] = `
       <p>
         To complete setup with your Identity Provider (IdP), you will need to provide the following callback URL.
       </p>
-      <p>
+      <div>
         <CopyField
           hideCopy={false}
           value="http://fake-api-test-host.com/v1/users/saml/consume"
         />
-      </p>
+      </div>
     </Panel.Section>
     <Panel.Section
       className="step"
@@ -108,7 +108,7 @@ exports[`ProviderForm renders form 1`] = `
       <p>
         This is a configuration file that can be downloaded from your IdP.
       </p>
-      <p>
+      <div>
         <Field
           component={[Function]}
           filetype="xml"
@@ -126,7 +126,7 @@ exports[`ProviderForm renders form 1`] = `
             ]
           }
         />
-      </p>
+      </div>
     </Panel.Section>
     <Panel.Section>
       <Button

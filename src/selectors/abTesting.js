@@ -49,8 +49,8 @@ export const selectEditInitialValues = createSelector(
 
     // Reshape dates and sets defaults
     const dates = {
-      from: test.start_time ? new Date(test.start_time) : moment().add(1, 'd').toDate(),
-      to: test.end_time ? new Date(test.end_time) : moment().add(8, 'd').toDate()
+      from: test.start_time ? new Date(test.start_time) : moment().toDate(),
+      to: test.end_time ? new Date(test.end_time) : moment().add(7, 'd').toDate()
     };
 
     return {
