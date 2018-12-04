@@ -1,95 +1,149 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Item tests should call toggle nav when on mobile 1`] = `
-<span>
-  <li>
-    <Link
-      className="Link mobile"
-      onClick={[MockFunction]}
-      replace={false}
-      to="/to"
+<li>
+  <Link
+    className="Link mobile"
+    onClick={[MockFunction]}
+    replace={false}
+    to="/to"
+  >
+    <span
+      className="iconWrapper"
     >
-      <span
-        className="iconWrapper"
-      >
-        <Mail
-          className="icon"
-          size={21}
-        />
-      </span>
-      label
-    </Link>
-  </li>
-</span>
+      <Mail
+        className="icon"
+        size={21}
+      />
+    </span>
+    label
+  </Link>
+</li>
 `;
 
 exports[`Item tests should render a link correctly 1`] = `
-<span>
-  <li>
-    <Link
-      className="Link"
-      onClick={null}
-      replace={false}
-      to="/to"
+<li>
+  <Link
+    className="Link"
+    onClick={null}
+    replace={false}
+    to="/to"
+  >
+    <span
+      className="iconWrapper"
     >
-      <span
-        className="iconWrapper"
+      <Mail
+        className="icon"
+        size={21}
+      />
+    </span>
+    label
+  </Link>
+</li>
+`;
+
+exports[`Item tests should render a link with beta tag 1`] = `
+<li>
+  <Link
+    className="Link"
+    onClick={null}
+    replace={false}
+    to="/to"
+  >
+    <span
+      className="iconWrapper"
+    >
+      <Mail
+        className="icon"
+        size={21}
+      />
+    </span>
+    label
+    <div
+      className="releaseTag"
+    >
+      <Tag
+        color="orange"
       >
-        <Mail
-          className="icon"
-          size={21}
-        />
-      </span>
-      label
-    </Link>
-  </li>
-</span>
+        BETA
+      </Tag>
+    </div>
+  </Link>
+</li>
+`;
+
+exports[`Item tests should render a link with labs tag 1`] = `
+<li>
+  <Link
+    className="Link"
+    onClick={null}
+    replace={false}
+    to="/to"
+  >
+    <span
+      className="iconWrapper"
+    >
+      <Mail
+        className="icon"
+        size={21}
+      />
+    </span>
+    label
+    <div
+      className="releaseTag"
+    >
+      <Tag
+        color="blue"
+      >
+        LABS
+      </Tag>
+    </div>
+  </Link>
+</li>
 `;
 
 exports[`Item tests should render children correctly 1`] = `
-<span>
-  <li>
-    <a
-      className="Link hasChildren"
-      onClick={[Function]}
+<li>
+  <a
+    className="Link hasChildren"
+    onClick={[Function]}
+  >
+    <span
+      className="iconWrapper"
     >
-      <span
-        className="iconWrapper"
-      >
-        <Mail
-          className="icon"
-          size={21}
-        />
-      </span>
-      label
-      <ChevronLeft
-        className="chevron"
+      <Mail
+        className="icon"
+        size={21}
       />
-    </a>
-    <ul
-      className="NestedList"
-    >
-      <Item
-        key="0"
-        label="child 1"
-        location={
-          Object {
-            "pathname": "to",
-          }
+    </span>
+    label
+    <ChevronLeft
+      className="chevron"
+    />
+  </a>
+  <ul
+    className="NestedList"
+  >
+    <Item
+      key="0"
+      label="child 1"
+      location={
+        Object {
+          "pathname": "to",
         }
-        to="/child1"
-      />
-      <Item
-        key="1"
-        label="child 2"
-        location={
-          Object {
-            "pathname": "to",
-          }
+      }
+      to="/child1"
+    />
+    <Item
+      key="1"
+      label="child 2"
+      location={
+        Object {
+          "pathname": "to",
         }
-        to="/child2"
-      />
-    </ul>
-  </li>
-</span>
+      }
+      to="/child2"
+    />
+  </ul>
+</li>
 `;
