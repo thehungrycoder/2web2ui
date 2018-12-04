@@ -17,10 +17,3 @@
   font-size: rem(15);
   border-bottom: 1px solid darken(color(gray, 1), 5);
 }
-
-:global {
-  .recharts-tooltip-wrapper {  // prevent next spark line from overlapping
-    z-index: 1;
-    pointer-events: none;
-  }
-}
