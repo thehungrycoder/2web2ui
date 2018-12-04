@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals View ControlGroup Component handles a select correctly 1`] = `
+<Button
+  key="foo"
+  onClick={[Function]}
+  outline={true}
+  size="default"
+>
+  <span
+    className="Content Selected"
+  >
+    fOo
+  </span>
+</Button>
+`;
+
+exports[`Signals View ControlGroup Component renders correctly 1`] = `
+<Button.Group
+  className="Group"
+>
+  <Button
+    key="foo"
+    onClick={[Function]}
+    outline={true}
+    size="default"
+  >
+    <span
+      className="Content"
+    >
+      fOo
+    </span>
+  </Button>
+  <Button
+    key="bar"
+    onClick={[Function]}
+    outline={true}
+    size="default"
+  >
+    <span
+      className="Content Selected"
+    >
+      <test>
+        BaR
+      </test>
+    </span>
+  </Button>
+</Button.Group>
+`;
