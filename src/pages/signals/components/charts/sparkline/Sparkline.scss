@@ -1,0 +1,8 @@
+// A very dangerous and global classname
+.SparklineWrapper {
+  position: relative;
+
+  .recharts-tooltip-wrapper {
+    z-index: 1;
+  }
+}
