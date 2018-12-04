@@ -8,8 +8,9 @@ describe('HorizontalBar Component', () => {
 
   beforeEach(() => {
     props = {
-      data: { value: 50, fill: 'blue' },
-      dataKey: 'value',
+      barData: { value: 2, fill: 'blue', date: '2011-01-01' },
+      xKey: 'value',
+      xRange: [0,5],
       height: 50,
       width: 100,
       onClick: jest.fn(),
@@ -22,13 +23,20 @@ describe('HorizontalBar Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders without tooltip', () => {
+    wrapper.setProps({ tooltipContent: null });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should handle click', () => {
     wrapper.find('Bar').simulate('click');
     expect(props.onClick).toHaveBeenCalled();
   });
 
-  it('should render custom bar shape', () => {
-    const shape = wrapper.find('Bar').props().shape({ extra: 'prop' });
-    expect(shape).toMatchSnapshot();
+  it('should render tooltip', () => {
+    const payload = [{ payload: props.barData }];
+    const tooltip = wrapper.find('Tooltip').props().content({ payload });
+    expect(tooltip).toMatchSnapshot();
+    expect(props.tooltipContent).toHaveBeenCalledWith(payload[0]);
   });
 });

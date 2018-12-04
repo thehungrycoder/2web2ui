@@ -2,7 +2,7 @@
 
 exports[`Sparkline Component renders correctly 1`] = `
 <div
-  className="SparklineWrapper"
+  className="LiftTooltip"
 >
   <ResponsiveContainer
     debounce={0}
@@ -127,7 +127,7 @@ exports[`Sparkline Component renders correctly 1`] = `
 
 exports[`Sparkline Component renders without tooltip 1`] = `
 <div
-  className="SparklineWrapper"
+  className="LiftTooltip"
 >
   <ResponsiveContainer
     debounce={0}

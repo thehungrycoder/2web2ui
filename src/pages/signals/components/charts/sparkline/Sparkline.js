@@ -3,7 +3,16 @@ import PropTypes from 'prop-types';
 import { ResponsiveContainer, LineChart, Line, Tooltip, YAxis } from 'recharts';
 import TooltipWrapper from '../tooltip/Tooltip';
 import _ from 'lodash';
-import './Sparkline.scss';
+
+/**
+ * Sparkline
+ * @example
+ *    <Sparkline
+ *      timeSeries={[{ hits: 0.1, date: new Date() }, ...]}
+ *      yRange={[0,1]}
+ *      yKey='hits'
+ *      tooltipContent={(payload) => <div>Hits: {payload.hits}</div>} />
+ */
 
 class Sparkline extends Component {
 
@@ -17,7 +26,7 @@ class Sparkline extends Component {
     const { timeSeries, height, width, yKey, dot, yRange, activeDot, stroke, onClick, tooltipContent } = this.props;
 
     return (
-      <div className='SparklineWrapper'>
+      <div className='LiftTooltip'>
         <ResponsiveContainer height={height} width={width}>
           <LineChart data={timeSeries} onClick={onClick}>
             <YAxis hide dataKey={yKey} type='number' domain={yRange} />

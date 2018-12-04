@@ -1,50 +1,71 @@
 import React, { Component } from 'react';
-import { ResponsiveContainer, BarChart, Bar, Tooltip, XAxis, YAxis, Rectangle } from 'recharts';
-// import TooltipWrapper from '../tooltip/Tooltip'; TODO when sparkline pr is merged
+import PropTypes from 'prop-types';
+import { ResponsiveContainer, BarChart, Bar, Tooltip, XAxis, YAxis } from 'recharts';
+import TooltipWrapper from '../tooltip/Tooltip';
 import _ from 'lodash';
 
+/**
+ * HorizontalBar
+ * @example
+ *    <HorizontalBar
+ *      barData={{ value: 50, fill: 'blue', date: new Date() }}
+ *      xRange={[0,50]}
+ *      tooltipContent={(payload) => <div>Value: {payload.value}</div>} />
+ */
+
 class HorizontalBar extends Component {
-  renderBar = (props) => (
-    <Rectangle radius={[0, 4, 4, 0]} {...props} />
-  )
+  renderTooltip = (props) => {
+    const content = _.get(props, 'payload[0]', {});
+    const date = _.get(content, 'payload.date');
+    return <TooltipWrapper date={date} children={this.props.tooltipContent(content)} />;
+  };
 
   render() {
-    const { data, height, width, dataKey, onClick, domain } = this.props;
+    const { barData, height, width, xKey, onClick, xRange, tooltipContent } = this.props;
 
     return (
-      <ResponsiveContainer height={height} width={width}>
-        <BarChart
-          barCategoryGap={0}
-          barGap={0}
-          barSize={height}
-          data={[data]}
-          layout='vertical'
-          margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
-        >
-          <YAxis hide dataKey='date' type='category' />
-          <XAxis hide dataKey={dataKey} type='number' domain={domain} />
-          <Bar
-            dataKey={dataKey}
-            isAnimationActive={false}
-            shape={this.renderBar}
-            onClick={onClick} />
-          <Tooltip
-            cursor={false}
-            isAnimationActive={false}
-            // content={this.renderTooltip} TODO when sparkline pr is merged
-          />
-        </BarChart>
-      </ResponsiveContainer>
+      <div className='LiftTooltip'>
+        <ResponsiveContainer height={height} width={width}>
+          <BarChart
+            barCategoryGap={0}
+            barGap={0}
+            barSize={height}
+            data={[barData]}
+            layout='vertical'
+            margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+          >
+            <YAxis hide type='category' />
+            <XAxis hide dataKey={xKey} type='number' domain={xRange} />
+            <Bar
+              dataKey={xKey}
+              isAnimationActive={false}
+              onClick={onClick} />
+            {tooltipContent && (
+              <Tooltip
+                cursor={false}
+                isAnimationActive={false}
+                content={this.renderTooltip}
+              />
+            )}
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     );
   }
 }
 
+HorizontalBar.propTypes = {
+  tooltipContent: PropTypes.func,
+  barData: PropTypes.object.isRequired,
+  xKey: PropTypes.string,
+  XRange: PropTypes.array
+};
+
 HorizontalBar.defaultProps = {
-  dataKey: 'value',
-  domain: [0, 100],
   height: 25,
-  tooltipContent: _.noop,
-  width: '99%' // Not responsive with 100%
+  width: '99%', // Not responsive with 100%
+  xKey: 'value',
+  xRange: [0, 100]
 };
 
 export default HorizontalBar;
