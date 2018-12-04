@@ -14,39 +14,30 @@ import { LoadingSVG } from 'src/components';
 function flattenItem({ type, value }) {
   return `${type}:${value}`;
 }
+
 const MatchesLoading = ({ isLoading }) => (isLoading) ? <LoadingSVG size='XSmall' /> : null;
 
+const staticItemTypes = ['Template', 'Subaccount', 'Sending Domain'];
 
 export class Typeahead extends Component {
   state = {
     inputValue: '',
     matches: [],
     calculatingMatches: false,
-    lastPattern: null
+    pattern: null
   };
-
 
   /**
-   * Returns all matches that match a pattern.
-   *
-   * If excludedItems is passed, it then takes the matches and
-   * filters out any items that already exist in excludedItems.
+   * Returns all matches of the given types that match a pattern.
    */
-  getMatches = ({ pattern, excludedItems }) => {
-    const { items, selected = []} = this.props;
-    const flatSelected = selected.map(flattenItem);
-    let matches = sortMatch(items, pattern, (i) => i.value)
-      .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
-      .slice(0,TYPEAHEAD_LIMIT);
-
-    if (excludedItems) {
-      const isInExcludedItems = function (item) {
-        return excludedItems.some((excludedItem) => _.isEqual(item, excludedItem));
-      };
-      matches = matches.filter((item) => !isInExcludedItems(item));
+    filterItems = (pattern, itemTypes) => {
+      const { items, selected = []} = this.props;
+      const flatSelected = selected.map(flattenItem);
+      const staticItems = itemTypes ? items.filter(({ type }) => itemTypes.includes(type)) : items;
+      return sortMatch(staticItems, pattern, (i) => i.value)
+        .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
+        .slice(0,TYPEAHEAD_LIMIT);
     }
-    return matches;
-  };
 
   /**
    * The lookahead/typeahead only activates when there are at least 2 characters.
@@ -58,29 +49,26 @@ export class Typeahead extends Component {
    */
   updateLookAhead = (pattern) => {
     if (!pattern || pattern.length < 2) {
-      this.setState({ matches: [], calculatingMatches: false, lastPattern: null });
+      this.setState({ matches: [], calculatingMatches: false, pattern: null });
       return Promise.resolve();
     }
 
-    this.setState({ calculatingMatches: true });
-    this.setState({ lastPattern: pattern });//This sets the last queued pattern
-    this.setState({ matches: this.getMatches({ pattern }) });
+    // Show filtered static items
+    const staticMatches = this.filterItems(pattern, staticItemTypes);
+    this.setState({ calculatingMatches: true, pattern, matches: staticMatches });
 
+    // Dispatch refresh for dynamic items
     const options = { ...this.props.reportOptions, match: pattern, limit: METRICS_API_LIMIT };
-    return this.props.refreshTypeaheadCache(options).then(() =>
-      this.appendNewMatches(pattern)
-    );
+    return this.props.refreshTypeaheadCache(options).then(() => {
+      // Avoid showing stale items from previous refreshes
+      if (pattern === this.state.pattern) {
+        // Then show static + dynamic items when available
+        const allMatches = this.filterItems(pattern);
+        this.setState({ calculatingMatches: false, matches: allMatches });
+      }
+    });
   };
 
-  //Appends the new metrics items only if the pattern is last in the queue
-  appendNewMatches = (pattern) => {
-    if (pattern === this.state.lastPattern) {
-      const currentMatches = this.state.matches;
-      const asyncMatches = this.getMatches({ pattern, excludedItems: currentMatches });
-      const matches = _.concat(currentMatches, asyncMatches).slice(0, TYPEAHEAD_LIMIT);
-      this.setState({ matches, calculatingMatches: false, lastPattern: null });
-    }
-  };
   updateLookAheadDebounced = _.debounce(this.updateLookAhead, 250);
 
   handleFieldChange = (e) => {

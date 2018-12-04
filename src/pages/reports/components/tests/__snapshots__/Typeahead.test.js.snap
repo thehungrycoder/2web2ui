@@ -1,56 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Typeahead should append new matches 1`] = `
-<div
-  className="Typeahead"
->
-  <div
-    className="List open"
-  >
-    <ActionList
-      actions={
-        Array [
-          Object {
-            "className": "",
-            "content": <TypeaheadItem
-              helpText="X"
-              value="cross"
-            />,
-            "highlighted": true,
-          },
-          Object {
-            "className": "",
-            "content": <TypeaheadItem
-              helpText="Campaign"
-              value="crossing"
-            />,
-            "highlighted": false,
-          },
-          Object {
-            "className": "",
-            "content": <TypeaheadItem
-              helpText="Z"
-              value="crossed"
-            />,
-            "highlighted": false,
-          },
-        ]
-      }
-      groupByKey="section"
-    />
-  </div>
-  <TextField
-    resize="both"
-    suffix={
-      <MatchesLoading
-        isLoading={false}
-      />
-    }
-    type="text"
-  />
-</div>
-`;
-
 exports[`Component: Typeahead should first show synchronous matches while waiting for async calls to finish 1`] = `
 <div
   className="Typeahead"
@@ -64,7 +13,7 @@ exports[`Component: Typeahead should first show synchronous matches while waitin
           Object {
             "className": "",
             "content": <TypeaheadItem
-              helpText="X"
+              helpText="Sending Domain"
               value="cross"
             />,
             "highlighted": true,
@@ -72,7 +21,7 @@ exports[`Component: Typeahead should first show synchronous matches while waitin
           Object {
             "className": "",
             "content": <TypeaheadItem
-              helpText="Campaign"
+              helpText="Template"
               value="crossing"
             />,
             "highlighted": false,
@@ -138,4 +87,55 @@ exports[`Component: Typeahead should render ok by default 1`] = `
 >
   <Component />
 </Downshift>
+`;
+
+exports[`Component: Typeahead should show sync and async matches 1`] = `
+<div
+  className="Typeahead"
+>
+  <div
+    className="List open"
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "className": "",
+            "content": <TypeaheadItem
+              helpText="Sending Domain"
+              value="cross"
+            />,
+            "highlighted": true,
+          },
+          Object {
+            "className": "",
+            "content": <TypeaheadItem
+              helpText="Recipient Domain"
+              value="cross.example.com"
+            />,
+            "highlighted": false,
+          },
+          Object {
+            "className": "",
+            "content": <TypeaheadItem
+              helpText="Template"
+              value="crossing"
+            />,
+            "highlighted": false,
+          },
+        ]
+      }
+      groupByKey="section"
+    />
+  </div>
+  <TextField
+    resize="both"
+    suffix={
+      <MatchesLoading
+        isLoading={false}
+      />
+    }
+    type="text"
+  />
+</div>
 `;

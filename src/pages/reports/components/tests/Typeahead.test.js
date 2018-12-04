@@ -6,28 +6,21 @@ describe('Component: Typeahead', () => {
   let props;
   let wrapper;
   let downshiftHelpers;
-  const defaultCrossMatches = [{ type: 'X', value: 'cross' }, { type: 'Campaign', value: 'crossing' }];
-
-  const simulateMetricsAPICallChanges = (lastPattern) => {
-    const newProps = {
-      ...props,
-      items: [{ type: 'Z', value: 'crossed' }]
-    };
-    wrapper = shallow(<Typeahead {...newProps} />);
-    wrapper.setState({
-      matches: defaultCrossMatches,
-      lastPattern
-    });
-  };
+  const defaultCrossMatches = [{ type: 'Sending Domain', value: 'cross' }, { type: 'Template', value: 'crossing' }];
 
   beforeEach(() => {
     props = {
-      items: [{ type: 'X', value: 'cross' }, { type: 'X', value: 'treasure' }, { type: 'Campaign', value: 'crossing' }],
+      items: [
+        { type: 'Sending Domain', value: 'cross' },
+        { type: 'Campaign', value: 'treasure' },
+        { type: 'Recipient Domain', value: 'cross.example.com' },
+        { type: 'Template', value: 'crossing' }
+      ],
       matches: [],
       onSelect: jest.fn(),
       refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
       placeholder: '',
-      lastPattern: null
+      pattern: null
     };
 
     downshiftHelpers = {
@@ -51,32 +44,20 @@ describe('Component: Typeahead', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should trigger updateLookAhead functon on field change', async () => {
-    expect(wrapper.state().calculatingMatches).toEqual(false);
-    const { handleFieldChange, updateLookAheadDebounced } = wrapper.instance();
-    await handleFieldChange({ target: { value: 'cros' }});
-    updateLookAheadDebounced.flush(); // forces debounced calls to execute
+  it('should trigger on field change', () => {
+    wrapper.instance().handleFieldChange({ target: { value: 'cros' }});
+    wrapper.instance().updateLookAheadDebounced.flush(); // forces debounced calls to execute
     expect(props.refreshTypeaheadCache).toHaveBeenCalledTimes(1);
-    expect(wrapper.state().calculatingMatches).toEqual(true);
-    expect(wrapper.state().lastPattern).toEqual('cros');
   });
 
   it('should produce matches on search', () => {
-    const pattern = 'cross';
-    const result = wrapper.instance().getMatches({ pattern });
-    expect(result).toEqual(defaultCrossMatches);
-  });
-
-  it('should produce correct matches after excluding items', () => {
-    const pattern = 'cross';
-    const result = wrapper.instance().getMatches({ pattern, excludedItems: [{ type: 'X', value: 'cross' }]});
-    expect(result).toEqual([{ type: 'Campaign', value: 'crossing' }]);
+    wrapper.instance().updateLookAhead('cross');
+    expect(wrapper.state().matches).toEqual(defaultCrossMatches);
   });
 
   it('should produce no matches on empty query', () => {
-    const pattern = '';
-    const result = wrapper.instance().getMatches({ pattern });
-    expect(result).toEqual([]);
+    wrapper.instance().updateLookAhead('');
+    expect(wrapper.state().matches).toEqual([]);
   });
 
   it('should first show synchronous matches while waiting for async calls to finish', () => {
@@ -92,21 +73,22 @@ describe('Component: Typeahead', () => {
       expect(props.refreshTypeaheadCache).not.toHaveBeenCalled();
       expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
     });
-
   });
 
-  it('should append new matches', () => {
+  it('should show sync and async matches', () => {
     const input = 'cross';
-    simulateMetricsAPICallChanges(input);
-    wrapper.instance().appendNewMatches(input);
-    expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
+    return wrapper.instance().updateLookAhead(input).then(() => {
+      expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
+    });
   });
 
-  it('should not append new matches if the pattern is not the most recent', () => {
+  it('should not update matches on receiving out-of-date results', () => {
     const input = 'cros';
-    simulateMetricsAPICallChanges('cross');
-    wrapper.instance().appendNewMatches(input);
-    expect(wrapper.state('matches')).toEqual(defaultCrossMatches);
+    const promise = wrapper.instance().updateLookAhead(input);
+    wrapper.instance().setState({ pattern: 'something else' });
+    return promise.then(() => {
+      expect(wrapper.state().matches).toEqual(defaultCrossMatches);
+    });
   });
 
   it('should call onSelect on change', () => {
