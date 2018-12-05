@@ -11,6 +11,7 @@ describe('Component: EnforceTfaPanel', () => {
     tfaRequired: false,
     tfaUpdatePending: false,
     getAccountSingleSignOnDetails: () => {},
+    getTfaStatus: () => {},
     updateAccountSingleSignOn: () => {},
     updateAccount: () => {},
     logout: jest.fn()
@@ -35,6 +36,12 @@ describe('Component: EnforceTfaPanel', () => {
     const getAccountSingleSignOnDetails = jest.fn();
     subject({ getAccountSingleSignOnDetails });
     expect(getAccountSingleSignOnDetails).toHaveBeenCalledTimes(1);
+  });
+
+  it('fetches user TFA status', () => {
+    const getTfaStatus = jest.fn();
+    subject({ getTfaStatus });
+    expect(getTfaStatus).toHaveBeenCalledTimes(1);
   });
 
   it('renders fully after loading', () => {

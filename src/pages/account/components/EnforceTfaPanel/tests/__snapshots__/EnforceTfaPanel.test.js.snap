@@ -33,10 +33,14 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
           <li>
             All users without two-factor authentication enabled will be sent an email informing them of this change.
           </li>
+          <li>
+            If 
+            <em>
+              you
+            </em>
+             don't have two-factor authentication enabled, you will be logged out.
+          </li>
         </ul>
-        <p>
-          You don't have two-factor authentication set up. Enforcing will log you out.
-        </p>
       </React.Fragment>
     }
     onCancel={[Function]}
@@ -112,10 +116,14 @@ exports[`Component: EnforceTfaPanel renders with sso enabled 1`] = `
           <li>
             All users without two-factor authentication enabled will be sent an email informing them of this change.
           </li>
+          <li>
+            If 
+            <em>
+              you
+            </em>
+             don't have two-factor authentication enabled, you will be logged out.
+          </li>
         </ul>
-        <p>
-          You don't have two-factor authentication set up. Enforcing will log you out.
-        </p>
       </React.Fragment>
     }
     onCancel={[Function]}
@@ -179,6 +187,13 @@ exports[`Component: EnforceTfaPanel renders with tfa enabled 1`] = `
           </li>
           <li>
             All users without two-factor authentication enabled will be sent an email informing them of this change.
+          </li>
+          <li>
+            If 
+            <em>
+              you
+            </em>
+             don't have two-factor authentication enabled, you will be logged out.
           </li>
         </ul>
       </React.Fragment>
