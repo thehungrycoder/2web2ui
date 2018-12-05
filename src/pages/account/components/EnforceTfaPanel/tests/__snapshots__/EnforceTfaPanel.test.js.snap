@@ -34,6 +34,9 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
             All users without two-factor authentication enabled will be sent an email informing them of this change.
           </li>
         </ul>
+        <p>
+          You don't have two-factor authentication set up. Enforcing will log you out.
+        </p>
       </React.Fragment>
     }
     onCancel={[Function]}
@@ -92,6 +95,74 @@ exports[`Component: EnforceTfaPanel renders with sso enabled 1`] = `
   </Panel.Section>
   <Component
     readOnly={true}
+    tfaRequired={false}
+    toggleTfaRequired={[Function]}
+  />
+  <ConfirmationModal
+    confirming={false}
+    content={
+      <React.Fragment>
+        <p>
+          Enforcing two-factor authentication account-wide will have the following effects:
+        </p>
+        <ul>
+          <li>
+            All users without two-factor authentication enabled will be forced to login to the UI again and enable it on login.
+          </li>
+          <li>
+            All users without two-factor authentication enabled will be sent an email informing them of this change.
+          </li>
+        </ul>
+        <p>
+          You don't have two-factor authentication set up. Enforcing will log you out.
+        </p>
+      </React.Fragment>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to enforce two-factor authentication for this account?"
+  />
+  <ConfirmationModal
+    confirming={false}
+    content={
+      <React.Fragment>
+        <p>
+          Making two-factor authentication optional will allow users to manage their own two-factor authentication settings.
+        </p>
+        <p>
+          Note: This will 
+          <em>
+            not
+          </em>
+           disable two-factor authentication for any user.
+        </p>
+      </React.Fragment>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to make two-factor authentication optional for this account?"
+  />
+</Panel>
+`;
+
+exports[`Component: EnforceTfaPanel renders with tfa enabled 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "component": [Function],
+        "content": "Learn more",
+        "to": "https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/",
+      },
+    ]
+  }
+  title="Two-factor Authentication"
+>
+  <Component
+    readOnly={false}
     tfaRequired={false}
     toggleTfaRequired={[Function]}
   />

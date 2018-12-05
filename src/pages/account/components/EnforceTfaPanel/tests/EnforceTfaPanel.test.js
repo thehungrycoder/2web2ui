@@ -45,6 +45,10 @@ describe('Component: EnforceTfaPanel', () => {
     expect(subject({ ssoEnabled: true })).toMatchSnapshot();
   });
 
+  it('renders with tfa enabled', () => {
+    expect(subject({ tfaEnabled: true })).toMatchSnapshot();
+  });
+
   cases('offers to enable/disable TFA required', ({ tfaRequired, modal }) => {
     const wrapper = subject({ tfaRequired });
     expect(modal(wrapper).prop('open')).toEqual(false);
