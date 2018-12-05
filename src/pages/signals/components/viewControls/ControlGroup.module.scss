@@ -1,14 +1,15 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Content {
-  opacity: 0.8;
+.Button {
+  position: relative;
+  color: color(gray, 5) !important;
 }
 
-.Selected {
-  color: color(orange);
-  opacity: 1;
+.Selected, .Selected:hover {
+  color: color(gray, 1) !important;
+  background: color(gray, 9);
 }
 
-.Group {
+.Group:not(:first-child) {
   margin-left: spacing();
 }

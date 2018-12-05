@@ -2,16 +2,12 @@
 
 exports[`Signals View ControlGroup Component handles a select correctly 1`] = `
 <Button
+  className="Button Selected"
   key="foo"
   onClick={[Function]}
-  outline={true}
   size="default"
 >
-  <span
-    className="Content Selected"
-  >
-    fOo
-  </span>
+  fOo
 </Button>
 `;
 
@@ -20,30 +16,22 @@ exports[`Signals View ControlGroup Component renders correctly 1`] = `
   className="Group"
 >
   <Button
+    className="Button"
     key="foo"
     onClick={[Function]}
-    outline={true}
     size="default"
   >
-    <span
-      className="Content"
-    >
-      fOo
-    </span>
+    fOo
   </Button>
   <Button
+    className="Button Selected"
     key="bar"
     onClick={[Function]}
-    outline={true}
     size="default"
   >
-    <span
-      className="Content Selected"
-    >
-      <test>
-        BaR
-      </test>
-    </span>
+    <test>
+      BaR
+    </test>
   </Button>
 </Button.Group>
 `;
