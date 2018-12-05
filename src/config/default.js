@@ -104,7 +104,8 @@ const config = {
       save_return_url: '/account/billing', // Return URL from Brightback for end-users who do not cancel
       cancel_confirmation_url: '/account/billing/plan/change', // Return URL from Brightback for end-users who cancel
       billing_url: '/account/billing/plan' // Billing URL to direct end-users to enter coupon code or other billing changes
-    }
+    },
+    freePlan: 'free500-1018'
   },
   smtpAuth: {
     host: 'no-default-set',

@@ -43,8 +43,10 @@ const productionTenants = {
       allowSubaccountDefault: false,
       cnameValue: 'eu.sparkpostmail.com'
     },
+    brightback: {
+      freePlan: 'free500-SPCEU-1018'
+    },
     crossLinkTenant: 'spc',
-    defaultPlan: 'free500-SPCEU-1018',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
@@ -75,7 +77,6 @@ const productionTenants = {
       cnameValue: 'sparkpostmail.com'
     },
     crossLinkTenant: 'spceu',
-    defaultPlan: 'free500-1018',
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
