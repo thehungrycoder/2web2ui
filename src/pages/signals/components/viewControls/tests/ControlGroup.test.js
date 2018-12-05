@@ -33,4 +33,9 @@ describe('Signals View ControlGroup Component', () => {
     wrapper.find('Button').first().simulate('click');
     expect(props.onChange).not.toHaveBeenCalled();
   });
+
+  it('does not set selected initially if not provided', () => {
+    wrapper = shallow(<ControlGroup options={props.options} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
