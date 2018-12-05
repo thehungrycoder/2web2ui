@@ -15,6 +15,7 @@ export class EnforceTFAPanel extends React.Component {
 
   componentDidMount() {
     this.props.getAccountSingleSignOnDetails();
+    this.props.getTfaStatus();
   }
 
   toggleTfaRequired = () => {
@@ -45,7 +46,7 @@ export class EnforceTFAPanel extends React.Component {
     });
 
   render() {
-    const { loading, tfaRequired, tfaUpdatePending, ssoEnabled, tfaEnabled } = this.props;
+    const { loading, tfaRequired, tfaUpdatePending, ssoEnabled } = this.props;
     const { enableModal, disableModal } = this.state;
 
     if (loading) {
@@ -90,12 +91,10 @@ export class EnforceTFAPanel extends React.Component {
                   All users without two-factor authentication enabled will be sent an email
                   informing them of this change.
                 </li>
+                <li>
+                  If <em>you</em> don't have two-factor authentication enabled, you will be logged out.
+                </li>
               </ul>
-              {!tfaEnabled && (
-                <p>
-                  You don't have two-factor authentication set up. Enforcing will log you out.
-                </p>
-              )}
             </React.Fragment>
           }
           onCancel={this.onCancel}
