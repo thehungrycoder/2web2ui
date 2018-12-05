@@ -24,20 +24,8 @@ describe('Sparkline Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders without tooltip', () => {
-    wrapper.setProps({ tooltipContent: null });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should handle click', () => {
     wrapper.find('LineChart').simulate('click');
     expect(props.onClick).toHaveBeenCalled();
-  });
-
-  it('should render tooltip', () => {
-    const payload = [{ payload: props.timeSeries[0] }];
-    const tooltip = wrapper.find('Tooltip').props().content({ payload });
-    expect(tooltip).toMatchSnapshot();
-    expect(props.tooltipContent).toHaveBeenCalledWith(payload[0]);
   });
 });

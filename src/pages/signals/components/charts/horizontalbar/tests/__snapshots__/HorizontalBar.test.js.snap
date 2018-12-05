@@ -110,7 +110,11 @@ exports[`HorizontalBar Component renders correctly 1`] = `
         active={false}
         animationDuration={400}
         animationEasing="ease"
-        content={[Function]}
+        content={
+          <Tooltip>
+            [MockFunction]
+          </Tooltip>
+        }
         contentStyle={Object {}}
         coordinate={
           Object {
@@ -141,121 +145,4 @@ exports[`HorizontalBar Component renders correctly 1`] = `
     </BarChart>
   </ResponsiveContainer>
 </div>
-`;
-
-exports[`HorizontalBar Component renders without tooltip 1`] = `
-<div
-  className="LiftTooltip"
->
-  <ResponsiveContainer
-    debounce={0}
-    height={50}
-    width={100}
-  >
-    <BarChart
-      barCategoryGap={0}
-      barGap={0}
-      barSize={50}
-      data={
-        Array [
-          Object {
-            "date": "2011-01-01",
-            "fill": "blue",
-            "value": 2,
-          },
-        ]
-      }
-      layout="vertical"
-      margin={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "right": 0,
-          "top": 0,
-        }
-      }
-      reverseStackOrder={false}
-      stackOffset="none"
-    >
-      <YAxis
-        allowDataOverflow={false}
-        allowDecimals={true}
-        allowDuplicatedCategory={true}
-        domain={
-          Array [
-            0,
-            "auto",
-          ]
-        }
-        height={0}
-        hide={true}
-        mirror={false}
-        orientation="left"
-        padding={
-          Object {
-            "bottom": 0,
-            "top": 0,
-          }
-        }
-        reversed={false}
-        scale="auto"
-        tickCount={5}
-        type="category"
-        width={60}
-        yAxisId={0}
-      />
-      <XAxis
-        allowDataOverflow={false}
-        allowDecimals={true}
-        allowDuplicatedCategory={true}
-        dataKey="value"
-        domain={
-          Array [
-            0,
-            5,
-          ]
-        }
-        height={30}
-        hide={true}
-        mirror={false}
-        orientation="bottom"
-        padding={
-          Object {
-            "left": 0,
-            "right": 0,
-          }
-        }
-        reversed={false}
-        scale="auto"
-        tickCount={5}
-        type="number"
-        width={0}
-        xAxisId={0}
-      />
-      <Bar
-        animationBegin={0}
-        animationDuration={400}
-        animationEasing="ease"
-        data={Array []}
-        dataKey="value"
-        hide={false}
-        isAnimationActive={false}
-        layout="vertical"
-        legendType="rect"
-        minPointSize={0}
-        onAnimationEnd={[Function]}
-        onAnimationStart={[Function]}
-        onClick={[MockFunction]}
-        xAxisId={0}
-        yAxisId={0}
-      />
-    </BarChart>
-  </ResponsiveContainer>
-</div>
-`;
-
-exports[`HorizontalBar Component should render tooltip 1`] = `
-<Tooltip
-  date="2011-01-01"
-/>
 `;
