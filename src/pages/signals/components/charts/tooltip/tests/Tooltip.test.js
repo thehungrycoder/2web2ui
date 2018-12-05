@@ -10,7 +10,10 @@ describe('Signals Tooltip Component', () => {
     props = {
       payload: [{
         value: 1,
-        date: new Date('2010-01-01T12:00:00.000Z')
+        payload: {
+          value: 1,
+          date: new Date('2010-01-01T12:00:00.000Z')
+        }
       }]
     };
     wrapper = shallow(<Tooltip {...props}/>);
@@ -21,7 +24,7 @@ describe('Signals Tooltip Component', () => {
   });
 
   it('renders correctly without date', () => {
-    wrapper.setProps({ payload: [{ value: 1 }]});
+    wrapper.setProps({ payload: [{ payload: { value: 1 }}]});
     expect(wrapper).toMatchSnapshot();
   });
 
