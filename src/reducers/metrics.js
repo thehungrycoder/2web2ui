@@ -31,6 +31,11 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_METRICS_IP_POOLS_SUCCESS':
       return { ...state, ipPools: payload['ip-pools'].sort() };
 
+    case 'UPDATE_METRICS_FROM_CACHE': {
+      const { domains, campaigns, 'sending-ips': sendingIps, 'ip-pools': ipPools } = payload;
+      return { ...state, domains, campaigns, sendingIps, ipPools };
+    }
+
     default:
       return state;
   }

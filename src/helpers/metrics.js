@@ -19,14 +19,13 @@ const FILTER_KEY_MAP = {
 
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
-export function getQueryFromOptions({ from, to, metrics, filters = []}) {
+export function getQueryFromOptions({ from, to, metrics, filters = [], match = '', limit }) {
   from = moment(from);
   to = moment(to);
 
   const apiMetricsKeys = getKeysFromMetrics(metrics);
   const delimiter = getDelimiter(filters);
-
-  return {
+  const options = {
     metrics: apiMetricsKeys.join(delimiter),
     precision: getPrecision(from, to),
     from: from.format(apiDateFormat),
@@ -35,6 +34,13 @@ export function getQueryFromOptions({ from, to, metrics, filters = []}) {
     ...getFilterSets(filters, delimiter),
     timezone: getLocalTimezone()
   };
+  if (match.length > 0) {
+    options.match = match;
+  }
+  if (limit) {
+    options.limit = limit;
+  }
+  return options;
 }
 
 export function pushToKey(obj, key, value) {

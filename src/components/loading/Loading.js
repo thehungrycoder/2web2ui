@@ -9,16 +9,17 @@ export const Loading = function Loading() {
   return <LoadingSVG className={styles.Center}/>;
 };
 
+
 Loading.displayName = 'Loading';
 
 /**
  * Circle Animation
  */
-export const LoadingSVG = ({ className = '', small = false }) => (
+export const LoadingSVG = ({ className = '', size = '' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="25 25 50 50"
-    className={classnames(styles.CircleWrapper, small && styles.Small, className)} >
+    className={classnames(styles.CircleWrapper, styles[size], className)} >
     <circle
       className={styles.Circle}
       cx="50" cy="50" r="20"

@@ -4,7 +4,6 @@ import { ReportOptions } from '../ReportOptions';
 import { Tag } from '@sparkpost/matchbox';
 import Typeahead from '../Typeahead';
 import * as reportHelpers from 'src/helpers/reports';
-import { isSameDate } from 'src/helpers/date';
 
 jest.mock('src/helpers/date');
 jest.mock('src/helpers/reports');
@@ -56,26 +55,6 @@ describe('Component: Report Options', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('componentDidUpdate', () => {
-    let instance;
-    beforeEach(() => {
-      instance = wrapper.instance();
-      wrapper.setProps({ reportOptions: { filters: []}});
-      instance.maybeRefreshFilterTypeaheadCache = jest.fn();
-    });
-
-    it('refreshes typeahead cache if searchOptions change', () => {
-      instance.componentDidUpdate({ reportOptions: { filters: ['something']}});
-      expect(instance.maybeRefreshFilterTypeaheadCache).toHaveBeenCalledTimes(1);
-
-    });
-
-    it('does not refresh typeahead cache if searchOptions do not change', () => {
-      instance.componentDidUpdate({ reportOptions: { filters: []}});
-      expect(instance.maybeRefreshFilterTypeaheadCache).toHaveBeenCalledTimes(0);
-
-    });
-  });
   describe('with active filters', () => {
 
     beforeEach(() => {
@@ -110,48 +89,6 @@ describe('Component: Report Options', () => {
     const item = {};
     typeahead.simulate('select', item);
     expect(testProps.addFilters).toHaveBeenCalledWith([item]);
-  });
-
-  describe('maybeRefreshFilterTypeaheadCache', () => {
-    let instance;
-    let reportOptions;
-    beforeEach(() => {
-      reportOptions = {
-        ...testProps.reportOptions,
-        relativeRange: 'day'
-      };
-
-      instance = wrapper.instance();
-      isSameDate.mockImplementation(() => false);
-    });
-
-    it('should not refresh if relative range does not change', () => {
-      instance.maybeRefreshFilterTypeaheadCache(reportOptions);
-      expect(testProps.refreshTypeaheadCache).not.toHaveBeenCalled();
-    });
-
-    it('should not refresh if range is "custom" and dates have not changed', () => {
-      isSameDate.mockReturnValue(true);
-      reportOptions.relativeRange = 'custom';
-      wrapper.setProps({ reportOptions });
-      testProps.refreshTypeaheadCache.mockReset();
-
-      instance.maybeRefreshFilterTypeaheadCache(reportOptions);
-      expect(testProps.refreshTypeaheadCache).not.toHaveBeenCalled();
-    });
-
-    it('should refresh if the range changes', () => {
-      const newReportOptions = { ...reportOptions, relativeRange: '7days' };
-      instance.maybeRefreshFilterTypeaheadCache(newReportOptions);
-      expect(testProps.refreshTypeaheadCache).toHaveBeenCalledWith(reportOptions);
-    });
-
-    it('should refresh if range is "custom" and dates change', () => {
-      const newReportOptions = { ...reportOptions, relativeRange: 'custom' };
-      instance.maybeRefreshFilterTypeaheadCache(newReportOptions);
-      expect(testProps.refreshTypeaheadCache).toHaveBeenCalledWith(reportOptions);
-    });
-
   });
 
 });

@@ -46,10 +46,18 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
         xl={5}
         xs={8}
       >
-        <Typeahead
+        <Connect(Typeahead)
           items={Array []}
           onSelect={[Function]}
           placeholder="Filter by domain, campaign, etc"
+          reportOptions={
+            Object {
+              "filters": Array [],
+              "from": 2018-02-15T12:00:00.000Z,
+              "relativeRange": "day",
+              "to": 2018-02-15T12:00:00.000Z,
+            }
+          }
           selected={Array []}
         />
       </Grid.Column>
@@ -126,10 +134,31 @@ exports[`Component: Report Options with active filters should render 1`] = `
         xl={5}
         xs={8}
       >
-        <Typeahead
+        <Connect(Typeahead)
           items={Array []}
           onSelect={[Function]}
           placeholder="Filter by domain, campaign, etc"
+          reportOptions={
+            Object {
+              "filters": Array [
+                Object {
+                  "type": "A",
+                  "value": "aaa",
+                },
+                Object {
+                  "type": "B",
+                  "value": "bbb",
+                },
+                Object {
+                  "type": "C",
+                  "value": "ccc",
+                },
+              ],
+              "from": 2018-02-15T12:00:00.000Z,
+              "relativeRange": "day",
+              "to": 2018-02-15T12:00:00.000Z,
+            }
+          }
           selected={
             Array [
               Object {

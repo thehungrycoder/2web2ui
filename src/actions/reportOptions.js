@@ -10,6 +10,8 @@ import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
 import { getRelativeDates } from 'src/helpers/date';
 import { getQueryFromOptions } from 'src/helpers/metrics';
+import { isSameDate } from 'src/helpers/date';
+import _ from 'lodash';
 
 // array of all lists that need to be re-filtered when time changes
 const metricLists = [
@@ -21,18 +23,14 @@ const metricLists = [
 
 /**
  * Returns a thunk that initializes the non-metric lists used
- * for populating the typeahead cache (metrics lists are populated
- * during date range refreshes)
+ * for populating the typeahead cache.
  *
  * The thunk skips calling any of the lists that already have values
  * in the redux store
  */
 export function initTypeaheadCache() {
   return (dispatch, getState) => {
-    const { templates, subaccounts, sendingDomains, metrics, reportOptions } = getState();
-    const allCachesEmpty = ['domains', 'campaigns', 'sendingIps', 'ipPools'].every((cache) => (
-      metrics[cache].length === 0
-    ));
+    const { templates, subaccounts, sendingDomains } = getState();
     const requests = [];
 
     if (templates.list.length === 0) {
@@ -46,20 +44,46 @@ export function initTypeaheadCache() {
     if (sendingDomains.list.length === 0) {
       requests.push(dispatch(listSendingDomains()));
     }
-
-    if (allCachesEmpty) {
-      requests.push(dispatch(refreshTypeaheadCache(reportOptions)));
-    }
-
     return Promise.all(requests);
   };
 }
 
+/**
+ * Refreshes the typeahead cache with the metrics lists. This occurs dynamically
+ * whenever the user types in the search field but with a debounce.
+ *
+ * It will first try to pull the data from cache, if it exists and the time range is the same.
+ * If there is no cache entry, it will make the api calls and add the results to the cache.
+ */
 export function refreshTypeaheadCache(options) {
   const params = getQueryFromOptions(options);
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { typeahead } = getState();
+    const { to: cachedTo, from: cachedFrom, cache } = typeahead;
+    const { match, to: currentTo, from: currentFrom } = options;
+    if (isSameDate(cachedFrom, currentFrom) && isSameDate(cachedTo, currentTo) && cache[match]) {
+      dispatch({
+        type: 'UPDATE_METRICS_FROM_CACHE',
+        payload: cache[match]
+      });
+      return Promise.resolve();
+    }
     const requests = metricLists.map((list) => dispatch(list(params)));
-    return Promise.all(requests);
+    return Promise.all(requests).then((arrayOfMetrics) => {
+      // Flattens the array from array of metrics objects to an object with each metric as a key
+      const metricsList = _.reduce(arrayOfMetrics, (accumulator, metric) => _.assign(accumulator, metric), {});
+      const payload = {
+        from: currentFrom,
+        to: currentTo,
+        itemToCache: { [match]: metricsList }
+      };
+
+      dispatch({
+        type: 'UPDATE_TYPEAHEAD_METRICS_CACHE',
+        payload
+      });
+    });
+
   };
 }
 

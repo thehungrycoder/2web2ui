@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { addFilters, removeFilter, refreshReportOptions, refreshTypeaheadCache, initTypeaheadCache } from 'src/actions/reportOptions';
@@ -9,7 +8,6 @@ import { Grid, Panel, Tag } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
-import { isSameDate } from 'src/helpers/date';
 import styles from './ReportOptions.module.scss';
 
 const RELATIVE_DATE_OPTIONS = [
@@ -31,22 +29,6 @@ export class ReportOptions extends Component {
     this.props.initTypeaheadCache();
   }
 
-  componentDidUpdate(prevProps) {
-    if (!_.isEqual(prevProps.reportOptions, this.props.reportOptions)) {
-      this.maybeRefreshFilterTypeaheadCache(prevProps.reportOptions);
-    }
-  }
-
-  maybeRefreshFilterTypeaheadCache(prev) {
-    const current = this.props.reportOptions;
-    const datesAreDifferent = !isSameDate(prev.from, current.from) || !isSameDate(prev.to, current.to);
-    const rangesAreDifferent = prev.relativeRange !== current.relativeRange;
-
-    if (rangesAreDifferent || (current.relativeRange === 'custom' && datesAreDifferent)) {
-      this.props.refreshTypeaheadCache(current);
-    }
-  }
-
   renderActiveFilters = () => {
     const { reportOptions } = this.props;
     return reportOptions.filters.length
@@ -55,19 +37,18 @@ export class ReportOptions extends Component {
         {reportOptions.filters.map((item, index) => <Tag key={index} onRemove={() => this.handleFilterRemove(index)} className={styles.TagWrapper}>{item.type}: {item.value}</Tag>)}
       </Panel.Section>
       : null;
-  }
+  };
 
   handleFilterRemove = (index) => {
     this.props.removeFilter(index);
-  }
+  };
 
   handleTypeaheadSelect = (item) => {
     this.props.addFilters([item]);
-  }
+  };
 
   render() {
     const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions, roundToPrecision } = this.props;
-
     return (
       <Panel>
         <Panel.Section >
@@ -85,6 +66,7 @@ export class ReportOptions extends Component {
             </Grid.Column>
             <Grid.Column xs={8} md={4} xl={5}>
               <Typeahead
+                reportOptions={reportOptions}
                 placeholder='Filter by domain, campaign, etc'
                 onSelect={this.handleTypeaheadSelect}
                 items={typeaheadCache}

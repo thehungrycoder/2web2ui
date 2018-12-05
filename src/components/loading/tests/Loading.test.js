@@ -10,8 +10,13 @@ describe('Loading Component', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should render - small', () => {
-      const wrapper = render(<LoadingSVG small />);
+    it('should render a specific size (small)', () => {
+      const wrapper = render(<LoadingSVG size = 'Small' />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render a specific style (center)', () => {
+      const wrapper = render(<LoadingSVG className = 'Center' />);
       expect(wrapper).toMatchSnapshot();
     });
 
