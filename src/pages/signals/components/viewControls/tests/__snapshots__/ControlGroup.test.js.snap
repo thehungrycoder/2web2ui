@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals View ControlGroup Component does not set selected initially if not provided 1`] = `
+<Button.Group
+  className="Group"
+>
+  <Button
+    className="Button"
+    key="foo"
+    onClick={[Function]}
+    size="default"
+  >
+    fOo
+  </Button>
+  <Button
+    className="Button"
+    key="bar"
+    onClick={[Function]}
+    size="default"
+  >
+    <test>
+      BaR
+    </test>
+  </Button>
+</Button.Group>
+`;
+
+exports[`Signals View ControlGroup Component handles a select correctly 1`] = `
+<Button
+  className="Button Selected"
+  key="foo"
+  onClick={[Function]}
+  size="default"
+>
+  fOo
+</Button>
+`;
+
+exports[`Signals View ControlGroup Component renders correctly 1`] = `
+<Button.Group
+  className="Group"
+>
+  <Button
+    className="Button"
+    key="foo"
+    onClick={[Function]}
+    size="default"
+  >
+    fOo
+  </Button>
+  <Button
+    className="Button Selected"
+    key="bar"
+    onClick={[Function]}
+    size="default"
+  >
+    <test>
+      BaR
+    </test>
+  </Button>
+</Button.Group>
+`;
