@@ -1,0 +1,9 @@
+:global {
+  .recharts-bar-rectangle path {
+    transition: 0.15s;
+  }
+
+  .recharts-text.recharts-cartesian-axis-tick-value {
+    font-size: 13px;
+  }
+}
