@@ -8,7 +8,7 @@ Object {
   },
   "app_id": "9N0rWBvKGR",
   "billing_url": "http://phoenix.test/billing_url",
-  "cancel_confirmation_url": "http://phoenix.test/cancel_confirmation_url?immediatePlanChange=undefined",
+  "cancel_confirmation_url": "http://phoenix.test/cancel_confirmation_url?immediatePlanChange=free500-1018",
   "context": Object {
     "locale": "en-US",
     "referrer": "",

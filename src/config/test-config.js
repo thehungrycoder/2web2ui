@@ -1,5 +1,6 @@
 const testConfig = {
   apiBase: 'http://fake-api-test-host.com',
+  defaultPlan: 'free500-1018',
   splashPage: '/dashboard',
   smtpAuth: {
     host: 'smtp.sparkmail.com',
