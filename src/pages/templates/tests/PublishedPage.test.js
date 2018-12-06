@@ -29,6 +29,11 @@ describe('Template PublishedPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render correctly with AMP enabled', () => {
+    wrapper = shallow(<PublishedPage {...props} isAmpLive={true} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render read-only correctly', () => {
     wrapper = shallow(<PublishedPage {...props} canModify={false} />);
     expect(wrapper).toMatchSnapshot();

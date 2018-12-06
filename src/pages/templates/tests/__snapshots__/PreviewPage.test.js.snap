@@ -61,9 +61,9 @@ exports[`renders loading error 1`] = `
       value="Test Template"
     />
     <PreviewPanel
-      amp_html=""
+      amp_html="<h2>Test Template</h2>"
       html="<h1>Test Template</h1>"
-      text=""
+      text="Test Template"
     />
   </Panel>
 </Page>
@@ -101,9 +101,9 @@ exports[`renders preview page with read-only template 1`] = `
       value="Test Template"
     />
     <PreviewPanel
-      amp_html=""
+      amp_html="<h2>Test Template</h2>"
       html="<h1>Test Template</h1>"
-      text=""
+      text="Test Template"
     />
   </Panel>
 </Page>
@@ -155,9 +155,64 @@ exports[`renders preview page with template 1`] = `
       value="Test Template"
     />
     <PreviewPanel
-      amp_html=""
+      amp_html="<h2>Test Template</h2>"
       html="<h1>Test Template</h1>"
-      text=""
+      text="Test Template"
+    />
+  </Panel>
+</Page>
+`;
+
+exports[`renders preview page with template and AMP enabled 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Back To Template",
+      "to": "/path/to/return",
+    }
+  }
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "content": "Send Email",
+      "disabled": false,
+      "onClick": [Function],
+    }
+  }
+  title="Test Template (Draft)"
+>
+  <Panel
+    sectioned={true}
+  >
+    <TextField
+      disabled={false}
+      label="To"
+      onChange={[Function]}
+      placeholder="Send to recipient email addresses"
+      resize="both"
+      type="text"
+      value=""
+    />
+    <TextField
+      disabled={true}
+      label="From"
+      resize="both"
+      type="text"
+      value="test@example.com"
+    />
+    <TextField
+      disabled={true}
+      label="Subject"
+      resize="both"
+      type="text"
+      value="Test Template"
+    />
+    <PreviewPanel
+      amp_html="<h2>Test Template</h2>"
+      html="<h1>Test Template</h1>"
+      isAmpLive={true}
+      text="Test Template"
     />
   </Panel>
 </Page>
@@ -209,9 +264,9 @@ exports[`resets error message when user starts typing again 1`] = `
       value="Test Template"
     />
     <PreviewPanel
-      amp_html=""
+      amp_html="<h2>Test Template</h2>"
       html="<h1>Test Template</h1>"
-      text=""
+      text="Test Template"
     />
   </Panel>
 </Page>
