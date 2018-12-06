@@ -42,31 +42,39 @@ describe('ContentEditor', () => {
     expect(wrapper.find('Field').props().readOnly).toBe(false);
   });
 
-  it('should set syntax validation correctly', () => {
+  it('should set HTML syntax validation correctly', () => {
     wrapper.instance().handleTab(0);
     wrapper.update();
     expect(wrapper.find('Field').props().name).toBe('content.html');
     expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+  });
 
+  it('should set Text syntax validation correctly', () => {
     wrapper.instance().handleTab(1);
     wrapper.update();
     expect(wrapper.find('Field').props().name).toBe('content.text');
     expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+  });
 
+  it('should set AMP HTML syntax validation correctly', () => {
     wrapper.instance().handleTab(2);
     wrapper.update();
     expect(wrapper.find('Field').props().name).toBe('content.amp_html');
     expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+  });
 
+  it('should set Test Data syntax validation correctly', () => {
     wrapper.instance().handleTab(3);
     wrapper.update();
     expect(wrapper.find('Field').props().name).toBe('testData');
     expect(wrapper.find('Field').props().syntaxValidation).toBe(true);
   });
 
-  it('should set required content validation correctly', () => {
+  it('should set required content validation correctly for just HTML and Text', () => {
     expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlOrText);
+  });
 
+  it('should set required content validation correctly for HTML, Text, and AMP', () => {
     wrapper.setProps({ isAmpLive: true, contentOnly: true });
     expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlTextOrAmp);
   });

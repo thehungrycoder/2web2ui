@@ -19,7 +19,7 @@ describe('EditPage', () => {
   });
 
   it('renders edit form with AMP enabled', () => {
-    expect(subject({ isAmpLive: true })).toMatchSnapshot();
+    expect(subject({ isAmpLive: true }).find('LoadableComponent').props().isAmpLive).toEqual(true);
   });
 
   it('redirects with alert when load request fails', () => {
