@@ -61,6 +61,7 @@ exports[`renders loading error 1`] = `
       value="Test Template"
     />
     <PreviewPanel
+      amp_html=""
       html="<h1>Test Template</h1>"
       text=""
     />
@@ -100,6 +101,7 @@ exports[`renders preview page with read-only template 1`] = `
       value="Test Template"
     />
     <PreviewPanel
+      amp_html=""
       html="<h1>Test Template</h1>"
       text=""
     />
@@ -153,6 +155,7 @@ exports[`renders preview page with template 1`] = `
       value="Test Template"
     />
     <PreviewPanel
+      amp_html=""
       html="<h1>Test Template</h1>"
       text=""
     />
@@ -206,6 +209,7 @@ exports[`resets error message when user starts typing again 1`] = `
       value="Test Template"
     />
     <PreviewPanel
+      amp_html=""
       html="<h1>Test Template</h1>"
       text=""
     />

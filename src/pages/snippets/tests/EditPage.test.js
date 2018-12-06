@@ -86,8 +86,7 @@ describe('EditPage', () => {
       name: 'Test Snippet',
       sharedWithSubaccounts: false,
       subaccountId: 345,
-      text: undefined,
-      isAmpLive: true
+      text: undefined
     });
     expect(showAlert).toHaveBeenCalled();
   });

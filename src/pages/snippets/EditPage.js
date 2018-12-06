@@ -63,8 +63,7 @@ export default class EditPage extends React.Component {
       sharedWithSubaccounts,
       subaccountId,
       text,
-      amp_html,
-      isAmpLive
+      amp_html: isAmpLive ? amp_html : undefined
     }).then(() => showAlert({ type: 'success', message: 'Snippet saved' }));
   }
 

@@ -46,8 +46,7 @@ export default class CreatePage extends React.Component {
       sharedWithSubaccounts: assignTo === 'shared',
       subaccountId,
       text,
-      amp_html,
-      isAmpLive
+      amp_html: isAmpLive ? amp_html : undefined
     }).then(() => {
       history.push(`/snippets/edit/${id}${setSubaccountQuery(subaccountId)}`);
     });
