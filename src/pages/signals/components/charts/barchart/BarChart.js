@@ -4,8 +4,21 @@ import { ResponsiveContainer, BarChart as RechartsBarchart, Bar, Tooltip, XAxis,
 import TooltipWrapper from '../tooltip/Tooltip';
 import './BarChart.scss';
 
+/**
+ * @example
+ * <BarChart timeSeries={data}
+ *   yDomain={[0,100]}
+ *   yKeys={[
+ *    { key: 'bar', fill: '#B157CE' },
+ *    { key: 'foo', fill: '#28C0C4' },
+ *   ]}
+ *   gap={0.5}
+ *   onClick={this.handleBarClick}
+ *   selected={this.state.selected}
+ *   xAxisProps={{ interval: 88, tickFormatter: (tick) => moment(tick).format('M/D') }}
+ * />
+ */
 class BarChart extends Component {
-
   renderBar = ({ key, fill }) => {
     const { onClick, xKey, selected, yKeys, selectedFill } = this.props;
 
