@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Summary Table Utils .getColumnProps return children props 1`] = `
+Array [
+  Object {
+    "children": "One",
+    "example": "one",
+  },
+  Object {
+    "children": "Two",
+    "example": "two",
+  },
+]
+`;
+
+exports[`Summary Table Utils .pickPageProps returns only page props 1`] = `
+Object {
+  "currentPage": 1,
+  "order": undefined,
+  "perPage": 10,
+}
+`;

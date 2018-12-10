@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Summary Tables Reducer when current page changes 1`] = `
+Object {
+  "@@DEFAULT_TABLE": Object {
+    "currentPage": 1,
+    "order": undefined,
+    "perPage": 10,
+  },
+  "testTable": Object {
+    "currentPage": 999,
+    "order": undefined,
+    "perPage": 10,
+  },
+}
+`;
+
+exports[`Summary Tables Reducer when init 1`] = `
+Object {
+  "@@DEFAULT_TABLE": Object {
+    "currentPage": 1,
+    "order": undefined,
+    "perPage": 10,
+  },
+}
+`;
+
+exports[`Summary Tables Reducer when order changes 1`] = `
+Object {
+  "@@DEFAULT_TABLE": Object {
+    "currentPage": 1,
+    "order": undefined,
+    "perPage": 10,
+  },
+  "testTable": Object {
+    "currentPage": 1,
+    "order": Object {
+      "ascending": true,
+      "dataKey": "columnA",
+    },
+    "perPage": 10,
+  },
+}
+`;
+
+exports[`Summary Tables Reducer when page size changes 1`] = `
+Object {
+  "@@DEFAULT_TABLE": Object {
+    "currentPage": 1,
+    "order": undefined,
+    "perPage": 10,
+  },
+  "testTable": Object {
+    "currentPage": 1,
+    "order": undefined,
+    "perPage": 25,
+  },
+}
+`;

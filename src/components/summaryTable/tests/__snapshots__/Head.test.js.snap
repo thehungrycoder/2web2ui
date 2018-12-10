@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Head renders a row of header cells 1`] = `
+<thead>
+  <Table.Row>
+    <Table.HeaderCell
+      className="Header"
+      key="header-id"
+    >
+      <HeaderLabel
+        dataKey="id"
+        label="Identifier"
+        onSort={[MockFunction]}
+        order={
+          Object {
+            "ascending": true,
+            "dataKey": "id",
+          }
+        }
+        sortable={true}
+      />
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      className="Header"
+      key="header-value"
+    >
+      <HeaderLabel
+        dataKey="value"
+        label="Value"
+        onSort={[MockFunction]}
+        order={
+          Object {
+            "ascending": true,
+            "dataKey": "id",
+          }
+        }
+        sortable={false}
+      />
+    </Table.HeaderCell>
+  </Table.Row>
+</thead>
+`;

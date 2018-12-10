@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Page from './components/SignalsPage';
-import SummaryTable from './components/SummaryTable';
+import SummaryPanel from './components/SummaryPanel';
 import FacetFilter from './components/filters/FacetFilter';
 import DateFilter from './components/filters/DateFilter';
 import SubaccountFilter from './components/filters/SubaccountFilter';
@@ -15,9 +15,9 @@ export class OverviewPage extends Component {
           <FacetFilter />
         </Fragment>
       }>
-        <SummaryTable title='Health Score' />
-        <SummaryTable title='Spam Traps' />
-        <SummaryTable title='Engagement Cohort' />
+        <SummaryPanel title='Health Score' />
+        <SummaryPanel title='Spam Traps' />
+        <SummaryPanel title='Engagement Cohort' />
       </Page>
     );
   }

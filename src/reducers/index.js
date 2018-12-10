@@ -31,6 +31,7 @@ import sendingIps from './sendingIps';
 import snippets from './snippets';
 import subaccounts from './subaccounts';
 import summaryChart from './summaryChart';
+import summaryTables from './summaryTables';
 import support from './support';
 import suppressions from './suppressions';
 import templates from './templates';
@@ -75,6 +76,7 @@ const appReducer = combineReducers({
   subaccounts,
   support,
   summaryChart,
+  summaryTables,
   suppressions,
   templates,
   tfa,
