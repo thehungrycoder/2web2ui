@@ -49,4 +49,10 @@ describe('BarChart Component', () => {
     const payload = { payload: { date: '2011-01-01' }, test: 'test' };
     expect(wrapper.find('Bar').at(0).props().shape(payload)).toMatchSnapshot();
   });
+
+  it('should handle click on all bars', () => {
+    wrapper.setProps({ timeSeries: stacked, yKeys });
+    wrapper.find('Bar').forEach((n) => n.simulate('click'));
+    expect(props.onClick).toHaveBeenCalledTimes(3);
+  });
 });

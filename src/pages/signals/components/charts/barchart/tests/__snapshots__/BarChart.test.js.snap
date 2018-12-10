@@ -2,6 +2,7 @@
 
 exports[`BarChart Component renders a normal bar chart correctly 1`] = `
 <ResponsiveContainer
+  className="SignalsBarChart"
   debounce={0}
   height={50}
   width={100}
