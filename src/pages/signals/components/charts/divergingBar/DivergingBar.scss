@@ -1,3 +1,8 @@
 .DivergingBar .xAxis .recharts-cartesian-axis-line {
   stroke: #ccc;
 }
+
+.DivergingBar .yAxis text {
+  user-select: none;
+  pointer-events: none;
+}

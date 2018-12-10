@@ -14,7 +14,6 @@ export class OverviewPage extends Component {
   }
 
   handleClick = ({ payload }) => {
-    console.log(payload);
     this.setState({ selected: payload.key });
   }
 
@@ -32,17 +31,20 @@ export class OverviewPage extends Component {
         <SummaryTable title='Engagement Cohort' />
 
         <Panel sectioned>
-          <DivergingBar data={[
-            { key: 'abc', label: 'Label 1', value: 0.8 },
-            { key: 'def', label: 'Label 2', value: -0.5 },
-            { key: 'ghi', label: 'Label 3', value: -0.1 },
-            { key: 'jkl', label: 'Label 4', value: 0.3 },
-            { key: 'mno', label: 'Label 5', value: 0.5 },
-            { key: 'pqr', label: 'Label 6', value: -0.15 }
-          ]}
-          selected={this.state.selected}
-          onClick={this.handleClick}
-          />
+          <div style={{ width: '350px' }}>
+            <DivergingBar data={[
+              { key: 'abc', label: 'Label 1', value: 0.8 },
+              { key: 'def', label: 'Label 2', value: -0.5 },
+              { key: 'xyz', label: 'Label 7', value: -0.22 },
+              { key: 'ghi', label: 'Label 3', value: -0.1 },
+              { key: 'jkl', label: 'Label 4', value: 0.3 },
+              { key: 'mno', label: 'Label 5', value: 0.5 },
+              { key: 'pqr', label: 'Label 6', value: -0.15 }
+            ]}
+            selected={this.state.selected}
+            onClick={this.handleClick}
+            height={280}
+            /></div>
         </Panel>
       </Page>
     );
