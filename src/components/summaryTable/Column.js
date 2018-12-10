@@ -10,7 +10,8 @@ Column.propTypes = {
   ]),
   dataKey: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  sortable: PropTypes.bool
+  sortable: PropTypes.bool,
+  width: PropTypes.string
 };
 
 export default Column;

@@ -6,8 +6,8 @@ import styles from './SummaryTable.module.scss';
 const Head = ({ columns, onSort, order }) => (
   <thead>
     <Table.Row>
-      {columns.map(({ dataKey, label, sortable }) => (
-        <Table.HeaderCell className={styles.Header} key={`header-${dataKey}`}>
+      {columns.map(({ dataKey, label, sortable, width }) => (
+        <Table.HeaderCell className={styles.Header} key={`header-${dataKey}`} width={width}>
           <HeaderLabel
             dataKey={dataKey}
             label={label}

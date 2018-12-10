@@ -16,7 +16,8 @@ describe('Head', () => {
           {
             dataKey: 'value',
             label: 'Value',
-            sortable: false
+            sortable: false,
+            width: '90%'
           }
         ]}
         onSort={handleSort}

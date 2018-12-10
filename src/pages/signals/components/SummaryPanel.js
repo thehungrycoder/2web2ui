@@ -44,6 +44,7 @@ const SummaryPanel = ({ title }) => (
       <Column
         dataKey="sending_domain"
         label="Sending Domains"
+        width="75%"
       />
       <Column
         dataKey="current"
