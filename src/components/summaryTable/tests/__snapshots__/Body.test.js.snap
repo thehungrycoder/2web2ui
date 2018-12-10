@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Body renders a table body 1`] = `
+<tbody>
+  <Table.Row
+    key="row-0"
+  >
+    <Table.Cell
+      className="Cell DataCell"
+      key="cell-id"
+    >
+      test-example
+    </Table.Cell>
+    <Table.Cell
+      className="Cell DataCell"
+      key="cell-value"
+    >
+      123
+    </Table.Cell>
+  </Table.Row>
+</tbody>
+`;
+
+exports[`Body renders custom component 1`] = `
+<tbody>
+  <Table.Row
+    key="row-0"
+  >
+    <Table.Cell
+      className="Cell DataCell"
+      key="cell-id"
+    >
+      test-example
+    </Table.Cell>
+    <Table.Cell
+      className="Cell"
+      key="cell-value"
+    >
+      <component
+        id="test-example"
+        value={123}
+      />
+    </Table.Cell>
+  </Table.Row>
+</tbody>
+`;
+
+exports[`Body renders loading 1`] = `
+<tbody>
+  <Table.Row>
+    <Table.Cell
+      className="Loading"
+      colSpan={2}
+    >
+      <Loading />
+    </Table.Cell>
+  </Table.Row>
+</tbody>
+`;
+
+exports[`Body renders max of perPage rows 1`] = `
+<tbody>
+  <Table.Row
+    key="row-0"
+  >
+    <Table.Cell
+      className="Cell DataCell"
+      key="cell-id"
+    >
+      test-example
+    </Table.Cell>
+    <Table.Cell
+      className="Cell DataCell"
+      key="cell-value"
+    >
+      123
+    </Table.Cell>
+  </Table.Row>
+</tbody>
+`;

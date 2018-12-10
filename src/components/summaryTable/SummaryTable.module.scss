@@ -1,0 +1,65 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Cell {
+  border: 1px solid color(grey, 8);
+  border-left: none;
+  padding: 0;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.DataCell {
+  padding: spacing(small);
+}
+
+.Header {
+  background-color: color(grey, 9);
+  border: 1px solid color(grey, 8);
+  border-left: none;
+  padding: spacing(small);
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.Loading {
+  height: 330px;
+  position: relative;
+}
+
+.PageButtons {
+  flex-grow: 1;
+
+  &> div {
+    margin: 0; // override
+  }
+}
+
+.Pagination {
+  display: flex;
+  align-items: baseline;
+  padding: spacing(small);
+}
+
+.PerPageLabel {
+  color: color(grey, 4);
+  display: inline-block;
+  font-size: rem(12);
+  margin-right: spacing();
+  text-transform: uppercase;
+}
+
+.Selected {
+  font-weight: 700;
+  color: color(orange);
+  pointer-events: none;
+}
+
+.SummaryTable {
+  table {
+    margin: 0; // override
+  }
+}

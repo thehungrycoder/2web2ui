@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderLabel renders a sortable label 1`] = `
+<SortLabel
+  label="Test Example"
+  onClick={[Function]}
+/>
+`;
+
+exports[`HeaderLabel renders ascending sorted label 1`] = `
+<SortLabel
+  direction="asc"
+  label="Test Example"
+  onClick={[Function]}
+/>
+`;
+
+exports[`HeaderLabel renders descending sorted label 1`] = `
+<SortLabel
+  direction="desc"
+  label="Test Example"
+  onClick={[Function]}
+/>
+`;

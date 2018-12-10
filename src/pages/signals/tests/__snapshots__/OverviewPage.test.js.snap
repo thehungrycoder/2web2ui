@@ -10,13 +10,13 @@ exports[`Signals Overview Page renders correctly 1`] = `
     </React.Fragment>
   }
 >
-  <SummaryTable
+  <SummaryPanel
     title="Health Score"
   />
-  <SummaryTable
+  <SummaryPanel
     title="Spam Traps"
   />
-  <SummaryTable
+  <SummaryPanel
     title="Engagement Cohort"
   />
 </SignalsPage>
