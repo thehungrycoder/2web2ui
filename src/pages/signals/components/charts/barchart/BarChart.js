@@ -65,7 +65,7 @@ class BarChart extends Component {
     const { gap, height, timeSeries, tooltipContent, width, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
 
     return (
-      <ResponsiveContainer height={height} width={width}>
+      <ResponsiveContainer height={height} width={width} className='SignalsBarChart'>
         <RechartsBarchart barCategoryGap={gap} data={timeSeries} margin={{ top: 5, left: 5, right: 18, bottom: 5 }}>
           {this.renderBackgrounds()}
           <CartesianGrid vertical={false} />
