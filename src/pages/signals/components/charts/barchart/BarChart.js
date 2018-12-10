@@ -19,26 +19,17 @@ import './BarChart.scss';
  * />
  */
 class BarChart extends Component {
-  renderBar = ({ key, fill }) => {
-    const { onClick, xKey, selected, yKeys, selectedFill } = this.props;
-
-    return (
-      <Bar
-        cursor='pointer'
-        stackId='stack'
-        key={key}
-        dataKey={key}
-        onClick={onClick}
-        fill={fill}
-        isAnimationActive={false}
-        shape={
-          ({ payload, ...rest }) => (
-            <Rectangle {...rest} fill={!yKeys && payload[xKey] === selected ? selectedFill : fill} />
-          )
-        }
-      />
-    );
-  }
+  renderBar = ({ key, fill }) => (
+    <Bar
+      cursor='pointer'
+      stackId='stack'
+      key={key}
+      dataKey={key}
+      onClick={this.props.onClick}
+      fill={fill}
+      isAnimationActive={false}
+    />
+  )
 
   renderBars = () => {
     const { yKeys, yKey, fill } = this.props;
@@ -51,7 +42,7 @@ class BarChart extends Component {
   }
 
   renderBackgrounds = () => {
-    const { xKey, selected, yKeys, onClick } = this.props;
+    const { xKey, selected, onClick } = this.props;
 
     return (
       <Bar
@@ -63,7 +54,7 @@ class BarChart extends Component {
         onClick={onClick}
         shape={
           ({ payload, background, ...rest }) => (
-            <Rectangle {...rest} {...background} opacity={yKeys && payload[xKey] === selected ? 0.4 : 0} />
+            <Rectangle {...rest} {...background} opacity={payload[xKey] === selected ? 0.4 : 0} />
           )
         }
       />
@@ -104,7 +95,6 @@ BarChart.defaultProps = {
   fill: '#B157CE',
   gap: 1,
   height: 250,
-  selectedFill: '#28C0C4',
   width: '99%',
   xKey: 'date',
   yKey: 'value',

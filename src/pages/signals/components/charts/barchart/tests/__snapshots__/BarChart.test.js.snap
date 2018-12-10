@@ -1,23 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BarChart Component normal bar renders background bars with no opacity 1`] = `
-<Rectangle
-  animationBegin={0}
-  animationDuration={1500}
-  animationEasing="ease"
-  height={0}
-  isAnimationActive={false}
-  isUpdateAnimationActive={false}
-  opacity={0}
-  radius={0}
-  test="test"
-  width={0}
-  x={0}
-  y={0}
-/>
-`;
-
-exports[`BarChart Component normal bar renders correctly 1`] = `
+exports[`BarChart Component renders a normal bar chart correctly 1`] = `
 <ResponsiveContainer
   debounce={0}
   height={50}
@@ -180,7 +163,7 @@ exports[`BarChart Component normal bar renders correctly 1`] = `
       cursor="pointer"
       data={Array []}
       dataKey="value"
-      fill="#unselected"
+      fill="#fill"
       hide={false}
       isAnimationActive={false}
       key="value"
@@ -190,7 +173,6 @@ exports[`BarChart Component normal bar renders correctly 1`] = `
       onAnimationEnd={[Function]}
       onAnimationStart={[Function]}
       onClick={[MockFunction]}
-      shape={[Function]}
       stackId="stack"
       xAxisId={0}
       yAxisId={0}
@@ -199,15 +181,62 @@ exports[`BarChart Component normal bar renders correctly 1`] = `
 </ResponsiveContainer>
 `;
 
-exports[`BarChart Component normal bar renders selected bar shape correctly 1`] = `
+exports[`BarChart Component renders a stacked bar chart correctly 1`] = `
+Array [
+  <Bar
+    animationBegin={0}
+    animationDuration={400}
+    animationEasing="ease"
+    cursor="pointer"
+    data={Array []}
+    dataKey="ab"
+    fill="blue"
+    hide={false}
+    isAnimationActive={false}
+    key="ab"
+    layout="vertical"
+    legendType="rect"
+    minPointSize={0}
+    onAnimationEnd={[Function]}
+    onAnimationStart={[Function]}
+    onClick={[MockFunction]}
+    stackId="stack"
+    xAxisId={0}
+    yAxisId={0}
+  />,
+  <Bar
+    animationBegin={0}
+    animationDuration={400}
+    animationEasing="ease"
+    cursor="pointer"
+    data={Array []}
+    dataKey="cd"
+    fill="red"
+    hide={false}
+    isAnimationActive={false}
+    key="cd"
+    layout="vertical"
+    legendType="rect"
+    minPointSize={0}
+    onAnimationEnd={[Function]}
+    onAnimationStart={[Function]}
+    onClick={[MockFunction]}
+    stackId="stack"
+    xAxisId={0}
+    yAxisId={0}
+  />,
+]
+`;
+
+exports[`BarChart Component renders background bars with no opacity if unselected 1`] = `
 <Rectangle
   animationBegin={0}
   animationDuration={1500}
   animationEasing="ease"
-  fill="#selected"
   height={0}
   isAnimationActive={false}
   isUpdateAnimationActive={false}
+  opacity={0}
   radius={0}
   test="test"
   width={0}
@@ -216,24 +245,7 @@ exports[`BarChart Component normal bar renders selected bar shape correctly 1`] 
 />
 `;
 
-exports[`BarChart Component normal bar renders unselected bar shape correctly 1`] = `
-<Rectangle
-  animationBegin={0}
-  animationDuration={1500}
-  animationEasing="ease"
-  fill="#unselected"
-  height={0}
-  isAnimationActive={false}
-  isUpdateAnimationActive={false}
-  radius={0}
-  test="test"
-  width={0}
-  x={0}
-  y={0}
-/>
-`;
-
-exports[`BarChart Component stacked bar renders a selected background when selected 1`] = `
+exports[`BarChart Component renders background bars with opacity if selected 1`] = `
 <Rectangle
   animationBegin={0}
   animationDuration={1500}
@@ -242,233 +254,6 @@ exports[`BarChart Component stacked bar renders a selected background when selec
   isAnimationActive={false}
   isUpdateAnimationActive={false}
   opacity={0.4}
-  radius={0}
-  test="test"
-  width={0}
-  x={0}
-  y={0}
-/>
-`;
-
-exports[`BarChart Component stacked bar renders a stacked bar chart correctly 1`] = `
-<ResponsiveContainer
-  debounce={0}
-  height={50}
-  width={100}
->
-  <BarChart
-    barCategoryGap={1}
-    barGap={4}
-    data={
-      Array [
-        Object {
-          "ab": 2,
-          "cd": 3,
-          "date": "2011-01-01",
-        },
-        Object {
-          "ab": 5,
-          "cd": 8,
-          "date": "2011-01-02",
-        },
-      ]
-    }
-    layout="horizontal"
-    margin={
-      Object {
-        "bottom": 5,
-        "left": 5,
-        "right": 18,
-        "top": 5,
-      }
-    }
-    reverseStackOrder={false}
-    stackOffset="none"
-  >
-    <Bar
-      animationBegin={0}
-      animationDuration={400}
-      animationEasing="ease"
-      cursor="pointer"
-      data={Array []}
-      dataKey="noKey"
-      fill="#5DCFF5"
-      hide={false}
-      isAnimationActive={false}
-      layout="vertical"
-      legendType="rect"
-      minPointSize={0}
-      onAnimationEnd={[Function]}
-      onAnimationStart={[Function]}
-      onClick={[MockFunction]}
-      shape={[Function]}
-      stackId="stack"
-      xAxisId={0}
-      yAxisId={0}
-    />
-    <CartesianGrid
-      fill="none"
-      horizontal={true}
-      horizontalFill={Array []}
-      horizontalPoints={Array []}
-      stroke="#ccc"
-      vertical={false}
-      verticalFill={Array []}
-      verticalPoints={Array []}
-    />
-    <YAxis
-      allowDataOverflow={false}
-      allowDecimals={true}
-      allowDuplicatedCategory={true}
-      axisLine={false}
-      domain={
-        Array [
-          0,
-          "auto",
-        ]
-      }
-      height={0}
-      hide={false}
-      mirror={false}
-      orientation="left"
-      padding={
-        Object {
-          "bottom": 0,
-          "top": 0,
-        }
-      }
-      reversed={false}
-      scale="auto"
-      tickCount={5}
-      tickLine={false}
-      type="number"
-      width={25}
-      yAxisId={0}
-    />
-    <XAxis
-      allowDataOverflow={false}
-      allowDecimals={true}
-      allowDuplicatedCategory={true}
-      axisLine={false}
-      dataKey="date"
-      domain={
-        Array [
-          0,
-          "auto",
-        ]
-      }
-      height={30}
-      hide={false}
-      mirror={false}
-      orientation="bottom"
-      padding={
-        Object {
-          "left": 0,
-          "right": 0,
-          "top": 0,
-        }
-      }
-      reversed={false}
-      scale="auto"
-      tickCount={5}
-      tickLine={false}
-      type="category"
-      width={0}
-      xAxisId={0}
-    />
-    <Tooltip
-      active={false}
-      animationDuration={400}
-      animationEasing="ease"
-      content={
-        <Tooltip>
-          [MockFunction]
-        </Tooltip>
-      }
-      contentStyle={Object {}}
-      coordinate={
-        Object {
-          "x": 0,
-          "y": 0,
-        }
-      }
-      cursor={false}
-      cursorStyle={Object {}}
-      filterNull={true}
-      isAnimationActive={false}
-      itemSorter={[Function]}
-      itemStyle={Object {}}
-      labelStyle={Object {}}
-      offset={10}
-      separator=" : "
-      useTranslate3d={false}
-      viewBox={
-        Object {
-          "x1": 0,
-          "x2": 0,
-          "y1": 0,
-          "y2": 0,
-        }
-      }
-      wrapperStyle={Object {}}
-    />
-    <Bar
-      animationBegin={0}
-      animationDuration={400}
-      animationEasing="ease"
-      cursor="pointer"
-      data={Array []}
-      dataKey="ab"
-      fill="blue"
-      hide={false}
-      isAnimationActive={false}
-      key="ab"
-      layout="vertical"
-      legendType="rect"
-      minPointSize={0}
-      onAnimationEnd={[Function]}
-      onAnimationStart={[Function]}
-      onClick={[MockFunction]}
-      shape={[Function]}
-      stackId="stack"
-      xAxisId={0}
-      yAxisId={0}
-    />
-    <Bar
-      animationBegin={0}
-      animationDuration={400}
-      animationEasing="ease"
-      cursor="pointer"
-      data={Array []}
-      dataKey="cd"
-      fill="red"
-      hide={false}
-      isAnimationActive={false}
-      key="cd"
-      layout="vertical"
-      legendType="rect"
-      minPointSize={0}
-      onAnimationEnd={[Function]}
-      onAnimationStart={[Function]}
-      onClick={[MockFunction]}
-      shape={[Function]}
-      stackId="stack"
-      xAxisId={0}
-      yAxisId={0}
-    />
-  </BarChart>
-</ResponsiveContainer>
-`;
-
-exports[`BarChart Component stacked bar renders selected bar shape correctly without changing fill 1`] = `
-<Rectangle
-  animationBegin={0}
-  animationDuration={1500}
-  animationEasing="ease"
-  fill="blue"
-  height={0}
-  isAnimationActive={false}
-  isUpdateAnimationActive={false}
   radius={0}
   test="test"
   width={0}
