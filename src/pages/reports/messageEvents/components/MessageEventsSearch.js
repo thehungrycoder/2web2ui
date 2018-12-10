@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import _ from 'lodash';
-import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
-import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
+import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/events';
+import { selectMessageEventsSearchOptions } from 'src/selectors/events';
 import { Panel, Grid, TextField } from '@sparkpost/matchbox';
 import AdvancedFilters from './AdvancedFilters';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import { recipientEmail as recipientEmailValidator } from 'src/helpers/validation';
-import { parseSearch } from 'src/helpers/messageEvents';
+import { parseSearch } from 'src/helpers/events';
 import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
 import { RELATIVE_DATE_OPTIONS } from './searchConfig';
@@ -46,7 +46,7 @@ export class MessageEventsSearch extends Component {
     });
 
     return invalids;
-  }
+  };
 
   handleRecipientsChange = (event) => {
     const value = event.target.value;
@@ -112,8 +112,8 @@ export class MessageEventsSearch extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  search: state.messageEvents.search,
-  loading: state.messageEvents.loading,
+  search: state.events.search,
+  loading: state.events.loading,
   searchOptions: selectMessageEventsSearchOptions(state)
 });
 const mapDispatchToProps = { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters };

@@ -84,6 +84,25 @@ export const FORMS = {
   EDIT_USER: 'userEditForm'
 };
 
+
+export const EVENTS_SEARCH_FILTERS = [
+  { value: 'recipient_domains', label: 'Recipient Domains' },
+  { value: 'from_addresses', label: 'From Addresses' },
+  { value: 'sending_domains', label: 'Sending Domains' },
+  { value: 'subject', label: 'Subject' },
+  { value: 'bounce_classes', label: 'Bounce Classes' },
+  { value: 'reason', label: 'Reason' },
+  { value: 'campaigns', label: 'Campaigns' },
+  { value: 'templates', label: 'Templates' },
+  { value: 'sending_ips', label: 'Sending IPs' },
+  { value: 'ip_pools', label: 'IP Pools' },
+  { value: 'subaccounts', label: 'Subaccount IDs' },
+  { value: 'message_ids', label: 'Message IDs' },
+  { value: 'transmission_ids', label: 'Transmissions IDs' },
+  { value: 'ab_tests', label: 'AB Tests' },
+  { value: 'ab_test_version', label: 'AB Test Version' }
+];
+
 export const ANALYTICS_CREATE_ACCOUNT = 'create account';
 export const ANALYTICS_ADDON_IP = 'dedicated_ips';
 export const ANALYTICS_PREMIUM_SUPPORT = 'premium-support';

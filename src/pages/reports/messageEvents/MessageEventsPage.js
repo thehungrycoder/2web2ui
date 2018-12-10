@@ -6,8 +6,8 @@ import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/compon
 import DisplayDate from './components/DisplayDate';
 import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
-import { getMessageEvents } from 'src/actions/messageEvents';
-import { selectMessageEvents } from 'src/selectors/messageEvents';
+import { getMessageEvents } from 'src/actions/events';
+import { selectMessageEvents } from 'src/selectors/events';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMesasage = 'There are no message events for your current query';
@@ -34,7 +34,7 @@ export class MessageEventsPage extends Component {
       friendly_from,
       <ViewDetailsButton {...rowData} />
     ];
-  }
+  };
 
   renderError() {
     const { error, getMessageEvents, search } = this.props;
@@ -58,7 +58,7 @@ export class MessageEventsPage extends Component {
       ? <Empty message={emptyMesasage} />
       : (
         <div>
-          { events.length >= maxResults &&
+          {events.length >= maxResults &&
             <Banner status="info" title={maxResultsTitle}>{maxResultsText}</Banner>
           }
 
@@ -80,9 +80,9 @@ export class MessageEventsPage extends Component {
     const { error } = this.props;
 
     return (
-      <Page title='Message Events'>
+      <Page title='Events'>
         <MessageEventsSearch />
-        { error ? this.renderError() : this.renderCollection() }
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
@@ -94,10 +94,10 @@ const mapStateToProps = (state) => {
 
   return {
     events: events,
-    loading: state.messageEvents.loading,
-    error: state.messageEvents.error,
+    loading: state.events.loading,
+    error: state.events.error,
     empty: events.length === 0,
-    search: state.messageEvents.search
+    search: state.events.search
   };
 };
 

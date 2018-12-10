@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel, Tag } from '@sparkpost/matchbox';
-import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
+import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/events';
 import { snakeToFriendly } from 'src/helpers/string';
 import _ from 'lodash';
+import { EVENTS_SEARCH_FILTERS } from 'src/constants';
 import styles from './ActiveFilters.module.scss';
 
 export class ActiveFilters extends Component {
@@ -11,23 +12,33 @@ export class ActiveFilters extends Component {
     search: {}
   };
 
-  renderTags = ({ key, label, itemToString }) => {
+
+  renderTags = () => {
     const { search } = this.props;
-
-    if (!search[key]) {
-      return null;
-    }
-
-    return search[key].map((item, i) => (
-      <Tag onRemove={() => this.handleRemove({ key, item })} key={i} className={styles.TagWrapper}>
-        {label}: {itemToString ? itemToString(item) : item}
-      </Tag>
-    ));
-  }
+    const filterTypes = [
+      { value: 'events', label: 'Event', itemToString: snakeToFriendly },
+      { value: 'recipients', label: 'Recipient' },
+      ...EVENTS_SEARCH_FILTERS
+    ];
+    const activeFilters = [];
+    filterTypes.forEach(({ value, label, itemToString }) => {
+      //If the filter is not empty, add the array to the main array of active filters
+      if (search[value].length > 0) {
+        activeFilters.push(search[value].map((item, i) => (
+          <Tag onRemove={() => this.handleRemove({ key: value, item })} key={i} className={styles.TagWrapper}>
+            {label}: {itemToString ? itemToString(item) : item}
+          </Tag>
+        )));
+      }
+    });
+    //console.log('filters', activeFilters);
+    return activeFilters;
+  };
 
   handleRemove = (filter) => {
     this.props.removeFilter(filter);
-  }
+  };
+
 
   handleRemoveAll = () => {
     const { dateOptions, ...filters } = this.props.search;
@@ -36,7 +47,7 @@ export class ActiveFilters extends Component {
   }
 
   isEmpty() {
-    const { dateOptions, ...rest } = this.props.search;
+    const { dateOptions, searchQueries, ...rest } = this.props.search;
     return _.every(rest, (arr) => arr.length === 0);
   }
 
@@ -48,21 +59,15 @@ export class ActiveFilters extends Component {
     return (
       <Panel.Section actions={[{ content: 'Clear All Filters', onClick: this.handleRemoveAll, color: 'blue' }]}>
         <small>Filters: </small>
-        {this.renderTags({ key: 'events', label: 'Event', itemToString: snakeToFriendly })}
-        {this.renderTags({ key: 'recipients', label: 'Recipient' })}
-        {this.renderTags({ key: 'friendly_froms', label: 'From' })}
-        {this.renderTags({ key: 'subaccounts', label: 'Subaccount' })}
-        {this.renderTags({ key: 'message_ids', label: 'Message' })}
-        {this.renderTags({ key: 'template_ids', label: 'Template' })}
-        {this.renderTags({ key: 'campaign_ids', label: 'Campaign' })}
-        {this.renderTags({ key: 'bounce_classes', label: 'Bounce Class' })}
+        {this.renderTags()}
       </Panel.Section>
     );
   }
 }
 
+
 const mapStateToProps = (state, props) => ({
-  search: state.messageEvents.search
+  search: state.events.search
 });
 
 export default connect(mapStateToProps, { removeFilter, getMessageEvents, updateMessageEventsSearchOptions })(ActiveFilters);

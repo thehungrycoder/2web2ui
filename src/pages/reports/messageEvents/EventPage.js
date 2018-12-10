@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getMessageHistory, getDocumentation } from 'src/actions/messageEvents';
+import { getMessageHistory, getDocumentation } from 'src/actions/events';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
-import { eventPageMSTP } from 'src/selectors/messageEvents';
-import { getDetailsPath } from 'src/helpers/messageEvents';
+import { eventPageMSTP } from 'src/selectors/events';
+import { getDetailsPath } from 'src/helpers/events';
 import { Page, Grid } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import HistoryTable from './components/HistoryTable';

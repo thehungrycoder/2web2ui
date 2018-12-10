@@ -1,30 +1,24 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { updateMessageEventsSearchOptions, getDocumentation } from 'src/actions/messageEvents';
-import { selectMessageEventListing } from 'src/selectors/eventListing';
+import { updateMessageEventsSearchOptions, getDocumentation } from 'src/actions/events';
+import { selectEventsListing } from 'src/selectors/eventListing';
 import { WindowEvent, Panel, Modal, Button } from '@sparkpost/matchbox';
-import { stringToArray } from 'src/helpers/string';
 import { onEnter, onEscape } from 'src/helpers/keyEvents';
 import _ from 'lodash';
-
 import EventTypeFilters from './EventTypeFilters';
 import TextFilters from './TextFilters';
 
 import styles from './AdvancedFilters.module.scss';
+import { AddCircleOutline } from '@sparkpost/matchbox-icons';
 
 export class AdvancedFilters extends Component {
   state = {
     modalOpen: false,
     search: {
       events: {},
-      friendly_froms: '',
-      message_ids: '',
-      subaccounts: '',
-      template_ids: '',
-      campaign_ids: '',
-      bounce_classes: ''
+      searchQueries: []
     }
-  }
+  };
 
   componentDidMount() {
     this.props.getDocumentation();
@@ -39,29 +33,32 @@ export class AdvancedFilters extends Component {
 
   syncSearchToState(props) {
     const events = {};
-
     // Converts event array into booleans for checkboxes
     _.forEach(props.search.events, (event) => {
       events[event] = true;
     });
-
-    this.setState({ search: { ...props.search, events }});
+    const search = { events, searchQueries: props.search.searchQueries };
+    this.setState({ search });
   }
 
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen });
-  }
+  };
+
+  checkErrors = () =>
+    //implement later
+    false
+  ;
 
   handleApply = () => {
     const { search } = this.state;
-    const { dateOptions, events, ...rest } = search;
-    const options = {};
-
-    _.forEach(rest, (value, key) => options[key] = stringToArray(value));
-
-    this.props.updateMessageEventsSearchOptions({ events: _.keys(_.pickBy(search.events)), ...options });
+    const { events, searchQueries } = search;
+    if (this.checkErrors()) {
+      return;
+    }
+    this.props.updateMessageEventsSearchOptions({ events: _.keys(_.pickBy(events)), searchQueries });
     this.toggleModal();
-  }
+  };
 
   handleKeyDown = (e) => {
     const { modalOpen } = this.state;
@@ -72,18 +69,36 @@ export class AdvancedFilters extends Component {
 
     onEnter(this.handleApply)(e);
     onEscape(this.toggleModal)(e);
-  }
+  };
 
   handleCheckbox = (event) => {
     const { search } = this.state;
     this.setState({ search: { ...search, events: { ...search.events, [event]: !search.events[event] }}});
-  }
+  };
 
-  handleTextField = (e, key) => {
-    const updatedSearch = {};
-    updatedSearch[key] = e.target.value;
-    this.setState({ search: { ...this.state.search, ...updatedSearch }});
-  }
+  handleTextField = (e, index) => {
+    const searchQueries = _.cloneDeep(this.state.search.searchQueries);
+    searchQueries[index].value = e.target.value;
+    this.setState({ search: { ...this.state.search, searchQueries }});
+  };
+
+  handleSelector = (e, index) => {
+    const searchQueries = _.cloneDeep(this.state.search.searchQueries);
+    searchQueries[index].key = e.target.value;
+    this.setState({ search: { ...this.state.search, searchQueries }});
+  };
+
+  handleAdd = () => {
+    const { searchQueries } = this.state.search;
+    const addedQuery = ({ key: 'recipient_domains', value: '', error: null });
+    this.setState({ search: { ...this.state.search, searchQueries: [...searchQueries, addedQuery]}});
+  };
+
+  handleDelete = (e, index) => {
+    const { searchQueries: tempFilters } = this.state.search;
+    tempFilters.splice(index,1);
+    this.setState({ search: { ...this.state.search, searchQueries: tempFilters }});
+  };
 
   render() {
     return (
@@ -100,7 +115,10 @@ export class AdvancedFilters extends Component {
               />
             </Panel.Section>
             <Panel.Section>
-              <TextFilters filterValues={this.state.search} onChange={this.handleTextField} />
+              <p>
+                <Button color="blue" flat onClick={this.handleAdd}> Add Filter <AddCircleOutline/></Button>
+              </p>
+              <TextFilters filterValues={this.state.search} onSelect={this.handleSelector} onChange={this.handleTextField} onDelete={this.handleDelete} />
             </Panel.Section>
             <Panel.Section>
               <Button primary onClick={this.handleApply}>Apply Filters</Button>
@@ -114,7 +132,7 @@ export class AdvancedFilters extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  search: state.messageEvents.search,
-  eventListing: selectMessageEventListing(state)
+  search: state.events.search,
+  eventListing: selectEventsListing(state)
 });
 export default connect(mapStateToProps, { updateMessageEventsSearchOptions, getDocumentation })(AdvancedFilters);

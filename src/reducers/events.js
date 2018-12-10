@@ -1,7 +1,7 @@
-import { formatDocumentation } from 'src/helpers/messageEvents';
+import { formatDocumentation, getFiltersFromSearchQueries, getSearchQueriesFromFilters, getEmptyFilters } from 'src/helpers/events';
 import { getRelativeDates } from 'src/helpers/date';
 import _ from 'lodash';
-
+const emptyFilters = getEmptyFilters();
 const initialState = {
   loading: false,
   historyLoading: false,
@@ -15,11 +15,8 @@ const initialState = {
     },
     recipients: [],
     events: [],
-    friendly_froms: [],
-    subaccounts: [],
-    message_ids: [],
-    template_ids: [],
-    campaign_ids: []
+    searchQueries: [],
+    ...emptyFilters
   }
 };
 
@@ -27,62 +24,58 @@ export default (state = initialState, { type, payload, meta }) => {
 
   switch (type) {
 
-    case 'GET_MESSAGE_EVENTS_PENDING':
+    case 'GET_EVENTS_PENDING':
       return { ...state, loading: true, error: null };
 
-    case 'GET_MESSAGE_EVENTS_SUCCESS':
+    case 'GET_EVENTS_SUCCESS':
       return { ...state, loading: false, events: payload };
 
-    case 'GET_MESSAGE_EVENTS_FAIL':
+    case 'GET_EVENTS_FAIL':
       return { ...state, loading: false, error: payload };
 
 
       // History
 
-    case 'GET_MESSAGE_HISTORY_PENDING':
+    case 'GET_EVENTS_HISTORY_PENDING':
       return { ...state, historyLoading: true, error: null };
 
-    case 'GET_MESSAGE_HISTORY_SUCCESS':
+    case 'GET_EVENTS_HISTORY_SUCCESS':
       return {
         ...state,
         historyLoading: false,
         history: { ...state.history, [meta.params.message_ids]: payload }
       };
 
-    case 'GET_MESSAGE_HISTORY_FAIL':
+    case 'GET_EVENTS_HISTORY_FAIL':
       return { ...state, historyLoading: false, error: payload };
 
 
       // Documentation
 
-    case 'GET_MESSAGE_EVENTS_DOCUMENTATION_PENDING':
+    case 'GET_EVENTS_DOCUMENTATION_PENDING':
       return { ...state, documentationLoading: true, error: null };
 
-    case 'GET_MESSAGE_EVENTS_DOCUMENTATION_SUCCESS':
+    case 'GET_EVENTS_DOCUMENTATION_SUCCESS':
       return { ...state, documentationLoading: false, documentation: formatDocumentation(payload) };
 
-    case 'GET_MESSAGE_EVENTS_DOCUMENTATION_FAIL':
+    case 'GET_EVENTS_DOCUMENTATION_FAIL':
       return { ...state, documentationLoading: false, error: payload };
 
 
       // Search options
 
-    case 'REFRESH_MESSAGE_EVENTS_DATE_OPTIONS': {
-      const dateOptions = {
-        ...state.search.dateOptions,
-        ...payload,
-        ...getRelativeDates(payload.relativeRange, { roundToPrecision: false })
-      };
-
+    case 'REFRESH_EVENTS_DATE_OPTIONS': {
+      const dateOptions = { ...state.search.dateOptions, ...payload, ...getRelativeDates(payload.relativeRange, false) };
       return { ...state, search: { ...state.search, dateOptions }};
     }
 
-    case 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS': {
+    case 'REFRESH_EVENTS_SEARCH_OPTIONS': {
       const { dateOptions, ...options } = payload;
-      return { ...state, search: { ...state.search, dateOptions: { ...state.search.dateOptions, ...dateOptions }, ...options }};
+      const updatedFilters = getFiltersFromSearchQueries(options);
+      return { ...state, search: { ...state.search,dateOptions: { ...state.search.dateOptions, ...dateOptions }, ...options, ...updatedFilters }};
     }
 
-    case 'ADD_MESSAGE_EVENTS_FILTERS': {
+    case 'ADD_EVENTS_FILTERS': {
       const updatedSearch = {};
       _.keys(payload).map((key) => {
         updatedSearch[key] = _.uniq([ ...state.search[key], ...payload[key]]);
@@ -90,10 +83,12 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, search: { ...state.search, ...updatedSearch }};
     }
 
-    case 'REMOVE_MESSAGE_EVENTS_FILTER': {
+    case 'REMOVE_EVENTS_FILTER': {
       const updatedSearch = {};
       updatedSearch[payload.key] = state.search[payload.key].filter((listItem) => payload.item !== listItem);
-      return { ...state, search: { ...state.search, ...updatedSearch }};
+      const search = { ...state.search, ...updatedSearch };
+      const searchQueries = getSearchQueriesFromFilters(search);
+      return { ...state, search: { ...search, searchQueries }};
     }
 
     default:

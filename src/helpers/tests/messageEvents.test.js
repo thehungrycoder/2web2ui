@@ -1,5 +1,5 @@
 import cases from 'jest-in-case';
-import * as messageEventHelpers from '../messageEvents';
+import * as messageEventHelpers from '../events';
 import * as dateHelpers from 'src/helpers/date';
 
 describe('messageEvents helpers', () => {
