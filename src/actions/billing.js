@@ -58,7 +58,7 @@ export function updateBillingContact(data) {
     .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
-export function verifyPromoCode({ promoCode, billingId }) {
+export function verifyPromoCode({ promoCode, billingId, meta = {}}) {
   return sparkpostApiRequest({
     type: 'VERIFY_PROMO_CODE',
     meta: {
@@ -66,7 +66,8 @@ export function verifyPromoCode({ promoCode, billingId }) {
       url: `v1/account/subscription/promo-codes/${promoCode}`,
       params: {
         billing_id: billingId
-      }
+      },
+      ...meta
     }
   });
 }

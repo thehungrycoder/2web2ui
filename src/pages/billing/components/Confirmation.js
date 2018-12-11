@@ -16,7 +16,7 @@ export class Confirmation extends React.Component {
       ? <p>Select a plan on the left to update your subscription</p>
       : <div>
         <small>New Plan</small>
-        <h5><PlanPrice className={styles.MainLabel} plan={selected} discount={selectedPromo}/></h5>
+        <h5><PlanPrice className={styles.MainLabel} plan={selected} selectedPromo={selectedPromo}/></h5>
       </div>;
   }
 
@@ -30,12 +30,19 @@ export class Confirmation extends React.Component {
     );
   }
 
+  handleBlur = (value) => {
+    const { verifyPromoCode, selected = {}} = this.props;
+    verifyPromoCode({ promoCode: value, billingId: selected.billingId, meta: { promoCode: value }});
+  }
+
   renderPromoCodeField() {
-    const { verifyPromoCode } = this.props;
+    const { selectedPromo = {}, promoError } = this.props;
     return (
       <Panel.Section>
         <PromoCode
-          onBlur={verifyPromoCode}
+          onBlur={this.handleBlur}
+          selectedPromo={selectedPromo}
+          promoError={promoError}
         />
       </Panel.Section>
     );

@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
       return { ...state, countriesLoading: false, countriesError: action.payload };
 
     case 'VERIFY_PROMO_CODE_SUCCESS':
-      return { ...state, promoPending: false, selectedPromo: action.payload };
+      return { ...state, promoPending: false, selectedPromo: action.payload, activePromoCode: action.meta.promoCode };
 
     case 'VERIFY_PROMO_CODE_FAIL':
       return { ...state, promoPending: false, promoError: action.payload };

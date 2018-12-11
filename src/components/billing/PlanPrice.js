@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { getPlanPrice } from 'src/helpers/billing';
 import styles from './PlanPrice.module.scss';
 
-const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false, discount = {} , ...rest }) => {
+const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false, selectedPromo = {} , ...rest }) => {
   if (_.isEmpty(plan)) {
     return null;
   }
@@ -22,12 +22,12 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
 
   let discountAmount = priceInfo.price;
 
-  if (discount.discount_amount) {
-    discountAmount = Math.max(priceInfo.price - discount.discount_amount, 0);
+  if (selectedPromo.discount_amount) {
+    discountAmount = Math.max(priceInfo.price - selectedPromo.discount_amount, 0);
   }
 
-  if (discount.discount_percentage) {
-    discountAmount = discountAmount * ((100 - discount.discount_percentage) / 100);
+  if (selectedPromo.discount_percentage) {
+    discountAmount = discountAmount * ((100 - selectedPromo.discount_percentage) / 100);
   }
 
   return (

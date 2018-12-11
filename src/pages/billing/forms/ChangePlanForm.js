@@ -56,20 +56,22 @@ export class ChangePlanForm extends Component {
     const oldCode = account.subscription.code;
     const newCode = values.planpicker.code;
     const isDowngradeToFree = values.planpicker.isFree;
-
+    const activePromoCode = billing.activePromoCode;
     const newValues = values.card && !isDowngradeToFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
-
+    const action = Promise.resolve();
+    if (activePromoCode && !isDowngradeToFree) {
+      action.then(verifyPromoCode({ promoCode: activePromoCode, billingId: values.planpicker.billingId, meta: { promoCode: activePromoCode }}));
+    }
     // decides which action to be taken based on
     // if it's aws account, it already has billing and if you use a saved CC
-    let action;
     if (this.props.isAws) {
-      action = updateSubscription({ code: newCode });
+      action.then(updateSubscription({ code: newCode }));
     } else if (account.billing) {
-      action = this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
+      action.then(this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode, promoCode: activePromoCode }) : billingUpdate(newValues));
     } else {
-      action = billingCreate(newValues); // creates Zuora account
+      action.then(billingCreate(newValues)); // creates Zuora account
     }
 
     return action
@@ -146,6 +148,7 @@ export class ChangePlanForm extends Component {
           <Grid.Column xs={12} md={5}>
             <Confirmation
               verifyPromoCode={verifyPromoCode}
+              promoError = {billing.promoError}
               selectedPromo={billing.selectedPromo}
               current={currentPlan}
               selected={selectedPlan}
