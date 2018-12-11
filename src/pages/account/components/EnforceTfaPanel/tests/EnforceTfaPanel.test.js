@@ -9,10 +9,14 @@ describe('Component: EnforceTfaPanel', () => {
     loading: false,
     ssoEnabled: false,
     tfaRequired: false,
+    tfaEnabled: false,
     tfaUpdatePending: false,
     getAccountSingleSignOnDetails: () => {},
+    getTfaStatus: () => {},
     updateAccountSingleSignOn: () => {},
-    updateAccount: () => {}
+    updateAccount: () => {},
+    showAlert: () => {},
+    logout: jest.fn()
   };
 
   function subject(props) {
@@ -36,12 +40,22 @@ describe('Component: EnforceTfaPanel', () => {
     expect(getAccountSingleSignOnDetails).toHaveBeenCalledTimes(1);
   });
 
+  it('fetches user TFA status', () => {
+    const getTfaStatus = jest.fn();
+    subject({ getTfaStatus });
+    expect(getTfaStatus).toHaveBeenCalledTimes(1);
+  });
+
   it('renders fully after loading', () => {
     expect(subject()).toMatchSnapshot();
   });
 
   it('renders with sso enabled', () => {
     expect(subject({ ssoEnabled: true })).toMatchSnapshot();
+  });
+
+  it('renders with tfa enabled', () => {
+    expect(subject({ tfaEnabled: true })).toMatchSnapshot();
   });
 
   cases('offers to enable/disable TFA required', ({ tfaRequired, modal }) => {
@@ -70,5 +84,17 @@ describe('Component: EnforceTfaPanel', () => {
     wrapper.instance().toggleTfaRequired();
     modal(wrapper).prop('onConfirm')();
     expect(updateAccount).toHaveBeenCalledWith({ tfa_required: !tfaRequired });
-  }, [ { tfaRequired: true, modal: disableModal }, { tfaRequired: false, modal: enableModal } ]);
+  }, [{ tfaRequired: true, modal: disableModal }, { tfaRequired: false, modal: enableModal }]);
+
+  cases('logs out if TFA enforced and TFA not enabled', async ({ tfaEnabled }) => {
+    const updateAccount = jest.fn().mockResolvedValue();
+    const logout = jest.fn();
+    const wrapper = subject({ logout, tfaEnabled, updateAccount });
+    await wrapper.instance().setTfaRequired(true);
+    if (tfaEnabled) {
+      expect(logout).not.toHaveBeenCalled();
+    } else {
+      expect(logout).toHaveBeenCalledTimes(1);
+    }
+  }, [{ tfaEnabled: false }, { tfaEnabled: true }]);
 });
