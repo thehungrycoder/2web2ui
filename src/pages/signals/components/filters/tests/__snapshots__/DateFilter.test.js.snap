@@ -1,16 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DateFilter Component renders correctly 1`] = `
+exports[`DateFilter renders a select 1`] = `
 <div
   className="DateFilter"
 >
   <Select
+    onChange={[Function]}
     options={
       Array [
-        "Last 7 Days",
-        "Last 14 Days",
-        "Last 30 Days",
-        "Last 90 Days",
+        Object {
+          "label": "Last 7 Days",
+          "value": "7days",
+        },
+        Object {
+          "label": "Last 14 Days",
+          "value": "14days",
+        },
+        Object {
+          "label": "Last 30 Days",
+          "value": "30days",
+        },
+        Object {
+          "label": "Last 90 Days",
+          "value": "90days",
+        },
       ]
     }
   />
