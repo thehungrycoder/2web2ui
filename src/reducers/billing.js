@@ -29,6 +29,15 @@ export default (state = initialState, action) => {
     case 'GET_COUNTRIES_BILLING_FAIL':
       return { ...state, countriesLoading: false, countriesError: action.payload };
 
+    case 'VERIFY_PROMO_CODE_SUCCESS':
+      return { ...state, promoPending: false, selectedPromo: action.payload };
+
+    case 'VERIFY_PROMO_CODE_FAIL':
+      return { ...state, promoPending: false, promoError: action.payload };
+
+    case 'VERIFY_PROMO_CODE_PENDING':
+      return { ...state, promoPending: true, promoError: undefined };
+
     default:
       return state;
   }

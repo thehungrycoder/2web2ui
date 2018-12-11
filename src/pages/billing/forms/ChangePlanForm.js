@@ -5,7 +5,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
-import { updateSubscription, getBillingCountries } from 'src/actions/billing';
+import { updateSubscription, getBillingCountries, verifyPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
@@ -117,7 +117,7 @@ export class ChangePlanForm extends Component {
   }
 
   render() {
-    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
+    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling, billing, verifyPromoCode } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -145,6 +145,8 @@ export class ChangePlanForm extends Component {
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
             <Confirmation
+              verifyPromoCode={verifyPromoCode}
+              selectedPromo={billing.selectedPromo}
               current={currentPlan}
               selected={selectedPlan}
               billingEnabled={isSelfServeBilling}
@@ -176,6 +178,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount };
+const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));
