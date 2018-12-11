@@ -66,8 +66,7 @@ describe('Snippet Actions', () => {
       name: 'with amp_html',
       action: () => (
         createSnippet({
-          amp_html: '<p>AMP Testing...</p>',
-          isAmpLive: true
+          amp_html: '<p>AMP Testing...</p>'
         })
       )
     }
@@ -159,8 +158,7 @@ describe('Snippet Actions', () => {
       name: 'with amp_html',
       action: () => (
         updateSnippet({
-          amp_html: '<p>AMP Testing...</p>',
-          isAmpLive: true
+          amp_html: '<p>AMP Testing...</p>'
         })
       )
     }
