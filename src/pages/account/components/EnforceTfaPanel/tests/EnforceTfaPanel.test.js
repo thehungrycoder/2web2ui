@@ -9,11 +9,13 @@ describe('Component: EnforceTfaPanel', () => {
     loading: false,
     ssoEnabled: false,
     tfaRequired: false,
+    tfaEnabled: false,
     tfaUpdatePending: false,
     getAccountSingleSignOnDetails: () => {},
     getTfaStatus: () => {},
     updateAccountSingleSignOn: () => {},
     updateAccount: () => {},
+    showAlert: () => {},
     logout: jest.fn()
   };
 
@@ -82,5 +84,17 @@ describe('Component: EnforceTfaPanel', () => {
     wrapper.instance().toggleTfaRequired();
     modal(wrapper).prop('onConfirm')();
     expect(updateAccount).toHaveBeenCalledWith({ tfa_required: !tfaRequired });
-  }, [ { tfaRequired: true, modal: disableModal }, { tfaRequired: false, modal: enableModal } ]);
+  }, [{ tfaRequired: true, modal: disableModal }, { tfaRequired: false, modal: enableModal }]);
+
+  cases('logs out if TFA enforced and TFA not enabled', async ({ tfaEnabled }) => {
+    const updateAccount = jest.fn().mockResolvedValue();
+    const logout = jest.fn();
+    const wrapper = subject({ logout, tfaEnabled, updateAccount });
+    await wrapper.instance().setTfaRequired(true);
+    if (tfaEnabled) {
+      expect(logout).not.toHaveBeenCalled();
+    } else {
+      expect(logout).toHaveBeenCalledTimes(1);
+    }
+  }, [{ tfaEnabled: false }, { tfaEnabled: true }]);
 });

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { showAlert } from 'src/actions/globalAlert';
 
 import {
   getAccountSingleSignOnDetails,
@@ -26,7 +27,8 @@ const mapDispatchToProps = {
   getTfaStatus,
   updateAccountSingleSignOn,
   updateAccount,
-  logout
+  logout,
+  showAlert
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnforceTfaPanel);
