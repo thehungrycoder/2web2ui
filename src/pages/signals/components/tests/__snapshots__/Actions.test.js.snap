@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Recommended Actions Component renders correctly 1`] = `
+<div>
+  <div
+    className="Title"
+  >
+    <h6>
+      Items needing attention
+       – Dec 31 2017
+    </h6>
+  </div>
+  <Action
+    content="foo"
+    key="0"
+    link="http://google.com"
+  />
+  <Action
+    content="bar"
+    key="1"
+  />
+</div>
+`;
+
+exports[`Signals Recommended Actions Component renders correctly 2`] = `
+<div>
+  <div
+    className="Action"
+  >
+    <div
+      className="Icon"
+    >
+      <Warning
+        size={25}
+      />
+    </div>
+    <p>
+      foo
+       
+      <UnstyledLink
+        external={true}
+        to="http://google.com"
+      >
+        Learn More
+        <ChevronRight
+          className="LinkIcon"
+          size={16}
+        />
+      </UnstyledLink>
+    </p>
+  </div>
+  <hr
+    className="Dash"
+  />
+</div>
+`;
+
+exports[`Signals Recommended Actions Component renders correctly 3`] = `
+<div>
+  <div
+    className="Action"
+  >
+    <div
+      className="Icon"
+    >
+      <Warning
+        size={25}
+      />
+    </div>
+    <p>
+      bar
+       
+    </p>
+  </div>
+  <hr
+    className="Dash"
+  />
+</div>
+`;
