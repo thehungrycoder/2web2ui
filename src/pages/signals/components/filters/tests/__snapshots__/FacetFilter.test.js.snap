@@ -1,18 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FacetFilter Component renders correctly 1`] = `
-<div
-  className="FacetFilter"
->
-  <Select
-    options={
-      Array [
-        "No Breakdown",
-        "By Sending Domain",
-        "By IP Pool",
-        "By Campaign",
-      ]
-    }
-  />
-</div>
+exports[`FacetFilter renders facet select and search input 1`] = `
+<Fragment>
+  <div
+    className="FacetFilter"
+  >
+    <Select
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "No Breakdown",
+            "value": "",
+          },
+          Object {
+            "label": "By Campaign",
+            "value": "campaign",
+          },
+          Object {
+            "label": "By IP Pool",
+            "value": "ip_pool",
+          },
+          Object {
+            "label": "By Sending Domain",
+            "value": "sending_domain",
+          },
+        ]
+      }
+      value="campaign"
+    />
+  </div>
+  <div
+    className="FacetFilter"
+  >
+    <TextField
+      onChange={[Function]}
+      onKeyPress={[Function]}
+      placeholder="Search here"
+      resize="both"
+      suffix={<Search />}
+      type="text"
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`FacetFilter renders only facet select 1`] = `
+<Fragment>
+  <div
+    className="FacetFilter"
+  >
+    <Select
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "No Breakdown",
+            "value": "",
+          },
+          Object {
+            "label": "By Campaign",
+            "value": "campaign",
+          },
+          Object {
+            "label": "By IP Pool",
+            "value": "ip_pool",
+          },
+          Object {
+            "label": "By Sending Domain",
+            "value": "sending_domain",
+          },
+        ]
+      }
+    />
+  </div>
+</Fragment>
 `;

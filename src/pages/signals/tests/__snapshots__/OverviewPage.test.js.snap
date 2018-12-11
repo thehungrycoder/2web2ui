@@ -6,7 +6,7 @@ exports[`Signals Overview Page renders correctly 1`] = `
     <React.Fragment>
       <SubaccountFilter />
       <Connect(DateFilter) />
-      <FacetFilter />
+      <Connect(FacetFilter) />
     </React.Fragment>
   }
 >
