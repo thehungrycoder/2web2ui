@@ -62,6 +62,30 @@ export default (state = initialState, { meta, payload, type }) => {
         current: payload
       };
 
+    case 'VALIDATE_RECIPIENT_LIST_PENDING':
+      return { ...state };
+
+    case 'VALIDATE_RECIPIENT_LIST_FAIL':
+      return { ...state };
+
+    case 'VALIDATE_RECIPIENT_LIST_SUCCESS':
+      localStorage.setItem('rl_id', payload.meta.params.rl_id);
+      localStorage.setItem('rv_id', payload.list_id);
+      return { ...state, listValidatingPending: true };
+
+    case 'FILTER_RECIPIENT_LIST_PENDING':
+      return { ...state };
+
+    case 'FILTER_RECIPIENT_LIST_FAIL':
+      return { ...state };
+
+    case 'FILTER_RECIPIENT_LIST_SUCCESS':
+      localStorage.removeItem('rl_id');
+      localStorage.removeItem('rv_id');
+      return { ...state, listValidatingPending: true } ;
+
+
+
     default:
       return state;
   }

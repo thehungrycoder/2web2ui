@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 
 import { Link, withRouter } from 'react-router-dom';
 
-import { Page } from '@sparkpost/matchbox';
+import { Page, Grid } from '@sparkpost/matchbox';
 
 import {
   getRecipientList,
   updateRecipientList,
-  deleteRecipientList
+  deleteRecipientList,
+  validateRecipientList
 } from 'src/actions/recipientLists';
 
 import { showAlert } from 'src/actions/globalAlert';
@@ -22,9 +23,10 @@ export class EditPage extends Component {
   };
 
   startValidation = () => {
-    //const { current } = this.props;
-    //TODO: implement action to start validation
+    const { validateRecipientList, current } = this.props;
+    validateRecipientList(current.id);
   }
+
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
 
   secondaryActions = [
@@ -88,8 +90,13 @@ export class EditPage extends Component {
         content: 'Recipient Lists',
         Component: Link,
         to: '/lists/recipient-lists' }}>
-
-      <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
+      <Grid>
+        <Grid.Column xs={12} md={4} lg={4}>
+          <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
+        </Grid.Column>
+        <Grid.Column xs={12} md={4} lg={4}>
+        </Grid.Column>
+      </Grid>
 
       <DeleteModal
         open={this.state.showDelete}
@@ -113,7 +120,8 @@ const mapDispatchToProps = {
   getRecipientList,
   updateRecipientList,
   deleteRecipientList,
-  showAlert
+  showAlert,
+  validateRecipientList
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditPage));

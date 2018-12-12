@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
 import { Users } from 'src/components/images';
-import { listRecipientLists } from 'src/actions/recipientLists';
+import { listRecipientLists, validateRecipientList } from 'src/actions/recipientLists';
 import { LINKS } from 'src/constants';
 import Actions from './components/Actions';
 
@@ -42,7 +42,8 @@ export class ListPage extends Component {
   ];
 
   startValidation = (id) => {
-    //TODO: Start validation
+    const { validateRecipientList } = this.props;
+    validateRecipientList(id);
   }
   componentDidMount() {
     this.props.listRecipientLists();
@@ -111,4 +112,6 @@ const mapStateToProps = ({ recipientLists }) => ({
   recipientLists: recipientLists.list
 });
 
-export default connect(mapStateToProps, { listRecipientLists })(ListPage);
+const mapDispatchToProps = { validateRecipientList, listRecipientLists };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListPage);

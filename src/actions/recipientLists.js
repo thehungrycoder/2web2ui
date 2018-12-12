@@ -64,3 +64,27 @@ export function getRecipientList(id, params) {
     }
   });
 }
+
+export function validateRecipientList(id) {
+  return sparkpostApiRequest({
+    type: 'VALIDATE_RECIPIENT_LIST',
+    meta: {
+      method: 'POST',
+      url: '/v1/recipient-validation/autovalidation/submit',
+      params: {
+        rl_id: id
+      }
+    }
+  });
+}
+
+export function filterRecipientList(params) {
+  return sparkpostApiRequest({
+    type: 'FILTER_RECIPIENT_LIST',
+    meta: {
+      method: 'POST',
+      url: '/v1/recipient-validation/autovalidation/filter',
+      params
+    }
+  });
+}
