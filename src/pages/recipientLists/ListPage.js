@@ -7,11 +7,13 @@ import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
 import { Users } from 'src/components/images';
 import { listRecipientLists } from 'src/actions/recipientLists';
 import { LINKS } from 'src/constants';
+import Actions from './components/Actions';
 
 const columns = [
   { label: 'Name', sortKey: 'name' },
   { label: 'ID', sortKey: 'id' },
-  { label: 'Recipients', sortKey: 'total_accepted_recipients', width: '20%' }
+  { label: 'Recipients', sortKey: 'total_accepted_recipients', width: '20%' },
+  null
 ];
 
 const primaryAction = {
@@ -20,13 +22,28 @@ const primaryAction = {
   to: '/lists/recipient-lists/create'
 };
 
-const getRowData = ({ name, id, total_accepted_recipients }) => [
-  <Link to={`/lists/recipient-lists/edit/${id}`}>{name}</Link>,
-  id,
-  total_accepted_recipients
-];
-
 export class ListPage extends Component {
+
+  getRowData = ({ name, id, total_accepted_recipients }) => [
+    <Link to={`/lists/recipient-lists/edit/${id}`}>{name}</Link>,
+    id,
+    total_accepted_recipients,
+    <Actions actions={[
+      {
+        content: 'Edit',
+        to: `/lists/recipient-lists/edit/${id}`,
+        component: Link
+      },
+      { //TODO: Disable/remove entry if process is already ongoing.
+        content: 'Validate List',
+        onClick: () => this.startValidation(id)
+      }
+    ]}/>
+  ];
+
+  startValidation = (id) => {
+    //TODO: Start validation
+  }
   componentDidMount() {
     this.props.listRecipientLists();
   }
@@ -48,7 +65,7 @@ export class ListPage extends Component {
     return (
       <TableCollection
         columns={columns}
-        getRowData={getRowData}
+        getRowData={this.getRowData}
         pagination={true}
         rows={this.props.recipientLists}
         filterBox={{
@@ -82,7 +99,7 @@ export class ListPage extends Component {
             to: LINKS.RECIP_API,
             external: true
           }}}>
-        { error ? this.renderError() : this.renderCollection() }
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }

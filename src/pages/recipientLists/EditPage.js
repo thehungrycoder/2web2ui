@@ -21,12 +21,20 @@ export class EditPage extends Component {
     showDelete: false
   };
 
+  startValidation = () => {
+    //const { current } = this.props;
+    //TODO: implement action to start validation
+  }
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
 
   secondaryActions = [
     {
       content: 'Delete',
       onClick: this.toggleDelete
+    },
+    {
+      content: 'Validate List',
+      onClick: this.startValidation
     }
   ];
 
