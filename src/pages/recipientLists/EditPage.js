@@ -1,27 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import styles from './EditPage.module.scss';
 import { Link, withRouter } from 'react-router-dom';
 import { showAlert } from 'src/actions/globalAlert';
 import { PollContext } from 'src/context/Poll';
 import withContext from 'src/context/withContext';
-
+import { LoadingSVG } from 'src/components/loading/Loading';
 import { Page, Grid, Button, Panel } from '@sparkpost/matchbox';
 
 import {
   getRecipientList,
   updateRecipientList,
   deleteRecipientList,
-  validateRecipientList
+  validateRecipientList,
+  filterRecipientList
 } from 'src/actions/recipientLists';
 
 import { Loading, DeleteModal } from 'src/components';
 
 import RecipientListForm from './components/RecipientListForm';
 
+
 export class EditPage extends Component {
   state = {
-    showDelete: false
+    showDelete: false,
+    complete: false,
+    INVALID_DOMAIN: false,
+    INVALID_EMAIL: true,
+    UNDELIVERABLE: true,
+    DISPOSABLE_DOMAIN: true,
+    ROLE_BASED_EMAIL: true
   };
 
   startValidation = () => {
@@ -54,6 +62,10 @@ export class EditPage extends Component {
       history.push('/lists/recipient-lists');
     });
   };
+
+  onCheckboxChange = (e) => {
+    this.setState({ [e.target.name]: e.target.checked });
+  }
 
   componentDidMount() {
     const {
@@ -108,7 +120,16 @@ export class EditPage extends Component {
         {current && current.id === pendingId &&
           <Grid.Column xs={12} md={4} lg={5}>
             <Panel title="List Validation">
-              {current && current.id}
+              {this.state.complete ? (
+                <div style={{ padding: '20px' }}>
+
+                </div>
+              ) : (
+                <div>
+                  <h6>Validation Pending</h6>
+                  <div className={styles.LoadingWrapper}><LoadingSVG size='Small' /></div>
+                </div>
+              )}
             </Panel>
           </Grid.Column>
         }
@@ -138,7 +159,8 @@ const mapDispatchToProps = {
   updateRecipientList,
   deleteRecipientList,
   showAlert,
-  validateRecipientList
+  validateRecipientList,
+  filterRecipientList
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withContext(PollContext, EditPage)));
