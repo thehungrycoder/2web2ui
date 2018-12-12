@@ -57,7 +57,7 @@ export default class PublishedPage extends Component {
   }
 
   render() {
-    const { loading, formName, subaccountId } = this.props;
+    const { loading, formName, subaccountId, isAmpLive } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -70,7 +70,7 @@ export default class PublishedPage extends Component {
             <Form name={formName} subaccountId={subaccountId} readOnly />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <ContentEditor readOnly />
+            <ContentEditor readOnly isAmpLive={isAmpLive}/>
           </Grid.Column>
         </Grid>
       </Page>

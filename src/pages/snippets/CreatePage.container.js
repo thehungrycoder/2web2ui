@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 import { clearSnippet, createSnippet, getSnippet } from 'src/actions/snippets';
 import assignedTo from 'src/helpers/assignedTo';
 import { duplicate } from 'src/helpers/snippets';
+import { hasUiOption } from 'src/helpers/conditions/account';
 import { hasSubaccounts, selectSubaccountFromId } from 'src/selectors/subaccounts';
 import CreatePage from './CreatePage';
 
@@ -35,7 +36,8 @@ export const mapStateToProps = (state, props) => {
       snippetToDuplicate: {
         id,
         subaccountId
-      }
+      },
+      isAmpLive: hasUiOption('amp_html')(state)
     };
   }
 
@@ -43,7 +45,8 @@ export const mapStateToProps = (state, props) => {
     hasSubaccounts: hasSubaccounts(state),
     initialValues: {
       assignTo: 'master'
-    }
+    },
+    isAmpLive: hasUiOption('amp_html')(state)
   };
 };
 

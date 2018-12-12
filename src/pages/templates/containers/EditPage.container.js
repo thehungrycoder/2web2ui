@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 import { getDraft, update, deleteTemplate, publish, getTestData, setTestData } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 import { hasGrants } from 'src/helpers/conditions';
+import { hasUiOption } from 'src/helpers/conditions/account';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 import { selectSubaccountIdFromQuery, hasSubaccounts, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 
@@ -30,7 +31,8 @@ const mapStateToProps = (state, props) => {
       testData: selectTemplateTestData(state),
       ...template,
       subaccount: selectSubaccountFromQuery(state, props)
-    }
+    },
+    isAmpLive: hasUiOption('amp_html')(state)
   };
 };
 

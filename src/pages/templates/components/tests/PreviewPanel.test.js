@@ -5,7 +5,8 @@ import PreviewPanel from '../PreviewPanel';
 
 const props = {
   html: '<h1>Test Template</h1>',
-  text: 'Test Template'
+  text: 'Test Template',
+  amp_html: '<h2>Test Template</h2>'
 };
 
 it('renders blank panel', () => {
@@ -25,6 +26,20 @@ it('renders text on tab click', () => {
   wrapper.instance().onChange({
     currentTarget: {
       text: 'Text'
+    }
+  });
+  wrapper.update();
+
+  expect(wrapper).toMatchSnapshot();
+});
+
+it('renders AMP HTML on tab click', () => {
+  const wrapper = shallow(<PreviewPanel {...props} isAmpLive={true} />);
+
+  // @todo should be able to .find() the AMP HTML tab then .simulate('click')
+  wrapper.instance().onChange({
+    currentTarget: {
+      text: 'AMP HTML'
     }
   });
   wrapper.update();

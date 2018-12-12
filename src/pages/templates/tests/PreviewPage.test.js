@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import PreviewPage from '../PreviewPage';
 
 // Load a preview page with a test template and return for additional operations
-const loadPreviewPage = async(overrides = {}) => {
+const loadPreviewPage = async (overrides = {}) => {
   const props = {
     canSendEmail: true,
     match: { params: { id: 'test-template' }},
@@ -14,7 +14,9 @@ const loadPreviewPage = async(overrides = {}) => {
     preview: {
       from: { email: 'test@example.com' },
       subject: 'Test Template',
-      html: '<h1>Test Template</h1>'
+      html: '<h1>Test Template</h1>',
+      text: 'Test Template',
+      amp_html: '<h2>Test Template</h2>'
     },
     returnPath: '/path/to/return',
     template: {
@@ -34,12 +36,17 @@ const loadPreviewPage = async(overrides = {}) => {
   return wrapper;
 };
 
-it('renders preview page with template', async() => {
+it('renders preview page with template', async () => {
   const wrapper = await loadPreviewPage();
   expect(wrapper).toMatchSnapshot();
 });
 
-it('renders preview page with read-only template', async() => {
+it('renders preview page with template and AMP enabled', async () => {
+  const wrapper = await loadPreviewPage({ isAmpLive: true });
+  expect(wrapper).toMatchSnapshot();
+});
+
+it('renders preview page with read-only template', async () => {
   const wrapper = await loadPreviewPage({ canSendEmail: false });
   expect(wrapper).toMatchSnapshot();
 });
@@ -81,7 +88,7 @@ it('makes request for preview with subaccount', () => {
   expect(props.onLoad).toHaveBeenCalledWith(id, 101);
 });
 
-it('renders loading error', async() => {
+it('renders loading error', async () => {
   const wrapper = await loadPreviewPage({
     onLoad: () => Promise.reject(new Error('Oh no!'))
   });
@@ -89,7 +96,7 @@ it('renders loading error', async() => {
 });
 
 
-it('resets error message when user starts typing again', async() => {
+it('resets error message when user starts typing again', async () => {
   const event = { currentTarget: { value: 'new@example.com' }};
   const wrapper = await loadPreviewPage();
 
@@ -100,7 +107,7 @@ it('resets error message when user starts typing again', async() => {
 });
 
 
-cases('displays error', async({ to }) => {
+cases('displays error', async ({ to }) => {
   const wrapper = await loadPreviewPage();
 
   wrapper.setState({ to });
@@ -114,7 +121,7 @@ cases('displays error', async({ to }) => {
   'with trailing comma': { to: 'test@example,' }
 });
 
-it('successfully sends email and shows global alert', async() => {
+it('successfully sends email and shows global alert', async () => {
   const props = {
     sendPreview: jest.fn(() => Promise.resolve()),
     showAlert: jest.fn()
@@ -134,7 +141,7 @@ it('successfully sends email and shows global alert', async() => {
   expect(wrapper.state()).toMatchSnapshot();
 });
 
-it('failed to send email and shows global alert', async() => {
+it('failed to send email and shows global alert', async () => {
   const props = {
     sendPreview: jest.fn(() => Promise.reject(new Error('Oh no!')))
   };

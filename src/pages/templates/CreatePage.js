@@ -25,7 +25,7 @@ export default class CreatePage extends Component {
   }
 
   render() {
-    const { cloneId, handleSubmit, submitting, loading, formName, subaccountId } = this.props;
+    const { cloneId, handleSubmit, submitting, loading, formName, subaccountId, isAmpLive } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -54,7 +54,7 @@ export default class CreatePage extends Component {
             <Form newTemplate name={formName} subaccountId={subaccountId}/>
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <ContentEditor action={<ImportSnippetLink />} />
+            <ContentEditor action={<ImportSnippetLink />} isAmpLive={isAmpLive} />
           </Grid.Column>
         </Grid>
       </Page>

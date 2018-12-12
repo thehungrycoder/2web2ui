@@ -62,7 +62,7 @@ describe('CreatePage', () => {
     cases('succeeds', ({ name, ...values }) => {
       const createSnippet = jest.fn(() => Promise.resolve());
       const historyPush = jest.fn();
-      const wrapper = subject({ createSnippet, history: { push: historyPush }});
+      const wrapper = subject({ createSnippet, history: { push: historyPush }, isAmpLive: !!values.content.amp_html });
 
       wrapper.prop('primaryAction').onClick({
         ...values,
@@ -75,20 +75,24 @@ describe('CreatePage', () => {
       'with content': {
         content: {
           html: '<p>testing...</p>',
-          text: 'testing...'
+          text: 'testing...',
+          amp_html: '<span>amped</span>'
         }
       },
       'with master account assignment': {
-        assignTo: 'master'
+        assignTo: 'master',
+        content: {}
       },
       'with shared subaccounts assignment': {
-        assignTo: 'shared'
+        assignTo: 'shared',
+        content: {}
       },
       'with a subaccount assignment': {
         assignTo: 'subaccount',
         subaccount: {
           id: 'example-subaccount'
-        }
+        },
+        content: {}
       }
     });
   });

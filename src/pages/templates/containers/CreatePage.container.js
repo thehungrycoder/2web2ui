@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { reduxForm, formValueSelector } from 'redux-form';
+import { hasUiOption } from 'src/helpers/conditions/account';
 import _ from 'lodash';
 
 // Actions
@@ -26,7 +27,8 @@ const mapStateToProps = (state, props) => ({
     assignTo: 'master',
     testData: selectDefaultTestData(),
     ...selectClonedTemplate(state, props)
-  }
+  },
+  isAmpLive: hasUiOption('amp_html')(state)
 });
 
 const formOptions = {
