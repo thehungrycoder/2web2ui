@@ -52,14 +52,15 @@ exports[`SummaryTable renders a table 1`] = `
     />
   </Table>
   <div
-    className="Pagination"
+    className="PaginationWrapper"
   >
     <div
       className="PageButtons"
     >
       <Pagination
+        className="Pagination"
         currentPage={1}
-        inset={true}
+        flat={true}
         onChange={[Function]}
         pageRange={5}
         pages={0}
