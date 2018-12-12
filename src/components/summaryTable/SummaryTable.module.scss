@@ -15,7 +15,7 @@
 }
 
 .Header {
-  background-color: color(grey, 9);
+  background-color: #FAFAFA;
   border: 1px solid color(grey, 8);
   border-left: none;
   padding: spacing(small);
@@ -31,17 +31,45 @@
 }
 
 .PageButtons {
-  flex-grow: 1;
+  flex: 1 0 0;
+}
 
-  &> div {
-    margin: 0; // override
+@mixin buttonOverrides {
+  button, button:active, button:focus {
+    border-right: 1px solid color(gray, 7);
+    border-left: 1px solid color(gray, 7);
+    background: #F2F2F2;
   }
 }
 
-.Pagination {
+.PaginationWrapper {
   display: flex;
   align-items: baseline;
-  padding: spacing(small);
+  background: #FAFAFA;
+  border: 1px solid color(gray, 7);
+  border-top: none;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.Pagination {
+  margin: 0;
+  @include buttonOverrides;
+
+  // Previous button
+  & > button:first-child {
+    border-left: none;
+    border-bottom-left-radius: 2px !important;
+  }
+}
+
+.PerPageGroup {
+  @include buttonOverrides;
+
+  // Last button
+  button:last-child {
+    border-bottom-right-radius: 2px !important;
+  }
 }
 
 .PerPageLabel {

@@ -11,24 +11,27 @@ const PerPageControl = ({ onChange, perPage, totalCount }) => {
   }
 
   return (
-    <Button.Group>
-      <span className={styles.PerPageLabel}>Per Page</span>
-      {SIZES.map((size) => {
-        if (totalCount < size) {
-          return null;
-        }
+    <div className={styles.PerPageGroup}>
+      <Button.Group>
+        <span className={styles.PerPageLabel}>Per Page</span>
+        {SIZES.map((size) => {
+          if (totalCount < size) {
+            return null;
+          }
 
-        return (
-          <Button
-            className={classnames(perPage === size && styles.Selected)}
-            key={size}
-            onClick={() => onChange(size)}
-          >
-            {size}
-          </Button>
-        );
-      })}
-    </Button.Group>
+          return (
+            <Button
+              flat
+              className={classnames(perPage === size && styles.Selected)}
+              key={size}
+              onClick={() => onChange(size)}
+            >
+              {size}
+            </Button>
+          );
+        })}
+      </Button.Group>
+    </div>
   );
 };
 

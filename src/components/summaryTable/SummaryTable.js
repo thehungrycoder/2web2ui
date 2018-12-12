@@ -79,14 +79,15 @@ class SummaryTable extends React.Component {
           <Head columns={columnProps} onSort={this.handleSort} order={order} />
           <Body columns={columnProps} data={data} loading={loading} perPage={perPage} />
         </Table>
-        <div className={styles.Pagination}>
+        <div className={styles.PaginationWrapper}>
           <div className={styles.PageButtons}>
             <Pagination
               currentPage={currentPage}
               pageRange={PAGE_RANGE}
               pages={pages}
               onChange={this.handlePagination}
-              inset
+              flat
+              className={styles.Pagination}
             />
           </div>
           <div>
