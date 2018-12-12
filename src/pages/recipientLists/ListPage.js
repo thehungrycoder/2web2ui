@@ -24,22 +24,27 @@ const primaryAction = {
 
 export class ListPage extends Component {
 
-  getRowData = ({ name, id, total_accepted_recipients }) => [
-    <Link to={`/lists/recipient-lists/edit/${id}`}>{name}</Link>,
-    id,
-    total_accepted_recipients,
-    <Actions actions={[
-      {
-        content: 'Edit',
-        to: `/lists/recipient-lists/edit/${id}`,
-        component: Link
-      },
-      { //TODO: Disable/remove entry if process is already ongoing.
-        content: 'Validate List',
-        onClick: () => this.startValidation(id)
-      }
-    ]}/>
-  ];
+  getRowData = ({ name, id, total_accepted_recipients }) => {
+    const { listValidatingPending } = this.props;
+
+    return [
+      <Link to={`/lists/recipient-lists/edit/${id}`}>{name}</Link>,
+      id,
+      total_accepted_recipients,
+      <Actions actions={[
+        {
+          content: 'Edit',
+          to: `/lists/recipient-lists/edit/${id}`,
+          component: Link
+        },
+        { //TODO: Disable/remove entry if process is already ongoing.
+          visible: !listValidatingPending,
+          content: 'Validate List',
+          onClick: () => this.startValidation(id)
+        }
+      ]} />
+    ];
+  }
 
   startValidation = (id) => {
     const { validateRecipientList } = this.props;
@@ -109,7 +114,8 @@ export class ListPage extends Component {
 const mapStateToProps = ({ recipientLists }) => ({
   error: recipientLists.error,
   loading: recipientLists.listLoading,
-  recipientLists: recipientLists.list
+  recipientLists: recipientLists.list,
+  listValidatingPending: recipientLists.listValidatingPending
 });
 
 const mapDispatchToProps = { validateRecipientList, listRecipientLists };

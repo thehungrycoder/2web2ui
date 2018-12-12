@@ -68,9 +68,9 @@ export class RecipientListForm extends Component {
     }
 
     return <div>
-      { error && this.renderCsvErrors() }
+      {error && this.renderCsvErrors()}
       <form onSubmit={handleSubmit(this.preSubmit)}>
-        <Panel>
+        <Panel title="Update Recipient List">
           <Panel.Section>
             <Field
               name='name'
@@ -81,7 +81,7 @@ export class RecipientListForm extends Component {
               component={TextFieldWrapper}
               required
             />
-            { ! editMode && <Field
+            {! editMode && <Field
               name='id'
               label='Identifier'
               placeholder='my-favorite-recipients'
@@ -89,7 +89,7 @@ export class RecipientListForm extends Component {
               disabled={submitting}
               component={TextFieldWrapper}
               required
-            /> }
+            />}
             <Field
               name='description'
               label='Description'

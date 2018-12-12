@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Link, withRouter } from 'react-router-dom';
+import { showAlert } from 'src/actions/globalAlert';
+import { PollContext } from 'src/context/Poll';
+import withContext from 'src/context/withContext';
 
-import { Page, Grid } from '@sparkpost/matchbox';
+import { Page, Grid, Button, Panel } from '@sparkpost/matchbox';
 
 import {
   getRecipientList,
@@ -12,7 +15,6 @@ import {
   validateRecipientList
 } from 'src/actions/recipientLists';
 
-import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
 
 import RecipientListForm from './components/RecipientListForm';
@@ -28,17 +30,6 @@ export class EditPage extends Component {
   }
 
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
-
-  secondaryActions = [
-    {
-      content: 'Delete',
-      onClick: this.toggleDelete
-    },
-    {
-      content: 'Validate List',
-      onClick: this.startValidation
-    }
-  ];
 
   deleteRecipientList = () => {
     const { current, deleteRecipientList, showAlert, history } = this.props;
@@ -76,26 +67,51 @@ export class EditPage extends Component {
     });
   }
 
+  handlePoll = (id) => {
+    const { showAlert, getJobStatus, stopPolling } = this.props;
+    return getJobStatus(id).then(({ complete }) => {
+      if (complete) {
+        stopPolling(id);
+        showAlert({
+          type: 'success',
+          message: 'Recipient List Ready to be Filtered.'
+        });
+      }
+    });
+  }
+
   render() {
-    const { loading } = this.props;
+    const { loading, listValidatingPending, current = {}} = this.props;
+
+    const pendingId = localStorage.getItem('rl_id');
 
     if (loading) {
       return <Loading />;
     }
 
     return <Page
-      title='Update Recipient List'
-      secondaryActions={this.secondaryActions}
+      title='Edit Recipient List'
+      primaryArea={(
+        <span>
+          <Button flat onClick={this.toggleDelete}>Delete</Button>
+          <Button onClick={this.startValidation} disabled={listValidatingPending}>Validate List</Button>
+        </span>
+      )}
       breadcrumbAction={{
         content: 'Recipient Lists',
         Component: Link,
         to: '/lists/recipient-lists' }}>
       <Grid>
-        <Grid.Column xs={12} md={4} lg={4}>
+        <Grid.Column>
           <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
         </Grid.Column>
-        <Grid.Column xs={12} md={4} lg={4}>
-        </Grid.Column>
+        {current && current.id === pendingId &&
+          <Grid.Column xs={12} md={4} lg={5}>
+            <Panel title="List Validation">
+              {current && current.id}
+            </Panel>
+          </Grid.Column>
+        }
       </Grid>
 
       <DeleteModal
@@ -113,7 +129,8 @@ const mapStateToProps = (state) => ({
   current: state.recipientLists.current,
   loading: state.recipientLists.currentLoading,
   list: state.recipientLists.list,
-  error: state.recipientLists.error
+  error: state.recipientLists.error,
+  listValidatingPending: state.recipientLists.listValidatingPending
 });
 
 const mapDispatchToProps = {
@@ -124,4 +141,4 @@ const mapDispatchToProps = {
   validateRecipientList
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditPage));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withContext(PollContext, EditPage)));
