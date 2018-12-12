@@ -70,10 +70,8 @@ export function validateRecipientList(id) {
     type: 'VALIDATE_RECIPIENT_LIST',
     meta: {
       method: 'POST',
-      url: '/v1/recipient-validation/autovalidation/submit',
-      params: {
-        rl_id: id
-      }
+      url: `/v1/recipient-validation/auto-validation/submit/${id}`,
+      rl_id: id
     }
   });
 }
@@ -83,7 +81,7 @@ export function filterRecipientList(params) {
     type: 'FILTER_RECIPIENT_LIST',
     meta: {
       method: 'POST',
-      url: '/v1/recipient-validation/autovalidation/filter',
+      url: '/v1/recipient-validation/auto-validation/filter',
       params
     }
   });
