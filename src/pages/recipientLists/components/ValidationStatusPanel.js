@@ -43,10 +43,6 @@ class ValidationStatusPanel extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-
-  }
-
   onCheckboxChange = (e) => {
     this.setState({ checkbox: !this.state.checkbox });
   }
@@ -67,7 +63,12 @@ class ValidationStatusPanel extends React.Component {
 
   onSubmit = (values) => {
     const { filterRecipientList, showAlert, history } = this.props;
-    return filterRecipientList(values).then(({ id }) => {
+    const params = {};
+    params['types_to_remove'] = Object.keys(values).filter((key) => values[key]);
+    params['rl_id'] = localStorage.getItem('rl_id');
+    params['rv_id'] = localStorage.getItem('rv_id');
+
+    return filterRecipientList().then(({ id }) => {
       history.push(`/lists/recipient-lists/edit/${id}`);
       showAlert({
         type: 'success',
