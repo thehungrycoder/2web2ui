@@ -88,6 +88,7 @@ class ValidationStatusPanel extends React.Component {
               <Checkbox.Group>
                 {CHECKBOXES.map((data) => (
                   <Field
+                    key={data.panel}
                     name={data.value}
                     label={data.label}
                     component={CheckboxWrapper}
