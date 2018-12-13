@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { showAlert } from 'src/actions/globalAlert';
-import { PollContext } from 'src/context/Poll';
-import withContext from 'src/context/withContext';
 import { Page, Grid, Button } from '@sparkpost/matchbox';
 
 import {
@@ -98,7 +96,7 @@ export class EditPage extends Component {
         <Grid.Column>
           <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
         </Grid.Column>
-        {current && current.id === pendingId &&
+        {current && current.id === pendingId || true &&
           <Grid.Column xs={12} md={4} lg={5}>
             <ValidationStatusPanel filterRecipientList={filterRecipientList} id={current.id}/>
           </Grid.Column>
@@ -133,4 +131,4 @@ const mapDispatchToProps = {
   filterRecipientList
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withContext(PollContext, EditPage)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditPage));

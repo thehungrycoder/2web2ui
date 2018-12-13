@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
 import { withRouter } from 'react-router-dom';
 import { getLatestJob, getJobStatus } from 'src/actions/recipientValidation';
+import { PollContext } from 'src/context/Poll';
+import withContext from 'src/context/withContext';
 
 const CHECKBOXES = [
   { value: 'role_based', label: 'Role Based Email' },
@@ -23,19 +25,19 @@ class ValidationStatusPanel extends React.Component {
     complete: false
   }
 
-  componentDidMount() {
-    this.props.getLatestJob();
-    const { results, stopPolling, latestId, startPolling } = this.props;
-    stopPolling(latestId);
-    if (!results.complete) {
-      this.handlePoll(latestId);
-      startPolling({
-        key: latestId,
-        action: () => this.handlePoll(latestId),
-        interval: 5000
-      });
-    }
-  }
+  // componentDidMount() {
+  //   this.props.getLatestJob();
+  //   const { results, stopPolling, latestId, startPolling } = this.props;
+  //   stopPolling(latestId);
+  //   if (!results.complete) {
+  //     this.handlePoll(latestId);
+  //     startPolling({
+  //       key: latestId,
+  //       action: () => this.handlePoll(latestId),
+  //       interval: 5000
+  //     });
+  //   }
+  // }
 
 
   onCheckboxChange = (e) => {
@@ -112,6 +114,7 @@ const mapDispatchToProps = {
   showAlert,
   getJobStatus,
   getLatestJob
+
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'validateList' })(ValidationStatusPanel)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'validateList' })(withContext(PollContext, ValidationStatusPanel))));
