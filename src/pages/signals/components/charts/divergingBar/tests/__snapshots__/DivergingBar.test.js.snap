@@ -44,7 +44,7 @@ exports[`DivergingBar Component renders correctly 1`] = `
       horizontalFill={Array []}
       horizontalPoints={Array []}
       shapeRendering="crispEdges"
-      stroke="#ccc"
+      stroke="#d2d2d7"
       vertical={true}
       verticalFill={Array []}
       verticalPoints={Array []}
@@ -106,8 +106,8 @@ exports[`DivergingBar Component renders correctly 1`] = `
       dataKey="value"
       domain={
         Array [
-          "auto",
-          "auto",
+          0,
+          0,
         ]
       }
       height={30}

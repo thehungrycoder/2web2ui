@@ -1,5 +1,7 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
 .DivergingBar .xAxis .recharts-cartesian-axis-line {
-  stroke: #ccc;
+  stroke: color(gray, 7);
 }
 
 .DivergingBar .yAxis text {

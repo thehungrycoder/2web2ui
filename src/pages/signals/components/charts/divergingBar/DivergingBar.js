@@ -50,6 +50,7 @@ class DivergingBar extends Component {
           <CartesianGrid
             horizontal={false}
             shapeRendering='crispEdges'
+            stroke='#d2d2d7'
           />
           <Bar
             cursor='pointer'
@@ -99,7 +100,7 @@ DivergingBar.propTypes = {
 
 DivergingBar.defaultProps = {
   height: 250,
-  xDomain: ['auto', 'auto'],
+  xDomain: [0, 0],
   xKey: 'value',
   yKey: 'label',
   width: '99%',
