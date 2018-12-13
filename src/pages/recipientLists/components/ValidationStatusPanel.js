@@ -27,18 +27,22 @@ class ValidationStatusPanel extends React.Component {
 
   componentDidMount() {
     this.props.getLatestJob();
-    const { results, stopPolling, latestId, startPolling } = this.props;
-    stopPolling(latestId);
-    if (!results.complete) {
-      this.handlePoll(latestId);
-      startPolling({
-        key: latestId,
-        action: () => this.handlePoll(latestId),
-        interval: 5000
-      });
-    }
   }
 
+  componentDidUpdate() {
+    const { results, stopPolling, latestId, startPolling } = this.props;
+    if (latestId) {
+      stopPolling(latestId);
+      if (!results.complete) {
+        this.handlePoll(latestId);
+        startPolling({
+          key: latestId,
+          action: () => this.handlePoll(latestId),
+          interval: 5000
+        });
+      }
+    }
+  }
 
   onCheckboxChange = (e) => {
     this.setState({ checkbox: !this.state.checkbox });
@@ -48,6 +52,7 @@ class ValidationStatusPanel extends React.Component {
     const { showAlert, getJobStatus, stopPolling } = this.props;
     return getJobStatus(id).then(({ complete }) => {
       if (complete) {
+        this.setState({ complete: true });
         stopPolling(id);
         showAlert({
           type: 'success',
