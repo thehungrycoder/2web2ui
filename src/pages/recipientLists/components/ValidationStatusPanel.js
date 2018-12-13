@@ -62,13 +62,13 @@ class ValidationStatusPanel extends React.Component {
   }
 
   onSubmit = (values) => {
-    const { filterRecipientList, showAlert, history } = this.props;
+    const { filterRecipientList, showAlert, history, latestId } = this.props;
     const params = {};
     params['types_to_remove'] = Object.keys(values).filter((key) => values[key]);
     params['rl_id'] = localStorage.getItem('rl_id');
-    params['rv_id'] = localStorage.getItem('rv_id');
+    params['rv_id'] = latestId;
 
-    return filterRecipientList().then(({ id }) => {
+    return filterRecipientList(params).then(({ id }) => {
       history.push(`/lists/recipient-lists/edit/${id}`);
       showAlert({
         type: 'success',

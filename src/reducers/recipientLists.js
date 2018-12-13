@@ -70,7 +70,6 @@ export default (state = initialState, { meta, payload, type }) => {
 
     case 'VALIDATE_RECIPIENT_LIST_SUCCESS':
       localStorage.setItem('rl_id', meta.rl_id);
-      localStorage.setItem('rv_id', payload.list_id);
       return { ...state, listValidatingPending: true };
 
     case 'FILTER_RECIPIENT_LIST_PENDING':
@@ -81,7 +80,6 @@ export default (state = initialState, { meta, payload, type }) => {
 
     case 'FILTER_RECIPIENT_LIST_SUCCESS':
       localStorage.removeItem('rl_id');
-      localStorage.removeItem('rv_id');
       return { ...state, listValidatingPending: true } ;
 
 
