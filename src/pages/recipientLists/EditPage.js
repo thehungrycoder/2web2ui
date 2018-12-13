@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styles from './EditPage.module.scss';
 import { Link, withRouter } from 'react-router-dom';
 import { showAlert } from 'src/actions/globalAlert';
 import { PollContext } from 'src/context/Poll';
 import withContext from 'src/context/withContext';
-import { LoadingSVG } from 'src/components/loading/Loading';
-import { Page, Grid, Button, Panel } from '@sparkpost/matchbox';
+import { Page, Grid, Button } from '@sparkpost/matchbox';
 
 import {
   getRecipientList,
@@ -19,7 +17,7 @@ import {
 import { Loading, DeleteModal } from 'src/components';
 
 import RecipientListForm from './components/RecipientListForm';
-
+import ValidationStatusPanel from './components/ValidationStatusPanel';
 
 export class EditPage extends Component {
   state = {
@@ -63,10 +61,6 @@ export class EditPage extends Component {
     });
   };
 
-  onCheckboxChange = (e) => {
-    this.setState({ [e.target.name]: e.target.checked });
-  }
-
   componentDidMount() {
     const {
       match: { params: { id }},
@@ -79,21 +73,8 @@ export class EditPage extends Component {
     });
   }
 
-  handlePoll = (id) => {
-    const { showAlert, getJobStatus, stopPolling } = this.props;
-    return getJobStatus(id).then(({ complete }) => {
-      if (complete) {
-        stopPolling(id);
-        showAlert({
-          type: 'success',
-          message: 'Recipient List Ready to be Filtered.'
-        });
-      }
-    });
-  }
-
   render() {
-    const { loading, listValidatingPending, current = {}} = this.props;
+    const { loading, listValidatingPending, current = {}, filterRecipientList } = this.props;
 
     const pendingId = localStorage.getItem('rl_id');
 
@@ -119,18 +100,7 @@ export class EditPage extends Component {
         </Grid.Column>
         {current && current.id === pendingId &&
           <Grid.Column xs={12} md={4} lg={5}>
-            <Panel title="List Validation">
-              {this.state.complete ? (
-                <div style={{ padding: '20px' }}>
-
-                </div>
-              ) : (
-                <div>
-                  <h6>Validation Pending</h6>
-                  <div className={styles.LoadingWrapper}><LoadingSVG size='Small' /></div>
-                </div>
-              )}
-            </Panel>
+            <ValidationStatusPanel filterRecipientList={filterRecipientList} id={current.id}/>
           </Grid.Column>
         }
       </Grid>
