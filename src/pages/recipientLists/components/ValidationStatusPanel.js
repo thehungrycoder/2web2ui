@@ -26,22 +26,25 @@ class ValidationStatusPanel extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getLatestJob();
+    const { results, stopPolling, startPolling } = this.props;
+
+    this.props.getLatestJob().then(({ list_id }) => {
+      if (list_id) {
+        stopPolling(list_id);
+        if (!results.complete) {
+          this.handlePoll(list_id);
+          startPolling({
+            key: list_id,
+            action: () => this.handlePoll(list_id),
+            interval: 5000
+          });
+        }
+      }
+    });
   }
 
   componentDidUpdate() {
-    const { results, stopPolling, latestId, startPolling } = this.props;
-    if (latestId) {
-      stopPolling(latestId);
-      if (!results.complete) {
-        this.handlePoll(latestId);
-        startPolling({
-          key: latestId,
-          action: () => this.handlePoll(latestId),
-          interval: 5000
-        });
-      }
-    }
+
   }
 
   onCheckboxChange = (e) => {
@@ -90,7 +93,7 @@ class ValidationStatusPanel extends React.Component {
                   />
                 ))}
               </Checkbox.Group>
-              <Button fullWidth color='orange'>Create New Recipient List</Button>
+              <Button type="submit" fullWidth color='orange'>Create New Recipient List</Button>
             </form>
           </div>
         ) : (
