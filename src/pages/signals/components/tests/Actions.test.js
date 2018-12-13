@@ -26,8 +26,8 @@ describe('Signals Recommended Actions Component', () => {
 
   it('renders nothing with no actions', () => {
     wrapper.setProps({ actions: null });
-    expect(wrapper.html()).toBe(null);
+    expect(wrapper.html()).toBeNull();
     wrapper.setProps({ actions: []});
-    expect(wrapper.html()).toBe(null);
+    expect(wrapper.html()).toBeNull();
   });
 });

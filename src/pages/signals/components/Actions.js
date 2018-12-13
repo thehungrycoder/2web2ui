@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { formatDate } from 'src/helpers/date';
-import { UnstyledLink } from '@sparkpost/matchbox';
-import { Warning, ChevronRight } from '@sparkpost/matchbox-icons';
+import ExternalLink from 'src/components/externalLink/ExternalLink';
+import { Warning } from '@sparkpost/matchbox-icons';
 import styles from './Actions.module.scss';
 
 const Action = ({ content, link }) => {
   const linkMarkup = link && (
-    <UnstyledLink to={link} external>
-      Learn More<ChevronRight className={styles.LinkIcon} size={16}/>
-    </UnstyledLink>
+    <ExternalLink to={link} className={styles.Link}>Learn More</ExternalLink>
   );
 
   return (

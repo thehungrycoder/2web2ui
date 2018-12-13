@@ -37,16 +37,12 @@ exports[`Signals Recommended Actions Component renders correctly 2`] = `
     <p>
       foo
        
-      <UnstyledLink
-        external={true}
+      <ExternalLink
+        className="Link"
         to="http://google.com"
       >
         Learn More
-        <ChevronRight
-          className="LinkIcon"
-          size={16}
-        />
-      </UnstyledLink>
+      </ExternalLink>
     </p>
   </div>
   <hr
