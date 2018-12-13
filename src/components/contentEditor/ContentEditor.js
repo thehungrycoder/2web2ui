@@ -48,8 +48,8 @@ class ContentEditor extends React.Component {
   }
 
   // note, create/update snippet requests will fail if either part only contains whitespace
-  normalize = (value = '') => {
-    if (value.trim() === '') {
+  normalize = (value) => {
+    if (!value || value.trim() === '') {
       return '';
     }
 
