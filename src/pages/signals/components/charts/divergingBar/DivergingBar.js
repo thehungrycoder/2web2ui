@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ResponsiveContainer, BarChart, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Rectangle, Text } from 'recharts';
 import TooltipWrapper from '../tooltip/Tooltip';
 import _ from 'lodash';
-import './DivergingBar.scss';
+import styles from './DivergingBar.module.scss';
 
 class DivergingBar extends Component {
   getData = () => {
@@ -45,7 +45,7 @@ class DivergingBar extends Component {
   render() {
     const { height, tooltipContent, onClick, width, xDomain, xKey, yKey } = this.props;
     return (
-      <ResponsiveContainer height={height} width={width} className='DivergingBar'>
+      <ResponsiveContainer height={height} width={width} className={styles.DivergingBar}>
         <BarChart data={this.getData()} layout='vertical' barCategoryGap={2}>
           <CartesianGrid
             horizontal={false}
