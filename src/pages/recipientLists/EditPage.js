@@ -96,7 +96,7 @@ export class EditPage extends Component {
         <Grid.Column>
           <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
         </Grid.Column>
-        {current && current.id === pendingId || true &&
+        {current && current.id === pendingId &&
           <Grid.Column xs={12} md={4} lg={5}>
             <ValidationStatusPanel filterRecipientList={filterRecipientList} id={current.id}/>
           </Grid.Column>

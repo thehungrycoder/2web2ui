@@ -25,19 +25,19 @@ class ValidationStatusPanel extends React.Component {
     complete: false
   }
 
-  // componentDidMount() {
-  //   this.props.getLatestJob();
-  //   const { results, stopPolling, latestId, startPolling } = this.props;
-  //   stopPolling(latestId);
-  //   if (!results.complete) {
-  //     this.handlePoll(latestId);
-  //     startPolling({
-  //       key: latestId,
-  //       action: () => this.handlePoll(latestId),
-  //       interval: 5000
-  //     });
-  //   }
-  // }
+  componentDidMount() {
+    this.props.getLatestJob();
+    const { results, stopPolling, latestId, startPolling } = this.props;
+    stopPolling(latestId);
+    if (!results.complete) {
+      this.handlePoll(latestId);
+      startPolling({
+        key: latestId,
+        action: () => this.handlePoll(latestId),
+        interval: 5000
+      });
+    }
+  }
 
 
   onCheckboxChange = (e) => {

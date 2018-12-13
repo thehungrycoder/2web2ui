@@ -69,7 +69,7 @@ export default (state = initialState, { meta, payload, type }) => {
       return { ...state };
 
     case 'VALIDATE_RECIPIENT_LIST_SUCCESS':
-      localStorage.setItem('rl_id', payload.meta.rl_id);
+      localStorage.setItem('rl_id', meta.rl_id);
       localStorage.setItem('rv_id', payload.list_id);
       return { ...state, listValidatingPending: true };
 
