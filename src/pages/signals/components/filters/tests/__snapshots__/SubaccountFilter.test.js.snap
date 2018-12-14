@@ -51,8 +51,8 @@ exports[`SubaccountFilter Component renders open popover with options 1`] = `
       }
     />
     <SubaccountOption
-      key="Subaccount"
-      label="Subaccount"
+      key="Search for Subaccount"
+      label="Search for Subaccount"
       nested={true}
       onChange={[Function]}
       onOpen={[Function]}
@@ -60,7 +60,7 @@ exports[`SubaccountFilter Component renders open popover with options 1`] = `
       value={
         Object {
           "id": undefined,
-          "name": "Subaccount",
+          "name": "Search for Subaccount",
         }
       }
     />
@@ -119,8 +119,8 @@ exports[`SubaccountFilter Component renders open popover with options after back
       }
     />
     <SubaccountOption
-      key="Subaccount"
-      label="Subaccount"
+      key="Search for Subaccount"
+      label="Search for Subaccount"
       nested={true}
       onChange={[Function]}
       onOpen={[Function]}
@@ -128,7 +128,7 @@ exports[`SubaccountFilter Component renders open popover with options after back
       value={
         Object {
           "id": undefined,
-          "name": "Subaccount",
+          "name": "Search for Subaccount",
         }
       }
     />

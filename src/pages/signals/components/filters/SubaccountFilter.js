@@ -20,7 +20,7 @@ const OPTIONS = [
     condition: ({ id }) => id === 0
   },
   {
-    name: 'Subaccount',
+    name: 'Search for Subaccount',
     nested: true,
     condition: ({ id }) => id > 0
   }

@@ -6,9 +6,7 @@ exports[`SubaccountOption renders nested option 1`] = `
 >
   Test Option
    
-  <ChevronRight
-    className="Icon"
-  />
+  <ChevronRight />
 </UnstyledLink>
 `;
 
@@ -30,8 +28,7 @@ exports[`SubaccountOption renders selected option 1`] = `
   Test Option
    
   <Check
-    className="Icon"
-    color="orange"
+    className="Check"
   />
 </UnstyledLink>
 `;

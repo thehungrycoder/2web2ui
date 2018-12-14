@@ -18,14 +18,14 @@ class SubaccountOption extends React.Component {
     if (nested) {
       return (
         <UnstyledLink className={styles.Option} onClick={onOpen}>
-          {label} <ChevronRight className={styles.Icon} />
+          {label} <ChevronRight />
         </UnstyledLink>
       );
     }
 
     return (
       <UnstyledLink className={styles.Option} onClick={this.handleClick}>
-        {label} {selected && <Check className={styles.Icon} color="orange" />}
+        {label} {selected && <Check className={styles.Check} />}
       </UnstyledLink>
     );
   }

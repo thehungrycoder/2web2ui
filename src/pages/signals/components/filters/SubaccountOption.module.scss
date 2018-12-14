@@ -1,7 +1,13 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.Check {
+  color: color(orange);
+}
+
 .Option, a.Option {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: rem(9) spacing();
   color: color(gray, 4);
   transition: 0.15s;
@@ -10,8 +16,4 @@
     background: color(gray, 9);
     color: color(gray, 1);
   }
-}
-
-.Icon {
-  float: right;
 }
