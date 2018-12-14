@@ -6,7 +6,7 @@ import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 const { apiDateFormat, messageEvents: { retentionPeriodDays }} = config;
 
 export function getMessageEvents(options = {}) {
-  const { dateOptions, searchQueries, ...rest } = options;
+  const { dateOptions, ...rest } = options;
   const { from, to } = dateOptions;
   const params = {};
   if (from) {

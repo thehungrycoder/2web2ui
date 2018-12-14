@@ -80,7 +80,7 @@ export class MessageEventsPage extends Component {
     const { error } = this.props;
 
     return (
-      <Page title='Events'>
+      <Page title='Search Events'>
         <MessageEventsSearch />
         {error ? this.renderError() : this.renderCollection()}
       </Page>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel, Tag } from '@sparkpost/matchbox';
 import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/events';
+import { removeEmptyFilters } from 'src/helpers/events';
 import { snakeToFriendly } from 'src/helpers/string';
 import _ from 'lodash';
 import { EVENTS_SEARCH_FILTERS } from 'src/constants';
@@ -20,17 +21,16 @@ export class ActiveFilters extends Component {
       { value: 'recipients', label: 'Recipient' },
       ...EVENTS_SEARCH_FILTERS
     ];
-    const activeFilters = [];
-    filterTypes.forEach(({ value, label, itemToString }) => {
-      //If the filter is not empty, add the array to the main array of active filters
-      if (search[value].length > 0) {
-        activeFilters.push(search[value].map((item, i) => (
-          <Tag onRemove={() => this.handleRemove({ key: value, item })} key={i} className={styles.TagWrapper}>
-            {label}: {itemToString ? itemToString(item) : item}
-          </Tag>
-        )));
-      }
-    });
+    const nonEmptyFilters = removeEmptyFilters(search);
+    const nonEmptyFilterTypes = filterTypes.filter((filterType) => nonEmptyFilters[filterType.value]);
+    let keyCounter = 0;
+    const activeFilters = _.flatMap(nonEmptyFilterTypes,({ value, label, itemToString }) =>
+      nonEmptyFilters[value].map((item) => (
+        <Tag onRemove={() => this.handleRemove({ key: value, item })} key={keyCounter++} className={styles.TagWrapper}>
+          {label}: {itemToString ? itemToString(item) : item}
+        </Tag>
+      ))
+    );
     //console.log('filters', activeFilters);
     return activeFilters;
   };
@@ -47,7 +47,7 @@ export class ActiveFilters extends Component {
   }
 
   isEmpty() {
-    const { dateOptions, searchQueries, ...rest } = this.props.search;
+    const { dateOptions, ...rest } = this.props.search;
     return _.every(rest, (arr) => arr.length === 0);
   }
 

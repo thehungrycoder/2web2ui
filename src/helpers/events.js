@@ -55,8 +55,7 @@ export function parseSearch(search) {
     return typeof filter === 'string' ? [filter] : filter
   });
 
-  const newSearchQueries = getSearchQueriesFromFilters(rest);
-  return { dateOptions, searchQueries: newSearchQueries, ...options };
+  return { dateOptions, ...options };
 }
 
 
@@ -65,12 +64,12 @@ export function getDetailsPath(messageId, eventId){
 }
 
 /**
- * Creates the filters arrays
+ * Creates the filters from the search query.
  *
- * First create an object with all search filters as keys and set each value to [].
- * Then replace the values with values calculated from searchqueries
+ * @param {Object[]} searchQueries An array of query objects.
+ * @returns {Object} An object containing the search parameters as keys and the search terms as values.
  */
-export function getFiltersFromSearchQueries({searchQueries = []}) {
+export function getFiltersFromSearchQueries(searchQueries = []) {
 
   const filtersList = getEmptyFilters();
 
@@ -82,29 +81,34 @@ export function getFiltersFromSearchQueries({searchQueries = []}) {
 
 
 /**
- * Creates the the search queries from the filter arrays.
- *
+ * Creates the search queries from the filter arrays.
+ * @param {Object} filters An object containing the search parameters as keys and the search terms as values.
+ * @returns {Object[]}  An array of query objects.
  */
-export function getSearchQueriesFromFilters(search) {
+export function getSearchQueriesFromFilters(filters) {
 
   //Filters out all search terms that are not part of the search query in AdvancedFilters
-  const { dateOptions, searchQueries, recipients, events, ...rest } = search;
+  const { dateOptions, recipients, events, ...rest } = filters;
 
-  const newSearchQueries = [];
-  _.forEach(rest, (value, key) => {
-    if(value.length>0) {
-      newSearchQueries.push({ key, value: typeof value === 'string' ? value : value.join(','), error: null })
-    }
-  });
+  const nonEmptyFilters = removeEmptyFilters(rest);
+  const newSearchQueries = _.map(nonEmptyFilters, (value, key) => {
+    return ({ key, value: value.join(',')});
+    });
   return newSearchQueries;
 }
 
+/**
+ * Creates an object with all existing filters set to an empty array
+ */
 export function getEmptyFilters() {
-  const emptyFilters = {};
-  EVENTS_SEARCH_FILTERS.forEach(({value}) => {
-    emptyFilters[value] = [];
-  });
+  const emptyFilters = _.reduce(EVENTS_SEARCH_FILTERS, (result, {value}) => {
+    result[value] = [];
+    return result;
+  }, {});
   return emptyFilters;
 }
 
+export function removeEmptyFilters(allFilters) {
+  return _.pickBy(allFilters, (value) => value.length>0);
+}
 

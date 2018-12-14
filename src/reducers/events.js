@@ -1,4 +1,4 @@
-import { formatDocumentation, getFiltersFromSearchQueries, getSearchQueriesFromFilters, getEmptyFilters } from 'src/helpers/events';
+import { formatDocumentation, getEmptyFilters } from 'src/helpers/events';
 import { getRelativeDates } from 'src/helpers/date';
 import _ from 'lodash';
 const emptyFilters = getEmptyFilters();
@@ -15,7 +15,6 @@ const initialState = {
     },
     recipients: [],
     events: [],
-    searchQueries: [],
     ...emptyFilters
   }
 };
@@ -71,8 +70,7 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'REFRESH_EVENTS_SEARCH_OPTIONS': {
       const { dateOptions, ...options } = payload;
-      const updatedFilters = getFiltersFromSearchQueries(options);
-      return { ...state, search: { ...state.search,dateOptions: { ...state.search.dateOptions, ...dateOptions }, ...options, ...updatedFilters }};
+      return { ...state, search: { ...state.search,dateOptions: { ...state.search.dateOptions, ...dateOptions }, ...options }};
     }
 
     case 'ADD_EVENTS_FILTERS': {
@@ -86,9 +84,7 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'REMOVE_EVENTS_FILTER': {
       const updatedSearch = {};
       updatedSearch[payload.key] = state.search[payload.key].filter((listItem) => payload.item !== listItem);
-      const search = { ...state.search, ...updatedSearch };
-      const searchQueries = getSearchQueriesFromFilters(search);
-      return { ...state, search: { ...search, searchQueries }};
+      return { ...state, search: { ...state.search, ...updatedSearch }};
     }
 
     default:
