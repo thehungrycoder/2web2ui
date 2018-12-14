@@ -63,6 +63,7 @@ export class SubaccountFilter extends React.Component {
           <span className={styles.ButtonLabel}>
             {subaccount.name}
           </span>
+          {subaccount.id > 0 && <span>({subaccount.id})</span>}
           <ArrowDropDown className={styles.ButtonIcon} />
         </Button>
         <Popover className={styles.Popover} left open={isOpen}>

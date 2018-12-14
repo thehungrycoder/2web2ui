@@ -28,6 +28,11 @@ describe('SubaccountFilter Component', () => {
     expect(wrapper.html()).toBeNull();
   });
 
+  it('renders with subaccount', () => {
+    const wrapper = subject({ subaccount: { id: 123, name: 'Test Subaccount' }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('renders open popover with options', () => {
     const wrapper = subject();
     openPopover(wrapper);
