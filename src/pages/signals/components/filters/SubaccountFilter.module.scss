@@ -1,6 +1,51 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.BackButton {
+  color: color(gray, 4);
+  left: spacing();
+  position: absolute;
+  transition: 0.15s;
+
+  &:hover {
+    color: color(gray, 1);
+  }
+}
+
+.ButtonIcon {
+  color: color(grey, 4); // to match other selects
+}
+
+.ButtonLabel {
+  color: color(grey, 1); // match other selects
+  display: inline-block;
+  margin-right: spacing(small);
+  overflow: hidden;
+  text-overflow: ellipsis; // to truncate really long subaccount names
+  white-space: nowrap;
+  max-width: rem(180);
+  vertical-align: middle;
+}
+
+.Popover {
+  width: 300px;
+
+  > span {
+    display: none; // remove popover carrot
+  }
+}
+
 .SubaccountFilter {
   display: inline-block;
   margin-left: spacing();
+}
+
+.SubaccountSearch {
+  padding: spacing();
+}
+
+.SubaccountSearchHeader {
+  border-bottom: 1px solid color(gray, 8);
+  color: color(gray, 4);
+  padding: spacing(small) spacing();
+  text-align: center;
 }

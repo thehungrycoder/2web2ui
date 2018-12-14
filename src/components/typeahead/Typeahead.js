@@ -74,7 +74,7 @@ export class Typeahead extends Component {
 
     return (
       <div className={cx('Typeahead')}>
-        <ActionList className={listClasses} actions={mappedItems} />
+        <ActionList className={listClasses} actions={mappedItems} maxHeight="300" />
         <TextField {...textFieldProps} onFocus={openMenu} />
       </div>
     );
