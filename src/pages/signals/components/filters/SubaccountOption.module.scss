@@ -1,0 +1,17 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Option, a.Option {
+  display: block;
+  padding: rem(9) spacing();
+  color: color(gray, 4);
+  transition: 0.15s;
+
+  &:hover {
+    background: color(gray, 9);
+    color: color(gray, 1);
+  }
+}
+
+.Icon {
+  float: right;
+}

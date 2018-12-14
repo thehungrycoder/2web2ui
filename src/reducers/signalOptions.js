@@ -2,7 +2,7 @@ const initialState = {
   // facet: 'sending_domain',
   // facetSearchTerm: '',
   relativeRange: '14days'
-  // subaccountId: 123
+  // subaccount
 };
 
 const signalOptionsReducer = (state = initialState, action) => {

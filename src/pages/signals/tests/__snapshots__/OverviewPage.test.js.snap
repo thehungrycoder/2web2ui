@@ -4,7 +4,7 @@ exports[`Signals Overview Page renders correctly 1`] = `
 <SignalsPage
   primaryArea={
     <React.Fragment>
-      <SubaccountFilter />
+      <Connect(Connect(SubaccountFilter)) />
       <Connect(DateFilter) />
       <Connect(FacetFilter) />
     </React.Fragment>

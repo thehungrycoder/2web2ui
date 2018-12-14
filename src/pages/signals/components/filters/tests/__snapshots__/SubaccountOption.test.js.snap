@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubaccountOption renders nested option 1`] = `
+<UnstyledLink
+  className="Option"
+>
+  Test Option
+   
+  <ChevronRight
+    className="Icon"
+  />
+</UnstyledLink>
+`;
+
+exports[`SubaccountOption renders option 1`] = `
+<UnstyledLink
+  className="Option"
+  onClick={[Function]}
+>
+  Test Option
+   
+</UnstyledLink>
+`;
+
+exports[`SubaccountOption renders selected option 1`] = `
+<UnstyledLink
+  className="Option"
+  onClick={[Function]}
+>
+  Test Option
+   
+  <Check
+    className="Icon"
+    color="orange"
+  />
+</UnstyledLink>
+`;
