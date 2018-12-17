@@ -45,6 +45,7 @@ export default class DisableTfaModal extends Component {
                   <TextField type='password' error={(this.state.showErrors && toggleError) ? 'Incorrect password' : ''} placeholder='Enter your password' onChange={this.handleInputChange} value={this.state.password} />
                 </Grid.Column>
               </Grid>
+              <p>If two-factor authentication is enforced, you will be logged out. You will have to re-enable again when you log in.</p>
             </Panel.Section>
             <Panel.Section>
               <Button type='submit' primary disabled={togglePending} onClick={() => this.props.disable(this.state.password)}>

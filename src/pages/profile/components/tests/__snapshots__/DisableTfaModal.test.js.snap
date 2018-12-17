@@ -31,6 +31,9 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
             />
           </Grid.Column>
         </Grid>
+        <p>
+          If two-factor authentication is enforced, you will be logged out. You will have to re-enable again when you log in.
+        </p>
       </Panel.Section>
       <Panel.Section>
         <Button
@@ -87,6 +90,9 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
             />
           </Grid.Column>
         </Grid>
+        <p>
+          If two-factor authentication is enforced, you will be logged out. You will have to re-enable again when you log in.
+        </p>
       </Panel.Section>
       <Panel.Section>
         <Button
@@ -143,6 +149,9 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
             />
           </Grid.Column>
         </Grid>
+        <p>
+          If two-factor authentication is enforced, you will be logged out. You will have to re-enable again when you log in.
+        </p>
       </Panel.Section>
       <Panel.Section>
         <Button

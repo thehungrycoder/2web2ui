@@ -7,7 +7,7 @@ import BackupCodesModal from './BackupCodesModal';
 import EnableTfaModal from './EnableTfaModal';
 import DisableTfaModal from './DisableTfaModal';
 import { LINKS } from 'src/constants';
-
+import { logout } from 'src/actions/auth';
 export class TfaManager extends Component {
 
   state = {
@@ -33,7 +33,15 @@ export class TfaManager extends Component {
     this.props.getTfaBackupStatus();
   }
 
-  disable = (password) => this.props.toggleTfa({ enabled: false, password });
+  disable = (password) => {
+    const { showAlert, required } = this.props;
+    this.props.toggleTfa({ enabled: false, password }).then(() => {
+      if (required) {
+        this.props.logout();
+      }
+      showAlert({ type: 'success', message: 'Profile Updated.' });
+    });
+  }
 
   generateBackupCodes = (password) => this.props.generateBackupCodes(password)
     .then(this.props.getTfaBackupStatus);
@@ -54,7 +62,7 @@ export class TfaManager extends Component {
   }
 
   render() {
-    const { statusUnknown, enabled, required } = this.props;
+    const { statusUnknown, enabled } = this.props;
 
     if (statusUnknown) {
       return <PanelLoading minHeight='100px' />;
@@ -75,15 +83,12 @@ export class TfaManager extends Component {
       content: 'Generate New Backup Codes',
       onClick: () => this.setState({ openModal: 'backupCodes' }),
       color: 'orange'
+    },
+    {
+      content: 'Disable 2FA',
+      onClick: () => this.setState({ openModal: 'disable' }),
+      color: 'orange'
     }];
-
-    if (!required) {
-      enabledActions.push({
-        content: 'Disable 2FA',
-        onClick: () => this.setState({ openModal: 'disable' }),
-        color: 'orange'
-      });
-    }
 
     return (
       <Panel sectioned title='Two-factor Authentication' actions={enabled ? enabledActions : disabledActions}>
@@ -126,4 +131,4 @@ const mapStateToProps = ({ account, tfa, tfaBackupCodes }) => ({
   backupCodes: tfaBackupCodes
 });
 
-export default connect(mapStateToProps, tfaActions)(TfaManager);
+export default connect(mapStateToProps, { logout, ...tfaActions })(TfaManager);
