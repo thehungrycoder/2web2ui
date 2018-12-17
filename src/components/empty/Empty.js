@@ -5,11 +5,14 @@ import styles from './Empty.module.scss';
 
 class Empty extends Component {
   render() {
-    const { title, message } = this.props;
+    const { title, message, children } = this.props;
 
     return (
       <Panel sectioned title={title}>
-        <h6 className={styles.Center}>{message}</h6>
+        <div className={styles.Empty}>
+          <h6 className={styles.Header}>{message}</h6>
+          {children}
+        </div>
       </Panel>
     );
   }

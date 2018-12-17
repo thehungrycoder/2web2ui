@@ -271,7 +271,7 @@ const routes = [
     supportDocSearch: 'signals'
   },
   {
-    path: '/signals/health-score',
+    path: '/signals/health-score/:facet/:facetId',
     component: signals.HealthScorePage,
     condition: hasUiOption('signals'),
     layout: App,
@@ -279,7 +279,7 @@ const routes = [
     supportDocSearch: 'signals'
   },
   {
-    path: '/signals/spam-traps',
+    path: '/signals/spam-traps/:facet/:facetId',
     component: signals.SpamTrapsPage,
     condition: hasUiOption('signals'),
     layout: App,
@@ -287,7 +287,7 @@ const routes = [
     supportDocSearch: 'signals'
   },
   {
-    path: '/signals/engagement-cohort',
+    path: '/signals/engagement-cohort/:facet/:facetId',
     component: signals.EngagementPage,
     condition: hasUiOption('signals'),
     layout: App,

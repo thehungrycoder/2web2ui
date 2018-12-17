@@ -1,0 +1,7 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Empty {
+  color: color(gray, 2);
+  padding: spacing() 0 spacing(larger);
+  text-align: center;
+}

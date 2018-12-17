@@ -1,8 +1,15 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Center {
+.Header {
   @include text-style-heading;
-  text-align: center;
-  padding: rem(80) 0;
-  color: color(gray, 6);
+  margin-bottom: spacing(smaller);
+  color: color(gray, 2);
+}
+
+.Empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: rem(180);
+  flex-direction: column;
 }
