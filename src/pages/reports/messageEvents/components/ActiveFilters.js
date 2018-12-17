@@ -8,30 +8,25 @@ import _ from 'lodash';
 import { EVENTS_SEARCH_FILTERS } from 'src/constants';
 import styles from './ActiveFilters.module.scss';
 
-export class ActiveFilters extends Component {
-  static defaultProps = {
-    search: {}
-  };
+const filterTypes = [
+  { value: 'events', label: 'Event', itemToString: snakeToFriendly },
+  { value: 'recipients', label: 'Recipient' },
+  ...EVENTS_SEARCH_FILTERS
+];
 
+export class ActiveFilters extends Component {
 
   renderTags = () => {
     const { search } = this.props;
-    const filterTypes = [
-      { value: 'events', label: 'Event', itemToString: snakeToFriendly },
-      { value: 'recipients', label: 'Recipient' },
-      ...EVENTS_SEARCH_FILTERS
-    ];
     const nonEmptyFilters = removeEmptyFilters(search);
     const nonEmptyFilterTypes = filterTypes.filter((filterType) => nonEmptyFilters[filterType.value]);
-    let keyCounter = 0;
-    const activeFilters = _.flatMap(nonEmptyFilterTypes,({ value, label, itemToString }) =>
-      nonEmptyFilters[value].map((item) => (
-        <Tag onRemove={() => this.handleRemove({ key: value, item })} key={keyCounter++} className={styles.TagWrapper}>
+    const activeFilters = _.flatMap(nonEmptyFilterTypes,({ value, label, itemToString }, typeIndex) =>
+      nonEmptyFilters[value].map((item, valueIndex) => (
+        <Tag onRemove={() => this.handleRemove({ key: value, item })} key={`${typeIndex}-${valueIndex}`} className={styles.TagWrapper}>
           {label}: {itemToString ? itemToString(item) : item}
         </Tag>
       ))
     );
-    //console.log('filters', activeFilters);
     return activeFilters;
   };
 
@@ -66,7 +61,7 @@ export class ActiveFilters extends Component {
 }
 
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   search: state.events.search
 });
 

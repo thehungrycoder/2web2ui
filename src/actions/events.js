@@ -27,7 +27,6 @@ export function getMessageEvents(options = {}) {
     }
   });
 
-  //console.log('params',params);
   return sparkpostApiRequest({
     type: 'GET_EVENTS',
     meta: {

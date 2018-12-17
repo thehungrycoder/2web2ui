@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/events';
 import { selectMessageEventsSearchOptions } from 'src/selectors/events';
 import { Panel, Grid, TextField } from '@sparkpost/matchbox';
-import AdvancedFilters from './AdvancedFilters';
+import AdvancedFiltersModal from './AdvancedFiltersModal';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';
 import DatePicker from 'src/components/datePicker/DatePicker';
@@ -97,7 +97,7 @@ export class MessageEventsSearch extends Component {
                 onKeyDown={onEnter(this.handleRecipientsChange)}
                 onFocus={() => this.setState({ recipientError: null })}
                 error={this.state.recipientError}
-                connectRight={<AdvancedFilters />}
+                connectRight={<AdvancedFiltersModal />}
               />
             </Grid.Column>
             <Grid.Column>

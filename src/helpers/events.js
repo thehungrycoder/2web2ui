@@ -36,7 +36,7 @@ export function formatDocumentation(data) {
   return events;
 }
 export function parseSearch(search) {
-  const { from, to, range, searchQueries, ...rest } = qs.parse(search);
+  const { from, to, range, ...rest } = qs.parse(search);
   let dateOptions = {};
 
   if (from) {
@@ -101,7 +101,7 @@ export function getSearchQueriesFromFilters(filters) {
  * Creates an object with all existing filters set to an empty array
  */
 export function getEmptyFilters() {
-  const emptyFilters = _.reduce(EVENTS_SEARCH_FILTERS, (result, {value}) => {
+  const emptyFilters = EVENTS_SEARCH_FILTERS.reduce((result, {value}) => {
     result[value] = [];
     return result;
   }, {});
