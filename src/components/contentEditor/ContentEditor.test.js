@@ -57,6 +57,7 @@ describe('ContentEditor', () => {
   });
 
   it('should set AMP HTML syntax validation correctly', () => {
+    wrapper.setProps({ isAmpLive: true });
     wrapper.instance().handleTab(2);
     wrapper.update();
     expect(wrapper.find('Field').props().name).toBe('content.amp_html');
@@ -64,7 +65,7 @@ describe('ContentEditor', () => {
   });
 
   it('should set Test Data syntax validation correctly', () => {
-    wrapper.instance().handleTab(3);
+    wrapper.instance().handleTab(2);
     wrapper.update();
     expect(wrapper.find('Field').props().name).toBe('testData');
     expect(wrapper.find('Field').props().syntaxValidation).toBe(true);

@@ -81,10 +81,8 @@ class ContentEditor extends React.Component {
   render() {
     const { readOnly, isAmpLive, contentOnly } = this.props;
     const { selectedTab } = this.state;
-
-    const tabs = fields
-      .filter((field) => field.show(this.props))
-      .map(({ content }, index) => ({ content, onClick: () => this.handleTab(index) }));
+    const visibleFields = fields.filter((field) => field.show(this.props));
+    const tabs = visibleFields.map(({ content }, index) => ({ content, onClick: () => this.handleTab(index) }));
 
     // Templates require HTML or Text. Snippets require HTML, AMP HTML, or Text.
     const requiredContentValidator = isAmpLive && contentOnly ? this.requiredHtmlTextOrAmp : this.requiredHtmlOrText;
@@ -98,11 +96,11 @@ class ContentEditor extends React.Component {
         <Panel className={styles.EditorPanel}>
           <Field
             component={AceWrapper}
-            mode={fields[selectedTab].mode}
-            name={fields[selectedTab].name}
+            mode={visibleFields[selectedTab].mode}
+            name={visibleFields[selectedTab].name}
             normalize={this.normalize}
             readOnly={readOnly && selectedTab !== 2}
-            syntaxValidation={fields[selectedTab].syntaxValidation}
+            syntaxValidation={visibleFields[selectedTab].syntaxValidation}
             validate={[requiredContentValidator, this.validTestDataJson]}
           />
         </Panel>
