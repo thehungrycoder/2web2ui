@@ -3,11 +3,14 @@ import { TextFieldWrapper } from 'src/components';
 import { Field } from 'redux-form';
 import styles from './PromoCode.module.scss';
 
+
 class PromoCode extends React.Component {
 
   handleBlur = (e, value) => {
     const { onBlur } = this.props;
-    onBlur(value);
+    if (value) {
+      onBlur(value);
+    }
   }
 
   render() {

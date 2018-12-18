@@ -56,7 +56,7 @@ export class ChangePlanForm extends Component {
     const oldCode = account.subscription.code;
     const newCode = values.planpicker.code;
     const isDowngradeToFree = values.planpicker.isFree;
-    const activePromoCode = billing.activePromoCode;
+    const activePromoCode = billing.selectedPromo.promoCode;
     const newValues = values.card && !isDowngradeToFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
