@@ -257,7 +257,7 @@ const productionTenants = {
       allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
-      cnameValue: 'link.eleatech.io'
+      cnameValue: 'eonian.et.e.sparkpost.com'
     }
   },
   fintimes: {
