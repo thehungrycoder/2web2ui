@@ -1,26 +1,35 @@
-import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import { formatInputDate, getRelativeDates } from 'src/helpers/date';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
+import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 
-export function getSpamTrapDetails({ facet = '', facetId = '', subaccount } = {}) {
-  return (dispatch, getState) => {
+export const getSpamHits = ({ filter, type = 'GET_SIGNALS_SPAM_HITS' } = {}) => (
+  (dispatch, getState) => {
+    const { signalOptions: { facet = '', facetSearchTerm, relativeRange, subaccount }} = getState();
+    const { from , to } = getRelativeDates(relativeRange);
 
-    // const { relativeRange } = getState().signalOptions;
-    // TODO generate from/to from relativeRange
+    return dispatch(
+      sparkpostApiRequest({
+        type,
+        meta: {
+          method: 'GET',
+          headers: setSubaccountHeader(subaccount),
+          url: `/v1/signals/spam-hits/${facet}`,
+          showErrorAlert: false,
+          params: {
+            filter: filter || facetSearchTerm,
+            from: formatInputDate(from),
+            to: formatInputDate(to)
+          }
+        }
+      })
+    );
+  }
+);
 
-    const headers = setSubaccountHeader(subaccount);
-
-    return dispatch(sparkpostApiRequest({
-      type: 'GET_SIGNALS_SPAM_TRAPS_DETAILS',
-      meta: {
-        method: 'GET',
-        url: `/v1/signals/spam-hits/${facet}`,
-        params: {
-          filter: facetId,
-          from: '2018-12-10',
-          to: '2018-12-17'
-        },
-        headers
-      }
-    }));
-  };
-}
+export const getSpamHitsDetails = ({ facetId, ...rest }) => (
+  getSpamHits({
+    ...rest,
+    type: 'GET_SIGNALS_SPAM_HITS_DETAILS',
+    filter: facetId
+  })
+);
