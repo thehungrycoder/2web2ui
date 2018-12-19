@@ -7,7 +7,8 @@ import Actions from './components/Actions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import withSpamTrapDetails from './containers/SpamTrapDetails.container';
-import { Loading, Empty } from 'src/components';
+import { Loading } from 'src/components';
+import Empty from './components/Empty';
 import OtherChartsHeader from './components/OtherChartsHeader';
 import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
@@ -18,7 +19,7 @@ import _ from 'lodash';
 // TODO replace with health score and engagement preview
 import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 
-export class SpamTrapsPage extends Component {
+export class SpamTrapPage extends Component {
   state = {
     calculation: 'absolute',
     selected: null
@@ -33,8 +34,9 @@ export class SpamTrapsPage extends Component {
 
   componentDidUpdate(prevProps) {
     const { data } = this.props;
+    const { selected } = this.state;
 
-    if (!prevProps.data && this.props.data) {
+    if (prevProps.data !== this.props.data && !selected) {
       this.setState({ selected: _.last(data).date });
     }
   }
@@ -67,28 +69,25 @@ export class SpamTrapsPage extends Component {
     <Fragment>
       <TooltipMetric label='Spam Trap Hits' value={formatFullNumber(payload.trap_hits)} />
       <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
-      <TooltipMetric label='Spam Trap Rate' value={`${roundToPlaces(payload.relative_trap_hits * 100, 3)}%`} />
+      <TooltipMetric label='Spam Trap Rate' value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`} />
     </Fragment>
   )
 
   renderContent = () => {
     const { data = [], loading, gap, empty } = this.props;
     const { calculation, selected } = this.state;
+    let chartPanel;
 
     if (loading) {
-      return (
-        <div style={{ height: '363px', position: 'relative' }}>
+      chartPanel = (
+        <div style={{ height: '220px', position: 'relative' }}>
           <Loading />
         </div>
       );
     }
 
     if (empty) {
-      return (
-        <Empty message='No Data Available'>
-          <p>Sorry! Insufficient data to populate this chart.</p>
-        </Empty>
-      );
+      chartPanel = <Empty>Insufficient data to populate this chart</Empty>;
     }
 
     return (
@@ -104,16 +103,18 @@ export class SpamTrapsPage extends Component {
                 />
               }
             />
-            <BarChart
-              gap={gap}
-              onClick={this.handleDateSelect}
-              selected={selected}
-              timeSeries={data}
-              tooltipContent={this.getTooltipContent}
-              yKey={calculation === 'absolute' ? 'trap_hits' : 'relative_trap_hits'}
-              yAxisProps={this.getYAxisProps()}
-              xAxisProps={this.getXAxisProps()}
-            />
+            {chartPanel || (
+              <BarChart
+                gap={gap}
+                onClick={this.handleDateSelect}
+                selected={selected}
+                timeSeries={data}
+                tooltipContent={this.getTooltipContent}
+                yKey={calculation === 'absolute' ? 'trap_hits' : 'relative_trap_hits'}
+                yAxisProps={this.getYAxisProps()}
+                xAxisProps={this.getXAxisProps()}
+              />
+            )}
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
@@ -150,4 +151,4 @@ export class SpamTrapsPage extends Component {
   }
 }
 
-export default withSpamTrapDetails(SpamTrapsPage);
+export default withSpamTrapDetails(SpamTrapPage);

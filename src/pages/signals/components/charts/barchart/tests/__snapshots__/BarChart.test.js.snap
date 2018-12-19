@@ -22,8 +22,8 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
     margin={
       Object {
         "bottom": 5,
-        "left": 5,
-        "right": 18,
+        "left": 18,
+        "right": 0,
         "top": 5,
       }
     }
@@ -56,7 +56,8 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
       horizontal={true}
       horizontalFill={Array []}
       horizontalPoints={Array []}
-      stroke="#ccc"
+      shapeRendering="crispEdges"
+      stroke="#e1e1e6"
       vertical={false}
       verticalFill={Array []}
       verticalPoints={Array []}
@@ -108,13 +109,13 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
       orientation="bottom"
       padding={
         Object {
-          "left": 0,
-          "right": 0,
-          "top": 0,
+          "left": 12,
+          "right": 12,
         }
       }
       reversed={false}
       scale="auto"
+      shapeRendering="crispEdges"
       tickCount={5}
       tickLine={false}
       type="category"
@@ -144,7 +145,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
       itemSorter={[Function]}
       itemStyle={Object {}}
       labelStyle={Object {}}
-      offset={10}
+      offset={25}
       separator=" : "
       useTranslate3d={false}
       viewBox={

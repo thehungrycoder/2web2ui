@@ -4,8 +4,8 @@ import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { PanelLoading, PageLink } from 'src/components';
 import withSpamTrapDetails from '../../containers/SpamTrapDetails.container';
 import BarChart from '../charts/barchart/BarChart';
+import Empty from '../Empty';
 import ChartHeader from '../ChartHeader';
-import styles from './Empty.module.scss';
 
 export class SpamTrapsPreview extends Component {
 
@@ -13,9 +13,7 @@ export class SpamTrapsPreview extends Component {
     const { data, gap, empty } = this.props;
 
     if (empty) {
-      return (
-        <p className={styles.Empty}>Insufficient data to populate this chart.</p>
-      );
+      return <Empty height='100px' />;
     }
 
     return (
@@ -36,9 +34,7 @@ export class SpamTrapsPreview extends Component {
     const { facet, facetId, loading } = this.props;
 
     if (loading) {
-      return (
-        <PanelLoading minHeight='170px' />
-      );
+      return <PanelLoading minHeight='170px' />;
     }
 
     return (

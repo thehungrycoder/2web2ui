@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
+<PageLink
+  to="/signals/spam-traps/ip-pool/best-pool"
+>
+  <Panel
+    sectioned={true}
+  >
+    <ChartHeader
+      primaryArea={
+        <Tooltip
+          bottom={true}
+          content="Content"
+          dark={true}
+          forcePosition={false}
+          horizontalOffset="-14px"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
+        >
+          <InfoOutline
+            size={24}
+          />
+        </Tooltip>
+      }
+      title="Spam Trap Monitoring"
+    />
+    <BarChart
+      disableHover={true}
+      fill="#B157CE"
+      gap={0.5}
+      height={170}
+      margin={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+        }
+      }
+      timeSeries={
+        Array [
+          1,
+          2,
+          3,
+        ]
+      }
+      width="99%"
+      xAxisProps={
+        Object {
+          "hide": true,
+        }
+      }
+      xKey="date"
+      yAxisProps={
+        Object {
+          "hide": true,
+        }
+      }
+      yKey="trap_hits"
+      yRange={
+        Array [
+          "auto",
+          "auto",
+        ]
+      }
+    />
+  </Panel>
+</PageLink>
+`;
+
+exports[`Signals SpamTrapsPreview Component renders empty correctly 1`] = `
+<PageLink
+  to="/signals/spam-traps/ip-pool/best-pool"
+>
+  <Panel
+    sectioned={true}
+  >
+    <ChartHeader
+      primaryArea={
+        <Tooltip
+          bottom={true}
+          content="Content"
+          dark={true}
+          forcePosition={false}
+          horizontalOffset="-14px"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
+        >
+          <InfoOutline
+            size={24}
+          />
+        </Tooltip>
+      }
+      title="Spam Trap Monitoring"
+    />
+    <Empty
+      height="100px"
+      title="No Data Available"
+    />
+  </Panel>
+</PageLink>
+`;
+
+exports[`Signals SpamTrapsPreview Component renders loading correctly 1`] = `
+<PanelLoading
+  minHeight="170px"
+/>
+`;

@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Spam Trap Page bar chart props gets x axis props 1`] = `
+Object {
+  "interval": -2,
+  "tickFormatter": [Function],
+}
+`;
+
+exports[`Signals Spam Trap Page bar chart props renders tooltip content 1`] = `
+<Fragment>
+  <TooltipMetric
+    label="Spam Trap Hits"
+    value="2"
+  />
+  <TooltipMetric
+    label="Injections"
+    value="3"
+  />
+  <TooltipMetric
+    label="Spam Trap Rate"
+    value="0.1235%"
+  />
+</Fragment>
+`;
+
+exports[`Signals Spam Trap Page renders correctly 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  primaryArea={<Connect(DateFilter) />}
+  subtitle="Spam Trap Monitoring for test.com"
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          primaryArea={
+            <Calculation
+              initialSelected="absolute"
+              onChange={[Function]}
+            />
+          }
+          title="Spam Trap Monitoring"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={250}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 5,
+            }
+          }
+          onClick={[Function]}
+          selected={null}
+          timeSeries={Array []}
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "interval": -2,
+              "tickFormatter": [Function],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": null,
+            }
+          }
+          yKey="trap_hits"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <Actions
+        actions={
+          Array [
+            Object {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
+              "link": "https://www.sparkpost.com",
+            },
+          ]
+        }
+        date={null}
+      />
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Spam Trap Page renders empty correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <ChartHeader
+    primaryArea={
+      <Calculation
+        initialSelected="absolute"
+        onChange={[Function]}
+      />
+    }
+    title="Spam Trap Monitoring"
+  />
+  <Empty
+    height="220px"
+    title="No Data Available"
+  >
+    Insufficient data to populate this chart
+  </Empty>
+</Panel>
+`;
+
+exports[`Signals Spam Trap Page renders loading correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <ChartHeader
+    primaryArea={
+      <Calculation
+        initialSelected="absolute"
+        onChange={[Function]}
+      />
+    }
+    title="Spam Trap Monitoring"
+  />
+  <div
+    style={
+      Object {
+        "height": "220px",
+        "position": "relative",
+      }
+    }
+  >
+    <Loading />
+  </div>
+</Panel>
+`;

@@ -1,0 +1,16 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Title {
+  margin-bottom: spacing(smaller);
+  color: color(gray, 2);
+}
+
+.Content {
+  color: color(gray, 3);
+}

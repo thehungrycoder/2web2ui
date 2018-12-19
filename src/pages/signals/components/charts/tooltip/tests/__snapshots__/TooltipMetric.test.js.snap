@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals TooltipMetric Component renders correctly 1`] = `
+<div
+  className="Wrapper"
+>
+  <div
+    className="TooltipMetric"
+  >
+    <div
+      className="Color"
+      style={
+        Object {
+          "background": "#6e6e73",
+        }
+      }
+    />
+    <div
+      className="Content"
+    >
+      <div
+        className="Label"
+      >
+        Foo
+      </div>
+      <div
+        className="Value"
+      >
+        101
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Signals TooltipMetric Component renders correctly with color 1`] = `
+<div
+  className="Wrapper"
+>
+  <div
+    className="TooltipMetric"
+  >
+    <div
+      className="Color"
+      style={
+        Object {
+          "background": "#abc",
+        }
+      }
+    />
+    <div
+      className="Content"
+    >
+      <div
+        className="Label"
+      >
+        Foo
+      </div>
+      <div
+        className="Value"
+      >
+        101
+      </div>
+    </div>
+  </div>
+</div>
+`;

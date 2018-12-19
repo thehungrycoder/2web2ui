@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Signals Recommended Actions Component renders correctly 1`] = `
-<div>
+<div
+  className="Wrapper"
+>
   <div
     className="Title"
   >

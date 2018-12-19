@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getSpamTrapDetails } from 'src/actions/signals.fake';
+import { getSpamTrapDetails } from 'src/actions/signals';
 import _ from 'lodash';
 
 function withSpamTrapDetails(WrappedComponent) {
@@ -44,11 +44,7 @@ function withSpamTrapDetails(WrappedComponent) {
     selected: _.get(props, 'location.state.date')
   });
 
-  const mapDispatchToProps = {
-    getSpamTrapDetails
-  };
-
-  return withRouter(connect(mapStateToProps, mapDispatchToProps)(WithSpamTrapDetails));
+  return withRouter(connect(mapStateToProps, { getSpamTrapDetails })(WithSpamTrapDetails));
 }
 
 export default withSpamTrapDetails;
