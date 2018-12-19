@@ -2,28 +2,23 @@ import React from 'react';
 import { TextFieldWrapper } from 'src/components';
 import { Field } from 'redux-form';
 import styles from './PromoCode.module.scss';
+import { LoadingSVG } from 'src/components';
+import { connect } from 'react-redux';
 
+const Loading = ({ loading }) => loading ? <LoadingSVG size="XSmall" /> : null;
 
 class PromoCode extends React.Component {
 
-  handleBlur = (e, value) => {
-    const { onBlur } = this.props;
-    if (value) {
-      onBlur(value);
-    }
-  }
-
   render() {
-    const { selectedPromo = {}, promoError = {}} = this.props;
+    const { selectedPromo = {}, promoPending = false } = this.props;
     return (
       <span>
         <Field
           label='Promo Code'
           name="promoCode"
           errorInLabel
-          validate={(value) => promoError.message}
-          onBlur={this.handleBlur}
           component={TextFieldWrapper}
+          suffix={<Loading loading={promoPending} />}
         />
         {selectedPromo && (
           <span className={styles.CurrentPromoLabel}>{selectedPromo.description}</span>
@@ -33,4 +28,9 @@ class PromoCode extends React.Component {
   }
 }
 
-export default PromoCode;
+const mapStateToProps = (state) => ({
+  promoPending: state.billing.promoPending,
+  promoError: state.billing.promoError
+});
+
+export default connect(mapStateToProps)(PromoCode);

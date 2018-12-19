@@ -19,6 +19,7 @@ import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
 import CardSummary from '../components/CardSummary';
+import promoCodeValidate from '../helpers/promoCodeValidate';
 import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { not } from 'src/helpers/conditions';
@@ -62,16 +63,16 @@ export class ChangePlanForm extends Component {
       : values;
     const action = Promise.resolve();
     if (activePromoCode && !isDowngradeToFree) {
-      action.then(verifyPromoCode({ promoCode: activePromoCode, billingId: values.planpicker.billingId, meta: { promoCode: activePromoCode }}));
+      action.then(() => verifyPromoCode({ promoCode: activePromoCode, billingId: values.planpicker.billingId, meta: { promoCode: activePromoCode }}));
     }
     // decides which action to be taken based on
     // if it's aws account, it already has billing and if you use a saved CC
     if (this.props.isAws) {
-      action.then(updateSubscription({ code: newCode }));
+      action.then(() => updateSubscription({ code: newCode }));
     } else if (account.billing) {
-      action.then(this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode, promoCode: activePromoCode }) : billingUpdate(newValues));
+      action.then(() => this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode, promoCode: activePromoCode }) : billingUpdate(newValues));
     } else {
-      action.then(billingCreate(newValues)); // creates Zuora account
+      action.then(() => billingCreate(newValues)); // creates Zuora account
     }
 
     return action
@@ -182,5 +183,5 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode };
-const formOptions = { form: FORMNAME, enableReinitialize: true };
+const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate, asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));

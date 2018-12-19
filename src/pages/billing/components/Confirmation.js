@@ -30,17 +30,11 @@ export class Confirmation extends React.Component {
     );
   }
 
-  handleBlur = (value) => {
-    const { verifyPromoCode, selected = {}} = this.props;
-    verifyPromoCode({ promoCode: value, billingId: selected.billingId, meta: { promoCode: value }});
-  }
-
   renderPromoCodeField() {
     const { selectedPromo = {}, promoError } = this.props;
     return (
       <Panel.Section>
         <PromoCode
-          onBlur={this.handleBlur}
           selectedPromo={selectedPromo}
           promoError={promoError}
         />
