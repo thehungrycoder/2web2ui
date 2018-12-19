@@ -1,55 +1,32 @@
-const initialDimension = {
-  overview: {},
-  details: {
-    facet: '',
-    loading: false,
-    empty: false,
-    error: null,
-    data: []
-  }
+const initialDimensionState = {
+  data: [],
+  error: null,
+  loading: false,
+  totalCount: 0
 };
 
 const initialState = {
-  spamTraps: initialDimension,
-  healthScore: initialDimension,
-  engagement: initialDimension
+  spamHits: initialDimensionState,
+  healthScore: initialDimensionState,
+  engagement: initialDimensionState
 };
 
-export default (state = initialState, { type, payload, meta }) => {
-  const setDimensionPageState = (dimension, page, data) => ({
-    ...state,
-    [dimension]: {
-      ...state[dimension],
-      [page]: {
-        ...state[dimension][page],
-        ...data
-      }
-    }
-  });
-
+const signalsReducer = (state = initialState, { type, payload, meta }) => {
   switch (type) {
-    case 'GET_SIGNALS_SPAM_TRAPS_DETAILS_PENDING':
-      return setDimensionPageState('spamTraps', 'details', {
-        loading: true,
-        empty: false,
-        error: false,
-        data: []
-      });
+    case 'GET_SPAM_HITS_FAIL':
+      return { ...state, spamHits: { ...initialDimensionState, error: payload.error, loading: false }};
 
-    case 'GET_SIGNALS_SPAM_TRAPS_DETAILS_FAIL':
-      return setDimensionPageState('spamTraps', 'details', {
-        loading: false,
-        error: payload.error
-      });
+    case 'GET_SPAM_HITS_PENDING':
+      return { ...state, spamHits: { ...initialDimensionState, loading: true }};
 
-    case 'GET_SIGNALS_SPAM_TRAPS_DETAILS_SUCCESS':
-      return setDimensionPageState('spamTraps', 'details', {
-        loading: false,
-        data: payload.data, // TODO match facet id from meta
-        empty: payload.data.length === 0
-      });
+    case 'GET_SPAM_HITS_SUCCESS': {
+      const { data, total_count: totalCount } = payload;
+      return { ...state, spamHits: { ...initialDimensionState, data, loading: false, totalCount }};
+    }
 
     default:
       return state;
   }
 };
+
+export default signalsReducer;
