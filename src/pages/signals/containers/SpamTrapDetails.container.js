@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getSpamTrapDetails } from 'src/actions/signals';
+import { getSpamHits } from 'src/actions/signals';
 import _ from 'lodash';
 
 function withSpamTrapDetails(WrappedComponent) {
   class WithSpamTrapDetails extends Component {
     componentDidMount() {
-      const { getSpamTrapDetails, facet, facetId } = this.props;
-      getSpamTrapDetails({ facet, facetId });
+      const { getSpamHits, facet, facetId } = this.props;
+      getSpamHits({ facet, facetId });
     }
 
     componentDidUpdate(prevProps) {
-      const { getSpamTrapDetails, facet, facetId, filters } = this.props;
+      const { getSpamHits, facet, facetId, filters } = this.props;
       const prevRange = prevProps.filters.relativeRange;
       const nextRange = filters.relativeRange;
 
       // Refresh when date range changes
       if (prevRange !== nextRange) {
-        getSpamTrapDetails({ facet, facetId });
+        getSpamHits({ facet, facetId });
       }
     }
 
@@ -44,7 +44,7 @@ function withSpamTrapDetails(WrappedComponent) {
     selected: _.get(props, 'location.state.date')
   });
 
-  return withRouter(connect(mapStateToProps, { getSpamTrapDetails })(WithSpamTrapDetails));
+  return withRouter(connect(mapStateToProps, { getSpamHits })(WithSpamTrapDetails));
 }
 
 export default withSpamTrapDetails;
