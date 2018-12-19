@@ -14,7 +14,7 @@ Array [
       "showErrorAlert": false,
       "url": "/v1/signals/spam-hits/",
     },
-    "type": "GET_SIGNALS_SPAM_HITS",
+    "type": "GET_SPAM_HITS",
   },
 ]
 `;
@@ -33,12 +33,12 @@ Array [
       "showErrorAlert": false,
       "url": "/v1/signals/spam-hits/sending-domain",
     },
-    "type": "GET_SIGNALS_SPAM_HITS",
+    "type": "GET_SPAM_HITS",
   },
 ]
 `;
 
-exports[`Signals Actions .getSpamHits with a search term 1`] = `
+exports[`Signals Actions .getSpamHits with a filter 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -52,7 +52,7 @@ Array [
       "showErrorAlert": false,
       "url": "/v1/signals/spam-hits/",
     },
-    "type": "GET_SIGNALS_SPAM_HITS",
+    "type": "GET_SPAM_HITS",
   },
 ]
 `;
@@ -73,26 +73,7 @@ Array [
       "showErrorAlert": false,
       "url": "/v1/signals/spam-hits/",
     },
-    "type": "GET_SIGNALS_SPAM_HITS",
-  },
-]
-`;
-
-exports[`Signals Actions .getSpamHitsDetails with facetId 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "headers": Object {},
-      "method": "GET",
-      "params": Object {
-        "filter": "example.com",
-        "from": "2018-01-12",
-        "to": "2018-01-13",
-      },
-      "showErrorAlert": false,
-      "url": "/v1/signals/spam-hits/",
-    },
-    "type": "GET_SIGNALS_SPAM_HITS_DETAILS",
+    "type": "GET_SPAM_HITS",
   },
 ]
 `;

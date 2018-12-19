@@ -1,5 +1,5 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
-import { getSpamHits, getSpamHitsDetails } from '../signals';
+import { getSpamHits } from '../signals';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 jest.mock('src/helpers/date', () => ({
@@ -11,48 +11,22 @@ jest.mock('src/helpers/date', () => ({
 }));
 
 describe('Signals Actions', () => {
-  const signalOptions = {
+  const requiredOptions = {
     relativeRange: '14days'
   };
 
   snapshotActionCases('.getSpamHits', {
     'by default': {
-      action: getSpamHits,
-      state: { signalOptions }
+      action: () => getSpamHits({ ...requiredOptions })
     },
     'with a facet': {
-      action: getSpamHits,
-      state: {
-        signalOptions: {
-          ...signalOptions,
-          facet: 'sending-domain'
-        }
-      }
+      action: () => getSpamHits({ ...requiredOptions, facet: 'sending-domain' })
     },
-    'with a search term': {
-      action: getSpamHits,
-      state: {
-        signalOptions: {
-          ...signalOptions,
-          facetSearchTerm: 'examp'
-        }
-      }
+    'with a filter': {
+      action: () => getSpamHits({ ...requiredOptions, filter: 'examp' })
     },
     'with a subaccount': {
-      action: getSpamHits,
-      state: {
-        signalOptions: {
-          ...signalOptions,
-          subaccount: { id: 123 }
-        }
-      }
-    }
-  });
-
-  snapshotActionCases('.getSpamHitsDetails', {
-    'with facetId': {
-      action: () => getSpamHitsDetails({ facetId: 'example.com' }),
-      state: { signalOptions }
+      action: () => getSpamHits({ ...requiredOptions, subaccount: { id: 123 }})
     }
   });
 });

@@ -102,6 +102,10 @@ export function getRelativeDates(range, roundToPrecision = true) {
       preciseFrom = moment(now).subtract(10, 'day').toDate();
       break;
 
+    case '14days':
+      preciseFrom = moment(now).subtract(14, 'day').toDate();
+      break;
+
     case '30days':
       preciseFrom = moment(now).subtract(30, 'day').toDate();
       break;
@@ -125,6 +129,7 @@ export function getRelativeDates(range, roundToPrecision = true) {
     const { to, from } = roundBoundaries(preciseFrom, now);
     return { to: to.toDate(), from: from.toDate(), relativeRange: range };
   }
+
   return { to: now, from: preciseFrom, relativeRange: range };
 }
 
