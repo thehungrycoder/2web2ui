@@ -27,10 +27,6 @@ const OPTIONS = [
 ];
 
 export class SubaccountFilter extends React.Component {
-  static defaultProps = {
-    subaccount: OPTIONS[0]
-  }
-
   state = {
     isOpen: false,
     isSearchOpen: false
@@ -50,7 +46,7 @@ export class SubaccountFilter extends React.Component {
   }
 
   render() {
-    const { hasSubaccounts, subaccount } = this.props;
+    const { hasSubaccounts, signalOptions: { subaccount = OPTIONS[0] }} = this.props;
     const { isOpen, isSearchOpen } = this.state;
 
     if (!hasSubaccounts) {

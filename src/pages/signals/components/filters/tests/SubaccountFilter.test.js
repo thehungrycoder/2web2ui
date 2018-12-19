@@ -6,6 +6,7 @@ describe('SubaccountFilter Component', () => {
   const subject = (props = {}) => shallow(
     <SubaccountFilter
       hasSubaccounts={true}
+      signalOptions={{}}
       {...props}
     />
   );
@@ -29,7 +30,12 @@ describe('SubaccountFilter Component', () => {
   });
 
   it('renders with subaccount', () => {
-    const wrapper = subject({ subaccount: { id: 123, name: 'Test Subaccount' }});
+    const props = {
+      signalOptions: {
+        subaccount: { id: 123, name: 'Test Subaccount' }
+      }
+    };
+    const wrapper = subject(props);
     expect(wrapper).toMatchSnapshot();
   });
 

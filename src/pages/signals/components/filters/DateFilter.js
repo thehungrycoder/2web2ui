@@ -17,7 +17,7 @@ export class DateFilter extends React.Component {
   }
 
   render() {
-    const { relativeRange } = this.props;
+    const { signalOptions: { relativeRange }} = this.props;
 
     return (
       <div className={styles.DateFilter}>

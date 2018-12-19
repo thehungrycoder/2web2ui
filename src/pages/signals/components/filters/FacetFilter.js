@@ -18,7 +18,7 @@ export class FacetFilter extends React.Component {
 
   static getDerivedStateFromProps(nextProps, nextState) {
     return {
-      searchTerm: nextProps.facetSearchTerm
+      searchTerm: nextProps.signalOptions.facetSearchTerm
     };
   }
 
@@ -37,7 +37,7 @@ export class FacetFilter extends React.Component {
   }
 
   render() {
-    const { facet } = this.props;
+    const { signalOptions: { facet }} = this.props;
     const { searchTerm } = this.state;
 
     return (
