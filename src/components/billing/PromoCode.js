@@ -21,7 +21,7 @@ class PromoCode extends React.Component {
           suffix={<Loading loading={promoPending} />}
         />
         {selectedPromo && (
-          <span className={styles.CurrentPromoLabel}>{selectedPromo.description}</span>
+          <span className={styles.CurrentPromoLabel}>{selectedPromo.description || 'Promo code applied!'}</span>
         )}
       </span>
     );
