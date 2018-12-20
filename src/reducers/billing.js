@@ -39,6 +39,9 @@ export default (state = initialState, action) => {
     case 'VERIFY_PROMO_CODE_PENDING':
       return { ...state, promoPending: true, promoError: undefined };
 
+    case 'REMOVE_ACTIVE_PROMO':
+      return { ...state, promoPending: false, promoError: undefined, selectedPromo: {}};
+
     default:
       return state;
   }

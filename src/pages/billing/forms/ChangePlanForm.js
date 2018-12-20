@@ -5,7 +5,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
-import { updateSubscription, getBillingCountries, verifyPromoCode } from 'src/actions/billing';
+import { updateSubscription, getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
@@ -123,9 +123,15 @@ export class ChangePlanForm extends Component {
     );
   }
 
+  onPlanSelect = (e) => {
+    const { currentPlan, clearPromoCode } = this.props;
+    if (currentPlan.code !== e.code) {
+      clearPromoCode();
+    }
+  }
+
   render() {
     const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling, billing, verifyPromoCode } = this.props;
-
     if (loading) {
       return <Loading />;
     }
@@ -142,7 +148,7 @@ export class ChangePlanForm extends Component {
           <Grid.Column>
             <Panel title='Select A Plan'>
               {plans.length
-                ? <PlanPicker disabled={submitting} plans={plans} />
+                ? <PlanPicker disabled={submitting} plans={plans} onChange={this.onPlanSelect}/>
                 : null
               }
             </Panel>
@@ -185,6 +191,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode };
-const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate, asyncBlurFields: ['promoCode']};
+const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
+const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate, asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));

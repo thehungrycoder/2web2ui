@@ -73,6 +73,10 @@ export function verifyPromoCode({ promoCode, billingId, meta = {}}) {
   });
 }
 
+export function clearPromoCode() {
+  return { type: 'REMOVE_ACTIVE_PROMO' };
+}
+
 export function cors({ meta = {}, context, data = {}}) {
   const type = `CORS_${context.toUpperCase().replace('-', '_')}`;
   return sparkpostApiRequest({
