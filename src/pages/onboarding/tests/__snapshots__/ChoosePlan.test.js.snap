@@ -12,6 +12,11 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
           disabled={true}
           plans={Array []}
         />
+        <Panel.Section>
+          <Connect(PromoCode)
+            selectedPromo={Object {}}
+          />
+        </Panel.Section>
         <Connect(AccessControl)
           condition={[Function]}
         >
@@ -59,6 +64,11 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
           disabled={false}
           plans={Array []}
         />
+        <Panel.Section>
+          <Connect(PromoCode)
+            selectedPromo={Object {}}
+          />
+        </Panel.Section>
         <Connect(AccessControl)
           condition={[Function]}
         >

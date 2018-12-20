@@ -7,7 +7,7 @@ import { CenteredLogo, Loading, PlanPicker } from 'src/components';
 import { FORMS } from 'src/constants';
 import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
-import { getBillingCountries } from 'src/actions/billing';
+import { getBillingCountries, verifyPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import { choosePlanMSTP } from 'src/selectors/onboarding';
 import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
@@ -16,6 +16,7 @@ import { isAws } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import AccessControl from 'src/components/auth/AccessControl';
 import { prepareCardInfo } from 'src/helpers/billing';
+import PromoCode from 'src/components/billing/PromoCode';
 
 const NEXT_STEP = '/onboarding/sending-domain';
 
@@ -89,8 +90,20 @@ export class OnboardingPlanPage extends Component {
     );
   }
 
+  renderPromoCodeField() {
+    const { billing } = this.props;
+    const { selectedPromo = {}} = billing;
+    return (
+      <Panel.Section>
+        <PromoCode
+          selectedPromo={selectedPromo}
+        />
+      </Panel.Section>
+    );
+  }
+
   render() {
-    const { loading, plans, submitting } = this.props;
+    const { loading, plans, submitting, selectedPlan = {}} = this.props;
 
     if (loading) {
       return <Loading />;
@@ -105,6 +118,7 @@ export class OnboardingPlanPage extends Component {
           <Grid.Column>
             <Panel title='Select A Plan'>
               <PlanPicker disabled={submitting} plans={plans} />
+              {!selectedPlan.isFree && this.renderPromoCodeField()}
               <AccessControl condition={not(isAws)}>
                 {this.renderCCSection()}
               </AccessControl>
@@ -120,7 +134,24 @@ export class OnboardingPlanPage extends Component {
   }
 }
 
-const formOptions = { form: FORMS.JOIN_PLAN, enableReinitialize: true };
+const promoCodeValidate = (values, dispatch) => {
+  const { promoCode, planpicker } = values;
+  if (!promoCode) {
+    return Promise.resolve();
+  }
+
+  return dispatch(
+    verifyPromoCode({
+      promoCode,
+      billingId: planpicker.billingId,
+      meta: { promoCode }
+    })
+  ).catch(({ message }) => {
+    throw { promoCode: 'Invalid promo code' };
+  });
+};
+
+const formOptions = { form: FORMS.JOIN_PLAN, enableReinitialize: true, asyncValidate: promoCodeValidate, asyncBlurFields: ['promoCode']};
 
 export default connect(
   choosePlanMSTP(FORMS.JOIN_PLAN),
