@@ -20,7 +20,7 @@ describe('ChoosePlan page tests', () => {
       push: jest.fn()
     },
     loading: false,
-    billing: { countries: []},
+    billing: { countries: [], selectedPromo: {}},
     plans: [],
     submitting: false
   };

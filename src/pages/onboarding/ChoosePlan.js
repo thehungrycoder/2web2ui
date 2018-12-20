@@ -37,8 +37,8 @@ export class OnboardingPlanPage extends Component {
   }
 
   onSubmit = (values) => {
-    const { billingCreate, showAlert, history } = this.props;
-
+    const { billingCreate, showAlert, history, billing } = this.props;
+    const selectedPromo = billing.selectedPromo;
     const newValues = values.card && !values.planpicker.isFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
@@ -49,8 +49,18 @@ export class OnboardingPlanPage extends Component {
       return;
     }
 
+    const action = Promise.resolve({});
+    if (selectedPromo.promoCode && !values.planpicker.isFree && values.promoCode) {
+      const { promoCode } = selectedPromo;
+      action.then(() => verifyPromoCode({ promoCode, billingId: values.planpicker.billingId, meta: { promoCode }}));
+    }
+
     // Note: billingCreate will update the subscription if the account is AWS
-    return billingCreate(newValues)
+    return action
+      .then(({ discount_id }) => {
+        newValues.discountId = discount_id;
+        return billingCreate(newValues);
+      })
       .then(() => history.push(NEXT_STEP))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
@@ -155,5 +165,5 @@ const formOptions = { form: FORMS.JOIN_PLAN, enableReinitialize: true, asyncVali
 
 export default connect(
   choosePlanMSTP(FORMS.JOIN_PLAN),
-  { billingCreate, showAlert, getPlans, getBillingCountries }
+  { billingCreate, showAlert, getPlans, getBillingCountries, verifyPromoCode }
 )(reduxForm(formOptions)(OnboardingPlanPage));
