@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Billboard renders signle cell table row 1`] = `
+<tbody>
+  <Table.Row>
+    <Table.Cell
+      className="Billboard"
+      colSpan={7}
+    >
+      <h1>
+        Test Example
+      </h1>
+    </Table.Cell>
+  </Table.Row>
+</tbody>
+`;

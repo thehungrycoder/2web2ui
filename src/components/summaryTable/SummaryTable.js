@@ -22,6 +22,8 @@ class SummaryTable extends React.Component {
     children: PropTypes.arrayOf(Column).isRequired,
     currentPage: PropTypes.number.isRequired,
     data: PropTypes.arrayOf(PropTypes.object),
+    empty: PropTypes.bool,
+    error: PropTypes.node,
     loading: PropTypes.bool,
     onChange: PropTypes.func,
     order: PropTypes.shape({
@@ -69,7 +71,9 @@ class SummaryTable extends React.Component {
   }
 
   render() {
-    const { children, currentPage, data, loading, order, perPage, totalCount } = this.props;
+    const {
+      children, currentPage, data, empty, error, loading, order, perPage, totalCount
+    } = this.props;
     const columnProps = getColumnProps(children);
     const pages = Math.ceil(totalCount / perPage);
 
@@ -77,7 +81,14 @@ class SummaryTable extends React.Component {
       <div className={styles.SummaryTable}>
         <Table>
           <Head columns={columnProps} onSort={this.handleSort} order={order} />
-          <Body columns={columnProps} data={data} loading={loading} perPage={perPage} />
+          <Body
+            columns={columnProps}
+            data={data}
+            empty={empty}
+            error={error}
+            loading={loading}
+            perPage={perPage}
+          />
         </Table>
         <div className={styles.PaginationWrapper}>
           <div className={styles.PageButtons}>

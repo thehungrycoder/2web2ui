@@ -45,17 +45,34 @@ exports[`Body renders custom component 1`] = `
 </tbody>
 `;
 
+exports[`Body renders empty message 1`] = `
+<Billboard
+  colSpan={2}
+>
+  <Callout
+    title="No Data Available"
+  />
+</Billboard>
+`;
+
+exports[`Body renders error message 1`] = `
+<Billboard
+  colSpan={2}
+>
+  <Callout
+    title="Unable to Load Data"
+  >
+    Oh no!
+  </Callout>
+</Billboard>
+`;
+
 exports[`Body renders loading 1`] = `
-<tbody>
-  <Table.Row>
-    <Table.Cell
-      className="Loading"
-      colSpan={2}
-    >
-      <Loading />
-    </Table.Cell>
-  </Table.Row>
-</tbody>
+<Billboard
+  colSpan={2}
+>
+  <Loading />
+</Billboard>
 `;
 
 exports[`Body renders max of perPage rows 1`] = `
