@@ -140,7 +140,9 @@ export class ChangePlanForm extends Component {
     const disableSubmit = submitting ||
       (isSelfServeBilling && currentPlan.code === selectedPlan.code) ||
       // do not allow private, deprecated, etc. plans to enable billing
-      (selectedPlan.status !== 'public' && selectedPlan.status !== 'secret');
+      (selectedPlan.status !== 'public' && selectedPlan.status !== 'secret') ||
+      // can't submit while verifying promoCode
+      billing.promoPending;
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
