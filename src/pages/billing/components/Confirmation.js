@@ -105,7 +105,7 @@ export class Confirmation extends React.Component {
         <Panel.Section>
           {this.renderCurrentPlanMarkup()}
         </Panel.Section>
-        {isPlanSelected && this.renderPromoCodeField()}
+        {isPlanSelected && !isDowngrade && this.renderPromoCodeField()}
         <Panel.Section>
           {this.renderSelectedPlanMarkup()}
           {effectiveDateMarkup}

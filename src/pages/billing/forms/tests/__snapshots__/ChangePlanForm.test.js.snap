@@ -37,6 +37,7 @@ exports[`Form Container: Change Plan should not show plans 1`] = `
         current={Object {}}
         disableSubmit={true}
         selected={Object {}}
+        selectedPromo={Object {}}
       />
     </Grid.Column>
   </Grid>
@@ -97,6 +98,7 @@ exports[`Form Container: Change Plan should render 1`] = `
         current={Object {}}
         disableSubmit={true}
         selected={Object {}}
+        selectedPromo={Object {}}
       />
     </Grid.Column>
   </Grid>
@@ -159,6 +161,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
         current={Object {}}
         disableSubmit={true}
         selected={Object {}}
+        selectedPromo={Object {}}
       />
     </Grid.Column>
   </Grid>

@@ -131,6 +131,7 @@ Array [
         "billing_id": "test-bill-id",
       },
       "promoCode": "test-code",
+      "showErrorAlert": false,
       "url": "v1/account/subscription/promo-codes/test-code",
     },
     "type": "VERIFY_PROMO_CODE",
@@ -163,6 +164,7 @@ Array [
     "meta": Object {
       "data": Object {
         "code": "test-code",
+        "promoCode": undefined,
       },
       "method": "PUT",
       "onSuccess": [Function],
@@ -179,6 +181,7 @@ Array [
     "meta": Object {
       "data": Object {
         "code": "test-code",
+        "promoCode": undefined,
       },
       "method": "PUT",
       "onSuccess": [Function],
@@ -195,6 +198,7 @@ Array [
     "meta": Object {
       "data": Object {
         "code": "test-code",
+        "promoCode": undefined,
       },
       "method": "PUT",
       "onSuccess": [MockFunction],
