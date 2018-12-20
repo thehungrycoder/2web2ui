@@ -29,3 +29,16 @@ export const selectSpamHitsDetails = createSelector(
     };
   }
 );
+
+export const selectSpamHitsOverviewData = createSelector(
+  getSpamHitsData,
+  ({ data }) => data.map((rowOfData) => {
+    const history = rowOfData.history || [];
+
+    return {
+      ...rowOfData,
+      history,
+      total_injections: history.reduce((total, { injections }) => total + injections, 0)
+    };
+  })
+);
