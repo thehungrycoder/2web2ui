@@ -1,6 +1,6 @@
 const facets = [
   {
-    key: 'campaign',
+    key: 'campaign_id',
     label: 'Campaign'
   },
   {
