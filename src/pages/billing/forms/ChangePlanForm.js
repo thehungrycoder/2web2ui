@@ -61,22 +61,25 @@ export class ChangePlanForm extends Component {
     const newValues = values.card && !isDowngradeToFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
-    const action = Promise.resolve();
+    const action = Promise.resolve({});
     if (selectedPromo && !isDowngradeToFree) {
       const { promoCode } = selectedPromo;
       action.then(() => verifyPromoCode({ promoCode , billingId: values.planpicker.billingId, meta: { promoCode }}));
     }
-    // decides which action to be taken based on
-    // if it's aws account, it already has billing and if you use a saved CC
-    if (this.props.isAws) {
-      action.then(() => updateSubscription({ code: newCode }));
-    } else if (account.billing) {
-      action.then(() => this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues));
-    } else {
-      action.then(() => billingCreate(newValues)); // creates Zuora account
-    }
 
     return action
+      .then(({ discount_id }) => {
+        newValues.discountId = discount_id;
+        // decides which action to be taken based on
+        // if it's aws account, it already has billing and if you use a saved CC
+        if (this.props.isAws) {
+          return updateSubscription({ code: newCode });
+        } else if (account.billing) {
+          return this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
+        } else {
+          return billingCreate(newValues); // creates Zuora account
+        }
+      })
       .then(() => history.push('/account/billing'))
       .then(() => {
         conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
