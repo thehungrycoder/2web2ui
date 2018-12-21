@@ -34,6 +34,9 @@ describe('Signals Actions', () => {
     'with an order': {
       action: () => getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'example_field' })
     },
+    'with a order field that needs to be mapped': {
+      action: () => getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'current_trap_hits' })
+    },
     'with a subaccount': {
       action: () => getSpamHits({ ...requiredOptions, subaccount: { id: 123 }})
     }

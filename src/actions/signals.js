@@ -3,6 +3,12 @@ import setSubaccountHeader from './helpers/setSubaccountHeader';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import moment from 'moment';
 
+// order_by param values do not match field names, so we have to translate here
+const ORDER_BY_MAPPING = {
+  current_trap_hits: 'trap_hits',
+  current_relative_trap_hits: 'perc'
+};
+
 export const getSpamHits = ({
   facet = '',
   filter,
@@ -10,10 +16,15 @@ export const getSpamHits = ({
   relativeRange,
   offset,
   order,
-  orderBy: order_by,
+  orderBy,
   subaccount
 }) => {
   const { from , to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
+  let order_by;
+
+  if (orderBy) {
+    order_by = ORDER_BY_MAPPING[orderBy] || orderBy;
+  }
 
   return sparkpostApiRequest({
     type: 'GET_SPAM_HITS',
