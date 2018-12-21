@@ -1,14 +1,19 @@
 import { formatInputDate, getRelativeDates } from 'src/helpers/date';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
+import moment from 'moment';
 
 export const getSpamHits = ({
   facet = '',
   filter,
+  limit,
   relativeRange,
+  offset,
+  order,
+  orderBy: order_by,
   subaccount
 }) => {
-  const { from , to } = getRelativeDates(relativeRange);
+  const { from , to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
 
   return sparkpostApiRequest({
     type: 'GET_SPAM_HITS',
@@ -20,7 +25,10 @@ export const getSpamHits = ({
       params: {
         filter,
         from: formatInputDate(from),
-        // On appteam staging account this must be no later than Dec 18 2018
+        limit,
+        offset,
+        order,
+        order_by,
         to: formatInputDate(to)
       }
     }

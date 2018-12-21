@@ -25,6 +25,15 @@ describe('Signals Actions', () => {
     'with a filter': {
       action: () => getSpamHits({ ...requiredOptions, filter: 'examp' })
     },
+    'with a limit': {
+      action: () => getSpamHits({ ...requiredOptions, limit: 100 })
+    },
+    'with a offset': {
+      action: () => getSpamHits({ ...requiredOptions, offset: 9 })
+    },
+    'with an order': {
+      action: () => getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'example_field' })
+    },
     'with a subaccount': {
       action: () => getSpamHits({ ...requiredOptions, subaccount: { id: 123 }})
     }
