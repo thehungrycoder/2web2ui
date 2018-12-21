@@ -20,7 +20,8 @@ describe('Signals Spam Trap Details Container', () => {
         relativeRange: '14days'
       },
       getSpamHits: jest.fn(),
-      selected: 'testing-selected'
+      selected: 'testing-selected',
+      subaccountId: '101'
     };
 
     wrapper = shallow(<WithSpamTrapDetails {...props} />);
@@ -31,7 +32,8 @@ describe('Signals Spam Trap Details Container', () => {
     expect(props.getSpamHits).toHaveBeenCalledWith({
       facet: 'sending_domain',
       filter: 'test.com',
-      relativeRange: '14days'
+      relativeRange: '14days',
+      subaccount: '101'
     });
   });
 
@@ -40,7 +42,8 @@ describe('Signals Spam Trap Details Container', () => {
     expect(props.getSpamHits).toHaveBeenCalledWith({
       facet: 'sending_domain',
       filter: 'test.com',
-      relativeRange: '30days'
+      relativeRange: '30days',
+      subaccount: '101'
     });
   });
 

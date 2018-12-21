@@ -31,7 +31,8 @@ describe('Selectors: signals', () => {
     location: {
       state: {
         date: '2018-02-01'
-      }
+      },
+      search: '?subaccount=101'
     }
   };
 
@@ -48,6 +49,12 @@ describe('Selectors: signals', () => {
     it('should not be empty when loading', () => {
       state = { signals: { spamHits: { data: [], loading: true }}};
       expect(selectors.selectSpamHitsDetails(state, props).details.empty).toBe(false);
+    });
+  });
+
+  describe('selected date', () => {
+    it('should select date from react router', () => {
+      expect(selectors.getSelectedDateFromRouter(state, props)).toMatchSnapshot();
     });
   });
 });

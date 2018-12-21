@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Selectors: signals selected date should select date from react router 1`] = `"2018-02-01"`;
+
 exports[`Selectors: signals spam hits details should be empty with no results when not loading 1`] = `
 Object {
   "details": Object {
@@ -10,6 +12,7 @@ Object {
   },
   "facet": "sending_domain",
   "facetId": "test.com",
+  "subaccountId": "101",
 }
 `;
 
@@ -29,5 +32,6 @@ Object {
   },
   "facet": "sending_domain",
   "facetId": "test.com",
+  "subaccountId": "101",
 }
 `;

@@ -6,22 +6,28 @@ import { selectSpamHitsDetails, getSelectedDateFromRouter } from 'src/selectors/
 
 export class WithSpamTrapDetails extends Component {
   componentDidMount() {
-    const { getSpamHits, facet, facetId, filters } = this.props;
+    const { getSpamHits, facet, facetId, filters, subaccountId } = this.props;
     getSpamHits({
       facet,
       filter: facetId,
-      relativeRange: filters.relativeRange
+      relativeRange: filters.relativeRange,
+      subaccount: subaccountId
     });
   }
 
   componentDidUpdate(prevProps) {
-    const { getSpamHits, facet, facetId, filters } = this.props;
+    const { getSpamHits, facet, facetId, filters, subaccountId } = this.props;
     const prevRange = prevProps.filters.relativeRange;
     const nextRange = filters.relativeRange;
 
     // Refresh when date range changes
     if (prevRange !== nextRange) {
-      getSpamHits({ facet, filter: facetId, relativeRange: nextRange });
+      getSpamHits({
+        facet,
+        filter: facetId,
+        relativeRange: nextRange,
+        subaccount: subaccountId
+      });
     }
   }
 

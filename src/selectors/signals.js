@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 import _ from 'lodash';
 
 // Router props
@@ -10,8 +11,8 @@ export const getSelectedDateFromRouter = (state, props) => _.get(props, 'locatio
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
 
 export const selectSpamHitsDetails = createSelector(
-  [getSpamHitsData, getFacetFromParams, getFacetIdFromParams],
-  ({ loading, error, data }, facet, facetId) => {
+  [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery],
+  ({ loading, error, data }, facet, facetId, subaccountId) => {
     const match = _.find(data, [facet, facetId]) || {};
     const history = match.history || [];
 
@@ -23,7 +24,8 @@ export const selectSpamHitsDetails = createSelector(
         loading
       },
       facet,
-      facetId
+      facetId,
+      subaccountId
     };
   }
 );
