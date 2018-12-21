@@ -280,7 +280,7 @@ const routes = [
   },
   {
     path: '/signals/spam-traps/:facet/:facetId',
-    component: signals.SpamTrapsPage,
+    component: signals.SpamTrapPage,
     condition: hasUiOption('signals'),
     layout: App,
     title: 'Signals',

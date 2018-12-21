@@ -171,7 +171,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
       key="value"
       layout="vertical"
       legendType="rect"
-      minPointSize={0}
+      minPointSize={1}
       onAnimationEnd={[Function]}
       onAnimationStart={[Function]}
       onClick={[MockFunction]}
@@ -198,7 +198,7 @@ Array [
     key="ab"
     layout="vertical"
     legendType="rect"
-    minPointSize={0}
+    minPointSize={1}
     onAnimationEnd={[Function]}
     onAnimationStart={[Function]}
     onClick={[MockFunction]}
@@ -219,7 +219,7 @@ Array [
     key="cd"
     layout="vertical"
     legendType="rect"
-    minPointSize={0}
+    minPointSize={1}
     onAnimationEnd={[Function]}
     onAnimationStart={[Function]}
     onClick={[MockFunction]}

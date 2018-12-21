@@ -76,7 +76,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "tickFormatter": [Function],
             }
           }
-          xKey="date"
+          xKey="dt"
           yAxisProps={
             Object {
               "tickFormatter": null,
@@ -117,15 +117,11 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
     <Grid.Column
       sm={6}
       xs={12}
-    >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
-    </Grid.Column>
+    />
     <Grid.Column
       sm={6}
       xs={12}
-    >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
-    </Grid.Column>
+    />
   </Grid>
 </SignalsPage>
 `;

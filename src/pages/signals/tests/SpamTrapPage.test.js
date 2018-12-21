@@ -40,7 +40,7 @@ describe('Signals Spam Trap Page', () => {
     });
 
     it('handles date select', () => {
-      wrapper.find('BarChart').simulate('click', { payload: { date: 'test' }});
+      wrapper.find('BarChart').simulate('click', { payload: { dt: 'test' }});
       expect(wrapper.find('BarChart').prop('selected')).toEqual('test');
       expect(wrapper.find('Actions').prop('date')).toEqual('test');
     });
@@ -52,7 +52,7 @@ describe('Signals Spam Trap Page', () => {
     });
 
     it('sets uses last selected date when receiving data', () => {
-      wrapper.setProps({ data: [1, { date: 'last-date' }]});
+      wrapper.setProps({ data: [1, { dt: 'last-date' }]});
       expect(wrapper.find('BarChart').prop('selected')).toEqual('last-date');
       expect(wrapper.find('Actions').prop('date')).toEqual('last-date');
     });

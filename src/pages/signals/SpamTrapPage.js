@@ -6,7 +6,7 @@ import BarChart from './components/charts/barchart/BarChart';
 import Actions from './components/Actions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
-import withSpamTrapDetails from './containers/SpamTrapDetails.container';
+import withSpamTrapDetails from './containers/SpamTrapDetailsContainer';
 import { Loading } from 'src/components';
 import Empty from './components/Empty';
 import OtherChartsHeader from './components/OtherChartsHeader';
@@ -17,7 +17,7 @@ import moment from 'moment';
 import _ from 'lodash';
 
 // TODO replace with health score and engagement preview
-import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
+// import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 
 export class SpamTrapPage extends Component {
   state = {
@@ -34,10 +34,10 @@ export class SpamTrapPage extends Component {
 
   componentDidUpdate(prevProps) {
     const { data } = this.props;
-    const { selected } = this.state;
 
-    if (prevProps.data !== this.props.data && !selected) {
-      this.setState({ selected: _.last(data).date });
+    if (prevProps.data !== data) {
+      const last = _.last(data) || {};
+      this.setState({ selected: last.dt });
     }
   }
 
@@ -46,7 +46,7 @@ export class SpamTrapPage extends Component {
   }
 
   handleDateSelect = (node) => {
-    this.setState({ selected: _.get(node, 'payload.date') });
+    this.setState({ selected: _.get(node, 'payload.dt') });
   }
 
   getYAxisProps = () => {
@@ -87,8 +87,11 @@ export class SpamTrapPage extends Component {
     }
 
     if (empty) {
+      // TODO Render with Callout component
       chartPanel = <Empty>Insufficient data to populate this chart</Empty>;
     }
+
+    // TODO Render error with Callout component
 
     return (
       <Grid>
@@ -111,6 +114,7 @@ export class SpamTrapPage extends Component {
                 timeSeries={data}
                 tooltipContent={this.getTooltipContent}
                 yKey={calculation === 'absolute' ? 'trap_hits' : 'relative_trap_hits'}
+                xKey='dt'
                 yAxisProps={this.getYAxisProps()}
                 xAxisProps={this.getXAxisProps()}
               />
@@ -140,10 +144,10 @@ export class SpamTrapPage extends Component {
         {/* TODO replace with health score and engagement preview */}
         <Grid>
           <Grid.Column xs={12} sm={6}>
-            <SpamTrapsPreview />
+            {/* <SpamTrapsPreview /> */}
           </Grid.Column>
           <Grid.Column xs={12} sm={6}>
-            <SpamTrapsPreview />
+            {/* <SpamTrapsPreview /> */}
           </Grid.Column>
         </Grid>
       </Page>

@@ -11,26 +11,26 @@ const spamTrapDetails = (count) => _.range(count).map((n) => {
     injections,
     trap_hits: trapHits,
     relative_trap_hits: rate,
-    date: moment().subtract(count - n, 'day').format('YYYY-MM-DD')
+    dt: moment().subtract(count - n, 'day').format('YYYY-MM-DD')
   };
 });
 
-export function getSpamTrapDetails({ facet, facetId }) {
+export function getSpamHits({ facet, filter }) {
   return (dispatch, getState) => {
     const { relativeRange } = getState().signalOptions;
     const count = Number(relativeRange.replace('days', ''));
     const data = spamTrapDetails(count);
 
     dispatch({
-      type: 'GET_SIGNALS_SPAM_TRAP_DETAILS_PENDING'
+      type: 'GET_SPAM_HITS_PENDING'
     });
 
     setTimeout(() => dispatch({
-      type: 'GET_SIGNALS_SPAM_TRAP_DETAILS_SUCCESS',
+      type: 'GET_SPAM_HITS_SUCCESS',
       payload: {
         data: [
           {
-            [facet]: facetId,
+            [facet]: filter,
             current_trap_hits: 0,
             current_relative_trap_hits: 0,
             history: data
@@ -44,10 +44,6 @@ export function getSpamTrapDetails({ facet, facetId }) {
           }
         ],
         total_count: 2
-      },
-      meta: {
-        facetId,
-        facet
       }
     }), 500);
   };

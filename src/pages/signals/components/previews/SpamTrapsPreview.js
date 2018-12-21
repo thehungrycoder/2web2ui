@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Panel, Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { PanelLoading, PageLink } from 'src/components';
-import withSpamTrapDetails from '../../containers/SpamTrapDetails.container';
+import withSpamTrapDetails from '../../containers/SpamTrapDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import Empty from '../Empty';
 import ChartHeader from '../ChartHeader';
@@ -13,6 +13,7 @@ export class SpamTrapsPreview extends Component {
     const { data, gap, empty } = this.props;
 
     if (empty) {
+      // TODO Render with Callout component
       return <Empty height='100px' />;
     }
 
@@ -36,6 +37,8 @@ export class SpamTrapsPreview extends Component {
     if (loading) {
       return <PanelLoading minHeight='170px' />;
     }
+
+    // TODO Render error with Callout component
 
     return (
       <PageLink to={`/signals/spam-traps/${facet}/${facetId}`}>

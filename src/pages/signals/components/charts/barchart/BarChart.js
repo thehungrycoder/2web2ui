@@ -28,6 +28,7 @@ class BarChart extends Component {
       onClick={this.props.onClick}
       fill={fill}
       isAnimationActive={false}
+      minPointSize={1}
     />
   )
 

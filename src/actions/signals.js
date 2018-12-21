@@ -20,6 +20,7 @@ export const getSpamHits = ({
       params: {
         filter,
         from: formatInputDate(from),
+        // On appteam staging account this must be no later than Dec 18 2018
         to: formatInputDate(to)
       }
     }
