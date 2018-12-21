@@ -35,7 +35,7 @@ class ControlGroup extends Component {
     return _.keys(options).map((key) => {
       const classes = classnames(styles.Button, selected === key && styles.Selected);
       return (
-        <Button key={key} onClick={() => this.handleChange(key)} className={classes}>
+        <Button key={key} onClick={() => this.handleChange(key)} className={classes} size='small'>
           {options[key]}
         </Button>
       );

@@ -28,6 +28,7 @@ class BarChart extends Component {
       onClick={this.props.onClick}
       fill={fill}
       isAnimationActive={false}
+      minPointSize={1}
     />
   )
 
@@ -62,20 +63,45 @@ class BarChart extends Component {
   }
 
   render() {
-    const { gap, height, timeSeries, tooltipContent, width, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
+    const { gap, height, disableHover, margin, timeSeries, tooltipContent, width, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
 
     return (
       <ResponsiveContainer height={height} width={width} className='SignalsBarChart'>
-        <RechartsBarchart barCategoryGap={gap} data={timeSeries} margin={{ top: 5, left: 5, right: 18, bottom: 5 }}>
+        <RechartsBarchart
+          barCategoryGap={gap}
+          data={timeSeries}
+          margin={margin}
+        >
           {this.renderBackgrounds()}
-          <CartesianGrid vertical={false} />
-          <YAxis axisLine={false} tickLine={false} width={25} domain={yDomain} {...yAxisProps} />
-          <XAxis axisLine={false} tickLine={false} dataKey={xKey} type='category' padding={{ top: 0, left: 0, right: 0 }} {...xAxisProps} />
-          <Tooltip
-            cursor={false}
-            isAnimationActive={false}
-            content={<TooltipWrapper children={tooltipContent} />}
+          <CartesianGrid
+            vertical={false}
+            stroke='#e1e1e6'
+            shapeRendering='crispEdges'
           />
+          <YAxis
+            axisLine={false}
+            tickLine={false}
+            width={25}
+            domain={yDomain}
+            {...yAxisProps}
+          />
+          <XAxis
+            axisLine={false}
+            tickLine={false}
+            dataKey={xKey}
+            type='category'
+            padding={{ left: 12, right: 12 }}
+            shapeRendering='crispEdges'
+            {...xAxisProps}
+          />
+          {!disableHover && (
+            <Tooltip
+              offset={25}
+              cursor={false}
+              isAnimationActive={false}
+              content={<TooltipWrapper children={tooltipContent} />}
+            />
+          )}
           {this.renderBars()}
         </RechartsBarchart>
       </ResponsiveContainer>
@@ -96,6 +122,7 @@ BarChart.defaultProps = {
   gap: 1,
   height: 250,
   width: '99%',
+  margin: { top: 5, left: 18, right: 0, bottom: 5 },
   xKey: 'date',
   yKey: 'value',
   yRange: ['auto', 'auto']

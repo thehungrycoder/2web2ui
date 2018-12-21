@@ -29,6 +29,7 @@ import reportOptions from './reportOptions';
 import sendingDomains from './sendingDomains';
 import sendingIps from './sendingIps';
 import signalOptions from './signalOptions';
+import signals from './signals';
 import snippets from './snippets';
 import subaccounts from './subaccounts';
 import summaryChart from './summaryChart';
@@ -74,6 +75,7 @@ const appReducer = combineReducers({
   sendingDomains,
   sendingIps,
   signalOptions,
+  signals,
   snippets,
   subaccounts,
   support,

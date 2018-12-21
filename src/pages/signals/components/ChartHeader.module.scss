@@ -1,0 +1,15 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.ChartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.Title {
+  padding-top: spacing(small);
+}
+
+.Line {
+  margin-bottom: spacing(larger);
+}

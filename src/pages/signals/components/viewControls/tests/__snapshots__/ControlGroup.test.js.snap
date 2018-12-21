@@ -8,7 +8,7 @@ exports[`Signals View ControlGroup Component does not set selected initially if 
     className="Button"
     key="foo"
     onClick={[Function]}
-    size="default"
+    size="small"
   >
     fOo
   </Button>
@@ -16,7 +16,7 @@ exports[`Signals View ControlGroup Component does not set selected initially if 
     className="Button"
     key="bar"
     onClick={[Function]}
-    size="default"
+    size="small"
   >
     <test>
       BaR
@@ -30,7 +30,7 @@ exports[`Signals View ControlGroup Component handles a select correctly 1`] = `
   className="Button Selected"
   key="foo"
   onClick={[Function]}
-  size="default"
+  size="small"
 >
   fOo
 </Button>
@@ -44,7 +44,7 @@ exports[`Signals View ControlGroup Component renders correctly 1`] = `
     className="Button"
     key="foo"
     onClick={[Function]}
-    size="default"
+    size="small"
   >
     fOo
   </Button>
@@ -52,7 +52,7 @@ exports[`Signals View ControlGroup Component renders correctly 1`] = `
     className="Button Selected"
     key="bar"
     onClick={[Function]}
-    size="default"
+    size="small"
   >
     <test>
       BaR

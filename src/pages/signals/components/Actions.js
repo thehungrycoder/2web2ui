@@ -27,7 +27,7 @@ const Actions = ({ actions, date }) => {
   }
 
   return (
-    <div>
+    <div className={styles.Wrapper}>
       <div className={styles.Title}>
         <h6>
           Items needing attention
@@ -44,7 +44,7 @@ Actions.propTypes = {
     content: PropTypes.node,
     link: PropTypes.string
   })),
-  date: PropTypes.instanceOf(Date)
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
 };
 
 export default Actions;

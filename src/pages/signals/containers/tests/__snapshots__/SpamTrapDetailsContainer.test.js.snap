@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Spam Trap Details Container gets spam hits on mount correctly 1`] = `
+<Component
+  facet="sending_domain"
+  facetId="test.com"
+  gap={0.5}
+  history={Array []}
+  selected="testing-selected"
+/>
+`;
