@@ -2,19 +2,22 @@ import React, { Component } from 'react';
 import { Panel, Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { PanelLoading, PageLink } from 'src/components';
+import Callout from 'src/components/callout';
 import withSpamTrapDetails from '../../containers/SpamTrapDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
-import Empty from '../Empty';
 import ChartHeader from '../ChartHeader';
 
 export class SpamTrapsPreview extends Component {
 
   renderContent = () => {
-    const { data, gap, empty } = this.props;
+    const { data, gap, empty, error } = this.props;
+
+    if (error) {
+      return <Callout title='Unable to Load Data'>{error.message}</Callout>;
+    }
 
     if (empty) {
-      // TODO Render with Callout component
-      return <Empty height='100px' />;
+      return <Callout title='No Data Available'>Insufficient data to populate this chart</Callout>;
     }
 
     return (
@@ -37,8 +40,6 @@ export class SpamTrapsPreview extends Component {
     if (loading) {
       return <PanelLoading minHeight='170px' />;
     }
-
-    // TODO Render error with Callout component
 
     return (
       <PageLink to={`/signals/spam-traps/${facet}/${facetId}`}>

@@ -139,13 +139,82 @@ exports[`Signals Spam Trap Page renders empty correctly 1`] = `
     }
     title="Spam Trap Monitoring"
   />
-  <Empty
-    height="220px"
+  <Callout
     title="No Data Available"
   >
     Insufficient data to populate this chart
-  </Empty>
+  </Callout>
 </Panel>
+`;
+
+exports[`Signals Spam Trap Page renders error correctly 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  primaryArea={<Connect(DateFilter) />}
+  subtitle="Spam Trap Monitoring for test.com"
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          primaryArea={
+            <Calculation
+              initialSelected="absolute"
+              onChange={[Function]}
+            />
+          }
+          title="Spam Trap Monitoring"
+        />
+        <Callout
+          title="Unable to Load Data"
+        >
+          error message
+        </Callout>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <Actions
+        actions={
+          Array [
+            Object {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
+              "link": "https://www.sparkpost.com",
+            },
+          ]
+        }
+        date={null}
+      />
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    />
+    <Grid.Column
+      sm={6}
+      xs={12}
+    />
+  </Grid>
+</SignalsPage>
 `;
 
 exports[`Signals Spam Trap Page renders loading correctly 1`] = `

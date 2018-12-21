@@ -108,10 +108,52 @@ exports[`Signals SpamTrapsPreview Component renders empty correctly 1`] = `
       }
       title="Spam Trap Monitoring"
     />
-    <Empty
-      height="100px"
+    <Callout
       title="No Data Available"
+    >
+      Insufficient data to populate this chart
+    </Callout>
+  </Panel>
+</PageLink>
+`;
+
+exports[`Signals SpamTrapsPreview Component renders error correctly 1`] = `
+<PageLink
+  to="/signals/spam-traps/ip-pool/best-pool"
+>
+  <Panel
+    sectioned={true}
+  >
+    <ChartHeader
+      primaryArea={
+        <Tooltip
+          bottom={true}
+          content="Content"
+          dark={true}
+          forcePosition={false}
+          horizontalOffset="-14px"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
+        >
+          <InfoOutline
+            size={24}
+          />
+        </Tooltip>
+      }
+      title="Spam Trap Monitoring"
     />
+    <Callout
+      title="Unable to Load Data"
+    >
+      error message
+    </Callout>
   </Panel>
 </PageLink>
 `;

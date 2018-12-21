@@ -31,4 +31,9 @@ describe('Signals SpamTrapsPreview Component', () => {
     wrapper.setProps({ empty: true });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders error correctly', () => {
+    wrapper.setProps({ error: { message: 'error message' }});
+    expect(wrapper).toMatchSnapshot();
+  });
 });

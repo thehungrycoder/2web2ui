@@ -8,7 +8,7 @@ import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import withSpamTrapDetails from './containers/SpamTrapDetailsContainer';
 import { Loading } from 'src/components';
-import Empty from './components/Empty';
+import Callout from 'src/components/callout';
 import OtherChartsHeader from './components/OtherChartsHeader';
 import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
@@ -36,7 +36,8 @@ export class SpamTrapPage extends Component {
     const { data } = this.props;
     const { selected } = this.state;
 
-    if (prevProps.data !== data && !selected) {
+    // Select last date when loading new data and selected value does not exist
+    if (prevProps.data !== data && !_.find(data, ['dt', selected])) {
       const last = _.last(data) || {};
       this.setState({ selected: last.dt });
     }
@@ -75,9 +76,17 @@ export class SpamTrapPage extends Component {
   )
 
   renderContent = () => {
-    const { data = [], loading, gap, empty } = this.props;
+    const { data = [], loading, gap, empty, error } = this.props;
     const { calculation, selected } = this.state;
     let chartPanel;
+
+    if (empty) {
+      chartPanel = <Callout title='No Data Available'>Insufficient data to populate this chart</Callout>;
+    }
+
+    if (error) {
+      chartPanel = <Callout title='Unable to Load Data'>{error.message}</Callout>;
+    }
 
     if (loading) {
       chartPanel = (
@@ -86,13 +95,6 @@ export class SpamTrapPage extends Component {
         </div>
       );
     }
-
-    if (empty) {
-      // TODO Render with Callout component
-      chartPanel = <Empty>Insufficient data to populate this chart</Empty>;
-    }
-
-    // TODO Render error with Callout component
 
     return (
       <Grid>
