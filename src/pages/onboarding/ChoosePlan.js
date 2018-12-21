@@ -119,11 +119,12 @@ export class OnboardingPlanPage extends Component {
     }
   }
   render() {
-    const { loading, plans, submitting, selectedPlan = {}} = this.props;
+    const { loading, plans, submitting, selectedPlan = {}, billing } = this.props;
 
     if (loading) {
       return <Loading />;
     }
+    const disableSubmit = submitting || billing.promoPending;
 
     const buttonText = submitting ? 'Updating Subscription...' : 'Get Started';
 
@@ -139,7 +140,7 @@ export class OnboardingPlanPage extends Component {
               </AccessControl>
               {!selectedPlan.isFree && this.renderPromoCodeField()}
               <Panel.Section>
-                <Button disabled={submitting} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>
+                <Button disabled={disableSubmit} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>
               </Panel.Section>
               <Steps />
             </Panel>
