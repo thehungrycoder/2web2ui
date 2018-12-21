@@ -51,10 +51,17 @@ describe('Signals Spam Trap Page', () => {
       expect(wrapper.find('Actions').prop('date')).toEqual('initial-selected');
     });
 
-    it('sets uses last selected date when receiving data', () => {
+    it('uses last selected date when receiving data', () => {
       wrapper.setProps({ data: [1, { dt: 'last-date' }]});
       expect(wrapper.find('BarChart').prop('selected')).toEqual('last-date');
       expect(wrapper.find('Actions').prop('date')).toEqual('last-date');
+    });
+
+    it('does not use last selected date if selected state already exists', () => {
+      wrapper = shallow(<SpamTrapPage {...props} selected='initial-selected'/>);
+      wrapper.setProps({ data: [1, { dt: 'last-date' }]});
+      expect(wrapper.find('BarChart').prop('selected')).toEqual('initial-selected');
+      expect(wrapper.find('Actions').prop('date')).toEqual('initial-selected');
     });
   });
 

@@ -34,8 +34,9 @@ export class SpamTrapPage extends Component {
 
   componentDidUpdate(prevProps) {
     const { data } = this.props;
+    const { selected } = this.state;
 
-    if (prevProps.data !== data) {
+    if (prevProps.data !== data && !selected) {
       const last = _.last(data) || {};
       this.setState({ selected: last.dt });
     }
