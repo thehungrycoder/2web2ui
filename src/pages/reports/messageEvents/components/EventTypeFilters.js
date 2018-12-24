@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox, Tooltip } from '@sparkpost/matchbox';
 import { Field } from 'redux-form';
-import { CheckboxWrapper } from '../../../../components';
+import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
 
 import styles from './AdvancedFilters.module.scss';
 

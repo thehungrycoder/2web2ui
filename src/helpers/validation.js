@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { getDuration } from 'src/helpers/date';
 import { isEmailAddress, isEmailLocalPart, isRecipientEmailAddress } from 'src/helpers/email';
+import { EVENTS_SEARCH_FILTERS } from 'src/constants/index.js';
 import { domainRegex, slugRegex } from './regex';
 import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
@@ -20,6 +21,27 @@ export function emailLocal(value) {
 
 export function recipientEmail(value) {
   return isRecipientEmailAddress(value) ? undefined : 'Invalid Email';
+}
+
+export function isValidQuery(value, formValues, props, name) {
+
+  if (!value) {
+    return 'Required';
+  }
+
+  const index = parseInt((name.replace('searchQuery[', '').replace('].value', '')));
+  const key = formValues.searchQuery[index].key;
+  if (!key) {
+    return undefined;
+  }
+  if (!EVENTS_SEARCH_FILTERS[key].comma && value.includes(',')) {
+    return 'No commas allowed';
+  }
+  /* TODO determine exact validation rules
+  if (!EVENTS_SEARCH_FILTERS[key].wildcard && value.includes('*')) {
+    return 'No wildcards allowed';
+  }*/
+  return undefined;
 }
 
 export function domain(value) {

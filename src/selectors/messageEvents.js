@@ -3,8 +3,8 @@ import { formatDateTime } from 'src/helpers/date';
 import moment from 'moment';
 import { createSelector, createStructuredSelector } from 'reselect';
 
-const getMessageEvents = (state) => state.events.events;
-const getMessageHistory = (state) => state.events.history;
+const getMessageEvents = (state) => state.messageEvents.events;
+const getMessageHistory = (state) => state.messageEvents.history;
 export const getMessageIdParam = (state, props) => props.match.params.messageId;
 const getEventIdParam = (state, props) => props.match.params.eventId;
 
@@ -30,12 +30,12 @@ export const selectInitialEventId = createSelector(
 );
 
 const selectMessageEventsDateOptions = (state) => ({
-  from: moment(_.get(state, 'events.search.dateOptions.from')).utc().format(),
-  to: moment(_.get(state, 'events.search.dateOptions.to')).utc().format(),
-  range: _.get(state, 'events.search.dateOptions.relativeRange')
+  from: moment(_.get(state, 'messageEvents.search.dateOptions.from')).utc().format(),
+  to: moment(_.get(state, 'messageEvents.search.dateOptions.to')).utc().format(),
+  range: _.get(state, 'messageEvents.search.dateOptions.relativeRange')
 });
 
-const selectSearch = (state) => _.omit(state.events.search, ['dateOptions']);
+const selectSearch = (state) => _.omit(state.messageEvents.search, ['dateOptions']);
 
 /**
  * Converts reportOptions for url sharing for message events
@@ -72,10 +72,10 @@ const getSelectedEvent = createSelector(
 export const eventPageMSTP = (state, props) => createStructuredSelector({
   isMessageHistoryEmpty: isMessageHistoryEmpty,
   isOrphanEvent: isOrphanEvent,
-  loading: (state) => !!(state.events.historyLoading || state.events.documentationLoading),
+  loading: (state) => !!(state.messageEvents.historyLoading || state.messageEvents.documentationLoading),
   messageHistory: selectMessageHistory,
   messageId: getMessageIdParam,
-  documentation: (state) => state.events.documentation,
+  documentation: (state) => state.messageEvents.documentation,
   selectedEventId: selectInitialEventId,
   selectedEvent: getSelectedEvent
 });

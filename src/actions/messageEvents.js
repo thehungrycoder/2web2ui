@@ -9,16 +9,13 @@ export function getMessageEvents(options = {}) {
   const { dateOptions, ...rest } = options;
   const { from, to } = dateOptions;
   const params = {};
+
   if (from) {
     params.from = moment(from).utc().format(apiDateFormat);
   }
 
   if (to) {
     params.to = moment(to).utc().format(apiDateFormat);
-  }
-
-  if (rest.events.length > 0) {
-    params.events = rest.events.join(',');
   }
 
   _.forEach(rest, (value, key) => {
@@ -28,7 +25,7 @@ export function getMessageEvents(options = {}) {
   });
 
   return sparkpostApiRequest({
-    type: 'GET_EVENTS',
+    type: 'GET_MESSAGE_EVENTS',
     meta: {
       method: 'GET',
       url: '/v1/message-events',
@@ -52,7 +49,7 @@ export function getMessageEvents(options = {}) {
  */
 export function refreshMessageEventsDateRange(dateOptions) {
   return {
-    type: 'REFRESH_EVENTS_DATE_OPTIONS',
+    type: 'REFRESH_MESSAGE_EVENTS_DATE_OPTIONS',
     payload: dateOptions
   };
 }
@@ -61,9 +58,10 @@ export function refreshMessageEventsDateRange(dateOptions) {
  * Overwrites filters options
  */
 export function updateMessageEventsSearchOptions({ dateOptions, ...options }) {
+  const updatedOptions = _.mapValues(options, (arr) => _.uniq(arr)); // Dedupes filter options
   return {
-    type: 'REFRESH_EVENTS_SEARCH_OPTIONS',
-    payload: { dateOptions, ...options }
+    type: 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS',
+    payload: { dateOptions, ...updatedOptions }
   };
 }
 
@@ -72,21 +70,21 @@ export function updateMessageEventsSearchOptions({ dateOptions, ...options }) {
  */
 export function addFilters(filters) {
   return {
-    type: 'ADD_EVENTS_FILTERS',
+    type: 'ADD_MESSAGE_EVENTS_FILTERS',
     payload: filters
   };
 }
 
 export function removeFilter(filter) {
   return {
-    type: 'REMOVE_EVENTS_FILTER',
+    type: 'REMOVE_MESSAGE_EVENTS_FILTER',
     payload: filter
   };
 }
 
 export function getMessageHistory({ messageId }) {
   return sparkpostApiRequest({
-    type: 'GET_HISTORY',
+    type: 'GET_MESSAGE_HISTORY',
     meta: {
       method: 'GET',
       url: '/v1/message-events',
@@ -104,7 +102,7 @@ export function getMessageHistory({ messageId }) {
 
 export function getDocumentation() {
   return sparkpostApiRequest({
-    type: 'GET_EVENTS_DOCUMENTATION',
+    type: 'GET_MESSAGE_EVENTS_DOCUMENTATION',
     meta: {
       method: 'GET',
       url: '/v1/message-events/events/documentation',

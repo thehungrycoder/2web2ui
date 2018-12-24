@@ -19,7 +19,7 @@ import currentUser from './currentUser';
 import globalAlert from './globalAlert';
 import invoices from './invoices';
 import ipPools from './ipPools';
-import events from './events';
+import messageEvents from './messageEvents';
 import metrics from './metrics';
 import notifications from './notifications';
 import passwordReset from './passwordReset';
@@ -61,12 +61,12 @@ const appReducer = combineReducers({
   abTesting,
   apiKeys,
   currentUser,
-  events,
   form,
   invoices,
   ipPools,
   globalAlert,
   metrics,
+  messageEvents,
   notifications,
   passwordReset,
   reportOptions,

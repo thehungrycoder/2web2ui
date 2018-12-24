@@ -5,8 +5,6 @@ import { getRelativeDates } from 'src/helpers/date';
 import { EVENTS_SEARCH_FILTERS} from 'src/constants';
 import { stringToArray } from 'src/helpers/string';
 
-
-
 /*
  * Translate the array of event definitions from /message-events/events/documentation
  * into an map of event type to event field descriptions.
@@ -71,12 +69,13 @@ export function getDetailsPath(messageId, eventId){
  */
 export function getFiltersFromSearchQueries(searchQueries = []) {
 
-  const filtersList = getEmptyFilters();
+  // Build a single object containing a key for each filter, initialised to an empty array
+  const emptyFilters = getEmptyFilters();
 
-  searchQueries.forEach((filter) => {
-    filtersList[filter.key] = stringToArray(filter.value);
-  });
-  return filtersList;
+  // Collect queries into an array of objects of form {key: value}
+  const queries = searchQueries.map(({key, value}) => ({[key]: stringToArray(value)}));
+
+  return Object.assign(emptyFilters, ...queries);
 }
 
 
@@ -98,14 +97,22 @@ export function getSearchQueriesFromFilters(filters) {
 }
 
 /**
- * Creates an object with all existing filters set to an empty array
+ * Creates an array with all possible search filters as an object with a value=key and a label
+ */
+export function getFiltersAsArray() {
+  const filtersAsArray = _.map(EVENTS_SEARCH_FILTERS, ({label}, key) =>
+    ({value: key, label}));
+  return filtersAsArray;
+}
+
+/**
+ * Creates an object with all search filters set to an empty array
  */
 export function getEmptyFilters() {
-  const emptyFilters = EVENTS_SEARCH_FILTERS.reduce((result, {value}) => {
-    result[value] = [];
-    return result;
-  }, {});
-  return emptyFilters;
+  // Build an array of objects of form { value: [] }
+  const emptyFilters = _.map(EVENTS_SEARCH_FILTERS,(value, key) => ({[key]: []}));
+
+  return Object.assign({}, ...emptyFilters);
 }
 
 export function removeEmptyFilters(allFilters) {

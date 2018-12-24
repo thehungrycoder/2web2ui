@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { updateMessageEventsSearchOptions, getDocumentation } from 'src/actions/events';
+import { updateMessageEventsSearchOptions, getDocumentation } from 'src/actions/messageEvents';
 import { WindowEvent, Modal, Button } from '@sparkpost/matchbox';
 import { onEscape } from 'src/helpers/keyEvents';
-import { getFiltersFromSearchQueries } from 'src/helpers/events';
-import _ from 'lodash';
+import { getFiltersFromSearchQueries } from 'src/helpers/messageEvents';
 import SearchForm from './SearchForm';
 
 export class AdvancedFiltersModal extends Component {
@@ -23,7 +22,8 @@ export class AdvancedFiltersModal extends Component {
   handleApply = (values) => {
     const { searchQuery, ...events } = values;
     const filters = getFiltersFromSearchQueries(searchQuery);
-    this.props.updateMessageEventsSearchOptions({ events: _.keys(_.pickBy(events)), ...filters });
+    const enabledEventsArray = Object.keys(events).filter((key) => Boolean(events[key]));
+    this.props.updateMessageEventsSearchOptions({ events: enabledEventsArray, ...filters });
     this.toggleModal();
   };
 
@@ -35,12 +35,12 @@ export class AdvancedFiltersModal extends Component {
     onEscape(this.toggleModal)(e);
   };
 
-
   render() {
+    const { modalOpen } = this.state;
     return (
       <Fragment>
         <Button onClick={this.toggleModal}>More Filters</Button>
-        <Modal open={this.state.modalOpen} onClose={this.toggleModal}>
+        <Modal open={modalOpen} onClose={this.toggleModal}>
           <WindowEvent event='keydown' handler={this.handleKeyDown} />
           <SearchForm handleApply = {this.handleApply} handleCancel = {this.toggleModal} />
         </Modal>
@@ -48,6 +48,5 @@ export class AdvancedFiltersModal extends Component {
     );
   }
 }
-
 
 export default connect(null, { updateMessageEventsSearchOptions, getDocumentation })(AdvancedFiltersModal);

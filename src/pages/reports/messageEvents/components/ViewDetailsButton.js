@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Button } from '@sparkpost/matchbox';
 
-import { getDetailsPath } from 'src/helpers/events';
+import { getDetailsPath } from 'src/helpers/messageEvents';
 import styles from './ViewDetailsButton.module.scss';
 
 export class ViewDetailsButton extends Component {

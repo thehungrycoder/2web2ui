@@ -1,4 +1,4 @@
-import * as selectors from '../events';
+import * as selectors from '../messageEvents';
 
 
 describe('MessageEvents Selectors', () => {

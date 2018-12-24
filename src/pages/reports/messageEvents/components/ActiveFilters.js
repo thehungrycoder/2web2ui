@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel, Tag } from '@sparkpost/matchbox';
-import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/events';
-import { removeEmptyFilters } from 'src/helpers/events';
+import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
+import { removeEmptyFilters, getFiltersAsArray } from 'src/helpers/messageEvents';
 import { snakeToFriendly } from 'src/helpers/string';
 import _ from 'lodash';
-import { EVENTS_SEARCH_FILTERS } from 'src/constants';
 import styles from './ActiveFilters.module.scss';
 
 const filterTypes = [
   { value: 'events', label: 'Event', itemToString: snakeToFriendly },
   { value: 'recipients', label: 'Recipient' },
-  ...EVENTS_SEARCH_FILTERS
+  ...getFiltersAsArray()
 ];
 
 export class ActiveFilters extends Component {
@@ -62,7 +61,7 @@ export class ActiveFilters extends Component {
 
 
 const mapStateToProps = (state) => ({
-  search: state.events.search
+  search: state.messageEvents.search
 });
 
 export default connect(mapStateToProps, { removeFilter, getMessageEvents, updateMessageEventsSearchOptions })(ActiveFilters);

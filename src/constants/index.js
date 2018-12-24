@@ -81,27 +81,27 @@ export const FORMS = {
   JOIN: 'joinForm',
   JOIN_PLAN: 'joinPlanForm',
   JOIN_SENDING_DOMAIN: 'joinSendingDomainForm',
-  EDIT_USER: 'userEditForm'
+  EDIT_USER: 'userEditForm',
+  EVENTS_SEARCH: 'eventsSearchForm'
 };
 
-
-export const EVENTS_SEARCH_FILTERS = [
-  { value: 'recipient_domains', label: 'Recipient Domains' },
-  { value: 'from_addresses', label: 'From Addresses' },
-  { value: 'sending_domains', label: 'Sending Domains' },
-  { value: 'subject', label: 'Subject' },
-  { value: 'bounce_classes', label: 'Bounce Classes' },
-  { value: 'reason', label: 'Reason' },
-  { value: 'campaigns', label: 'Campaigns' },
-  { value: 'templates', label: 'Templates' },
-  { value: 'sending_ips', label: 'Sending IPs' },
-  { value: 'ip_pools', label: 'IP Pools' },
-  { value: 'subaccounts', label: 'Subaccount IDs' },
-  { value: 'message_ids', label: 'Message IDs' },
-  { value: 'transmission_ids', label: 'Transmissions IDs' },
-  { value: 'ab_tests', label: 'AB Tests' },
-  { value: 'ab_test_version', label: 'AB Test Version' }
-];
+export const EVENTS_SEARCH_FILTERS = {
+  recipient_domains: { comma: true, wildcard: false, placeholder: '', label: 'Recipient Domains' },
+  from_addresses: { comma: true, wildcard: false, placeholder: '', label: 'From Addresses' },
+  sending_domains: { comma: true, wildcard: true, placeholder: '', label: 'Sending Domains' },
+  subject: { comma: false, wildcard: true, placeholder: '', label: 'Subject' },
+  bounce_classes: { comma: true, wildcard: false, placeholder: 'Filter by bounce class codes.', label: 'Bounce Classes' },
+  reason: { comma: false, wildcard: true, placeholder: 'Filter by bounce/failure/rejection reason.', label: 'Reason' },
+  campaigns: { comma: true, wildcard: true, placeholder: '', label: 'Campaign IDs' },
+  templates: { comma: true, wildcard: true, placeholder: '', label: 'Template IDs' },
+  sending_ips: { comma: true, wildcard: false, placeholder: '', label: 'Sending IPs' },
+  ip_pools: { comma: true, wildcard: true, placeholder: '', label: 'IP Pools' },
+  subaccounts: { comma: true, wildcard: false, placeholder: '', label: 'Subaccount IDs' },
+  message_ids: { comma: true, wildcard: false, placeholder: '', label: 'Message IDs' },
+  transmission_ids: { comma: true, wildcard: false, placeholder: '', label: 'Transmissions IDs' },
+  ab_tests: { comma: true, wildcard: true, placeholder: '', label: 'AB Test IDs' },
+  ab_test_version: { comma: false, wildcard: false, placeholder: 'AB Test ID required', label: 'AB Test Version' }
+};
 
 export const ANALYTICS_CREATE_ACCOUNT = 'create account';
 export const ANALYTICS_ADDON_IP = 'dedicated_ips';
