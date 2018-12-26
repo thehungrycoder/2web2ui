@@ -164,7 +164,7 @@ Array [
     "meta": Object {
       "data": Object {
         "code": "test-code",
-        "promoCode": undefined,
+        "promo_code": undefined,
       },
       "method": "PUT",
       "onSuccess": [Function],
@@ -181,7 +181,7 @@ Array [
     "meta": Object {
       "data": Object {
         "code": "test-code",
-        "promoCode": undefined,
+        "promo_code": undefined,
       },
       "method": "PUT",
       "onSuccess": [Function],
@@ -198,7 +198,7 @@ Array [
     "meta": Object {
       "data": Object {
         "code": "test-code",
-        "promoCode": undefined,
+        "promo_code": undefined,
       },
       "method": "PUT",
       "onSuccess": [MockFunction],

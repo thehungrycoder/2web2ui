@@ -50,7 +50,7 @@ Array [
     Object {
       "data": Object {
         "code": "large",
-        "promoCode": undefined,
+        "promo_code": undefined,
       },
       "headers": Object {
         "Authorization": "very-real-access-token",
@@ -108,7 +108,7 @@ Array [
     Object {
       "data": Object {
         "code": "large",
-        "promoCode": undefined,
+        "promo_code": undefined,
       },
       "headers": Object {
         "Authorization": "very-real-access-token",

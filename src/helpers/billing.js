@@ -50,7 +50,6 @@ export function formatDataForCors(values) {
     },
     discountId
   };
-
   return { corsData, billingData };
 }
 
@@ -103,6 +102,7 @@ export function formatCreateData({
     creditCard,
     billToContact
   };
+
 
   if (discountId) {
     formatted.subscription.subscribeToRatePlans.push({ productRatePlanId: discountId });
