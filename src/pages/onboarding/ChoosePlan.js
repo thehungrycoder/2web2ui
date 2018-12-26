@@ -37,7 +37,7 @@ export class OnboardingPlanPage extends Component {
   }
 
   onSubmit = (values) => {
-    const { billingCreate, showAlert, history, billing } = this.props;
+    const { billingCreate, showAlert, history, billing, verifyPromoCode } = this.props;
     const selectedPromo = billing.selectedPromo;
     const newValues = values.card && !values.planpicker.isFree
       ? { ...values, card: prepareCardInfo(values.card) }
@@ -49,10 +49,10 @@ export class OnboardingPlanPage extends Component {
       return;
     }
 
-    const action = Promise.resolve({});
-    if (selectedPromo.promoCode && !values.planpicker.isFree && values.promoCode) {
+    let action = Promise.resolve({});
+    if (selectedPromo.promoCode && !values.planpicker.isFree) {
       const { promoCode } = selectedPromo;
-      action.then(() => verifyPromoCode({ promoCode, billingId: values.planpicker.billingId, meta: { promoCode }}));
+      action = verifyPromoCode({ promoCode, billingId: values.planpicker.billingId, meta: { promoCode }});
     }
 
     // Note: billingCreate will update the subscription if the account is AWS
@@ -134,7 +134,7 @@ export class OnboardingPlanPage extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              <PlanPicker disabled={submitting} plans={plans} />
+              <PlanPicker disabled={submitting} plans={plans} onChange={this.onPlanSelect}/>
               <AccessControl condition={not(isAws)}>
                 {this.renderCCSection()}
               </AccessControl>
