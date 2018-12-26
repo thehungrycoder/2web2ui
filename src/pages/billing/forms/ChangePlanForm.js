@@ -26,6 +26,7 @@ import { not } from 'src/helpers/conditions';
 import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
 import { prepareCardInfo } from 'src/helpers/billing';
+import _ from 'lodash';
 
 const FORMNAME = 'changePlan';
 
@@ -62,14 +63,14 @@ export class ChangePlanForm extends Component {
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
     const action = Promise.resolve({});
-    if (selectedPromo && !isDowngradeToFree) {
+    if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
       const { promoCode } = selectedPromo;
       action.then(() => verifyPromoCode({ promoCode , billingId: values.planpicker.billingId, meta: { promoCode }}));
     }
 
     return action
       .then(({ discount_id }) => {
-        newValues.discountId = discount_id;
+        newValues.discount_id = discount_id;
         // decides which action to be taken based on
         // if it's aws account, it already has billing and if you use a saved CC
         if (this.props.isAws) {
