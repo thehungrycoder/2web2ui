@@ -30,7 +30,7 @@ export function updateSubscription({ code, promoCode, meta = {}}) {
         method: 'PUT',
         url: isAws(getState()) ? '/v1/account/aws-marketplace/subscription' : '/v1/account/subscription',
         data: {
-          promoCode,
+          promo_code: promoCode,
           code
         },
         ...meta,
