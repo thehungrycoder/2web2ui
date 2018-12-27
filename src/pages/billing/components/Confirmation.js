@@ -3,19 +3,20 @@ import { Panel, Button } from '@sparkpost/matchbox';
 import config from 'src/config';
 import { getPlanPrice } from 'src/helpers/billing';
 import PlanPrice from 'src/components/billing/PlanPrice';
+import PromoCode from 'src/components/billing/PromoCode';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 import Brightback from 'src/components/brightback/Brightback';
 import styles from './Confirmation.module.scss';
 
 export class Confirmation extends React.Component {
-  renderSelectedPlanMarkup() {
-    const { current = {}, selected = {}} = this.props;
 
+  renderSelectedPlanMarkup() {
+    const { current = {}, selected = {}, selectedPromo = {}} = this.props;
     return !selected || selected.code === current.code
       ? <p>Select a plan on the left to update your subscription</p>
       : <div>
         <small>New Plan</small>
-        <h5><PlanPrice className={styles.MainLabel} plan={selected}/></h5>
+        <h5><PlanPrice className={styles.MainLabel} plan={selected} selectedPromo={selectedPromo}/></h5>
       </div>;
   }
 
@@ -26,6 +27,18 @@ export class Confirmation extends React.Component {
         <small>Current Plan</small>
         <h4><PlanPrice plan={current}/></h4>
       </span>
+    );
+  }
+
+  renderPromoCodeField() {
+    const { selectedPromo = {}, promoError } = this.props;
+    return (
+      <Panel.Section>
+        <PromoCode
+          selectedPromo={selectedPromo}
+          promoError={promoError}
+        />
+      </Panel.Section>
     );
   }
 
@@ -92,6 +105,7 @@ export class Confirmation extends React.Component {
         <Panel.Section>
           {this.renderCurrentPlanMarkup()}
         </Panel.Section>
+        {isPlanSelected && !isDowngrade && this.renderPromoCodeField()}
         <Panel.Section>
           {this.renderSelectedPlanMarkup()}
           {effectiveDateMarkup}

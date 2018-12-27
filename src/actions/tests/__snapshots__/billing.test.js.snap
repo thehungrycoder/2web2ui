@@ -122,6 +122,23 @@ Array [
 ]
 `;
 
+exports[`Action Creator: Billing should dispatch a verification of a promo code 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "billing_id": "test-bill-id",
+      },
+      "promoCode": "test-code",
+      "showErrorAlert": false,
+      "url": "v1/account/subscription/promo-codes/test-code",
+    },
+    "type": "VERIFY_PROMO_CODE",
+  },
+]
+`;
+
 exports[`Action Creator: Billing should dispatch an update credit card action 1`] = `
 Array [
   Object {
@@ -147,6 +164,7 @@ Array [
     "meta": Object {
       "data": Object {
         "code": "test-code",
+        "promo_code": undefined,
       },
       "method": "PUT",
       "onSuccess": [Function],
@@ -163,6 +181,7 @@ Array [
     "meta": Object {
       "data": Object {
         "code": "test-code",
+        "promo_code": undefined,
       },
       "method": "PUT",
       "onSuccess": [Function],
@@ -179,6 +198,7 @@ Array [
     "meta": Object {
       "data": Object {
         "code": "test-code",
+        "promo_code": undefined,
       },
       "method": "PUT",
       "onSuccess": [MockFunction],

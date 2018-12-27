@@ -36,7 +36,7 @@ describe('Form Container: Change Plan', () => {
         billing: {}
       },
       isSelfServeBilling: true,
-      billing: { countries: [], plans },
+      billing: { countries: [], plans, selectedPromo: {}},
       getPlans: jest.fn(),
       getBillingCountries: jest.fn(),
       fetchAccount: jest.fn(),

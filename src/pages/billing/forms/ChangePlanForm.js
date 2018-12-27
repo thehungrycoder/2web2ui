@@ -5,7 +5,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
-import { updateSubscription, getBillingCountries } from 'src/actions/billing';
+import { updateSubscription, getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
@@ -19,12 +19,14 @@ import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
 import CardSummary from '../components/CardSummary';
+import promoCodeValidate from '../helpers/promoCodeValidate';
 import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { not } from 'src/helpers/conditions';
 import * as conversions from 'src/helpers/conversionTracking';
 import AccessControl from 'src/components/auth/AccessControl';
 import { prepareCardInfo } from 'src/helpers/billing';
+import _ from 'lodash';
 
 const FORMNAME = 'changePlan';
 
@@ -52,27 +54,33 @@ export class ChangePlanForm extends Component {
   };
 
   onSubmit = (values) => {
-    const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history } = this.props;
+    const { account, billing, updateSubscription, billingCreate, billingUpdate, showAlert, history, verifyPromoCode } = this.props;
     const oldCode = account.subscription.code;
     const newCode = values.planpicker.code;
     const isDowngradeToFree = values.planpicker.isFree;
-
+    const selectedPromo = billing.selectedPromo;
     const newValues = values.card && !isDowngradeToFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
-
-    // decides which action to be taken based on
-    // if it's aws account, it already has billing and if you use a saved CC
-    let action;
-    if (this.props.isAws) {
-      action = updateSubscription({ code: newCode });
-    } else if (account.billing) {
-      action = this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode }) : billingUpdate(newValues);
-    } else {
-      action = billingCreate(newValues); // creates Zuora account
+    let action = Promise.resolve({});
+    if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
+      const { promoCode } = selectedPromo;
+      action = verifyPromoCode({ promoCode , billingId: values.planpicker.billingId, meta: { promoCode }});
     }
 
     return action
+      .then(({ discount_id }) => {
+        newValues.discountId = discount_id;
+        // decides which action to be taken based on
+        // if it's aws account, it already has billing and if you use a saved CC
+        if (this.props.isAws) {
+          return updateSubscription({ code: newCode });
+        } else if (account.billing) {
+          return this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
+        } else {
+          return billingCreate(newValues); // creates Zuora account
+        }
+      })
       .then(() => history.push('/account/billing'))
       .then(() => {
         conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
@@ -116,9 +124,15 @@ export class ChangePlanForm extends Component {
     );
   }
 
-  render() {
-    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling } = this.props;
+  onPlanSelect = (e) => {
+    const { currentPlan, clearPromoCode } = this.props;
+    if (currentPlan.code !== e.code) {
+      clearPromoCode();
+    }
+  }
 
+  render() {
+    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling, billing, verifyPromoCode } = this.props;
     if (loading) {
       return <Loading />;
     }
@@ -127,7 +141,9 @@ export class ChangePlanForm extends Component {
     const disableSubmit = submitting ||
       (isSelfServeBilling && currentPlan.code === selectedPlan.code) ||
       // do not allow private, deprecated, etc. plans to enable billing
-      (selectedPlan.status !== 'public' && selectedPlan.status !== 'secret');
+      (selectedPlan.status !== 'public' && selectedPlan.status !== 'secret') ||
+      // can't submit while verifying promoCode
+      billing.promoPending;
 
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -135,7 +151,7 @@ export class ChangePlanForm extends Component {
           <Grid.Column>
             <Panel title='Select A Plan'>
               {plans.length
-                ? <PlanPicker disabled={submitting} plans={plans} />
+                ? <PlanPicker disabled={submitting} plans={plans} onChange={this.onPlanSelect}/>
                 : null
               }
             </Panel>
@@ -145,6 +161,8 @@ export class ChangePlanForm extends Component {
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
             <Confirmation
+              verifyPromoCode={verifyPromoCode}
+              selectedPromo={billing.selectedPromo}
               current={currentPlan}
               selected={selectedPlan}
               billingEnabled={isSelfServeBilling}
@@ -176,6 +194,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount };
-const formOptions = { form: FORMNAME, enableReinitialize: true };
+const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
+const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate, asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));
