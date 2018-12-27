@@ -10,6 +10,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
       >
         <Component
           disabled={true}
+          onChange={[Function]}
           plans={Array []}
         />
         <Connect(AccessControl)
@@ -62,6 +63,7 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
       >
         <Component
           disabled={false}
+          onChange={[Function]}
           plans={Array []}
         />
         <Connect(AccessControl)
@@ -115,6 +117,7 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
       >
         <Component
           disabled={false}
+          onChange={[Function]}
           plans={Array []}
         />
         <Connect(AccessControl)
