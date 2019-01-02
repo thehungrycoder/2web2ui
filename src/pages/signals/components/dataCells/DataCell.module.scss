@@ -1,5 +1,11 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.Center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .PaddedCell {
   padding: spacing(small);
 }
