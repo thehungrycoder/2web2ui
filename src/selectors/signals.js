@@ -13,7 +13,10 @@ export const getOptions = (state, options) => options;
 
 // Redux store
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
+export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
 
+
+// Details
 export const selectSpamHitsDetails = createSelector(
   [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery],
   ({ loading, error, data }, facet, facetId, subaccountId) => {
@@ -34,6 +37,40 @@ export const selectSpamHitsDetails = createSelector(
   }
 );
 
+export const selectEngagementRecencyDetails = createSelector(
+  [getEngagementRecencyData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery],
+  ({ loading, error, data }, facet, facetId, subaccountId) => {
+    const match = _.find(data, [facet, facetId]) || {};
+
+    const relativeifyCounts = (data) => data.map(({ c_total, dt, ...absolutes }) => {
+      let values = {};
+
+      for (const key in absolutes) {
+        values = { ...values, [key]: absolutes[key] / c_total };
+      }
+
+      console.log({ values });
+
+      return { ...values, c_total, dt };
+    });
+
+    const history = relativeifyCounts(match.history || []);
+    console.log({ history });
+    return {
+      details: {
+        data: history,
+        empty: !history.length && !loading,
+        error,
+        loading
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
+
+// Overview
 export const selectSpamHitsOverviewData = createSelector(
   getSpamHitsData, getOptions,
   ({ data }, { relativeRange }) => data.map((rowOfData) => {

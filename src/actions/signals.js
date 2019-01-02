@@ -45,3 +45,28 @@ export const getSpamHits = ({
     }
   });
 };
+
+export const getEngagementRecency = ({
+  facet = '',
+  filter,
+  relativeRange,
+  subaccount
+}) => {
+  const { from , to } = getRelativeDates(relativeRange);
+
+  return sparkpostApiRequest({
+    type: 'GET_ENGAGEMENT_RECENCY',
+    meta: {
+      method: 'GET',
+      headers: setSubaccountHeader(subaccount),
+      url: `/v1/signals/cohort-engagement/${facet}`,
+      showErrorAlert: false,
+      params: {
+        filter,
+        from: formatInputDate(from),
+        // On appteam staging account this must be no later than Dec 18 2018
+        to: formatInputDate(to)
+      }
+    }
+  });
+};
