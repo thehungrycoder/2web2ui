@@ -32,15 +32,11 @@ export function isValidQuery(value, formValues, props, name) {
   const index = parseInt((name.replace('searchQuery[', '').replace('].value', '')));
   const key = formValues.searchQuery[index].key;
   if (!key) {
-    return undefined;
+    return 'Select a Filter';
   }
   if (!EVENTS_SEARCH_FILTERS[key].comma && value.includes(',')) {
     return 'No commas allowed';
   }
-  /* TODO determine exact validation rules
-  if (!EVENTS_SEARCH_FILTERS[key].wildcard && value.includes('*')) {
-    return 'No wildcards allowed';
-  }*/
   return undefined;
 }
 
