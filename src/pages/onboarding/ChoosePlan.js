@@ -135,7 +135,7 @@ export class OnboardingPlanPage extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              <PlanPicker disabled={disableSubmit} plans={plans} onChange={this.onPlanSelect}/>
+              <PlanPicker selectedPromo={billing.selectedPromo} disabled={disableSubmit} plans={plans} onChange={this.onPlanSelect}/>
               <AccessControl condition={not(isAws)}>
                 {!selectedPlan.isFree && this.renderPromoCodeField()}
                 {this.renderCCSection()}

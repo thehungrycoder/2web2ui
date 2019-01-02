@@ -24,7 +24,7 @@ export class PlanPicker extends Component {
     selectedItem,
     highlightedIndex
   }) => {
-    const { plans, input, disabled } = this.props;
+    const { plans, input, disabled, selectedPromo } = this.props;
 
     if (!selectedItem || !plans) {
       return null;
@@ -50,13 +50,16 @@ export class PlanPicker extends Component {
       plan: selectedItem,
       onClick: this.handleOpen
     });
+    const planPriceProps = {
+      selectedPromo
+    };
 
     return (
       <div className={styles.PlanPicker}>
         <div className={listClasses}>{items}</div>
         <ExpandMore size={24} className={styles.Chevron} />
         <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
-        <Plan {...triggerProps} className={triggerClasses} />
+        <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps}/>
       </div>
     );
   };

@@ -3,7 +3,8 @@ import { formatCountries } from 'src/helpers/billing';
 const initialState = {
   plansError: null,
   countriesError: null,
-  selectedPromo: {}
+  selectedPromo: {},
+  promoPending: false
 };
 
 export default (state = initialState, action) => {

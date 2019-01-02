@@ -1,9 +1,10 @@
 import { verifyPromoCode } from 'src/actions/billing';
 import { change } from 'redux-form';
 
-const promoCodeValidate = (formName) => (values, dispatch) => {
+const promoCodeValidate = (formName) => (values, dispatch, props, field) => {
   const { promoCode, planpicker } = values;
-  if (!promoCode) {
+  if (!promoCode || field === 'planpicker') {
+    dispatch(change(formName, 'promoCode', ''));
     return Promise.resolve();
   }
 
