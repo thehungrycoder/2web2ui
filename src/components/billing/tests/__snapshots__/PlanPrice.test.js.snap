@@ -10,7 +10,8 @@ exports[`PlanPrice allows class name overriding 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <strong>
@@ -37,7 +38,8 @@ exports[`PlanPrice renders correctly 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <strong>
@@ -64,7 +66,8 @@ exports[`PlanPrice renders correctly for CSM inclusion 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <strong>
@@ -96,8 +99,9 @@ exports[`PlanPrice renders correctly for free plan 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
-     for Free
+     emails
+     for 30 days
+     for free
   </span>
   <span
     className="SupportLabel"
@@ -115,7 +119,8 @@ exports[`PlanPrice renders correctly with hourly plans 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <strong>
@@ -142,7 +147,8 @@ exports[`PlanPrice renders free ip 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <strong>
@@ -171,7 +177,8 @@ exports[`PlanPrice renders free ip and overage correct 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <strong>
@@ -203,7 +210,8 @@ exports[`PlanPrice renders with overage 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <strong>
