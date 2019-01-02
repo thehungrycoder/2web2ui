@@ -3,7 +3,7 @@ import { Button, Grid } from '@sparkpost/matchbox';
 import { AddCircleOutline, RemoveCircleOutline } from '@sparkpost/matchbox-icons';
 import styles from './AdvancedFilters.module.scss';
 import { Field } from 'redux-form';
-import { getFiltersAsArray } from 'src/helpers/messageEvents';
+import { getFiltersAsArray } from '../helpers/transformData.js';
 import { SelectWrapper, TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { required, isValidQuery } from 'src/helpers/validation';
 import { EVENTS_SEARCH_FILTERS } from 'src/constants';

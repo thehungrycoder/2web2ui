@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel, Tag } from '@sparkpost/matchbox';
 import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
-import { removeEmptyFilters, getFiltersAsArray } from 'src/helpers/messageEvents';
+import { removeEmptyFilters, getFiltersAsArray } from '../helpers/transformData.js';
 import { snakeToFriendly } from 'src/helpers/string';
 import _ from 'lodash';
 import styles from './ActiveFilters.module.scss';

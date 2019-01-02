@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import styles from './AdvancedFilters.module.scss';
 import { FORMS } from 'src/constants';
 import EventTypeFilters from './EventTypeFilters';
-import { getSearchQueriesFromFilters } from 'src/helpers/messageEvents';
+import { getSearchQueriesFromFilters, getBooleanEventsObject } from '../helpers/transformData.js';
 import { selectMessageEventListing } from 'src/selectors/eventListing';
 import { getDocumentation, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
 import SearchQuery from './SearchQuery';
@@ -31,14 +31,6 @@ export class SearchForm extends Component {
       </form>
     );
   }
-}
-
-//Transforms an array of event types into an object with each existing event type as the key with a value of true.
-function getBooleanEventsObject(events) {
-  return (events.reduce((accumulator, event) => {
-    accumulator[event] = true;
-    return accumulator;
-  }, {}));
 }
 
 const mapStateToProps = (state) => ({

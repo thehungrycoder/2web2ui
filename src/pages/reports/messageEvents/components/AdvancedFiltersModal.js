@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { updateMessageEventsSearchOptions, getDocumentation } from 'src/actions/messageEvents';
 import { WindowEvent, Modal, Button } from '@sparkpost/matchbox';
 import { onEscape } from 'src/helpers/keyEvents';
-import { getFiltersFromSearchQueries } from 'src/helpers/messageEvents';
+import { getFiltersFromSearchQueries } from '../helpers/transformData.js';
 import SearchForm from './SearchForm';
 
 export class AdvancedFiltersModal extends Component {

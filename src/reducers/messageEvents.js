@@ -70,7 +70,7 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'REFRESH_MESSAGE_EVENTS_SEARCH_OPTIONS': {
       const { dateOptions, ...options } = payload;
-      return { ...state, search: { ...state.search,dateOptions: { ...state.search.dateOptions, ...dateOptions }, ...options }};
+      return { ...state, search: { ...state.search, dateOptions: { ...state.search.dateOptions, ...dateOptions }, ...options }};
     }
 
     case 'ADD_MESSAGE_EVENTS_FILTERS': {
