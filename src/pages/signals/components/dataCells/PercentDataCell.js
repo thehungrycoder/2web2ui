@@ -3,10 +3,10 @@ import React from 'react';
 import { formatPercent } from 'src/helpers/units';
 import styles from './DataCell.module.scss';
 
-const PercentageDataCell = ({ value }) => (
+const PercentDataCell = ({ value }) => (
   <div className={styles.PaddedCell}>
-    {_.isNil(value) ? '- - -' : formatPercent(value)}
+    {_.isNil(value) ? '- - -' : formatPercent(value * 100)}
   </div>
 );
 
-export default PercentageDataCell;
+export default PercentDataCell;

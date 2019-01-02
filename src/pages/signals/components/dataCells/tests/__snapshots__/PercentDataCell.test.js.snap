@@ -4,7 +4,7 @@ exports[`PercentDataCell renders a percentage 1`] = `
 <div
   className="PaddedCell"
 >
-  50%
+  5%
 </div>
 `;
 

@@ -4,7 +4,7 @@ import PercentDataCell from '../PercentDataCell';
 
 describe('PercentDataCell', () => {
   const subject = (props = {}) => shallow(
-    <PercentDataCell value={50} {...props} />
+    <PercentDataCell value={0.05} {...props} />
   );
 
   it('renders a percentage', () => {
