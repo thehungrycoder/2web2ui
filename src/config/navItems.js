@@ -44,7 +44,8 @@ export default [
   {
     label: 'Signals',
     to: '/signals',
-    icon: Signal
+    icon: Signal,
+    newFeature: true
   },
   {
     label: 'Templates',

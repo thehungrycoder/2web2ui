@@ -39,13 +39,14 @@ export class Item extends Component {
   renderItem = ({ mobile }) => {
     const {
       beta,
-      to,
+      children,
+      divider,
       icon: Icon,
       label,
-      children,
-      toggleMobileNav,
       labs,
-      divider
+      newFeature,
+      to,
+      toggleMobileNav
     } = this.props;
 
     const active = this.isActive();
@@ -63,7 +64,7 @@ export class Item extends Component {
         <li>
           <a onClick={() => this.handleParentClick()} className={linkClasses}>
             <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>
-            {label}
+            <div className={styles.Label}>{label}</div>
             <ChevronLeft className={styles.chevron} />
           </a>
           {this.renderChildren()}
@@ -79,12 +80,16 @@ export class Item extends Component {
       releaseTag = <Tag color="blue">LABS</Tag>;
     }
 
+    if (newFeature) {
+      releaseTag = <Tag color="orange">NEW</Tag>;
+    }
+
     return (
       <li>
         {divider && <hr className={styles.divider}/>}
         <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
           {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon} /></span>}
-          {label}
+          <div className={styles.Label}>{label}</div>
           {releaseTag && <div className={styles.releaseTag}>{releaseTag}</div>}
         </Link>
       </li>

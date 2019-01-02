@@ -45,6 +45,20 @@ describe('Item tests', () => {
     expect(item.children()).toMatchSnapshot();
   });
 
+  it('should render a link with new tag', () => {
+    const item = context(
+      <Item
+        newFeature
+        to='/to'
+        icon='Mail'
+        label='label'
+        location={{ pathname: 'to' }}
+      />
+      , defaultContext);
+
+    expect(item.children()).toMatchSnapshot();
+  });
+
   it('should render children correctly', () => {
     const location = { pathname: 'to' };
     const children = [

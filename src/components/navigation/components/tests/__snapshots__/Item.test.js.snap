@@ -16,7 +16,11 @@ exports[`Item tests should call toggle nav when on mobile 1`] = `
         size={21}
       />
     </span>
-    label
+    <div
+      className="Label"
+    >
+      label
+    </div>
   </Link>
 </li>
 `;
@@ -37,7 +41,11 @@ exports[`Item tests should render a link correctly 1`] = `
         size={21}
       />
     </span>
-    label
+    <div
+      className="Label"
+    >
+      label
+    </div>
   </Link>
 </li>
 `;
@@ -58,7 +66,11 @@ exports[`Item tests should render a link with beta tag 1`] = `
         size={21}
       />
     </span>
-    label
+    <div
+      className="Label"
+    >
+      label
+    </div>
     <div
       className="releaseTag"
     >
@@ -88,7 +100,11 @@ exports[`Item tests should render a link with labs tag 1`] = `
         size={21}
       />
     </span>
-    label
+    <div
+      className="Label"
+    >
+      label
+    </div>
     <div
       className="releaseTag"
     >
@@ -96,6 +112,40 @@ exports[`Item tests should render a link with labs tag 1`] = `
         color="blue"
       >
         LABS
+      </Tag>
+    </div>
+  </Link>
+</li>
+`;
+
+exports[`Item tests should render a link with new tag 1`] = `
+<li>
+  <Link
+    className="Link"
+    onClick={null}
+    replace={false}
+    to="/to"
+  >
+    <span
+      className="iconWrapper"
+    >
+      <Mail
+        className="icon"
+        size={21}
+      />
+    </span>
+    <div
+      className="Label"
+    >
+      label
+    </div>
+    <div
+      className="releaseTag"
+    >
+      <Tag
+        color="orange"
+      >
+        NEW
       </Tag>
     </div>
   </Link>
@@ -116,7 +166,11 @@ exports[`Item tests should render children correctly 1`] = `
         size={21}
       />
     </span>
-    label
+    <div
+      className="Label"
+    >
+      label
+    </div>
     <ChevronLeft
       className="chevron"
     />

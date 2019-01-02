@@ -8,7 +8,7 @@
 
 .Link, .Link:visited {
   position: relative;
-  display: block;
+  display: flex;
   padding: rem(9) rem(18);
   color: color(gray, 2);
 
@@ -67,7 +67,7 @@
 }
 
 .NestedList .Link {
-  padding: rem(4) spacing(large) rem(4) rem(54);
+  padding: rem(4) rem(18) rem(4) rem(54);
   font-weight: 400;
 
   &.isActive {
@@ -103,6 +103,10 @@
   margin-top: spacing();
 }
 
+.Label {
+  flex: 1 0 0;
+}
+
 .releaseTag {
-  float: right;
+  align-self: flex-end;
 }
