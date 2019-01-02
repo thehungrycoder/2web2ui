@@ -74,9 +74,7 @@ exports[`Item tests should render a link with beta tag 1`] = `
     <div
       className="releaseTag"
     >
-      <Tag
-        color="orange"
-      >
+      <Tag>
         BETA
       </Tag>
     </div>
@@ -108,9 +106,7 @@ exports[`Item tests should render a link with labs tag 1`] = `
     <div
       className="releaseTag"
     >
-      <Tag
-        color="blue"
-      >
+      <Tag>
         LABS
       </Tag>
     </div>
@@ -143,7 +139,7 @@ exports[`Item tests should render a link with new tag 1`] = `
       className="releaseTag"
     >
       <Tag
-        color="orange"
+        color="blue"
       >
         NEW
       </Tag>

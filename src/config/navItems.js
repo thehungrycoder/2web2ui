@@ -45,7 +45,7 @@ export default [
     label: 'Signals',
     to: '/signals',
     icon: Signal,
-    newFeature: true
+    tag: 'new'
   },
   {
     label: 'Templates',
@@ -73,7 +73,7 @@ export default [
       {
         label: 'Recipient Validation',
         to: '/recipient-validation',
-        beta: true
+        tag: 'beta'
       }
     ]
   },
@@ -117,14 +117,14 @@ export default [
   {
     label: 'Alerts',
     to: '/alerts',
-    labs: true,
+    tag: 'labs',
     divider: true,
     icon: NotificationsActive
   },
   {
     label: 'Snippets',
     to: '/snippets',
-    labs: true,
+    tag: 'labs',
     icon: Code
   }
 ];

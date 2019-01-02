@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { Tag } from '@sparkpost/matchbox';
 import { ChevronLeft } from '@sparkpost/matchbox-icons';
 import classnames from 'classnames';
 import styles from './Item.module.scss';
+
+const TAGS = {
+  beta: { label: 'BETA' },
+  new: { color: 'blue', label: 'NEW' },
+  labs: { label: 'LABS' }
+};
 
 export class Item extends Component {
   state = {
@@ -38,13 +45,11 @@ export class Item extends Component {
 
   renderItem = ({ mobile }) => {
     const {
-      beta,
       children,
       divider,
       icon: Icon,
       label,
-      labs,
-      newFeature,
+      tag,
       to,
       toggleMobileNav
     } = this.props;
@@ -72,16 +77,9 @@ export class Item extends Component {
       );
     }
 
-    if (beta) {
-      releaseTag = <Tag color="orange">BETA</Tag>;
-    }
-
-    if (labs) {
-      releaseTag = <Tag color="blue">LABS</Tag>;
-    }
-
-    if (newFeature) {
-      releaseTag = <Tag color="orange">NEW</Tag>;
+    if (tag) {
+      const tagSpec = TAGS[tag];
+      releaseTag = <Tag color={tagSpec.color}>{tagSpec.label}</Tag>;
     }
 
     return (
@@ -100,5 +98,9 @@ export class Item extends Component {
     return <WindowSizeContext.Consumer children={this.renderItem} />;
   }
 }
+
+Item.propTypes = {
+  tag: PropTypes.oneOf(['new', 'beta', 'labs'])
+};
 
 export default Item;
