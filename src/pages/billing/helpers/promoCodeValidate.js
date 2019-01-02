@@ -1,7 +1,7 @@
 import { verifyPromoCode } from 'src/actions/billing';
 import { change } from 'redux-form';
 
-export default function promoCodeValidate(values, dispatch) {
+const promoCodeValidate = (formName) => (values, dispatch) => {
   const { promoCode, planpicker } = values;
   if (!promoCode) {
     return Promise.resolve();
@@ -14,7 +14,9 @@ export default function promoCodeValidate(values, dispatch) {
       meta: { promoCode }
     })
   ).catch(({ message }) => {
-    dispatch(change('changePlan', 'promoCode', ''));
+    dispatch(change(formName, 'promoCode', ''));
     throw { promoCode: 'Invalid promo code' };
   });
-}
+};
+
+export default promoCodeValidate;

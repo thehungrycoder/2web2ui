@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { reduxForm, change } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
@@ -12,6 +12,7 @@ import billingCreate from 'src/actions/billingCreate';
 import { choosePlanMSTP } from 'src/selectors/onboarding';
 import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
 import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
+import promoCodeValidate from 'src/pages/billing/helpers/promoCodeValidate';
 import { isAws } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import AccessControl from 'src/components/auth/AccessControl';
@@ -134,11 +135,11 @@ export class OnboardingPlanPage extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              <PlanPicker disabled={submitting} plans={plans} onChange={this.onPlanSelect}/>
+              <PlanPicker disabled={disableSubmit} plans={plans} onChange={this.onPlanSelect}/>
               <AccessControl condition={not(isAws)}>
+                {!selectedPlan.isFree && this.renderPromoCodeField()}
                 {this.renderCCSection()}
               </AccessControl>
-              {!selectedPlan.isFree && this.renderPromoCodeField()}
               <Panel.Section>
                 <Button disabled={disableSubmit} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>
               </Panel.Section>
@@ -151,21 +152,7 @@ export class OnboardingPlanPage extends Component {
   }
 }
 
-const promoCodeValidate = (values, dispatch) => {
-  const { promoCode, planpicker } = values;
-  if (!promoCode) {
-    return Promise.resolve();
-  }
-
-  return dispatch(
-    verifyPromoCode({ promoCode, billingId: planpicker.billingId, meta: { promoCode }})
-  ).catch(({ message }) => {
-    dispatch(change(FORMS.JOIN_PLAN, 'promoCode', ''));
-    throw { promoCode: 'Invalid promo code' };
-  });
-};
-
-const formOptions = { form: FORMS.JOIN_PLAN, enableReinitialize: true, asyncValidate: promoCodeValidate, asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
+const formOptions = { form: FORMS.JOIN_PLAN, enableReinitialize: true, asyncValidate: promoCodeValidate(FORMS.JOIN_PLAN), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 
 export default connect(
   choosePlanMSTP(FORMS.JOIN_PLAN),

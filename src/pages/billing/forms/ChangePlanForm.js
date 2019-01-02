@@ -195,5 +195,5 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
-const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate, asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
+const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));
