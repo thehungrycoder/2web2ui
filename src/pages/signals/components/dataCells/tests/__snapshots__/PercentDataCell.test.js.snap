@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PercentDataCell renders a percentage 1`] = `
+<div
+  className="PaddedCell"
+>
+  50%
+</div>
+`;
+
+exports[`PercentDataCell renders bars 1`] = `
+<div
+  className="PaddedCell"
+>
+  - - -
+</div>
+`;
