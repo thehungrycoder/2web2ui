@@ -105,7 +105,7 @@ Object {
     "selector": "scph0118",
     "signing_domain": "iamsigning.edu",
   },
-  "dkimHostname": "iamsigning.edu._domainkey.xyz.com",
+  "dkimHostname": "scph0118._domainkey.iamsigning.edu",
   "dkimValue": "v=DKIM1; k=rsa; h=sha256; p=123456789A",
   "id": "xyz.com",
 }
