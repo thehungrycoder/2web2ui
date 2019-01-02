@@ -1,6 +1,6 @@
 import React from 'react';
 import PageLink from 'src/components/pageLink';
-import styles from '../SpamTrapOverview.module.scss';
+import styles from './DataCell.module.scss';
 
 const FacetDataCell = ({ facet, signalOptions, subaccounts, ...props }) => {
   const id = props[facet.key];
