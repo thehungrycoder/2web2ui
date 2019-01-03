@@ -39,6 +39,7 @@ describe('Form Container: Change Plan', () => {
       billing: { countries: [], plans, selectedPromo: {}},
       getPlans: jest.fn(),
       getBillingCountries: jest.fn(),
+      verifyPromoCode: jest.fn(() => Promise.resolve({})),
       fetchAccount: jest.fn(),
       plans,
       currentPlan: {},
@@ -119,7 +120,7 @@ describe('Form Container: Change Plan', () => {
     let values;
 
     beforeEach(() => {
-      values = { key: 'value', planpicker: { code: 'paid' }, card: 'card info' };
+      values = { key: 'value', planpicker: { code: 'paid', billingId: 'test-id' }, card: 'card info' };
     });
 
     // Upgrade from free to new paid plan for the first time
@@ -128,6 +129,21 @@ describe('Form Container: Change Plan', () => {
       wrapper.setProps({ account }); // remove billing from account
       await instance.onSubmit(values);
       expect(props.billingCreate).toHaveBeenCalledWith(values);
+      expect(props.history.push).toHaveBeenCalledWith('/account/billing');
+      expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
+
+    it('should call verify promo code before submission steps if promocode is is available', async () => {
+      const billing = { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }};
+      wrapper.setProps({ billing });
+      await instance.onSubmit(values);
+      expect(props.verifyPromoCode).toHaveBeenCalledWith({
+        promoCode: 'test-promo-code',
+        billingId: 'test-id',
+        meta: { promoCode: 'test-promo-code' }
+      });
+      expect(props.billingUpdate).toHaveBeenCalledWith(values);
+      expect(props.updateSubscription).not.toHaveBeenCalled();
       expect(props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
     });

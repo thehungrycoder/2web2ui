@@ -16,6 +16,7 @@ describe('ChoosePlan page tests', () => {
     billingCreate: jest.fn(() => Promise.resolve()),
     handleSubmit: jest.fn(),
     showAlert: jest.fn(),
+    verifyPromoCode: jest.fn(() => Promise.resolve({})),
     history: {
       push: jest.fn()
     },
@@ -79,6 +80,20 @@ describe('ChoosePlan page tests', () => {
     it('should create billing record on submission', async () => {
       const values = { planpicker: { isFree: false }, key: 'value', card: 'card info' };
       await instance.onSubmit(values);
+      expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
+      expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
+      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
+    });
+
+    it('should call verify of promo code before rest of submission flow', async () => {
+      const values = { planpicker: { isFree: false, billingId: 'test-id' }, key: 'value', card: 'card info' };
+      wrapper.setProps({ billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }}});
+      await instance.onSubmit(values);
+      expect(props.verifyPromoCode).toHaveBeenCalledWith({
+        promoCode: 'test-promo-code',
+        billingId: 'test-id',
+        meta: { promoCode: 'test-promo-code' }
+      });
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
