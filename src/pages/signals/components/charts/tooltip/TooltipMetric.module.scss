@@ -1,0 +1,38 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+
+.Wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: rem(50);
+  margin-top: spacing(small);
+}
+
+.TooltipMetric {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Content {
+  flex: 1 0 0;
+}
+
+.Color {
+  flex: 0 0 0;
+  height: rem(50);
+  min-width: 4px;
+  max-width: 4px;
+  margin-right: rem(12);
+  background: red;
+}
+
+.Label {
+  font-size: rem(12);
+  font-weight: 400;
+}
+
+.Value {
+  font-size: rem(22);
+  font-weight: 500;
+}

@@ -33,7 +33,7 @@ exports[`Confirmation:  renders correctly when billing not enabled 1`] = `
       urls={
         Object {
           "billing_url": "/account/billing/plan",
-          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free500-1018",
+          "cancel_confirmation_url": "/account/billing/plan/change",
           "save_return_url": "/account/billing",
         }
       }
@@ -64,6 +64,11 @@ exports[`Confirmation:  should render correctly for an upgrade effectively immed
     </span>
   </Panel.Section>
   <Panel.Section>
+    <Connect(PromoCode)
+      selectedPromo={Object {}}
+    />
+  </Panel.Section>
+  <Panel.Section>
     <div>
       <small>
         New Plan
@@ -78,6 +83,7 @@ exports[`Confirmation:  should render correctly for an upgrade effectively immed
               "volume": 2000,
             }
           }
+          selectedPromo={Object {}}
         />
       </h5>
     </div>
@@ -92,7 +98,7 @@ exports[`Confirmation:  should render correctly for an upgrade effectively immed
       urls={
         Object {
           "billing_url": "/account/billing/plan",
-          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free500-1018",
+          "cancel_confirmation_url": "/account/billing/plan/change",
           "save_return_url": "/account/billing",
         }
       }
@@ -151,6 +157,7 @@ exports[`Confirmation:  should render correctly with a downgrade 1`] = `
               "volume": 500,
             }
           }
+          selectedPromo={Object {}}
         />
       </h5>
     </div>
@@ -184,7 +191,7 @@ exports[`Confirmation:  should render correctly with a downgrade 1`] = `
       urls={
         Object {
           "billing_url": "/account/billing/plan",
-          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free500-1018",
+          "cancel_confirmation_url": "/account/billing/plan/change",
           "save_return_url": "/account/billing",
         }
       }
@@ -243,6 +250,7 @@ exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
               "volume": 100,
             }
           }
+          selectedPromo={Object {}}
         />
       </h5>
     </div>
@@ -260,7 +268,7 @@ exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
       urls={
         Object {
           "billing_url": "/account/billing/plan",
-          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free500-1018",
+          "cancel_confirmation_url": "/account/billing/plan/change",
           "save_return_url": "/account/billing",
         }
       }
@@ -304,6 +312,11 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
     </span>
   </Panel.Section>
   <Panel.Section>
+    <Connect(PromoCode)
+      selectedPromo={Object {}}
+    />
+  </Panel.Section>
+  <Panel.Section>
     <div>
       <small>
         New Plan
@@ -318,6 +331,7 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
               "volume": 2000,
             }
           }
+          selectedPromo={Object {}}
         />
       </h5>
     </div>
@@ -332,7 +346,7 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
       urls={
         Object {
           "billing_url": "/account/billing/plan",
-          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free500-1018",
+          "cancel_confirmation_url": "/account/billing/plan/change",
           "save_return_url": "/account/billing",
         }
       }
@@ -376,6 +390,11 @@ exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
     </span>
   </Panel.Section>
   <Panel.Section>
+    <Connect(PromoCode)
+      selectedPromo={Object {}}
+    />
+  </Panel.Section>
+  <Panel.Section>
     <div>
       <small>
         New Plan
@@ -391,6 +410,7 @@ exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
               "volume": 2000,
             }
           }
+          selectedPromo={Object {}}
         />
       </h5>
     </div>
@@ -410,7 +430,7 @@ exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
       urls={
         Object {
           "billing_url": "/account/billing/plan",
-          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free500-1018",
+          "cancel_confirmation_url": "/account/billing/plan/change",
           "save_return_url": "/account/billing",
         }
       }
@@ -452,7 +472,7 @@ exports[`Confirmation:  should render with nothing selected 1`] = `
       urls={
         Object {
           "billing_url": "/account/billing/plan",
-          "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free500-1018",
+          "cancel_confirmation_url": "/account/billing/plan/change",
           "save_return_url": "/account/billing",
         }
       }

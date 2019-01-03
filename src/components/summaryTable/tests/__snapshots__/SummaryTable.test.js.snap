@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SummaryTable renders a table 1`] = `
+<div
+  className="SummaryTable"
+>
+  <Table>
+    <Head
+      columns={
+        Array [
+          Object {
+            "dataKey": "id",
+            "label": "Identifier",
+          },
+          Object {
+            "dataKey": "name",
+            "label": "Name",
+          },
+        ]
+      }
+      onSort={[Function]}
+      order={
+        Object {
+          "ascending": false,
+          "dataKey": "id",
+        }
+      }
+    />
+    <Body
+      columns={
+        Array [
+          Object {
+            "dataKey": "id",
+            "label": "Identifier",
+          },
+          Object {
+            "dataKey": "name",
+            "label": "Name",
+          },
+        ]
+      }
+      data={
+        Array [
+          Object {
+            "id": "test-example",
+            "name": "Test Example",
+          },
+        ]
+      }
+      loading={false}
+      perPage={10}
+    />
+  </Table>
+  <div
+    className="PaginationWrapper"
+  >
+    <div
+      className="PageButtons"
+    >
+      <Pagination
+        className="Pagination"
+        currentPage={1}
+        flat={true}
+        onChange={[Function]}
+        pageRange={5}
+        pages={0}
+        selectedColor="orange"
+      />
+    </div>
+    <div>
+      <PerPageControl
+        onChange={[Function]}
+        perPage={10}
+        totalCount={0}
+      />
+    </div>
+  </div>
+</div>
+`;

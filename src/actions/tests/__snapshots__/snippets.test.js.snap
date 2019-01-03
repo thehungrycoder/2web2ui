@@ -14,6 +14,7 @@ Array [
     "meta": Object {
       "data": Object {
         "content": Object {
+          "amp_html": undefined,
           "html": undefined,
           "text": "Testing...",
         },
@@ -36,6 +37,7 @@ Array [
     "meta": Object {
       "data": Object {
         "content": Object {
+          "amp_html": undefined,
           "html": undefined,
           "text": "Testing...",
         },
@@ -58,6 +60,7 @@ Array [
     "meta": Object {
       "data": Object {
         "content": Object {
+          "amp_html": undefined,
           "html": undefined,
           "text": "Testing...",
         },
@@ -76,12 +79,36 @@ Array [
 ]
 `;
 
+exports[`Snippet Actions .createSnippet with amp_html 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "amp_html": "<p>AMP Testing...</p>",
+          "html": undefined,
+          "text": undefined,
+        },
+        "id": undefined,
+        "name": undefined,
+        "shared_with_subaccounts": false,
+      },
+      "headers": Object {},
+      "method": "POST",
+      "url": "/labs/snippets",
+    },
+    "type": "CREATE_SNIPPET",
+  },
+]
+`;
+
 exports[`Snippet Actions .createSnippet with html and text content 1`] = `
 Array [
   Object {
     "meta": Object {
       "data": Object {
         "content": Object {
+          "amp_html": undefined,
           "html": "<p>Testing...</p>",
           "text": "Testing...",
         },
@@ -188,6 +215,7 @@ Array [
     "meta": Object {
       "data": Object {
         "content": Object {
+          "amp_html": undefined,
           "html": undefined,
           "text": "Testing...",
         },
@@ -209,6 +237,7 @@ Array [
     "meta": Object {
       "data": Object {
         "content": Object {
+          "amp_html": undefined,
           "html": undefined,
           "text": "Testing...",
         },
@@ -230,6 +259,7 @@ Array [
     "meta": Object {
       "data": Object {
         "content": Object {
+          "amp_html": undefined,
           "html": undefined,
           "text": "Testing...",
         },
@@ -247,12 +277,35 @@ Array [
 ]
 `;
 
+exports[`Snippet Actions .updateSnippet with amp_html 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "amp_html": "<p>AMP Testing...</p>",
+          "html": undefined,
+          "text": undefined,
+        },
+        "name": undefined,
+        "shared_with_subaccounts": false,
+      },
+      "headers": Object {},
+      "method": "PUT",
+      "url": "/labs/snippets/undefined",
+    },
+    "type": "UPDATE_SNIPPET",
+  },
+]
+`;
+
 exports[`Snippet Actions .updateSnippet with html and text content 1`] = `
 Array [
   Object {
     "meta": Object {
       "data": Object {
         "content": Object {
+          "amp_html": undefined,
           "html": "<p>Testing...</p>",
           "text": "Testing...",
         },

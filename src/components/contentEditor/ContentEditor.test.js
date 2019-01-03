@@ -42,14 +42,42 @@ describe('ContentEditor', () => {
     expect(wrapper.find('Field').props().readOnly).toBe(false);
   });
 
-  it('should set syntax validation correctly', () => {
+  it('should set HTML syntax validation correctly', () => {
+    wrapper.instance().handleTab(0);
+    wrapper.update();
+    expect(wrapper.find('Field').props().name).toBe('content.html');
+    expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+  });
+
+  it('should set Text syntax validation correctly', () => {
     wrapper.instance().handleTab(1);
     wrapper.update();
+    expect(wrapper.find('Field').props().name).toBe('content.text');
     expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+  });
 
+  it('should set AMP HTML syntax validation correctly', () => {
+    wrapper.setProps({ isAmpLive: true });
     wrapper.instance().handleTab(2);
     wrapper.update();
+    expect(wrapper.find('Field').props().name).toBe('content.amp_html');
+    expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+  });
+
+  it('should set Test Data syntax validation correctly', () => {
+    wrapper.instance().handleTab(2);
+    wrapper.update();
+    expect(wrapper.find('Field').props().name).toBe('testData');
     expect(wrapper.find('Field').props().syntaxValidation).toBe(true);
+  });
+
+  it('should set required content validation correctly for just HTML and Text', () => {
+    expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlOrText);
+  });
+
+  it('should set required content validation correctly for HTML, Text, and AMP', () => {
+    wrapper.setProps({ isAmpLive: true, contentOnly: true });
+    expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlTextOrAmp);
   });
 
   cases('.normalize', ({ expected, value }) => {
@@ -96,6 +124,36 @@ describe('ContentEditor', () => {
 
     it('returns required validation message with null', () => {
       expect(subject({ html: null })).toMatch(/required/);
+    });
+  });
+
+  describe('.requiredHtmlTextOrAmp', () => {
+    const subject = (content) => (
+      wrapper.instance().requiredHtmlTextOrAmp(undefined, { content })
+    );
+
+    it('returns undefined with html content', () => {
+      expect(subject({ html: '<p>test</p>' })).toBeUndefined();
+    });
+
+    it('returns undefined with text content', () => {
+      expect(subject({ text: 'test' })).toBeUndefined();
+    });
+
+    it('returns undefined with amp content', () => {
+      expect(subject({ amp_html: '<span>test</span>' })).toBeUndefined();
+    });
+
+    it('returns undefined with all content', () => {
+      expect(subject({ html: '<p>test</p>', text: 'test', amp_html: '<span>test</span>' })).toBeUndefined();
+    });
+
+    it('returns required validation message', () => {
+      expect(subject({})).toMatch(/required/);
+    });
+
+    it('returns required validation message with whitespace', () => {
+      expect(subject({ html: '     ' })).toMatch(/required/);
     });
   });
 

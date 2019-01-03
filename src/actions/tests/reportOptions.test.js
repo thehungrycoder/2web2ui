@@ -33,6 +33,11 @@ describe('Action Creator: Report Options', () => {
       },
       sendingDomains: {
         list: []
+      },
+      typeahead: {
+        from: null,
+        to: null,
+        cache: {}
       }
     };
     dispatchMock = jest.fn((a) => a);
@@ -44,7 +49,7 @@ describe('Action Creator: Report Options', () => {
 
     it('should dispatch 4 actions', () => {
       reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-      expect(dispatchMock).toHaveBeenCalledTimes(4);
+      expect(dispatchMock).toHaveBeenCalledTimes(3);
       expect(listTemplates).toHaveBeenCalledTimes(1);
       expect(listSubaccounts).toHaveBeenCalledTimes(1);
       expect(listSendingDomains).toHaveBeenCalledTimes(1);
@@ -57,46 +62,35 @@ describe('Action Creator: Report Options', () => {
 
       reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
 
-      expect(dispatchMock).toHaveBeenCalledTimes(1);
+      expect(dispatchMock).toHaveBeenCalledTimes(0);
       expect(listTemplates).not.toHaveBeenCalled();
       expect(listSubaccounts).not.toHaveBeenCalled();
       expect(listSendingDomains).not.toHaveBeenCalled();
     });
 
-    it('should skip call to refreshTypeaheadCache if any of the metrics lists are not empty', () => {
-      testState.templates.list.push('template');
-      testState.subaccounts.list.push('subaccount');
-      testState.sendingDomains.list.push('sending-domain');
-
-      testState.metrics.campaigns.push('campaign');
-      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-
-      testState.metrics.campaigns = [];
-
-      testState.metrics.domains.push('domain');
-      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-
-      testState.metrics.domains = [];
-
-      testState.metrics.sendingIps.push('sendingIp');
-      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-
-      testState.metrics.sendingIps = [];
-
-      testState.metrics.ipPools.push('pool');
-      reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-
-      expect(dispatchMock).not.toHaveBeenCalled();
-    });
-
   });
 
-  it('should refresh the metrics lists for the typeahead cache', () => {
-    reportOptions.refreshTypeaheadCache({ foo: 'bar' })(dispatchMock);
+  it('should refresh the metrics lists for the typeahead cache if the results are not cached', async () => {
+    await reportOptions.refreshTypeaheadCache({ match: 'foo' })(dispatchMock, getStateMock);
     expect(metrics.fetchMetricsDomains).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsCampaigns).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsSendingIps).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsIpPools).toHaveBeenCalledTimes(1);
+  });
+
+  it('should load metrics lists for the typeahead from cache if exists', async () => {
+    testState.typeahead = {
+      cache: {
+        foo: ['foobar']
+      }
+    };
+    isSameDate.mockImplementation(() => true);
+    await reportOptions.refreshTypeaheadCache({ match: 'foo' })(dispatchMock, getStateMock);
+    expect(metrics.fetchMetricsDomains).not.toHaveBeenCalled();
+    expect(metrics.fetchMetricsCampaigns).not.toHaveBeenCalled();
+    expect(metrics.fetchMetricsSendingIps).not.toHaveBeenCalled();
+    expect(metrics.fetchMetricsIpPools).not.toHaveBeenCalled();
+
   });
 
   it('should add multiple filters', () => {

@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Actions .getSpamHits by default 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/spam-hits/",
+    },
+    "type": "GET_SPAM_HITS",
+  },
+]
+`;
+
+exports[`Signals Actions .getSpamHits with a facet 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/spam-hits/sending-domain",
+    },
+    "type": "GET_SPAM_HITS",
+  },
+]
+`;
+
+exports[`Signals Actions .getSpamHits with a filter 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": "examp",
+        "from": "2018-01-12",
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/spam-hits/",
+    },
+    "type": "GET_SPAM_HITS",
+  },
+]
+`;
+
+exports[`Signals Actions .getSpamHits with a subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {
+        "x-msys-subaccount": 123,
+      },
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/spam-hits/",
+    },
+    "type": "GET_SPAM_HITS",
+  },
+]
+`;

@@ -54,6 +54,7 @@ exports[`Typeahead render function should render the list 1`] = `
     }
     className="List"
     groupByKey="section"
+    maxHeight="300"
   />
   <TextField
     connectRight={null}

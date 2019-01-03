@@ -9,7 +9,8 @@ export const createSnippet = ({
   name,
   sharedWithSubaccounts = false,
   subaccountId,
-  text
+  text,
+  amp_html
 }) => (
   sparkpostApiRequest({
     type: 'CREATE_SNIPPET',
@@ -21,7 +22,8 @@ export const createSnippet = ({
         // undefined content parts will not be sent with request
         content: {
           html,
-          text
+          text,
+          amp_html
         },
         id,
         name,
@@ -71,7 +73,8 @@ export const updateSnippet = ({
   name,
   sharedWithSubaccounts = false,
   subaccountId,
-  text
+  text,
+  amp_html
 }) => (
   sparkpostApiRequest({
     type: 'UPDATE_SNIPPET',
@@ -83,7 +86,8 @@ export const updateSnippet = ({
         // undefined content parts will not be sent with request
         content: {
           html,
-          text
+          text,
+          amp_html
         },
         name,
         shared_with_subaccounts: subaccountId ? false : sharedWithSubaccounts

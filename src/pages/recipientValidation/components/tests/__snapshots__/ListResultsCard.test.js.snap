@@ -52,7 +52,7 @@ exports[`ListResultsCard renders correctly when loading and status is unknown 1`
     className="LoadingWrapper"
   >
     <LoadingSVG
-      small={true}
+      size="Small"
     />
   </div>
 </Panel>
@@ -76,7 +76,7 @@ exports[`ListResultsCard renders correctly when not complete 1`] = `
     className="ProcessingWrapper"
   >
     <LoadingSVG
-      small={true}
+      size="Small"
     />
   </div>
   <LabelledValue

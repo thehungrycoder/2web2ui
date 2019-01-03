@@ -23,6 +23,13 @@ const fields = [
     show: () => true
   },
   {
+    content: 'AMP HTML',
+    name: 'content.amp_html',
+    mode: 'html',
+    syntaxValidation: false,
+    show: ({ isAmpLive }) => isAmpLive
+  },
+  {
     content: 'Test Data',
     name: 'testData',
     mode: 'json',
@@ -41,8 +48,8 @@ class ContentEditor extends React.Component {
   }
 
   // note, create/update snippet requests will fail if either part only contains whitespace
-  normalize = (value = '') => {
-    if (value.trim() === '') {
+  normalize = (value) => {
+    if (!value || value.trim() === '') {
       return '';
     }
 
@@ -52,8 +59,16 @@ class ContentEditor extends React.Component {
   // note, must handle null template parts
   requiredHtmlOrText = (value, { content: { html, text } = {}}) => {
     // return validation error if both parts are falsy or empty
-    if ((!html || html.trim() === '') && (!text || text.trim() === '')) {
+    if (!this.normalize(html) && !this.normalize(text)) {
       return 'HTML or Text is required';
+    }
+  }
+
+  // note, must handle null template parts
+  requiredHtmlTextOrAmp = (value, { content: { html, text, amp_html } = {}}) => {
+    // return validation error if both parts are falsy or empty
+    if (!this.normalize(html) && !this.normalize(text) && !this.normalize(amp_html)) {
+      return 'HTML, AMP HTML, or Text is required';
     }
   }
 
@@ -64,12 +79,13 @@ class ContentEditor extends React.Component {
   }
 
   render() {
-    const { readOnly } = this.props;
+    const { readOnly, isAmpLive, contentOnly } = this.props;
     const { selectedTab } = this.state;
+    const visibleFields = fields.filter((field) => field.show(this.props));
+    const tabs = visibleFields.map(({ content }, index) => ({ content, onClick: () => this.handleTab(index) }));
 
-    const tabs = fields
-      .filter((field) => field.show(this.props))
-      .map(({ content }, index) => ({ content, onClick: () => this.handleTab(index) }));
+    // Templates require HTML or Text. Snippets require HTML, AMP HTML, or Text.
+    const requiredContentValidator = isAmpLive && contentOnly ? this.requiredHtmlTextOrAmp : this.requiredHtmlOrText;
 
     return (
       <div className={styles.EditorSection}>
@@ -80,12 +96,12 @@ class ContentEditor extends React.Component {
         <Panel className={styles.EditorPanel}>
           <Field
             component={AceWrapper}
-            mode={fields[selectedTab].mode}
-            name={fields[selectedTab].name}
+            mode={visibleFields[selectedTab].mode}
+            name={visibleFields[selectedTab].name}
             normalize={this.normalize}
             readOnly={readOnly && selectedTab !== 2}
-            syntaxValidation={fields[selectedTab].syntaxValidation}
-            validate={[this.requiredHtmlOrText, this.validTestDataJson]}
+            syntaxValidation={visibleFields[selectedTab].syntaxValidation}
+            validate={[requiredContentValidator, this.validTestDataJson]}
           />
         </Panel>
       </div>

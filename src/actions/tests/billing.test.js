@@ -62,6 +62,11 @@ describe('Action Creator: Billing', () => {
     snapActions();
   });
 
+  it('should dispatch a verification of a promo code', () => {
+    mockStore.dispatch(billing.verifyPromoCode({ promoCode: 'test-code', billingId: 'test-bill-id', meta: { promoCode: 'test-code' }}));
+    snapActions();
+  });
+
   it('should dispatch a cors action', () => {
     mockStore.dispatch(billing.cors({ context: 'some-context', data: { some: 'cors-data' }, meta: { word: 'up' }}));
     snapActions();
@@ -80,21 +85,21 @@ describe('Action Creator: Billing', () => {
   });
 
   describe('updateSubscription', () => {
-    it('should dispatch an update subscription action and fetch account', async() => {
+    it('should dispatch an update subscription action and fetch account', async () => {
       const dispatchMock = jest.fn((a) => Promise.resolve(a));
       const thunk = billing.updateSubscription({ code: 'test-code' });
       await thunk(dispatchMock, getStateMock);
       expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });
 
-    it('should dispatch an update subscription action with provided onSuccess action', async() => {
+    it('should dispatch an update subscription action with provided onSuccess action', async () => {
       const dispatchMock = jest.fn((a) => Promise.resolve(a));
       const thunk = billing.updateSubscription({ code: 'test-code', meta: { onSuccess: jest.fn() }});
       await thunk(dispatchMock, getStateMock);
       expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });
 
-    it('should dispatch an update subscription action for aws marketplace account', async() => {
+    it('should dispatch an update subscription action for aws marketplace account', async () => {
       const dispatchMock = jest.fn((a) => Promise.resolve(a));
       isAws.mockImplementation(() => true);
       const thunk = billing.updateSubscription({ code: 'test-code' });
@@ -110,14 +115,14 @@ describe('Action Creator: Billing', () => {
       dispatchMock = jest.fn(() => Promise.resolve());
     });
 
-    it('dispatches with correct data for "normal" account', async() => {
+    it('dispatches with correct data for "normal" account', async () => {
       const thunk = billing.addDedicatedIps({ ip_pool: 'abcd', isAwsAccount: false, quantity: 1 });
 
       await thunk(dispatchMock);
       expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });
 
-    it('dispatches with correct data for aws account', async() => {
+    it('dispatches with correct data for aws account', async () => {
       const thunk = billing.addDedicatedIps({ ip_pool: 'abcd', isAwsAccount: true, quantity: 1 });
 
       await thunk(dispatchMock);
@@ -126,7 +131,7 @@ describe('Action Creator: Billing', () => {
   });
 
   describe('collectPayments', () => {
-    it('dispatches a collection action', async() => {
+    it('dispatches a collection action', async () => {
       await mockStore.dispatch(billing.collectPayments({ meta: { onSuccess: jest.fn() }}));
       snapActions();
     });

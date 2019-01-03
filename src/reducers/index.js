@@ -28,9 +28,12 @@ import recipientValidation from './recipientValidation';
 import reportOptions from './reportOptions';
 import sendingDomains from './sendingDomains';
 import sendingIps from './sendingIps';
+import signalOptions from './signalOptions';
+import signals from './signals';
 import snippets from './snippets';
 import subaccounts from './subaccounts';
 import summaryChart from './summaryChart';
+import summaryTables from './summaryTables';
 import support from './support';
 import suppressions from './suppressions';
 import templates from './templates';
@@ -38,6 +41,7 @@ import users from './users';
 import tfa from './tfa';
 import tfaBackupCodes from './tfaBackupCodes';
 import trackingDomains from './trackingDomains';
+import typeahead from './typeahead';
 import webhooks from './webhooks';
 import websiteAuth from './websiteAuth';
 
@@ -70,15 +74,19 @@ const appReducer = combineReducers({
   recipientValidation,
   sendingDomains,
   sendingIps,
+  signalOptions,
+  signals,
   snippets,
   subaccounts,
   support,
   summaryChart,
+  summaryTables,
   suppressions,
   templates,
   tfa,
   tfaBackupCodes,
   trackingDomains,
+  typeahead,
   users,
   webhooks,
   websiteAuth

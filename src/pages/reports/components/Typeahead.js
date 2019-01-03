@@ -2,45 +2,77 @@ import React, { Component } from 'react';
 import Downshift from 'downshift';
 import classnames from 'classnames';
 import _ from 'lodash';
-
+import { METRICS_API_LIMIT, TYPEAHEAD_LIMIT } from '../../../constants';
+import { refreshTypeaheadCache } from 'src/actions/reportOptions';
 import sortMatch from 'src/helpers/sortMatch';
 import { TextField, ActionList } from '@sparkpost/matchbox';
 import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';
+import { connect } from 'react-redux';
+import { LoadingSVG } from 'src/components';
 
 function flattenItem({ type, value }) {
   return `${type}:${value}`;
 }
 
-class Typeahead extends Component {
+const MatchesLoading = ({ isLoading }) => (isLoading) ? <LoadingSVG size='XSmall' /> : null;
+
+const staticItemTypes = ['Template', 'Subaccount', 'Sending Domain'];
+
+export class Typeahead extends Component {
   state = {
     inputValue: '',
     matches: [],
-    calculatingMatches: false
-  }
-
-  updateMatches = (pattern) => {
-    let matches;
-
-    this.setState({ calculatingMatches: true });
-
-    if (!pattern || pattern.length < 2) {
-      matches = [];
-    } else {
-      const { items, selected = []} = this.props;
-      const flatSelected = selected.map(flattenItem);
-      matches = sortMatch(items, pattern, (i) => i.value)
-        .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
-        .slice(0, 100);
-    }
-
-    this.setState({ matches, calculatingMatches: false });
+    calculatingMatches: false,
+    pattern: null
   };
 
-  updateMatchesDebounced = _.debounce(this.updateMatches, 250);
+  /**
+   * Returns all matches of the given types that match a pattern.
+   */
+    filterItems = (pattern, itemTypes) => {
+      const { items, selected = []} = this.props;
+      const flatSelected = selected.map(flattenItem);
+      const staticItems = itemTypes ? items.filter(({ type }) => itemTypes.includes(type)) : items;
+      return sortMatch(staticItems, pattern, (i) => i.value)
+        .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
+        .slice(0,TYPEAHEAD_LIMIT);
+    }
+
+  /**
+   * The lookahead/typeahead only activates when there are at least 2 characters.
+   * If there are, it finds matches within the currently loaded items.
+   * Then it makes the metrics api calls to load new items, filters those
+   * items for matches while excluding results that already exits, and finally
+   * appending the results to the existing matches.
+   *
+   */
+  updateLookAhead = (pattern) => {
+    if (!pattern || pattern.length < 2) {
+      this.setState({ matches: [], calculatingMatches: false, pattern: null });
+      return Promise.resolve();
+    }
+
+    // Show filtered static items
+    const staticMatches = this.filterItems(pattern, staticItemTypes);
+    this.setState({ calculatingMatches: true, pattern, matches: staticMatches });
+
+    // Dispatch refresh for dynamic items
+    const options = { ...this.props.reportOptions, match: pattern, limit: METRICS_API_LIMIT };
+    return this.props.refreshTypeaheadCache(options).then(() => {
+      // Avoid showing stale items from previous refreshes
+      if (pattern === this.state.pattern) {
+        // Then show static + dynamic items when available
+        const allMatches = this.filterItems(pattern);
+        this.setState({ calculatingMatches: false, matches: allMatches });
+      }
+    });
+  };
+
+  updateLookAheadDebounced = _.debounce(this.updateLookAhead, 250);
 
   handleFieldChange = (e) => {
-    this.updateMatchesDebounced(e.target.value);
+    this.updateLookAheadDebounced(e.target.value);
   };
 
   // Pass only item selection events to mask the
@@ -78,7 +110,6 @@ class Typeahead extends Component {
     }));
 
     const listClasses = classnames(styles.List, isOpen && mappedMatches.length && styles.open);
-
     return (
       <div className={styles.Typeahead}>
         <div className={listClasses}><ActionList actions={mappedMatches} /></div>
@@ -86,7 +117,9 @@ class Typeahead extends Component {
           placeholder,
           onFocus: clearSelection,
           onChange: this.handleFieldChange
-        })} />
+        })}
+        suffix={<MatchesLoading isLoading={this.state.calculatingMatches}/>}
+        />
       </div>
     );
   };
@@ -98,4 +131,8 @@ class Typeahead extends Component {
   }
 }
 
-export default Typeahead;
+const mapDispatchToProps = {
+  refreshTypeaheadCache
+};
+
+export default connect(null, mapDispatchToProps)(Typeahead);

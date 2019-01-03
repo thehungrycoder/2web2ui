@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Callout renders title 1`] = `
+<div
+  className="Callout"
+  style={
+    Object {
+      "height": "220px",
+    }
+  }
+>
+  <div>
+    <h3
+      className="Title"
+    >
+      Example
+    </h3>
+  </div>
+</div>
+`;
+
+exports[`Callout renders title and details 1`] = `
+<div
+  className="Callout"
+  style={
+    Object {
+      "height": "220px",
+    }
+  }
+>
+  <div>
+    <h3
+      className="Title"
+    >
+      Example
+    </h3>
+    <p
+      className="Content"
+    >
+      Here is the deal...
+    </p>
+  </div>
+</div>
+`;

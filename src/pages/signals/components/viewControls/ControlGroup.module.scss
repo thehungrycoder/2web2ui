@@ -1,0 +1,15 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Button {
+  position: relative;
+  color: color(gray, 5) !important;
+}
+
+.Selected, .Selected:hover {
+  color: color(gray, 1) !important;
+  background: color(gray, 9);
+}
+
+.Group:not(:first-child) {
+  margin-left: spacing();
+}

@@ -15,7 +15,7 @@ export const selectDomain = createSelector(
   [getDomain],
   (domain) => ({
     ...domain,
-    dkimHostname: `${domain.dkim.selector}._domainkey.${domain.id}`,
+    dkimHostname: `${domain.dkim.selector}._domainkey.${domain.dkim.signing_domain || domain.id}`,
     dkimValue: `v=DKIM1; k=rsa; h=sha256; p=${domain.dkim.public}`
   })
 );

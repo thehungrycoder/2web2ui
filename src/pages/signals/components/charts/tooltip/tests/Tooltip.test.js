@@ -2,24 +2,34 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import Tooltip from '../Tooltip';
 
-describe('Sparkline Component', () => {
+describe('Signals Tooltip Component', () => {
   let wrapper;
   let props;
 
   beforeEach(() => {
     props = {
-      date: new Date('2010-01-01T12:00:00.000Z'),
-      children: 'test'
+      payload: [{
+        value: 1,
+        payload: {
+          value: 1,
+          date: new Date('2010-01-01T12:00:00.000Z')
+        }
+      }]
     };
     wrapper = shallow(<Tooltip {...props}/>);
   });
 
-  it('renders correctly', () => {
+  it('renders correctly with default children', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly without date', () => {
-    wrapper.setProps({ date: null });
+    wrapper.setProps({ payload: [{ payload: { value: 1 }}]});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders children correctly', () => {
+    wrapper.setProps({ children: () => 'test' });
     expect(wrapper).toMatchSnapshot();
   });
 });

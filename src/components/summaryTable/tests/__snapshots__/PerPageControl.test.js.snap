@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PerPageControl renders group of buttons 1`] = `
+<div
+  className="PerPageGroup"
+>
+  <Button.Group>
+    <span
+      className="PerPageLabel"
+    >
+      Per Page
+    </span>
+    <Button
+      className="Selected"
+      flat={true}
+      key="10"
+      onClick={[Function]}
+      size="default"
+    >
+      10
+    </Button>
+    <Button
+      className=""
+      flat={true}
+      key="25"
+      onClick={[Function]}
+      size="default"
+    >
+      25
+    </Button>
+    <Button
+      className=""
+      flat={true}
+      key="50"
+      onClick={[Function]}
+      size="default"
+    >
+      50
+    </Button>
+    <Button
+      className=""
+      flat={true}
+      key="100"
+      onClick={[Function]}
+      size="default"
+    >
+      100
+    </Button>
+  </Button.Group>
+</div>
+`;
+
+exports[`PerPageControl renders only size buttons less than or equal to totalCount 1`] = `
+<div
+  className="PerPageGroup"
+>
+  <Button.Group>
+    <span
+      className="PerPageLabel"
+    >
+      Per Page
+    </span>
+    <Button
+      className="Selected"
+      flat={true}
+      key="10"
+      onClick={[Function]}
+      size="default"
+    >
+      10
+    </Button>
+    <Button
+      className=""
+      flat={true}
+      key="25"
+      onClick={[Function]}
+      size="default"
+    >
+      25
+    </Button>
+    <Button
+      className=""
+      flat={true}
+      key="50"
+      onClick={[Function]}
+      size="default"
+    >
+      50
+    </Button>
+  </Button.Group>
+</div>
+`;

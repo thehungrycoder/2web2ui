@@ -1,0 +1,240 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DivergingBar Component renders correctly 1`] = `
+<ResponsiveContainer
+  className="DivergingBar"
+  debounce={0}
+  height={300}
+  width="50%"
+>
+  <BarChart
+    barCategoryGap={2}
+    barGap={4}
+    data={
+      Array [
+        Object {
+          "fill": "#DB2F2D",
+          "key": "bar",
+          "label": "Label bar",
+          "value": -0.5,
+        },
+        Object {
+          "fill": "#8CBE3C",
+          "key": "foo",
+          "label": "Label foo",
+          "value": 0.5,
+        },
+      ]
+    }
+    layout="vertical"
+    margin={
+      Object {
+        "bottom": 5,
+        "left": 5,
+        "right": 5,
+        "top": 5,
+      }
+    }
+    reverseStackOrder={false}
+    stackOffset="none"
+  >
+    <CartesianGrid
+      fill="none"
+      horizontal={false}
+      horizontalFill={Array []}
+      horizontalPoints={Array []}
+      shapeRendering="crispEdges"
+      stroke="#d2d2d7"
+      vertical={true}
+      verticalFill={Array []}
+      verticalPoints={Array []}
+    />
+    <Bar
+      animationBegin={0}
+      animationDuration={400}
+      animationEasing="ease"
+      cursor="pointer"
+      data={Array []}
+      dataKey="value"
+      hide={false}
+      isAnimationActive={false}
+      layout="vertical"
+      legendType="rect"
+      minPointSize={0}
+      onAnimationEnd={[Function]}
+      onAnimationStart={[Function]}
+      onClick={[MockFunction]}
+      shape={[Function]}
+      xAxisId={0}
+      yAxisId={0}
+    />
+    <YAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      axisLine={false}
+      dataKey="label"
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={0}
+      hide={false}
+      interval={0}
+      mirror={false}
+      orientation="left"
+      padding={
+        Object {
+          "bottom": 5,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tick={[Function]}
+      tickCount={5}
+      tickLine={false}
+      type="category"
+      width={60}
+      yAxisId={0}
+    />
+    <XAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      dataKey="value"
+      domain={
+        Array [
+          0,
+          0,
+        ]
+      }
+      height={30}
+      hide={false}
+      mirror={false}
+      orientation="bottom"
+      padding={
+        Object {
+          "left": 0,
+          "right": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      shapeRendering="crispEdges"
+      tickCount={5}
+      tickLine={false}
+      type="number"
+      width={0}
+      xAxisId={0}
+    />
+    <Tooltip
+      active={false}
+      animationDuration={400}
+      animationEasing="ease"
+      content={
+        <Tooltip>
+          [MockFunction]
+        </Tooltip>
+      }
+      contentStyle={Object {}}
+      coordinate={
+        Object {
+          "x": 0,
+          "y": 0,
+        }
+      }
+      cursor={false}
+      cursorStyle={Object {}}
+      filterNull={true}
+      isAnimationActive={false}
+      itemSorter={[Function]}
+      itemStyle={Object {}}
+      labelStyle={Object {}}
+      offset={10}
+      separator=" : "
+      useTranslate3d={false}
+      viewBox={
+        Object {
+          "x1": 0,
+          "x2": 0,
+          "y1": 0,
+          "y2": 0,
+        }
+      }
+      wrapperStyle={Object {}}
+    />
+  </BarChart>
+</ResponsiveContainer>
+`;
+
+exports[`DivergingBar Component should render custom unselected bar 1`] = `
+<g>
+  <rect
+    fill="#5DCFF5"
+    opacity={0}
+    width={100}
+    x={0}
+    x1={0}
+    x2={100}
+  />
+  <Rectangle
+    animationBegin={0}
+    animationDuration={1500}
+    animationEasing="ease"
+    height={0}
+    isAnimationActive={false}
+    isUpdateAnimationActive={false}
+    radius={0}
+    width={0}
+    x={0}
+    y={0}
+  />
+</g>
+`;
+
+exports[`DivergingBar Component should render custom unselected y tick 1`] = `
+<Text
+  background={
+    Object {
+      "width": 100,
+      "x": 0,
+    }
+  }
+  capHeight="0.71em"
+  lineHeight="1em"
+  scaleToFit={false}
+  textAnchor="start"
+  verticalAnchor="end"
+  x={0}
+  y={0}
+>
+  Label foo
+</Text>
+`;
+
+exports[`DivergingBar Component should render selected bar 1`] = `
+<g>
+  <rect
+    fill="#5DCFF5"
+    opacity={0.3}
+    width={100}
+    x={0}
+    x1={0}
+    x2={100}
+  />
+  <Rectangle
+    animationBegin={0}
+    animationDuration={1500}
+    animationEasing="ease"
+    height={0}
+    isAnimationActive={false}
+    isUpdateAnimationActive={false}
+    radius={0}
+    width={0}
+    x={0}
+    y={0}
+  />
+</g>
+`;

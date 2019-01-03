@@ -1,24 +1,262 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SubaccountFilter Component renders correctly 1`] = `
+exports[`SubaccountFilter Component renders open popover with options 1`] = `
 <div
   className="SubaccountFilter"
 >
+  <Button
+    onClick={[Function]}
+    size="default"
+  >
+    <span
+      className="ButtonLabel"
+    >
+      Master & All Subaccounts
+    </span>
+    <ArrowDropDown
+      className="ButtonIcon"
+    />
+  </Button>
   <Popover
     bottom={true}
+    className="Popover"
     left={true}
+    open={true}
     right={true}
-    sectioned={true}
-    style={
-      Object {
-        "width": "250px",
+  >
+    <SubaccountOption
+      key="Master & All Subaccounts"
+      label="Master & All Subaccounts"
+      onChange={[Function]}
+      onOpen={[Function]}
+      selected={true}
+      value={
+        Object {
+          "id": undefined,
+          "name": "Master & All Subaccounts",
+        }
       }
-    }
-    trigger={
-      <Trigger
-        label="Master & All Subaccounts"
+    />
+    <SubaccountOption
+      key="Master Account"
+      label="Master Account"
+      onChange={[Function]}
+      onOpen={[Function]}
+      selected={false}
+      value={
+        Object {
+          "id": 0,
+          "name": "Master Account",
+        }
+      }
+    />
+    <SubaccountOption
+      key="Search for Subaccount"
+      label="Search for Subaccount"
+      nested={true}
+      onChange={[Function]}
+      onOpen={[Function]}
+      selected={false}
+      value={
+        Object {
+          "id": undefined,
+          "name": "Search for Subaccount",
+        }
+      }
+    />
+  </Popover>
+</div>
+`;
+
+exports[`SubaccountFilter Component renders open popover with options after back button is clicked 1`] = `
+<div
+  className="SubaccountFilter"
+>
+  <Button
+    onClick={[Function]}
+    size="default"
+  >
+    <span
+      className="ButtonLabel"
+    >
+      Master & All Subaccounts
+    </span>
+    <ArrowDropDown
+      className="ButtonIcon"
+    />
+  </Button>
+  <Popover
+    bottom={true}
+    className="Popover"
+    left={true}
+    open={true}
+    right={true}
+  >
+    <SubaccountOption
+      key="Master & All Subaccounts"
+      label="Master & All Subaccounts"
+      onChange={[Function]}
+      onOpen={[Function]}
+      selected={true}
+      value={
+        Object {
+          "id": undefined,
+          "name": "Master & All Subaccounts",
+        }
+      }
+    />
+    <SubaccountOption
+      key="Master Account"
+      label="Master Account"
+      onChange={[Function]}
+      onOpen={[Function]}
+      selected={false}
+      value={
+        Object {
+          "id": 0,
+          "name": "Master Account",
+        }
+      }
+    />
+    <SubaccountOption
+      key="Search for Subaccount"
+      label="Search for Subaccount"
+      nested={true}
+      onChange={[Function]}
+      onOpen={[Function]}
+      selected={false}
+      value={
+        Object {
+          "id": undefined,
+          "name": "Search for Subaccount",
+        }
+      }
+    />
+  </Popover>
+</div>
+`;
+
+exports[`SubaccountFilter Component renders open popover with subaccount search 1`] = `
+<div
+  className="SubaccountFilter"
+>
+  <Button
+    onClick={[Function]}
+    size="default"
+  >
+    <span
+      className="ButtonLabel"
+    >
+      Master & All Subaccounts
+    </span>
+    <ArrowDropDown
+      className="ButtonIcon"
+    />
+  </Button>
+  <Popover
+    bottom={true}
+    className="Popover"
+    left={true}
+    open={true}
+    right={true}
+  >
+    <div
+      className="SubaccountSearchHeader"
+    >
+      <UnstyledLink
+        className="BackButton"
+        onClick={[Function]}
+      >
+        <ChevronLeft
+          size={20}
+        />
+      </UnstyledLink>
+      <span>
+        Subaccount
+      </span>
+    </div>
+    <div
+      className="SubaccountSearch"
+    >
+      <Connect(SubaccountTypeahead)
+        label=""
+        onChange={[Function]}
+        placeholder="Search here"
       />
-    }
-  />
+    </div>
+  </Popover>
+</div>
+`;
+
+exports[`SubaccountFilter Component renders with subaccount 1`] = `
+<div
+  className="SubaccountFilter"
+>
+  <Button
+    onClick={[Function]}
+    size="default"
+  >
+    <span
+      className="ButtonLabel"
+    >
+      Test Subaccount
+    </span>
+    <span>
+      (
+      123
+      )
+    </span>
+    <ArrowDropDown
+      className="ButtonIcon"
+    />
+  </Button>
+  <Popover
+    bottom={true}
+    className="Popover"
+    left={true}
+    open={false}
+    right={true}
+  >
+    <SubaccountOption
+      key="Master & All Subaccounts"
+      label="Master & All Subaccounts"
+      onChange={[Function]}
+      onOpen={[Function]}
+      selected={false}
+      value={
+        Object {
+          "id": undefined,
+          "name": "Master & All Subaccounts",
+        }
+      }
+    />
+    <SubaccountOption
+      key="Master Account"
+      label="Master Account"
+      onChange={[Function]}
+      onOpen={[Function]}
+      selected={false}
+      value={
+        Object {
+          "id": 0,
+          "name": "Master Account",
+        }
+      }
+    />
+    <SubaccountOption
+      key="Search for Subaccount"
+      label="Search for Subaccount"
+      nested={true}
+      onChange={[Function]}
+      onOpen={[Function]}
+      selected={true}
+      value={
+        Object {
+          "id": undefined,
+          "name": "Search for Subaccount",
+        }
+      }
+    />
+  </Popover>
 </div>
 `;

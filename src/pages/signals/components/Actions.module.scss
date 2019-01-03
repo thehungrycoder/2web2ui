@@ -1,0 +1,36 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Wrapper {
+  padding: spacing() 0 0 spacing();
+}
+
+.Action {
+  display: flex;
+
+  p {
+    flex: 1 0 0;
+  }
+}
+
+.Dash {
+  border: none;
+  margin-bottom: spacing();
+  height: 1px;
+  background: center left / 10px 1px  linear-gradient(to right, transparent 40%, color(gray, 8) 40%) repeat-x;
+}
+
+.Icon {
+  flex: 0 0 0;
+  min-width: rem(45);
+  color: color(red, dark);
+}
+
+.Title {
+  border-bottom: 1px solid color(gray, 8);
+  margin-bottom: spacing();
+  padding-top: spacing(small);
+}
+
+.Link {
+  white-space: nowrap
+}

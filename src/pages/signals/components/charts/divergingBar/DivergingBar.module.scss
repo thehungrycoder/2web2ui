@@ -1,0 +1,14 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.DivergingBar {
+  :global {
+    .xAxis .recharts-cartesian-axis-line {
+      stroke: color(gray, 7);
+    }
+
+    .yAxis text {
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+}

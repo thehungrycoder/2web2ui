@@ -18,6 +18,10 @@ describe('EditPage', () => {
     expect(subject()).toMatchSnapshot();
   });
 
+  it('renders edit form with AMP enabled', () => {
+    expect(subject({ isAmpLive: true }).find('LoadableComponent').props().isAmpLive).toEqual(true);
+  });
+
   it('redirects with alert when load request fails', () => {
     const wrapper = subject({ loadingError: new Error('Oh no!') });
     expect(wrapper).toMatchSnapshot();
@@ -60,11 +64,12 @@ describe('EditPage', () => {
   it('requests snippet update on submit', async () => {
     const showAlert = jest.fn();
     const updateSnippet = jest.fn(() => Promise.resolve());
-    const wrapper = subject({ showAlert, updateSnippet });
+    const wrapper = subject({ showAlert, updateSnippet, isAmpLive: true });
 
     await wrapper.prop('primaryAction').onClick({
       content: {
-        html: '<p>Testing</p>'
+        html: '<p>Testing</p>',
+        amp_html: '<span>Testing</span>'
       },
       id: 'test-snippet',
       name: 'Test Snippet',
@@ -76,6 +81,7 @@ describe('EditPage', () => {
 
     expect(updateSnippet).toHaveBeenCalledWith({
       html: '<p>Testing</p>',
+      amp_html: '<span>Testing</span>',
       id: 'test-snippet',
       name: 'Test Snippet',
       sharedWithSubaccounts: false,

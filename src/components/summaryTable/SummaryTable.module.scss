@@ -1,0 +1,93 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Cell {
+  border: 1px solid color(grey, 8);
+  border-left: none;
+  padding: 0;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.DataCell {
+  padding: spacing(small);
+}
+
+.Header {
+  background-color: #FAFAFA;
+  border: 1px solid color(grey, 8);
+  border-left: none;
+  padding: spacing(small);
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.Loading {
+  height: 330px;
+  position: relative;
+}
+
+.PageButtons {
+  flex: 1 0 0;
+}
+
+@mixin buttonOverrides {
+  button, button:active, button:focus {
+    border-right: 1px solid color(gray, 7);
+    border-left: 1px solid color(gray, 7);
+    background: #F2F2F2;
+  }
+}
+
+.PaginationWrapper {
+  display: flex;
+  align-items: baseline;
+  background: #FAFAFA;
+  border: 1px solid color(gray, 7);
+  border-top: none;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.Pagination {
+  margin: 0;
+  @include buttonOverrides;
+
+  // Previous button
+  & > button:first-child {
+    border-left: none;
+    border-bottom-left-radius: 2px !important;
+  }
+}
+
+.PerPageGroup {
+  @include buttonOverrides;
+
+  // Last button
+  button:last-child {
+    border-bottom-right-radius: 2px !important;
+  }
+}
+
+.PerPageLabel {
+  color: color(grey, 4);
+  display: inline-block;
+  font-size: rem(12);
+  margin-right: spacing();
+  text-transform: uppercase;
+}
+
+.Selected {
+  font-weight: 700;
+  color: color(orange);
+  pointer-events: none;
+}
+
+.SummaryTable {
+  table {
+    margin: 0; // override
+  }
+}

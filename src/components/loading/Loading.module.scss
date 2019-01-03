@@ -38,6 +38,12 @@
     height: 28px;
     animation: rotate 1s linear infinite;
   }
+
+  &.XSmall {
+    width: 25px;
+    height: 25px;
+    animation: rotate 800ms linear infinite;
+  }
 }
 
 .Circle {
@@ -51,6 +57,12 @@
 
   .Small & {
     stroke-width: 3px;
+    stroke-dasharray: 100 100;
+    animation: dash-small 1.5s ease-in-out infinite;
+  }
+
+  .XSmall & {
+    stroke-width: 2.3px;
     stroke-dasharray: 100 100;
     animation: dash-small 1.5s ease-in-out infinite;
   }

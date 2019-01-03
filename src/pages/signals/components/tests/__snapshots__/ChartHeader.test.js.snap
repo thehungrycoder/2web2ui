@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals ChartHeader Component renders correctly 1`] = `
+<Fragment>
+  <div
+    className="ChartHeader"
+  >
+    <h6
+      className="Title"
+    >
+      Foo
+    </h6>
+  </div>
+  <hr
+    className="Line"
+  />
+</Fragment>
+`;
+
+exports[`Signals ChartHeader Component renders primaryArea correctly 1`] = `
+<Fragment>
+  <div
+    className="ChartHeader"
+  >
+    <h6
+      className="Title"
+    >
+      Foo
+    </h6>
+    <div>
+      <div>
+        react
+      </div>
+    </div>
+  </div>
+  <hr
+    className="Line"
+  />
+</Fragment>
+`;

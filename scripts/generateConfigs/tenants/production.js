@@ -43,6 +43,9 @@ const productionTenants = {
       allowSubaccountDefault: false,
       cnameValue: 'eu.sparkpostmail.com'
     },
+    brightback: {
+      freePlan: 'free500-SPCEU-1018'
+    },
     crossLinkTenant: 'spc',
     featureFlags: {
       allow_anyone_at_verification: true,
@@ -254,7 +257,7 @@ const productionTenants = {
       allow_default_signing_domains_for_ip_pools: true
     },
     trackingDomains: {
-      cnameValue: 'link.eleatech.io'
+      cnameValue: 'eonian.et.e.sparkpost.com'
     }
   },
   fintimes: {

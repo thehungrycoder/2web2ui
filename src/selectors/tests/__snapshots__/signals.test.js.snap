@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors: signals selected date should select date from react router 1`] = `"2018-02-01"`;
+
+exports[`Selectors: signals spam hits details should be empty with no results when not loading 1`] = `
+Object {
+  "details": Object {
+    "data": Array [],
+    "empty": true,
+    "error": undefined,
+    "loading": false,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;
+
+exports[`Selectors: signals spam hits details should select spam hits details 1`] = `
+Object {
+  "details": Object {
+    "data": Array [
+      Object {
+        "dt": "2018-01-01",
+        "relative_trap_hits": 0.25,
+        "trap_hits": 456,
+      },
+    ],
+    "empty": false,
+    "error": null,
+    "loading": false,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;

@@ -104,6 +104,7 @@ Object {
       "expirationYear": 2050,
       "securityCode": 123,
     },
+    "discountId": undefined,
   },
   "corsData": Object {
     "address1": null,

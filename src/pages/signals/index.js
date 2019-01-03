@@ -1,11 +1,11 @@
 import EngagementPage from './EngagementPage';
 import HealthScorePage from './HealthScorePage';
 import OverviewPage from './OverviewPage';
-import SpamTrapsPage from './SpamTrapsPage';
+import SpamTrapPage from './SpamTrapPage';
 
 export default {
   EngagementPage,
   HealthScorePage,
   OverviewPage,
-  SpamTrapsPage
+  SpamTrapPage
 };

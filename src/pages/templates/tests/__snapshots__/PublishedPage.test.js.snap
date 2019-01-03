@@ -47,6 +47,54 @@ exports[`Template PublishedPage should render correctly 1`] = `
 </Page>
 `;
 
+exports[`Template PublishedPage should render correctly with AMP enabled 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Templates",
+      "to": "/templates",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "component": [Function],
+        "content": "Edit Draft",
+        "to": "/templates/edit/id",
+      },
+      Object {
+        "content": "Preview & Send",
+        "onClick": undefined,
+      },
+    ]
+  }
+  title="id (Published)"
+>
+  <Grid>
+    <Grid.Column
+      lg={4}
+      xs={12}
+    >
+      <Connect(Form)
+        name="templatePublished"
+        readOnly={true}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={8}
+      xs={12}
+    >
+      <LoadableComponent
+        isAmpLive={true}
+        readOnly={true}
+      />
+    </Grid.Column>
+  </Grid>
+</Page>
+`;
+
 exports[`Template PublishedPage should render read-only correctly 1`] = `
 <Page
   breadcrumbAction={

@@ -46,7 +46,7 @@ export default class EditPage extends React.Component {
   ]
 
   submitSnippet = ({
-    content: { html, text } = {},
+    content: { html, text, amp_html } = {},
     id,
     name,
     subaccount,
@@ -54,9 +54,17 @@ export default class EditPage extends React.Component {
   }) => {
     // must handle when subaccount is set to null by SubaccountSection
     const subaccountId = subaccount ? subaccount.id : undefined;
+    const { updateSnippet, showAlert, isAmpLive } = this.props;
 
-    return this.props.updateSnippet({ html, id, name, sharedWithSubaccounts, subaccountId, text })
-      .then(() => this.props.showAlert({ type: 'success', message: 'Snippet saved' }));
+    return updateSnippet({
+      html,
+      id,
+      name,
+      sharedWithSubaccounts,
+      subaccountId,
+      text,
+      amp_html: isAmpLive ? amp_html : undefined
+    }).then(() => showAlert({ type: 'success', message: 'Snippet saved' }));
   }
 
   render() {
@@ -67,7 +75,8 @@ export default class EditPage extends React.Component {
       hasSubaccounts,
       id,
       loading,
-      submitting
+      submitting,
+      isAmpLive
     } = this.props;
     const disabled = !canModify || submitting;
 
@@ -131,7 +140,7 @@ export default class EditPage extends React.Component {
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>
-              <ContentEditor contentOnly={true} readOnly={disabled} />
+              <ContentEditor contentOnly={true} readOnly={disabled} isAmpLive={isAmpLive} />
             </Grid.Column>
           </Grid>
         </Form>

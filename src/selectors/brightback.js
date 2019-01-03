@@ -18,7 +18,7 @@ export const selectBrightbackData = (state, { urls = {}}) => {
       referrer: document.referrer
     },
     save_return_url: `${window.location.origin}${save_return_url}`,
-    cancel_confirmation_url: `${window.location.origin}${cancel_confirmation_url}`,
+    cancel_confirmation_url: `${window.location.origin}${cancel_confirmation_url}?immediatePlanChange=${brightbackConfig.freePlan}`,
     billing_url: `${window.location.origin}${billing_url}`,
     account: {
       created_at: new Date(created).getTime(),

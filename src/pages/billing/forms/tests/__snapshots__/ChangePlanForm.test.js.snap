@@ -37,6 +37,7 @@ exports[`Form Container: Change Plan should not show plans 1`] = `
         current={Object {}}
         disableSubmit={true}
         selected={Object {}}
+        selectedPromo={Object {}}
       />
     </Grid.Column>
   </Grid>
@@ -51,6 +52,7 @@ exports[`Form Container: Change Plan should render 1`] = `
         title="Select A Plan"
       >
         <Component
+          onChange={[Function]}
           plans={
             Array [
               Object {
@@ -97,6 +99,7 @@ exports[`Form Container: Change Plan should render 1`] = `
         current={Object {}}
         disableSubmit={true}
         selected={Object {}}
+        selectedPromo={Object {}}
       />
     </Grid.Column>
   </Grid>
@@ -111,6 +114,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
         title="Select A Plan"
       >
         <Component
+          onChange={[Function]}
           plans={
             Array [
               Object {
@@ -159,6 +163,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
         current={Object {}}
         disableSubmit={true}
         selected={Object {}}
+        selectedPromo={Object {}}
       />
     </Grid.Column>
   </Grid>
