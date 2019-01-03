@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Promo Code async validator does not verify if promo code is empty 1`] = `Array []`;
+
+exports[`Promo Code async validator does not verify if trigger is plan picker 1`] = `
+Array [
+  Array [
+    Object {
+      "meta": Object {
+        "field": "promoCode",
+        "form": "formName",
+        "persistentSubmitErrors": undefined,
+        "touch": undefined,
+      },
+      "payload": "",
+      "type": "@@redux-form/CHANGE",
+    },
+  ],
+]
+`;
+
+exports[`Promo Code async validator validates if a promo code is attached 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+]
+`;

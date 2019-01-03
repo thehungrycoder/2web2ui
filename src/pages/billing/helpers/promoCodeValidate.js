@@ -3,7 +3,11 @@ import { change } from 'redux-form';
 
 const promoCodeValidate = (formName) => (values, dispatch, props, field) => {
   const { promoCode, planpicker } = values;
-  if (!promoCode || field === 'planpicker') {
+  if (!promoCode) {
+    return Promise.resolve();
+  }
+
+  if (field === 'planpicker') {
     dispatch(change(formName, 'promoCode', ''));
     return Promise.resolve();
   }
@@ -14,7 +18,7 @@ const promoCodeValidate = (formName) => (values, dispatch, props, field) => {
       billingId: planpicker.billingId,
       meta: { promoCode }
     })
-  ).catch(({ message }) => {
+  ).catch(() => {
     dispatch(change(formName, 'promoCode', ''));
     throw { promoCode: 'Invalid promo code' };
   });

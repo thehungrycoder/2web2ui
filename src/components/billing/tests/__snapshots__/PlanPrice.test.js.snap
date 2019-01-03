@@ -27,6 +27,39 @@ exports[`PlanPrice allows class name overriding 1`] = `
 </span>
 `;
 
+exports[`PlanPrice renders as 0 if flat discount is greater than price 1`] = `
+<span
+  className="notranslate"
+>
+  <span
+    className="MainLabel"
+  >
+    <strong>
+      50,000
+    </strong>
+     emails/month
+    <span>
+       at 
+      <s
+        className="DiscountedLabel"
+      >
+        $
+        9
+      </s>
+      <strong>
+        $
+        0
+      </strong>
+      /
+      mo
+    </span>
+  </span>
+  <span
+    className="SupportLabel"
+  />
+</span>
+`;
+
 exports[`PlanPrice renders correctly 1`] = `
 <span
   className="notranslate"
@@ -132,6 +165,39 @@ exports[`PlanPrice renders correctly with hourly plans 1`] = `
 </span>
 `;
 
+exports[`PlanPrice renders flat discount 1`] = `
+<span
+  className="notranslate"
+>
+  <span
+    className="MainLabel"
+  >
+    <strong>
+      50,000
+    </strong>
+     emails/month
+    <span>
+       at 
+      <s
+        className="DiscountedLabel"
+      >
+        $
+        9
+      </s>
+      <strong>
+        $
+        4
+      </strong>
+      /
+      mo
+    </span>
+  </span>
+  <span
+    className="SupportLabel"
+  />
+</span>
+`;
+
 exports[`PlanPrice renders free ip 1`] = `
 <span
   className="notranslate"
@@ -192,6 +258,39 @@ exports[`PlanPrice renders free ip and overage correct 1`] = `
 `;
 
 exports[`PlanPrice renders nothing when no plan 1`] = `""`;
+
+exports[`PlanPrice renders percent discount 1`] = `
+<span
+  className="notranslate"
+>
+  <span
+    className="MainLabel"
+  >
+    <strong>
+      50,000
+    </strong>
+     emails/month
+    <span>
+       at 
+      <s
+        className="DiscountedLabel"
+      >
+        $
+        9
+      </s>
+      <strong>
+        $
+        6.75
+      </strong>
+      /
+      mo
+    </span>
+  </span>
+  <span
+    className="SupportLabel"
+  />
+</span>
+`;
 
 exports[`PlanPrice renders with overage 1`] = `
 <span
