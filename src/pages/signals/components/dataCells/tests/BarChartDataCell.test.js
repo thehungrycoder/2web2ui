@@ -5,8 +5,13 @@ import BarChartDataCell from '../BarChartDataCell';
 describe('BarChartDataCell', () => {
   const subject = (props = {}) => shallow(
     <BarChartDataCell
-      data={{ date: '2018-01-13', example: 12 }}
-      dataKey="example"
+      data={{
+        date: '2018-01-13',
+        happy: 12,
+        sad: null,
+        ranking: 'good'
+      }}
+      dataKey="happy"
       label="Example Label"
       max={500}
       {...props}
@@ -18,19 +23,13 @@ describe('BarChartDataCell', () => {
   });
 
   it('renders empty data cell', () => {
-    expect(subject({ dataKey: 'unknown' })).toMatchSnapshot();
+    expect(subject({ dataKey: 'sad' })).toMatchSnapshot();
   });
 
-  describe('when relative', () => {
+  it('renders percentage in tooltip', () => {
     const wrapper = subject({ relative: true });
+    const Tooltip = wrapper.prop('tooltipContent');
 
-    it('renders percentage in tooltip', () => {
-      const Tooltip = wrapper.prop('tooltipContent');
-      expect(shallow(<Tooltip />)).toMatchSnapshot();
-    });
-
-    it('renders bar with static max range', () => {
-      expect(wrapper.prop('xRange')[1]).toEqual(100);
-    });
+    expect(shallow(<Tooltip />)).toMatchSnapshot();
   });
 });

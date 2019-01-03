@@ -4,7 +4,7 @@ exports[`BarChartDataCell renders empty data cell 1`] = `<EmptyDataCell />`;
 
 exports[`BarChartDataCell renders horizontal bar 1`] = `
 <HorizontalBar
-  color="#b252d1"
+  color="#8CCA3A"
   height={25}
   tooltipContent={[Function]}
   value={
@@ -24,9 +24,9 @@ exports[`BarChartDataCell renders horizontal bar 1`] = `
 />
 `;
 
-exports[`BarChartDataCell when relative renders percentage in tooltip 1`] = `
+exports[`BarChartDataCell renders percentage in tooltip 1`] = `
 <TooltipMetric
-  color="#b252d1"
+  color="#8CCA3A"
   label="Example Label"
   value="12%"
 />

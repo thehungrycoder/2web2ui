@@ -1,30 +1,30 @@
 import React from 'react';
-import _ from 'lodash';
 import { formatPercent } from 'src/helpers/units';
 import HorizontalBar from '../charts/horizontalbar/HorizontalBar';
 import TooltipMetric from '../charts/tooltip/TooltipMetric';
+import colorMapByRank from './colorMapByRank';
 import EmptyDataCell from './EmptyDataCell';
 
-const BarChartDataCell = ({ data, dataKey, label, max, relative = false }) => {
+const BarChartDataCell = ({ data, dataKey, label, max, relative }) => {
   const date = data.date;
   const value = data[dataKey];
 
-  if (_.isNil(value)) {
+  if (value === null) {
     return <EmptyDataCell />;
   }
 
   return (
     <HorizontalBar
-      color="#b252d1"
+      color={colorMapByRank[data.ranking]}
       tooltipContent={() => (
         <TooltipMetric
-          color="#b252d1"
+          color={colorMapByRank[data.ranking]}
           label={label}
           value={relative ? formatPercent(value) : value.toLocaleString()}
         />
       )}
       value={{ date, value }}
-      xRange={[0, relative ? 100 : max]}
+      xRange={[0, max]}
     />
   );
 };
