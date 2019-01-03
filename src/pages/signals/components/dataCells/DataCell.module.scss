@@ -1,9 +1,10 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Center {
+.EmptyDataCell {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-style: italic;
 }
 
 .PaddedCell {
