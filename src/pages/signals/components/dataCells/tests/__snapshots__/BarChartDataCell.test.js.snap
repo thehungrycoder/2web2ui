@@ -6,6 +6,7 @@ exports[`BarChartDataCell renders horizontal bar 1`] = `
 <HorizontalBar
   color="#8CCA3A"
   height={25}
+  onClick={[Function]}
   tooltipContent={[Function]}
   value={
     Object {

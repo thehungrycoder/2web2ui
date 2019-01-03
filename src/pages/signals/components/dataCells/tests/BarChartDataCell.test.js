@@ -32,4 +32,12 @@ describe('BarChartDataCell', () => {
 
     expect(shallow(<Tooltip />)).toMatchSnapshot();
   });
+
+  it('calls onClick when clicked', () => {
+    const onClick = jest.fn();
+    const wrapper = subject({ onClick });
+    wrapper.simulate('click');
+
+    expect(onClick).toHaveBeenCalled();
+  });
 });

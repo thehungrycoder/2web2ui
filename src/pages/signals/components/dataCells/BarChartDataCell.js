@@ -5,7 +5,7 @@ import TooltipMetric from '../charts/tooltip/TooltipMetric';
 import colorMapByRank from './colorMapByRank';
 import EmptyDataCell from './EmptyDataCell';
 
-const BarChartDataCell = ({ data, dataKey, label, max, relative }) => {
+const BarChartDataCell = ({ data, dataKey, label, max, onClick = () => {}, relative }) => {
   const date = data.date;
   const value = data[dataKey];
 
@@ -16,6 +16,7 @@ const BarChartDataCell = ({ data, dataKey, label, max, relative }) => {
   return (
     <HorizontalBar
       color={colorMapByRank[data.ranking]}
+      onClick={() => { onClick(data); }}
       tooltipContent={() => (
         <TooltipMetric
           color={colorMapByRank[data.ranking]}
