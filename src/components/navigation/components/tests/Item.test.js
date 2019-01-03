@@ -20,7 +20,7 @@ describe('Item tests', () => {
   it('should render a link with beta tag', () => {
     const item = context(
       <Item
-        beta
+        tag='beta'
         to='/to'
         icon='Mail'
         label='label'
@@ -34,7 +34,21 @@ describe('Item tests', () => {
   it('should render a link with labs tag', () => {
     const item = context(
       <Item
-        labs
+        tag='labs'
+        to='/to'
+        icon='Mail'
+        label='label'
+        location={{ pathname: 'to' }}
+      />
+      , defaultContext);
+
+    expect(item.children()).toMatchSnapshot();
+  });
+
+  it('should render a link with new tag', () => {
+    const item = context(
+      <Item
+        tag='new'
         to='/to'
         icon='Mail'
         label='label'
