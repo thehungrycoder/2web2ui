@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel, Tooltip } from '@sparkpost/matchbox';
+import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
-import withSpamTrapDetails from '../../containers/SpamTrapDetailsContainer';
+import withEngagementRecencyDetails from '../../containers/EngagementRecencyDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
+import cohorts from '../../constants/cohorts';
+import _ from 'lodash';
 
-export class SpamTrapsPreview extends Component {
-
+export class EngagementRecencyPreview extends Component {
   renderContent = () => {
     const { data, gap, empty, error } = this.props;
 
@@ -26,7 +28,7 @@ export class SpamTrapsPreview extends Component {
         margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
         gap={gap}
         timeSeries={data}
-        yKey='trap_hits'
+        yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
         xKey='dt'
         yAxisProps={{ hide: true }}
         xAxisProps={{ hide: true }}
@@ -42,11 +44,11 @@ export class SpamTrapsPreview extends Component {
     }
 
     return (
-      <PageLink to={`/signals/spam-traps/${facet}/${facetId}`}>
+      <PageLink to={`/signals/engagement-recency/${facet}/${facetId}`}>
         <Panel>
           <Panel.Section>
             <ChartHeader
-              title='Spam Trap Monitoring'
+              title='Engagement Recency'
               hideLine
               tooltipContent='TODO'
             />
@@ -60,4 +62,4 @@ export class SpamTrapsPreview extends Component {
   }
 }
 
-export default withSpamTrapDetails(SpamTrapsPreview);
+export default withEngagementRecencyDetails(EngagementRecencyPreview);

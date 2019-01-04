@@ -23,6 +23,8 @@ export const selectSpamHitsDetails = createSelector(
     const match = _.find(data, [facet, facetId]) || {};
     const history = match.history || [];
 
+    // TODO convert dt -> date
+
     return {
       details: {
         data: history,
@@ -42,20 +44,19 @@ export const selectEngagementRecencyDetails = createSelector(
   ({ loading, error, data }, facet, facetId, subaccountId) => {
     const match = _.find(data, [facet, facetId]) || {};
 
-    const relativeifyCounts = (data) => data.map(({ c_total, dt, ...absolutes }) => {
+    const calculatePercentages = (data) => data.map(({ c_total, dt, ...absolutes }) => {
       let values = {};
 
       for (const key in absolutes) {
         values = { ...values, [key]: absolutes[key] / c_total };
       }
 
-      console.log({ values });
-
       return { ...values, c_total, dt };
     });
 
-    const history = relativeifyCounts(match.history || []);
-    console.log({ history });
+    const history = calculatePercentages(match.history || []);
+    // TODO convert dt -> date
+
     return {
       details: {
         data: history,

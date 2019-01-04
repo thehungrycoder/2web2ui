@@ -63,9 +63,8 @@ export const getEngagementRecency = ({
       showErrorAlert: false,
       params: {
         filter,
+        to: formatInputDate(to),
         from: formatInputDate(from),
-        // On appteam staging account this must be no later than Dec 18 2018
-        to: formatInputDate(to)
       }
     }
   });

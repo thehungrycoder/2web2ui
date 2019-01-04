@@ -16,45 +16,15 @@ import { formatFullNumber, roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
 
-// TODO replace with health score and engagement preview
-// import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
+import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 
 export class SpamTrapPage extends Component {
   state = {
-    calculation: 'absolute',
-    selected: null
-  }
-
-  componentDidMount() {
-    const { selected } = this.props;
-
-    if (selected) {
-      this.setState({ selected });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { data, loading } = this.props;
-    const { selected } = this.state;
-    const dataSetChangedAndDoesNotContainSelectedDate = (
-      prevProps.loading === true &&
-      loading === false &&
-      prevProps.data !== data &&
-      !_.find(data, ['dt', selected])
-    );
-
-    if (dataSetChangedAndDoesNotContainSelectedDate) {
-      const last = _.last(data) || {};
-      this.setState({ selected: last.dt });
-    }
+    calculation: 'absolute'
   }
 
   handleCalculationToggle = (value) => {
     this.setState({ calculation: value });
-  }
-
-  handleDateSelect = (node) => {
-    this.setState({ selected: _.get(node, 'payload.dt') });
   }
 
   getYAxisProps = () => {
@@ -66,9 +36,9 @@ export class SpamTrapPage extends Component {
   }
 
   getXAxisProps = () => {
-    const { data } = this.props;
+    const { xTicks } = this.props;
     return {
-      interval: data.length - 2, // Show only first and last tick marks
+      ticks: xTicks,
       tickFormatter: (tick) => moment(tick).format('M/D')
     };
   }
@@ -83,7 +53,7 @@ export class SpamTrapPage extends Component {
 
   renderContent = () => {
     const { data = [], loading, gap, empty, error } = this.props;
-    const { calculation, selected } = this.state;
+    const { calculation } = this.state;
     let chartPanel;
 
     if (empty) {
@@ -118,8 +88,6 @@ export class SpamTrapPage extends Component {
             {chartPanel || (
               <BarChart
                 gap={gap}
-                onClick={this.handleDateSelect}
-                selected={selected}
                 timeSeries={data}
                 tooltipContent={this.getTooltipContent}
                 yKey={calculation === 'absolute' ? 'trap_hits' : 'relative_trap_hits'}
@@ -132,7 +100,7 @@ export class SpamTrapPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           {/* TODO finish actions */}
-          <Actions date={selected} actions={[
+          <Actions actions={[
             { content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.', link: 'https://www.sparkpost.com' }
           ]}/>
         </Grid.Column>
@@ -150,13 +118,12 @@ export class SpamTrapPage extends Component {
         primaryArea={<DateFilter />}>
         {this.renderContent()}
         <OtherChartsHeader facetId={facetId} />
-        {/* TODO replace with health score and engagement preview */}
         <Grid>
           <Grid.Column xs={12} sm={6}>
-            {/* <SpamTrapsPreview /> */}
+            <EngagementRecencyPreview />
           </Grid.Column>
           <Grid.Column xs={12} sm={6}>
-            {/* <SpamTrapsPreview /> */}
+            {/* TODO replace with health score preview */}
           </Grid.Column>
         </Grid>
       </Page>

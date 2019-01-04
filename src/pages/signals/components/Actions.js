@@ -29,7 +29,7 @@ const Actions = ({ actions, date }) => {
   return (
     <div className={styles.Wrapper}>
       <div className={styles.Title}>
-        <h6>
+        <h6 className={styles.TitleText}>
           Items needing attention
           {date && ` – ${formatDate(date)}`}
         </h6>
