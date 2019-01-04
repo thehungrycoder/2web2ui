@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Panel } from '@sparkpost/matchbox';
 import { FieldArray, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import styles from './AdvancedFilters.module.scss';
+import styles from './SearchForm.module.scss';
 import { FORMS } from 'src/constants';
 import EventTypeFilters from './EventTypeFilters';
 import { getSearchQueriesFromFilters, getBooleanEventsObject } from '../helpers/transformData.js';

@@ -4,13 +4,14 @@ import { Panel, Tag } from '@sparkpost/matchbox';
 import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
 import { removeEmptyFilters, getFiltersAsArray } from '../helpers/transformData.js';
 import { snakeToFriendly } from 'src/helpers/string';
+import { EVENTS_SEARCH_FILTERS } from 'src/constants';
 import _ from 'lodash';
 import styles from './ActiveFilters.module.scss';
 
 const filterTypes = [
   { value: 'events', label: 'Event', itemToString: snakeToFriendly },
   { value: 'recipients', label: 'Recipient' },
-  ...getFiltersAsArray()
+  ...getFiltersAsArray(EVENTS_SEARCH_FILTERS)
 ];
 
 export class ActiveFilters extends Component {
@@ -38,7 +39,7 @@ export class ActiveFilters extends Component {
     const { dateOptions, ...filters } = this.props.search;
     const clearedFilters = _.mapValues(filters, () => []);
     this.props.updateMessageEventsSearchOptions({ dateOptions, ...clearedFilters });
-  }
+  };
 
   isEmpty() {
     const { dateOptions, ...rest } = this.props.search;

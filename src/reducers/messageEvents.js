@@ -1,7 +1,8 @@
 import { formatDocumentation, getEmptyFilters } from 'src/helpers/messageEvents';
 import { getRelativeDates } from 'src/helpers/date';
 import _ from 'lodash';
-const emptyFilters = getEmptyFilters();
+import { EVENTS_SEARCH_FILTERS } from 'src/constants';
+
 const initialState = {
   loading: false,
   historyLoading: false,
@@ -15,7 +16,7 @@ const initialState = {
     },
     recipients: [],
     events: [],
-    ...emptyFilters
+    ...getEmptyFilters(EVENTS_SEARCH_FILTERS)
   }
 };
 

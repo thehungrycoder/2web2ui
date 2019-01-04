@@ -2,7 +2,6 @@
 import qs from 'query-string';
 import _ from 'lodash';
 import { getRelativeDates } from 'src/helpers/date';
-import { EVENTS_SEARCH_FILTERS } from 'src/constants';
 
 /*
  * Translate the array of event definitions from /message-events/events/documentation
@@ -62,10 +61,12 @@ export function getDetailsPath(messageId, eventId){
 
 /**
  * Creates an object with all search filters set to an empty array
+ * @param {Object} filters - Object in the form of {key: value, ...}.
+ * @returns {Object} - Object in the form {key: [],...}.
  */
-export function getEmptyFilters() {
+export function getEmptyFilters(filters) {
   // Build an array of objects of form { value: [] }
-  const emptyFilters = _.map(EVENTS_SEARCH_FILTERS,(value, key) => ({[key]: []}));
+  const emptyFilters = _.map(filters,(value, key) => ({[key]: []}));
 
   return Object.assign({}, ...emptyFilters);
 }

@@ -23,14 +23,12 @@ export function recipientEmail(value) {
   return isRecipientEmailAddress(value) ? undefined : 'Invalid Email';
 }
 
-export function isValidQuery(value, formValues, props, name) {
-
-  if (!value) {
+export function eventsQuery(filter) {
+  if (!filter || !filter.value) {
     return 'Required';
   }
 
-  const index = parseInt((name.replace('searchQuery[', '').replace('].value', '')));
-  const key = formValues.searchQuery[index].key;
+  const { key, value } = filter;
   if (!key) {
     return 'Select a Filter';
   }

@@ -12,7 +12,7 @@ import { getEmptyFilters } from 'src/helpers/messageEvents';
 export function getFiltersFromSearchQueries(searchQueries = []) {
 
   // Build a single object containing a key for each filter, initialised to an empty array
-  const emptyFilters = getEmptyFilters();
+  const emptyFilters = getEmptyFilters(EVENTS_SEARCH_FILTERS);
 
   // Collect queries into an array of objects of form {key: value}
   const queries = searchQueries.map(({ key, value }) => ({ [key]: stringToArray(value) }));
@@ -22,8 +22,8 @@ export function getFiltersFromSearchQueries(searchQueries = []) {
 
 /**
  * Creates the search queries from the filter arrays.
- * @param {Object} filters An object containing the search parameters as keys and the search terms as values.
- * @returns {Object[]}  An array of query objects.
+ * @param {Object} filters - An object containing the search parameters as keys and the search terms as values.
+ * @returns {Object[]} - An array of query objects.
  */
 export function getSearchQueriesFromFilters(filters) {
 
@@ -37,17 +37,19 @@ export function getSearchQueriesFromFilters(filters) {
 
 /**
  * Creates an array with all possible search filters as an object with a value=key and a label
+ * @param {Object} filters - An object with the form {key: {label:''}, ...}.
+ * @returns {Object[]} - An array of event objects in the form of {key: 'foo',label: 'bar'}.
  */
-export function getFiltersAsArray() {
-  const filtersAsArray = _.map(EVENTS_SEARCH_FILTERS, ({ label }, key) =>
+export function getFiltersAsArray(filters) {
+  const filtersAsArray = _.map(filters, ({ label }, key) =>
     ({ value: key, label }));
   return filtersAsArray;
 }
 
 /**
  * Transforms an array of event types into an object.
- * @param [String] An array with the names of enabled event types.
- * @returns {Object[]}  An array of event objects with the key = the event type and the value = boolean.
+ * @param [events] - A String array with the names of enabled event types with the form ['foo'].
+ * @returns {Object} - An event object with the key = the event type and the value = boolean, ex: {foo:true, bar:false}.
  */
 export function getBooleanEventsObject(events) {
   return (events.reduce((accumulator, event) => {

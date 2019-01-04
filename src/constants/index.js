@@ -86,7 +86,7 @@ export const FORMS = {
 };
 
 export const EVENTS_SEARCH_FILTERS = {
-  recipient_domains: { comma: true, wildcard: false, placeholder: '', label: 'Recipient Domains' },
+  recipient_domains: { comma: true, wildcard: true, placeholder: '', label: 'Recipient Domains' },
   from_addresses: { comma: true, wildcard: false, placeholder: '', label: 'From Addresses' },
   sending_domains: { comma: true, wildcard: true, placeholder: '', label: 'Sending Domains' },
   subject: { comma: false, wildcard: true, placeholder: '', label: 'Subject' },
