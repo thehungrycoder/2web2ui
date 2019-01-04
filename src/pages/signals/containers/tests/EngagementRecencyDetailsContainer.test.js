@@ -1,12 +1,12 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { WithSpamTrapDetails } from '../SpamTrapDetailsContainer';
+import { WithEngagementRecencyDetails } from '../EngagementRecencyDetailsContainer';
 import * as dateMock from 'src/helpers/date';
 import _ from 'lodash';
 
 jest.mock('src/helpers/date');
 
-describe('Signals Spam Trap Details Container', () => {
+describe('Signals Engagement Recency Details Container', () => {
   let wrapper;
   let props;
   const Component = () => <div>test</div>;
@@ -22,17 +22,17 @@ describe('Signals Spam Trap Details Container', () => {
       filters: {
         relativeRange: '14days'
       },
-      getSpamHits: jest.fn(),
+      getEngagementRecency: jest.fn(),
       subaccountId: '101'
     };
 
     dateMock.getDateTicks.mockImplementation(() => [1,2]);
-    wrapper = shallow(<WithSpamTrapDetails {...props} />);
+    wrapper = shallow(<WithEngagementRecencyDetails {...props} />);
   });
 
-  it('gets spam hits on mount correctly', () => {
+  it('gets engagement recency on mount correctly', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(props.getSpamHits).toHaveBeenCalledWith({
+    expect(props.getEngagementRecency).toHaveBeenCalledWith({
       facet: 'sending_domain',
       filter: 'test.com',
       relativeRange: '14days',
@@ -40,9 +40,9 @@ describe('Signals Spam Trap Details Container', () => {
     });
   });
 
-  it('gets spam hits when range is updated', () => {
+  it('gets engagement recency when range is updated', () => {
     wrapper.setProps({ filters: { relativeRange: '30days' }});
-    expect(props.getSpamHits).toHaveBeenCalledWith({
+    expect(props.getEngagementRecency).toHaveBeenCalledWith({
       facet: 'sending_domain',
       filter: 'test.com',
       relativeRange: '30days',
@@ -50,10 +50,10 @@ describe('Signals Spam Trap Details Container', () => {
     });
   });
 
-  it('should not gets spam hits when range isnt updated', () => {
+  it('should not get engagement recency when range isnt updated', () => {
     jest.clearAllMocks();
     wrapper.setProps({ another: 'prop' });
-    expect(props.getSpamHits).toHaveBeenCalledTimes(0);
+    expect(props.getEngagementRecency).toHaveBeenCalledTimes(0);
   });
 
   it('should shorten chart gap if data is long', () => {

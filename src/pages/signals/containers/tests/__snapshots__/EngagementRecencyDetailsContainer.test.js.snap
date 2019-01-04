@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals Spam Trap Details Container gets spam hits on mount correctly 1`] = `
+exports[`Signals Engagement Recency Details Container gets engagement recency on mount correctly 1`] = `
 <Component
   data={Array []}
   facet="sending_domain"

@@ -4,37 +4,7 @@ import * as dateHelpers from 'src/helpers/date';
 jest.mock('src/helpers/date');
 
 describe('Selectors: signals', () => {
-  const state = {
-    signals: {
-      spamHits: {
-        total_count: 1,
-        data: [
-          {
-            sending_domain: 'test.com',
-            current_trap_hits: 123,
-            current_relative_trap_hits: 0.12,
-            history: [
-              {
-                dt: '2018-01-01',
-                injections: 182400,
-                relative_trap_hits: 0.25,
-                trap_hits: 456
-              },
-              {
-                dt: '2018-01-02',
-                injections: 35000,
-                relative_trap_hits: 0.1,
-                trap_hits: 35
-              }
-            ]
-          }
-        ],
-        loading: false,
-        error: null
-      }
-    }
-  };
-
+  let state;
   const props = {
     match: {
       params: {
@@ -50,6 +20,52 @@ describe('Selectors: signals', () => {
     }
   };
 
+  beforeEach(() => {
+    state = {
+      signals: {
+        spamHits: {
+          total_count: 1,
+          data: [
+            {
+              sending_domain: 'test.com',
+              current_trap_hits: 123,
+              current_relative_trap_hits: 0.12,
+              history: [
+                {
+                  dt: '2018-01-01',
+                  injections: 182400,
+                  relative_trap_hits: 0.25,
+                  trap_hits: 456
+                },
+                {
+                  dt: '2018-01-02',
+                  injections: 35000,
+                  relative_trap_hits: 0.1,
+                  trap_hits: 35
+                }
+              ]
+            }
+          ],
+          loading: false,
+          error: null
+        },
+        engagementRecency: {
+          total_count: 10,
+          data: [
+            {
+              sending_domain: 'test.com',
+              history: [
+                { c_total: 25, c_new: 5, c_uneng: 5, c_365d: 5, dt: '2018-01-01' }
+              ]
+            }
+          ],
+          loading: false,
+          error: null
+        }
+      }
+    };
+  });
+
   describe('spam hits details', () => {
     it('should select spam hits details', () => {
       expect(selectors.selectSpamHitsDetails(state, props)).toMatchSnapshot();
@@ -63,6 +79,22 @@ describe('Selectors: signals', () => {
     it('should not be empty when loading', () => {
       const stateWhenLoading = { signals: { spamHits: { data: [], loading: true }}};
       expect(selectors.selectSpamHitsDetails(stateWhenLoading, props).details.empty).toBe(false);
+    });
+  });
+
+  describe('engagement recency details', () => {
+    it('should select details', () => {
+      expect(selectors.selectEngagementRecencyDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should be empty with no results when not loading', () => {
+      state = { signals: { engagementRecency: { data: [], loading: false }}};
+      expect(selectors.selectEngagementRecencyDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should not be empty when loading', () => {
+      state = { signals: { engagementRecency: { data: [], loading: true }}};
+      expect(selectors.selectEngagementRecencyDetails(state, props).details.empty).toBe(false);
     });
   });
 

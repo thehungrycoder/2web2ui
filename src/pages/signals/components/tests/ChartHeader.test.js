@@ -21,4 +21,9 @@ describe('Signals ChartHeader Component', () => {
     wrapper.setProps({ primaryArea: <div>react</div> });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders tooltip content correctly', () => {
+    wrapper.setProps({ tooltipContent: 'tooltip content' });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

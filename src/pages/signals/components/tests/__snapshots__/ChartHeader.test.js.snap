@@ -38,3 +38,44 @@ exports[`Signals ChartHeader Component renders primaryArea correctly 1`] = `
   />
 </Fragment>
 `;
+
+exports[`Signals ChartHeader Component renders tooltip content correctly 1`] = `
+<Fragment>
+  <div
+    className="ChartHeader"
+  >
+    <h6
+      className="Title"
+    >
+      Foo
+    </h6>
+    <div
+      className="Tooltip"
+    >
+      <Tooltip
+        bottom={true}
+        content="tooltip content"
+        dark={true}
+        forcePosition={false}
+        horizontalOffset="-14px"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
+      >
+        <InfoOutline
+          size={24}
+        />
+      </Tooltip>
+    </div>
+  </div>
+  <hr
+    className="Line"
+  />
+</Fragment>
+`;

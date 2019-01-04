@@ -1,5 +1,5 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
-import { getSpamHits } from '../signals';
+import { getSpamHits, getEngagementRecency } from '../signals';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 jest.mock('src/helpers/date', () => ({
@@ -39,6 +39,21 @@ describe('Signals Actions', () => {
     },
     'with a subaccount': {
       action: () => getSpamHits({ ...requiredOptions, subaccount: { id: 123 }})
+    }
+  });
+
+  snapshotActionCases('.getEngagementRecency', {
+    'by default': {
+      action: () => getEngagementRecency({ ...requiredOptions })
+    },
+    'with a facet': {
+      action: () => getEngagementRecency({ ...requiredOptions, facet: 'sending-domain' })
+    },
+    'with a filter': {
+      action: () => getEngagementRecency({ ...requiredOptions, filter: 'examp' })
+    },
+    'with a subaccount': {
+      action: () => getEngagementRecency({ ...requiredOptions, subaccount: { id: 123 }})
     }
   });
 });
