@@ -108,4 +108,14 @@ describe('Selectors: signals', () => {
       });
     });
   });
+
+  describe('selectSpamHitsOverview', () => {
+    beforeEach(() => {
+      dateHelpers.fillByDate.mockImplementationOnce(({ dataSet }) => dataSet);
+    });
+
+    it('returns all overview data', () => {
+      expect(selectors.selectSpamHitsOverview(state, { relativeRange: '7days' })).toMatchSnapshot();
+    });
+  });
 });

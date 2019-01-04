@@ -3,11 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { getSpamHits } from 'src/actions/signals';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
 import { defaultFacet, facetsByKey } from 'src/config/facets';
-import {
-  getSpamHitsData,
-  selectSpamHitsOverviewData,
-  selectSpamHitsOverviewMetaData
-} from 'src/selectors/signals';
+import { selectSpamHitsOverview } from 'src/selectors/signals';
 import { selectSubaccountsById } from 'src/selectors/subaccounts';
 import { selectSummaryTable } from 'src/selectors/summaryTables';
 import SpamTrapOverview from '../components/SpamTrapOverview';
@@ -18,10 +14,8 @@ const mapStateToProps = (state, props) => {
   const tableName = 'spamTrapHitsOverview';
 
   return {
-    ...getSpamHitsData(state),
-    data: selectSpamHitsOverviewData(state, { relativeRange }),
+    ...selectSpamHitsOverview(state, { relativeRange }),
     facet: facetKey ? facetsByKey[facetKey] : defaultFacet,
-    metaData: selectSpamHitsOverviewMetaData(state),
     subaccounts: selectSubaccountsById(state),
     summaryTable: selectSummaryTable(state, tableName),
     tableName

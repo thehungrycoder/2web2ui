@@ -80,3 +80,12 @@ export const selectSpamHitsOverviewMetaData = createSelector(
     };
   }
 );
+
+export const selectSpamHitsOverview = createSelector(
+  [getSpamHitsData, selectSpamHitsOverviewData, selectSpamHitsOverviewMetaData],
+  (spamHitsData, data, metaData) => ({
+    ...spamHitsData,
+    data,
+    metaData
+  })
+);

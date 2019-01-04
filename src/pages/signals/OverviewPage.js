@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Page from './components/SignalsPage';
-import SpamTrapOverview from './containers/SpamTrapOverview.container';
+import SpamTrapOverview from './containers/SpamTrapOverviewContainer';
 import FacetFilter from './components/filters/FacetFilter';
 import DateFilter from './components/filters/DateFilter';
 import SubaccountFilter from './components/filters/SubaccountFilter';
