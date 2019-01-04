@@ -90,7 +90,7 @@ export class EditPage extends Component {
       });
     }
 
-    if (user.tfa_enabled) {
+    if (user.tfa_enabled && !user.isCurrentUser) {
       secondaryActions.push({
         content: 'Disable Two-Factor Authentication',
         onClick: this.toggleTfaModal
