@@ -1,0 +1,14 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Controls {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.Header {
+  display: flex;
+  align-items: baseline;
+  padding: spacing();
+  padding-bottom: 0;
+}
