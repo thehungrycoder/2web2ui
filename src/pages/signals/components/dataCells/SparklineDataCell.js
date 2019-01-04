@@ -29,7 +29,11 @@ const SparklineDataCell = ({ data, dataKey, label, onClick = () => {}, relative 
 
         return null;
       }}
-      onClick={(data) => { onClick(data.activePayload[0].payload); }}
+      onClick={(data) => {
+        if (data) { // if a user doesn't click a dot, data === null
+          onClick(data.activePayload[0].payload);
+        }
+      }}
       timeSeries={data}
       tooltipContent={({ payload, value = null }) => {
         if (value === null) {
