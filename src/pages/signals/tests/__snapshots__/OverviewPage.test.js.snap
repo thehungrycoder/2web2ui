@@ -10,6 +10,6 @@ exports[`Signals Overview Page renders correctly 1`] = `
     </React.Fragment>
   }
 >
-  <Connect(Connect(SpamTrapOverview)) />
+  <Connect(withRouter(Connect(SpamTrapOverview))) />
 </SignalsPage>
 `;
