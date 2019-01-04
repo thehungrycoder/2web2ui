@@ -16,6 +16,9 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
         <p>
           Enter your SparkPost password to disable two-factor authentication.
         </p>
+        <p>
+          If two-factor authentication is required on this account, you will be logged out after disabling it. You can re-enable when you next log in.
+        </p>
         <Grid>
           <Grid.Column
             md={6}
@@ -31,9 +34,6 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
             />
           </Grid.Column>
         </Grid>
-        <p>
-          If two-factor authentication is enforced, you will be logged out. You will have to re-enable again when you log in.
-        </p>
       </Panel.Section>
       <Panel.Section>
         <Button
@@ -75,6 +75,9 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
         <p>
           Enter your SparkPost password to disable two-factor authentication.
         </p>
+        <p>
+          If two-factor authentication is required on this account, you will be logged out after disabling it. You can re-enable when you next log in.
+        </p>
         <Grid>
           <Grid.Column
             md={6}
@@ -90,9 +93,6 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
             />
           </Grid.Column>
         </Grid>
-        <p>
-          If two-factor authentication is enforced, you will be logged out. You will have to re-enable again when you log in.
-        </p>
       </Panel.Section>
       <Panel.Section>
         <Button
@@ -134,6 +134,9 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
         <p>
           Enter your SparkPost password to disable two-factor authentication.
         </p>
+        <p>
+          If two-factor authentication is required on this account, you will be logged out after disabling it. You can re-enable when you next log in.
+        </p>
         <Grid>
           <Grid.Column
             md={6}
@@ -149,9 +152,6 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
             />
           </Grid.Column>
         </Grid>
-        <p>
-          If two-factor authentication is enforced, you will be logged out. You will have to re-enable again when you log in.
-        </p>
       </Panel.Section>
       <Panel.Section>
         <Button
