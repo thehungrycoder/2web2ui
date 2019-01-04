@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { getSpamHits } from 'src/actions/signals';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
 import { defaultFacet, facetsByKey } from 'src/config/facets';
@@ -33,4 +34,10 @@ const mapDispatchToProps = {
 };
 
 
-export default withSignalOptions(connect(mapStateToProps, mapDispatchToProps)(SpamTrapOverview));
+export default (
+  withSignalOptions(
+    withRouter(
+      connect(mapStateToProps, mapDispatchToProps)(SpamTrapOverview)
+    )
+  )
+);

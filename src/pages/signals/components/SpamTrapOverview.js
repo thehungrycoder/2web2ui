@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import _ from 'lodash';
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
@@ -68,6 +69,23 @@ class SpamTrapOverview extends React.Component {
     this.setState({ chartType });
   }
 
+  handleClick = (facetId) => ({ date }) => {
+    const { facet, history, signalOptions } = this.props;
+    let search;
+
+    if (signalOptions.subaccount) {
+      search = { subaccount: signalOptions.subaccount.id };
+    }
+
+    history.push({
+      pathname: `/signals/spam-traps/${facet.key}/${facetId}`,
+      search,
+      state: {
+        date
+      }
+    });
+  }
+
   render() {
     const {
       data, error, facet, loading, metaData, signalOptions, subaccounts, tableName, totalCount
@@ -109,7 +127,9 @@ class SpamTrapOverview extends React.Component {
             dataKey="history"
             label="Daily Spam Trap Hits"
             width="30%"
-            component={({ history }) => {
+            component={({ history, ...data }) => {
+              const id = data[facet.key];
+
               if (chartType === 'bar') {
                 return (
                   <BarChartDataCell
@@ -117,6 +137,7 @@ class SpamTrapOverview extends React.Component {
                     dataKey={calculation === 'relative' ? 'relative_trap_hits' : 'trap_hits'}
                     label="Spam Trap Hits"
                     max={calculation === 'relative' ? metaData.currentRelativeMax : metaData.currentMax}
+                    onClick={this.handleClick(id)}
                     relative={calculation === 'relative'}
                   />
                 );
@@ -127,6 +148,7 @@ class SpamTrapOverview extends React.Component {
                   data={history}
                   dataKey={calculation === 'relative' ? 'relative_trap_hits' : 'trap_hits'}
                   label="Spam Trap Hits"
+                  onClick={this.handleClick(id)}
                   relative={calculation === 'relative'}
                 />
               );

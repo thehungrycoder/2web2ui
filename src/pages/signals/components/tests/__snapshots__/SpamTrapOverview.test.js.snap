@@ -17,6 +17,7 @@ exports[`SpamTrapOverview history component renders absolute bar chart 1`] = `
   dataKey="trap_hits"
   label="Spam Trap Hits"
   max={200}
+  onClick={[Function]}
   relative={false}
 />
 `;
@@ -25,6 +26,7 @@ exports[`SpamTrapOverview history component renders absolute sparkline 1`] = `
 <SparklineDataCell
   dataKey="trap_hits"
   label="Spam Trap Hits"
+  onClick={[Function]}
   relative={false}
 />
 `;
@@ -34,6 +36,7 @@ exports[`SpamTrapOverview history component renders relative bar chart 1`] = `
   dataKey="relative_trap_hits"
   label="Spam Trap Hits"
   max={40}
+  onClick={[Function]}
   relative={true}
 />
 `;
@@ -42,6 +45,7 @@ exports[`SpamTrapOverview history component renders relative sparkline 1`] = `
 <SparklineDataCell
   dataKey="relative_trap_hits"
   label="Spam Trap Hits"
+  onClick={[Function]}
   relative={true}
 />
 `;

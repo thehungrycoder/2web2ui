@@ -130,14 +130,15 @@ describe('SpamTrapOverview', () => {
   });
 
   describe('history component', () => {
-    const factory = ({ calculation, chartType, ...props }) => {
+    const factory = ({ calculation, chartType, history, ...props }) => {
       const wrapper = subject({
+        history,
         metaData: { currentMax: 200, currentRelativeMax: 40 }
       });
       wrapper.setState({ calculation, chartType });
       const Column = wrapper.find('Column[dataKey="history"]').prop('component');
 
-      return shallow(<Column {...props} />);
+      return shallow(<Column {...props} domain="example.com" />);
     };
 
     it('renders absolute bar chart', () => {
@@ -158,6 +159,30 @@ describe('SpamTrapOverview', () => {
     it('renders relative sparkline', () => {
       const wrapper = factory({ calculation: 'relative', chartType: 'line' });
       expect(wrapper).toMatchSnapshot();
+    });
+
+    it('redirects to details page when bar is clicked', () => {
+      const historyPush = jest.fn();
+      const wrapper = factory({ chartType: 'bar', history: { push: historyPush }});
+      wrapper.simulate('click', { date: '2018-01-13' });
+
+      expect(historyPush).toHaveBeenCalledWith({
+        pathname: '/signals/spam-traps/domain/example.com',
+        search: { subaccount: undefined },
+        state: { date: '2018-01-13' }
+      });
+    });
+
+    it('redirects to details page when dot is clicked', () => {
+      const historyPush = jest.fn();
+      const wrapper = factory({ chartType: 'line', history: { push: historyPush }});
+      wrapper.simulate('click', { date: '2018-01-13' });
+
+      expect(historyPush).toHaveBeenCalledWith({
+        pathname: '/signals/spam-traps/domain/example.com',
+        search: { subaccount: undefined },
+        state: { date: '2018-01-13' }
+      });
     });
   });
 

@@ -64,7 +64,7 @@ function withSpamTrapDetails(WrappedComponent) {
   const mapStateToProps = (state, props) => ({
     ...selectSpamHitsDetails(state, props),
     filters: state.signalOptions,
-    selected: getSelectedDateFromRouter(state)
+    selected: getSelectedDateFromRouter(state, props)
   });
 
   return withRouter(connect(mapStateToProps, { getSpamHits })(Wrapper));
