@@ -4,7 +4,7 @@ import { Button, Popover, UnstyledLink } from '@sparkpost/matchbox';
 import { ArrowDropDown, ChevronLeft } from '@sparkpost/matchbox-icons';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import withSignalOptions from '../withSignalOptions';
+import withSignalOptions from '../../containers/withSignalOptions';
 import SubaccountOption from './SubaccountOption';
 import styles from './SubaccountFilter.module.scss';
 

@@ -3,7 +3,7 @@ import { Select, TextField } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 import facets from 'src/config/facets';
 import { onEnter } from 'src/helpers/keyEvents';
-import withSignalOptions from '../withSignalOptions';
+import withSignalOptions from '../../containers/withSignalOptions';
 import styles from './FacetFilter.module.scss';
 
 const OPTIONS = [

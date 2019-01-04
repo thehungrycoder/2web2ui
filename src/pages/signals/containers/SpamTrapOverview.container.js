@@ -11,7 +11,7 @@ import {
 import { selectSubaccountsById } from 'src/selectors/subaccounts';
 import { selectSummaryTable } from 'src/selectors/summaryTables';
 import SpamTrapOverview from '../components/SpamTrapOverview';
-import withSignalOptions from '../components/withSignalOptions';
+import withSignalOptions from './withSignalOptions';
 
 const mapStateToProps = (state, props) => {
   const { facet: facetKey, relativeRange } = props.signalOptions;

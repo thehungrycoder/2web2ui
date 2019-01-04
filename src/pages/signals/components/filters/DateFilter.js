@@ -1,6 +1,6 @@
 import React from 'react';
 import { Select } from '@sparkpost/matchbox';
-import withSignalOptions from '../withSignalOptions';
+import withSignalOptions from '../../containers/withSignalOptions';
 import styles from './DateFilter.module.scss';
 
 const OPTIONS = [
