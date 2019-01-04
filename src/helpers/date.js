@@ -154,3 +154,23 @@ export const formatInputTime = (time) => moment(time).format(FORMATS.TIME);
 export const parseDate = (str) => moment(str, FORMATS.INPUT_DATES, true);
 export const parseTime = (str) => moment(str, FORMATS.INPUT_TIMES, true);
 export const parseDatetime = (...args) => moment(args.join(' '), FORMATS.INPUT_DATETIMES, true);
+
+export const fillByDate = ({ dataSet, fill = {}, now, relativeRange } = {}) => {
+  const { from, to } = getRelativeDates(relativeRange, { now });
+  const orderedData = dataSet.sort((a, b) => new Date(a.date) - new Date(b.date));
+  let filledDataSet = [];
+
+  for (let time = moment(from), index = 0; time.isBefore(moment(to)); time.add(1, 'day')) {
+    const data = orderedData[index];
+    const fillData = { ...fill, date: formatInputDate(time) };
+
+    if (!data || data.date !== fillData.date) {
+      filledDataSet = [...filledDataSet, fillData];
+    } else {
+      filledDataSet = [...filledDataSet, data];
+      index++;
+    }
+  }
+
+  return filledDataSet;
+};

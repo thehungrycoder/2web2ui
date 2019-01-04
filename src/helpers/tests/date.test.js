@@ -1,4 +1,5 @@
 import {
+  fillByDate,
   getEndOfDay,
   getStartOfDay,
   getNextHour,
@@ -294,6 +295,21 @@ describe('Date helpers', () => {
 
     it('returns the duration between two dates in days', () => {
       expect(getDuration({ from: '2017-12-18T00:00:00', to: '2017-12-19T00:00:00' }, 'days')).toEqual(1);
+    });
+  });
+
+  describe('fillByDate', () => {
+    const now = moment('2018-02-02');
+    const relativeRange = '7days';
+
+    it('returns sorted and filled dataset', () => {
+      const dataSet = [
+        { date: '2018-02-02', value: 234 },
+        { date: '2018-01-30', value: 123 }
+      ];
+      const fill = { value: null };
+
+      expect(fillByDate({ dataSet, fill, now, relativeRange })).toMatchSnapshot();
     });
   });
 });

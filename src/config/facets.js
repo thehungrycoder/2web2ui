@@ -13,4 +13,13 @@ const facets = [
   }
 ];
 
+
+export const defaultFacet = {
+  key: 'sid',
+  label: 'Subaccount',
+  isDefault: true
+};
+
+export const facetsByKey = facets.reduce((acc, facet) => ({ ...acc, [facet.key]: facet }), {});
+
 export default facets;

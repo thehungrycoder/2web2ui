@@ -1,17 +1,31 @@
 import * as selectors from '../signals';
+import * as dateHelpers from 'src/helpers/date';
+
+jest.mock('src/helpers/date');
 
 describe('Selectors: signals', () => {
-  let state = {
+  const state = {
     signals: {
       spamHits: {
-        total_count: 10,
+        total_count: 1,
         data: [
           {
             sending_domain: 'test.com',
             current_trap_hits: 123,
             current_relative_trap_hits: 0.12,
             history: [
-              { trap_hits: 456, relative_trap_hits: 0.25, dt: '2018-01-01' }
+              {
+                dt: '2018-01-01',
+                injections: 182400,
+                relative_trap_hits: 0.25,
+                trap_hits: 456
+              },
+              {
+                dt: '2018-01-02',
+                injections: 35000,
+                relative_trap_hits: 0.1,
+                trap_hits: 35
+              }
             ]
           }
         ],
@@ -42,19 +56,56 @@ describe('Selectors: signals', () => {
     });
 
     it('should be empty with no results when not loading', () => {
-      state = { signals: { spamHits: { data: [], loading: false }}};
-      expect(selectors.selectSpamHitsDetails(state, props)).toMatchSnapshot();
+      const stateWhenEmpty = { signals: { spamHits: { data: [], loading: false }}};
+      expect(selectors.selectSpamHitsDetails(stateWhenEmpty, props)).toMatchSnapshot();
     });
 
     it('should not be empty when loading', () => {
-      state = { signals: { spamHits: { data: [], loading: true }}};
-      expect(selectors.selectSpamHitsDetails(state, props).details.empty).toBe(false);
+      const stateWhenLoading = { signals: { spamHits: { data: [], loading: true }}};
+      expect(selectors.selectSpamHitsDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
   });
 
   describe('selected date', () => {
     it('should select date from react router', () => {
       expect(selectors.getSelectedDateFromRouter(state, props)).toMatchSnapshot();
+    });
+  });
+
+
+  describe('selectSpamHitsOverviewData', () => {
+    beforeEach(() => {
+      dateHelpers.fillByDate.mockImplementationOnce(({ dataSet }) => dataSet);
+    });
+
+    it('returns data', () => {
+      expect(selectors.selectSpamHitsOverviewData(state, { relativeRange: '7days' })).toMatchSnapshot();
+    });
+
+    it('returns empty array', () => {
+      const stateWhenEmpty = { signals: { spamHits: { data: []}}};
+      expect(selectors.selectSpamHitsOverviewData(stateWhenEmpty, { relativeRange: '7days' })).toEqual([]);
+    });
+  });
+
+  describe('selectSpamHitsOverviewMetaData', () => {
+    it('returns max values', () => {
+      expect(selectors.selectSpamHitsOverviewMetaData(state)).toEqual({
+        currentMax: 123,
+        currentRelativeMax: 0.12,
+        max: 456,
+        relativeMax: 0.25
+      });
+    });
+
+    it('returns null', () => {
+      const stateWhenEmpty = { signals: { spamHits: { data: []}}};
+      expect(selectors.selectSpamHitsOverviewMetaData(stateWhenEmpty)).toEqual({
+        currentMax: null,
+        currentRelativeMax: null,
+        max: null,
+        relativeMax: null
+      });
     });
   });
 });
