@@ -2,7 +2,7 @@ import React from 'react';
 import { formatPercent } from 'src/helpers/units';
 import HorizontalBar from '../charts/horizontalbar/HorizontalBar';
 import TooltipMetric from '../charts/tooltip/TooltipMetric';
-import colorMapByRank from './colorMapByRank';
+import colorMapByRank from '../../constants/colorMapByRank';
 import EmptyDataCell from './EmptyDataCell';
 
 const BarChartDataCell = ({ data, dataKey, label, max, onClick = () => {}, relative }) => {

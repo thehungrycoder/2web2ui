@@ -2,9 +2,9 @@ import React from 'react';
 import _ from 'lodash';
 import { Dot } from 'recharts';
 import { formatPercent } from 'src/helpers/units';
+import colorMapByRank from '../../constants/colorMapByRank';
 import Sparkline from '../charts/sparkline/Sparkline';
 import TooltipMetric from '../charts/tooltip/TooltipMetric';
-import colorMapByRank from './colorMapByRank';
 import EmptyDataCell from './EmptyDataCell';
 
 const StyledDot = (props) => (
