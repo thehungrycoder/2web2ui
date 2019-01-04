@@ -37,9 +37,13 @@ const Body = ({ columns, data, empty, error, loading, perPage }) => {
     <tbody>
       {data.slice(0, perPage).map((rowOfData, rowIndex) => (
         <Table.Row key={`row-${rowIndex}`}>
-          {columns.map(({ component: Component, dataKey }) => (
+          {columns.map(({ align = 'left', component: Component, dataKey }) => (
             <Table.Cell
-              className={classnames(styles.Cell, { [styles.DataCell]: !Component })}
+              className={classnames(styles.Cell, {
+                [styles.DataCell]: !Component,
+                [styles.CenterAlign]: align === 'center',
+                [styles.RightAlign]: align === 'right'
+              })}
               key={`cell-${dataKey}`}
             >
               {Component ? <Component {...rowOfData} /> : rowOfData[dataKey]}

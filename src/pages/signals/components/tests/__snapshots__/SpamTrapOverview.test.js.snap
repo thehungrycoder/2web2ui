@@ -107,6 +107,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
       width="30%"
     />
     <Column
+      align="right"
       component={[Function]}
       dataKey="current_hits"
       label="Current Ratio"
@@ -114,6 +115,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
       width="20%"
     />
     <Column
+      align="right"
       component={[Function]}
       dataKey="total_injections"
       label="Total Injections"

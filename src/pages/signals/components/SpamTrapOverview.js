@@ -155,6 +155,7 @@ class SpamTrapOverview extends React.Component {
             }}
           />
           <Column
+            align="right"
             dataKey="current_hits"
             label={calculation === 'relative' ? 'Current Ratio' : 'Current Count'}
             sortable
@@ -168,6 +169,7 @@ class SpamTrapOverview extends React.Component {
             }}
           />
           <Column
+            align="right"
             dataKey="total_injections"
             label="Total Injections"
             width="20%"
