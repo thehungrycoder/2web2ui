@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm should render correctly with existing filters 1`] = `
+<Fragment>
+  <Button
+    className="AddButton"
+    color="blue"
+    flat={true}
+    onClick={[Function]}
+    size="default"
+  >
+     Add Filter
+    <AddCircleOutline
+      className="Icon"
+    />
+  </Button>
+  <Grid
+    key="0"
+  >
+    <Grid.Column
+      lg={3}
+      md={3}
+      xs={3}
+    >
+      <div
+        className="Selector"
+      >
+        <Field
+          component={[Function]}
+          name="searchQuery[0].key"
+          options={
+            Array [
+              Object {
+                "label": "Recipient Domains",
+                "value": "recipient_domains",
+              },
+            ]
+          }
+          validate={[Function]}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      lg={7}
+      md={12}
+      xs={12}
+    >
+      <Field
+        component={[Function]}
+        name="searchQuery[0].value"
+        placeholder=" Supports comma-separated values"
+        type="text"
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={2}
+      md={12}
+      xs={12}
+    >
+      <p>
+        <Button
+          color="red"
+          flat={true}
+          onClick={[Function]}
+          size="default"
+        >
+          Remove
+          <HighlightOff
+            className="Icon"
+          />
+        </Button>
+      </p>
+    </Grid.Column>
+  </Grid>
+  <Grid
+    key="1"
+  >
+    <Grid.Column
+      lg={3}
+      md={3}
+      xs={3}
+    >
+      <div
+        className="Selector"
+      >
+        <Field
+          component={[Function]}
+          name="searchQuery[1].key"
+          options={
+            Array [
+              Object {
+                "label": "Subject",
+                "value": "subject",
+              },
+            ]
+          }
+          validate={[Function]}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      lg={7}
+      md={12}
+      xs={12}
+    >
+      <Field
+        component={[Function]}
+        name="searchQuery[1].value"
+        placeholder=" Supports wildcards"
+        type="text"
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={2}
+      md={12}
+      xs={12}
+    >
+      <p>
+        <Button
+          color="red"
+          flat={true}
+          onClick={[Function]}
+          size="default"
+        >
+          Remove
+          <HighlightOff
+            className="Icon"
+          />
+        </Button>
+      </p>
+    </Grid.Column>
+  </Grid>
+  <Grid
+    key="2"
+  >
+    <Grid.Column
+      lg={3}
+      md={3}
+      xs={3}
+    >
+      <div
+        className="Selector"
+      >
+        <Field
+          component={[Function]}
+          name="searchQuery[2].key"
+          options={
+            Array [
+              Object {
+                "disabled": true,
+                "label": "Select a Filter",
+                "value": "",
+              },
+            ]
+          }
+          validate={[Function]}
+        />
+      </div>
+    </Grid.Column>
+    <Grid.Column
+      lg={7}
+      md={12}
+      xs={12}
+    >
+      <Field
+        component={[Function]}
+        name="searchQuery[2].value"
+        placeholder="Select Filter Type"
+        type="text"
+        validate={[Function]}
+      />
+    </Grid.Column>
+    <Grid.Column
+      lg={2}
+      md={12}
+      xs={12}
+    >
+      <p>
+        <Button
+          color="red"
+          flat={true}
+          onClick={[Function]}
+          size="default"
+        >
+          Remove
+          <HighlightOff
+            className="Icon"
+          />
+        </Button>
+      </p>
+    </Grid.Column>
+  </Grid>
+</Fragment>
+`;
+
+exports[`SearchForm should render correctly with no filters 1`] = `
+<Fragment>
+  <Button
+    className="AddButton"
+    color="blue"
+    flat={true}
+    onClick={[Function]}
+    size="default"
+  >
+     Add Filter
+    <AddCircleOutline
+      className="Icon"
+    />
+  </Button>
+</Fragment>
+`;

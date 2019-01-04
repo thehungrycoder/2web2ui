@@ -3,6 +3,7 @@ import * as messageEventHelpers from '../messageEvents';
 import * as dateHelpers from 'src/helpers/date';
 
 describe('messageEvents helpers', () => {
+
   describe('formatDocumentation', () => {
     let data;
 
@@ -62,6 +63,14 @@ describe('messageEvents helpers', () => {
 
     it('returns correct path when messageId is empty', () => {
       expect(messageEventHelpers.getDetailsPath(null, 'bar')).toEqual('/reports/message-events/details/_noid_/bar');
+    });
+  });
+
+  describe('getEmptyFilters', () => {
+    it('returns an object of filters with the key being the filter key and the value as a empty array', () => {
+      const input = { foo: {}};
+      const output = { foo: []};
+      expect(messageEventHelpers.getEmptyFilters(input)).toEqual(output);
     });
   });
 

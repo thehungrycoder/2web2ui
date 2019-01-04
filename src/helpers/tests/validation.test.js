@@ -9,7 +9,6 @@ import * as validations from '../validation';
  * Each bad input is passed to the function and the result is expected toBeDefined().
  *
  */
-
 const cases = {
   required: {
     good: ['101', 1, {}, []],
@@ -46,6 +45,14 @@ const cases = {
   slug: {
     good: ['id', 'test-id', 'test_1', '1'],
     bad: ['test.id', 'NOT_!@#$%^&*()_VALID', 'test id', ':doge:']
+  },
+  eventsQuery: {
+    good: [[{ key: 'reason', value: 'fo*o' }],
+      [{ key: 'campaigns', value: 'foo, bar' }]],
+    bad: [[{}],
+      [{ value: 'foo' }],
+      [{ key: 'subject', value: 'foo, bar' }]],
+    multiArg: true
   },
   abTestDefaultTemplate: {
     good: [['foobar', { subaccount: true }, { templates: ['foo', 'bar', 'foobar']}]],

@@ -11,18 +11,11 @@ describe('EventTypeFilters', () => {
         { type: 'amp_open', displayName: 'AMP Open', description: 'AMP open desc' },
         { type: 'bounce' , displayName: 'Bounce', description: 'Bounce desc' }
       ],
-      checkedTypes: {},
       onChange: jest.fn()
     };
   });
 
   it('should render from a list of event types', () => {
-    const wrapper = shallow(<EventTypeFilters {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render checked state', () => {
-    props.checkedTypes.bounce = true;
     const wrapper = shallow(<EventTypeFilters {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

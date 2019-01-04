@@ -58,7 +58,7 @@ describe('Action Creator: MessageEvents', () => {
       expect(messageEvents.updateMessageEventsSearchOptions({
         subaccounts: ['1','4','1','2','3'],
         message_ids: ['1'],
-        campaign_ids: [],
+        campaigns: [],
         dateOptions: {}
       })).toMatchSnapshot();
     });

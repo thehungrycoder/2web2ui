@@ -1,68 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EventTypeFilters should render checked state 1`] = `
-<Checkbox.Group
-  label="Event Type"
->
-  <div
-    className="CheckBoxGrid"
-  >
-    <Checkbox
-      checked={false}
-      id="amp_open"
-      key="amp_open"
-      label={
-        <Tooltip
-          bottom={true}
-          content="AMP open desc"
-          dark={true}
-          forcePosition={false}
-          horizontalOffset="0px"
-          preferredDirection={
-            Object {
-              "bottom": true,
-              "left": false,
-              "right": true,
-              "top": false,
-            }
-          }
-          right={true}
-        >
-          AMP Open
-        </Tooltip>
-      }
-      onChange={[Function]}
-    />
-    <Checkbox
-      checked={true}
-      id="bounce"
-      key="bounce"
-      label={
-        <Tooltip
-          bottom={true}
-          content="Bounce desc"
-          dark={true}
-          forcePosition={false}
-          horizontalOffset="0px"
-          preferredDirection={
-            Object {
-              "bottom": true,
-              "left": false,
-              "right": true,
-              "top": false,
-            }
-          }
-          right={true}
-        >
-          Bounce
-        </Tooltip>
-      }
-      onChange={[Function]}
-    />
-  </div>
-</Checkbox.Group>
-`;
-
 exports[`EventTypeFilters should render from a list of event types 1`] = `
 <Checkbox.Group
   label="Event Type"
@@ -70,9 +7,8 @@ exports[`EventTypeFilters should render from a list of event types 1`] = `
   <div
     className="CheckBoxGrid"
   >
-    <Checkbox
-      checked={false}
-      id="amp_open"
+    <Field
+      component={[Function]}
       key="amp_open"
       label={
         <Tooltip
@@ -94,11 +30,11 @@ exports[`EventTypeFilters should render from a list of event types 1`] = `
           AMP Open
         </Tooltip>
       }
-      onChange={[Function]}
+      name="amp_open"
+      type="checkbox"
     />
-    <Checkbox
-      checked={false}
-      id="bounce"
+    <Field
+      component={[Function]}
       key="bounce"
       label={
         <Tooltip
@@ -120,7 +56,8 @@ exports[`EventTypeFilters should render from a list of event types 1`] = `
           Bounce
         </Tooltip>
       }
-      onChange={[Function]}
+      name="bounce"
+      type="checkbox"
     />
   </div>
 </Checkbox.Group>

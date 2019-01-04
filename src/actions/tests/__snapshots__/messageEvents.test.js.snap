@@ -76,7 +76,7 @@ Object {
 exports[`Action Creator: MessageEvents updateMessageEventsSearchOptions dedupes filters 1`] = `
 Object {
   "payload": Object {
-    "campaign_ids": Array [],
+    "campaigns": Array [],
     "dateOptions": Object {},
     "message_ids": Array [
       "1",
