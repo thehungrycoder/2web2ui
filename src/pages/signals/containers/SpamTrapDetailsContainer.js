@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getSpamHits } from 'src/actions/signals.fake';
+import { getSpamHits } from 'src/actions/signals';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 

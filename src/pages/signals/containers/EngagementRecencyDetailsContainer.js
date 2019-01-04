@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getEngagementRecency } from 'src/actions/signals.fake';
+import { getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRecencyDetails } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 
