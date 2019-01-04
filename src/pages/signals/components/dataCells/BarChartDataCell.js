@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatPercent } from 'src/helpers/units';
+import { formatPrecisePercent } from 'src/helpers/units';
 import HorizontalBar from '../charts/horizontalbar/HorizontalBar';
 import TooltipMetric from '../charts/tooltip/TooltipMetric';
 import colorMapByRank from '../../constants/colorMapByRank';
@@ -21,7 +21,7 @@ const BarChartDataCell = ({ data, dataKey, label, max, onClick = () => {}, relat
         <TooltipMetric
           color={colorMapByRank[data.ranking]}
           label={label}
-          value={relative ? formatPercent(value) : value.toLocaleString()}
+          value={relative ? formatPrecisePercent(value) : value.toLocaleString()}
         />
       )}
       value={{ date, value }}

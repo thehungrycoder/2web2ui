@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { Dot } from 'recharts';
-import { formatPercent } from 'src/helpers/units';
+import { formatPrecisePercent } from 'src/helpers/units';
 import colorMapByRank from '../../constants/colorMapByRank';
 import Sparkline from '../charts/sparkline/Sparkline';
 import TooltipMetric from '../charts/tooltip/TooltipMetric';
@@ -44,7 +44,7 @@ const SparklineDataCell = ({ data, dataKey, label, onClick = () => {}, relative 
           <TooltipMetric
             color={colorMapByRank[payload.ranking]}
             label={label}
-            value={relative ? formatPercent(value) : value.toLocaleString()}
+            value={relative ? formatPrecisePercent(value) : value.toLocaleString()}
           />
         );
       }}

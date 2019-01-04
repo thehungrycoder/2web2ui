@@ -1,3 +1,4 @@
+import cases from 'jest-in-case';
 import * as formatting from '../units';
 
 describe('Formatting helpers', () => {
@@ -79,5 +80,26 @@ describe('Formatting helpers', () => {
     it('should round percentages nicely', () => expect(formatting.formatPercent(27.436)).toEqual('27.44%'));
     it('should be nice about small percentages', () => expect(formatting.formatPercent(0.001)).toMatch(/<\s+0.01%$/));
     it('should be nice about large percentages', () => expect(formatting.formatPercent(101)).toEqual('> 100%'));
+  });
+
+  cases('formatPrecisePercent', ({ formatted, value }) => {
+    expect(formatting.formatPrecisePercent(value)).toEqual(formatted);
+  }, {
+    'with zero': {
+      formatted: '0%',
+      value: 0
+    },
+    'with whole number': {
+      formatted: '12%',
+      value: 12
+    },
+    'with short decimal': {
+      formatted: '0.01%',
+      value: 0.01
+    },
+    'with long decimal': {
+      formatted: '0.0001%',
+      value: 0.00005
+    }
   });
 });

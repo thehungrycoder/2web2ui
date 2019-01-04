@@ -122,4 +122,12 @@ export const formatPercent = (value) => {
   return formatted;
 };
 
+export const formatPrecisePercent = (value) => {
+  if (!isNumber(value)) {
+    return value;
+  }
+
+  return `${roundToPlaces(value, 4)}%`;
+};
+
 export const formatCurrency = (value) => `$${value.toFixed(2)}`;
