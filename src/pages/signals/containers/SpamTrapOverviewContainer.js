@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getSpamHits } from 'src/actions/signals';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
-import { defaultFacet, facetsByKey } from 'src/config/facets';
+import { defaultFacet, facetsByKey } from '../constants/facets';
 import { selectSpamHitsOverview } from 'src/selectors/signals';
 import { selectSubaccountsById } from 'src/selectors/subaccounts';
 import { selectSummaryTable } from 'src/selectors/summaryTables';

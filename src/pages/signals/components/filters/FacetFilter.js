@@ -1,8 +1,8 @@
 import React from 'react';
 import { Select, TextField } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
-import facets from 'src/config/facets';
 import { onEnter } from 'src/helpers/keyEvents';
+import facets from '../../constants/facets';
 import withSignalOptions from '../../containers/withSignalOptions';
 import styles from './FacetFilter.module.scss';
 
