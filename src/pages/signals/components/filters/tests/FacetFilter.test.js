@@ -6,7 +6,7 @@ jest.mock('src/helpers/keyEvents', () => ({ onEnter: (fn) => fn }));
 
 describe('FacetFilter', () => {
   const subject = (props = {}) => shallow(
-    <FacetFilter facet="campaign" {...props} />
+    <FacetFilter signalOptions={{ facet: 'campaign' }} {...props} />
   );
 
   it('renders facet select and search input', () => {
@@ -14,11 +14,11 @@ describe('FacetFilter', () => {
   });
 
   it('renders only facet select', () => {
-    expect(subject({ facet: undefined })).toMatchSnapshot();
+    expect(subject({ signalOptions: { facet: undefined }})).toMatchSnapshot();
   });
 
   it('hydrates searchTerm state on mount', () => {
-    const wrapper = subject({ facetSearchTerm: 'example' });
+    const wrapper = subject({ signalOptions: { facetSearchTerm: 'example' }});
     expect(wrapper.state('searchTerm')).toEqual('example');
   });
 

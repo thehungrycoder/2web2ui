@@ -1,24 +1,45 @@
 import React from 'react';
 import SortLabel from 'src/components/collection/SortLabel'; // need to share
 
-const HeaderLabel = ({ dataKey, label, onSort, order, sortable }) => {
-  let direction;
-
-  if (!sortable) {
-    return label;
+class HeaderLabel extends React.Component {
+  handleSort = () => {
+    this.props.onSort(this.nextOrder);
   }
 
-  if (order && order.dataKey === dataKey) {
-    direction = order.ascending ? 'asc' : 'desc';
+  get nextOrder() {
+    const { dataKey, order } = this.props;
+
+    if (!order || order.dataKey !== dataKey) { // no order or order by new field
+      return { ascending: true, dataKey };
+    }
+
+    if (!order.ascending) {
+      return undefined; // unset
+    }
+
+    return { ascending: false, dataKey };
   }
 
-  return (
-    <SortLabel
-      direction={direction}
-      label={label}
-      onClick={() => onSort({ ascending: !direction || direction === 'desc', dataKey })}
-    />
-  );
-};
+  render() {
+    const { dataKey, label, order, sortable } = this.props;
+    let direction;
+
+    if (!sortable) {
+      return label;
+    }
+
+    if (order && order.dataKey === dataKey) {
+      direction = order.ascending ? 'asc' : 'desc';
+    }
+
+    return (
+      <SortLabel
+        direction={direction}
+        label={label}
+        onClick={this.handleSort}
+      />
+    );
+  }
+}
 
 export default HeaderLabel;

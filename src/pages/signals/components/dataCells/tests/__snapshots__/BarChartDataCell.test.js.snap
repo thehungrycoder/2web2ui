@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BarChartDataCell renders empty data cell 1`] = `<EmptyDataCell />`;
+
+exports[`BarChartDataCell renders horizontal bar 1`] = `
+<HorizontalBar
+  color="#8CCA3A"
+  height={25}
+  onClick={[Function]}
+  tooltipContent={[Function]}
+  value={
+    Object {
+      "date": "2018-01-13",
+      "value": 12,
+    }
+  }
+  width="99%"
+  xKey="value"
+  xRange={
+    Array [
+      0,
+      500,
+    ]
+  }
+/>
+`;
+
+exports[`BarChartDataCell renders percentage in tooltip 1`] = `
+<TooltipMetric
+  color="#8CCA3A"
+  label="Example Label"
+  value="12%"
+/>
+`;

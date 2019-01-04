@@ -23,6 +23,14 @@ describe('Body', () => {
     expect(subject({ loading: true })).toMatchSnapshot();
   });
 
+  it('renders error message', () => {
+    expect(subject({ error: 'Oh no!' })).toMatchSnapshot();
+  });
+
+  it('renders empty message', () => {
+    expect(subject({ empty: true })).toMatchSnapshot();
+  });
+
   it('renders max of perPage rows', () => {
     const wrapper = subject({
       data: [

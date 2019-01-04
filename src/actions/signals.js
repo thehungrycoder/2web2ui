@@ -1,14 +1,30 @@
 import { formatInputDate, getRelativeDates } from 'src/helpers/date';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
+import moment from 'moment';
+
+// order_by param values do not match field names, so we have to translate here
+const ORDER_BY_MAPPING = {
+  current_trap_hits: 'trap_hits',
+  current_relative_trap_hits: 'perc'
+};
 
 export const getSpamHits = ({
   facet = '',
   filter,
+  limit,
   relativeRange,
+  offset,
+  order,
+  orderBy,
   subaccount
 }) => {
-  const { from , to } = getRelativeDates(relativeRange);
+  const { from , to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
+  let order_by;
+
+  if (orderBy) {
+    order_by = ORDER_BY_MAPPING[orderBy] || orderBy;
+  }
 
   return sparkpostApiRequest({
     type: 'GET_SPAM_HITS',
@@ -20,7 +36,10 @@ export const getSpamHits = ({
       params: {
         filter,
         from: formatInputDate(from),
-        // On appteam staging account this must be no later than Dec 18 2018
+        limit,
+        offset,
+        order,
+        order_by,
         to: formatInputDate(to)
       }
     }

@@ -103,6 +103,7 @@ exports[`HorizontalBar Component renders correctly 1`] = `
         onAnimationEnd={[Function]}
         onAnimationStart={[Function]}
         onClick={[MockFunction]}
+        shape={[Function]}
         xAxisId={0}
         yAxisId={0}
       />

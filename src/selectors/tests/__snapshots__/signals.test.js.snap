@@ -1,5 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Selectors: signals selectSpamHitsOverview returns all overview data 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "current_relative_trap_hits": 0.12,
+      "current_trap_hits": 123,
+      "history": Array [
+        Object {
+          "date": "2018-01-01",
+          "injections": 182400,
+          "ranking": "bad",
+          "relative_trap_hits": 0.25,
+          "trap_hits": 456,
+        },
+        Object {
+          "date": "2018-01-02",
+          "injections": 35000,
+          "ranking": "good",
+          "relative_trap_hits": 0.1,
+          "trap_hits": 35,
+        },
+      ],
+      "sending_domain": "test.com",
+      "total_injections": 217400,
+    },
+  ],
+  "error": null,
+  "loading": false,
+  "metaData": Object {
+    "currentMax": 123,
+    "currentRelativeMax": 0.12,
+    "max": 456,
+    "relativeMax": 0.25,
+  },
+  "total_count": 1,
+}
+`;
+
+exports[`Selectors: signals selectSpamHitsOverviewData returns data 1`] = `
+Array [
+  Object {
+    "current_relative_trap_hits": 0.12,
+    "current_trap_hits": 123,
+    "history": Array [
+      Object {
+        "date": "2018-01-01",
+        "injections": 182400,
+        "ranking": "bad",
+        "relative_trap_hits": 0.25,
+        "trap_hits": 456,
+      },
+      Object {
+        "date": "2018-01-02",
+        "injections": 35000,
+        "ranking": "good",
+        "relative_trap_hits": 0.1,
+        "trap_hits": 35,
+      },
+    ],
+    "sending_domain": "test.com",
+    "total_injections": 217400,
+  },
+]
+`;
+
 exports[`Selectors: signals selected date should select date from react router 1`] = `"2018-02-01"`;
 
 exports[`Selectors: signals spam hits details should be empty with no results when not loading 1`] = `
@@ -22,8 +87,15 @@ Object {
     "data": Array [
       Object {
         "dt": "2018-01-01",
+        "injections": 182400,
         "relative_trap_hits": 0.25,
         "trap_hits": 456,
+      },
+      Object {
+        "dt": "2018-01-02",
+        "injections": 35000,
+        "relative_trap_hits": 0.1,
+        "trap_hits": 35,
       },
     ],
     "empty": false,

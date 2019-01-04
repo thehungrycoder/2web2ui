@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ControlGroup from './ControlGroup';
 
 const options = {
-  absolute: 'Absolute',
-  relative: 'Relative'
+  absolute: 'Count',
+  relative: 'Ratio'
 };
 
 const Calculation = (props) => (

@@ -21,13 +21,31 @@ describe('HeaderLabel', () => {
     expect(wrapper.text()).toEqual('Identifier');
   });
 
-  it('calls onSort callback with dataKey', () => {
+  it('calls onSort callback with ascending order', () => {
     const onSort = jest.fn();
     const wrapper = subject({ onSort });
 
     wrapper.simulate('click');
 
     expect(onSort).toHaveBeenCalledWith({ ascending: true, dataKey: 'test-example' });
+  });
+
+  it('calls onSort callback with descending order', () => {
+    const onSort = jest.fn();
+    const wrapper = subject({ onSort, order: { ascending: true, dataKey: 'test-example' }});
+
+    wrapper.simulate('click');
+
+    expect(onSort).toHaveBeenCalledWith({ ascending: false, dataKey: 'test-example' });
+  });
+
+  it('calls onSort callback with undefined order', () => {
+    const onSort = jest.fn();
+    const wrapper = subject({ onSort, order: { ascending: false, dataKey: 'test-example' }});
+
+    wrapper.simulate('click');
+
+    expect(onSort).toHaveBeenCalledWith(undefined);
   });
 
   it('renders ascending sorted label', () => {

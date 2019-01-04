@@ -27,17 +27,23 @@ export class SpamTrapPage extends Component {
 
   componentDidMount() {
     const { selected } = this.props;
+
     if (selected) {
       this.setState({ selected });
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { data } = this.props;
+    const { data, loading } = this.props;
     const { selected } = this.state;
+    const dataSetChangedAndDoesNotContainSelectedDate = (
+      prevProps.loading === true &&
+      loading === false &&
+      prevProps.data !== data &&
+      !_.find(data, ['dt', selected])
+    );
 
-    // Select last date when loading new data and selected value does not exist
-    if (prevProps.data !== data && !_.find(data, ['dt', selected])) {
+    if (dataSetChangedAndDoesNotContainSelectedDate) {
       const last = _.last(data) || {};
       this.setState({ selected: last.dt });
     }

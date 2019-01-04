@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FacetDataCell renders data cell with a page link 1`] = `
+<div
+  className="PaddedCell"
+>
+  <PageLink
+    to={
+      Object {
+        "pathname": "/signals/spam-traps/sending_domain/example.com",
+        "search": undefined,
+      }
+    }
+  >
+    example.com
+  </PageLink>
+</div>
+`;
+
+exports[`FacetDataCell renders data cell with a page link and subaccount search 1`] = `
+<div
+  className="PaddedCell"
+>
+  <PageLink
+    to={
+      Object {
+        "pathname": "/signals/spam-traps/sending_domain/example.com",
+        "search": Object {
+          "subaccount": 123,
+        },
+      }
+    }
+  >
+    example.com
+  </PageLink>
+</div>
+`;
+
+exports[`FacetDataCell renders label and id 1`] = `
+<div
+  className="PaddedCell"
+>
+  Test Subaccount (123)
+</div>
+`;
+
+exports[`FacetDataCell renders only id 1`] = `
+<div
+  className="PaddedCell"
+>
+  123
+</div>
+`;

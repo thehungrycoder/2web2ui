@@ -10,6 +10,7 @@ describe('SummaryTable', () => {
       data={[
         { id: 'test-example', name: 'Test Example' }
       ]}
+      empty={false}
       loading={false}
       order={{
         ascending: false,
@@ -28,6 +29,11 @@ describe('SummaryTable', () => {
   it('renders a table', () => {
     const wrapper = subject();
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('passes error message to body', () => {
+    const wrapper = subject({ error: 'Oh no!' });
+    expect(wrapper.find('Body').prop('error')).toEqual('Oh no!');
   });
 
   it('calls onChange on mount', () => {

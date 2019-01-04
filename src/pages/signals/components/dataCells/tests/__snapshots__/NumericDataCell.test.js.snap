@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumericDataCell renders a number 1`] = `
+<div
+  className="PaddedCell"
+>
+  123
+</div>
+`;
+
+exports[`NumericDataCell renders bars 1`] = `
+<div
+  className="PaddedCell"
+>
+  - - -
+</div>
+`;
+
+exports[`NumericDataCell renders number with commas 1`] = `
+<div
+  className="PaddedCell"
+>
+  1,230
+</div>
+`;
