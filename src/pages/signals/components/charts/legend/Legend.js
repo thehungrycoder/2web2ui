@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './Legend.module.scss';
 
-const Item = ({ label, fill = 'whitesmoke', tooltipContent }) => (
+// TODO tooltip content?
+const Item = ({ label, fill = 'whitesmoke' }) => (
   <div className={styles.Item}>
     <span className={styles.Fill} style={{ background: fill }}/>
     <span className={styles.Label}>{label}</span>

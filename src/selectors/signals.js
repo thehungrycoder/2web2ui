@@ -54,7 +54,7 @@ export const selectEngagementRecencyDetails = createSelector(
       return { ...values, c_total, dt };
     });
 
-    const history = match.history && calculatePercentages(match.history) || [];
+    const history = calculatePercentages(match.history || []);
     // TODO convert dt -> date
 
     return {
