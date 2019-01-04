@@ -17,14 +17,14 @@
 }
 
 .DataCell {
-  padding: spacing(small);
+  padding: spacing(small) spacing();
 }
 
 .Header {
   background-color: #FAFAFA;
   border: 1px solid color(grey, 8);
   border-left: none;
-  padding: spacing(small);
+  padding: spacing(small) spacing();
 
   &:last-child {
     border-right: none;
