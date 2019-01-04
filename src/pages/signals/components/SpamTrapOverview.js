@@ -134,7 +134,7 @@ class SpamTrapOverview extends React.Component {
           />
           <Column
             dataKey="current_hits"
-            label={calculation === 'relative' ? 'Current Rate' : 'Current Count'}
+            label={calculation === 'relative' ? 'Current Ratio' : 'Current Count'}
             sortable
             width="20%"
             component={({ current_relative_trap_hits, current_trap_hits }) => {
