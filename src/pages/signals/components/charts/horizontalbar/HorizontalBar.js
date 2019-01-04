@@ -29,7 +29,7 @@ const HorizontalBar = ({ color, value, height, width, xKey, onClick, xRange, too
           dataKey={xKey}
           isAnimationActive={false}
           onClick={onClick}
-          shape={(props) => <Rectangle {...props} radius={[0, 2, 2, 0]} fill={color} />}
+          shape={(props) => <Rectangle {...props} fill={color} />}
         />
         <Tooltip
           cursor={false}
