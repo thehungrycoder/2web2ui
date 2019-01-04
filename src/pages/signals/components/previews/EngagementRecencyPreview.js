@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, Tooltip } from '@sparkpost/matchbox';
-import { InfoOutline } from '@sparkpost/matchbox-icons';
+import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
 import withEngagementRecencyDetails from '../../containers/EngagementRecencyDetailsContainer';

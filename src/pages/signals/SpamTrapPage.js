@@ -14,7 +14,6 @@ import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
-import _ from 'lodash';
 
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 

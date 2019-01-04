@@ -1,7 +1,6 @@
 import { formatInputDate, getRelativeDates } from 'src/helpers/date';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
-import moment from 'moment';
 
 // order_by param values do not match field names, so we have to translate here
 const ORDER_BY_MAPPING = {
@@ -64,7 +63,7 @@ export const getEngagementRecency = ({
       params: {
         filter,
         to: formatInputDate(to),
-        from: formatInputDate(from),
+        from: formatInputDate(from)
       }
     }
   });

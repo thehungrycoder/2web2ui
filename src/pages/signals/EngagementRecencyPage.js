@@ -10,10 +10,9 @@ import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsC
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
 import OtherChartsHeader from './components/OtherChartsHeader';
-import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
 import Legend from './components/charts/legend/Legend';
-import { formatFullNumber, roundToPlaces } from 'src/helpers/units';
+import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
 
@@ -29,7 +28,7 @@ export class EngagementRecencyPage extends Component {
   })
 
   getXAxisProps = () => {
-    const { data, xTicks } = this.props;
+    const { xTicks } = this.props;
     return {
       ticks: xTicks,
       tickFormatter: (tick) => moment(tick).format('M/D')

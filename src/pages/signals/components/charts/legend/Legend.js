@@ -1,7 +1,5 @@
 import React from 'react';
-import { Tooltip } from '@sparkpost/matchbox';
 import styles from './Legend.module.scss';
-import classnames from 'classnames';
 
 const Item = ({ label, fill = 'whitesmoke', tooltipContent }) => (
   <div className={styles.Item}>
