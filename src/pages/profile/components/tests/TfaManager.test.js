@@ -93,17 +93,15 @@ describe('EnableTfaModal tests', () => {
   });
 
   it('logs out if disabling TFA with TFA enforced', async () => {
-    const logout = jest.fn();
-    wrapper.setProps({ enabled: true, required: true, logout });
+    wrapper.setProps({ enabled: true, required: true });
     await wrapper.instance().disable();
-    expect(logout).toHaveBeenCalled();
+    expect(wrapper.instance().props.logout).toHaveBeenCalled();
   });
 
   it('should not logout if disabling TFA and TFA not enforced', async () => {
-    const logout = jest.fn();
-    wrapper.setProps({ enabled: true, logout });
+    wrapper.setProps({ enabled: true });
     await wrapper.instance().disable();
-    expect(logout).not.toHaveBeenCalled();
+    expect(wrapper.instance().props.logout).not.toHaveBeenCalled();
   });
 });
 

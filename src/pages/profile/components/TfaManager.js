@@ -8,6 +8,7 @@ import EnableTfaModal from './EnableTfaModal';
 import DisableTfaModal from './DisableTfaModal';
 import { LINKS } from 'src/constants';
 import { logout } from 'src/actions/auth';
+import { showAlert } from 'src/actions/globalAlert';
 export class TfaManager extends Component {
 
   state = {
@@ -35,7 +36,7 @@ export class TfaManager extends Component {
 
   disable = (password) => {
     const { showAlert, required } = this.props;
-    this.props.toggleTfa({ enabled: false, password }).then(() => {
+    return this.props.toggleTfa({ enabled: false, password }).then(() => {
       if (required) {
         this.props.logout();
       }
@@ -131,4 +132,4 @@ const mapStateToProps = ({ account, tfa, tfaBackupCodes }) => ({
   backupCodes: tfaBackupCodes
 });
 
-export default connect(mapStateToProps, { logout, ...tfaActions })(TfaManager);
+export default connect(mapStateToProps, { logout, showAlert, ...tfaActions })(TfaManager);

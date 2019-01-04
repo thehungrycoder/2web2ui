@@ -40,12 +40,12 @@ export default class DisableTfaModal extends Component {
           <form onSubmit={(e) => e.preventDefault()}>
             <Panel.Section>
               <p>Enter your SparkPost password to disable two-factor authentication.</p>
+              <p>If two-factor authentication is required on this account, you will be logged out after disabling it. You can re-enable when you next log in.</p>
               <Grid>
                 <Grid.Column xs={12} md={6}>
                   <TextField type='password' error={(this.state.showErrors && toggleError) ? 'Incorrect password' : ''} placeholder='Enter your password' onChange={this.handleInputChange} value={this.state.password} />
                 </Grid.Column>
               </Grid>
-              <p>If two-factor authentication is enforced, you will be logged out. You will have to re-enable again when you log in.</p>
             </Panel.Section>
             <Panel.Section>
               <Button type='submit' primary disabled={togglePending} onClick={() => this.props.disable(this.state.password)}>
