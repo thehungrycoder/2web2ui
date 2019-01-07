@@ -190,7 +190,8 @@ describe('SpamTrapOverview', () => {
     const factory = ({ calculation, ...props }) => {
       const wrapper = subject();
       wrapper.setState({ calculation });
-      const Column = wrapper.find('Column[dataKey="current_hits"]').prop('component');
+      const dataKey = calculation === 'relative' ? 'current_relative_trap_hits' : 'current_trap_hits';
+      const Column = wrapper.find(`Column[dataKey="${dataKey}"]`).prop('component');
 
       return shallow(<Column {...props} />);
     };
