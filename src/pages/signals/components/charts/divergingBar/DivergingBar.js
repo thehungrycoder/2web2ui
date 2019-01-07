@@ -8,11 +8,16 @@ import styles from './DivergingBar.module.scss';
 class DivergingBar extends Component {
   getData = () => {
     const { data, xKey, positiveFill, negativeFill } = this.props;
-    return _.sortBy(data, (item) => item[xKey]).map((item) => ({ ...item, fill: item[xKey] > 0 ? positiveFill : negativeFill }));
+    return data && data.map((item) => ({ ...item, fill: item[xKey] > 0 ? positiveFill : negativeFill }));
+  }
+
+  getHeight = () => {
+    const { data } = this.props;
+    return data && data.length * 35;
   }
 
   renderBar = ({ key, background, payload, ...props }) => {
-    const { selected } = this.props;
+    const { selected, yKey } = this.props;
     const width = background.x + background.width;
     return (
       <g>
@@ -24,7 +29,7 @@ class DivergingBar extends Component {
           x2={width}
           width={width}
           fill='#5DCFF5'
-          opacity={selected === payload.key ? 0.3 : 0}
+          opacity={selected && selected === payload[yKey] ? 0.3 : 0}
         />
         <Rectangle key={key} {...props} />
       </g>
@@ -43,9 +48,9 @@ class DivergingBar extends Component {
   }
 
   render() {
-    const { height, tooltipContent, onClick, width, xDomain, xKey, yKey } = this.props;
+    const { tooltipContent, onClick, width, xDomain, xKey, yKey } = this.props;
     return (
-      <ResponsiveContainer height={height} width={width} className={styles.DivergingBar}>
+      <ResponsiveContainer height={this.getHeight()} width={width} className={styles.DivergingBar}>
         <BarChart data={this.getData()} layout='vertical' barCategoryGap={2}>
           <CartesianGrid
             horizontal={false}
@@ -58,6 +63,7 @@ class DivergingBar extends Component {
             onClick={onClick}
             isAnimationActive={false}
             shape={this.renderBar}
+            minPointSize={1}
           />
           <YAxis
             type='category'
@@ -67,8 +73,10 @@ class DivergingBar extends Component {
             dataKey={yKey}
             padding={{ bottom: 5 }}
             tick={this.renderYTick}
+            width={90}
           />
           <XAxis
+            hide
             type='number'
             tickLine={false}
             domain={xDomain}
@@ -87,7 +95,6 @@ class DivergingBar extends Component {
 }
 
 DivergingBar.propTypes = {
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   negativeFill: PropTypes.string,
   onClick: PropTypes.func,
   positiveFill: PropTypes.string,
@@ -99,8 +106,7 @@ DivergingBar.propTypes = {
 };
 
 DivergingBar.defaultProps = {
-  height: 250,
-  xDomain: [0, 0],
+  xDomain: ['auto', 'auto'],
   xKey: 'value',
   yKey: 'label',
   width: '99%',

@@ -35,6 +35,17 @@ const signalsReducer = (state = initialState, { type, payload, meta }) => {
       return { ...state, engagementRecency: { ...initialDimensionState, data, loading: false, totalCount }};
     }
 
+    case 'GET_HEALTH_SCORE_FAIL':
+      return { ...state, healthScore: { ...initialDimensionState, error: payload.error, loading: false }};
+
+    case 'GET_HEALTH_SCORE_PENDING':
+      return { ...state, healthScore: { ...initialDimensionState, loading: true }};
+
+    case 'GET_HEALTH_SCORE_SUCCESS': {
+      const { data, total_count: totalCount } = payload;
+      return { ...state, healthScore: { ...initialDimensionState, data, loading: false, totalCount }};
+    }
+
     default:
       return state;
   }

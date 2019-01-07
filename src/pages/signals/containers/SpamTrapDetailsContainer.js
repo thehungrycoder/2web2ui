@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getSpamHits } from 'src/actions/signals';
+import { getSpamHits } from 'src/actions/signals.fake';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 
@@ -42,7 +42,7 @@ export class WithSpamTrapDetails extends Component {
     } = this.props;
 
     // Calculate gap here to share with preview and details
-    const gap = details.data && details.data.length > 14 ? 0.2 : 0.5;
+    const gap = details.data && details.data.length > 15 ? 0.2 : 1;
 
     return (
       <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} xTicks={getDateTicks(filters.relativeRange)} />
