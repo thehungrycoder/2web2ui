@@ -52,7 +52,7 @@ export const getEngagementRecency = ({
   relativeRange,
   subaccount
 }) => {
-  const { from , to } = getRelativeDates(relativeRange);
+  const { from , to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
 
   return sparkpostApiRequest({
     type: 'GET_ENGAGEMENT_RECENCY',

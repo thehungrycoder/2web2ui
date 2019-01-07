@@ -82,10 +82,12 @@ export const selectEngagementRecencyDetails = createSelector(
       relativeRange
     });
 
+    const isEmpty = filledHistory.every((values) => values.c_total === null);
+
     return {
       details: {
         data: filledHistory,
-        empty: !filledHistory.length && !loading,
+        empty: isEmpty && !loading,
         error,
         loading
       },
