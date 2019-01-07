@@ -87,7 +87,6 @@ export class EngagementRecencyPage extends Component {
                     timeSeries={data}
                     tooltipContent={this.getTooltipContent}
                     yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
-                    xKey='dt'
                     yAxisProps={this.getYAxisProps()}
                     xAxisProps={this.getXAxisProps()}
                   />

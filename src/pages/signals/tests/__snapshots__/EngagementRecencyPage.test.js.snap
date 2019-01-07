@@ -95,7 +95,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
                 ],
               }
             }
-            xKey="dt"
+            xKey="date"
             yAxisProps={
               Object {
                 "domain": Array [

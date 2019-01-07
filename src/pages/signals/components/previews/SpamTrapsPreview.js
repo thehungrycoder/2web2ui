@@ -27,7 +27,6 @@ export class SpamTrapsPreview extends Component {
         gap={gap}
         timeSeries={data}
         yKey='trap_hits'
-        xKey='dt'
         yAxisProps={{ hide: true }}
         xAxisProps={{ hide: true }}
       />

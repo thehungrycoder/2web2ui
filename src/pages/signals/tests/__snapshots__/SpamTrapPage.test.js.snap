@@ -74,7 +74,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "ticks": Array [],
             }
           }
-          xKey="dt"
+          xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": null,

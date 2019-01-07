@@ -22,6 +22,9 @@ describe('Selectors: signals', () => {
 
   beforeEach(() => {
     state = {
+      signalOptions: {
+        relativeRange: '14days'
+      },
       signals: {
         spamHits: {
           total_count: 1,
@@ -64,6 +67,8 @@ describe('Selectors: signals', () => {
         }
       }
     };
+
+    dateHelpers.fillByDate.mockImplementationOnce(({ dataSet }) => dataSet);
   });
 
   describe('spam hits details', () => {
@@ -106,10 +111,6 @@ describe('Selectors: signals', () => {
 
 
   describe('selectSpamHitsOverviewData', () => {
-    beforeEach(() => {
-      dateHelpers.fillByDate.mockImplementationOnce(({ dataSet }) => dataSet);
-    });
-
     it('returns data', () => {
       expect(selectors.selectSpamHitsOverviewData(state, { relativeRange: '7days' })).toMatchSnapshot();
     });
@@ -142,10 +143,6 @@ describe('Selectors: signals', () => {
   });
 
   describe('selectSpamHitsOverview', () => {
-    beforeEach(() => {
-      dateHelpers.fillByDate.mockImplementationOnce(({ dataSet }) => dataSet);
-    });
-
     it('returns all overview data', () => {
       expect(selectors.selectSpamHitsOverview(state, { relativeRange: '7days' })).toMatchSnapshot();
     });

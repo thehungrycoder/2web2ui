@@ -8,27 +8,36 @@ import moment from 'moment';
 export const getFacetFromParams = (state, props) => _.get(props, 'match.params.facet');
 export const getFacetIdFromParams = (state, props) => _.get(props, 'match.params.facetId');
 export const getSelectedDateFromRouter = (state, props) => _.get(props, 'location.state.date');
-
+export const getSignalOptions = (state, props) => _.get(state, 'signalOptions', {});
 export const getOptions = (state, options) => options;
 
 // Redux store
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
 export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
 
-
 // Details
 export const selectSpamHitsDetails = createSelector(
-  [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery],
-  ({ loading, error, data }, facet, facetId, subaccountId) => {
+  [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { relativeRange }) => {
     const match = _.find(data, [facet, facetId]) || {};
     const history = match.history || [];
+    const normalizedHistory = history.map(({ dt: date, ...values }) => ({ date, ...values }));
 
-    // TODO convert dt -> date
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        injections: null,
+        relative_trap_hits: null,
+        trap_hits: null
+      },
+      now: moment().subtract(1, 'day'),
+      relativeRange
+    });
 
     return {
       details: {
-        data: history,
-        empty: !history.length && !loading,
+        data: filledHistory,
+        empty: !filledHistory.length && !loading,
         error,
         loading
       },
@@ -40,8 +49,8 @@ export const selectSpamHitsDetails = createSelector(
 );
 
 export const selectEngagementRecencyDetails = createSelector(
-  [getEngagementRecencyData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery],
-  ({ loading, error, data }, facet, facetId, subaccountId) => {
+  [getEngagementRecencyData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { relativeRange }) => {
     const match = _.find(data, [facet, facetId]) || {};
 
     const calculatePercentages = (data) => data.map(({ c_total, dt, ...absolutes }) => {
@@ -55,12 +64,26 @@ export const selectEngagementRecencyDetails = createSelector(
     });
 
     const history = calculatePercentages(match.history || []);
-    // TODO convert dt -> date
+    const normalizedHistory = history.map(({ dt: date, ...values }) => ({ date, ...values }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        c_new: null,
+        c_14d: null,
+        c_90d: null,
+        c_365d: null,
+        c_uneng: null,
+        c_total: null
+      },
+      now: moment().subtract(1, 'day'),
+      relativeRange
+    });
 
     return {
       details: {
-        data: history,
-        empty: !history.length && !loading,
+        data: filledHistory,
+        empty: !filledHistory.length && !loading,
         error,
         loading
       },

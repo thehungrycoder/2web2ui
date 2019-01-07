@@ -28,7 +28,6 @@ export class EngagementRecencyPreview extends Component {
         gap={gap}
         timeSeries={data}
         yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
-        xKey='dt'
         yAxisProps={{ hide: true }}
         xAxisProps={{ hide: true }}
       />

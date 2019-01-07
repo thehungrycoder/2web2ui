@@ -60,7 +60,7 @@ const engagementDetails = (count) => _.range(count).map((n) => {
 
   return {
     c_new, c_14d, c_90d, c_365d, c_uneng, c_total,
-    dt: moment().subtract(count - n, 'day').format('YYYY-MM-DD')
+    dt: moment().subtract(count - n + 1, 'day').format('YYYY-MM-DD')
   };
 });
 

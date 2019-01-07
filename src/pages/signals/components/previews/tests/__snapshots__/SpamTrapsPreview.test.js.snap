@@ -39,7 +39,7 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
             "hide": true,
           }
         }
-        xKey="dt"
+        xKey="date"
         yAxisProps={
           Object {
             "hide": true,

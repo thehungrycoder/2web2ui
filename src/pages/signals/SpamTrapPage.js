@@ -90,7 +90,6 @@ export class SpamTrapPage extends Component {
                 timeSeries={data}
                 tooltipContent={this.getTooltipContent}
                 yKey={calculation === 'absolute' ? 'trap_hits' : 'relative_trap_hits'}
-                xKey='dt'
                 yAxisProps={this.getYAxisProps()}
                 xAxisProps={this.getXAxisProps()}
               />
