@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getSpamHits } from 'src/actions/signals';
-import { selectSpamHitsDetails } from 'src/selectors/signals';
+import { getEngagementRecency } from 'src/actions/signals';
+import { selectEngagementRecencyDetails } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 
-export class WithSpamTrapDetails extends Component {
+export class WithEngagementRecencyDetails extends Component {
   componentDidMount() {
-    const { getSpamHits, facet, facetId, filters, subaccountId } = this.props;
-    getSpamHits({
+    const { getEngagementRecency, facet, facetId, filters, subaccountId } = this.props;
+    getEngagementRecency({
       facet,
       filter: facetId,
       relativeRange: filters.relativeRange,
@@ -17,13 +17,13 @@ export class WithSpamTrapDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { getSpamHits, facet, facetId, filters, subaccountId } = this.props;
+    const { getEngagementRecency, facet, facetId, filters, subaccountId } = this.props;
     const prevRange = prevProps.filters.relativeRange;
     const nextRange = filters.relativeRange;
 
     // Refresh when date range changes
     if (prevRange !== nextRange) {
-      getSpamHits({
+      getEngagementRecency({
         facet,
         filter: facetId,
         relativeRange: nextRange,
@@ -53,21 +53,21 @@ export class WithSpamTrapDetails extends Component {
 /**
  * Provides Spam Trap details to the provided component
  * @example
- *   export default withSpamTrapDetails(MyComponent);
+ *   export default withEngagementRecencyDetails(MyComponent);
  */
-function withSpamTrapDetails(WrappedComponent) {
+function withEngagementRecencyDetails(WrappedComponent) {
   const Wrapper = (props) => (
-    <WithSpamTrapDetails {...props} component={WrappedComponent} />
+    <WithEngagementRecencyDetails {...props} component={WrappedComponent} />
   );
 
-  Wrapper.displayName = `WithSpamTrapDetails(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  Wrapper.displayName = `withEngagementRecencyDetails(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 
   const mapStateToProps = (state, props) => ({
-    ...selectSpamHitsDetails(state, props),
+    ...selectEngagementRecencyDetails(state, props),
     filters: state.signalOptions
   });
 
-  return withRouter(connect(mapStateToProps, { getSpamHits })(Wrapper));
+  return withRouter(connect(mapStateToProps, { getEngagementRecency })(Wrapper));
 }
 
-export default withSpamTrapDetails;
+export default withEngagementRecencyDetails;

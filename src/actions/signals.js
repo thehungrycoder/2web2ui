@@ -45,3 +45,27 @@ export const getSpamHits = ({
     }
   });
 };
+
+export const getEngagementRecency = ({
+  facet = '',
+  filter,
+  relativeRange,
+  subaccount
+}) => {
+  const { from , to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
+
+  return sparkpostApiRequest({
+    type: 'GET_ENGAGEMENT_RECENCY',
+    meta: {
+      method: 'GET',
+      headers: setSubaccountHeader(subaccount),
+      url: `/v1/signals/cohort-engagement/${facet}`,
+      showErrorAlert: false,
+      params: {
+        filter,
+        to: formatInputDate(to),
+        from: formatInputDate(from)
+      }
+    }
+  });
+};

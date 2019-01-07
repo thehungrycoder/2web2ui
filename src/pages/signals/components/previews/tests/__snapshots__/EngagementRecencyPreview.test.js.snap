@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
+exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
 <PageLink
-  to="/signals/spam-traps/ip-pool/best-pool"
+  to="/signals/engagement-recency/ip-pool/best-pool"
 >
   <Panel>
     <Panel.Section>
       <ChartHeader
         hideLine={true}
-        title="Spam Trap Monitoring"
+        title="Engagement Recency"
         tooltipContent="TODO"
       />
     </Panel.Section>
@@ -45,7 +45,36 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
             "hide": true,
           }
         }
-        yKey="trap_hits"
+        yKey="value"
+        yKeys={
+          Array [
+            Object {
+              "fill": "#3F8B93",
+              "key": "c_new",
+              "label": "New",
+            },
+            Object {
+              "fill": "#44A8AD",
+              "key": "c_14d",
+              "label": "Recently Engaged",
+            },
+            Object {
+              "fill": "#9AD8E3",
+              "key": "c_90d",
+              "label": "Semi Recently Engaged",
+            },
+            Object {
+              "fill": "#B9E2E9",
+              "key": "c_365d",
+              "label": "Not Recently Engaged",
+            },
+            Object {
+              "fill": "#E4EEF0",
+              "key": "c_uneng",
+              "label": "Never Engaged",
+            },
+          ]
+        }
         yRange={
           Array [
             "auto",
@@ -58,15 +87,15 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
 </PageLink>
 `;
 
-exports[`Signals SpamTrapsPreview Component renders empty correctly 1`] = `
+exports[`Signals EngagementRecencyPreview Component renders empty correctly 1`] = `
 <PageLink
-  to="/signals/spam-traps/ip-pool/best-pool"
+  to="/signals/engagement-recency/ip-pool/best-pool"
 >
   <Panel>
     <Panel.Section>
       <ChartHeader
         hideLine={true}
-        title="Spam Trap Monitoring"
+        title="Engagement Recency"
         tooltipContent="TODO"
       />
     </Panel.Section>
@@ -81,15 +110,15 @@ exports[`Signals SpamTrapsPreview Component renders empty correctly 1`] = `
 </PageLink>
 `;
 
-exports[`Signals SpamTrapsPreview Component renders error correctly 1`] = `
+exports[`Signals EngagementRecencyPreview Component renders error correctly 1`] = `
 <PageLink
-  to="/signals/spam-traps/ip-pool/best-pool"
+  to="/signals/engagement-recency/ip-pool/best-pool"
 >
   <Panel>
     <Panel.Section>
       <ChartHeader
         hideLine={true}
-        title="Spam Trap Monitoring"
+        title="Engagement Recency"
         tooltipContent="TODO"
       />
     </Panel.Section>
@@ -104,7 +133,7 @@ exports[`Signals SpamTrapsPreview Component renders error correctly 1`] = `
 </PageLink>
 `;
 
-exports[`Signals SpamTrapsPreview Component renders loading correctly 1`] = `
+exports[`Signals EngagementRecencyPreview Component renders loading correctly 1`] = `
 <PanelLoading
   minHeight="170px"
 />

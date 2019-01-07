@@ -8,8 +8,16 @@
 
 .Title {
   padding-top: spacing(small);
+  font-weight: 500;
+  font-size: rem(15);
+  margin-bottom: 0;
 }
 
 .Line {
+  margin-top: spacing();
   margin-bottom: spacing(larger);
+}
+
+.Tooltip {
+  color: color(blue);
 }

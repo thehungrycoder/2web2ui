@@ -287,8 +287,8 @@ const routes = [
     supportDocSearch: 'signals'
   },
   {
-    path: '/signals/engagement-cohort/:facet/:facetId',
-    component: signals.EngagementPage,
+    path: '/signals/engagement-recency/:facet/:facetId',
+    component: signals.EngagementRecencyPage,
     condition: hasUiOption('signals'),
     layout: App,
     title: 'Signals',

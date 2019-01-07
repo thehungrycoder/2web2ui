@@ -8,22 +8,38 @@ import moment from 'moment';
 export const getFacetFromParams = (state, props) => _.get(props, 'match.params.facet');
 export const getFacetIdFromParams = (state, props) => _.get(props, 'match.params.facetId');
 export const getSelectedDateFromRouter = (state, props) => _.get(props, 'location.state.date');
-
+export const getSignalOptions = (state, props) => _.get(state, 'signalOptions', {});
 export const getOptions = (state, options) => options;
 
 // Redux store
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
+export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
 
+// Details
 export const selectSpamHitsDetails = createSelector(
-  [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery],
-  ({ loading, error, data }, facet, facetId, subaccountId) => {
+  [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { relativeRange }) => {
     const match = _.find(data, [facet, facetId]) || {};
     const history = match.history || [];
+    const normalizedHistory = history.map(({ dt: date, ...values }) => ({ date, ...values }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        injections: null,
+        relative_trap_hits: null,
+        trap_hits: null
+      },
+      now: moment().subtract(1, 'day'),
+      relativeRange
+    });
+
+    const isEmpty = filledHistory.every((values) => values.trap_hits === null);
 
     return {
       details: {
-        data: history,
-        empty: !history.length && !loading,
+        data: filledHistory,
+        empty: isEmpty && !loading,
         error,
         loading
       },
@@ -34,6 +50,55 @@ export const selectSpamHitsDetails = createSelector(
   }
 );
 
+export const selectEngagementRecencyDetails = createSelector(
+  [getEngagementRecencyData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { relativeRange }) => {
+    const match = _.find(data, [facet, facetId]) || {};
+
+    const calculatePercentages = (data) => data.map(({ c_total, dt, ...absolutes }) => {
+      let values = {};
+
+      for (const key in absolutes) {
+        values = { ...values, [key]: absolutes[key] / c_total };
+      }
+
+      return { ...values, c_total, dt };
+    });
+
+    const history = calculatePercentages(match.history || []);
+    const normalizedHistory = history.map(({ dt: date, ...values }) => ({ date, ...values }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        c_new: null,
+        c_14d: null,
+        c_90d: null,
+        c_365d: null,
+        c_uneng: null,
+        c_total: null
+      },
+      now: moment().subtract(1, 'day'),
+      relativeRange
+    });
+
+    const isEmpty = filledHistory.every((values) => values.c_total === null);
+
+    return {
+      details: {
+        data: filledHistory,
+        empty: isEmpty && !loading,
+        error,
+        loading
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
+
+// Overview
 export const selectSpamHitsOverviewData = createSelector(
   getSpamHitsData, getOptions,
   ({ data }, { relativeRange }) => data.map((rowOfData) => {

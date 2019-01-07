@@ -7,7 +7,9 @@ exports[`Signals Recommended Actions Component renders correctly 1`] = `
   <div
     className="Title"
   >
-    <h6>
+    <h6
+      className="TitleText"
+    >
       Items needing attention
        – Dec 31 2017
     </h6>

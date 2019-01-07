@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Selectors: signals engagement recency details should be empty with no results when not loading 1`] = `
+Object {
+  "details": Object {
+    "data": Array [],
+    "empty": true,
+    "error": undefined,
+    "loading": false,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;
+
+exports[`Selectors: signals engagement recency details should select details 1`] = `
+Object {
+  "details": Object {
+    "data": Array [
+      Object {
+        "c_365d": 0.2,
+        "c_new": 0.2,
+        "c_total": 25,
+        "c_uneng": 0.2,
+        "date": "2018-01-01",
+      },
+    ],
+    "empty": false,
+    "error": null,
+    "loading": false,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;
+
 exports[`Selectors: signals selectSpamHitsOverview returns all overview data 1`] = `
 Object {
   "data": Array [
@@ -86,13 +122,13 @@ Object {
   "details": Object {
     "data": Array [
       Object {
-        "dt": "2018-01-01",
+        "date": "2018-01-01",
         "injections": 182400,
         "relative_trap_hits": 0.25,
         "trap_hits": 456,
       },
       Object {
-        "dt": "2018-01-02",
+        "date": "2018-01-02",
         "injections": 35000,
         "relative_trap_hits": 0.1,
         "trap_hits": 35,

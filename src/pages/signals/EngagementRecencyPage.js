@@ -6,33 +6,26 @@ import BarChart from './components/charts/barchart/BarChart';
 import Actions from './components/Actions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
-import withSpamTrapDetails from './containers/SpamTrapDetailsContainer';
+import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
 import OtherChartsHeader from './components/OtherChartsHeader';
-import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
-import { formatFullNumber, roundToPlaces } from 'src/helpers/units';
+import Legend from './components/charts/legend/Legend';
+import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
+import _ from 'lodash';
 
-import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
+import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
+import cohorts from './constants/cohorts';
 
-export class SpamTrapPage extends Component {
-  state = {
-    calculation: 'absolute'
-  }
+export class EngagementRecencyPage extends Component {
 
-  handleCalculationToggle = (value) => {
-    this.setState({ calculation: value });
-  }
-
-  getYAxisProps = () => {
-    const { calculation } = this.state;
-
-    return {
-      tickFormatter: calculation === 'relative' ? (tick) => `${roundToPlaces(tick * 100, 2)}%` : null
-    };
-  }
+  getYAxisProps = () => ({
+    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`,
+    domain: [0, 1],
+    ticks: [0, 0.25, 0.5, 0.75, 1.0]
+  })
 
   getXAxisProps = () => {
     const { xTicks } = this.props;
@@ -44,15 +37,19 @@ export class SpamTrapPage extends Component {
 
   getTooltipContent = ({ payload = {}}) => (
     <Fragment>
-      <TooltipMetric label='Spam Trap Hits' value={formatFullNumber(payload.trap_hits)} />
-      <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
-      <TooltipMetric label='Spam Trap Rate' value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`} />
+      {_.keys(cohorts).map((key) => (
+        <TooltipMetric
+          key={key}
+          color={cohorts[key].fill}
+          label={cohorts[key].label}
+          value={`${roundToPlaces(payload[key] * 100, 1)}%`}
+        />
+      ))}
     </Fragment>
   )
 
   renderContent = () => {
     const { data = [], loading, gap, empty, error } = this.props;
-    const { calculation } = this.state;
     let chartPanel;
 
     if (empty) {
@@ -74,26 +71,29 @@ export class SpamTrapPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Panel sectioned>
-            <ChartHeader
-              title='Spam Trap Monitoring'
-              primaryArea={
-                <Calculation
-                  initialSelected={calculation}
-                  onChange={this.handleCalculationToggle}
-                />
-              }
-            />
-            {chartPanel || (
-              <BarChart
-                gap={gap}
-                timeSeries={data}
-                tooltipContent={this.getTooltipContent}
-                yKey={calculation === 'absolute' ? 'trap_hits' : 'relative_trap_hits'}
-                yAxisProps={this.getYAxisProps()}
-                xAxisProps={this.getXAxisProps()}
+          <Panel>
+            <Panel.Section>
+              <ChartHeader
+                title='Engagement Recency'
+                hideLine
+                tooltipContent='TODO'
               />
-            )}
+            </Panel.Section>
+            <Panel.Section>
+              {chartPanel || (
+                <Fragment>
+                  <BarChart
+                    gap={gap}
+                    timeSeries={data}
+                    tooltipContent={this.getTooltipContent}
+                    yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
+                    yAxisProps={this.getYAxisProps()}
+                    xAxisProps={this.getXAxisProps()}
+                  />
+                  <Legend items={_.values(cohorts)} />
+                </Fragment>
+              )}
+            </Panel.Section>
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
@@ -112,13 +112,13 @@ export class SpamTrapPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        subtitle={`Spam Trap Monitoring for ${facetId}`}
+        subtitle={`Engagement Recency for ${facetId}`}
         primaryArea={<DateFilter />}>
         {this.renderContent()}
         <OtherChartsHeader facetId={facetId} />
         <Grid>
           <Grid.Column xs={12} sm={6}>
-            <EngagementRecencyPreview />
+            <SpamTrapsPreview />
           </Grid.Column>
           <Grid.Column xs={12} sm={6}>
             {/* TODO replace with health score preview */}
@@ -129,4 +129,4 @@ export class SpamTrapPage extends Component {
   }
 }
 
-export default withSpamTrapDetails(SpamTrapPage);
+export default withEngagementRecencyDetails(EngagementRecencyPage);

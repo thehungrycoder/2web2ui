@@ -1,5 +1,6 @@
 import {
   fillByDate,
+  getDateTicks,
   getEndOfDay,
   getStartOfDay,
   getNextHour,
@@ -310,6 +311,12 @@ describe('Date helpers', () => {
       const fill = { value: null };
 
       expect(fillByDate({ dataSet, fill, now, relativeRange })).toMatchSnapshot();
+    });
+  });
+
+  describe('getDateTicks', () => {
+    it('returns an array of start, end and middle days', () => {
+      expect(getDateTicks('14days')).toMatchSnapshot();
     });
   });
 });

@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { SpamTrapPage } from '../SpamTrapPage';
+import { EngagementRecencyPage } from '../EngagementRecencyPage';
 
-describe('Signals Spam Trap Page', () => {
+describe('Signals Engagement Recency Page', () => {
   let wrapper;
   let props;
 
@@ -14,9 +14,9 @@ describe('Signals Spam Trap Page', () => {
       gap: 0.25,
       loading: false,
       empty: false,
-      xTicks: []
+      xTicks: [1,2]
     };
-    wrapper = shallow(<SpamTrapPage {...props}/>);
+    wrapper = shallow(<EngagementRecencyPage {...props}/>);
   });
 
   it('renders correctly', () => {
@@ -38,21 +38,17 @@ describe('Signals Spam Trap Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('local state', () => {
-    it('handles calculation type', () => {
-      const calculation = shallow(wrapper.find('ChartHeader').props().primaryArea);
-      calculation.simulate('change', 'relative');
-      expect(wrapper.find('BarChart').prop('yKey')).toEqual('relative_trap_hits');
-    });
-  });
-
   describe('bar chart props', () => {
     it('renders tooltip content', () => {
       const Tooltip = wrapper.find('BarChart').prop('tooltipContent');
       expect(shallow(<Tooltip payload={{
-        trap_hits: 2,
-        injections: 3,
-        relative_trap_hits: 0.001234567
+        c_uneng: 0.1,
+        c_365d: 0.2,
+        c_90d: 0.3,
+        c_14d: 0.4,
+        c_new: 0.5,
+        date: '2018-01-01',
+        c_total: 10
       }} />)).toMatchSnapshot();
     });
 
@@ -62,16 +58,10 @@ describe('Signals Spam Trap Page', () => {
       expect(axisProps.tickFormatter('2018-12-05')).toEqual('12/5');
     });
 
-    it('gets y axis props with relative calculation', () => {
+    it('gets y axis props', () => {
       wrapper.setState({ calculation: 'relative' });
       const axisProps = wrapper.find('BarChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter(0.2468)).toEqual('24.68%');
-    });
-
-    it('gets y axis props with absolute calculation', () => {
-      wrapper.setState({ calculation: 'absolute' });
-      const axisProps = wrapper.find('BarChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter).toEqual(null);
+      expect(axisProps.tickFormatter(0.2468)).toEqual('25%');
     });
   });
 });
