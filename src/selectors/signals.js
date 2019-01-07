@@ -34,10 +34,12 @@ export const selectSpamHitsDetails = createSelector(
       relativeRange
     });
 
+    const isEmpty = filledHistory.every((values) => values.trap_hits === null);
+
     return {
       details: {
         data: filledHistory,
-        empty: !filledHistory.length && !loading,
+        empty: isEmpty && !loading,
         error,
         loading
       },
