@@ -1,5 +1,6 @@
 import React from 'react';
 import PageLink from 'src/components/pageLink';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import styles from './DataCell.module.scss';
 
 const FacetDataCell = ({ facet, id, name, signalOptions }) => {
@@ -15,7 +16,7 @@ const FacetDataCell = ({ facet, id, name, signalOptions }) => {
   }
 
   if (signalOptions.subaccount) {
-    search = { subaccount: signalOptions.subaccount.id };
+    search = setSubaccountQuery(signalOptions.subaccount.id);
   }
 
   return (

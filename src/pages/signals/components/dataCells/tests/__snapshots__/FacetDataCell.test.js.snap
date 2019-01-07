@@ -59,9 +59,7 @@ exports[`FacetDataCell renders page link with subaccount search 1`] = `
     to={
       Object {
         "pathname": "/signals/spam-traps/domain/example.com",
-        "search": Object {
-          "subaccount": 123,
-        },
+        "search": "?subaccount=123",
       }
     }
   >
