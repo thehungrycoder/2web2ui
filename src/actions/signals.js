@@ -9,14 +9,14 @@ const ORDER_BY_MAPPING = {
   current_relative_trap_hits: 'perc'
 };
 
-export const getSpamHits = ({
+const signalsActionCreator = ({ dimension, type }) => ({
   facet = '',
   filter,
   limit,
-  relativeRange,
   offset,
   order,
   orderBy,
+  relativeRange,
   subaccount
 }) => {
   const { from , to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
@@ -26,12 +26,18 @@ export const getSpamHits = ({
     order_by = ORDER_BY_MAPPING[orderBy] || orderBy;
   }
 
+  if (facet === 'sid') {
+    facet = '';
+    subaccount = filter;
+    filter = '';
+  }
+
   return sparkpostApiRequest({
-    type: 'GET_SPAM_HITS',
+    type,
     meta: {
       method: 'GET',
       headers: setSubaccountHeader(subaccount),
-      url: `/v1/signals/spam-hits/${facet}`,
+      url: `/v1/signals/${dimension}/${facet}`,
       showErrorAlert: false,
       params: {
         filter,
@@ -46,26 +52,12 @@ export const getSpamHits = ({
   });
 };
 
-export const getEngagementRecency = ({
-  facet = '',
-  filter,
-  relativeRange,
-  subaccount
-}) => {
-  const { from , to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
+export const getSpamHits = signalsActionCreator({
+  dimension: 'spam-hits',
+  type: 'GET_SPAM_HITS'
+});
 
-  return sparkpostApiRequest({
-    type: 'GET_ENGAGEMENT_RECENCY',
-    meta: {
-      method: 'GET',
-      headers: setSubaccountHeader(subaccount),
-      url: `/v1/signals/cohort-engagement/${facet}`,
-      showErrorAlert: false,
-      params: {
-        filter,
-        to: formatInputDate(to),
-        from: formatInputDate(from)
-      }
-    }
-  });
-};
+export const getEngagementRecency = signalsActionCreator({
+  dimension: 'cohort-engagement',
+  type: 'GET_ENGAGEMENT_RECENCY'
+});
