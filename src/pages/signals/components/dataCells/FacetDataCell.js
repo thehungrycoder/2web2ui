@@ -2,9 +2,17 @@ import React from 'react';
 import PageLink from 'src/components/pageLink';
 import styles from './DataCell.module.scss';
 
-const FacetDataCell = ({ facet, signalOptions, subaccounts, ...props }) => {
-  const id = props[facet.key];
+const FacetDataCell = ({ facet, id, name, signalOptions }) => {
+  let label = id;
   let search;
+
+  if (facet === 'sid' && id === 0) {
+    label = 'Master Account';
+  }
+
+  if (name) {
+    label = `${name} (${id})`;
+  }
 
   if (signalOptions.subaccount) {
     search = { subaccount: signalOptions.subaccount.id };
@@ -12,17 +20,13 @@ const FacetDataCell = ({ facet, signalOptions, subaccounts, ...props }) => {
 
   return (
     <div className={styles.PaddedCell}>
-      {facet.isDefault ? (
-        subaccounts[id] ? `${subaccounts[id].name} (${id})` : id
-      ) : (
-        <PageLink
-          children={id}
-          to={{
-            pathname: `/signals/spam-traps/${facet.key}/${id}`,
-            search
-          }}
-        />
-      )}
+      <PageLink
+        children={label}
+        to={{
+          pathname: `/signals/spam-traps/${facet}/${id}`,
+          search
+        }}
+      />
     </div>
   );
 };

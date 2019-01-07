@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getSpamHits } from 'src/actions/signals';
+import { getSpamHits } from 'src/actions/signals.fake';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
 import { defaultFacet, facetsByKey } from '../constants/facets';
 import { selectSpamHitsOverview } from 'src/selectors/signals';

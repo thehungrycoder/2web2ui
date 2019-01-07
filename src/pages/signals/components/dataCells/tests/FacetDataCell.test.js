@@ -5,19 +5,22 @@ import FacetDataCell from '../FacetDataCell';
 describe('FacetDataCell', () => {
   const subject = (props = {}) => shallow(
     <FacetDataCell
-      facet={{ key: 'sending_domain' }}
-      sending_domain="example.com"
+      facet="domain"
+      id="example.com"
       signalOptions={{}}
-      subaccounts={{}}
       {...props}
     />
   );
 
-  it('renders data cell with a page link', () => {
+  it('renders page link', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('renders data cell with a page link and subaccount search', () => {
+  it('renders page link for master account', () => {
+    expect(subject({ facet: 'sid', id: 0 })).toMatchSnapshot();
+  });
+
+  it('renders page link with subaccount search', () => {
     const props = {
       signalOptions: {
         subaccount: {
@@ -29,30 +32,11 @@ describe('FacetDataCell', () => {
     expect(subject(props)).toMatchSnapshot();
   });
 
-  it('renders label and id', () => {
+  it('renders page link with name and id', () => {
     const props = {
-      facet: {
-        isDefault: true,
-        key: 'subaccount_id'
-      },
-      subaccounts: {
-        123: {
-          name: 'Test Subaccount'
-        }
-      },
-      subaccount_id: 123
-    };
-
-    expect(subject(props)).toMatchSnapshot();
-  });
-
-  it('renders only id', () => {
-    const props = {
-      facet: {
-        isDefault: true,
-        key: 'subaccount_id'
-      },
-      subaccount_id: 123
+      facet: 'sid',
+      id: 123,
+      name: 'Test Subaccount'
     };
 
     expect(subject(props)).toMatchSnapshot();

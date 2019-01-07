@@ -17,9 +17,9 @@ describe('SpamTrapOverview', () => {
         }
       ]}
       facet={{
-        isDefault: true,
         key: 'domain',
-        label: 'Domain'
+        label: 'Domain',
+        sortable: false
       }}
       getSpamHits={() => {}}
       getSubaccounts={() => {}}
