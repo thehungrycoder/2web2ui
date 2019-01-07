@@ -16,7 +16,7 @@ const promoCodeValidate = (formName) => (values, dispatch, props, field) => {
     verifyPromoCode({
       promoCode,
       billingId: planpicker.billingId,
-      meta: { promoCode }
+      meta: { promoCode, showErrorAlert: false }
     })
   ).catch(() => {
     dispatch(change(formName, 'promoCode', ''));

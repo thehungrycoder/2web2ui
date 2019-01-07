@@ -52,14 +52,16 @@ describe('Action Creator: Billing', () => {
     isAws.mockImplementation(() => false);
   });
 
-  it('should dispatch a subscription sync action with no params', () => {
-    mockStore.dispatch(billing.syncSubscription());
-    snapActions();
-  });
+  describe('sync subscription', () => {
+    it('should dispatch a subscription sync action with no params', () => {
+      mockStore.dispatch(billing.syncSubscription());
+      snapActions();
+    });
 
-  it('should dispatch a subscription sync action with meta data param', () => {
-    mockStore.dispatch(billing.syncSubscription({ meta: { word: 'test' }}));
-    snapActions();
+    it('should dispatch a subscription sync action with meta data param', () => {
+      mockStore.dispatch(billing.syncSubscription({ meta: { word: 'test' }}));
+      snapActions();
+    });
   });
 
   it('should dispatch a verification of a promo code', () => {
