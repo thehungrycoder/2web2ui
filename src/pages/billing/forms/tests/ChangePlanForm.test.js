@@ -39,6 +39,7 @@ describe('Form Container: Change Plan', () => {
       billing: { countries: [], plans, selectedPromo: {}},
       getPlans: jest.fn(),
       getBillingCountries: jest.fn(),
+      verifyPromoCode: jest.fn(() => Promise.resolve({})),
       fetchAccount: jest.fn(),
       plans,
       currentPlan: {},
@@ -119,7 +120,7 @@ describe('Form Container: Change Plan', () => {
     let values;
 
     beforeEach(() => {
-      values = { key: 'value', planpicker: { code: 'paid' }, card: 'card info' };
+      values = { key: 'value', planpicker: { code: 'paid', billingId: 'test-id' }, card: 'card info' };
     });
 
     // Upgrade from free to new paid plan for the first time
@@ -130,6 +131,35 @@ describe('Form Container: Change Plan', () => {
       expect(props.billingCreate).toHaveBeenCalledWith(values);
       expect(props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
+
+    it('should call verify if promo code is attached and update subscription', async () => {
+      const billing = { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }};
+      wrapper.setState({ useSavedCC: true });
+      wrapper.setProps({ billing });
+      await instance.onSubmit(values);
+      expect(props.verifyPromoCode).toHaveBeenCalledWith({
+        promoCode: 'test-promo-code',
+        billingId: 'test-id',
+        meta: { promoCode: 'test-promo-code' }
+      });
+      expect(props.updateSubscription).toHaveBeenCalledWith({ code: 'paid' , promoCode: 'test-promo-code' });
+      expect(props.billingUpdate).not.toHaveBeenCalled();
+      expect(props.history.push).toHaveBeenCalledWith('/account/billing');
+      expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
+
+
+    it('should interrupt submission if validation of promo code fails', async () => {
+      expect.assertions(3);
+      const verifyPromoCode = jest.fn(() => Promise.reject({}));
+      const billing = { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }};
+      wrapper.setProps({ billing, verifyPromoCode });
+      return instance.onSubmit(values).catch(() => {
+        expect(props.billingUpdate).not.toHaveBeenCalled();
+        expect(props.updateSubscription).not.toHaveBeenCalled();
+        expect(props.history.push).not.toHaveBeenCalled();
+      });
     });
 
     // Changing plan and changing card

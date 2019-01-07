@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 const Loading = ({ loading }) => loading ? <LoadingSVG size="XSmall" /> : null;
 
-class PromoCode extends React.Component {
+export class PromoCode extends React.Component {
 
   render() {
     const { selectedPromo = {}, promoPending = false } = this.props;

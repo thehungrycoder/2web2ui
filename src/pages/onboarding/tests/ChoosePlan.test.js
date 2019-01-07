@@ -16,11 +16,12 @@ describe('ChoosePlan page tests', () => {
     billingCreate: jest.fn(() => Promise.resolve()),
     handleSubmit: jest.fn(),
     showAlert: jest.fn(),
+    verifyPromoCode: jest.fn(() => Promise.resolve({})),
     history: {
       push: jest.fn()
     },
     loading: false,
-    billing: { countries: []},
+    billing: { countries: [], selectedPromo: {}, promoPending: false },
     plans: [],
     submitting: false
   };
@@ -82,6 +83,31 @@ describe('ChoosePlan page tests', () => {
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
       expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
+    });
+
+    it('should call verify of promo code before rest of submission flow if available', async () => {
+      const values = { planpicker: { isFree: false, billingId: 'test-id' }, key: 'value', card: 'card info' };
+      wrapper.setProps({ billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }}});
+      await instance.onSubmit(values);
+      expect(props.verifyPromoCode).toHaveBeenCalledWith({
+        promoCode: 'test-promo-code',
+        billingId: 'test-id',
+        meta: { promoCode: 'test-promo-code' }
+      });
+      expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
+      expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
+      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
+    });
+
+    it('should throw error if promo code validation fails', async () => {
+      expect.assertions(2);
+      const values = { planpicker: { isFree: false, billingId: 'test-id' }, key: 'value', card: 'card info' };
+      const verifyPromoCode = jest.fn(() => Promise.reject());
+      wrapper.setProps({ billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }}, verifyPromoCode });
+      return instance.onSubmit(values).catch(() => {
+        expect(props.billingCreate).not.toHaveBeenCalled();
+        expect(props.history.push).not.toHaveBeenCalled();
+      });
     });
   });
 });

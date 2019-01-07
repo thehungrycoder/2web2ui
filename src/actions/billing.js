@@ -67,7 +67,6 @@ export function verifyPromoCode({ promoCode, billingId, meta = {}}) {
       params: {
         billing_id: billingId
       },
-      showErrorAlert: false,
       ...meta
     }
   });

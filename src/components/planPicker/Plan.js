@@ -6,11 +6,11 @@ import styles from './PlanPicker.module.scss';
 
 class Plan extends React.Component {
   render() {
-    const { plan, className, ...rest } = this.props;
+    const { plan, className, planPriceProps, ...rest } = this.props;
 
     return (
       <a className={className} {...rest} >
-        <PlanPrice plan={plan} showOverage showIp showCsm className={styles.MainLabel} />
+        <PlanPrice plan={plan} showOverage showIp showCsm className={styles.MainLabel} {...planPriceProps} />
       </a>
     );
   }
