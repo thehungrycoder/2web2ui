@@ -22,6 +22,9 @@ describe('Signals Actions', () => {
     'with a facet': {
       action: () => getSpamHits({ ...requiredOptions, facet: 'sending-domain' })
     },
+    'with a subaccount facet': {
+      action: () => getSpamHits({ ...requiredOptions, facet: 'sid', filter: 123 })
+    },
     'with a filter': {
       action: () => getSpamHits({ ...requiredOptions, filter: 'examp' })
     },
@@ -45,15 +48,6 @@ describe('Signals Actions', () => {
   snapshotActionCases('.getEngagementRecency', {
     'by default': {
       action: () => getEngagementRecency({ ...requiredOptions })
-    },
-    'with a facet': {
-      action: () => getEngagementRecency({ ...requiredOptions, facet: 'sending-domain' })
-    },
-    'with a filter': {
-      action: () => getEngagementRecency({ ...requiredOptions, filter: 'examp' })
-    },
-    'with a subaccount': {
-      action: () => getEngagementRecency({ ...requiredOptions, subaccount: { id: 123 }})
     }
   });
 });

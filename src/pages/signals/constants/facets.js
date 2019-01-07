@@ -1,15 +1,18 @@
 const facets = [
   {
     key: 'campaign_id',
-    label: 'Campaign'
+    label: 'Campaign',
+    sortable: true
   },
   {
     key: 'ip_pool',
-    label: 'IP Pool'
+    label: 'IP Pool',
+    sortable: true
   },
   {
     key: 'sending_domain',
-    label: 'Sending Domain'
+    label: 'Sending Domain',
+    sortable: true
   }
 ];
 
@@ -17,7 +20,7 @@ const facets = [
 export const defaultFacet = {
   key: 'sid',
   label: 'Subaccount',
-  isDefault: true
+  sortable: false
 };
 
 export const facetsByKey = facets.reduce((acc, facet) => ({ ...acc, [facet.key]: facet }), {});

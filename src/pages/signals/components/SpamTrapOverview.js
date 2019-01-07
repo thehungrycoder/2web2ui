@@ -112,16 +112,20 @@ class SpamTrapOverview extends React.Component {
           <Column
             dataKey={facet.key}
             label={facet.label}
-            sortable={!facet.isDefault}
+            sortable={facet.sortable}
             width="30%"
-            component={(props) => (
-              <FacetDataCell
-                {...props}
-                facet={facet}
-                signalOptions={signalOptions}
-                subaccounts={subaccounts}
-              />
-            )}
+            component={(props) => {
+              const id = props[facet.key];
+
+              return (
+                <FacetDataCell
+                  facet={facet.key}
+                  id={id}
+                  name={_.get(subaccounts, `[${id}].name`)}
+                  signalOptions={signalOptions}
+                />
+              );
+            }}
           />
           <Column
             dataKey="history"
