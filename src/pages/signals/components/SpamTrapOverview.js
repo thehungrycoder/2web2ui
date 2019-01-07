@@ -154,20 +154,29 @@ class SpamTrapOverview extends React.Component {
               );
             }}
           />
-          <Column
-            align="right"
-            dataKey="current_hits"
-            label={calculation === 'relative' ? 'Current Ratio' : 'Current Count'}
-            sortable
-            width="20%"
-            component={({ current_relative_trap_hits, current_trap_hits }) => {
-              if (calculation === 'relative') {
-                return <PercentDataCell value={current_relative_trap_hits} />;
-              }
-
-              return <NumericDataCell value={current_trap_hits} />;
-            }}
-          />
+          {calculation === 'relative' ? (
+            <Column
+              align="right"
+              dataKey="current_relative_trap_hits"
+              label="Current Ratio"
+              sortable
+              width="20%"
+              component={({ current_relative_trap_hits }) => (
+                <PercentDataCell value={current_relative_trap_hits} />
+              )}
+            />
+          ) : (
+            <Column
+              align="right"
+              dataKey="current_trap_hits"
+              label="Current Count"
+              sortable
+              width="20%"
+              component={({ current_trap_hits }) => (
+                <NumericDataCell value={current_trap_hits} />
+              )}
+            />
+          )}
           <Column
             align="right"
             dataKey="total_injections"

@@ -109,7 +109,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
     <Column
       align="right"
       component={[Function]}
-      dataKey="current_hits"
+      dataKey="current_relative_trap_hits"
       label="Current Ratio"
       sortable={true}
       width="20%"
