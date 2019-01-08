@@ -11,5 +11,6 @@ exports[`Signals Overview Page renders correctly 1`] = `
   }
 >
   <Connect(withRouter(Connect(SpamTrapOverview))) />
+  <Connect(withRouter(Connect(EngagementRecencyOverview))) />
 </SignalsPage>
 `;

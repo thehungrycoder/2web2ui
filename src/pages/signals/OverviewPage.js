@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Page from './components/SignalsPage';
+import EngagementRecencyOverview from './containers/EngagementRecencyOverviewContainer';
 import SpamTrapOverview from './containers/SpamTrapOverviewContainer';
 import FacetFilter from './components/filters/FacetFilter';
 import DateFilter from './components/filters/DateFilter';
@@ -16,6 +17,7 @@ export class OverviewPage extends Component {
         </Fragment>
       }>
         <SpamTrapOverview />
+        <EngagementRecencyOverview />
       </Page>
     );
   }

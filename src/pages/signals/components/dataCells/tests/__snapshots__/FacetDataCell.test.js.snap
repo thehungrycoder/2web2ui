@@ -7,7 +7,7 @@ exports[`FacetDataCell renders page link 1`] = `
   <PageLink
     to={
       Object {
-        "pathname": "/signals/spam-traps/domain/example.com",
+        "pathname": "/signals/example/domain/example.com",
         "search": undefined,
       }
     }
@@ -24,7 +24,7 @@ exports[`FacetDataCell renders page link for master account 1`] = `
   <PageLink
     to={
       Object {
-        "pathname": "/signals/spam-traps/sid/0",
+        "pathname": "/signals/example/sid/0",
         "search": undefined,
       }
     }
@@ -41,7 +41,7 @@ exports[`FacetDataCell renders page link with name and id 1`] = `
   <PageLink
     to={
       Object {
-        "pathname": "/signals/spam-traps/sid/123",
+        "pathname": "/signals/example/sid/123",
         "search": undefined,
       }
     }
@@ -58,7 +58,7 @@ exports[`FacetDataCell renders page link with subaccount search 1`] = `
   <PageLink
     to={
       Object {
-        "pathname": "/signals/spam-traps/domain/example.com",
+        "pathname": "/signals/example/domain/example.com",
         "search": "?subaccount=123",
       }
     }

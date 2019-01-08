@@ -3,7 +3,7 @@ import PageLink from 'src/components/pageLink';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import styles from './DataCell.module.scss';
 
-const FacetDataCell = ({ facet, id, name, signalOptions }) => {
+const FacetDataCell = ({ dimension, facet, id, name, signalOptions }) => {
   let label = id;
   let search;
 
@@ -24,7 +24,7 @@ const FacetDataCell = ({ facet, id, name, signalOptions }) => {
       <PageLink
         children={label}
         to={{
-          pathname: `/signals/spam-traps/${facet}/${id}`,
+          pathname: `/signals/${dimension}/${facet}/${id}`,
           search
         }}
       />

@@ -13,7 +13,7 @@ import Calculation from './viewControls/Calculation';
 import ChartType from './viewControls/ChartType';
 import styles from './SpamTrapOverview.module.scss';
 
-class SpamTrapOverview extends React.Component {
+class EngagementRecencyOverview extends React.Component {
   state = {
     calculation: 'relative',
     chartType: 'line'
@@ -22,6 +22,7 @@ class SpamTrapOverview extends React.Component {
   componentDidMount() {
     const { getSubaccounts, resetSummaryTable, subaccounts, tableName } = this.props;
 
+    // todo, move to page component, so it is only called once
     if (_.isEmpty(subaccounts)) {
       getSubaccounts();
     }
@@ -44,7 +45,7 @@ class SpamTrapOverview extends React.Component {
   }
 
   getData = () => {
-    const { getSpamHits, signalOptions, summaryTable } = this.props;
+    const { getEngagementRecency, signalOptions, summaryTable } = this.props;
     let { subaccount } = signalOptions;
     let order;
     let orderBy;
@@ -58,7 +59,7 @@ class SpamTrapOverview extends React.Component {
       subaccount = undefined; // unset
     }
 
-    getSpamHits({
+    getEngagementRecency({
       facet: signalOptions.facet,
       filter: signalOptions.facetSearchTerm,
       limit: summaryTable.perPage,
@@ -87,7 +88,7 @@ class SpamTrapOverview extends React.Component {
     }
 
     history.push({
-      pathname: `/signals/spam-traps/${facet.key}/${facetId}`,
+      pathname: `/signals/engagement-recency/${facet.key}/${facetId}`,
       search,
       state: {
         date
@@ -104,7 +105,7 @@ class SpamTrapOverview extends React.Component {
     return (
       <Panel>
         <div className={styles.Header}>
-          <h5>Spam Trap Monitoring Summary</h5>
+          <h5>Engagement Recency Summary</h5>
           <div className={styles.Controls}>
             <Calculation initialSelected={calculation} onChange={this.handleCalculationChange} />
             <ChartType initialSelected={chartType} onChange={this.handleChartTypeChange} />
@@ -128,7 +129,7 @@ class SpamTrapOverview extends React.Component {
 
               return (
                 <FacetDataCell
-                  dimension="spam-traps"
+                  dimension="engagement-recency"
                   facet={facet.key}
                   id={id}
                   name={_.get(subaccounts, `[${id}].name`)}
@@ -139,7 +140,7 @@ class SpamTrapOverview extends React.Component {
           />
           <Column
             dataKey="history"
-            label="Daily Spam Trap Hits"
+            label="Daily Recently Engaged Recipients"
             width="30%"
             component={({ history, ...data }) => {
               const id = data[facet.key];
@@ -148,8 +149,8 @@ class SpamTrapOverview extends React.Component {
                 return (
                   <BarChartDataCell
                     data={_.last(history)}
-                    dataKey={calculation === 'relative' ? 'relative_trap_hits' : 'trap_hits'}
-                    label="Spam Trap Hits"
+                    dataKey={calculation === 'relative' ? 'relative_engaged_recipients' : 'engaged_recipients'}
+                    label="Recently Engaged Recipients"
                     max={calculation === 'relative' ? metaData.currentRelativeMax : metaData.currentMax}
                     onClick={this.handleClick(id)}
                     relative={calculation === 'relative'}
@@ -160,8 +161,8 @@ class SpamTrapOverview extends React.Component {
               return (
                 <SparklineDataCell
                   data={history}
-                  dataKey={calculation === 'relative' ? 'relative_trap_hits' : 'trap_hits'}
-                  label="Spam Trap Hits"
+                  dataKey={calculation === 'relative' ? 'relative_engaged_recipients' : 'engaged_recipients'}
+                  label="Recently Engaged Recipients"
                   onClick={this.handleClick(id)}
                   relative={calculation === 'relative'}
                 />
@@ -171,32 +172,30 @@ class SpamTrapOverview extends React.Component {
           {calculation === 'relative' ? (
             <Column
               align="right"
-              dataKey="current_relative_trap_hits"
+              dataKey="current_relative_engaged_recipients"
               label="Current Ratio"
-              sortable
               width="20%"
-              component={({ current_relative_trap_hits }) => (
-                <PercentDataCell value={current_relative_trap_hits} />
+              component={({ current_relative_engaged_recipients }) => (
+                <PercentDataCell value={current_relative_engaged_recipients} />
               )}
             />
           ) : (
             <Column
               align="right"
-              dataKey="current_trap_hits"
+              dataKey="current_engaged_recipients"
               label="Current Count"
-              sortable
               width="20%"
-              component={({ current_trap_hits }) => (
-                <NumericDataCell value={current_trap_hits} />
+              component={({ current_engaged_recipients }) => (
+                <NumericDataCell value={current_engaged_recipients} />
               )}
             />
           )}
           <Column
             align="right"
-            dataKey="total_injections"
-            label="Total Injections"
+            dataKey="total_engagement"
+            label="Total Recipients"
             width="20%"
-            component={({ total_injections }) => <NumericDataCell value={total_injections} />}
+            component={({ total_engagement }) => <NumericDataCell value={total_engagement} />}
           />
         </SummaryTable>
       </Panel>
@@ -204,4 +203,4 @@ class SpamTrapOverview extends React.Component {
   }
 }
 
-export default SpamTrapOverview;
+export default EngagementRecencyOverview;

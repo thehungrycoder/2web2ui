@@ -19,11 +19,20 @@ Object {
   "details": Object {
     "data": Array [
       Object {
+        "c_14d": 0.2,
         "c_365d": 0.2,
         "c_new": 0.2,
         "c_total": 25,
         "c_uneng": 0.2,
         "date": "2018-01-01",
+      },
+      Object {
+        "c_14d": 0.2,
+        "c_365d": 0.2,
+        "c_new": 0.2,
+        "c_total": 50,
+        "c_uneng": 0.2,
+        "date": "2018-01-02",
       },
     ],
     "empty": false,
@@ -34,6 +43,87 @@ Object {
   "facetId": "test.com",
   "subaccountId": "101",
 }
+`;
+
+exports[`Selectors: signals selectEngagementRecencyOverview returns all overview data 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "current_c_14d": 10,
+      "current_c_total": 50,
+      "current_engaged_recipients": 10,
+      "current_relative_engaged_recipients": 20,
+      "history": Array [
+        Object {
+          "c_14d": 5,
+          "c_365d": 5,
+          "c_new": 5,
+          "c_total": 25,
+          "c_uneng": 5,
+          "date": "2018-01-01",
+          "engaged_recipients": 5,
+          "relative_engaged_recipients": 20,
+        },
+        Object {
+          "c_14d": 10,
+          "c_365d": 10,
+          "c_new": 10,
+          "c_total": 50,
+          "c_uneng": 10,
+          "date": "2018-01-02",
+          "engaged_recipients": 10,
+          "relative_engaged_recipients": 20,
+        },
+      ],
+      "sending_domain": "test.com",
+      "total_engagement": 75,
+    },
+  ],
+  "error": null,
+  "loading": false,
+  "metaData": Object {
+    "currentMax": 10,
+    "currentRelativeMax": 20,
+    "max": 10,
+    "relativeMax": 20,
+  },
+  "total_count": 10,
+}
+`;
+
+exports[`Selectors: signals selectEngagementRecencyOverviewData returns data 1`] = `
+Array [
+  Object {
+    "current_c_14d": 10,
+    "current_c_total": 50,
+    "current_engaged_recipients": 10,
+    "current_relative_engaged_recipients": 20,
+    "history": Array [
+      Object {
+        "c_14d": 5,
+        "c_365d": 5,
+        "c_new": 5,
+        "c_total": 25,
+        "c_uneng": 5,
+        "date": "2018-01-01",
+        "engaged_recipients": 5,
+        "relative_engaged_recipients": 20,
+      },
+      Object {
+        "c_14d": 10,
+        "c_365d": 10,
+        "c_new": 10,
+        "c_total": 50,
+        "c_uneng": 10,
+        "date": "2018-01-02",
+        "engaged_recipients": 10,
+        "relative_engaged_recipients": 20,
+      },
+    ],
+    "sending_domain": "test.com",
+    "total_engagement": 75,
+  },
+]
 `;
 
 exports[`Selectors: signals selectSpamHitsOverview returns all overview data 1`] = `
@@ -61,14 +151,36 @@ Object {
       "sending_domain": "test.com",
       "total_injections": 217400,
     },
+    Object {
+      "current_relative_trap_hits": null,
+      "current_trap_hits": null,
+      "history": Array [
+        Object {
+          "date": "2018-01-01",
+          "injections": 282400,
+          "ranking": "bad",
+          "relative_trap_hits": 0.3,
+          "trap_hits": 856,
+        },
+        Object {
+          "date": "2018-01-02",
+          "injections": 50000,
+          "ranking": "good",
+          "relative_trap_hits": 0.1,
+          "trap_hits": 50,
+        },
+      ],
+      "sending_domain": "null.test.com",
+      "total_injections": 332400,
+    },
   ],
   "error": null,
   "loading": false,
   "metaData": Object {
     "currentMax": 123,
     "currentRelativeMax": 0.12,
-    "max": 456,
-    "relativeMax": 0.25,
+    "max": 856,
+    "relativeMax": 0.3,
   },
   "total_count": 1,
 }
@@ -97,6 +209,28 @@ Array [
     ],
     "sending_domain": "test.com",
     "total_injections": 217400,
+  },
+  Object {
+    "current_relative_trap_hits": null,
+    "current_trap_hits": null,
+    "history": Array [
+      Object {
+        "date": "2018-01-01",
+        "injections": 282400,
+        "ranking": "bad",
+        "relative_trap_hits": 0.3,
+        "trap_hits": 856,
+      },
+      Object {
+        "date": "2018-01-02",
+        "injections": 50000,
+        "ranking": "good",
+        "relative_trap_hits": 0.1,
+        "trap_hits": 50,
+      },
+    ],
+    "sending_domain": "null.test.com",
+    "total_injections": 332400,
   },
 ]
 `;
