@@ -103,7 +103,7 @@ export const selectEngagementRecencyDetails = createSelector(
 export const selectHealthScoreDetails = createSelector(
   [getHealthScoreData, selectSpamHitsDetails, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
   ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { relativeRange }) => {
-    const match = _.find(data, [facet, facetId]) || {};
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const history = _.get(match, 'history', []);
     const normalizedHistory = history.map(({ dt: date, weights, ...values }) => ({

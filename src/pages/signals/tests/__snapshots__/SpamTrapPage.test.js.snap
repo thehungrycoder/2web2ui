@@ -120,7 +120,9 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+    </Grid.Column>
   </Grid>
 </SignalsPage>
 `;
@@ -212,7 +214,9 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+    </Grid.Column>
   </Grid>
 </SignalsPage>
 `;

@@ -22,8 +22,7 @@ import EngagementRecencyPreview from './components/previews/EngagementRecencyPre
 
 export class HealthScorePage extends Component {
   state = {
-    selectedDate: null,
-    selectedComponent: null
+    selectedDate: null
   }
 
   componentDidMount() {
@@ -39,26 +38,16 @@ export class HealthScorePage extends Component {
     const { selectedDate } = this.state;
 
     const dataSetChanged = prevProps.data !== data;
+    const containsSelectedDay = _.find(data, ['date', selectedDate]);
 
-    let selectedDataByDay = _.find(data, ['date', selectedDate]);
-
-    if (dataSetChanged && !selectedDataByDay) {
-      selectedDataByDay = _.last(data);
-      this.setState({ selectedDate: selectedDataByDay.date });
-    }
-
-    if (dataSetChanged || prevState.selectedDate !== selectedDate) {
-      const firstComponentType = _.get(selectedDataByDay, 'weights[0].weight_type');
-      this.setState({ selectedComponent: firstComponentType });
+    if (dataSetChanged && !containsSelectedDay) {
+      const last = _.last(data);
+      this.setState({ selectedDate: last.date });
     }
   }
 
   handleDateSelect = (node) => {
     this.setState({ selectedDate: _.get(node, 'payload.date') });
-  }
-
-  handleComponentSelect = (node) => {
-    this.setState({ selectedComponent: _.get(node, 'payload.weight_type') });
   }
 
   getXAxisProps = () => {
@@ -69,13 +58,9 @@ export class HealthScorePage extends Component {
     };
   }
 
-  getTooltipContent = ({ payload = {}}) => (
-    <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score * 100, 1)}`} />
-  )
-
   renderContent = () => {
     const { data = [], loading, gap, empty, error } = this.props;
-    const { selectedDate, selectedComponent } = this.state;
+    const { selectedDate } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
 
@@ -109,7 +94,9 @@ export class HealthScorePage extends Component {
                   onClick={this.handleDateSelect}
                   selected={selectedDate}
                   timeSeries={data}
-                  tooltipContent={this.getTooltipContent}
+                  tooltipContent={({ payload = {}}) => (
+                    <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score * 100, 1)}`} />
+                  )}
                   yKey='health_score'
                   yAxisProps={{
                     tickFormatter: (tick) => tick * 100
@@ -138,16 +125,18 @@ export class HealthScorePage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <DivergingBar
-            data={selectedWeights}
-            xKey='weight'
-            yKey='weight_type'
-            onClick={this.handleComponentSelect}
-            selected={selectedComponent}
-          />
-          <Actions actions={[
-            { content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.', link: 'https://www.sparkpost.com' }
-          ]}/>
+          {!panelContent && (
+            <Fragment>
+              <DivergingBar
+                data={selectedWeights}
+                xKey='weight'
+                yKey='weight_type'
+              />
+              <Actions actions={[
+                { content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.', link: 'https://www.sparkpost.com' }
+              ]}/>
+            </Fragment>
+          )}
         </Grid.Column>
       </Grid>
     );

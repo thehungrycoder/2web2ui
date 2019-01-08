@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
+exports[`Signals HealthScorePreview Component renders correctly 1`] = `
 <PageLink
-  to="/signals/spam-traps/ip-pool/best-pool"
+  to="/signals/health-score/ip-pool/best-pool"
 >
   <Panel>
     <Panel.Section>
       <ChartHeader
         hideLine={true}
-        title="Spam Trap Monitoring"
+        title="Health Score"
         tooltipContent="TODO"
       />
     </Panel.Section>
@@ -45,7 +45,7 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
             "hide": true,
           }
         }
-        yKey="trap_hits"
+        yKey="health_score"
         yRange={
           Array [
             "auto",
@@ -58,15 +58,15 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
 </PageLink>
 `;
 
-exports[`Signals SpamTrapsPreview Component renders empty correctly 1`] = `
+exports[`Signals HealthScorePreview Component renders empty correctly 1`] = `
 <PageLink
-  to="/signals/spam-traps/ip-pool/best-pool"
+  to="/signals/health-score/ip-pool/best-pool"
 >
   <Panel>
     <Panel.Section>
       <ChartHeader
         hideLine={true}
-        title="Spam Trap Monitoring"
+        title="Health Score"
         tooltipContent="TODO"
       />
     </Panel.Section>
@@ -82,15 +82,15 @@ exports[`Signals SpamTrapsPreview Component renders empty correctly 1`] = `
 </PageLink>
 `;
 
-exports[`Signals SpamTrapsPreview Component renders error correctly 1`] = `
+exports[`Signals HealthScorePreview Component renders error correctly 1`] = `
 <PageLink
-  to="/signals/spam-traps/ip-pool/best-pool"
+  to="/signals/health-score/ip-pool/best-pool"
 >
   <Panel>
     <Panel.Section>
       <ChartHeader
         hideLine={true}
-        title="Spam Trap Monitoring"
+        title="Health Score"
         tooltipContent="TODO"
       />
     </Panel.Section>
@@ -106,7 +106,7 @@ exports[`Signals SpamTrapsPreview Component renders error correctly 1`] = `
 </PageLink>
 `;
 
-exports[`Signals SpamTrapsPreview Component renders loading correctly 1`] = `
+exports[`Signals HealthScorePreview Component renders loading correctly 1`] = `
 <PanelLoading
   minHeight="170px"
 />

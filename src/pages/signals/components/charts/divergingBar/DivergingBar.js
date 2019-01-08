@@ -38,7 +38,7 @@ class DivergingBar extends Component {
 
   renderYTick = ({ payload, ...props }) => {
     const { data, selected, yKey } = this.props;
-    const match = _.find(data, ['key', selected]) || {};
+    const match = _.find(data, [yKey, selected]) || {};
 
     if (payload.value === match[yKey]) {
       return <Text {...props} fill='#0B83D6'>{payload.value}</Text>;

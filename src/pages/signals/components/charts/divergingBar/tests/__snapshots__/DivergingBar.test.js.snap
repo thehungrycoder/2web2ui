@@ -4,7 +4,7 @@ exports[`DivergingBar Component renders correctly 1`] = `
 <ResponsiveContainer
   className="DivergingBar"
   debounce={0}
-  height={300}
+  height={70}
   width="50%"
 >
   <BarChart
@@ -13,16 +13,14 @@ exports[`DivergingBar Component renders correctly 1`] = `
     data={
       Array [
         Object {
-          "fill": "#DB2F2D",
-          "key": "bar",
-          "label": "Label bar",
-          "value": -0.5,
-        },
-        Object {
           "fill": "#8CBE3C",
-          "key": "foo",
           "label": "Label foo",
           "value": 0.5,
+        },
+        Object {
+          "fill": "#DB2F2D",
+          "label": "Label bar",
+          "value": -0.5,
         },
       ]
     }
@@ -60,7 +58,7 @@ exports[`DivergingBar Component renders correctly 1`] = `
       isAnimationActive={false}
       layout="vertical"
       legendType="rect"
-      minPointSize={0}
+      minPointSize={1}
       onAnimationEnd={[Function]}
       onAnimationStart={[Function]}
       onClick={[MockFunction]}
@@ -96,7 +94,7 @@ exports[`DivergingBar Component renders correctly 1`] = `
       tickCount={5}
       tickLine={false}
       type="category"
-      width={60}
+      width={90}
       yAxisId={0}
     />
     <XAxis
@@ -106,12 +104,12 @@ exports[`DivergingBar Component renders correctly 1`] = `
       dataKey="value"
       domain={
         Array [
-          0,
-          0,
+          "auto",
+          "auto",
         ]
       }
       height={30}
-      hide={false}
+      hide={true}
       mirror={false}
       orientation="bottom"
       padding={

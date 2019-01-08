@@ -45,6 +45,52 @@ Object {
 }
 `;
 
+exports[`Selectors: signals health score details should be empty with no results when not loading 1`] = `
+Object {
+  "details": Object {
+    "data": Array [],
+    "empty": true,
+    "error": undefined,
+    "loading": undefined,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;
+
+exports[`Selectors: signals health score details should select details 1`] = `
+Object {
+  "details": Object {
+    "data": Array [
+      Object {
+        "date": "2018-01-01",
+        "health_score": 0.8,
+        "injections": 182400,
+        "weights": Array [
+          Object {
+            "weight": -0.1,
+            "weight_type": "Other bounces",
+            "weight_value": 0.5,
+          },
+          Object {
+            "weight": 0.7,
+            "weight_type": "Transient Failures",
+            "weight_value": 0.5,
+          },
+        ],
+      },
+    ],
+    "empty": false,
+    "error": undefined,
+    "loading": false,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;
+
 exports[`Selectors: signals selectEngagementRecencyOverview returns all overview data 1`] = `
 Object {
   "data": Array [
