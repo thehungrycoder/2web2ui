@@ -35,10 +35,10 @@ export class TfaManager extends Component {
   }
 
   disable = (password) => {
-    const { showAlert, required } = this.props;
-    return this.props.toggleTfa({ enabled: false, password }).then(() => {
+    const { showAlert, required, toggleTfa, logout } = this.props;
+    return toggleTfa({ enabled: false, password }).then(() => {
       if (required) {
-        this.props.logout();
+        logout();
       }
       showAlert({ type: 'success', message: 'Profile Updated.' });
     });
