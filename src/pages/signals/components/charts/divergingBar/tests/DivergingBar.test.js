@@ -6,8 +6,8 @@ describe('DivergingBar Component', () => {
   let wrapper;
   let props;
   const data = [
-    { label: 'Label foo', value: 0.5 },
-    { label: 'Label bar', value: -0.5 }
+    { label: 'Label foo', value: '0.5' },
+    { label: 'Label bar', value: '-0.5' }
   ];
   const getPayload = (i) => ({
     key: data[i].key,

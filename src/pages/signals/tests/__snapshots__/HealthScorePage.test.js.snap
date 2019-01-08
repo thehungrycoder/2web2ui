@@ -135,8 +135,8 @@ exports[`Signals Health Score Page renders correctly 1`] = `
         width="99%"
         xDomain={
           Array [
-            "auto",
-            "auto",
+            "dataMin",
+            "dataMax",
           ]
         }
         xKey="weight"

@@ -15,12 +15,12 @@ exports[`DivergingBar Component renders correctly 1`] = `
         Object {
           "fill": "#8CBE3C",
           "label": "Label foo",
-          "value": 0.5,
+          "value": "0.5",
         },
         Object {
           "fill": "#DB2F2D",
           "label": "Label bar",
-          "value": -0.5,
+          "value": "-0.5",
         },
       ]
     }
@@ -104,8 +104,8 @@ exports[`DivergingBar Component renders correctly 1`] = `
       dataKey="value"
       domain={
         Array [
-          "auto",
-          "auto",
+          "dataMin",
+          "dataMax",
         ]
       }
       height={30}
@@ -123,6 +123,11 @@ exports[`DivergingBar Component renders correctly 1`] = `
       shapeRendering="crispEdges"
       tickCount={5}
       tickLine={false}
+      ticks={
+        Array [
+          0,
+        ]
+      }
       type="number"
       width={0}
       xAxisId={0}

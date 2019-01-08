@@ -108,11 +108,11 @@ export const selectHealthScoreDetails = createSelector(
     const history = _.get(match, 'history', []);
     const normalizedHistory = history.map(({ dt: date, weights, ...values }) => ({
       date,
-      weights: _.sortBy(weights, 'weight').filter(({ weight_type }) => !weight_type.includes('eng cohorts:')),
+      weights: _.sortBy(weights, ({ weight }) => parseFloat(weight)).filter(({ weight_type }) => !weight_type.includes('eng cohorts:')),
       ...values
     }));
 
-     const filledHistory = fillByDate({
+    const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
         weights: [],
@@ -122,15 +122,15 @@ export const selectHealthScoreDetails = createSelector(
       relativeRange
     });
 
-     // Merge in injections
+    // Merge in injections
     const mergedHistory = _.map(filledHistory, (healthData) => {
       const spamData = _.find(spamDetails.data, ['date', healthData.date]);
       return { injections: spamData.injections, ...healthData };
     });
 
-     const isEmpty = mergedHistory.every((values) => values.health_score === null);
+    const isEmpty = mergedHistory.every((values) => values.health_score === null);
 
-     return {
+    return {
       details: {
         data: mergedHistory,
         empty: isEmpty && !loading && !spamDetails.loading,

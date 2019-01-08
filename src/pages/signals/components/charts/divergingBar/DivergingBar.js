@@ -82,6 +82,7 @@ class DivergingBar extends Component {
             domain={xDomain}
             dataKey={xKey}
             shapeRendering='crispEdges'
+            ticks={[0]}
           />
           <Tooltip
             cursor={false}
@@ -106,7 +107,7 @@ DivergingBar.propTypes = {
 };
 
 DivergingBar.defaultProps = {
-  xDomain: ['auto', 'auto'],
+  xDomain: ['dataMin', 'dataMax'],
   xKey: 'value',
   yKey: 'label',
   width: '99%',
