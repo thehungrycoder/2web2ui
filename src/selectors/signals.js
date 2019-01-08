@@ -20,7 +20,7 @@ export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.
 export const selectSpamHitsDetails = createSelector(
   [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
   ({ loading, error, data }, facet, facetId, subaccountId, { relativeRange }) => {
-    const match = _.find(data, [facet, facetId]) || {};
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
     const history = match.history || [];
     const normalizedHistory = history.map(({ dt: date, ...values }) => ({ date, ...values }));
 
@@ -54,7 +54,7 @@ export const selectSpamHitsDetails = createSelector(
 export const selectEngagementRecencyDetails = createSelector(
   [getEngagementRecencyData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
   ({ loading, error, data }, facet, facetId, subaccountId, { relativeRange }) => {
-    const match = _.find(data, [facet, facetId]) || {};
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const calculatePercentages = (data) => data.map(({ c_total, dt, ...absolutes }) => {
       let values = {};
