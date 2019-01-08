@@ -39,7 +39,7 @@ describe('Form Container: Change Plan', () => {
       billing: { countries: [], plans, selectedPromo: {}},
       getPlans: jest.fn(),
       getBillingCountries: jest.fn(),
-      verifyPromoCode: jest.fn(() => Promise.resolve({})),
+      verifyPromoCode: jest.fn(() => Promise.resolve({ discount_id: 'test-discount' })),
       fetchAccount: jest.fn(),
       plans,
       currentPlan: {},

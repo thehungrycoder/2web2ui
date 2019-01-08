@@ -44,6 +44,7 @@ describe('Action Creator: Billing Create', () => {
     }));
     billingActions.createZuoraAccount = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.consumePromoCode = jest.fn(({ meta }) => meta.onSuccess({}));
     accountActions.fetch = jest.fn();
 
     billingHelpers.formatCreateData = jest.fn((a) => a);
@@ -64,6 +65,8 @@ describe('Action Creator: Billing Create', () => {
 
     expect(billingActions.syncSubscription).toHaveBeenCalled();
     expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage,billing' }));
+
+    expect(billingActions.consumePromoCode).not.toHaveBeenCalled();
   });
 
   it('update subscription for AWS users', () => {
@@ -77,5 +80,60 @@ describe('Action Creator: Billing Create', () => {
     thunk(dispatch, () => state);
     expect(accountConditions.isAws).toHaveBeenCalledWith(state);
     expect(billingActions.updateSubscription).toHaveBeenCalledWith({ code: 'plan-code' });
+  });
+
+  it('should consume promo code if available', () => {
+    const values = { promoCode: 'test-promo-code' };
+    const currentUser = {
+      email: 'test@example.com'
+    };
+    const corsData = {
+      email: 'test@example.com'
+    };
+    const billingData = {
+      billToContact: {},
+      billingId: 'test-billing-id',
+      creditCard: {
+        cardNumber: '1111222233334444'
+      },
+      invoiceCollect: true
+    };
+    const getState = () => ({ currentUser });
+
+    const thunk = billingCreate(values);
+
+    billingActions.cors = jest.fn(({ meta }) => meta.onSuccess({
+      results: {
+        signature: 'TEST_SIGNATURE',
+        token: 'TEST_TOKEN'
+      }
+    }));
+    billingActions.createZuoraAccount = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.consumePromoCode = jest.fn(({ meta }) => meta.onSuccess({}));
+    accountActions.fetch = jest.fn();
+
+    billingHelpers.formatCreateData = jest.fn((a) => a);
+    billingHelpers.formatDataForCors = jest.fn((a) => ({ billingData, corsData }));
+
+    thunk(dispatch, getState);
+
+    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
+      context: 'create-account',
+      data: corsData
+    }));
+
+    expect(billingActions.createZuoraAccount).toHaveBeenCalledWith(expect.objectContaining({
+      data: billingData,
+      signature: 'TEST_SIGNATURE',
+      token: 'TEST_TOKEN'
+    }));
+    expect(billingActions.syncSubscription).toHaveBeenCalled();
+    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage,billing' }));
+
+    expect(billingActions.consumePromoCode).toHaveBeenCalledWith(expect.objectContaining({
+      promoCode: 'test-promo-code',
+      billingId: 'test-billing-id'
+    }));
   });
 });
