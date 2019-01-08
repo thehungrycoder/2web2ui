@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'src/store';
 import { Provider } from 'react-redux';
 import _ from 'lodash';
+import axios from 'axios';
 import getFiller from './fill';
 
 // prevent problems with trying to load google analytics stuff
@@ -24,6 +25,7 @@ export const setReady = (store) => store.dispatch({
 
 export async function setupForm(tree, { authenticated = true } = { }) {
   const store = configureStore();
+  const axiosMock = axios.create();
 
   if (authenticated) {
     login(store);
@@ -46,11 +48,14 @@ export async function setupForm(tree, { authenticated = true } = { }) {
     find: mounted.find.bind(mounted),
     store,
     fill: getFiller(mounted),
+    axiosMock,
     asyncFlush,
     submit: async () => {
+      axiosMock.mockClear();
       mounted.find('form').simulate('submit');
       return asyncFlush();
     },
+    mockApiCalls: () => axiosMock.mock.calls,
     /* eslint-disable-next-line no-console */
     debug: (path = 'form') => console.log(JSON.stringify(_.get(store.getState(), path), null, 2))
   };

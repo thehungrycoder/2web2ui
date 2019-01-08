@@ -4,8 +4,6 @@ import UpdatePaymentForm from 'src/pages/billing/forms/UpdatePaymentForm';
 import UpdateContactForm from 'src/pages/billing/forms/UpdateContactForm';
 import ChangePlanForm from 'src/pages/billing/forms/ChangePlanForm';
 import AddIps from 'src/pages/billing/forms/AddIps';
-import axios from 'axios';
-const axiosMock = axios.create();
 
 test('Update Payment Form', async () => {
   const form = await setupForm(<UpdatePaymentForm />);
@@ -23,9 +21,8 @@ test('Update Payment Form', async () => {
     { name: 'billingAddress.zip', value: '12345' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Update Contact Form', async () => {
@@ -40,9 +37,8 @@ test('Update Contact Form', async () => {
     { name: 'billingContact.zip', value: '12345' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Change Plan Form: Update My Credit Card and Plan', async () => {
@@ -70,9 +66,8 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
     { name: 'billingAddress.zip', value: '12345' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Change Plan Form: Update Plan Only', async () => {
@@ -83,9 +78,8 @@ test('Change Plan Form: Update Plan Only', async () => {
 
   form.fill({ type: 'typeahead', name: 'planpicker', value: newPlan });
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Change Plan Form: Upgrade for the First Time', async () => {
@@ -124,9 +118,8 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
     { name: 'billingAddress.zip', value: '12345' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Add IPs Form: add a dedicated IP to a new pool', async () => {
@@ -139,9 +132,8 @@ test('Add IPs Form: add a dedicated IP to a new pool', async () => {
     { name: 'ipPool.name', value: 'newPool' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Add IPs Form: add a dedicated IP to an existing pool', async () => {
@@ -154,7 +146,6 @@ test('Add IPs Form: add a dedicated IP to an existing pool', async () => {
     { name: 'ipPool.id', value: 'default', type: 'select' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
