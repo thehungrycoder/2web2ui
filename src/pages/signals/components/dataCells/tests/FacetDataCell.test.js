@@ -5,6 +5,7 @@ import FacetDataCell from '../FacetDataCell';
 describe('FacetDataCell', () => {
   const subject = (props = {}) => shallow(
     <FacetDataCell
+      dimension="example"
       facet="domain"
       id="example.com"
       signalOptions={{}}

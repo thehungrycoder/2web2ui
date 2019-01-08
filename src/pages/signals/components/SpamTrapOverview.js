@@ -128,6 +128,7 @@ class SpamTrapOverview extends React.Component {
 
               return (
                 <FacetDataCell
+                  dimension="spam-traps"
                   facet={facet.key}
                   id={id}
                   name={_.get(subaccounts, `[${id}].name`)}
