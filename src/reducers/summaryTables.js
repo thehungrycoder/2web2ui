@@ -19,6 +19,15 @@ const summaryTablesReducer = (state = initialState, action) => {
       };
     }
 
+    case 'RESET_SUMMARY_TABLE': {
+      const { payload: { tableName }} = action;
+
+      return {
+        ...state,
+        [tableName]: { ...state[DEFAULT] }
+      };
+    }
+
     default:
       return state;
   }

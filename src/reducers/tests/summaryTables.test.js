@@ -29,5 +29,11 @@ cases('Summary Tables Reducer', ({ name, ...action }) => {
       tableName: 'testTable',
       perPage: 25
     }
+  },
+  'when reset': {
+    type: 'RESET_SUMMARY_TABLE',
+    payload: {
+      tableName: 'testTable'
+    }
   }
 });
