@@ -21,6 +21,10 @@ describe('FacetDataCell', () => {
     expect(subject({ facet: 'sid', id: 0 })).toMatchSnapshot();
   });
 
+  it('renders page link for all accounts', () => {
+    expect(subject({ facet: 'sid', id: -1 })).toMatchSnapshot();
+  });
+
   it('renders page link with subaccount search', () => {
     const props = {
       signalOptions: {

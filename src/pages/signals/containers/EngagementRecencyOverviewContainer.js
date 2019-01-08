@@ -11,11 +11,11 @@ import EngagementRecencyOverview from '../components/EngagementRecencyOverview';
 import withSignalOptions from './withSignalOptions';
 
 const mapStateToProps = (state, props) => {
-  const { facet: facetKey, relativeRange } = props.signalOptions;
+  const { facet: facetKey } = props.signalOptions;
   const tableName = 'engagementRecencyOverview';
 
   return {
-    ...selectEngagementRecencyOverview(state, { relativeRange }),
+    ...selectEngagementRecencyOverview(state),
     facet: facetKey ? facetsByKey[facetKey] : defaultFacet,
     subaccounts: selectSubaccountsById(state),
     summaryTable: selectSummaryTable(state, tableName),

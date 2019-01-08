@@ -54,11 +54,6 @@ const signalsActionCreator = ({ dimension, type }) => ({
   });
 };
 
-export const getSpamHits = signalsActionCreator({
-  dimension: 'spam-hits',
-  type: 'GET_SPAM_HITS'
-});
-
 export const getEngagementRecency = signalsActionCreator({
   dimension: 'cohort-engagement',
   type: 'GET_ENGAGEMENT_RECENCY'
@@ -67,4 +62,9 @@ export const getEngagementRecency = signalsActionCreator({
 export const getHealthScore = signalsActionCreator({
   dimension: 'health-score',
   type: 'GET_HEALTH_SCORE'
+});
+
+export const getSpamHits = signalsActionCreator({
+  dimension: 'spam-hits',
+  type: 'GET_SPAM_HITS'
 });

@@ -11,6 +11,10 @@ const FacetDataCell = ({ dimension, facet, id, name, signalOptions }) => {
     label = 'Master Account';
   }
 
+  if (facet === 'sid' && id === -1) {
+    label = 'Master & All Subaccounts';
+  }
+
   if (name) {
     label = `${name} (${id})`;
   }

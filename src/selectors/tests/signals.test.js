@@ -1,7 +1,5 @@
+import moment from 'moment';
 import * as selectors from '../signals';
-import * as dateHelpers from 'src/helpers/date';
-
-jest.mock('src/helpers/date');
 
 describe('Selectors: signals', () => {
   let state;
@@ -17,13 +15,14 @@ describe('Selectors: signals', () => {
         date: '2018-02-01'
       },
       search: '?subaccount=101'
-    }
+    },
+    now: moment('2018-01-03')
   };
 
   beforeEach(() => {
     state = {
       signalOptions: {
-        relativeRange: '14days'
+        relativeRange: '7days'
       },
       signals: {
         spamHits: {
@@ -31,8 +30,8 @@ describe('Selectors: signals', () => {
           data: [
             {
               sending_domain: 'test.com',
-              current_trap_hits: 123,
-              current_relative_trap_hits: 0.12,
+              current_trap_hits: 35,
+              current_relative_trap_hits: 0.1,
               history: [
                 {
                   dt: '2018-01-01',
@@ -41,7 +40,7 @@ describe('Selectors: signals', () => {
                   trap_hits: 456
                 },
                 {
-                  dt: '2018-01-02',
+                  dt: '2018-01-03',
                   injections: 35000,
                   relative_trap_hits: 0.1,
                   trap_hits: 35
@@ -93,7 +92,7 @@ describe('Selectors: signals', () => {
                   c_uneng: 10,
                   c_14d: 10,
                   c_365d: 10,
-                  dt: '2018-01-02'
+                  dt: '2018-01-03'
                 }
               ]
             }
@@ -105,11 +104,13 @@ describe('Selectors: signals', () => {
           total_count: 10,
           data: [
             {
+              current_weights: [],
+              current_health_score: 0.98,
               sending_domain: 'test.com',
               history: [
                 {
-                  health_score: 0.8,
                   dt: '2018-01-01',
+                  health_score: 0.74321, // bad
                   weights: [
                     {
                       weight_type: 'eng cohorts: should not be returned',
@@ -125,19 +126,20 @@ describe('Selectors: signals', () => {
                       weight_type: 'Other bounces',
                       weight: -0.1,
                       weight_value: 0.5
-                    },
+                    }
                   ]
+                },
+                {
+                  dt: '2018-01-03',
+                  health_score: 0.98, // good
+                  weights: []
                 }
-              ],
-              current_weights: [],
-              current_health_score: 0.9
+              ]
             }
           ]
         }
       }
     };
-
-    dateHelpers.fillByDate.mockImplementation(({ dataSet }) => dataSet);
   });
 
   describe('spam hits details', () => {
@@ -145,13 +147,13 @@ describe('Selectors: signals', () => {
       expect(selectors.selectSpamHitsDetails(state, props)).toMatchSnapshot();
     });
 
-    it('should be empty with no results when not loading', () => {
-      const stateWhenEmpty = { signals: { spamHits: { data: [], loading: false }}};
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = { ...state, signals: { spamHits: { data: [], loading: false }}};
       expect(selectors.selectSpamHitsDetails(stateWhenEmpty, props)).toMatchSnapshot();
     });
 
     it('should not be empty when loading', () => {
-      const stateWhenLoading = { signals: { spamHits: { data: [], loading: true }}};
+      const stateWhenLoading = { ...state, signals: { spamHits: { data: [], loading: true }}};
       expect(selectors.selectSpamHitsDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
   });
@@ -161,14 +163,14 @@ describe('Selectors: signals', () => {
       expect(selectors.selectEngagementRecencyDetails(state, props)).toMatchSnapshot();
     });
 
-    it('should be empty with no results when not loading', () => {
-      state = { signals: { engagementRecency: { data: [], loading: false }}};
-      expect(selectors.selectEngagementRecencyDetails(state, props)).toMatchSnapshot();
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = { ...state, signals: { engagementRecency: { data: [], loading: false }}};
+      expect(selectors.selectEngagementRecencyDetails(stateWhenEmpty, props)).toMatchSnapshot();
     });
 
     it('should not be empty when loading', () => {
-      state = { signals: { engagementRecency: { data: [], loading: true }}};
-      expect(selectors.selectEngagementRecencyDetails(state, props).details.empty).toBe(false);
+      const stateWhenLoading = { ...state, signals: { engagementRecency: { data: [], loading: true }}};
+      expect(selectors.selectEngagementRecencyDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
   });
 
@@ -177,14 +179,14 @@ describe('Selectors: signals', () => {
       expect(selectors.selectHealthScoreDetails(state, props)).toMatchSnapshot();
     });
 
-    it('should be empty with no results when not loading', () => {
-      state = { signals: { healthScore: { data: [], loading: false }, spamHits: { data: [] }}};
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = { ...state, signals: { healthScore: { data: [], loading: false }, spamHits: { data: [] }}};
       expect(selectors.selectHealthScoreDetails(state, props)).toMatchSnapshot();
     });
 
     it('should not be empty when loading', () => {
-      state = { signals: { healthScore: { data: [], loading: true }, spamHits: { data: [] }}};
-      expect(selectors.selectHealthScoreDetails(state, props).details.empty).toBe(false);
+      const stateWhenLoading = { ...state, signals: { healthScore: { data: [], loading: true }, spamHits: { data: [] }}};
+      expect(selectors.selectHealthScoreDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
   });
 
@@ -196,23 +198,18 @@ describe('Selectors: signals', () => {
 
   describe('selectEngagementRecencyOverviewData', () => {
     it('returns data', () => {
-      expect(
-        selectors.selectEngagementRecencyOverviewData(state, { relativeRange: '7days' })
-      ).toMatchSnapshot();
+      expect(selectors.selectEngagementRecencyOverviewData(state, props)).toMatchSnapshot();
     });
 
     it('returns empty array', () => {
-      const stateWhenEmpty = { signals: { engagementRecency: { data: []}}};
-
-      expect(
-        selectors.selectEngagementRecencyOverviewData(stateWhenEmpty, { relativeRange: '7days' })
-      ).toEqual([]);
+      const stateWhenEmpty = { ...state, signals: { engagementRecency: { data: []}}};
+      expect(selectors.selectEngagementRecencyOverviewData(stateWhenEmpty, props)).toEqual([]);
     });
   });
 
   describe('selectEngagementRecencyOverviewMetaData', () => {
     it('returns max values', () => {
-      expect(selectors.selectEngagementRecencyOverviewMetaData(state)).toEqual({
+      expect(selectors.selectEngagementRecencyOverviewMetaData(state, props)).toEqual({
         currentMax: 10,
         currentRelativeMax: 20,
         max: 10,
@@ -222,7 +219,7 @@ describe('Selectors: signals', () => {
 
     it('returns null', () => {
       const stateWhenEmpty = { signals: { engagementRecency: { data: []}}};
-      expect(selectors.selectEngagementRecencyOverviewMetaData(stateWhenEmpty)).toEqual({
+      expect(selectors.selectEngagementRecencyOverviewMetaData(stateWhenEmpty, props)).toEqual({
         currentMax: null,
         currentRelativeMax: null,
         max: null,
@@ -233,34 +230,34 @@ describe('Selectors: signals', () => {
 
   describe('selectEngagementRecencyOverview', () => {
     it('returns all overview data', () => {
-      expect(selectors.selectEngagementRecencyOverview(state, { relativeRange: '7days' })).toMatchSnapshot();
+      expect(selectors.selectEngagementRecencyOverview(state, props)).toMatchSnapshot();
     });
   });
 
   describe('selectSpamHitsOverviewData', () => {
     it('returns data', () => {
-      expect(selectors.selectSpamHitsOverviewData(state, { relativeRange: '7days' })).toMatchSnapshot();
+      expect(selectors.selectSpamHitsOverviewData(state, props)).toMatchSnapshot();
     });
 
     it('returns empty array', () => {
-      const stateWhenEmpty = { signals: { spamHits: { data: []}}};
-      expect(selectors.selectSpamHitsOverviewData(stateWhenEmpty, { relativeRange: '7days' })).toEqual([]);
+      const stateWhenEmpty = { ...state, signals: { spamHits: { data: []}}};
+      expect(selectors.selectSpamHitsOverviewData(stateWhenEmpty, props)).toEqual([]);
     });
   });
 
   describe('selectSpamHitsOverviewMetaData', () => {
     it('returns max values', () => {
-      expect(selectors.selectSpamHitsOverviewMetaData(state)).toEqual({
-        currentMax: 123,
-        currentRelativeMax: 0.12,
+      expect(selectors.selectSpamHitsOverviewMetaData(state, props)).toEqual({
+        currentMax: 35,
+        currentRelativeMax: 0.1,
         max: 856,
         relativeMax: 0.3
       });
     });
 
     it('returns null', () => {
-      const stateWhenEmpty = { signals: { spamHits: { data: []}}};
-      expect(selectors.selectSpamHitsOverviewMetaData(stateWhenEmpty)).toEqual({
+      const stateWhenEmpty = { ...state, signals: { spamHits: { data: []}}};
+      expect(selectors.selectSpamHitsOverviewMetaData(stateWhenEmpty, props)).toEqual({
         currentMax: null,
         currentRelativeMax: null,
         max: null,
@@ -271,7 +268,24 @@ describe('Selectors: signals', () => {
 
   describe('selectSpamHitsOverview', () => {
     it('returns all overview data', () => {
-      expect(selectors.selectSpamHitsOverview(state, { relativeRange: '7days' })).toMatchSnapshot();
+      expect(selectors.selectSpamHitsOverview(state, props)).toMatchSnapshot();
+    });
+  });
+
+  describe('selectHealthScoreOverviewData', () => {
+    it('returns data', () => {
+      expect(selectors.selectHealthScoreOverviewData(state, props)).toMatchSnapshot();
+    });
+
+    it('returns empty array', () => {
+      const stateWhenEmpty = { ...state, signals: { healthScore: { data: []}}};
+      expect(selectors.selectHealthScoreOverviewData(stateWhenEmpty, props)).toEqual([]);
+    });
+  });
+
+  describe('selectHealthScoreOverview', () => {
+    it('returns all overview data', () => {
+      expect(selectors.selectHealthScoreOverview(state, props)).toMatchSnapshot();
     });
   });
 });
