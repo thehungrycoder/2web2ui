@@ -41,12 +41,17 @@ class SpamTrapOverview extends React.Component {
 
   getData = () => {
     const { getSpamHits, signalOptions, summaryTable } = this.props;
+    let { subaccount } = signalOptions;
     let order;
     let orderBy;
 
     if (summaryTable.order) {
       order = summaryTable.order.ascending ? 'asc' : 'desc';
       orderBy = summaryTable.order.dataKey;
+    }
+
+    if (subaccount && subaccount.id === undefined) {
+      subaccount = undefined; // unset
     }
 
     getSpamHits({
@@ -57,7 +62,7 @@ class SpamTrapOverview extends React.Component {
       order,
       orderBy,
       relativeRange: signalOptions.relativeRange,
-      subaccount: signalOptions.subaccount
+      subaccount
     });
   }
 

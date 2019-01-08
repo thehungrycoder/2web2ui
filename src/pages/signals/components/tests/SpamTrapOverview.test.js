@@ -28,7 +28,9 @@ describe('SpamTrapOverview', () => {
         facet: 'domain',
         facetSearchTerm: 'example.com',
         relativeRange: '14days',
-        subaccount: 123
+        subaccount: {
+          id: 123
+        }
       }}
       subaccounts={{
         123: { id: 123, name: 'Test Subaccount' }
@@ -95,7 +97,35 @@ describe('SpamTrapOverview', () => {
       order: 'asc',
       orderBy: 'domain',
       relativeRange: '14days',
-      subaccount: 123
+      subaccount: {
+        id: 123
+      }
+    });
+  });
+
+  it('requests data on mount for master and all subaccounts', () => {
+    const getSpamHits = jest.fn();
+    const signalOptions = {
+      facet: 'domain',
+      facetSearchTerm: 'example.com',
+      relativeRange: '14days',
+      subaccount: {
+        id: undefined,
+        name: 'Master & All Subaccounts'
+      }
+    };
+
+    subject({ getSpamHits, signalOptions });
+
+    expect(getSpamHits).toHaveBeenCalledWith({
+      facet: 'domain',
+      filter: 'example.com',
+      limit: 10,
+      offset: 0,
+      order: 'asc',
+      orderBy: 'domain',
+      relativeRange: '14days',
+      subaccount: undefined
     });
   });
 
