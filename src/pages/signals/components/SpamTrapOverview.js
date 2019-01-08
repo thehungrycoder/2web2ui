@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import SummaryTable, { Column } from 'src/components/summaryTable';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
@@ -79,7 +80,7 @@ class SpamTrapOverview extends React.Component {
     let search;
 
     if (signalOptions.subaccount) {
-      search = { subaccount: signalOptions.subaccount.id };
+      search = setSubaccountQuery(signalOptions.subaccount.id);
     }
 
     history.push({

@@ -198,7 +198,7 @@ describe('SpamTrapOverview', () => {
 
       expect(historyPush).toHaveBeenCalledWith({
         pathname: '/signals/spam-traps/domain/example.com',
-        search: { subaccount: undefined },
+        search: '?subaccount=123',
         state: { date: '2018-01-13' }
       });
     });
@@ -210,7 +210,7 @@ describe('SpamTrapOverview', () => {
 
       expect(historyPush).toHaveBeenCalledWith({
         pathname: '/signals/spam-traps/domain/example.com',
-        search: { subaccount: undefined },
+        search: '?subaccount=123',
         state: { date: '2018-01-13' }
       });
     });
