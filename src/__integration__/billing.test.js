@@ -3,6 +3,7 @@ import { setupForm } from './helpers';
 import UpdatePaymentForm from 'src/pages/billing/forms/UpdatePaymentForm';
 import UpdateContactForm from 'src/pages/billing/forms/UpdateContactForm';
 import ChangePlanForm from 'src/pages/billing/forms/ChangePlanForm';
+import AddIps from 'src/pages/billing/forms/AddIps';
 import axios from 'axios';
 const axiosMock = axios.create();
 
@@ -51,7 +52,8 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
   // Click the button to use a different credit card
   form
     .find('Panel[title="Pay With Saved Payment Method"]')
-    .find('button').first()
+    .find('button')
+    .first()
     .simulate('click');
 
   form.fill([
@@ -120,6 +122,36 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
     { type: 'select', name: 'billingAddress.country', value: 'US' },
     { type: 'select', name: 'billingAddress.state', value: 'MD' },
     { name: 'billingAddress.zip', value: '12345' }
+  ]);
+
+  axiosMock.mockClear();
+  await form.submit();
+  expect(axiosMock.mock.calls).toMatchSnapshot();
+});
+
+test('Add IPs Form: add a dedicated IP to a new pool', async () => {
+  const onClose = jest.fn();
+  const form = await setupForm(<AddIps onClose={onClose} />);
+
+  form.fill([
+    { name: 'quantity', value: '1' },
+    { name: 'ipPool.action', value: 'new', type: 'radio' },
+    { name: 'ipPool.name', value: 'newPool' }
+  ]);
+
+  axiosMock.mockClear();
+  await form.submit();
+  expect(axiosMock.mock.calls).toMatchSnapshot();
+});
+
+test('Add IPs Form: add a dedicated IP to an existing pool', async () => {
+  const onClose = jest.fn();
+  const form = await setupForm(<AddIps onClose={onClose} />);
+
+  form.fill([
+    { name: 'quantity', value: '1' },
+    { name: 'ipPool.action', value: 'existing', type: 'radio' },
+    { name: 'ipPool.id', value: 'default', type: 'select' }
   ]);
 
   axiosMock.mockClear();
