@@ -11,44 +11,50 @@ jest.mock('src/helpers/billing');
 
 describe('Action Creator: Billing Create', () => {
   let dispatch;
+  let values;
+  let currentUser;
+  let corsData;
+  let billingData;
+  let getState;
 
   beforeEach(() => {
-    dispatch = jest.fn((a) => a);
-    accountConditions.isAws = jest.fn(() => false);
-    accountConditions.isCustomBilling = jest.fn(() => false);
-  });
-
-  it('update without a planpicker code', () => {
-    const values = {};
-    const currentUser = {
+    values = {};
+    currentUser = {
       email: 'test@example.com'
     };
-    const corsData = {
+    corsData = {
       email: 'test@example.com'
     };
-    const billingData = {
+    billingData = {
+      billingId: 'test-billing-id',
       billToContact: {},
       creditCard: {
         cardNumber: '1111222233334444'
       },
       invoiceCollect: true
     };
-    const getState = () => ({ currentUser });
-    const thunk = billingCreate(values);
-
+    getState = () => ({ currentUser });
+    dispatch = jest.fn((a) => a);
+    accountConditions.isAws = jest.fn(() => false);
+    accountConditions.isCustomBilling = jest.fn(() => false);
+    billingActions.createZuoraAccount = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.consumePromoCode = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.cors = jest.fn(({ meta }) => meta.onSuccess({
       results: {
         signature: 'TEST_SIGNATURE',
         token: 'TEST_TOKEN'
       }
     }));
-    billingActions.createZuoraAccount = jest.fn(({ meta }) => meta.onSuccess({}));
-    billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
-    billingActions.consumePromoCode = jest.fn(({ meta }) => meta.onSuccess({}));
-    accountActions.fetch = jest.fn();
-
+    accountActions.fetch = jest.fn(({ meta }) => meta.onSuccess({}));
     billingHelpers.formatCreateData = jest.fn((a) => a);
     billingHelpers.formatDataForCors = jest.fn((a) => ({ billingData, corsData }));
+  });
+
+  it('update without a planpicker code', () => {
+
+    const thunk = billingCreate(values);
+    accountActions.fetch = jest.fn();
 
     thunk(dispatch, getState);
 
@@ -83,38 +89,10 @@ describe('Action Creator: Billing Create', () => {
   });
 
   it('should consume promo code if available', () => {
-    const values = { promoCode: 'test-promo-code' };
-    const currentUser = {
-      email: 'test@example.com'
-    };
-    const corsData = {
-      email: 'test@example.com'
-    };
-    const billingData = {
-      billToContact: {},
-      billingId: 'test-billing-id',
-      creditCard: {
-        cardNumber: '1111222233334444'
-      },
-      invoiceCollect: true
-    };
-    const getState = () => ({ currentUser });
+    values = { promoCode: 'test-promo-code' };
 
     const thunk = billingCreate(values);
-
-    billingActions.cors = jest.fn(({ meta }) => meta.onSuccess({
-      results: {
-        signature: 'TEST_SIGNATURE',
-        token: 'TEST_TOKEN'
-      }
-    }));
-    billingActions.createZuoraAccount = jest.fn(({ meta }) => meta.onSuccess({}));
-    billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
-    billingActions.consumePromoCode = jest.fn(({ meta }) => meta.onSuccess({}));
-    accountActions.fetch = jest.fn();
-
-    billingHelpers.formatCreateData = jest.fn((a) => a);
-    billingHelpers.formatDataForCors = jest.fn((a) => ({ billingData, corsData }));
+    billingActions.consumePromoCode = jest.fn();
 
     thunk(dispatch, getState);
 
