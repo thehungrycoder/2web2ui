@@ -12,11 +12,11 @@ export class SpamTrapsPreview extends Component {
     const { data, gap, empty, error } = this.props;
 
     if (error) {
-      return <Callout title='Unable to Load Data'>{error.message}</Callout>;
+      return <Callout height='170px' title='Unable to Load Data'>{error.message}</Callout>;
     }
 
     if (empty) {
-      return <Callout title='No Data Available'>Insufficient data to populate this chart</Callout>;
+      return <Callout height='170px' title='No Data Available'>Insufficient data to populate this chart</Callout>;
     }
 
     return (

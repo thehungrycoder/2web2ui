@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
-import withEngagementRecencyDetails from '../../containers/EngagementRecencyDetailsContainer';
+import withHealthScoreDetails from '../../containers/HealthScoreDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
-import cohorts from '../../constants/cohorts';
-import _ from 'lodash';
 
-export class EngagementRecencyPreview extends Component {
+export class HealthScorePreview extends Component {
   renderContent = () => {
     const { data, gap, empty, error } = this.props;
 
@@ -27,8 +25,8 @@ export class EngagementRecencyPreview extends Component {
         margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
         gap={gap}
         timeSeries={data}
-        yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
-        yAxisProps={{ hide: true, domain: [0, 1]}}
+        yKey='health_score'
+        yAxisProps={{ hide: true }}
         xAxisProps={{ hide: true }}
       />
     );
@@ -42,11 +40,11 @@ export class EngagementRecencyPreview extends Component {
     }
 
     return (
-      <PageLink to={`/signals/engagement-recency/${facet}/${facetId}`}>
+      <PageLink to={`/signals/health-score/${facet}/${facetId}`}>
         <Panel>
           <Panel.Section>
             <ChartHeader
-              title='Engagement Recency'
+              title='Health Score'
               hideLine
               tooltipContent='TODO'
             />
@@ -60,4 +58,4 @@ export class EngagementRecencyPreview extends Component {
   }
 }
 
-export default withEngagementRecencyDetails(EngagementRecencyPreview);
+export default withHealthScoreDetails(HealthScorePreview);

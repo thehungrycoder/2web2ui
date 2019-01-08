@@ -7,6 +7,21 @@ import { getDateTicks } from 'src/helpers/date';
 
 export class WithHealthScoreDetails extends Component {
   componentDidMount() {
+    this.getData();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { filters } = this.props;
+    const prevRange = prevProps.filters.relativeRange;
+    const nextRange = filters.relativeRange;
+
+    // Refresh when date range changes
+    if (prevRange !== nextRange) {
+      this.getData();
+    }
+  }
+
+  getData = () => {
     const { getHealthScore, getSpamHits, facet, facetId, filters, subaccountId } = this.props;
     const options = {
       facet,
@@ -14,27 +29,8 @@ export class WithHealthScoreDetails extends Component {
       relativeRange: filters.relativeRange,
       subaccount: subaccountId
     };
-
     getHealthScore(options);
-    getSpamHits(options); // Get spam hits for injection count
-  }
-
-  componentDidUpdate(prevProps) {
-    const { getHealthScore, getSpamHits, facet, facetId, filters, subaccountId } = this.props;
-    const prevRange = prevProps.filters.relativeRange;
-    const nextRange = filters.relativeRange;
-
-    // Refresh when date range changes
-    if (prevRange !== nextRange) {
-      const options = {
-        facet,
-        filter: facetId,
-        relativeRange: filters.relativeRange,
-        subaccount: subaccountId
-      };
-      getHealthScore(options);
-      getSpamHits(options);
-    }
+    getSpamHits(options);
   }
 
   render() {

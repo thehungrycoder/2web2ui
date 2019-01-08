@@ -17,6 +17,7 @@ import moment from 'moment';
 import _ from 'lodash';
 
 import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
+import HealthScorePreview from './components/previews/HealthScorePreview';
 import cohorts from './constants/cohorts';
 
 export class EngagementRecencyPage extends Component {
@@ -121,7 +122,7 @@ export class EngagementRecencyPage extends Component {
             <SpamTrapsPreview />
           </Grid.Column>
           <Grid.Column xs={12} sm={6}>
-            {/* TODO replace with health score preview */}
+            <HealthScorePreview />
           </Grid.Column>
         </Grid>
       </Page>
