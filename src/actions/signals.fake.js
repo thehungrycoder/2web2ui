@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -97,35 +98,45 @@ const healthScoreDetails = (count) => _.range(count).map((n) => {
   const health_score = randInt(100) / 100;
   const weights = [
     {
-        weight_type: "List Quality",
-        weight: -randInt(100) / 100,
-        weight_value: randInt(100) / 100
+      weight_type: 'List Quality',
+      weight: -randInt(100) / 100,
+      weight_value: randInt(100) / 100
     },
     {
-        weight_type: "Hard Bounces",
-        weight: -randInt(100) / 100,
-        weight_value: randInt(100) / 100
+      weight_type: 'Hard Bounces',
+      weight: -randInt(100) / 100,
+      weight_value: randInt(100) / 100
     },
     {
-        weight_type: "Block Bounces",
-        weight: -randInt(100) / 100,
-        weight_value: randInt(100) / 100
+      weight_type: 'Block Bounces',
+      weight: -randInt(100) / 100,
+      weight_value: randInt(100) / 100
     },
     {
-        weight_type: "Complaints",
-        weight: randInt(100) / 100,
-        weight_value: randInt(100) / 100
+      weight_type: 'Complaints',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
     },
     {
-        weight_type: "Transient Failures",
-        weight: randInt(100) / 100,
-        weight_value: randInt(100) / 100
+      weight_type: 'Transient Failures',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
     },
     {
-        weight_type: "Other bounces",
-        weight: randInt(100) / 100,
-        weight_value: randInt(100) / 100
+      weight_type: 'Other bounces',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
     },
+    {
+      weight_type: 'eng cohorts: 14day',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    },
+    {
+      weight_type: 'eng cohorts: new',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    }
   ];
 
 

@@ -105,7 +105,7 @@ export const selectHealthScoreDetails = createSelector(
   ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { relativeRange }) => {
     const match = _.find(data, [facet, facetId]) || {};
 
-     const history = _.get(match, 'history', []);
+    const history = _.get(match, 'history', []);
     const normalizedHistory = history.map(({ dt: date, weights, ...values }) => ({
       date,
       weights: _.sortBy(weights, 'weight').filter(({ weight_type }) => !weight_type.includes('eng cohorts:')),
