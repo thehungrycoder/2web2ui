@@ -9,3 +9,12 @@ Object {
   "type": "CHANGE_SUMMARY_TABLE",
 }
 `;
+
+exports[`Summary Table Action Creators .resetSummaryTable passes on name for payload 1`] = `
+Object {
+  "payload": Object {
+    "tableName": "testTable",
+  },
+  "type": "RESET_SUMMARY_TABLE",
+}
+`;

@@ -24,11 +24,14 @@ describe('SpamTrapOverview', () => {
       getSpamHits={() => {}}
       getSubaccounts={() => {}}
       loading={false}
+      resetSummaryTable={() => {}}
       signalOptions={{
         facet: 'domain',
         facetSearchTerm: 'example.com',
         relativeRange: '14days',
-        subaccount: 123
+        subaccount: {
+          id: 123
+        }
       }}
       subaccounts={{
         123: { id: 123, name: 'Test Subaccount' }
@@ -84,19 +87,9 @@ describe('SpamTrapOverview', () => {
   });
 
   it('requests data on mount', () => {
-    const getSpamHits = jest.fn();
-    subject({ getSpamHits });
-
-    expect(getSpamHits).toHaveBeenCalledWith({
-      facet: 'domain',
-      filter: 'example.com',
-      limit: 10,
-      offset: 0,
-      order: 'asc',
-      orderBy: 'domain',
-      relativeRange: '14days',
-      subaccount: 123
-    });
+    const resetSummaryTable = jest.fn();
+    subject({ resetSummaryTable });
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test');
   });
 
   it('does not request subaccounts on mount if already loaded', () => {
@@ -113,20 +106,77 @@ describe('SpamTrapOverview', () => {
     expect(getSubaccounts).toHaveBeenCalled();
   });
 
-  it('requests data on signal options update', () => {
-    const getSpamHits = jest.fn();
+  it('requests table reset on signal options update', () => {
+    const resetSummaryTable = jest.fn();
     const wrapper = subject();
-    wrapper.setProps({ getSpamHits, signalOptions: {}});
+    wrapper.setProps({ resetSummaryTable, signalOptions: {}});
 
-    expect(getSpamHits).toHaveBeenCalled();
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test');
   });
 
   it('requests data on summary table update', () => {
     const getSpamHits = jest.fn();
+    const summaryTable = {
+      currentPage: 2,
+      perPage: 10
+    };
     const wrapper = subject();
-    wrapper.setProps({ getSpamHits, summaryTable: {}});
 
-    expect(getSpamHits).toHaveBeenCalled();
+    wrapper.setProps({ getSpamHits, summaryTable });
+
+    expect(getSpamHits).toHaveBeenCalledWith({
+      facet: 'domain',
+      filter: 'example.com',
+      limit: 10,
+      offset: 10,
+      order: undefined,
+      orderBy: undefined,
+      relativeRange: '14days',
+      subaccount: {
+        id: 123
+      }
+    });
+  });
+
+  it('requests ordered data on summary table update', () => {
+    const getSpamHits = jest.fn();
+    const summaryTable = {
+      currentPage: 1,
+      order: { ascending: true, dataKey: 'domain' },
+      perPage: 10
+    };
+    const wrapper = subject();
+
+    wrapper.setProps({ getSpamHits, summaryTable });
+
+    expect(getSpamHits).toHaveBeenCalledWith(expect.objectContaining({
+      order: 'asc',
+      orderBy: 'domain'
+    }));
+  });
+
+  it('requests data without subaccount data on summary table update', () => {
+    const getSpamHits = jest.fn();
+    const signalOptions = {
+      facet: 'domain',
+      facetSearchTerm: 'example.com',
+      relativeRange: '14days',
+      subaccount: {
+        id: undefined,
+        name: 'Master & All Subaccounts'
+      }
+    };
+    const summaryTable = {
+      currentPage: 2,
+      perPage: 10
+    };
+    const wrapper = subject();
+
+    wrapper.setProps({ getSpamHits, signalOptions, summaryTable });
+
+    expect(getSpamHits).toHaveBeenCalledWith(expect.objectContaining({
+      subaccount: undefined
+    }));
   });
 
   describe('history component', () => {
@@ -168,7 +218,7 @@ describe('SpamTrapOverview', () => {
 
       expect(historyPush).toHaveBeenCalledWith({
         pathname: '/signals/spam-traps/domain/example.com',
-        search: { subaccount: undefined },
+        search: '?subaccount=123',
         state: { date: '2018-01-13' }
       });
     });
@@ -180,7 +230,7 @@ describe('SpamTrapOverview', () => {
 
       expect(historyPush).toHaveBeenCalledWith({
         pathname: '/signals/spam-traps/domain/example.com',
-        search: { subaccount: undefined },
+        search: '?subaccount=123',
         state: { date: '2018-01-13' }
       });
     });

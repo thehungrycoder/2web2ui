@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import SummaryTable, { Column } from 'src/components/summaryTable';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
@@ -19,34 +20,42 @@ class SpamTrapOverview extends React.Component {
   }
 
   componentDidMount() {
-    const { getSubaccounts, subaccounts } = this.props;
+    const { getSubaccounts, resetSummaryTable, subaccounts, tableName } = this.props;
 
     if (_.isEmpty(subaccounts)) {
       getSubaccounts();
     }
 
-    this.getData();
+    resetSummaryTable(tableName);
   }
 
+  // assumptions, signalOptions and summaryTable should never both change on the same update and
+  // resetting signal options will trigger a summary table reset which calls getData
   componentDidUpdate(prevProps) {
-    const controlsHaveChanged = (
-      !_.isEqual(prevProps.signalOptions, this.props.signalOptions) ||
-      !_.isEqual(prevProps.summaryTable, this.props.summaryTable)
-    );
+    const { resetSummaryTable, signalOptions, summaryTable, tableName } = this.props;
 
-    if (controlsHaveChanged) {
+    if (prevProps.signalOptions !== signalOptions) {
+      resetSummaryTable(tableName);
+    }
+
+    if (prevProps.summaryTable !== summaryTable) {
       this.getData();
     }
   }
 
   getData = () => {
     const { getSpamHits, signalOptions, summaryTable } = this.props;
+    let { subaccount } = signalOptions;
     let order;
     let orderBy;
 
     if (summaryTable.order) {
       order = summaryTable.order.ascending ? 'asc' : 'desc';
       orderBy = summaryTable.order.dataKey;
+    }
+
+    if (subaccount && subaccount.id === undefined) {
+      subaccount = undefined; // unset
     }
 
     getSpamHits({
@@ -57,7 +66,7 @@ class SpamTrapOverview extends React.Component {
       order,
       orderBy,
       relativeRange: signalOptions.relativeRange,
-      subaccount: signalOptions.subaccount
+      subaccount
     });
   }
 
@@ -74,7 +83,7 @@ class SpamTrapOverview extends React.Component {
     let search;
 
     if (signalOptions.subaccount) {
-      search = { subaccount: signalOptions.subaccount.id };
+      search = setSubaccountQuery(signalOptions.subaccount.id);
     }
 
     history.push({

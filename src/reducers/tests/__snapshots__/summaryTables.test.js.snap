@@ -57,3 +57,18 @@ Object {
   },
 }
 `;
+
+exports[`Summary Tables Reducer when reset 1`] = `
+Object {
+  "@@DEFAULT_TABLE": Object {
+    "currentPage": 1,
+    "order": undefined,
+    "perPage": 10,
+  },
+  "testTable": Object {
+    "currentPage": 1,
+    "order": undefined,
+    "perPage": 10,
+  },
+}
+`;
