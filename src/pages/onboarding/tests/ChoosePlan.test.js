@@ -109,5 +109,16 @@ describe('ChoosePlan page tests', () => {
         expect(props.history.push).not.toHaveBeenCalled();
       });
     });
+
+    it('should throw error if billing creation fails', async () => {
+      expect.assertions(2);
+      const values = { planpicker: { isFree: false, billingId: 'test-id' }, key: 'value', card: 'card info' };
+      const billingCreate = jest.fn(() => Promise.reject());
+      wrapper.setProps({ billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }}, billingCreate });
+      return instance.onSubmit(values).catch(() => {
+        expect(props.billingCreate).not.toHaveBeenCalled();
+        expect(props.history.push).not.toHaveBeenCalled();
+      });
+    });
   });
 });

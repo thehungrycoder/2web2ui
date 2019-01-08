@@ -71,7 +71,7 @@ describe('Action Creator: Billing', () => {
     });
 
     it('should dispatch a consumption of a promo code', () => {
-      mockStore.dispatch(billing.verifyPromoCode({ promoCode: 'test-code', billingId: 'test-bill-id', meta: { promoCode: 'test-code' }}));
+      mockStore.dispatch(billing.consumePromoCode({ promoCode: 'test-code', billingId: 'test-bill-id', meta: { promoCode: 'test-code' }}));
       snapActions();
     });
   });

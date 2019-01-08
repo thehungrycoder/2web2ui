@@ -17,6 +17,22 @@ describe('Action Creator: Billing Create', () => {
   let billingData;
   let getState;
 
+  const checkBillingCreationSteps = () => {
+    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
+      context: 'create-account',
+      data: corsData
+    }));
+
+    expect(billingActions.createZuoraAccount).toHaveBeenCalledWith(expect.objectContaining({
+      data: billingData,
+      signature: 'TEST_SIGNATURE',
+      token: 'TEST_TOKEN'
+    }));
+
+    expect(billingActions.syncSubscription).toHaveBeenCalled();
+    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage,billing' }));
+  };
+
   beforeEach(() => {
     values = {};
     currentUser = {
@@ -58,20 +74,7 @@ describe('Action Creator: Billing Create', () => {
 
     thunk(dispatch, getState);
 
-    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
-      context: 'create-account',
-      data: corsData
-    }));
-
-    expect(billingActions.createZuoraAccount).toHaveBeenCalledWith(expect.objectContaining({
-      data: billingData,
-      signature: 'TEST_SIGNATURE',
-      token: 'TEST_TOKEN'
-    }));
-
-    expect(billingActions.syncSubscription).toHaveBeenCalled();
-    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage,billing' }));
-
+    checkBillingCreationSteps();
     expect(billingActions.consumePromoCode).not.toHaveBeenCalled();
   });
 
@@ -95,20 +98,7 @@ describe('Action Creator: Billing Create', () => {
     billingActions.consumePromoCode = jest.fn();
 
     thunk(dispatch, getState);
-
-    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
-      context: 'create-account',
-      data: corsData
-    }));
-
-    expect(billingActions.createZuoraAccount).toHaveBeenCalledWith(expect.objectContaining({
-      data: billingData,
-      signature: 'TEST_SIGNATURE',
-      token: 'TEST_TOKEN'
-    }));
-    expect(billingActions.syncSubscription).toHaveBeenCalled();
-    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage,billing' }));
-
+    checkBillingCreationSteps();
     expect(billingActions.consumePromoCode).toHaveBeenCalledWith(expect.objectContaining({
       promoCode: 'test-promo-code',
       billingId: 'test-billing-id'

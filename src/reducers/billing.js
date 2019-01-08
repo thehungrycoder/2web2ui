@@ -40,15 +40,6 @@ export default (state = initialState, action) => {
     case 'VERIFY_PROMO_CODE_PENDING':
       return { ...state, promoPending: true, promoError: undefined };
 
-    case 'CONSUME_PROMO_CODE_SUCCESS':
-      return { ...state, promoConsumePending: false };
-
-    case 'CONUME_PROMO_CODE_FAIL':
-      return { ...state, promoConsumePending: false, promoError: action.payload };
-
-    case 'CONSUME_PROMO_CODE_PENDING':
-      return { ...state, promoConsumePending: true, promoError: undefined };
-
     case 'REMOVE_ACTIVE_PROMO':
       return { ...state, promoPending: false, promoError: undefined, selectedPromo: {}};
 

@@ -63,14 +63,14 @@ exports[`Action Creator: Billing promo code should dispatch a consumption of a p
 Array [
   Object {
     "meta": Object {
-      "method": "GET",
+      "method": "POST",
       "params": Object {
         "billing_id": "test-bill-id",
       },
       "promoCode": "test-code",
       "url": "v1/account/subscription/promo-codes/test-code",
     },
-    "type": "VERIFY_PROMO_CODE",
+    "type": "CONSUME_PROMO_CODE",
   },
 ]
 `;
