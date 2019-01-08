@@ -15,6 +15,8 @@ describe('EnableTfaModal tests', () => {
       clearBackupCodes: jest.fn(),
       generateBackupCodes: jest.fn().mockImplementation(() => Promise.resolve(null)),
       toggleTfa: jest.fn().mockImplementation(() => Promise.resolve(null)),
+      showAlert: jest.fn(),
+      logout: jest.fn(),
       enabled: false,
       required: false,
       secret: 'shhh',
@@ -90,11 +92,16 @@ describe('EnableTfaModal tests', () => {
     expect(wrapper.state('openModal')).toEqual(null);
   });
 
-  it('should not allow disable when required', () => {
+  it('logs out if disabling TFA with TFA enforced', async () => {
     wrapper.setProps({ enabled: true, required: true });
-    const actions = wrapper.find('Panel').props().actions;
-    expect(actions).toHaveLength(1);
-    expect(actions[0].content).not.toContain('Disable');
+    await wrapper.instance().disable();
+    expect(wrapper.instance().props.logout).toHaveBeenCalled();
+  });
+
+  it('should not logout if disabling TFA and TFA not enforced', async () => {
+    wrapper.setProps({ enabled: true });
+    await wrapper.instance().disable();
+    expect(wrapper.instance().props.logout).not.toHaveBeenCalled();
   });
 });
 

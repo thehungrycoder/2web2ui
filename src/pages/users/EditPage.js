@@ -65,8 +65,7 @@ export class EditPage extends Component {
       submitting,
       updatePending,
       user,
-      users,
-      tfaRequired
+      users
     } = this.props;
 
     if (loadingError) {
@@ -89,13 +88,13 @@ export class EditPage extends Component {
         content: 'Delete',
         onClick: this.toggleDelete
       });
+    }
 
-      if (user.tfa_enabled && !tfaRequired) {
-        secondaryActions.push({
-          content: 'Disable Two-Factor Authentication',
-          onClick: this.toggleTfaModal
-        });
-      }
+    if (user.tfa_enabled && !user.isCurrentUser) {
+      secondaryActions.push({
+        content: 'Disable Two-Factor Authentication',
+        onClick: this.toggleTfaModal
+      });
     }
 
     return (

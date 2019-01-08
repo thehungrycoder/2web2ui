@@ -66,6 +66,71 @@ exports[`Page: Users Edit should not allow current user to delete 1`] = `
 </Page>
 `;
 
+exports[`Page: Users Edit should not render TFA disable button if tfa enabled but user is current user 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Users",
+      "to": "/account/users",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={Array []}
+  title="test-user@test.com"
+>
+  <Component
+    currentUser={
+      Object {
+        "name": "current-user",
+      }
+    }
+    isAccountSingleSignOnEnabled={true}
+    onSubmit={[Function]}
+    user={
+      Object {
+        "access": "admin",
+        "email": "test-user@test.com",
+        "isCurrentUser": true,
+        "name": "test-user",
+        "tfa_enabled": true,
+      }
+    }
+  />
+  <DeleteModal
+    content={
+      <p>
+        <span>
+          User "
+        </span>
+        <span>
+          test-user
+        </span>
+        <span>
+          " will no longer be able to log in or access this SparkPost account. All API keys associated with this user will be transferred to you.
+        </span>
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this user?"
+  />
+  <ConfirmationModal
+    confirmVerb="Disable"
+    content={
+      <p>
+        Disabling two-factor authentication will also delete their two-factor backup codes. The next time they log in, they'll have to use their password or single sign-on if available.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to disable two-factor authentication for this user?"
+  />
+</Page>
+`;
+
 exports[`Page: Users Edit should redirect after delete or if user does not exist 1`] = `
 <Redirect
   push={false}
@@ -78,6 +143,81 @@ exports[`Page: Users Edit should redirect on loadingError 1`] = `
   push={false}
   to="/account/users"
 />
+`;
+
+exports[`Page: Users Edit should render TFA disable button if tfa enabled and not current user 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "Users",
+      "to": "/account/users",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete",
+        "onClick": [Function],
+      },
+      Object {
+        "content": "Disable Two-Factor Authentication",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="test-user@test.com"
+>
+  <Component
+    currentUser={
+      Object {
+        "name": "current-user",
+      }
+    }
+    isAccountSingleSignOnEnabled={true}
+    onSubmit={[Function]}
+    user={
+      Object {
+        "access": "admin",
+        "email": "test-user@test.com",
+        "name": "test-user",
+        "tfa_enabled": true,
+      }
+    }
+  />
+  <DeleteModal
+    content={
+      <p>
+        <span>
+          User "
+        </span>
+        <span>
+          test-user
+        </span>
+        <span>
+          " will no longer be able to log in or access this SparkPost account. All API keys associated with this user will be transferred to you.
+        </span>
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this user?"
+  />
+  <ConfirmationModal
+    confirmVerb="Disable"
+    content={
+      <p>
+        Disabling two-factor authentication will also delete their two-factor backup codes. The next time they log in, they'll have to use their password or single sign-on if available.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to disable two-factor authentication for this user?"
+  />
+</Page>
 `;
 
 exports[`Page: Users Edit should render correctly by default 1`] = `

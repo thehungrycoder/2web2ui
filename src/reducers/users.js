@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
         access: access_level,
         is_sso,
         tfa_enabled
-      })(state);
+      })({ ...state, updatePending: false });
     }
 
     case 'REGISTER_USER_PENDING':
