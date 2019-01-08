@@ -5,8 +5,10 @@ import moment from 'moment';
 
 // order_by param values do not match field names, so we have to translate here
 const ORDER_BY_MAPPING = {
-  current_trap_hits: 'trap_hits',
-  current_relative_trap_hits: 'perc'
+  current_engaged_recipients: 'c_14d',
+  current_relative_engaged_recipients: 'perc',
+  current_relative_trap_hits: 'perc',
+  current_trap_hits: 'trap_hits'
 };
 
 const signalsActionCreator = ({ dimension, type }) => ({

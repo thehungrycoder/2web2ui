@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { createSelector } from 'reselect';
 import { fillByDate } from 'src/helpers/date';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
@@ -98,7 +99,82 @@ export const selectEngagementRecencyDetails = createSelector(
   }
 );
 
-// Overview
+
+export const selectEngagementRecencyOverviewData = createSelector(
+  getEngagementRecencyData, getOptions,
+  ({ data }, { relativeRange }) => data.map((rowOfData) => {
+    const history = rowOfData.history || [];
+    const normalizedHistory = history.map(({ dt: date, ...values }) => {
+      const relative_engaged_recipients = (values.c_14d / values.c_total) * 100;
+
+      return {
+        ...values,
+        date,
+        engaged_recipients: values.c_14d,
+        relative_engaged_recipients
+      };
+    });
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        engaged_recipients: null,
+        relative_engaged_recipients: null
+      },
+      now: moment().subtract(1, 'day'),
+      relativeRange
+    });
+
+    return {
+      ...rowOfData,
+      current_engaged_recipients: _.last(filledHistory).engaged_recipients,
+      current_relative_engaged_recipients: _.last(filledHistory).relative_engaged_recipients,
+      history: filledHistory,
+      total_engagement: history.reduce((total, { c_total }) => total + c_total, 0)
+    };
+  })
+);
+
+export const selectEngagementRecencyOverviewMetaData = createSelector(
+  getEngagementRecencyData,
+  ({ data }) => {
+    const absoluteValues = _.flatMap(data, ({ history }) => history.map(({ c_14d }) => c_14d));
+    const relativeValues = _.flatMap(data, ({ history }) => (
+      history.map(({ c_14d, c_total }) => (c_14d / c_total) * 100)
+    ));
+    const currentValues = data.reduce((acc, { current_c_14d }) => {
+      if (current_c_14d === null) {
+        return acc; // ignore
+      }
+
+      return [...acc, current_c_14d];
+    }, []);
+    const currentRelativeValues = data.reduce((acc, { current_c_14d, current_c_total }) => {
+      if (current_c_total === null) {
+        return acc; // ignore
+      }
+
+      return [...acc, (current_c_14d / current_c_total) * 100];
+    }, []);
+
+    return {
+      currentMax: currentValues.length ? Math.max(...currentValues) : null,
+      currentRelativeMax: currentRelativeValues.length ? Math.max(...currentRelativeValues) : null,
+      max: absoluteValues.length ? Math.max(...absoluteValues) : null,
+      relativeMax: relativeValues.length ? Math.max(...relativeValues) : null
+    };
+  }
+);
+
+export const selectEngagementRecencyOverview = createSelector(
+  [getEngagementRecencyData, selectEngagementRecencyOverviewData, selectEngagementRecencyOverviewMetaData],
+  (engagementRecencyData, data, metaData) => ({
+    ...engagementRecencyData,
+    data,
+    metaData
+  })
+);
+
+
 export const selectSpamHitsOverviewData = createSelector(
   getSpamHitsData, getOptions,
   ({ data }, { relativeRange }) => data.map((rowOfData) => {
@@ -134,8 +210,20 @@ export const selectSpamHitsOverviewMetaData = createSelector(
   ({ data }) => {
     const absoluteValues = _.flatMap(data, ({ history }) => history.map(({ trap_hits }) => trap_hits));
     const relativeValues = _.flatMap(data, ({ history }) => history.map(({ relative_trap_hits }) => relative_trap_hits));
-    const currentValues = data.map(({ current_trap_hits }) => current_trap_hits);
-    const currentRelativeValues = data.map(({ current_relative_trap_hits }) => current_relative_trap_hits);
+    const currentValues = data.reduce((acc, { current_trap_hits }) => {
+      if (current_trap_hits === null) {
+        return acc; // ignore
+      }
+
+      return [...acc, current_trap_hits];
+    }, []);
+    const currentRelativeValues = data.reduce((acc, { current_relative_trap_hits }) => {
+      if (current_relative_trap_hits === null) {
+        return acc; // ignore
+      }
+
+      return [...acc, current_relative_trap_hits];
+    }, []);
 
     return {
       currentMax: currentValues.length ? Math.max(...currentValues) : null,

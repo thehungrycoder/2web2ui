@@ -47,6 +47,25 @@ describe('Selectors: signals', () => {
                   trap_hits: 35
                 }
               ]
+            },
+            {
+              sending_domain: 'null.test.com',
+              current_trap_hits: null,
+              current_relative_trap_hits: null,
+              history: [
+                {
+                  dt: '2018-01-01',
+                  injections: 282400,
+                  relative_trap_hits: 0.3,
+                  trap_hits: 856
+                },
+                {
+                  dt: '2018-01-02',
+                  injections: 50000,
+                  relative_trap_hits: 0.1,
+                  trap_hits: 50
+                }
+              ]
             }
           ],
           loading: false,
@@ -57,8 +76,25 @@ describe('Selectors: signals', () => {
           data: [
             {
               sending_domain: 'test.com',
+              current_c_14d: 10,
+              current_c_total: 50,
               history: [
-                { c_total: 25, c_new: 5, c_uneng: 5, c_365d: 5, dt: '2018-01-01' }
+                {
+                  c_total: 25,
+                  c_new: 5,
+                  c_uneng: 5,
+                  c_14d: 5,
+                  c_365d: 5,
+                  dt: '2018-01-01'
+                },
+                {
+                  c_total: 50,
+                  c_new: 10,
+                  c_uneng: 10,
+                  c_14d: 10,
+                  c_365d: 10,
+                  dt: '2018-01-02'
+                }
               ]
             }
           ],
@@ -109,6 +145,48 @@ describe('Selectors: signals', () => {
     });
   });
 
+  describe('selectEngagementRecencyOverviewData', () => {
+    it('returns data', () => {
+      expect(
+        selectors.selectEngagementRecencyOverviewData(state, { relativeRange: '7days' })
+      ).toMatchSnapshot();
+    });
+
+    it('returns empty array', () => {
+      const stateWhenEmpty = { signals: { engagementRecency: { data: []}}};
+
+      expect(
+        selectors.selectEngagementRecencyOverviewData(stateWhenEmpty, { relativeRange: '7days' })
+      ).toEqual([]);
+    });
+  });
+
+  describe('selectEngagementRecencyOverviewMetaData', () => {
+    it('returns max values', () => {
+      expect(selectors.selectEngagementRecencyOverviewMetaData(state)).toEqual({
+        currentMax: 10,
+        currentRelativeMax: 20,
+        max: 10,
+        relativeMax: 20
+      });
+    });
+
+    it('returns null', () => {
+      const stateWhenEmpty = { signals: { engagementRecency: { data: []}}};
+      expect(selectors.selectEngagementRecencyOverviewMetaData(stateWhenEmpty)).toEqual({
+        currentMax: null,
+        currentRelativeMax: null,
+        max: null,
+        relativeMax: null
+      });
+    });
+  });
+
+  describe('selectEngagementRecencyOverview', () => {
+    it('returns all overview data', () => {
+      expect(selectors.selectEngagementRecencyOverview(state, { relativeRange: '7days' })).toMatchSnapshot();
+    });
+  });
 
   describe('selectSpamHitsOverviewData', () => {
     it('returns data', () => {
@@ -126,8 +204,8 @@ describe('Selectors: signals', () => {
       expect(selectors.selectSpamHitsOverviewMetaData(state)).toEqual({
         currentMax: 123,
         currentRelativeMax: 0.12,
-        max: 456,
-        relativeMax: 0.25
+        max: 856,
+        relativeMax: 0.3
       });
     });
 
