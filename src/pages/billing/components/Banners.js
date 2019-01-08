@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
 import * as conversions from 'src/helpers/conversionTracking';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
+import moment from 'moment';
 
 const dateFormat = (date) => format(date, 'MMM DD, YYYY');
 
@@ -78,3 +79,20 @@ export const EnterpriseBanner = () => (
     </ul>
   </Banner>
 );
+
+export const FreePlanWarningBanner = ({ account = {}}) => {
+  const { created, subscription = {}} = account;
+  const daysLeft = moment(created).add(30, 'd').diff(moment(new Date()), 'days');
+  if (daysLeft <= 0 || subscription.code !== 'free15K-1018') {
+    return null;
+  }
+  return (
+    <Banner status='warning' title='Free Plan Downgrade'>
+      <p>
+        Your plan will automatically downgrade to 500 emails/month
+        in {daysLeft} day{daysLeft !== 1 && 's'}. <Link to='/account/billing/plan'>Upgrade your plan</Link> to
+        keep or increase your sending limits.
+      </p>
+    </Banner>
+  );
+};

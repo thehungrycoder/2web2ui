@@ -33,6 +33,32 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
 </Banner>
 `;
 
+exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
+<Banner
+  status="warning"
+  title="Free Plan Downgrade"
+>
+  <p>
+    Your plan will automatically downgrade to 500 emails/month in 
+    29
+     day
+    s
+    . 
+    <Link
+      replace={false}
+      to="/account/billing/plan"
+    >
+      Upgrade your plan
+    </Link>
+     to keep or increase your sending limits.
+  </p>
+</Banner>
+`;
+
+exports[`Billing Banners:  Free Plan Downgrade warning banner should not render anything if date is past 1`] = `""`;
+
+exports[`Billing Banners:  Free Plan Downgrade warning banner should not render if current plan is not free15K-1018 1`] = `""`;
+
 exports[`Billing Banners:  PendingPlanBanner should render with pending_subscription 1`] = `
 <Banner
   status="info"

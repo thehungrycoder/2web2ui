@@ -1,5 +1,5 @@
 import React from 'react';
-import { PendingPlanBanner, PremiumBanner, EnterpriseBanner } from '../Banners';
+import { PendingPlanBanner, PremiumBanner, EnterpriseBanner, FreePlanWarningBanner } from '../Banners';
 import * as conversions from 'src/helpers/conversionTracking';
 import * as constants from 'src/constants';
 import { shallow } from 'enzyme';
@@ -53,6 +53,42 @@ describe('Billing Banners: ', () => {
     it('tracks addon request', () => {
       wrapper.prop('action').onClick();
       expect(conversions.trackAddonRequest).toHaveBeenCalledWith(constants.ANALYTICS_ENTERPRISE_SUPPORT);
+    });
+  });
+
+  describe('Free Plan Downgrade warning banner', () => {
+    let wrapper;
+    const props = {
+      account: {
+        subscription: {
+          code: 'free15K-1018'
+        },
+        created: Date.now()
+      }
+    };
+    beforeEach(() => {
+      wrapper = shallow(<FreePlanWarningBanner {...props} />);
+    });
+
+    it('renders', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render anything if date is past', () => {
+      wrapper.setProps({ account: { ...props.account, created: new Date(2010) }});
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render if current plan is not free15K-1018', () => {
+      wrapper.setProps({
+        account: {
+          ...props.account,
+          subscription: {
+            code: 'not-free15K-1018'
+          }
+        }
+      });
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });
