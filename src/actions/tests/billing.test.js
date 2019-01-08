@@ -64,9 +64,16 @@ describe('Action Creator: Billing', () => {
     });
   });
 
-  it('should dispatch a verification of a promo code', () => {
-    mockStore.dispatch(billing.verifyPromoCode({ promoCode: 'test-code', billingId: 'test-bill-id', meta: { promoCode: 'test-code' }}));
-    snapActions();
+  describe('promo code', () => {
+    it('should dispatch a verification of a promo code', () => {
+      mockStore.dispatch(billing.verifyPromoCode({ promoCode: 'test-code', billingId: 'test-bill-id', meta: { promoCode: 'test-code' }}));
+      snapActions();
+    });
+
+    it('should dispatch a consumption of a promo code', () => {
+      mockStore.dispatch(billing.consumePromoCode({ promoCode: 'test-code', billingId: 'test-bill-id', meta: { promoCode: 'test-code' }}));
+      snapActions();
+    });
   });
 
   it('should dispatch a cors action', () => {

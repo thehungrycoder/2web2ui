@@ -2,7 +2,7 @@ import { isAws, isCustomBilling } from 'src/helpers/conditions/account';
 import { formatCreateData, formatDataForCors } from 'src/helpers/billing';
 import { fetch as fetchAccount } from './account';
 import chainActions from 'src/actions/helpers/chainActions';
-import { cors, createZuoraAccount, syncSubscription, updateSubscription } from './billing';
+import { cors, createZuoraAccount, syncSubscription, updateSubscription, consumePromoCode } from './billing';
 
 export default function billingCreate(values) {
   return (dispatch, getState) => {
@@ -26,8 +26,12 @@ export default function billingCreate(values) {
       data.billToContact.workEmail = state.currentUser.email;
       return createZuoraAccount({ data, token, signature, meta });
     };
-    const actions = [corsCreateBilling, constructZuoraAccount, syncSubscription, fetchUsageAndBilling];
 
+    const actions = [corsCreateBilling, constructZuoraAccount, syncSubscription, fetchUsageAndBilling];
+    if (values.promoCode) {
+      const consumePromo = ({ meta }) => consumePromoCode({ meta, promoCode: values.promoCode, billingId: billingData.billingId });
+      actions.push(consumePromo);
+    }
     return dispatch(chainActions(...actions)());
   };
 }

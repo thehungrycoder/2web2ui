@@ -64,10 +64,9 @@ export class ChangePlanForm extends Component {
       : values;
     let action = Promise.resolve({});
     if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
-      const { promoCode } = selectedPromo;
-      action = verifyPromoCode({ promoCode , billingId: values.planpicker.billingId, meta: { promoCode }});
+      newValues.promoCode = selectedPromo.promoCode;
+      action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId: values.planpicker.billingId, meta: { promoCode: selectedPromo.promoCode }});
     }
-
     return action
       .then(({ discount_id }) => {
         newValues.discountId = discount_id;

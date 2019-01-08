@@ -53,6 +53,7 @@ export class OnboardingPlanPage extends Component {
     let action = Promise.resolve({});
     if (selectedPromo.promoCode && !values.planpicker.isFree) {
       const { promoCode } = selectedPromo;
+      newValues.promoCode = promoCode;
       action = verifyPromoCode({ promoCode, billingId: values.planpicker.billingId, meta: { promoCode }});
     }
 
