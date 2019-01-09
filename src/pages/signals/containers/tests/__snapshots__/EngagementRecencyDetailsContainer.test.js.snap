@@ -6,6 +6,7 @@ exports[`Signals Engagement Recency Details Container gets engagement recency on
   facet="sending_domain"
   facetId="test.com"
   gap={1}
+  subaccountId="101"
   xTicks={
     Array [
       1,

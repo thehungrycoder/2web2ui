@@ -7,6 +7,7 @@ import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
 import cohorts from '../../constants/cohorts';
 import _ from 'lodash';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export class EngagementRecencyPreview extends Component {
   renderContent = () => {
@@ -35,14 +36,14 @@ export class EngagementRecencyPreview extends Component {
   }
 
   render() {
-    const { facet, facetId, loading } = this.props;
+    const { facet, facetId, loading, subaccountId } = this.props;
 
     if (loading) {
       return <PanelLoading minHeight='170px' />;
     }
 
     return (
-      <PageLink to={`/signals/engagement-recency/${facet}/${facetId}`}>
+      <PageLink to={`/signals/engagement-recency/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
         <Panel>
           <Panel.Section>
             <ChartHeader

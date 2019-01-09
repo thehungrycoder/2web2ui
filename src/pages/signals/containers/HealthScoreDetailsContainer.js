@@ -40,14 +40,15 @@ export class WithHealthScoreDetails extends Component {
       facet,
       facetId,
       filters,
-      selected
+      selected,
+      subaccountId
     } = this.props;
 
     // Calculate gap here to share with preview and details
     const gap = details.data && details.data.length > 15 ? 0.2 : 1;
 
     return (
-      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} selected={selected} xTicks={getDateTicks(filters.relativeRange)} />
+      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} selected={selected} xTicks={getDateTicks(filters.relativeRange)} subaccountId={subaccountId} />
     );
   }
 }

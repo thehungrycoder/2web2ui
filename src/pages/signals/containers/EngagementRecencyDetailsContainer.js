@@ -38,14 +38,15 @@ export class WithEngagementRecencyDetails extends Component {
       details,
       facet,
       facetId,
-      filters
+      filters,
+      subaccountId
     } = this.props;
 
     // Calculate gap here to share with preview and details
     const gap = details.data && details.data.length > 15 ? 0.2 : 1;
 
     return (
-      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} xTicks={getDateTicks(filters.relativeRange)} />
+      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} xTicks={getDateTicks(filters.relativeRange)} subaccountId={subaccountId} />
     );
   }
 }

@@ -2,7 +2,7 @@
 
 exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
 <PageLink
-  to="/signals/spam-traps/ip-pool/best-pool"
+  to="/signals/spam-traps/ip-pool/best-pool?subaccount=101"
 >
   <Panel>
     <Panel.Section>
@@ -60,7 +60,7 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
 
 exports[`Signals SpamTrapsPreview Component renders empty correctly 1`] = `
 <PageLink
-  to="/signals/spam-traps/ip-pool/best-pool"
+  to="/signals/spam-traps/ip-pool/best-pool?subaccount=101"
 >
   <Panel>
     <Panel.Section>
@@ -84,7 +84,7 @@ exports[`Signals SpamTrapsPreview Component renders empty correctly 1`] = `
 
 exports[`Signals SpamTrapsPreview Component renders error correctly 1`] = `
 <PageLink
-  to="/signals/spam-traps/ip-pool/best-pool"
+  to="/signals/spam-traps/ip-pool/best-pool?subaccount=101"
 >
   <Panel>
     <Panel.Section>

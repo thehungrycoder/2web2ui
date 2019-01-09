@@ -5,6 +5,7 @@ import Callout from 'src/components/callout';
 import withSpamTrapDetails from '../../containers/SpamTrapDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export class SpamTrapsPreview extends Component {
 
@@ -34,14 +35,14 @@ export class SpamTrapsPreview extends Component {
   }
 
   render() {
-    const { facet, facetId, loading } = this.props;
+    const { facet, facetId, loading, subaccountId } = this.props;
 
     if (loading) {
       return <PanelLoading minHeight='170px' />;
     }
 
     return (
-      <PageLink to={`/signals/spam-traps/${facet}/${facetId}`}>
+      <PageLink to={`/signals/spam-traps/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
         <Panel>
           <Panel.Section>
             <ChartHeader

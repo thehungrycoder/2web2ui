@@ -5,6 +5,7 @@ import Callout from 'src/components/callout';
 import withHealthScoreDetails from '../../containers/HealthScoreDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export class HealthScorePreview extends Component {
   renderContent = () => {
@@ -33,14 +34,14 @@ export class HealthScorePreview extends Component {
   }
 
   render() {
-    const { facet, facetId, loading } = this.props;
+    const { facet, facetId, loading, subaccountId } = this.props;
 
     if (loading) {
       return <PanelLoading minHeight='170px' />;
     }
 
     return (
-      <PageLink to={`/signals/health-score/${facet}/${facetId}`}>
+      <PageLink to={`/signals/health-score/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
         <Panel>
           <Panel.Section>
             <ChartHeader

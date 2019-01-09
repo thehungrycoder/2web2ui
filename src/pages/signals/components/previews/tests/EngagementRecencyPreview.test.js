@@ -13,7 +13,8 @@ describe('Signals EngagementRecencyPreview Component', () => {
       loading: false,
       gap: 0.5,
       empty: false,
-      data: [1,2,3]
+      data: [1,2,3],
+      subaccountId: 101
     };
     wrapper = shallow(<EngagementRecencyPreview {...props}/>);
   });

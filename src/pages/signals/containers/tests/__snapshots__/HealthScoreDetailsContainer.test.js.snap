@@ -6,6 +6,7 @@ exports[`Signals Health Score Details Container gets health score and spam hits 
   facet="sending_domain"
   facetId="test.com"
   gap={1}
+  subaccountId="101"
   xTicks={
     Array [
       1,
