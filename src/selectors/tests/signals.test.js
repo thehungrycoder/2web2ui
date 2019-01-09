@@ -31,18 +31,18 @@ describe('Selectors: signals', () => {
             {
               sending_domain: 'test.com',
               current_trap_hits: 35,
-              current_relative_trap_hits: 0.1,
+              current_relative_trap_hits: 0.001,
               history: [
                 {
                   dt: '2018-01-01',
                   injections: 182400,
-                  relative_trap_hits: 0.25,
+                  relative_trap_hits: 0.0025, // bad
                   trap_hits: 456
                 },
                 {
                   dt: '2018-01-03',
                   injections: 35000,
-                  relative_trap_hits: 0.1,
+                  relative_trap_hits: 0.001, // good
                   trap_hits: 35
                 }
               ]
@@ -55,13 +55,13 @@ describe('Selectors: signals', () => {
                 {
                   dt: '2018-01-01',
                   injections: 282400,
-                  relative_trap_hits: 0.3,
+                  relative_trap_hits: 0.003, // bad
                   trap_hits: 856
                 },
                 {
                   dt: '2018-01-02',
                   injections: 50000,
-                  relative_trap_hits: 0.1,
+                  relative_trap_hits: 0.001, // good
                   trap_hits: 50
                 }
               ]
@@ -180,12 +180,12 @@ describe('Selectors: signals', () => {
     });
 
     it('should be empty with only fill data when not loading', () => {
-      const stateWhenEmpty = { ...state, signals: { healthScore: { data: [], loading: false }, spamHits: { data: [] }}};
-      expect(selectors.selectHealthScoreDetails(state, props)).toMatchSnapshot();
+      const stateWhenEmpty = { ...state, signals: { healthScore: { data: [], loading: false }, spamHits: { data: []}}};
+      expect(selectors.selectHealthScoreDetails(stateWhenEmpty, props)).toMatchSnapshot();
     });
 
     it('should not be empty when loading', () => {
-      const stateWhenLoading = { ...state, signals: { healthScore: { data: [], loading: true }, spamHits: { data: [] }}};
+      const stateWhenLoading = { ...state, signals: { healthScore: { data: [], loading: true }, spamHits: { data: []}}};
       expect(selectors.selectHealthScoreDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
   });
