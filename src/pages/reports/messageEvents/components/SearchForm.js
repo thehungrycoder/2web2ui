@@ -22,6 +22,9 @@ export class SearchForm extends Component {
           </Panel.Section>
           <Panel.Section>
             <FieldArray component={SearchQuery} name="searchQuery"/>
+            <p>
+              All filters accept comma-separated values.
+            </p>
           </Panel.Section>
           <Panel.Section>
             <Button primary submit >Apply Filters</Button>

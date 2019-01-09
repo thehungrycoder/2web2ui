@@ -28,7 +28,7 @@ export function getMessageEvents(options = {}) {
     type: 'GET_MESSAGE_EVENTS',
     meta: {
       method: 'GET',
-      url: '/v1/message-events',
+      url: '/v1/events/message',
       params,
       showErrorAlert: false
     }
@@ -87,7 +87,7 @@ export function getMessageHistory({ messageId }) {
     type: 'GET_MESSAGE_HISTORY',
     meta: {
       method: 'GET',
-      url: '/v1/message-events',
+      url: '/v1/events/message',
       params: {
         message_ids: messageId,
         // Must pass a time range because the defaults are too narrow (now to 24 hours ago) and
@@ -105,7 +105,7 @@ export function getDocumentation() {
     type: 'GET_MESSAGE_EVENTS_DOCUMENTATION',
     meta: {
       method: 'GET',
-      url: '/v1/message-events/events/documentation',
+      url: '/v1/events/message/documentation',
       showErrorAlert: false
     }
   });

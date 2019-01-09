@@ -2,7 +2,6 @@ import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { getDuration } from 'src/helpers/date';
 import { isEmailAddress, isEmailLocalPart, isRecipientEmailAddress } from 'src/helpers/email';
-import { EVENTS_SEARCH_FILTERS } from 'src/constants/index.js';
 import { domainRegex, slugRegex } from './regex';
 import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
@@ -27,13 +26,8 @@ export function eventsQuery(filter) {
   if (!filter || !filter.value) {
     return 'Required';
   }
-
-  const { key, value } = filter;
-  if (!key) {
+  if (!filter.key) {
     return 'Select a Filter';
-  }
-  if (!EVENTS_SEARCH_FILTERS[key].comma && value.includes(',')) {
-    return 'No commas allowed';
   }
   return undefined;
 }

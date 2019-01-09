@@ -12,8 +12,6 @@ import _ from 'lodash';
 const EVENTS_SELECTOR = [{ disabled: true, value: '', label: 'Select a Filter' },
   ... getFiltersAsArray(EVENTS_SEARCH_FILTERS)];
 
-const VALIDATION_TEXT = ['', 'Supports comma-separated values', 'Supports wildcards', 'Supports comma-separated values and wildcards'];
-
 const makeQueryValidator = _.memoize((filter) => () => eventsQuery(filter));
 
 //Returns options array only containing those not selected yet and the currently selected option.
@@ -26,10 +24,7 @@ const getPlaceholderText = _.memoize((key) => {
   if (!key) {
     return 'Select Filter Type';
   }
-  const helpText = EVENTS_SEARCH_FILTERS[key].placeholder;
-  const index = ((EVENTS_SEARCH_FILTERS[key].comma) ? 1 : 0) + ((EVENTS_SEARCH_FILTERS[key].wildcard) ? 2 : 0);
-  const validationText = VALIDATION_TEXT[index];
-  return `${helpText} ${validationText}`;
+  return EVENTS_SEARCH_FILTERS[key].placeholder;
 });
 
 export default ({ fields }) => (
