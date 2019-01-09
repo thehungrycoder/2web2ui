@@ -16,6 +16,7 @@ import { formatFullNumber, roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
+import HealthScorePreview from './components/previews/HealthScorePreview';
 
 export class SpamTrapPage extends Component {
   state = {
@@ -121,7 +122,7 @@ export class SpamTrapPage extends Component {
             <EngagementRecencyPreview />
           </Grid.Column>
           <Grid.Column xs={12} sm={6}>
-            {/* TODO replace with health score preview */}
+            <HealthScorePreview />
           </Grid.Column>
         </Grid>
       </Page>

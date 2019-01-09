@@ -2,7 +2,7 @@
 
 exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
 <PageLink
-  to="/signals/engagement-recency/ip-pool/best-pool"
+  to="/signals/engagement-recency/ip-pool/best-pool?subaccount=101"
 >
   <Panel>
     <Panel.Section>
@@ -42,6 +42,10 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
         xKey="date"
         yAxisProps={
           Object {
+            "domain": Array [
+              0,
+              1,
+            ],
             "hide": true,
           }
         }
@@ -89,7 +93,7 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
 
 exports[`Signals EngagementRecencyPreview Component renders empty correctly 1`] = `
 <PageLink
-  to="/signals/engagement-recency/ip-pool/best-pool"
+  to="/signals/engagement-recency/ip-pool/best-pool?subaccount=101"
 >
   <Panel>
     <Panel.Section>
@@ -101,6 +105,7 @@ exports[`Signals EngagementRecencyPreview Component renders empty correctly 1`] 
     </Panel.Section>
     <Panel.Section>
       <Callout
+        height="170px"
         title="No Data Available"
       >
         Insufficient data to populate this chart
@@ -112,7 +117,7 @@ exports[`Signals EngagementRecencyPreview Component renders empty correctly 1`] 
 
 exports[`Signals EngagementRecencyPreview Component renders error correctly 1`] = `
 <PageLink
-  to="/signals/engagement-recency/ip-pool/best-pool"
+  to="/signals/engagement-recency/ip-pool/best-pool?subaccount=101"
 >
   <Panel>
     <Panel.Section>
@@ -124,6 +129,7 @@ exports[`Signals EngagementRecencyPreview Component renders error correctly 1`] 
     </Panel.Section>
     <Panel.Section>
       <Callout
+        height="170px"
         title="Unable to Load Data"
       >
         error message

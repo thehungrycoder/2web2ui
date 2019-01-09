@@ -41,6 +41,6 @@ exports[`Date helpers getDateTicks returns an array of start, end and middle day
 Array [
   "2017-12-02",
   "2017-12-09",
-  "2017-12-15",
+  "2017-12-16",
 ]
 `;

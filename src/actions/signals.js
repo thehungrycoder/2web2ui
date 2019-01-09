@@ -63,3 +63,8 @@ export const getEngagementRecency = signalsActionCreator({
   dimension: 'cohort-engagement',
   type: 'GET_ENGAGEMENT_RECENCY'
 });
+
+export const getHealthScore = signalsActionCreator({
+  dimension: 'health-score',
+  type: 'GET_HEALTH_SCORE'
+});

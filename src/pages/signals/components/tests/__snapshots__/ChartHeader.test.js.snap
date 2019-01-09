@@ -4,6 +4,33 @@ exports[`Signals ChartHeader Component renders correctly 1`] = `
 <Fragment>
   <div
     className="ChartHeader"
+    style={
+      Object {
+        "padding": "",
+      }
+    }
+  >
+    <h6
+      className="Title"
+    >
+      Foo
+    </h6>
+  </div>
+  <hr
+    className="Line"
+  />
+</Fragment>
+`;
+
+exports[`Signals ChartHeader Component renders padding correctly 1`] = `
+<Fragment>
+  <div
+    className="ChartHeader"
+    style={
+      Object {
+        "padding": "0 0 1rem 0",
+      }
+    }
   >
     <h6
       className="Title"
@@ -21,6 +48,11 @@ exports[`Signals ChartHeader Component renders primaryArea correctly 1`] = `
 <Fragment>
   <div
     className="ChartHeader"
+    style={
+      Object {
+        "padding": "",
+      }
+    }
   >
     <h6
       className="Title"
@@ -43,6 +75,11 @@ exports[`Signals ChartHeader Component renders tooltip content correctly 1`] = `
 <Fragment>
   <div
     className="ChartHeader"
+    style={
+      Object {
+        "padding": "",
+      }
+    }
   >
     <h6
       className="Title"

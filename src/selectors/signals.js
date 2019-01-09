@@ -15,6 +15,7 @@ export const getOptions = (state, options) => options;
 // Redux store
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
 export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
+export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
 
 // Details
 export const selectSpamHitsDetails = createSelector(
@@ -99,6 +100,49 @@ export const selectEngagementRecencyDetails = createSelector(
   }
 );
 
+export const selectHealthScoreDetails = createSelector(
+  [getHealthScoreData, selectSpamHitsDetails, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
+  ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { relativeRange }) => {
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
+
+    const history = _.get(match, 'history', []);
+    const normalizedHistory = history.map(({ dt: date, weights, ...values }) => ({
+      date,
+      weights: _.sortBy(weights, ({ weight }) => parseFloat(weight)).filter(({ weight_type }) => !weight_type.includes('eng cohorts:')),
+      ...values
+    }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        weights: [],
+        health_score: null
+      },
+      now: moment().subtract(1, 'day'),
+      relativeRange
+    });
+
+    // Merge in injections
+    const mergedHistory = _.map(filledHistory, (healthData) => {
+      const spamData = _.find(spamDetails.data, ['date', healthData.date]);
+      return { injections: spamData.injections, ...healthData };
+    });
+
+    const isEmpty = mergedHistory.every((values) => values.health_score === null);
+
+    return {
+      details: {
+        data: mergedHistory,
+        empty: isEmpty && !loading && !spamDetails.loading,
+        error,
+        loading: loading || spamDetails.loading
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
 
 export const selectEngagementRecencyOverviewData = createSelector(
   getEngagementRecencyData, getOptions,
@@ -173,7 +217,6 @@ export const selectEngagementRecencyOverview = createSelector(
     metaData
   })
 );
-
 
 export const selectSpamHitsOverviewData = createSelector(
   getSpamHitsData, getOptions,

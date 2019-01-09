@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { SpamTrapsPreview } from '../SpamTrapsPreview';
+import { HealthScorePreview } from '../HealthScorePreview';
 
-describe('Signals SpamTrapsPreview Component', () => {
+describe('Signals HealthScorePreview Component', () => {
   let wrapper;
   let props;
 
@@ -16,7 +16,7 @@ describe('Signals SpamTrapsPreview Component', () => {
       data: [1,2,3],
       subaccountId: 101
     };
-    wrapper = shallow(<SpamTrapsPreview {...props}/>);
+    wrapper = shallow(<HealthScorePreview {...props}/>);
   });
 
   it('renders correctly', () => {

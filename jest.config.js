@@ -2,7 +2,8 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     '!src/**/containers/**',
-    '!src/**/*.container.{js,jsx}'
+    '!src/**/*.container.{js,jsx}',
+    '!src/**/*.fake.{js,jsx}'
   ],
   coverageDirectory: 'build-reports',
   coverageReporters: [

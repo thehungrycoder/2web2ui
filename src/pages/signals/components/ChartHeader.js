@@ -3,9 +3,9 @@ import { Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import styles from './ChartHeader.module.scss';
 
-const ChartHeader = ({ title, primaryArea, hideLine, tooltipContent }) => (
+const ChartHeader = ({ title, primaryArea, hideLine, tooltipContent, padding = '' }) => (
   <Fragment>
-    <div className={styles.ChartHeader}>
+    <div className={styles.ChartHeader} style={{ padding }}>
       <h6 className={styles.Title}>{title}</h6>
       {tooltipContent && (
         <div className={styles.Tooltip}>

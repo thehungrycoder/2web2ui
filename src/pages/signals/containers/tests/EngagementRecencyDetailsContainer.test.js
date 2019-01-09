@@ -57,7 +57,7 @@ describe('Signals Engagement Recency Details Container', () => {
   });
 
   it('should shorten chart gap if data is long', () => {
-    wrapper.setProps({ details: { data: _.range(15).map((n) => n) }});
+    wrapper.setProps({ details: { data: _.range(16).map((n) => n) }});
     expect(wrapper.prop('gap')).toEqual(0.2);
   });
 });

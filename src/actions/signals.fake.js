@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -50,7 +51,6 @@ export function getSpamHits({ facet, filter }) {
 }
 
 const engagementDetails = (count) => _.range(count).map((n) => {
-
   const c_new = randInt(50000, 10000);
   const c_14d = randInt(50000, 25000);
   const c_90d = randInt(50000, 25000);
@@ -86,6 +86,92 @@ export function getEngagementRecency({ facet, filter }) {
             // simulating multiple results to for facetid matching
             [facet]: 'notthisone',
             history: data
+          }
+        ],
+        total_count: 2
+      }
+    }), 500);
+  };
+}
+
+const healthScoreDetails = (count) => _.range(count).map((n) => {
+  const health_score = randInt(100) / 100;
+  const weights = [
+    {
+      weight_type: 'List Quality',
+      weight: -randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    },
+    {
+      weight_type: 'Hard Bounces',
+      weight: -randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    },
+    {
+      weight_type: 'Block Bounces',
+      weight: -randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    },
+    {
+      weight_type: 'Complaints',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    },
+    {
+      weight_type: 'Transient Failures',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    },
+    {
+      weight_type: 'Other bounces',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    },
+    {
+      weight_type: 'eng cohorts: 14day',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    },
+    {
+      weight_type: 'eng cohorts: new',
+      weight: randInt(100) / 100,
+      weight_value: randInt(100) / 100
+    }
+  ];
+
+
+  return {
+    health_score, weights,
+    dt: moment().subtract(count - n, 'day').format('YYYY-MM-DD')
+  };
+});
+
+export function getHealthScore({ facet, filter }) {
+  return (dispatch, getState) => {
+    const { relativeRange } = getState().signalOptions;
+    const count = Number(relativeRange.replace('days', ''));
+    const data = healthScoreDetails(count + 1);
+
+    dispatch({
+      type: 'GET_HEALTH_SCORE_PENDING'
+    });
+
+    setTimeout(() => dispatch({
+      type: 'GET_HEALTH_SCORE_SUCCESS',
+      payload: {
+        data: [
+          {
+            [facet]: filter,
+            history: data,
+            current_weights: data[0].weights,
+            current_health_score: data[0].health_score
+          },
+          {
+            // simulating multiple results to for facetid matching
+            [facet]: 'notthisone',
+            history: data,
+            current_weights: data[0].weights,
+            current_health_score: data[0].health_score
           }
         ],
         total_count: 2

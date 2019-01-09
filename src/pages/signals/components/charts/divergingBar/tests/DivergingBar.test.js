@@ -6,8 +6,8 @@ describe('DivergingBar Component', () => {
   let wrapper;
   let props;
   const data = [
-    { key: 'foo', label: 'Label foo', value: 0.5 },
-    { key: 'bar', label: 'Label bar', value: -0.5 }
+    { label: 'Label foo', value: '0.5' },
+    { label: 'Label bar', value: '-0.5' }
   ];
   const getPayload = (i) => ({
     key: data[i].key,
@@ -17,10 +17,10 @@ describe('DivergingBar Component', () => {
 
   beforeEach(() => {
     props = {
+      barHeight: 10,
       data,
       xKey: 'value',
       yKey: 'label',
-      height: 300,
       width: '50%',
       onClick: jest.fn(),
       tooltipContent: jest.fn()
@@ -44,7 +44,7 @@ describe('DivergingBar Component', () => {
   });
 
   it('should render selected bar', () => {
-    wrapper.setProps({ selected: data[0].key });
+    wrapper.setProps({ selected: data[0].label });
     const Bar = wrapper.find('Bar').props().shape(getPayload(0));
     expect(Bar).toMatchSnapshot();
   });
@@ -55,7 +55,7 @@ describe('DivergingBar Component', () => {
   });
 
   it('should render selected y tick', () => {
-    wrapper.setProps({ selected: data[0].key });
+    wrapper.setProps({ selected: data[0].label });
     const Text = wrapper.find('YAxis').props().tick(getPayload(0));
     expect(Text.props.fill).toBe('#0B83D6');
   });

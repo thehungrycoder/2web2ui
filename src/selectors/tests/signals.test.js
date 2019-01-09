@@ -100,11 +100,44 @@ describe('Selectors: signals', () => {
           ],
           loading: false,
           error: null
+        },
+        healthScore: {
+          total_count: 10,
+          data: [
+            {
+              sending_domain: 'test.com',
+              history: [
+                {
+                  health_score: 0.8,
+                  dt: '2018-01-01',
+                  weights: [
+                    {
+                      weight_type: 'eng cohorts: should not be returned',
+                      weight: 0.5,
+                      weight_value: 0.5
+                    },
+                    {
+                      weight_type: 'Transient Failures',
+                      weight: 0.7,
+                      weight_value: 0.5
+                    },
+                    {
+                      weight_type: 'Other bounces',
+                      weight: -0.1,
+                      weight_value: 0.5
+                    },
+                  ]
+                }
+              ],
+              current_weights: [],
+              current_health_score: 0.9
+            }
+          ]
         }
       }
     };
 
-    dateHelpers.fillByDate.mockImplementationOnce(({ dataSet }) => dataSet);
+    dateHelpers.fillByDate.mockImplementation(({ dataSet }) => dataSet);
   });
 
   describe('spam hits details', () => {
@@ -136,6 +169,22 @@ describe('Selectors: signals', () => {
     it('should not be empty when loading', () => {
       state = { signals: { engagementRecency: { data: [], loading: true }}};
       expect(selectors.selectEngagementRecencyDetails(state, props).details.empty).toBe(false);
+    });
+  });
+
+  describe('health score details', () => {
+    it('should select details', () => {
+      expect(selectors.selectHealthScoreDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should be empty with no results when not loading', () => {
+      state = { signals: { healthScore: { data: [], loading: false }, spamHits: { data: [] }}};
+      expect(selectors.selectHealthScoreDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should not be empty when loading', () => {
+      state = { signals: { healthScore: { data: [], loading: true }, spamHits: { data: [] }}};
+      expect(selectors.selectHealthScoreDetails(state, props).details.empty).toBe(false);
     });
   });
 
