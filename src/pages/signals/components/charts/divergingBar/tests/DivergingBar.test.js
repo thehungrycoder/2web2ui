@@ -17,6 +17,7 @@ describe('DivergingBar Component', () => {
 
   beforeEach(() => {
     props = {
+      barHeight: 10,
       data,
       xKey: 'value',
       yKey: 'label',

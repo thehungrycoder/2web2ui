@@ -12,8 +12,8 @@ class DivergingBar extends Component {
   }
 
   getHeight = () => {
-    const { data } = this.props;
-    return data && data.length * 35;
+    const { data, barHeight } = this.props;
+    return data && data.length * barHeight;
   }
 
   renderBar = ({ key, background, payload, ...props }) => {
@@ -107,6 +107,7 @@ DivergingBar.propTypes = {
 };
 
 DivergingBar.defaultProps = {
+  barHeight: 35,
   xDomain: ['dataMin', 'dataMax'],
   xKey: 'value',
   yKey: 'label',

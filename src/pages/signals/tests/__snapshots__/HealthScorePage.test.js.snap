@@ -134,6 +134,7 @@ exports[`Signals Health Score Page renders correctly 1`] = `
         title="Health Score Components"
       />
       <DivergingBar
+        barHeight={35}
         data={Array []}
         negativeFill="#DB2F2D"
         positiveFill="#8CBE3C"
