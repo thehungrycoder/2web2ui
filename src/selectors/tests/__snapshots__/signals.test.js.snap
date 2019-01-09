@@ -208,20 +208,9 @@ Object {
       },
       Object {
         "date": "2018-01-01",
-        "health_score": 0.74321,
-        "injections": 182400,
-        "weights": Array [
-          Object {
-            "weight": -0.1,
-            "weight_type": "Other bounces",
-            "weight_value": 0.5,
-          },
-          Object {
-            "weight": 0.7,
-            "weight_type": "Transient Failures",
-            "weight_value": 0.5,
-          },
-        ],
+        "health_score": null,
+        "injections": null,
+        "weights": Array [],
       },
       Object {
         "date": "2018-01-02",
@@ -231,14 +220,14 @@ Object {
       },
       Object {
         "date": "2018-01-03",
-        "health_score": 0.98,
-        "injections": 35000,
+        "health_score": null,
+        "injections": null,
         "weights": Array [],
       },
     ],
-    "empty": false,
+    "empty": true,
     "error": undefined,
-    "loading": false,
+    "loading": undefined,
   },
   "facet": "sending_domain",
   "facetId": "test.com",
@@ -985,7 +974,7 @@ Object {
       Object {
         "date": "2018-01-01",
         "injections": 182400,
-        "relative_trap_hits": 0.25,
+        "relative_trap_hits": 0.0025,
         "trap_hits": 456,
       },
       Object {
@@ -997,7 +986,7 @@ Object {
       Object {
         "date": "2018-01-03",
         "injections": 35000,
-        "relative_trap_hits": 0.1,
+        "relative_trap_hits": 0.001,
         "trap_hits": 35,
       },
     ],

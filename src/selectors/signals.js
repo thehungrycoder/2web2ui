@@ -269,11 +269,12 @@ export const selectSpamHitsOverviewData = createSelector(
   getSpamHitsData, getOptions,
   ({ data }, { now, relativeRange }) => data.map((rowOfData) => {
     const history = rowOfData.history || [];
-    const normalizedHistory = history.map(({ dt: date, ...values }) => ({
+    const normalizedHistory = history.map(({ dt: date, relative_trap_hits, ...values }) => ({
       ...values,
       date,
       // Less than one tenth percent of hits to injections is good
-      ranking: values.relative_trap_hits > .1 ? 'bad' : 'good'
+      ranking: relative_trap_hits > .001 ? 'bad' : 'good',
+      relative_trap_hits: relative_trap_hits * 100
     }));
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
@@ -289,6 +290,7 @@ export const selectSpamHitsOverviewData = createSelector(
 
     return {
       ...rowOfData,
+      current_relative_trap_hits: _.last(filledHistory).relative_trap_hits,
       history: filledHistory,
       total_injections: history.reduce((total, { injections }) => total + injections, 0)
     };
@@ -299,7 +301,7 @@ export const selectSpamHitsOverviewMetaData = createSelector(
   getSpamHitsData,
   ({ data }) => {
     const absoluteValues = _.flatMap(data, ({ history }) => history.map(({ trap_hits }) => trap_hits));
-    const relativeValues = _.flatMap(data, ({ history }) => history.map(({ relative_trap_hits }) => relative_trap_hits));
+    const relativeValues = _.flatMap(data, ({ history }) => history.map(({ relative_trap_hits }) => relative_trap_hits * 100));
     const currentValues = data.reduce((acc, { current_trap_hits }) => {
       if (current_trap_hits === null) {
         return acc; // ignore
@@ -312,7 +314,7 @@ export const selectSpamHitsOverviewMetaData = createSelector(
         return acc; // ignore
       }
 
-      return [...acc, current_relative_trap_hits];
+      return [...acc, current_relative_trap_hits * 100];
     }, []);
 
     return {
