@@ -21,6 +21,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
         },
       }
     }
+    accountAgeInDays={5}
   />
   <Panel
     accent={true}
@@ -130,6 +131,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
         },
       }
     }
+    accountAgeInDays={5}
   />
   <Panel
     accent={true}
@@ -190,6 +192,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
         },
       }
     }
+    accountAgeInDays={5}
   />
   <Panel
     accent={true}
@@ -290,6 +293,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
         },
       }
     }
+    accountAgeInDays={5}
   />
   <Panel
     accent={true}
@@ -388,6 +392,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
         },
       }
     }
+    accountAgeInDays={5}
   />
   <Panel
     accent={true}
@@ -457,6 +462,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
         },
       }
     }
+    accountAgeInDays={5}
   />
   <Panel
     accent={true}
@@ -570,6 +576,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
         },
       }
     }
+    accountAgeInDays={5}
   />
   <Panel
     accent={true}
@@ -683,6 +690,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
         },
       }
     }
+    accountAgeInDays={5}
   />
   <Panel
     accent={true}
@@ -796,6 +804,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
         },
       }
     }
+    accountAgeInDays={5}
   />
   <Panel
     accent={true}

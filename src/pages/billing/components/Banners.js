@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
 import * as conversions from 'src/helpers/conversionTracking';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
-import moment from 'moment';
 
 const dateFormat = (date) => format(date, 'MMM DD, YYYY');
 
@@ -80,12 +79,16 @@ export const EnterpriseBanner = () => (
   </Banner>
 );
 
-export const FreePlanWarningBanner = ({ account = {}}) => {
-  const { created, subscription = {}, pending_subscription } = account;
-  const daysLeft = moment(created).add(30, 'd').diff(moment(new Date()), 'days');
-  if (daysLeft < 0 || pending_subscription || subscription.code !== 'free15K-1018') {
+export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays = 0, daysLeftShow = 30 }) => {
+  const { subscription = {}, pending_subscription } = account;
+
+  const daysLeft = Number.parseInt(30 - accountAgeInDays);
+
+  if (daysLeft < 0 || daysLeftShow < daysLeft || accountAgeInDays > 30 ||
+    pending_subscription || subscription.code !== 'free15K-1018') {
     return null;
   }
+
   return (
     <Banner status='warning' title='Free Plan Downgrade'>
       <p>

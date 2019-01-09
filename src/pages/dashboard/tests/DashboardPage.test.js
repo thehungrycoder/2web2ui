@@ -22,7 +22,8 @@ describe('Page: Dashboard tests', () => {
     },
     hasSuppressions: true,
     accountAgeInWeeks: 0,
-    verifyingEmail: false
+    verifyingEmail: false,
+    accountAgeInDays: 15
   };
 
   let wrapper;
@@ -48,29 +49,6 @@ describe('Page: Dashboard tests', () => {
 
   it('should display upgrade CTA when account is free and active', () => {
     wrapper.setProps({ account: { subscription: { code: 'free' }, status: 'active' }});
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render warning banner if within 14 days of free plan ending', () => {
-    wrapper.setProps({
-      account: {
-        ...props.account,
-        subscription: {
-          code: 'free15K-1018'
-        },
-        created: new Date(mockDate.getTime() - 23 * 24 * 60 * 60 * 1000) //1 week before the end date
-      }
-    });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should not render warning banner if more than 14 days of free plan ending', () => {
-    wrapper.setProps({
-      account: {
-        ...props.account,
-        created: new Date(mockDate.getTime() - 15 * 24 * 60 * 60 * 1000) //15 days before the end date
-      }
-    });
     expect(wrapper).toMatchSnapshot();
   });
 });

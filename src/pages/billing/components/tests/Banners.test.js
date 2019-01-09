@@ -62,9 +62,10 @@ describe('Billing Banners: ', () => {
       account: {
         subscription: {
           code: 'free15K-1018'
-        },
-        created: new Date()
-      }
+        }
+      },
+      accountAgeInDays: 16,
+      daysLeftShow: 14
     };
     beforeEach(() => {
       wrapper = shallow(<FreePlanWarningBanner {...props} />);
@@ -76,22 +77,22 @@ describe('Billing Banners: ', () => {
 
     it('renders correct text within 1 day of plan ending', () => {
       wrapper.setProps({
-        account: {
-          ...props.account,
-          created: new Date(new Date().getTime() - 28.5 * 24 * 60 * 60 * 1000)
-        }
+        accountAgeInDays: 29
       });
       expect(wrapper).toMatchSnapshot();
     });
 
     it('should not render if past 30 days of creation date', () => {
       wrapper.setProps({
-        account: {
-          ...props.account,
-          created: new Date(new Date().getTime() - 31 * 24 * 60 * 60 * 1000)
-        }
+        accountAgeInDays: 31
       });
+      expect(wrapper).toMatchSnapshot();
+    });
 
+    it('should not render if not within the limit of daysShowLeft', () => {
+      wrapper.setProps({
+        accountAgeInDays: 5
+      });
       expect(wrapper).toMatchSnapshot();
     });
 

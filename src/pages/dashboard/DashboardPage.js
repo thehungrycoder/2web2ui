@@ -15,11 +15,9 @@ import { checkSuppression } from 'src/actions/suppressions';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { listApiKeys } from 'src/actions/api-keys';
 
-import selectAccountAgeInWeeks from 'src/selectors/accountAge';
+import { selectAccountAgeInWeeks , selectAccountAgeInDays } from 'src/selectors/accountAge';
 import { selectVerifiedDomains, selectNotBlockedDomains } from 'src/selectors/sendingDomains';
 import { selectApiKeysForSending } from 'src/selectors/api-keys';
-
-import moment from 'moment';
 export class DashboardPage extends Component {
   componentDidMount() {
     this.props.checkSuppression();
@@ -28,19 +26,16 @@ export class DashboardPage extends Component {
   }
 
   render() {
-    const { accountAgeInWeeks, currentUser, hasSuppressions, account } = this.props;
+    const { accountAgeInWeeks, accountAgeInDays, currentUser, hasSuppressions, account } = this.props;
 
     //Shows banner if within 14 days of plan to downgrade
-    const showWarnBanner = moment(account.created).add(30, 'd').diff(moment(Date.now()), 'days') <= 14;
 
     return (
       <Page title='Dashboard'>
         {currentUser.email_verified === false && (
           <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
         )}
-        {showWarnBanner && (
-          <FreePlanWarningBanner account={account}/>
-        )}
+        <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} daysLeftShow={14}/>
         <UsageReport accountAgeInWeeks={accountAgeInWeeks} />
         <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
         <Tutorial {...this.props} />
@@ -50,7 +45,8 @@ export class DashboardPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const acctAge = selectAccountAgeInWeeks(state);
+  const acctAgeWeeks = selectAccountAgeInWeeks(state);
+  const acctAgeDays = selectAccountAgeInDays(state);
   const notBlockedDomains = selectNotBlockedDomains(state);
   const verifiedDomains = selectVerifiedDomains(state);
   const apiKeysForSending = selectApiKeysForSending(state);
@@ -58,7 +54,8 @@ function mapStateToProps(state) {
   return {
     account: state.account,
     currentUser: state.currentUser,
-    accountAgeInWeeks: acctAge,
+    accountAgeInWeeks: acctAgeWeeks,
+    accountAgeInDays: acctAgeDays,
     hasSuppressions: state.suppressions.hasSuppression,
     hasSendingDomains: notBlockedDomains.length > 0,
     hasVerifiedDomains: verifiedDomains.length > 0,

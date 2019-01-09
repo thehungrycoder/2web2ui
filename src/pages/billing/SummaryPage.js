@@ -4,6 +4,7 @@ import { Page } from '@sparkpost/matchbox';
 import { fetch as fetchAccount, getPlans } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
 import { selectBillingInfo } from 'src/selectors/accountBillingInfo';
+import { selectAccountAgeInDays } from 'src/selectors/accountAge';
 import ConditionSwitch, { defaultCase } from 'src/components/auth/ConditionSwitch';
 import { not } from 'src/helpers/conditions';
 import { isSuspendedForBilling, isSelfServeBilling } from 'src/helpers/conditions/account';
@@ -23,7 +24,7 @@ export class BillingSummaryPage extends Component {
   }
 
   render() {
-    const { loading, account, billingInfo, sendingIps, invoices } = this.props;
+    const { loading, account, billingInfo, sendingIps, invoices, accountAgeInDays } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -34,7 +35,7 @@ export class BillingSummaryPage extends Component {
         <ConditionSwitch>
           <SuspendedForBilling condition={isSuspendedForBilling} account={account} />
           <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} onZuoraPlan={billingInfo.onZuoraPlan} />
-          <BillingSummary condition={defaultCase} account={account} {...billingInfo} invoices={invoices} sendingIps={sendingIps} />
+          <BillingSummary condition={defaultCase} account={account} {...billingInfo} invoices={invoices} sendingIps={sendingIps} accountAgeInDays={accountAgeInDays} />
         </ConditionSwitch>
       </Page>
     );
@@ -44,6 +45,7 @@ export class BillingSummaryPage extends Component {
 const mapStateToProps = (state) => ({
   loading: state.account.loading || state.billing.plansLoading || !state.account.subscription,
   account: state.account,
+  accountAgeInDays: selectAccountAgeInDays(state),
   billingInfo: selectBillingInfo(state),
   sendingIps: state.sendingIps.list,
   invoices: state.invoices.list

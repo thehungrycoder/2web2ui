@@ -40,7 +40,7 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
 >
   <p>
     Your plan will automatically downgrade to 500 emails/month in 
-    29
+    14
      day
     s
     . 
@@ -79,6 +79,8 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders correct te
 exports[`Billing Banners:  Free Plan Downgrade warning banner should not render anything if pending plan change 1`] = `""`;
 
 exports[`Billing Banners:  Free Plan Downgrade warning banner should not render if current plan is not free15K-1018 1`] = `""`;
+
+exports[`Billing Banners:  Free Plan Downgrade warning banner should not render if not within the limit of daysShowLeft 1`] = `""`;
 
 exports[`Billing Banners:  Free Plan Downgrade warning banner should not render if past 30 days of creation date 1`] = `""`;
 

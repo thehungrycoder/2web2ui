@@ -5,6 +5,19 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
   empty={Object {}}
   title="Dashboard"
 >
+  <Component
+    account={
+      Object {
+        "created": 2018-05-15T12:00:00.000Z,
+        "status": "active",
+        "subscription": Object {
+          "code": "paid",
+        },
+      }
+    }
+    accountAgeInDays={15}
+    daysLeftShow={14}
+  />
   <Connect(UsageReport)
     accountAgeInWeeks={0}
   />
@@ -22,6 +35,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
         },
       }
     }
+    accountAgeInDays={15}
     accountAgeInWeeks={0}
     checkSuppression={
       [MockFunction] {
@@ -67,6 +81,18 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
   empty={Object {}}
   title="Dashboard"
 >
+  <Component
+    account={
+      Object {
+        "status": "active",
+        "subscription": Object {
+          "code": "free",
+        },
+      }
+    }
+    accountAgeInDays={15}
+    daysLeftShow={14}
+  />
   <Connect(UsageReport)
     accountAgeInWeeks={0}
   />
@@ -83,68 +109,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
         },
       }
     }
-    accountAgeInWeeks={0}
-    checkSuppression={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
-    currentUser={
-      Object {
-        "email_verified": true,
-      }
-    }
-    hasSuppressions={true}
-    listApiKeys={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
-        ],
-        "results": undefined,
-      }
-    }
-    listSendingDomains={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
-    verifyingEmail={false}
-  />
-</Page>
-`;
-
-exports[`Page: Dashboard tests should not render warning banner if more than 14 days of free plan ending 1`] = `
-<Page
-  empty={Object {}}
-  title="Dashboard"
->
-  <Connect(UsageReport)
-    accountAgeInWeeks={0}
-  />
-  <SuppressionBanner
-    accountAgeInWeeks={0}
-    hasSuppressions={true}
-  />
-  <Tutorial
-    account={
-      Object {
-        "created": 2018-04-30T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "paid",
-        },
-      }
-    }
+    accountAgeInDays={15}
     accountAgeInWeeks={0}
     checkSuppression={
       [MockFunction] {
@@ -190,6 +155,19 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
   empty={Object {}}
   title="Dashboard"
 >
+  <Component
+    account={
+      Object {
+        "created": 2018-05-15T12:00:00.000Z,
+        "status": "active",
+        "subscription": Object {
+          "code": "paid",
+        },
+      }
+    }
+    accountAgeInDays={15}
+    daysLeftShow={14}
+  />
   <Connect(UsageReport)
     accountAgeInWeeks={40}
   />
@@ -207,6 +185,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
         },
       }
     }
+    accountAgeInDays={15}
     accountAgeInWeeks={40}
     checkSuppression={
       [MockFunction] {
@@ -252,6 +231,19 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
   empty={Object {}}
   title="Dashboard"
 >
+  <Component
+    account={
+      Object {
+        "created": 2018-05-15T12:00:00.000Z,
+        "status": "active",
+        "subscription": Object {
+          "code": "paid",
+        },
+      }
+    }
+    accountAgeInDays={15}
+    daysLeftShow={14}
+  />
   <Connect(UsageReport)
     accountAgeInWeeks={0}
   />
@@ -269,79 +261,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
         },
       }
     }
-    accountAgeInWeeks={0}
-    checkSuppression={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
-    currentUser={
-      Object {
-        "email_verified": true,
-      }
-    }
-    hasSuppressions={true}
-    listApiKeys={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
-        ],
-        "results": undefined,
-      }
-    }
-    listSendingDomains={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
-    verifyingEmail={false}
-  />
-</Page>
-`;
-
-exports[`Page: Dashboard tests should render warning banner if within 14 days of free plan ending 1`] = `
-<Page
-  empty={Object {}}
-  title="Dashboard"
->
-  <Component
-    account={
-      Object {
-        "created": 2018-04-22T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "free15K-1018",
-        },
-      }
-    }
-  />
-  <Connect(UsageReport)
-    accountAgeInWeeks={0}
-  />
-  <SuppressionBanner
-    accountAgeInWeeks={0}
-    hasSuppressions={true}
-  />
-  <Tutorial
-    account={
-      Object {
-        "created": 2018-04-22T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "free15K-1018",
-        },
-      }
-    }
+    accountAgeInDays={15}
     accountAgeInWeeks={0}
     checkSuppression={
       [MockFunction] {

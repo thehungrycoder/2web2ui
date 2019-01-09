@@ -27,7 +27,8 @@ describe('Component: Billing Summary', () => {
       canUpdateBillingInfo: true,
       canPurchaseIps: true,
       sendingIps: [],
-      invoices: []
+      invoices: [],
+      accountAgeInDays: 5
     };
     wrapper = shallow(<BillingSummary {...props} />);
   });

@@ -1,2 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors: accountAge returns account age in days 1`] = `20.484277569444444`;
+
 exports[`Selectors: accountAge returns account age in weeks 1`] = `2.926325367063492`;
