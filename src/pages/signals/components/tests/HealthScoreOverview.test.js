@@ -174,8 +174,8 @@ describe('HealthScoreOverview', () => {
   });
 
   describe('history component', () => {
-    const factory = ({ chartType, history, ...props }) => {
-      const wrapper = subject({ history });
+    const factory = (pageProps) => ({ chartType, ...props }) => {
+      const wrapper = subject(pageProps);
       wrapper.setState({ chartType });
       const Column = wrapper.find('Column[dataKey="history"]').prop('component');
 
@@ -183,18 +183,18 @@ describe('HealthScoreOverview', () => {
     };
 
     it('renders absolute bar chart', () => {
-      const wrapper = factory({ chartType: 'bar' });
+      const wrapper = factory()({ chartType: 'bar' });
       expect(wrapper).toMatchSnapshot();
     });
 
     it('renders absolute sparkline', () => {
-      const wrapper = factory({ chartType: 'line' });
+      const wrapper = factory()({ chartType: 'line' });
       expect(wrapper).toMatchSnapshot();
     });
 
     it('redirects to details page when bar is clicked', () => {
       const historyPush = jest.fn();
-      const wrapper = factory({ chartType: 'bar', history: { push: historyPush }});
+      const wrapper = factory({ history: { push: historyPush }})({ chartType: 'bar' });
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
@@ -206,7 +206,7 @@ describe('HealthScoreOverview', () => {
 
     it('redirects to details page when dot is clicked', () => {
       const historyPush = jest.fn();
-      const wrapper = factory({ chartType: 'line', history: { push: historyPush }});
+      const wrapper = factory({ history: { push: historyPush }})({ chartType: 'line' });
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
@@ -214,6 +214,23 @@ describe('HealthScoreOverview', () => {
         search: '?subaccount=123',
         state: { date: '2018-01-13' }
       });
+    });
+
+    it('ignores master and all subaccount clickthrough to details page', () => {
+      const historyPush = jest.fn();
+      const wrapper = factory({
+        facet: {
+          key: 'sid',
+          label: 'Subaccount'
+        },
+        history: { push: historyPush }
+      })({
+        chartType: 'line',
+        sid: -1
+      });
+      wrapper.simulate('click', { date: '2018-01-13' });
+
+      expect(historyPush).not.toHaveBeenCalled();
     });
   });
 

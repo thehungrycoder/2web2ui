@@ -12,7 +12,11 @@ const FacetDataCell = ({ dimension, facet, id, name, signalOptions }) => {
   }
 
   if (facet === 'sid' && id === -1) {
-    label = 'Master & All Subaccounts';
+    return (
+      <div className={styles.PaddedCell}>
+        Master & All Subaccounts
+      </div>
+    );
   }
 
   if (name) {

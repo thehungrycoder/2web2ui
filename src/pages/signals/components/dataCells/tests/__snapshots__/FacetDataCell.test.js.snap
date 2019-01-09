@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FacetDataCell renders label for all accounts 1`] = `
+<div
+  className="PaddedCell"
+>
+  Master & All Subaccounts
+</div>
+`;
+
 exports[`FacetDataCell renders page link 1`] = `
 <div
   className="PaddedCell"
@@ -13,23 +21,6 @@ exports[`FacetDataCell renders page link 1`] = `
     }
   >
     example.com
-  </PageLink>
-</div>
-`;
-
-exports[`FacetDataCell renders page link for all accounts 1`] = `
-<div
-  className="PaddedCell"
->
-  <PageLink
-    to={
-      Object {
-        "pathname": "/signals/example/sid/-1",
-        "search": undefined,
-      }
-    }
-  >
-    Master & All Subaccounts
   </PageLink>
 </div>
 `;
