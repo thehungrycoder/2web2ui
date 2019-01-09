@@ -6,6 +6,7 @@ import moment from 'moment';
 // order_by param values do not match field names, so we have to translate here
 const ORDER_BY_MAPPING = {
   current_engaged_recipients: 'c_14d',
+  current_health_score: 'health_score',
   current_relative_engaged_recipients: 'perc',
   current_relative_trap_hits: 'perc',
   current_trap_hits: 'trap_hits'
@@ -54,11 +55,6 @@ const signalsActionCreator = ({ dimension, type }) => ({
   });
 };
 
-export const getSpamHits = signalsActionCreator({
-  dimension: 'spam-hits',
-  type: 'GET_SPAM_HITS'
-});
-
 export const getEngagementRecency = signalsActionCreator({
   dimension: 'cohort-engagement',
   type: 'GET_ENGAGEMENT_RECENCY'
@@ -67,4 +63,9 @@ export const getEngagementRecency = signalsActionCreator({
 export const getHealthScore = signalsActionCreator({
   dimension: 'health-score',
   type: 'GET_HEALTH_SCORE'
+});
+
+export const getSpamHits = signalsActionCreator({
+  dimension: 'spam-hits',
+  type: 'GET_SPAM_HITS'
 });

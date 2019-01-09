@@ -9,8 +9,11 @@ import moment from 'moment';
 export const getFacetFromParams = (state, props) => _.get(props, 'match.params.facet');
 export const getFacetIdFromParams = (state, props) => _.get(props, 'match.params.facetId');
 export const getSelectedDateFromRouter = (state, props) => _.get(props, 'location.state.date');
-export const getSignalOptions = (state, props) => _.get(state, 'signalOptions', {});
-export const getOptions = (state, options) => options;
+export const getOptions = (state, { now = moment().subtract(1, 'day'), ...options } = {}) => ({
+  ...state.signalOptions,
+  now,
+  ...options
+});
 
 // Redux store
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
@@ -19,8 +22,8 @@ export const getHealthScoreData = (state, props) => _.get(state, 'signals.health
 
 // Details
 export const selectSpamHitsDetails = createSelector(
-  [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { relativeRange }) => {
+  [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
     const history = match.history || [];
     const normalizedHistory = history.map(({ dt: date, ...values }) => ({ date, ...values }));
@@ -32,7 +35,7 @@ export const selectSpamHitsDetails = createSelector(
         relative_trap_hits: null,
         trap_hits: null
       },
-      now: moment().subtract(1, 'day'),
+      now,
       relativeRange
     });
 
@@ -53,8 +56,8 @@ export const selectSpamHitsDetails = createSelector(
 );
 
 export const selectEngagementRecencyDetails = createSelector(
-  [getEngagementRecencyData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { relativeRange }) => {
+  [getEngagementRecencyData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const calculatePercentages = (data) => data.map(({ c_total, dt, ...absolutes }) => {
@@ -80,7 +83,7 @@ export const selectEngagementRecencyDetails = createSelector(
         c_uneng: null,
         c_total: null
       },
-      now: moment().subtract(1, 'day'),
+      now,
       relativeRange
     });
 
@@ -101,8 +104,8 @@ export const selectEngagementRecencyDetails = createSelector(
 );
 
 export const selectHealthScoreDetails = createSelector(
-  [getHealthScoreData, selectSpamHitsDetails, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getSignalOptions],
-  ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { relativeRange }) => {
+  [getHealthScoreData, selectSpamHitsDetails, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { now, relativeRange }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const history = _.get(match, 'history', []);
@@ -118,7 +121,7 @@ export const selectHealthScoreDetails = createSelector(
         weights: [],
         health_score: null
       },
-      now: moment().subtract(1, 'day'),
+      now,
       relativeRange
     });
 
@@ -146,7 +149,7 @@ export const selectHealthScoreDetails = createSelector(
 
 export const selectEngagementRecencyOverviewData = createSelector(
   getEngagementRecencyData, getOptions,
-  ({ data }, { relativeRange }) => data.map((rowOfData) => {
+  ({ data }, { now, relativeRange }) => data.map((rowOfData) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, ...values }) => {
       const relative_engaged_recipients = (values.c_14d / values.c_total) * 100;
@@ -164,7 +167,7 @@ export const selectEngagementRecencyOverviewData = createSelector(
         engaged_recipients: null,
         relative_engaged_recipients: null
       },
-      now: moment().subtract(1, 'day'),
+      now,
       relativeRange
     });
 
@@ -218,9 +221,53 @@ export const selectEngagementRecencyOverview = createSelector(
   })
 );
 
+export const selectHealthScoreOverviewData = createSelector(
+  getHealthScoreData, getOptions,
+  ({ data }, { now, relativeRange }) => data.map(({ current_health_score, ...rowOfData }) => {
+    const history = rowOfData.history || [];
+    const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
+      const wholeHealthScore = Math.floor(health_score * 100);
+
+      return {
+        ...values,
+        date,
+        health_score: wholeHealthScore,
+        ranking: wholeHealthScore < 75 ? 'bad' : 'good'
+      };
+    });
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        health_score: null,
+        ranking: null
+      },
+      now,
+      relativeRange
+    });
+
+    return {
+      ...rowOfData,
+      current_health_score: _.last(filledHistory).health_score,
+      history: filledHistory,
+      average_health_score: Math.floor(
+        normalizedHistory.reduce((total, { health_score }) => total + health_score, 0) / normalizedHistory.length
+      )
+    };
+  })
+);
+
+export const selectHealthScoreOverview = createSelector(
+  [getHealthScoreData, selectHealthScoreOverviewData],
+  (healthScoreData, data) => ({
+    ...healthScoreData,
+    data
+  })
+);
+
+
 export const selectSpamHitsOverviewData = createSelector(
   getSpamHitsData, getOptions,
-  ({ data }, { relativeRange }) => data.map((rowOfData) => {
+  ({ data }, { now, relativeRange }) => data.map((rowOfData) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, ...values }) => ({
       ...values,
@@ -236,7 +283,7 @@ export const selectSpamHitsOverviewData = createSelector(
         relative_trap_hits: null,
         trap_hits: null
       },
-      now: moment().subtract(1, 'day'),
+      now,
       relativeRange
     });
 

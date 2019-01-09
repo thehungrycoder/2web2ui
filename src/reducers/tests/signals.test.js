@@ -25,5 +25,41 @@ cases('Signals Reducer', ({ name, ...action }) => {
       ],
       total_count: 3
     }
+  },
+  'engagment recency fail': {
+    type: 'GET_ENGAGEMENT_RECENCY_FAIL',
+    payload: {
+      error: new Error('Oh no!')
+    }
+  },
+  'engagment recency pending': {
+    type: 'GET_ENGAGEMENT_RECENCY_PENDING'
+  },
+  'engagment recency success': {
+    type: 'GET_ENGAGEMENT_RECENCY_SUCCESS',
+    payload: {
+      data: [
+        { 'sending-domain': 'example.com' }
+      ],
+      total_count: 3
+    }
+  },
+  'health score fail': {
+    type: 'GET_HEALTH_SCORE_FAIL',
+    payload: {
+      error: new Error('Oh no!')
+    }
+  },
+  'health score pending': {
+    type: 'GET_HEALTH_SCORE_PENDING'
+  },
+  'health score success': {
+    type: 'GET_HEALTH_SCORE_SUCCESS',
+    payload: {
+      data: [
+        { 'sending-domain': 'example.com' }
+      ],
+      total_count: 3
+    }
   }
 });

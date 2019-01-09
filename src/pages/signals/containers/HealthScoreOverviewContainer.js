@@ -1,21 +1,21 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getSpamHits } from 'src/actions/signals';
+import { getHealthScore } from 'src/actions/signals';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
 import { resetSummaryTable } from 'src/actions/summaryTables';
 import { defaultFacet, facetsByKey } from '../constants/facets';
-import { selectSpamHitsOverview } from 'src/selectors/signals';
+import { selectHealthScoreOverview } from 'src/selectors/signals';
 import { selectSubaccountsById } from 'src/selectors/subaccounts';
 import { selectSummaryTable } from 'src/selectors/summaryTables';
-import SpamTrapOverview from '../components/SpamTrapOverview';
+import HealthScoreOverview from '../components/HealthScoreOverview';
 import withSignalOptions from './withSignalOptions';
 
 const mapStateToProps = (state, props) => {
   const { facet: facetKey } = props.signalOptions;
-  const tableName = 'spamTrapHitsOverview';
+  const tableName = 'healthScoreOverview';
 
   return {
-    ...selectSpamHitsOverview(state),
+    ...selectHealthScoreOverview(state),
     facet: facetKey ? facetsByKey[facetKey] : defaultFacet,
     subaccounts: selectSubaccountsById(state),
     summaryTable: selectSummaryTable(state, tableName),
@@ -24,7 +24,7 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = {
-  getSpamHits,
+  getHealthScore,
   getSubaccounts,
   resetSummaryTable
 };
@@ -33,7 +33,7 @@ const mapDispatchToProps = {
 export default (
   withSignalOptions(
     withRouter(
-      connect(mapStateToProps, mapDispatchToProps)(SpamTrapOverview)
+      connect(mapStateToProps, mapDispatchToProps)(HealthScoreOverview)
     )
   )
 );

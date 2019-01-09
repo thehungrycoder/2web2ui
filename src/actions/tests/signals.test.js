@@ -1,5 +1,5 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
-import { getSpamHits, getEngagementRecency, getHealthScore } from '../signals';
+import { getEngagementRecency, getHealthScore, getSpamHits } from '../signals';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 jest.mock('src/helpers/date', () => ({

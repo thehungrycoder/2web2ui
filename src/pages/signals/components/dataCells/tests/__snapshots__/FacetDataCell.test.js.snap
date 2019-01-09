@@ -17,6 +17,23 @@ exports[`FacetDataCell renders page link 1`] = `
 </div>
 `;
 
+exports[`FacetDataCell renders page link for all accounts 1`] = `
+<div
+  className="PaddedCell"
+>
+  <PageLink
+    to={
+      Object {
+        "pathname": "/signals/example/sid/-1",
+        "search": undefined,
+      }
+    }
+  >
+    Master & All Subaccounts
+  </PageLink>
+</div>
+`;
+
 exports[`FacetDataCell renders page link for master account 1`] = `
 <div
   className="PaddedCell"
