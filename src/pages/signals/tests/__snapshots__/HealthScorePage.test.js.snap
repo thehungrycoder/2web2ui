@@ -128,6 +128,11 @@ exports[`Signals Health Score Page renders correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
+      <ChartHeader
+        hideLine={true}
+        padding="1rem 0 1rem"
+        title="Health Score Components"
+      />
       <DivergingBar
         data={Array []}
         negativeFill="#DB2F2D"
@@ -223,7 +228,13 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       md={5}
       mdOffset={0}
       sm={12}
-    />
+    >
+      <ChartHeader
+        hideLine={true}
+        padding="1rem 0 1rem"
+        title="Health Score Components"
+      />
+    </Grid.Column>
   </Grid>
   <OtherChartsHeader
     facetId="test.com"

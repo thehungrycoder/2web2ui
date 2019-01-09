@@ -26,4 +26,9 @@ describe('Signals ChartHeader Component', () => {
     wrapper.setProps({ tooltipContent: 'tooltip content' });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders padding correctly', () => {
+    wrapper.setProps({ padding: '0 0 1rem 0' });
+    expect(wrapper).toMatchSnapshot();
+  });
 });
