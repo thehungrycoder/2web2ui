@@ -12,6 +12,16 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
       }
     }
   />
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
+      }
+    }
+  />
   <Panel
     accent={true}
     title="Plan Overview"
@@ -111,6 +121,16 @@ exports[`Component: Billing Summary should render correctly for a standard free 
       }
     }
   />
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
+      }
+    }
+  />
   <Panel
     accent={true}
     title="Plan Overview"
@@ -151,6 +171,16 @@ exports[`Component: Billing Summary should render correctly for a standard free 
 
 exports[`Component: Billing Summary should render correctly if you can't buy IPs 1`] = `
 <div>
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
+      }
+    }
+  />
   <Component
     account={
       Object {
@@ -251,6 +281,16 @@ exports[`Component: Billing Summary should render correctly if you can't change 
       }
     }
   />
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
+      }
+    }
+  />
   <Panel
     accent={true}
     title="Plan Overview"
@@ -339,6 +379,16 @@ exports[`Component: Billing Summary should render correctly if you can't update 
       }
     }
   />
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
+      }
+    }
+  />
   <Panel
     accent={true}
     title="Plan Overview"
@@ -388,6 +438,16 @@ exports[`Component: Billing Summary should render correctly if you can't update 
 
 exports[`Component: Billing Summary should render with IP modal open 1`] = `
 <div>
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
+      }
+    }
+  />
   <Component
     account={
       Object {
@@ -501,6 +561,16 @@ exports[`Component: Billing Summary should render with the billing contact modal
       }
     }
   />
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
+      }
+    }
+  />
   <Panel
     accent={true}
     title="Plan Overview"
@@ -604,6 +674,16 @@ exports[`Component: Billing Summary should render with the payment info modal op
       }
     }
   />
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
+      }
+    }
+  />
   <Panel
     accent={true}
     title="Plan Overview"
@@ -697,6 +777,16 @@ exports[`Component: Billing Summary should render with the payment info modal op
 
 exports[`Component: Billing Summary should show the invoice history if there are invoices 1`] = `
 <div>
+  <Component
+    account={
+      Object {
+        "billing": Object {},
+        "subscription": Object {
+          "plan_volume": 15000,
+        },
+      }
+    }
+  />
   <Component
     account={
       Object {

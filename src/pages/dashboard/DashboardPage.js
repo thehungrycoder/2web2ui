@@ -8,6 +8,7 @@ import { UsageReport } from 'src/components';
 import Tutorial from './components/Tutorial';
 import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import SuppressionBanner from './components/SuppressionBanner';
+import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 
 import { fetch as fetchAccount } from 'src/actions/account';
 import { checkSuppression } from 'src/actions/suppressions';
@@ -18,6 +19,7 @@ import selectAccountAgeInWeeks from 'src/selectors/accountAge';
 import { selectVerifiedDomains, selectNotBlockedDomains } from 'src/selectors/sendingDomains';
 import { selectApiKeysForSending } from 'src/selectors/api-keys';
 
+import moment from 'moment';
 export class DashboardPage extends Component {
   componentDidMount() {
     this.props.checkSuppression();
@@ -26,12 +28,18 @@ export class DashboardPage extends Component {
   }
 
   render() {
-    const { accountAgeInWeeks, currentUser, hasSuppressions } = this.props;
+    const { accountAgeInWeeks, currentUser, hasSuppressions, account } = this.props;
+
+    //Shows banner if within 14 days of plan to downgrade
+    const showWarnBanner = moment(account.created).add(30, 'd').diff(moment(Date.now()), 'days') <= 14;
 
     return (
       <Page title='Dashboard'>
         {currentUser.email_verified === false && (
           <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
+        )}
+        {showWarnBanner && (
+          <FreePlanWarningBanner account={account}/>
         )}
         <UsageReport accountAgeInWeeks={accountAgeInWeeks} />
         <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
@@ -48,6 +56,7 @@ function mapStateToProps(state) {
   const apiKeysForSending = selectApiKeysForSending(state);
 
   return {
+    account: state.account,
     currentUser: state.currentUser,
     accountAgeInWeeks: acctAge,
     hasSuppressions: state.suppressions.hasSuppression,
