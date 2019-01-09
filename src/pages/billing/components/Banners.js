@@ -81,9 +81,9 @@ export const EnterpriseBanner = () => (
 );
 
 export const FreePlanWarningBanner = ({ account = {}}) => {
-  const { created, subscription = {}} = account;
+  const { created, subscription = {}, pending_subscription } = account;
   const daysLeft = moment(created).add(30, 'd').diff(moment(new Date()), 'days');
-  if (daysLeft <= 0 || subscription.code !== 'free15K-1018') {
+  if (daysLeft < 0 || pending_subscription || subscription.code !== 'free15K-1018') {
     return null;
   }
   return (

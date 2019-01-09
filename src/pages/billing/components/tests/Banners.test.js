@@ -63,7 +63,7 @@ describe('Billing Banners: ', () => {
         subscription: {
           code: 'free15K-1018'
         },
-        created: Date.now()
+        created: new Date()
       }
     };
     beforeEach(() => {
@@ -74,8 +74,34 @@ describe('Billing Banners: ', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should not render anything if date is past', () => {
-      wrapper.setProps({ account: { ...props.account, created: new Date(2010) }});
+    it('renders correct text within 1 day of plan ending', () => {
+      wrapper.setProps({
+        account: {
+          ...props.account,
+          created: new Date(new Date().getTime() - 28.5 * 24 * 60 * 60 * 1000)
+        }
+      });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render if past 30 days of creation date', () => {
+      wrapper.setProps({
+        account: {
+          ...props.account,
+          created: new Date(new Date().getTime() - 31 * 24 * 60 * 60 * 1000)
+        }
+      });
+
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render anything if pending plan change', () => {
+      wrapper.setProps({
+        account: {
+          ...props.account,
+          pending_subscription: true
+        }
+      });
       expect(wrapper).toMatchSnapshot();
     });
 
