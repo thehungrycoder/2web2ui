@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
-import Actions from './components/Actions';
+import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
@@ -98,10 +98,7 @@ export class EngagementRecencyPage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          {/* TODO finish actions */}
-          <Actions actions={[
-            { content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.', link: 'https://www.sparkpost.com' }
-          ]}/>
+          <EngagementRecencyActions cohorts={_.last(data)} />
         </Grid.Column>
       </Grid>
     );

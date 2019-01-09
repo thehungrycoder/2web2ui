@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
-import Actions from './components/Actions';
+import SpamTrapActions from './components/actionContent/SpamTrapActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import withSpamTrapDetails from './containers/SpamTrapDetailsContainer';
@@ -14,6 +14,7 @@ import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
+import _ from 'lodash';
 
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
@@ -98,10 +99,7 @@ export class SpamTrapPage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          {/* TODO finish actions */}
-          <Actions actions={[
-            { content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.', link: 'https://www.sparkpost.com' }
-          ]}/>
+          <SpamTrapActions percent={_.last(data).relative_trap_hits} />
         </Grid.Column>
       </Grid>
     );

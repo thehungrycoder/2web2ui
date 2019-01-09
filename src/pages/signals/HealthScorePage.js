@@ -5,7 +5,7 @@ import { Panel, Grid } from '@sparkpost/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import DivergingBar from './components/charts/divergingBar/DivergingBar';
-import Actions from './components/Actions';
+import HealthScoreActions from './components/actionContent/HealthScoreActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import withHealthScoreDetails from './containers/HealthScoreDetailsContainer';
@@ -63,6 +63,8 @@ export class HealthScorePage extends Component {
     const { selectedDate } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
+    // const currentWeights = _.get(_.last(data), 'weights');
+    const currentWeights = _.get(data[5], 'weights', []);
 
     let panelContent;
 
@@ -133,9 +135,7 @@ export class HealthScorePage extends Component {
                 xKey='weight'
                 yKey='weight_type'
               />
-              <Actions actions={[
-                { content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.', link: 'https://www.sparkpost.com' }
-              ]}/>
+              <HealthScoreActions weights={currentWeights} />
             </Fragment>
           )}
         </Grid.Column>

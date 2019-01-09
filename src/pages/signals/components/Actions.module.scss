@@ -9,6 +9,18 @@
 
   p {
     flex: 1 0 0;
+    font-size: rem(13);
+  }
+}
+
+
+.ActionWrapper:last-child {
+  .Dash {
+    display: none;
+  }
+
+  p {
+    margin-bottom: 0;
   }
 }
 
@@ -19,10 +31,24 @@
   background: center left / 10px 1px  linear-gradient(to right, transparent 40%, color(gray, 8) 40%) repeat-x;
 }
 
-.Icon {
+%Icon {
   flex: 0 0 0;
   min-width: rem(45);
+}
+
+.IconBad {
+  @extend %Icon;
   color: color(red, dark);
+}
+
+.IconGood {
+  @extend %Icon;
+  color: color(green, dark);
+}
+
+.IconWarning {
+  @extend %Icon;
+  color: color(yellow, dark);
 }
 
 .Title {
