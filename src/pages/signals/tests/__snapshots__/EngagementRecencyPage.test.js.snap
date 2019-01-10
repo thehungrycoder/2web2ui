@@ -74,117 +74,121 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
           />
         </Panel.Section>
         <Panel.Section>
-          <BarChart
-            fill="#B157CE"
-            gap={0.25}
-            height={250}
-            margin={
-              Object {
-                "bottom": 5,
-                "left": 18,
-                "right": 0,
-                "top": 5,
+          <div
+            className="LiftTooltip"
+          >
+            <BarChart
+              fill="#B157CE"
+              gap={0.25}
+              height={250}
+              margin={
+                Object {
+                  "bottom": 5,
+                  "left": 18,
+                  "right": 0,
+                  "top": 5,
+                }
               }
-            }
-            timeSeries={
-              Array [
-                Object {
-                  "c_total": 10,
-                },
-              ]
-            }
-            tooltipContent={[Function]}
-            width="99%"
-            xAxisProps={
-              Object {
-                "tickFormatter": [Function],
-                "ticks": Array [
-                  1,
-                  2,
-                ],
+              timeSeries={
+                Array [
+                  Object {
+                    "c_total": 10,
+                  },
+                ]
               }
-            }
-            xKey="date"
-            yAxisProps={
-              Object {
-                "domain": Array [
-                  0,
-                  1,
-                ],
-                "tickFormatter": [Function],
-                "ticks": Array [
-                  0,
-                  0.25,
-                  0.5,
-                  0.75,
-                  1,
-                ],
+              tooltipContent={[Function]}
+              width="99%"
+              xAxisProps={
+                Object {
+                  "tickFormatter": [Function],
+                  "ticks": Array [
+                    1,
+                    2,
+                  ],
+                }
               }
-            }
-            yKey="value"
-            yKeys={
-              Array [
+              xKey="date"
+              yAxisProps={
                 Object {
-                  "fill": "#3F8B93",
-                  "key": "c_new",
-                  "label": "New",
-                },
-                Object {
-                  "fill": "#44A8AD",
-                  "key": "c_14d",
-                  "label": "Recently Engaged",
-                },
-                Object {
-                  "fill": "#9AD8E3",
-                  "key": "c_90d",
-                  "label": "Semi Recently Engaged",
-                },
-                Object {
-                  "fill": "#B9E2E9",
-                  "key": "c_365d",
-                  "label": "Not Recently Engaged",
-                },
-                Object {
-                  "fill": "#E4EEF0",
-                  "key": "c_uneng",
-                  "label": "Never Engaged",
-                },
-              ]
-            }
-            yRange={
-              Array [
-                "auto",
-                "auto",
-              ]
-            }
-          />
-          <Legend
-            items={
-              Array [
-                Object {
-                  "fill": "#E4EEF0",
-                  "label": "Never Engaged",
-                },
-                Object {
-                  "fill": "#B9E2E9",
-                  "label": "Not Recently Engaged",
-                },
-                Object {
-                  "fill": "#9AD8E3",
-                  "label": "Semi Recently Engaged",
-                },
-                Object {
-                  "fill": "#44A8AD",
-                  "label": "Recently Engaged",
-                },
-                Object {
-                  "fill": "#3F8B93",
-                  "label": "New",
-                },
-              ]
-            }
-            tooltipContent={[Function]}
-          />
+                  "domain": Array [
+                    0,
+                    1,
+                  ],
+                  "tickFormatter": [Function],
+                  "ticks": Array [
+                    0,
+                    0.25,
+                    0.5,
+                    0.75,
+                    1,
+                  ],
+                }
+              }
+              yKey="value"
+              yKeys={
+                Array [
+                  Object {
+                    "fill": "#3F8B93",
+                    "key": "c_new",
+                    "label": "New",
+                  },
+                  Object {
+                    "fill": "#44A8AD",
+                    "key": "c_14d",
+                    "label": "Recently Engaged",
+                  },
+                  Object {
+                    "fill": "#9AD8E3",
+                    "key": "c_90d",
+                    "label": "Semi Recently Engaged",
+                  },
+                  Object {
+                    "fill": "#B9E2E9",
+                    "key": "c_365d",
+                    "label": "Not Recently Engaged",
+                  },
+                  Object {
+                    "fill": "#E4EEF0",
+                    "key": "c_uneng",
+                    "label": "Never Engaged",
+                  },
+                ]
+              }
+              yRange={
+                Array [
+                  "auto",
+                  "auto",
+                ]
+              }
+            />
+            <Legend
+              items={
+                Array [
+                  Object {
+                    "fill": "#E4EEF0",
+                    "label": "Never Engaged",
+                  },
+                  Object {
+                    "fill": "#B9E2E9",
+                    "label": "Not Recently Engaged",
+                  },
+                  Object {
+                    "fill": "#9AD8E3",
+                    "label": "Semi Recently Engaged",
+                  },
+                  Object {
+                    "fill": "#44A8AD",
+                    "label": "Recently Engaged",
+                  },
+                  Object {
+                    "fill": "#3F8B93",
+                    "label": "New",
+                  },
+                ]
+              }
+              tooltipContent={[Function]}
+            />
+          </div>
         </Panel.Section>
       </Panel>
     </Grid.Column>

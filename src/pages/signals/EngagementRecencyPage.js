@@ -83,7 +83,7 @@ export class EngagementRecencyPage extends Component {
             </Panel.Section>
             <Panel.Section>
               {chartPanel || (
-                <Fragment>
+                <div className='LiftTooltip'>
                   <BarChart
                     gap={gap}
                     timeSeries={data}
@@ -96,7 +96,7 @@ export class EngagementRecencyPage extends Component {
                     items={_.values(cohorts)}
                     tooltipContent={(label) => ENGAGEMENT_RECENCY_COHORTS[label]}
                   />
-                </Fragment>
+                </div>
               )}
             </Panel.Section>
           </Panel>
