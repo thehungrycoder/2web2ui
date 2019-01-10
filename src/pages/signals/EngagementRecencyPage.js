@@ -98,7 +98,7 @@ export class EngagementRecencyPage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <EngagementRecencyActions cohorts={_.last(data)} />
+          {!chartPanel && <EngagementRecencyActions cohorts={_.last(data)} />}
         </Grid.Column>
       </Grid>
     );

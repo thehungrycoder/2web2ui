@@ -99,7 +99,7 @@ export class SpamTrapPage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <SpamTrapActions percent={_.last(data).relative_trap_hits} />
+          {!chartPanel && <SpamTrapActions percent={_.last(data).relative_trap_hits} />}
         </Grid.Column>
       </Grid>
     );

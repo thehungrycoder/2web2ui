@@ -12,7 +12,7 @@ const EngagementRecencyActions = ({ cohorts }) => {
   });
 
   actions = actions.slice(0, 3);
-  return <Actions actions={actions} />; // todo empty={cohorts.every(key)}
+  return <Actions actions={actions} empty={cohorts.c_total === null} />;
 };
 
 export default EngagementRecencyActions;

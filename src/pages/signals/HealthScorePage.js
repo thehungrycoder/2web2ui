@@ -63,8 +63,7 @@ export class HealthScorePage extends Component {
     const { selectedDate } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
-    // const currentWeights = _.get(_.last(data), 'weights');
-    const currentWeights = _.get(data[5], 'weights', []);
+    const currentWeights = _.get(_.last(data), 'weights');
 
     let panelContent;
 
