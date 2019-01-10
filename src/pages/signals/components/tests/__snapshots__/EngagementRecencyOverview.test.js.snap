@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EngagementRecencyOverview current column component renders current count 1`] = `
+<NumericDataCell
+  value={123}
+/>
+`;
+
+exports[`EngagementRecencyOverview current column component renders current rate 1`] = `
+<PercentDataCell
+  value={234}
+/>
+`;
+
+exports[`EngagementRecencyOverview history component renders absolute bar chart 1`] = `
+<BarChartDataCell
+  dataKey="engaged_recipients"
+  label="Recently Engaged Recipients"
+  max={200}
+  onClick={[Function]}
+  relative={false}
+/>
+`;
+
+exports[`EngagementRecencyOverview history component renders absolute sparkline 1`] = `
+<SparklineDataCell
+  dataKey="engaged_recipients"
+  label="Recently Engaged Recipients"
+  onClick={[Function]}
+  relative={false}
+/>
+`;
+
+exports[`EngagementRecencyOverview history component renders relative bar chart 1`] = `
+<BarChartDataCell
+  dataKey="relative_engaged_recipients"
+  label="Recently Engaged Recipients"
+  max={40}
+  onClick={[Function]}
+  relative={true}
+/>
+`;
+
+exports[`EngagementRecencyOverview history component renders relative sparkline 1`] = `
+<SparklineDataCell
+  dataKey="relative_engaged_recipients"
+  label="Recently Engaged Recipients"
+  onClick={[Function]}
+  relative={true}
+/>
+`;
+
+exports[`EngagementRecencyOverview renders overview panel with controls and table 1`] = `
+<Panel>
+  <div
+    className="Header"
+  >
+    <h5>
+      Engagement Recency Summary
+    </h5>
+    <div
+      className="Controls"
+    >
+      <Calculation
+        initialSelected="relative"
+        onChange={[Function]}
+      />
+      <ChartType
+        initialSelected="line"
+        onChange={[Function]}
+      />
+    </div>
+  </div>
+  <Connect(SummaryTable)
+    data={
+      Array [
+        Object {
+          "current_engaged_recipients": 12,
+          "current_relative_engaged_recipients": 5,
+          "domain": "example.com",
+          "history": Array [
+            Object {
+              "date": "2018-01-13",
+              "engaged_recipients": 12,
+              "relative_engaged_recipients": 5,
+            },
+          ],
+          "total_engagement": 12,
+        },
+      ]
+    }
+    empty={false}
+    loading={false}
+    tableName="Test"
+    totalCount={1}
+  >
+    <Column
+      component={[Function]}
+      dataKey="domain"
+      label="Domain"
+      sortable={false}
+      width="30%"
+    />
+    <Column
+      component={[Function]}
+      dataKey="history"
+      label="Daily Recently Engaged Recipients"
+      width="30%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="current_relative_engaged_recipients"
+      label="Current Ratio"
+      width="20%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="total_engagement"
+      label="Total Recipients"
+      width="20%"
+    />
+  </Connect(SummaryTable)>
+</Panel>
+`;

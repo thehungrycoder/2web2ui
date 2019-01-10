@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SpamTrapOverview current_hits component renders current count 1`] = `
+<NumericDataCell
+  value={123}
+/>
+`;
+
+exports[`SpamTrapOverview current_hits component renders current rate 1`] = `
+<PercentDataCell
+  value={234}
+/>
+`;
+
+exports[`SpamTrapOverview history component renders absolute bar chart 1`] = `
+<BarChartDataCell
+  dataKey="trap_hits"
+  label="Spam Trap Hits"
+  max={200}
+  onClick={[Function]}
+  relative={false}
+/>
+`;
+
+exports[`SpamTrapOverview history component renders absolute sparkline 1`] = `
+<SparklineDataCell
+  dataKey="trap_hits"
+  label="Spam Trap Hits"
+  onClick={[Function]}
+  relative={false}
+/>
+`;
+
+exports[`SpamTrapOverview history component renders relative bar chart 1`] = `
+<BarChartDataCell
+  dataKey="relative_trap_hits"
+  label="Spam Trap Hits"
+  max={40}
+  onClick={[Function]}
+  relative={true}
+/>
+`;
+
+exports[`SpamTrapOverview history component renders relative sparkline 1`] = `
+<SparklineDataCell
+  dataKey="relative_trap_hits"
+  label="Spam Trap Hits"
+  onClick={[Function]}
+  relative={true}
+/>
+`;
+
+exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
+<Panel>
+  <div
+    className="Header"
+  >
+    <h5>
+      Spam Trap Monitoring Summary
+    </h5>
+    <div
+      className="Controls"
+    >
+      <Calculation
+        initialSelected="relative"
+        onChange={[Function]}
+      />
+      <ChartType
+        initialSelected="line"
+        onChange={[Function]}
+      />
+    </div>
+  </div>
+  <Connect(SummaryTable)
+    data={
+      Array [
+        Object {
+          "current_relative_trap_hits": 5,
+          "current_trap_hits": 12,
+          "domain": "example.com",
+          "history": Array [
+            Object {
+              "date": "2018-01-13",
+              "relative_trap_hits": 5,
+              "trap_hits": 12,
+            },
+          ],
+        },
+      ]
+    }
+    empty={false}
+    loading={false}
+    tableName="Test"
+    totalCount={1}
+  >
+    <Column
+      component={[Function]}
+      dataKey="domain"
+      label="Domain"
+      sortable={false}
+      width="30%"
+    />
+    <Column
+      component={[Function]}
+      dataKey="history"
+      label="Daily Spam Trap Hits"
+      width="30%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="current_relative_trap_hits"
+      label="Current Ratio"
+      sortable={true}
+      width="20%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="total_injections"
+      label="Total Injections"
+      width="20%"
+    />
+  </Connect(SummaryTable)>
+</Panel>
+`;

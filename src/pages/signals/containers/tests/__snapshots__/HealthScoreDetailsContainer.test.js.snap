@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Health Score Details Container gets health score and spam hits on mount correctly 1`] = `
+<Component
+  data={Array []}
+  facet="sending_domain"
+  facetId="test.com"
+  gap={1}
+  subaccountId="101"
+  xTicks={
+    Array [
+      1,
+      2,
+    ]
+  }
+/>
+`;

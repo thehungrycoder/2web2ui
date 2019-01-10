@@ -71,4 +71,19 @@ describe('PlanPrice', () => {
     wrapper.setProps({ plan, showCsm: true });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders flat discount', () => {
+    wrapper.setProps({ selectedPromo: { discount_amount: 5 }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders as 0 if flat discount is greater than price', () => {
+    wrapper.setProps({ selectedPromo: { discount_amount: 15 }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders percent discount', () => {
+    wrapper.setProps({ selectedPromo: { discount_percentage: 25 }});
+    expect(wrapper).toMatchSnapshot();
+  });
 });

@@ -2,10 +2,16 @@
 
 exports[`Signals Spam Trap Details Container gets spam hits on mount correctly 1`] = `
 <Component
+  data={Array []}
   facet="sending_domain"
   facetId="test.com"
-  gap={0.5}
-  history={Array []}
-  selected="testing-selected"
+  gap={1}
+  subaccountId="101"
+  xTicks={
+    Array [
+      1,
+      2,
+    ]
+  }
 />
 `;

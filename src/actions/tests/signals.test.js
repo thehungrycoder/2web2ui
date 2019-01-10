@@ -1,5 +1,5 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
-import { getSpamHits } from '../signals';
+import { getEngagementRecency, getHealthScore, getSpamHits } from '../signals';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 jest.mock('src/helpers/date', () => ({
@@ -22,11 +22,38 @@ describe('Signals Actions', () => {
     'with a facet': {
       action: () => getSpamHits({ ...requiredOptions, facet: 'sending-domain' })
     },
+    'with a subaccount facet': {
+      action: () => getSpamHits({ ...requiredOptions, facet: 'sid', filter: 123 })
+    },
     'with a filter': {
       action: () => getSpamHits({ ...requiredOptions, filter: 'examp' })
     },
+    'with a limit': {
+      action: () => getSpamHits({ ...requiredOptions, limit: 100 })
+    },
+    'with a offset': {
+      action: () => getSpamHits({ ...requiredOptions, offset: 9 })
+    },
+    'with an order': {
+      action: () => getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'example_field' })
+    },
+    'with a order field that needs to be mapped': {
+      action: () => getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'current_trap_hits' })
+    },
     'with a subaccount': {
       action: () => getSpamHits({ ...requiredOptions, subaccount: { id: 123 }})
+    }
+  });
+
+  snapshotActionCases('.getEngagementRecency', {
+    'by default': {
+      action: () => getEngagementRecency({ ...requiredOptions })
+    }
+  });
+
+  snapshotActionCases('.getHealthScore', {
+    'by default': {
+      action: () => getHealthScore({ ...requiredOptions })
     }
   });
 });

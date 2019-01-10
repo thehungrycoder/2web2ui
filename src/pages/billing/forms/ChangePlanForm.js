@@ -64,10 +64,9 @@ export class ChangePlanForm extends Component {
       : values;
     let action = Promise.resolve({});
     if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
-      const { promoCode } = selectedPromo;
-      action = verifyPromoCode({ promoCode , billingId: values.planpicker.billingId, meta: { promoCode }});
+      newValues.promoCode = selectedPromo.promoCode;
+      action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId: values.planpicker.billingId, meta: { promoCode: selectedPromo.promoCode }});
     }
-
     return action
       .then(({ discount_id }) => {
         newValues.discountId = discount_id;
@@ -195,5 +194,5 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
-const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate, asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
+const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Panel, Tooltip } from '@sparkpost/matchbox';
-import { InfoOutline } from '@sparkpost/matchbox-icons';
+import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
 import withSpamTrapDetails from '../../containers/SpamTrapDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export class SpamTrapsPreview extends Component {
 
@@ -13,11 +13,11 @@ export class SpamTrapsPreview extends Component {
     const { data, gap, empty, error } = this.props;
 
     if (error) {
-      return <Callout title='Unable to Load Data'>{error.message}</Callout>;
+      return <Callout height='170px' title='Unable to Load Data'>{error.message}</Callout>;
     }
 
     if (empty) {
-      return <Callout title='No Data Available'>Insufficient data to populate this chart</Callout>;
+      return <Callout height='170px' title='No Data Available'>Insufficient data to populate this chart</Callout>;
     }
 
     return (
@@ -35,25 +35,25 @@ export class SpamTrapsPreview extends Component {
   }
 
   render() {
-    const { facet, facetId, loading } = this.props;
+    const { facet, facetId, loading, subaccountId } = this.props;
 
     if (loading) {
       return <PanelLoading minHeight='170px' />;
     }
 
     return (
-      <PageLink to={`/signals/spam-traps/${facet}/${facetId}`}>
-        <Panel sectioned>
-          <ChartHeader
-            title='Spam Trap Monitoring'
-            primaryArea={
-              // TODO fill tooltip content
-              <Tooltip dark horizontalOffset='-14px' content={'Content'}>
-                <InfoOutline size={24} />
-              </Tooltip>
-            }
-          />
-          {this.renderContent()}
+      <PageLink to={`/signals/spam-traps/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
+        <Panel>
+          <Panel.Section>
+            <ChartHeader
+              title='Spam Trap Monitoring'
+              hideLine
+              tooltipContent='TODO'
+            />
+          </Panel.Section>
+          <Panel.Section>
+            {this.renderContent()}
+          </Panel.Section>
         </Panel>
       </PageLink>
     );

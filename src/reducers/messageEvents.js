@@ -37,7 +37,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, loading: false, error: payload };
 
 
-    // History
+      // History
 
     case 'GET_MESSAGE_HISTORY_PENDING':
       return { ...state, historyLoading: true, error: null };
@@ -53,7 +53,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, historyLoading: false, error: payload };
 
 
-    // Documentation
+      // Documentation
 
     case 'GET_MESSAGE_EVENTS_DOCUMENTATION_PENDING':
       return { ...state, documentationLoading: true, error: null };
@@ -65,10 +65,15 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, documentationLoading: false, error: payload };
 
 
-    // Search options
+      // Search options
 
     case 'REFRESH_MESSAGE_EVENTS_DATE_OPTIONS': {
-      const dateOptions = { ...state.search.dateOptions, ...payload, ...getRelativeDates(payload.relativeRange, false) };
+      const dateOptions = {
+        ...state.search.dateOptions,
+        ...payload,
+        ...getRelativeDates(payload.relativeRange, { roundToPrecision: false })
+      };
+
       return { ...state, search: { ...state.search, dateOptions }};
     }
 

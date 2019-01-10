@@ -23,6 +23,13 @@ describe('HorizontalBar Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders with color', () => {
+    wrapper.setProps({ color: '#b252d1' });
+    const BarShape = wrapper.find('Bar').prop('shape');
+    const barWrapper = shallow(<BarShape />);
+    expect(barWrapper.prop('fill')).toEqual('#b252d1');
+  });
+
   it('should handle click', () => {
     wrapper.find('Bar').simulate('click');
     expect(props.onClick).toHaveBeenCalled();

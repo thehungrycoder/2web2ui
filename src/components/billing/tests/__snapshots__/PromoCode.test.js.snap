@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`promoCode should render correctly 1`] = `
+<span>
+  <Field
+    component={[Function]}
+    errorInLabel={true}
+    label="Promo Code"
+    name="promoCode"
+    suffix={
+      <Loading
+        loading={false}
+      />
+    }
+  />
+</span>
+`;
+
+exports[`promoCode should render with description 1`] = `
+<span>
+  <Field
+    component={[Function]}
+    errorInLabel={true}
+    label="Promo Code"
+    name="promoCode"
+    suffix={
+      <Loading
+        loading={false}
+      />
+    }
+  />
+  <span
+    className="CurrentPromoLabel"
+  >
+    Promo code description
+  </span>
+</span>
+`;
+
+exports[`promoCode should render with loading spinner 1`] = `
+<span>
+  <Field
+    component={[Function]}
+    errorInLabel={true}
+    label="Promo Code"
+    name="promoCode"
+    suffix={
+      <Loading
+        loading={true}
+      />
+    }
+  />
+</span>
+`;

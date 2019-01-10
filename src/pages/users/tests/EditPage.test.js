@@ -73,6 +73,27 @@ describe('Page: Users Edit', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render TFA disable button if tfa enabled and not current user', () => {
+    wrapper.setProps({
+      user: {
+        ...props.user,
+        tfa_enabled: true
+      }
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not render TFA disable button if tfa enabled but user is current user', () => {
+    wrapper.setProps({
+      user: {
+        ...props.user,
+        tfa_enabled: true,
+        isCurrentUser: true
+      }
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should show a delete modal', () => {
     instance.toggleDelete();
     wrapper.update();

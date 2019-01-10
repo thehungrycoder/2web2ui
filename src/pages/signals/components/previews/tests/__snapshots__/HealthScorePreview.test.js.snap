@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals HealthScorePreview Component renders correctly 1`] = `
+<PageLink
+  to="/signals/health-score/ip-pool/best-pool?subaccount=101"
+>
+  <Panel>
+    <Panel.Section>
+      <ChartHeader
+        hideLine={true}
+        title="Health Score"
+        tooltipContent="TODO"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <BarChart
+        disableHover={true}
+        fill="#B157CE"
+        gap={0.5}
+        height={170}
+        margin={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+          }
+        }
+        timeSeries={
+          Array [
+            1,
+            2,
+            3,
+          ]
+        }
+        width="99%"
+        xAxisProps={
+          Object {
+            "hide": true,
+          }
+        }
+        xKey="date"
+        yAxisProps={
+          Object {
+            "hide": true,
+          }
+        }
+        yKey="health_score"
+        yRange={
+          Array [
+            "auto",
+            "auto",
+          ]
+        }
+      />
+    </Panel.Section>
+  </Panel>
+</PageLink>
+`;
+
+exports[`Signals HealthScorePreview Component renders empty correctly 1`] = `
+<PageLink
+  to="/signals/health-score/ip-pool/best-pool?subaccount=101"
+>
+  <Panel>
+    <Panel.Section>
+      <ChartHeader
+        hideLine={true}
+        title="Health Score"
+        tooltipContent="TODO"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Callout
+        height="170px"
+        title="No Data Available"
+      >
+        Insufficient data to populate this chart
+      </Callout>
+    </Panel.Section>
+  </Panel>
+</PageLink>
+`;
+
+exports[`Signals HealthScorePreview Component renders error correctly 1`] = `
+<PageLink
+  to="/signals/health-score/ip-pool/best-pool?subaccount=101"
+>
+  <Panel>
+    <Panel.Section>
+      <ChartHeader
+        hideLine={true}
+        title="Health Score"
+        tooltipContent="TODO"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Callout
+        height="170px"
+        title="Unable to Load Data"
+      >
+        error message
+      </Callout>
+    </Panel.Section>
+  </Panel>
+</PageLink>
+`;
+
+exports[`Signals HealthScorePreview Component renders loading correctly 1`] = `
+<PanelLoading
+  minHeight="170px"
+/>
+`;

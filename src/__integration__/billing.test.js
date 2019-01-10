@@ -3,8 +3,7 @@ import { setupForm } from './helpers';
 import UpdatePaymentForm from 'src/pages/billing/forms/UpdatePaymentForm';
 import UpdateContactForm from 'src/pages/billing/forms/UpdateContactForm';
 import ChangePlanForm from 'src/pages/billing/forms/ChangePlanForm';
-import axios from 'axios';
-const axiosMock = axios.create();
+import AddIps from 'src/pages/billing/forms/AddIps';
 
 test('Update Payment Form', async () => {
   const form = await setupForm(<UpdatePaymentForm />);
@@ -22,9 +21,8 @@ test('Update Payment Form', async () => {
     { name: 'billingAddress.zip', value: '12345' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Update Contact Form', async () => {
@@ -39,9 +37,8 @@ test('Update Contact Form', async () => {
     { name: 'billingContact.zip', value: '12345' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Change Plan Form: Update My Credit Card and Plan', async () => {
@@ -51,7 +48,8 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
   // Click the button to use a different credit card
   form
     .find('Panel[title="Pay With Saved Payment Method"]')
-    .find('button').first()
+    .find('button')
+    .first()
     .simulate('click');
 
   form.fill([
@@ -68,9 +66,8 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
     { name: 'billingAddress.zip', value: '12345' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Change Plan Form: Update Plan Only', async () => {
@@ -81,9 +78,8 @@ test('Change Plan Form: Update Plan Only', async () => {
 
   form.fill({ type: 'typeahead', name: 'planpicker', value: newPlan });
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Change Plan Form: Upgrade for the First Time', async () => {
@@ -122,7 +118,34 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
     { name: 'billingAddress.zip', value: '12345' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
+});
+
+test('Add IPs Form: add a dedicated IP to a new pool', async () => {
+  const onClose = jest.fn();
+  const form = await setupForm(<AddIps onClose={onClose} />);
+
+  form.fill([
+    { name: 'quantity', value: '1' },
+    { name: 'ipPool.action', value: 'new', type: 'radio' },
+    { name: 'ipPool.name', value: 'newPool' }
+  ]);
+
+  await form.submit();
+  expect(form.mockApiCalls()).toMatchSnapshot();
+});
+
+test('Add IPs Form: add a dedicated IP to an existing pool', async () => {
+  const onClose = jest.fn();
+  const form = await setupForm(<AddIps onClose={onClose} />);
+
+  form.fill([
+    { name: 'quantity', value: '1' },
+    { name: 'ipPool.action', value: 'existing', type: 'radio' },
+    { name: 'ipPool.id', value: 'default', type: 'select' }
+  ]);
+
+  await form.submit();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });

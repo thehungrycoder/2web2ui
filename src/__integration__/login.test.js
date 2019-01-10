@@ -1,8 +1,6 @@
 import React from 'react';
 import { setupForm } from './helpers';
 import AuthPage from 'src/pages/auth/AuthPage';
-import axios from 'axios';
-const axiosMock = axios.create();
 
 test('Login Page: Basic Auth', async () => {
 
@@ -13,10 +11,9 @@ test('Login Page: Basic Auth', async () => {
     { name: 'password', value: 'test-password' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
 
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Login Page: Basic Auth w/ Remember-Me', async () => {
@@ -29,8 +26,7 @@ test('Login Page: Basic Auth w/ Remember-Me', async () => {
     { type: 'checkbox', name: 'rememberMe', value: true }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
 
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });

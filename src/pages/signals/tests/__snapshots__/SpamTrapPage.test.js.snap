@@ -2,8 +2,8 @@
 
 exports[`Signals Spam Trap Page bar chart props gets x axis props 1`] = `
 Object {
-  "interval": -2,
   "tickFormatter": [Function],
+  "ticks": Array [],
 }
 `;
 
@@ -65,18 +65,16 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "top": 5,
             }
           }
-          onClick={[Function]}
-          selected={null}
           timeSeries={Array []}
           tooltipContent={[Function]}
           width="99%"
           xAxisProps={
             Object {
-              "interval": -2,
               "tickFormatter": [Function],
+              "ticks": Array [],
             }
           }
-          xKey="dt"
+          xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": null,
@@ -106,7 +104,6 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
             },
           ]
         }
-        date={null}
       />
     </Grid.Column>
   </Grid>
@@ -117,11 +114,15 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+    </Grid.Column>
   </Grid>
 </SignalsPage>
 `;
@@ -197,7 +198,6 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
             },
           ]
         }
-        date={null}
       />
     </Grid.Column>
   </Grid>
@@ -208,11 +208,15 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+    </Grid.Column>
   </Grid>
 </SignalsPage>
 `;

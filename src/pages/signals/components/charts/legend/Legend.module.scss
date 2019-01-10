@@ -1,0 +1,22 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Item {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.Fill {
+  display: inline-block;
+  margin: 0 spacing(small) 0 rem(14);
+  width: rem(16);
+  height: rem(16);
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.Label {
+  font-weight: 400;
+  font-size: rem(9);
+  white-space: nowrap;
+  vertical-align: middle;
+}

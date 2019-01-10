@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Legend Component renders correctly 1`] = `
+<div>
+  <Item
+    fill="blue"
+    key="0"
+    label="label 1"
+  />
+  <Item
+    key="1"
+    label="label 2"
+  />
+</div>
+`;
+
+exports[`Legend Component renders correctly 2`] = `
+<div
+  className="Item"
+>
+  <span
+    className="Fill"
+    style={
+      Object {
+        "background": "blue",
+      }
+    }
+  />
+  <span
+    className="Label"
+  >
+    label 1
+  </span>
+</div>
+`;
+
+exports[`Legend Component renders correctly 3`] = `
+<div
+  className="Item"
+>
+  <span
+    className="Fill"
+    style={
+      Object {
+        "background": "whitesmoke",
+      }
+    }
+  />
+  <span
+    className="Label"
+  >
+    label 2
+  </span>
+</div>
+`;

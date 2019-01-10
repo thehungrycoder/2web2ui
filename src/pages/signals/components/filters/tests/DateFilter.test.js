@@ -3,7 +3,7 @@ import React from 'react';
 import { DateFilter } from '../DateFilter';
 
 describe('DateFilter', () => {
-  const subject = (props = {}) => shallow(<DateFilter {...props} />);
+  const subject = (props = {}) => shallow(<DateFilter signalOptions={{}} {...props} />);
 
   it('renders a select', () => {
     expect(subject()).toMatchSnapshot();

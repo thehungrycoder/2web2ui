@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
+<PageLink
+  to="/signals/engagement-recency/ip-pool/best-pool?subaccount=101"
+>
+  <Panel>
+    <Panel.Section>
+      <ChartHeader
+        hideLine={true}
+        title="Engagement Recency"
+        tooltipContent="TODO"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <BarChart
+        disableHover={true}
+        fill="#B157CE"
+        gap={0.5}
+        height={170}
+        margin={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+          }
+        }
+        timeSeries={
+          Array [
+            1,
+            2,
+            3,
+          ]
+        }
+        width="99%"
+        xAxisProps={
+          Object {
+            "hide": true,
+          }
+        }
+        xKey="date"
+        yAxisProps={
+          Object {
+            "domain": Array [
+              0,
+              1,
+            ],
+            "hide": true,
+          }
+        }
+        yKey="value"
+        yKeys={
+          Array [
+            Object {
+              "fill": "#3F8B93",
+              "key": "c_new",
+              "label": "New",
+            },
+            Object {
+              "fill": "#44A8AD",
+              "key": "c_14d",
+              "label": "Recently Engaged",
+            },
+            Object {
+              "fill": "#9AD8E3",
+              "key": "c_90d",
+              "label": "Semi Recently Engaged",
+            },
+            Object {
+              "fill": "#B9E2E9",
+              "key": "c_365d",
+              "label": "Not Recently Engaged",
+            },
+            Object {
+              "fill": "#E4EEF0",
+              "key": "c_uneng",
+              "label": "Never Engaged",
+            },
+          ]
+        }
+        yRange={
+          Array [
+            "auto",
+            "auto",
+          ]
+        }
+      />
+    </Panel.Section>
+  </Panel>
+</PageLink>
+`;
+
+exports[`Signals EngagementRecencyPreview Component renders empty correctly 1`] = `
+<PageLink
+  to="/signals/engagement-recency/ip-pool/best-pool?subaccount=101"
+>
+  <Panel>
+    <Panel.Section>
+      <ChartHeader
+        hideLine={true}
+        title="Engagement Recency"
+        tooltipContent="TODO"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Callout
+        height="170px"
+        title="No Data Available"
+      >
+        Insufficient data to populate this chart
+      </Callout>
+    </Panel.Section>
+  </Panel>
+</PageLink>
+`;
+
+exports[`Signals EngagementRecencyPreview Component renders error correctly 1`] = `
+<PageLink
+  to="/signals/engagement-recency/ip-pool/best-pool?subaccount=101"
+>
+  <Panel>
+    <Panel.Section>
+      <ChartHeader
+        hideLine={true}
+        title="Engagement Recency"
+        tooltipContent="TODO"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Callout
+        height="170px"
+        title="Unable to Load Data"
+      >
+        error message
+      </Callout>
+    </Panel.Section>
+  </Panel>
+</PageLink>
+`;
+
+exports[`Signals EngagementRecencyPreview Component renders loading correctly 1`] = `
+<PanelLoading
+  minHeight="170px"
+/>
+`;

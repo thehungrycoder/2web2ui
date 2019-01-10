@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getSpamHits } from 'src/actions/signals';
-import { selectSpamHitsDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
+import { selectSpamHitsDetails } from 'src/selectors/signals';
+import { getDateTicks } from 'src/helpers/date';
 
 export class WithSpamTrapDetails extends Component {
   componentDidMount() {
@@ -37,14 +38,15 @@ export class WithSpamTrapDetails extends Component {
       details,
       facet,
       facetId,
-      selected
+      filters,
+      subaccountId
     } = this.props;
 
     // Calculate gap here to share with preview and details
-    const gap = details.history && details.history.length > 14 ? 0.1 : 0.5;
+    const gap = details.data && details.data.length > 15 ? 0.2 : 1;
 
     return (
-      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} selected={selected}/>
+      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} xTicks={getDateTicks(filters.relativeRange)} subaccountId={subaccountId} />
     );
   }
 }
@@ -63,8 +65,7 @@ function withSpamTrapDetails(WrappedComponent) {
 
   const mapStateToProps = (state, props) => ({
     ...selectSpamHitsDetails(state, props),
-    filters: state.signalOptions,
-    selected: getSelectedDateFromRouter(state)
+    filters: state.signalOptions
   });
 
   return withRouter(connect(mapStateToProps, { getSpamHits })(Wrapper));

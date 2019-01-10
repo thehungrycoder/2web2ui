@@ -7,15 +7,17 @@ import { CenteredLogo, Loading, PlanPicker } from 'src/components';
 import { FORMS } from 'src/constants';
 import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
-import { getBillingCountries } from 'src/actions/billing';
+import { getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import { choosePlanMSTP } from 'src/selectors/onboarding';
 import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
 import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
+import promoCodeValidate from 'src/pages/billing/helpers/promoCodeValidate';
 import { isAws } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import AccessControl from 'src/components/auth/AccessControl';
 import { prepareCardInfo } from 'src/helpers/billing';
+import PromoCode from 'src/components/billing/PromoCode';
 
 const NEXT_STEP = '/onboarding/sending-domain';
 
@@ -36,8 +38,8 @@ export class OnboardingPlanPage extends Component {
   }
 
   onSubmit = (values) => {
-    const { billingCreate, showAlert, history } = this.props;
-
+    const { billingCreate, showAlert, history, billing, verifyPromoCode } = this.props;
+    const selectedPromo = billing.selectedPromo;
     const newValues = values.card && !values.planpicker.isFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
@@ -48,8 +50,19 @@ export class OnboardingPlanPage extends Component {
       return;
     }
 
+    let action = Promise.resolve({});
+    if (selectedPromo.promoCode && !values.planpicker.isFree) {
+      const { promoCode } = selectedPromo;
+      newValues.promoCode = promoCode;
+      action = verifyPromoCode({ promoCode, billingId: values.planpicker.billingId, meta: { promoCode }});
+    }
+
     // Note: billingCreate will update the subscription if the account is AWS
-    return billingCreate(newValues)
+    return action
+      .then(({ discount_id }) => {
+        newValues.discountId = discount_id;
+        return billingCreate(newValues);
+      })
       .then(() => history.push(NEXT_STEP))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
@@ -89,12 +102,31 @@ export class OnboardingPlanPage extends Component {
     );
   }
 
+  renderPromoCodeField() {
+    const { billing } = this.props;
+    const { selectedPromo = {}} = billing;
+    return (
+      <Panel.Section>
+        <PromoCode
+          selectedPromo={selectedPromo}
+        />
+      </Panel.Section>
+    );
+  }
+
+  onPlanSelect = (e) => {
+    const { currentPlan, clearPromoCode } = this.props;
+    if (currentPlan !== e.code) {
+      clearPromoCode();
+    }
+  }
   render() {
-    const { loading, plans, submitting } = this.props;
+    const { loading, plans, submitting, selectedPlan = {}, billing } = this.props;
 
     if (loading) {
       return <Loading />;
     }
+    const disableSubmit = submitting || billing.promoPending;
 
     const buttonText = submitting ? 'Updating Subscription...' : 'Get Started';
 
@@ -104,12 +136,13 @@ export class OnboardingPlanPage extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              <PlanPicker disabled={submitting} plans={plans} />
+              <PlanPicker selectedPromo={billing.selectedPromo} disabled={disableSubmit} plans={plans} onChange={this.onPlanSelect}/>
               <AccessControl condition={not(isAws)}>
+                {!selectedPlan.isFree && this.renderPromoCodeField()}
                 {this.renderCCSection()}
               </AccessControl>
               <Panel.Section>
-                <Button disabled={submitting} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>
+                <Button disabled={disableSubmit} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>
               </Panel.Section>
               <Steps />
             </Panel>
@@ -120,9 +153,9 @@ export class OnboardingPlanPage extends Component {
   }
 }
 
-const formOptions = { form: FORMS.JOIN_PLAN, enableReinitialize: true };
+const formOptions = { form: FORMS.JOIN_PLAN, enableReinitialize: true, asyncValidate: promoCodeValidate(FORMS.JOIN_PLAN), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 
 export default connect(
   choosePlanMSTP(FORMS.JOIN_PLAN),
-  { billingCreate, showAlert, getPlans, getBillingCountries }
+  { billingCreate, showAlert, getPlans, getBillingCountries, verifyPromoCode, clearPromoCode }
 )(reduxForm(formOptions)(OnboardingPlanPage));

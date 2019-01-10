@@ -38,6 +38,7 @@ exports[`Form Container: Change Plan should not show plans 1`] = `
         disableSubmit={true}
         selected={Object {}}
         selectedPromo={Object {}}
+        verifyPromoCode={[MockFunction]}
       />
     </Grid.Column>
   </Grid>
@@ -100,6 +101,7 @@ exports[`Form Container: Change Plan should render 1`] = `
         disableSubmit={true}
         selected={Object {}}
         selectedPromo={Object {}}
+        verifyPromoCode={[MockFunction]}
       />
     </Grid.Column>
   </Grid>
@@ -164,6 +166,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
         disableSubmit={true}
         selected={Object {}}
         selectedPromo={Object {}}
+        verifyPromoCode={[MockFunction]}
       />
     </Grid.Column>
   </Grid>

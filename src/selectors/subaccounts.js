@@ -43,3 +43,10 @@ export const selectSubaccountFromId = createSelector(
   [getSubaccounts, getSubaccountId],
   (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
 );
+
+export const selectSubaccountsById = createSelector(
+  selectSubaccounts,
+  (subaccounts) => (
+    subaccounts.reduce((acc, subaccount) => ({ ...acc, [Number(subaccount.id)]: subaccount }), {})
+  )
+);

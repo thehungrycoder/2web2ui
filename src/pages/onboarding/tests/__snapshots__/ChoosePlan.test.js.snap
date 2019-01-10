@@ -10,11 +10,18 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
       >
         <Component
           disabled={true}
+          onChange={[Function]}
           plans={Array []}
+          selectedPromo={Object {}}
         />
         <Connect(AccessControl)
           condition={[Function]}
         >
+          <Panel.Section>
+            <Connect(PromoCode)
+              selectedPromo={Object {}}
+            />
+          </Panel.Section>
           <Panel.Section>
             <Connect(PaymentForm)
               disabled={true}
@@ -57,11 +64,18 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
       >
         <Component
           disabled={false}
+          onChange={[Function]}
           plans={Array []}
+          selectedPromo={Object {}}
         />
         <Connect(AccessControl)
           condition={[Function]}
         >
+          <Panel.Section>
+            <Connect(PromoCode)
+              selectedPromo={Object {}}
+            />
+          </Panel.Section>
           <Panel.Section>
             <Connect(PaymentForm)
               disabled={false}
@@ -106,7 +120,9 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
       >
         <Component
           disabled={false}
+          onChange={[Function]}
           plans={Array []}
+          selectedPromo={Object {}}
         />
         <Connect(AccessControl)
           condition={[Function]}

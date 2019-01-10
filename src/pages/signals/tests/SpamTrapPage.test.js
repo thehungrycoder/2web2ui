@@ -13,7 +13,8 @@ describe('Signals Spam Trap Page', () => {
       data: [],
       gap: 0.25,
       loading: false,
-      empty: false
+      empty: false,
+      xTicks: []
     };
     wrapper = shallow(<SpamTrapPage {...props}/>);
   });
@@ -42,38 +43,6 @@ describe('Signals Spam Trap Page', () => {
       const calculation = shallow(wrapper.find('ChartHeader').props().primaryArea);
       calculation.simulate('change', 'relative');
       expect(wrapper.find('BarChart').prop('yKey')).toEqual('relative_trap_hits');
-    });
-
-    it('handles date select', () => {
-      wrapper.find('BarChart').simulate('click', { payload: { dt: 'test' }});
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('test');
-      expect(wrapper.find('Actions').prop('date')).toEqual('test');
-    });
-
-    it('sets selected date on mount if provided one', () => {
-      wrapper = shallow(<SpamTrapPage {...props} selected='initial-selected'/>);
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('initial-selected');
-      expect(wrapper.find('Actions').prop('date')).toEqual('initial-selected');
-    });
-
-    it('uses last selected date when receiving data', () => {
-      wrapper.setProps({ data: [1, { dt: 'last-date' }]});
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('last-date');
-      expect(wrapper.find('Actions').prop('date')).toEqual('last-date');
-    });
-
-    it('uses last selected date if selected date is not in data', () => {
-      wrapper = shallow(<SpamTrapPage {...props} selected='initial-selected'/>);
-      wrapper.setProps({ data: [1, { dt: 'last-date' }]});
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('last-date');
-      expect(wrapper.find('Actions').prop('date')).toEqual('last-date');
-    });
-
-    it('does not use last selected date if selected date is in data', () => {
-      wrapper = shallow(<SpamTrapPage {...props} selected='first-date'/>);
-      wrapper.setProps({ data: [{ dt: 'first-date' }, { dt: 'last-date' }]});
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('first-date');
-      expect(wrapper.find('Actions').prop('date')).toEqual('first-date');
     });
   });
 

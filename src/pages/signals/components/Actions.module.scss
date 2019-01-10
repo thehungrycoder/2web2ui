@@ -1,7 +1,7 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Wrapper {
-  padding: spacing() 0 0 spacing();
+  padding: spacing() 0 0 0;
 }
 
 .Action {
@@ -29,6 +29,11 @@
   border-bottom: 1px solid color(gray, 8);
   margin-bottom: spacing();
   padding-top: spacing(small);
+}
+
+.TitleText {
+  font-weight: 500;
+  font-size: rem(15);
 }
 
 .Link {

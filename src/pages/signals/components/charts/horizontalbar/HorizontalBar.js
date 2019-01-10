@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ResponsiveContainer, BarChart, Bar, Tooltip, XAxis, YAxis } from 'recharts';
+import { Rectangle, ResponsiveContainer, BarChart, Bar, Tooltip, XAxis, YAxis } from 'recharts';
 import TooltipWrapper from '../tooltip/Tooltip';
 
 /**
@@ -12,7 +12,7 @@ import TooltipWrapper from '../tooltip/Tooltip';
  *      tooltipContent={(payload) => <div>Value: {payload.value}</div>} />
  */
 
-const HorizontalBar = ({ value, height, width, xKey, onClick, xRange, tooltipContent }) => (
+const HorizontalBar = ({ color, value, height, width, xKey, onClick, xRange, tooltipContent }) => (
   <div className='LiftTooltip'>
     <ResponsiveContainer height={height} width={width}>
       <BarChart
@@ -28,7 +28,9 @@ const HorizontalBar = ({ value, height, width, xKey, onClick, xRange, tooltipCon
         <Bar
           dataKey={xKey}
           isAnimationActive={false}
-          onClick={onClick} />
+          onClick={onClick}
+          shape={(props) => <Rectangle {...props} fill={color} />}
+        />
         <Tooltip
           cursor={false}
           isAnimationActive={false}

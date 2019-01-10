@@ -59,6 +59,38 @@ Array [
 ]
 `;
 
+exports[`Action Creator: Billing promo code should dispatch a consumption of a promo code 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "POST",
+      "params": Object {
+        "billing_id": "test-bill-id",
+      },
+      "promoCode": "test-code",
+      "url": "v1/account/subscription/promo-codes/test-code",
+    },
+    "type": "CONSUME_PROMO_CODE",
+  },
+]
+`;
+
+exports[`Action Creator: Billing promo code should dispatch a verification of a promo code 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "params": Object {
+        "billing_id": "test-bill-id",
+      },
+      "promoCode": "test-code",
+      "url": "v1/account/subscription/promo-codes/test-code",
+    },
+    "type": "VERIFY_PROMO_CODE",
+  },
+]
+`;
+
 exports[`Action Creator: Billing should dispatch a cors action 1`] = `
 Array [
   Object {
@@ -97,48 +129,6 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Billing should dispatch a subscription sync action with meta data param 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "method": "POST",
-      "url": "/v1/account/subscription/check",
-      "word": "test",
-    },
-    "type": "SYNC_SUBSCRIPTION",
-  },
-]
-`;
-
-exports[`Action Creator: Billing should dispatch a subscription sync action with no params 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "method": "POST",
-      "url": "/v1/account/subscription/check",
-    },
-    "type": "SYNC_SUBSCRIPTION",
-  },
-]
-`;
-
-exports[`Action Creator: Billing should dispatch a verification of a promo code 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "method": "GET",
-      "params": Object {
-        "billing_id": "test-bill-id",
-      },
-      "promoCode": "test-code",
-      "showErrorAlert": false,
-      "url": "v1/account/subscription/promo-codes/test-code",
-    },
-    "type": "VERIFY_PROMO_CODE",
-  },
-]
-`;
-
 exports[`Action Creator: Billing should dispatch an update credit card action 1`] = `
 Array [
   Object {
@@ -154,6 +144,31 @@ Array [
       "url": "/payment-methods/credit-cards",
     },
     "type": "ZUORA_UPDATE_CC",
+  },
+]
+`;
+
+exports[`Action Creator: Billing sync subscription should dispatch a subscription sync action with meta data param 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "POST",
+      "url": "/v1/account/subscription/check",
+      "word": "test",
+    },
+    "type": "SYNC_SUBSCRIPTION",
+  },
+]
+`;
+
+exports[`Action Creator: Billing sync subscription should dispatch a subscription sync action with no params 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "POST",
+      "url": "/v1/account/subscription/check",
+    },
+    "type": "SYNC_SUBSCRIPTION",
   },
 ]
 `;

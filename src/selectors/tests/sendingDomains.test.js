@@ -1,58 +1,67 @@
 import { selectVerifiedDomains, selectReadyForBounce, selectDkimVerifiedDomains, hasUnverifiedDomains, selectDomain, selectNotBlockedDomains } from '../sendingDomains';
 
 describe('Selectors: sendingDomains', () => {
-  const state = {
-    sendingDomains: {
-      domain: {
-        id: 'xyz.com',
-        dkim: {
-          selector: 'scph0118',
-          public: '123456789A'
-        }
-      },
-      list: [
-        {
-          domain: 'owner-verified.test',
-          status: {
-            ownership_verified: true,
-            compliance_status: 'valid'
+  let state;
+
+  beforeEach(() => {
+    state = {
+      sendingDomains: {
+        domain: {
+          id: 'xyz.com',
+          dkim: {
+            selector: 'scph0118',
+            public: '123456789A'
           }
         },
-        {
-          domain: 'dkim-verified.test',
-          status: {
-            ownership_verified: false,
-            compliance_status: 'valid',
-            mx_status: 'valid',
-            cname_status: 'invalid',
-            dkim_status: 'valid'
+        list: [
+          {
+            domain: 'owner-verified.test',
+            status: {
+              ownership_verified: true,
+              compliance_status: 'valid'
+            }
+          },
+          {
+            domain: 'dkim-verified.test',
+            status: {
+              ownership_verified: false,
+              compliance_status: 'valid',
+              mx_status: 'valid',
+              cname_status: 'invalid',
+              dkim_status: 'valid'
+            }
+          },
+          {
+            domain: 'compliance-verified.test',
+            status: {
+              ownership_verified: true,
+              compliance_status: 'pending',
+              mx_status: 'invalid',
+              cname_status: 'valid',
+              dkim_status: 'invalid'
+            }
+          },
+          {
+            domain: 'verified-but-blocked.test',
+            status: {
+              ownership_verified: true,
+              compliance_status: 'blocked',
+              mx_status: 'valid',
+              cname_status: 'valid',
+              dkim_status: 'valid'
+            }
           }
-        },
-        {
-          domain: 'compliance-verified.test',
-          status: {
-            ownership_verified: true,
-            compliance_status: 'pending',
-            mx_status: 'invalid',
-            cname_status: 'valid',
-            dkim_status: 'invalid'
-          }
-        },
-        {
-          domain: 'verified-but-blocked.test',
-          status: {
-            ownership_verified: true,
-            compliance_status: 'blocked',
-            mx_status: 'valid',
-            cname_status: 'valid',
-            dkim_status: 'valid'
-          }
-        }
-      ]
-    }
-  };
+        ]
+      }
+    };
+  });
 
   it('should append DKIM keys to domain object', () => {
+    expect(selectDomain(state)).toMatchSnapshot();
+  });
+
+  it('should use signing domain when present for DKIM hostname', () => {
+    state.sendingDomains.domain.dkim.signing_domain = 'iamsigning.edu';
     expect(selectDomain(state)).toMatchSnapshot();
   });
 

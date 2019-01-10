@@ -67,7 +67,20 @@ export function verifyPromoCode({ promoCode, billingId, meta = {}}) {
       params: {
         billing_id: billingId
       },
-      showErrorAlert: false,
+      ...meta
+    }
+  });
+}
+
+export function consumePromoCode({ promoCode, billingId, meta = {}}) {
+  return sparkpostApiRequest({
+    type: 'CONSUME_PROMO_CODE',
+    meta: {
+      method: 'POST',
+      url: `v1/account/subscription/promo-codes/${promoCode}`,
+      params: {
+        billing_id: billingId
+      },
       ...meta
     }
   });

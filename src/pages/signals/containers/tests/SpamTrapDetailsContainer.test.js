@@ -1,7 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { WithSpamTrapDetails } from '../SpamTrapDetailsContainer';
+import * as dateMock from 'src/helpers/date';
 import _ from 'lodash';
+
+jest.mock('src/helpers/date');
 
 describe('Signals Spam Trap Details Container', () => {
   let wrapper;
@@ -12,7 +15,7 @@ describe('Signals Spam Trap Details Container', () => {
     props = {
       component: Component,
       details: {
-        history: []
+        data: []
       },
       facet: 'sending_domain',
       facetId: 'test.com',
@@ -20,10 +23,10 @@ describe('Signals Spam Trap Details Container', () => {
         relativeRange: '14days'
       },
       getSpamHits: jest.fn(),
-      selected: 'testing-selected',
       subaccountId: '101'
     };
 
+    dateMock.getDateTicks.mockImplementation(() => [1,2]);
     wrapper = shallow(<WithSpamTrapDetails {...props} />);
   });
 
@@ -53,8 +56,8 @@ describe('Signals Spam Trap Details Container', () => {
     expect(props.getSpamHits).toHaveBeenCalledTimes(0);
   });
 
-  it('should shorten chart gap if history is long', () => {
-    wrapper.setProps({ details: { history: _.range(15).map((n) => n) }});
-    expect(wrapper.prop('gap')).toEqual(0.1);
+  it('should shorten chart gap if data is long', () => {
+    wrapper.setProps({ details: { data: _.range(16).map((n) => n) }});
+    expect(wrapper.prop('gap')).toEqual(0.2);
   });
 });

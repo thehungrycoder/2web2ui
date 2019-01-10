@@ -47,6 +47,7 @@ exports[`SummaryTable renders a table 1`] = `
           },
         ]
       }
+      empty={false}
       loading={false}
       perPage={10}
     />

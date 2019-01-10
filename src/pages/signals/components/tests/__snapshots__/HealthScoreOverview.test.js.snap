@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HealthScoreOverview current score column component renders current score 1`] = `
+<NumericDataCell
+  value={99}
+/>
+`;
+
+exports[`HealthScoreOverview history component renders absolute bar chart 1`] = `
+<BarChartDataCell
+  dataKey="health_score"
+  label="Health Score"
+  onClick={[Function]}
+  relative={false}
+/>
+`;
+
+exports[`HealthScoreOverview history component renders absolute sparkline 1`] = `
+<SparklineDataCell
+  dataKey="health_score"
+  label="Health Score"
+  onClick={[Function]}
+  relative={false}
+/>
+`;
+
+exports[`HealthScoreOverview renders overview panel with controls and table 1`] = `
+<Panel>
+  <div
+    className="Header"
+  >
+    <h5>
+      Health Score Summary
+    </h5>
+    <div
+      className="Controls"
+    >
+      <ChartType
+        initialSelected="line"
+        onChange={[Function]}
+      />
+    </div>
+  </div>
+  <Connect(SummaryTable)
+    data={
+      Array [
+        Object {
+          "average_health_score": 98,
+          "current_health_score": 98,
+          "domain": "example.com",
+          "history": Array [
+            Object {
+              "date": "2018-01-13",
+              "health_score": 98,
+            },
+          ],
+        },
+      ]
+    }
+    empty={false}
+    loading={false}
+    tableName="Test"
+    totalCount={1}
+  >
+    <Column
+      component={[Function]}
+      dataKey="domain"
+      label="Domain"
+      sortable={false}
+      width="30%"
+    />
+    <Column
+      component={[Function]}
+      dataKey="history"
+      label="Daily Health Score"
+      width="30%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="current_health_score"
+      label="Current Score"
+      sortable={true}
+      width="20%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="average_health_score"
+      label="Average Score"
+      width="20%"
+    />
+  </Connect(SummaryTable)>
+</Panel>
+`;

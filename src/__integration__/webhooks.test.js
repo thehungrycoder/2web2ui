@@ -1,8 +1,6 @@
 import React from 'react';
 import { setupForm } from './helpers';
 import WebhookCreatePage from 'src/pages/webhooks/CreatePage';
-import axios from 'axios';
-const axiosMock = axios.create();
 
 test('Create Webhook: Defaults', async () => {
   const form = await setupForm(<WebhookCreatePage />);
@@ -12,9 +10,8 @@ test('Create Webhook: Defaults', async () => {
     { name: 'target', value: 'https://target.webhooks.com/status/200' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Create Webhook: Selected Events', async () => {
@@ -28,9 +25,8 @@ test('Create Webhook: Selected Events', async () => {
     { type: 'checkbox', name: 'events.spam_complaint', value: true }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Create Webhook: With Basic Auth', async () => {
@@ -44,9 +40,8 @@ test('Create Webhook: With Basic Auth', async () => {
     { name: 'basicPass', value: 'my-basic-auth-password' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Create Webhook: With OAuth2', async () => {
@@ -61,9 +56,8 @@ test('Create Webhook: With OAuth2', async () => {
     { name: 'tokenURL', value: 'https://oauth2.webhooks.com/token' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Create Webhook: Assigned to Master Account', async () => {
@@ -82,9 +76,8 @@ test('Create Webhook: Assigned to Master Account', async () => {
     { type: 'radio', name: 'assignTo', value: 'master' }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });
 
 test('Create Webhook: Assigned to a Subaccount', async () => {
@@ -116,7 +109,6 @@ test('Create Webhook: Assigned to a Subaccount', async () => {
     { type: 'typeahead', name: 'subaccount', value: subaccount }
   ]);
 
-  axiosMock.mockClear();
   await form.submit();
-  expect(axiosMock.mock.calls).toMatchSnapshot();
+  expect(form.mockApiCalls()).toMatchSnapshot();
 });

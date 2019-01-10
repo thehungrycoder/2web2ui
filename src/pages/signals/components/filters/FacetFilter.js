@@ -1,9 +1,9 @@
 import React from 'react';
 import { Select, TextField } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
-import facets from 'src/config/facets';
 import { onEnter } from 'src/helpers/keyEvents';
-import withSignalOptions from '../withSignalOptions';
+import facets from '../../constants/facets';
+import withSignalOptions from '../../containers/withSignalOptions';
 import styles from './FacetFilter.module.scss';
 
 const OPTIONS = [
@@ -18,7 +18,7 @@ export class FacetFilter extends React.Component {
 
   static getDerivedStateFromProps(nextProps, nextState) {
     return {
-      searchTerm: nextProps.facetSearchTerm
+      searchTerm: nextProps.signalOptions.facetSearchTerm
     };
   }
 
@@ -37,7 +37,7 @@ export class FacetFilter extends React.Component {
   }
 
   render() {
-    const { facet } = this.props;
+    const { signalOptions: { facet }} = this.props;
     const { searchTerm } = this.state;
 
     return (

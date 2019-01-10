@@ -21,4 +21,14 @@ describe('Signals ChartHeader Component', () => {
     wrapper.setProps({ primaryArea: <div>react</div> });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders tooltip content correctly', () => {
+    wrapper.setProps({ tooltipContent: 'tooltip content' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders padding correctly', () => {
+    wrapper.setProps({ padding: '0 0 1rem 0' });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

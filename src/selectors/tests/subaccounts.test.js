@@ -99,4 +99,42 @@ describe('Subaccount selectors', () => {
       expect(selector.selectSubaccountFromQuery(state, props)).toEqual({ name: 'sub 2', id: 501 });
     });
   });
+
+  describe('selectSubaccountsById', () => {
+    it('should return an empty object', () => {
+      const state = {
+        subaccounts: {
+          list: []
+        }
+      };
+
+      expect(selector.selectSubaccountsById(state)).toEqual({});
+    });
+
+    it('should return a map of subaccounts', () => {
+      const state = {
+        subaccounts: {
+          list: [
+            { id: 123, name: 'First Example' },
+            { id: 456, name: 'Second Example' }
+          ]
+        }
+      };
+
+      expect(selector.selectSubaccountsById(state)).toEqual({
+        123: {
+          id: 123,
+          name: 'First Example',
+          compliance: false,
+          status: 'active'
+        },
+        456: {
+          id: 456,
+          name: 'Second Example',
+          compliance: false,
+          status: 'active'
+        }
+      });
+    });
+  });
 });

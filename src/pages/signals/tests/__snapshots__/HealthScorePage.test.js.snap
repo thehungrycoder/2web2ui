@@ -1,3 +1,278 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals Health Score Page renders correctly 1`] = `<SignalsPage />`;
+exports[`Signals Health Score Page bar chart props gets x axis props 1`] = `
+Object {
+  "tickFormatter": [Function],
+  "ticks": Array [],
+}
+`;
+
+exports[`Signals Health Score Page bar chart props renders tooltip content for health score 1`] = `
+<TooltipMetric
+  label="Health Score"
+  value="12"
+/>
+`;
+
+exports[`Signals Health Score Page bar chart props renders tooltip content for injections 1`] = `
+<TooltipMetric
+  label="Injections"
+  value="1,000"
+/>
+`;
+
+exports[`Signals Health Score Page renders correctly 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  primaryArea={<Connect(DateFilter) />}
+  subtitle="Health Score for test.com"
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          title="Health Score"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={250}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 5,
+            }
+          }
+          onClick={[Function]}
+          selected={null}
+          timeSeries={Array []}
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="health_score"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+        <ChartHeader
+          title="Injections"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={190}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 5,
+            }
+          }
+          onClick={[Function]}
+          selected={null}
+          timeSeries={Array []}
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="injections"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <ChartHeader
+        hideLine={true}
+        padding="1rem 0 1rem"
+        title="Health Score Components"
+      />
+      <DivergingBar
+        barHeight={35}
+        data={Array []}
+        negativeFill="#DB2F2D"
+        positiveFill="#8CBE3C"
+        width="99%"
+        xDomain={
+          Array [
+            "dataMin",
+            "dataMax",
+          ]
+        }
+        xKey="weight"
+        yKey="weight_type"
+      />
+      <Actions
+        actions={
+          Array [
+            Object {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
+              "link": "https://www.sparkpost.com",
+            },
+          ]
+        }
+      />
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Health Score Page renders empty correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <ChartHeader
+    title="Health Score"
+  />
+  <Callout
+    title="No Data Available"
+  >
+    Insufficient data to populate this chart
+  </Callout>
+</Panel>
+`;
+
+exports[`Signals Health Score Page renders error correctly 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  primaryArea={<Connect(DateFilter) />}
+  subtitle="Health Score for test.com"
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          title="Health Score"
+        />
+        <Callout
+          title="Unable to Load Data"
+        >
+          error message
+        </Callout>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <ChartHeader
+        hideLine={true}
+        padding="1rem 0 1rem"
+        title="Health Score Components"
+      />
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Health Score Page renders loading correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <ChartHeader
+    title="Health Score"
+  />
+  <div
+    style={
+      Object {
+        "height": "220px",
+        "position": "relative",
+      }
+    }
+  >
+    <Loading />
+  </div>
+</Panel>
+`;

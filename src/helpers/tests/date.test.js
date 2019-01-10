@@ -1,4 +1,6 @@
 import {
+  fillByDate,
+  getDateTicks,
   getEndOfDay,
   getStartOfDay,
   getNextHour,
@@ -70,13 +72,13 @@ describe('Date helpers', () => {
 
   describe('getRelativeDates', () => {
 
-    cases('calculations', ({ range, subtractArgs, round }) => {
+    cases('calculations', ({ range, roundToPrecision, subtractArgs }) => {
       const date = moment(new Date('2017-12-17T12:00:00')).utc();
       Date.now = jest.fn(() => date);
-      const { from, to, relativeRange } = getRelativeDates(range, round);
+      const { from, to, relativeRange } = getRelativeDates(range, { roundToPrecision });
       let expectedFrom = moment(date.toDate()).subtract(...subtractArgs);
       let expectedTo = date;
-      if (round) {
+      if (roundToPrecision) {
         const rounded = roundBoundaries(expectedFrom, expectedTo);
         expectedFrom = rounded.from;
         expectedTo = rounded.to;
@@ -85,19 +87,19 @@ describe('Date helpers', () => {
       expect(from).toEqual(expectedFrom.toDate());
       expect(relativeRange).toEqual(range);
     }, {
-      'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours'], round: false },
-      'for a day ago': { range: 'day', subtractArgs: [1, 'days'], round: false },
-      'for a week ago': { range: '7days', subtractArgs: [7, 'days'], round: false },
-      'for 10 days ago': { range: '10days', subtractArgs: [10, 'days'], round: false },
-      'for two weeks ago': { range: '14days', subtractArgs: [14, 'days'], round: false },
-      'for a month': { range: '30days', subtractArgs: [30, 'days'], round: false },
-      'for a quarter ago': { range: '90days', subtractArgs: [90, 'days'], round: false },
-      'for an hour ago rounded': { range: 'hour', subtractArgs: [1, 'hours'], round: true },
-      'for a day ago rounded': { range: 'day', subtractArgs: [1, 'days'], round: true },
-      'for a week ago rounded': { range: '7days', subtractArgs: [7, 'days'], round: true },
-      'for 10 days ago rounded': { range: '10days', subtractArgs: [10, 'days'], round: true },
-      'for a month rounded': { range: '30days', subtractArgs: [30, 'days'], round: true },
-      'for a quarter ago rounded': { range: '90days', subtractArgs: [90, 'days'], round: true }
+      'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours'], roundToPrecision: false },
+      'for a day ago': { range: 'day', subtractArgs: [1, 'days'], roundToPrecision: false },
+      'for a week ago': { range: '7days', subtractArgs: [7, 'days'], roundToPrecision: false },
+      'for 10 days ago': { range: '10days', subtractArgs: [10, 'days'], roundToPrecision: false },
+      'for two weeks ago': { range: '14days', subtractArgs: [14, 'days'], roundToPrecision: false },
+      'for a month': { range: '30days', subtractArgs: [30, 'days'], roundToPrecision: false },
+      'for a quarter ago': { range: '90days', subtractArgs: [90, 'days'], roundToPrecision: false },
+      'for an hour ago rounded': { range: 'hour', subtractArgs: [1, 'hours'], roundToPrecision: true },
+      'for a day ago rounded': { range: 'day', subtractArgs: [1, 'days'], roundToPrecision: true },
+      'for a week ago rounded': { range: '7days', subtractArgs: [7, 'days'], roundToPrecision: true },
+      'for 10 days ago rounded': { range: '10days', subtractArgs: [10, 'days'], roundToPrecision: true },
+      'for a month rounded': { range: '30days', subtractArgs: [30, 'days'], roundToPrecision: true },
+      'for a quarter ago rounded': { range: '90days', subtractArgs: [90, 'days'], roundToPrecision: true }
     });
 
     it('should default to rounding the range', () => {
@@ -294,6 +296,27 @@ describe('Date helpers', () => {
 
     it('returns the duration between two dates in days', () => {
       expect(getDuration({ from: '2017-12-18T00:00:00', to: '2017-12-19T00:00:00' }, 'days')).toEqual(1);
+    });
+  });
+
+  describe('fillByDate', () => {
+    const now = moment('2018-02-02');
+    const relativeRange = '7days';
+
+    it('returns sorted and filled dataset', () => {
+      const dataSet = [
+        { date: '2018-02-02', value: 234 },
+        { date: '2018-01-30', value: 123 }
+      ];
+      const fill = { value: null };
+
+      expect(fillByDate({ dataSet, fill, now, relativeRange })).toMatchSnapshot();
+    });
+  });
+
+  describe('getDateTicks', () => {
+    it('returns an array of start, end and middle days', () => {
+      expect(getDateTicks('14days')).toMatchSnapshot();
     });
   });
 });

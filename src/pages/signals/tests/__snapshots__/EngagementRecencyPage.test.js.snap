@@ -1,0 +1,330 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Engagement Recency Page bar chart props gets x axis props 1`] = `
+Object {
+  "tickFormatter": [Function],
+  "ticks": Array [
+    1,
+    2,
+  ],
+}
+`;
+
+exports[`Signals Engagement Recency Page bar chart props renders tooltip content 1`] = `
+<Fragment>
+  <TooltipMetric
+    color="#E4EEF0"
+    key="c_uneng"
+    label="Never Engaged"
+    value="10%"
+  />
+  <TooltipMetric
+    color="#B9E2E9"
+    key="c_365d"
+    label="Not Recently Engaged"
+    value="20%"
+  />
+  <TooltipMetric
+    color="#9AD8E3"
+    key="c_90d"
+    label="Semi Recently Engaged"
+    value="30%"
+  />
+  <TooltipMetric
+    color="#44A8AD"
+    key="c_14d"
+    label="Recently Engaged"
+    value="40%"
+  />
+  <TooltipMetric
+    color="#3F8B93"
+    key="c_new"
+    label="New"
+    value="50%"
+  />
+</Fragment>
+`;
+
+exports[`Signals Engagement Recency Page renders correctly 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  primaryArea={<Connect(DateFilter) />}
+  subtitle="Engagement Recency for test.com"
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel>
+        <Panel.Section>
+          <ChartHeader
+            hideLine={true}
+            title="Engagement Recency"
+            tooltipContent="TODO"
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <BarChart
+            fill="#B157CE"
+            gap={0.25}
+            height={250}
+            margin={
+              Object {
+                "bottom": 5,
+                "left": 18,
+                "right": 0,
+                "top": 5,
+              }
+            }
+            timeSeries={Array []}
+            tooltipContent={[Function]}
+            width="99%"
+            xAxisProps={
+              Object {
+                "tickFormatter": [Function],
+                "ticks": Array [
+                  1,
+                  2,
+                ],
+              }
+            }
+            xKey="date"
+            yAxisProps={
+              Object {
+                "domain": Array [
+                  0,
+                  1,
+                ],
+                "tickFormatter": [Function],
+                "ticks": Array [
+                  0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1,
+                ],
+              }
+            }
+            yKey="value"
+            yKeys={
+              Array [
+                Object {
+                  "fill": "#3F8B93",
+                  "key": "c_new",
+                  "label": "New",
+                },
+                Object {
+                  "fill": "#44A8AD",
+                  "key": "c_14d",
+                  "label": "Recently Engaged",
+                },
+                Object {
+                  "fill": "#9AD8E3",
+                  "key": "c_90d",
+                  "label": "Semi Recently Engaged",
+                },
+                Object {
+                  "fill": "#B9E2E9",
+                  "key": "c_365d",
+                  "label": "Not Recently Engaged",
+                },
+                Object {
+                  "fill": "#E4EEF0",
+                  "key": "c_uneng",
+                  "label": "Never Engaged",
+                },
+              ]
+            }
+            yRange={
+              Array [
+                "auto",
+                "auto",
+              ]
+            }
+          />
+          <Legend
+            items={
+              Array [
+                Object {
+                  "fill": "#E4EEF0",
+                  "label": "Never Engaged",
+                },
+                Object {
+                  "fill": "#B9E2E9",
+                  "label": "Not Recently Engaged",
+                },
+                Object {
+                  "fill": "#9AD8E3",
+                  "label": "Semi Recently Engaged",
+                },
+                Object {
+                  "fill": "#44A8AD",
+                  "label": "Recently Engaged",
+                },
+                Object {
+                  "fill": "#3F8B93",
+                  "label": "New",
+                },
+              ]
+            }
+          />
+        </Panel.Section>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <Actions
+        actions={
+          Array [
+            Object {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
+              "link": "https://www.sparkpost.com",
+            },
+          ]
+        }
+      />
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Engagement Recency Page renders empty correctly 1`] = `
+<Panel>
+  <Panel.Section>
+    <ChartHeader
+      hideLine={true}
+      title="Engagement Recency"
+      tooltipContent="TODO"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <Callout
+      title="No Data Available"
+    >
+      Insufficient data to populate this chart
+    </Callout>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Signals Engagement Recency Page renders error correctly 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  primaryArea={<Connect(DateFilter) />}
+  subtitle="Engagement Recency for test.com"
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel>
+        <Panel.Section>
+          <ChartHeader
+            hideLine={true}
+            title="Engagement Recency"
+            tooltipContent="TODO"
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Callout
+            title="Unable to Load Data"
+          >
+            error message
+          </Callout>
+        </Panel.Section>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <Actions
+        actions={
+          Array [
+            Object {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
+              "link": "https://www.sparkpost.com",
+            },
+          ]
+        }
+      />
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Engagement Recency Page renders loading correctly 1`] = `
+<Panel>
+  <Panel.Section>
+    <ChartHeader
+      hideLine={true}
+      title="Engagement Recency"
+      tooltipContent="TODO"
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <div
+      style={
+        Object {
+          "height": "220px",
+          "position": "relative",
+        }
+      }
+    >
+      <Loading />
+    </div>
+  </Panel.Section>
+</Panel>
+`;

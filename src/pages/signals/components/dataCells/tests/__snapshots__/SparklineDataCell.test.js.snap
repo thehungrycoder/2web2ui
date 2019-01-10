@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SparklineDataCell renders a dot for current date 1`] = `
+<StyledDot
+  payload={
+    Object {
+      "date": "2018-01-13",
+    }
+  }
+/>
+`;
+
+exports[`SparklineDataCell renders empty data cell 1`] = `<EmptyDataCell />`;
+
+exports[`SparklineDataCell renders sparkline 1`] = `
+<Sparkline
+  activeDot={[Function]}
+  dot={[Function]}
+  height={25}
+  onClick={[Function]}
+  stroke="#000000"
+  timeSeries={
+    Array [
+      Object {
+        "date": "2018-01-12",
+        "example": 34,
+      },
+      Object {
+        "date": "2018-01-13",
+        "example": 50,
+      },
+    ]
+  }
+  tooltipContent={[Function]}
+  width="100%"
+  yKey="example"
+  yRange={
+    Array [
+      0,
+      "auto",
+    ]
+  }
+/>
+`;
+
+exports[`SparklineDataCell renders tooltip with absolute value 1`] = `
+<TooltipMetric
+  color="#8CCA3A"
+  value="1,234"
+/>
+`;
+
+exports[`SparklineDataCell renders tooltip with relative value 1`] = `
+<TooltipMetric
+  color="#8CCA3A"
+  value="12%"
+/>
+`;

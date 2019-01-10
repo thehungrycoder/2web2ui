@@ -49,7 +49,7 @@ Sparkline.defaultProps = {
   stroke: '#000000',
   width: '100%',
   yKey: 'value',
-  yRange: [0, 100]
+  yRange: [0, 'auto']
 };
 
 export default Sparkline;
