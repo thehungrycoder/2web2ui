@@ -89,7 +89,7 @@ export function getMessageHistory({ messageId }) {
       method: 'GET',
       url: '/v1/events/message',
       params: {
-        message_ids: messageId,
+        messages: messageId,
         // Must pass a time range because the defaults are too narrow (now to 24 hours ago) and
         // must cast a wide time range (even wider than the standard 10 day retention) to avoid
         // missing message events

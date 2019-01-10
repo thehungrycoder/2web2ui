@@ -43,7 +43,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return {
         ...state,
         historyLoading: false,
-        history: { ...state.history, [meta.params.message_ids]: payload }
+        history: { ...state.history, [meta.params.messages]: payload }
       };
 
     case 'GET_MESSAGE_HISTORY_FAIL':
