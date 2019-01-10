@@ -183,6 +183,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
                 },
               ]
             }
+            tooltipContent={[Function]}
           />
         </Panel.Section>
       </Panel>

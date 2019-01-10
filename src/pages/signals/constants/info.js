@@ -46,3 +46,26 @@ export const ENGAGEMENT_RECENCY_INFO = `
   This reports the share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 `;
+
+export const ENGAGEMENT_RECENCY_COHORTS = {
+  'Never Engaged': `
+    Never Engaged Recipients are the group of recipients who have received email but have not
+    engaged with your messages in the past 365 days.
+  `,
+  New: `
+    New Recipients are the group of recipients who have received their first email from you within
+    the past 7 days and who have not yet engaged with your messages.
+  `,
+  'Not Recently Engaged': `
+    Not Recently Engaged Recipients are the group of recipients who have engaged with your email
+    in the past 365 days, but not in the past 90 days.
+  `,
+  'Recently Engaged': `
+    Recently Engaged Recipients are the group of recipients who have engaged with your email in
+    the past 14 days.
+  `,
+  'Semi Recently Engaged': `
+    Semi-Recently Engaged Recipients are the group of recipients who have engaged with your email
+    in the past 90 days, but not in the past 14 days.
+  `
+};

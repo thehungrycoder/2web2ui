@@ -53,3 +53,93 @@ exports[`Legend Component renders correctly 3`] = `
   </span>
 </div>
 `;
+
+exports[`Legend Component renders correctly with tooltip content 1`] = `
+<div>
+  <Item
+    fill="blue"
+    key="0"
+    label="label 1"
+    tooltipContent={[Function]}
+  />
+  <Item
+    key="1"
+    label="label 2"
+    tooltipContent={[Function]}
+  />
+</div>
+`;
+
+exports[`Legend Component renders correctly with tooltip content 2`] = `
+<Tooltip
+  bottom={true}
+  content="label 1"
+  dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
+>
+  <div
+    className="Item"
+  >
+    <span
+      className="Fill"
+      style={
+        Object {
+          "background": "blue",
+        }
+      }
+    />
+    <span
+      className="Label"
+    >
+      label 1
+    </span>
+  </div>
+</Tooltip>
+`;
+
+exports[`Legend Component renders correctly with tooltip content 3`] = `
+<Tooltip
+  bottom={true}
+  content="label 2"
+  dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
+>
+  <div
+    className="Item"
+  >
+    <span
+      className="Fill"
+      style={
+        Object {
+          "background": "whitesmoke",
+        }
+      }
+    />
+    <span
+      className="Label"
+    >
+      label 2
+    </span>
+  </div>
+</Tooltip>
+`;

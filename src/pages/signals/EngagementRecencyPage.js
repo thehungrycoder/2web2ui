@@ -6,7 +6,7 @@ import BarChart from './components/charts/barchart/BarChart';
 import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
-import { ENGAGEMENT_RECENCY_INFO } from './constants/info';
+import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
 import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
@@ -92,7 +92,10 @@ export class EngagementRecencyPage extends Component {
                     yAxisProps={this.getYAxisProps()}
                     xAxisProps={this.getXAxisProps()}
                   />
-                  <Legend items={_.values(cohorts)} />
+                  <Legend
+                    items={_.values(cohorts)}
+                    tooltipContent={(label) => ENGAGEMENT_RECENCY_COHORTS[label]}
+                  />
                 </Fragment>
               )}
             </Panel.Section>
