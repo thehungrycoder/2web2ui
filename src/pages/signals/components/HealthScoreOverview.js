@@ -5,6 +5,7 @@ import { Panel, Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { HEALTH_SCORE_INFO } from '../constants/info';
 import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
@@ -107,11 +108,7 @@ class HealthScoreOverview extends React.Component {
           <div className={styles.Tooltip}>
             <Tooltip
               children={<InfoOutline size={18} />}
-              content={`
-                This is a predictive score that monitors your email health to identify problems
-                before they negagtively impact email delivery. This composite score is informed by
-                message events, including bounces, spam trap hits, user engagement, and others.
-              `}
+              content={HEALTH_SCORE_INFO}
               dark
               horizontalOffset="-1rem"
               right

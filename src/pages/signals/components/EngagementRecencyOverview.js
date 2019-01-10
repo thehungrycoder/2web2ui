@@ -5,6 +5,7 @@ import { Panel, Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { ENGAGEMENT_RECENCY_INFO } from '../constants/info';
 import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
@@ -110,10 +111,7 @@ class EngagementRecencyOverview extends React.Component {
           <div className={styles.Tooltip}>
             <Tooltip
               children={<InfoOutline size={18} />}
-              content={`
-                This reports the share over time of your email that has been sent to recipients who
-                most recently opened messages or clicked links during several defined time periods.
-              `}
+              content={ENGAGEMENT_RECENCY_INFO}
               dark
               horizontalOffset="-1rem"
               right
