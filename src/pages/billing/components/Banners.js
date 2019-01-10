@@ -94,13 +94,13 @@ export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays = 0, ageR
     return null;
   }
 
-  const daysLeft = Number.parseInt(ageRangeEnd - accountAgeInDays);
+  const daysLeft = Number.parseInt(ageRangeEnd - accountAgeInDays) + 1;
 
   return (
     <Banner status='warning' title='Free Plan Downgrade'>
       <p>
         Your plan will automatically downgrade to 500 emails/month
-        {daysLeft > 0 ? ` in ${pluralString(daysLeft, 'day', 'days')}` : ' today'}. <Link to='/account/billing/plan'>Upgrade your plan</Link> to
+        in {pluralString(daysLeft, 'day')}. <Link to='/account/billing/plan'>Upgrade your plan</Link> to
         keep or increase your sending limits.
       </p>
     </Banner>

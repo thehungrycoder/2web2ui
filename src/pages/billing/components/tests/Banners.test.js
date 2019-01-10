@@ -61,7 +61,7 @@ describe('Billing Banners: ', () => {
     const props = {
       account: {
         subscription: {
-          code: 'free15K-1018'
+          code: 'free15K-plan'
         }
       },
       accountAgeInDays: 16,
@@ -76,16 +76,9 @@ describe('Billing Banners: ', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('renders correct text within 1 day of plan ending', () => {
-      wrapper.setProps({
-        accountAgeInDays: 29
-      });
-      expect(wrapper).toMatchSnapshot();
-    });
-
     it('renders correct text on last day of plan', () => {
       wrapper.setProps({
-        accountAgeInDays: 30
+        accountAgeInDays: 29.5
       });
       expect(wrapper).toMatchSnapshot();
     });
@@ -100,7 +93,7 @@ describe('Billing Banners: ', () => {
     it('should not render if days account age is greater than ageRangeEnd', () => {
       wrapper.setProps({
         accountAgeInDays: 31,
-        ageRageEnd: 20
+        ageRangeEnd: 20
       });
       expect(wrapper).toMatchSnapshot();
     });
@@ -128,7 +121,7 @@ describe('Billing Banners: ', () => {
         account: {
           ...props.account,
           subscription: {
-            code: 'free500-1018'
+            code: 'free500-plan'
           }
         }
       });
