@@ -2,12 +2,10 @@
 
 .ChartHeader {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
 }
 
 .Title {
-  padding-top: spacing(small);
   font-weight: 500;
   font-size: rem(15);
   margin-bottom: 0;
@@ -18,6 +16,15 @@
   margin-bottom: spacing(larger);
 }
 
+.PrimaryArea {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
 .Tooltip {
   color: color(blue);
+  display: inline-block;
+  line-height: normal;
+  margin: 0 spacing(small);
 }

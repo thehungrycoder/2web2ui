@@ -59,7 +59,9 @@ exports[`Signals ChartHeader Component renders primaryArea correctly 1`] = `
     >
       Foo
     </h6>
-    <div>
+    <div
+      className="PrimaryArea"
+    >
       <div>
         react
       </div>
@@ -94,7 +96,7 @@ exports[`Signals ChartHeader Component renders tooltip content correctly 1`] = `
         content="tooltip content"
         dark={true}
         forcePosition={false}
-        horizontalOffset="-14px"
+        horizontalOffset="-1rem"
         preferredDirection={
           Object {
             "bottom": true,
@@ -106,7 +108,7 @@ exports[`Signals ChartHeader Component renders tooltip content correctly 1`] = `
         right={true}
       >
         <InfoOutline
-          size={24}
+          size={17}
         />
       </Tooltip>
     </div>
