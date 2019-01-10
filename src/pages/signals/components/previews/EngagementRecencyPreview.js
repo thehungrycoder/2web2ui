@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
+import { ENGAGEMENT_RECENCY_INFO } from '../../constants/info';
 import withEngagementRecencyDetails from '../../containers/EngagementRecencyDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
@@ -49,7 +50,7 @@ export class EngagementRecencyPreview extends Component {
             <ChartHeader
               title='Engagement Recency'
               hideLine
-              tooltipContent='TODO'
+              tooltipContent={ENGAGEMENT_RECENCY_INFO}
             />
           </Panel.Section>
           <Panel.Section>

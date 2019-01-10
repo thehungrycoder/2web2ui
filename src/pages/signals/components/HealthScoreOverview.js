@@ -1,9 +1,11 @@
 /* eslint-disable max-lines */
 import _ from 'lodash';
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel, Tooltip } from '@sparkpost/matchbox';
+import { InfoOutline } from '@sparkpost/matchbox-icons';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { HEALTH_SCORE_INFO } from '../constants/info';
 import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
@@ -103,6 +105,15 @@ class HealthScoreOverview extends React.Component {
       <Panel>
         <div className={styles.Header}>
           <h5>Health Score Summary</h5>
+          <div className={styles.Tooltip}>
+            <Tooltip
+              children={<InfoOutline className={styles.TooltipIcon} size={18} />}
+              content={HEALTH_SCORE_INFO}
+              dark
+              horizontalOffset="-1rem"
+              right
+            />
+          </div>
           <div className={styles.Controls}>
             <ChartType initialSelected={chartType} onChange={this.handleChartTypeChange} />
           </div>

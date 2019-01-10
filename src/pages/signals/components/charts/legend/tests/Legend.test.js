@@ -22,4 +22,12 @@ describe('Legend Component', () => {
       expect(item.dive()).toMatchSnapshot();
     });
   });
+
+  it('renders correctly with tooltip content', () => {
+    wrapper.setProps({ tooltipContent: (label) => label });
+    expect(wrapper).toMatchSnapshot();
+    wrapper.find('Item').forEach((item) => {
+      expect(item.dive()).toMatchSnapshot();
+    });
+  });
 });

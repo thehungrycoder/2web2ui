@@ -9,12 +9,12 @@ const ChartHeader = ({ title, primaryArea, hideLine, tooltipContent, padding = '
       <h6 className={styles.Title}>{title}</h6>
       {tooltipContent && (
         <div className={styles.Tooltip}>
-          <Tooltip dark horizontalOffset='-14px' content={tooltipContent}>
-            <InfoOutline size={24} />
+          <Tooltip dark horizontalOffset='-1rem' content={tooltipContent}>
+            <InfoOutline className={styles.TooltipIcon} size={17} />
           </Tooltip>
         </div>
       )}
-      {primaryArea && <div>{primaryArea}</div>}
+      {primaryArea && <div className={styles.PrimaryArea}>{primaryArea}</div>}
     </div>
     {!hideLine && <hr className={styles.Line} />}
   </Fragment>

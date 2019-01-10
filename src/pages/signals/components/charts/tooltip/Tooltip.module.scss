@@ -13,6 +13,10 @@
   color: color(gray, 10);
 }
 
+.TooltipContent {
+  font-size: rem(13);
+}
+
 .TooltipDate {
   font-size: rem(15);
   border-bottom: 1px solid darken(color(gray, 1), 5);

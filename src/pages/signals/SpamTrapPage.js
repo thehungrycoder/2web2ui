@@ -6,6 +6,7 @@ import BarChart from './components/charts/barchart/BarChart';
 import SpamTrapActions from './components/actionContent/SpamTrapActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
+import { SPAM_TRAP_INFO } from './constants/info';
 import withSpamTrapDetails from './containers/SpamTrapDetailsContainer';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
@@ -85,6 +86,7 @@ export class SpamTrapPage extends Component {
                   onChange={this.handleCalculationToggle}
                 />
               }
+              tooltipContent={SPAM_TRAP_INFO}
             />
             {chartPanel || (
               <BarChart

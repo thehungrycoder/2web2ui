@@ -9,7 +9,10 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
       <ChartHeader
         hideLine={true}
         title="Spam Trap Monitoring"
-        tooltipContent="TODO"
+        tooltipContent="
+  This reports the share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
       />
     </Panel.Section>
     <Panel.Section>
@@ -67,7 +70,10 @@ exports[`Signals SpamTrapsPreview Component renders empty correctly 1`] = `
       <ChartHeader
         hideLine={true}
         title="Spam Trap Monitoring"
-        tooltipContent="TODO"
+        tooltipContent="
+  This reports the share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
       />
     </Panel.Section>
     <Panel.Section>
@@ -91,7 +97,10 @@ exports[`Signals SpamTrapsPreview Component renders error correctly 1`] = `
       <ChartHeader
         hideLine={true}
         title="Spam Trap Monitoring"
-        tooltipContent="TODO"
+        tooltipContent="
+  This reports the share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
       />
     </Panel.Section>
     <Panel.Section>
