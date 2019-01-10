@@ -23,8 +23,12 @@
 }
 
 .Tooltip {
-  color: color(blue);
   display: inline-block;
   line-height: normal;
   margin: 0 spacing(small);
+}
+
+.TooltipIcon {
+  color: color(blue);
+  margin-top: -0.2em;
 }

@@ -110,7 +110,7 @@ class EngagementRecencyOverview extends React.Component {
           <h5>Engagement Recency Summary</h5>
           <div className={styles.Tooltip}>
             <Tooltip
-              children={<InfoOutline size={18} />}
+              children={<InfoOutline className={styles.TooltipIcon} size={18} />}
               content={ENGAGEMENT_RECENCY_INFO}
               dark
               horizontalOffset="-1rem"

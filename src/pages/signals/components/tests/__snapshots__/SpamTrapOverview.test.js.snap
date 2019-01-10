@@ -81,6 +81,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
         right={true}
       >
         <InfoOutline
+          className="TooltipIcon"
           size={18}
         />
       </Tooltip>

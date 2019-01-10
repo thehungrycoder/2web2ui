@@ -107,7 +107,7 @@ class HealthScoreOverview extends React.Component {
           <h5>Health Score Summary</h5>
           <div className={styles.Tooltip}>
             <Tooltip
-              children={<InfoOutline size={18} />}
+              children={<InfoOutline className={styles.TooltipIcon} size={18} />}
               content={HEALTH_SCORE_INFO}
               dark
               horizontalOffset="-1rem"

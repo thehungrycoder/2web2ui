@@ -81,6 +81,7 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
         right={true}
       >
         <InfoOutline
+          className="TooltipIcon"
           size={18}
         />
       </Tooltip>

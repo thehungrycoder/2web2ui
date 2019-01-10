@@ -10,7 +10,7 @@ const ChartHeader = ({ title, primaryArea, hideLine, tooltipContent, padding = '
       {tooltipContent && (
         <div className={styles.Tooltip}>
           <Tooltip dark horizontalOffset='-1rem' content={tooltipContent}>
-            <InfoOutline size={17} />
+            <InfoOutline className={styles.TooltipIcon} size={17} />
           </Tooltip>
         </div>
       )}

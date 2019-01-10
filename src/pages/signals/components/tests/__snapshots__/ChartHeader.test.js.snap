@@ -108,6 +108,7 @@ exports[`Signals ChartHeader Component renders tooltip content correctly 1`] = `
         right={true}
       >
         <InfoOutline
+          className="TooltipIcon"
           size={17}
         />
       </Tooltip>
