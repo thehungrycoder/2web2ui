@@ -129,16 +129,15 @@ export class HealthScorePage extends Component {
           {(!loading && !selectedWeights.length) && (
             <Callout>Insufficient data to populate this chart</Callout>
           )}
-          {!panelContent && (
-            <Fragment>
-              <DivergingBar
-                data={selectedWeights}
-                xKey='weight'
-                yKey='weight_type'
-              />
-              <HealthScoreActions weights={currentWeights} />
-            </Fragment>
+
+          {!panelContent && Boolean(selectedWeights.length) && (
+            <DivergingBar
+              data={selectedWeights}
+              xKey='weight'
+              yKey='weight_type'
+            />
           )}
+          {!panelContent && <HealthScoreActions weights={currentWeights} />}
         </Grid.Column>
       </Grid>
     );

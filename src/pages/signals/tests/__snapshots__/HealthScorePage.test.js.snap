@@ -345,21 +345,6 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       <Callout>
         Insufficient data to populate this chart
       </Callout>
-      <DivergingBar
-        barHeight={35}
-        data={Array []}
-        negativeFill="#DB2F2D"
-        positiveFill="#8CBE3C"
-        width="99%"
-        xDomain={
-          Array [
-            "dataMin",
-            "dataMax",
-          ]
-        }
-        xKey="weight"
-        yKey="weight_type"
-      />
       <HealthScoreActions />
     </Grid.Column>
   </Grid>
