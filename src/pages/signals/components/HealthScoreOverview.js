@@ -76,6 +76,10 @@ class HealthScoreOverview extends React.Component {
     const { facet, history, signalOptions } = this.props;
     let search;
 
+    if (facet.key === 'sid' && facetId === -1) {
+      return; // ignore
+    }
+
     if (signalOptions.subaccount) {
       search = setSubaccountQuery(signalOptions.subaccount.id);
     }
