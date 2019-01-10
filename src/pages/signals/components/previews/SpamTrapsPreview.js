@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
+import { SPAM_TRAP_INFO } from '../../constants/info';
 import withSpamTrapDetails from '../../containers/SpamTrapDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
@@ -48,7 +49,7 @@ export class SpamTrapsPreview extends Component {
             <ChartHeader
               title='Spam Trap Monitoring'
               hideLine
-              tooltipContent='TODO'
+              tooltipContent={SPAM_TRAP_INFO}
             />
           </Panel.Section>
           <Panel.Section>

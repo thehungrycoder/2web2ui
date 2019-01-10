@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
+import { HEALTH_SCORE_INFO } from '../../constants/info';
 import withHealthScoreDetails from '../../containers/HealthScoreDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
@@ -47,7 +48,7 @@ export class HealthScorePreview extends Component {
             <ChartHeader
               title='Health Score'
               hideLine
-              tooltipContent='TODO'
+              tooltipContent={HEALTH_SCORE_INFO}
             />
           </Panel.Section>
           <Panel.Section>

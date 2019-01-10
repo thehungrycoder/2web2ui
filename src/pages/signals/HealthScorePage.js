@@ -8,6 +8,7 @@ import DivergingBar from './components/charts/divergingBar/DivergingBar';
 import HealthScoreActions from './components/actionContent/HealthScoreActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
+import { HEALTH_SCORE_INFO } from './constants/info';
 import withHealthScoreDetails from './containers/HealthScoreDetailsContainer';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
@@ -87,7 +88,7 @@ export class HealthScorePage extends Component {
       <Grid>
         <Grid.Column sm={12} md={7}>
           <Panel sectioned>
-            <ChartHeader title='Health Score' />
+            <ChartHeader title='Health Score' tooltipContent={HEALTH_SCORE_INFO} />
             {panelContent || (
               <Fragment>
                 <BarChart

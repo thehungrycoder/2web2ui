@@ -52,6 +52,10 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
             />
           }
           title="Spam Trap Monitoring"
+          tooltipContent="
+  This reports the share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
         />
         <BarChart
           fill="#B157CE"
@@ -138,6 +142,10 @@ exports[`Signals Spam Trap Page renders empty correctly 1`] = `
       />
     }
     title="Spam Trap Monitoring"
+    tooltipContent="
+  This reports the share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
   />
   <Callout
     title="No Data Available"
@@ -175,6 +183,10 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
             />
           }
           title="Spam Trap Monitoring"
+          tooltipContent="
+  This reports the share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
         />
         <Callout
           title="Unable to Load Data"
@@ -221,6 +233,10 @@ exports[`Signals Spam Trap Page renders loading correctly 1`] = `
       />
     }
     title="Spam Trap Monitoring"
+    tooltipContent="
+  This reports the share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
   />
   <div
     style={

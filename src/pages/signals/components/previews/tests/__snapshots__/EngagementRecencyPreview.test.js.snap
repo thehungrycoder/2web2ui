@@ -9,7 +9,10 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
       <ChartHeader
         hideLine={true}
         title="Engagement Recency"
-        tooltipContent="TODO"
+        tooltipContent="
+  This reports the share over time of your email that has been sent to recipients who most recently
+  opened messages or clicked links during several defined time periods.
+"
       />
     </Panel.Section>
     <Panel.Section>
@@ -100,7 +103,10 @@ exports[`Signals EngagementRecencyPreview Component renders empty correctly 1`] 
       <ChartHeader
         hideLine={true}
         title="Engagement Recency"
-        tooltipContent="TODO"
+        tooltipContent="
+  This reports the share over time of your email that has been sent to recipients who most recently
+  opened messages or clicked links during several defined time periods.
+"
       />
     </Panel.Section>
     <Panel.Section>
@@ -124,7 +130,10 @@ exports[`Signals EngagementRecencyPreview Component renders error correctly 1`] 
       <ChartHeader
         hideLine={true}
         title="Engagement Recency"
-        tooltipContent="TODO"
+        tooltipContent="
+  This reports the share over time of your email that has been sent to recipients who most recently
+  opened messages or clicked links during several defined time periods.
+"
       />
     </Panel.Section>
     <Panel.Section>
