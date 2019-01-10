@@ -13,5 +13,12 @@
 
   h5 {
     font-weight: 500;
+    margin-bottom: 0;
   }
+}
+
+.Tooltip {
+  color: color(blue);
+  display: inline-block;
+  margin-left: spacing(small);
 }

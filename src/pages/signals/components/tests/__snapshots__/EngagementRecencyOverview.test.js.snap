@@ -59,6 +59,33 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
       Engagement Recency Summary
     </h5>
     <div
+      className="Tooltip"
+    >
+      <Tooltip
+        bottom={true}
+        content="
+                This reports the share over time of your email that has been sent to recipients who
+                most recently opened messages or clicked links during several defined time periods.
+              "
+        dark={true}
+        forcePosition={false}
+        horizontalOffset="-1rem"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
+      >
+        <InfoOutline
+          size={18}
+        />
+      </Tooltip>
+    </div>
+    <div
       className="Controls"
     >
       <Calculation

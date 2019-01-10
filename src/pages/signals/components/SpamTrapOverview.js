@@ -1,7 +1,8 @@
 /* eslint-disable max-lines */
 import _ from 'lodash';
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel, Tooltip } from '@sparkpost/matchbox';
+import { InfoOutline } from '@sparkpost/matchbox-icons';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import BarChartDataCell from './dataCells/BarChartDataCell';
@@ -105,6 +106,19 @@ class SpamTrapOverview extends React.Component {
       <Panel>
         <div className={styles.Header}>
           <h5>Spam Trap Monitoring Summary</h5>
+          <div className={styles.Tooltip}>
+            <Tooltip
+              children={<InfoOutline size={18} />}
+              content={`
+                This reports the share over time of your total email that has been sent to known
+                spam traps. An excessive rate of spam trap hits is an indicator of poor list
+                procurement and hygiene practices.
+              `}
+              dark
+              horizontalOffset="-1rem"
+              right
+            />
+          </div>
           <div className={styles.Controls}>
             <Calculation initialSelected={calculation} onChange={this.handleCalculationChange} />
             <ChartType initialSelected={chartType} onChange={this.handleChartTypeChange} />

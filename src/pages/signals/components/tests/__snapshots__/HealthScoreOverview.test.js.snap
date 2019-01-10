@@ -33,6 +33,34 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
       Health Score Summary
     </h5>
     <div
+      className="Tooltip"
+    >
+      <Tooltip
+        bottom={true}
+        content="
+                This is a predictive score that monitors your email health to identify problems
+                before they negagtively impact email delivery. This composite score is informed by
+                message events, including bounces, spam trap hits, user engagement, and others.
+              "
+        dark={true}
+        forcePosition={false}
+        horizontalOffset="-1rem"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
+      >
+        <InfoOutline
+          size={18}
+        />
+      </Tooltip>
+    </div>
+    <div
       className="Controls"
     >
       <ChartType
