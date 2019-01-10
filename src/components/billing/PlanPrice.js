@@ -10,6 +10,8 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
 
   const priceInfo = getPlanPrice(plan);
 
+  const is30DayPlan = plan.code && plan.code.includes('free15K');
+
   const overage = plan.isFree
     ? 'Full-featured developer account'
     : plan.overage ? `$${plan.overage.toFixed(2)}/ thousand extra emails. ` : null;
@@ -34,7 +36,7 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
     <span className='notranslate'>
       <span className={styles.MainLabel} {...rest}>
         <strong>{plan.volume.toLocaleString()}</strong> emails
-        {plan.isFree ? ' for 30 days' : '/month'}
+        {is30DayPlan ? ' for 30 days' : '/month'}
         {priceInfo.price > 0 && <span> at {discountAmount !== priceInfo.price && (<s className={styles.DiscountedLabel}>${priceInfo.price}</s>)}<strong>${discountAmount.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>}
         {plan.isFree && ' for free'}
       </span>

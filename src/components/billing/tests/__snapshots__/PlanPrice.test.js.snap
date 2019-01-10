@@ -38,7 +38,8 @@ exports[`PlanPrice renders as 0 if flat discount is greater than price 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <s
@@ -89,6 +90,26 @@ exports[`PlanPrice renders correctly 1`] = `
 </span>
 `;
 
+exports[`PlanPrice renders correctly for 30 day free plan 1`] = `
+<span
+  className="notranslate"
+>
+  <span
+    className="MainLabel"
+  >
+    <strong>
+      50,000
+    </strong>
+     emails
+     for 30 days
+     for free
+  </span>
+  <span
+    className="SupportLabel"
+  />
+</span>
+`;
+
 exports[`PlanPrice renders correctly for CSM inclusion 1`] = `
 <span
   className="notranslate"
@@ -122,7 +143,7 @@ exports[`PlanPrice renders correctly for CSM inclusion 1`] = `
 </span>
 `;
 
-exports[`PlanPrice renders correctly for free plan 1`] = `
+exports[`PlanPrice renders correctly for eternal free plan 1`] = `
 <span
   className="notranslate"
 >
@@ -133,7 +154,7 @@ exports[`PlanPrice renders correctly for free plan 1`] = `
       50,000
     </strong>
      emails
-     for 30 days
+    /month
      for free
   </span>
   <span
@@ -180,7 +201,8 @@ exports[`PlanPrice renders flat discount 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <s
@@ -276,7 +298,8 @@ exports[`PlanPrice renders percent discount 1`] = `
     <strong>
       50,000
     </strong>
-     emails/month
+     emails
+    /month
     <span>
        at 
       <s
