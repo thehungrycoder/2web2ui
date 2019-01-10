@@ -57,8 +57,18 @@ exports[`Signals Health Score Page renders correctly 1`] = `
             }
           }
           onClick={[Function]}
-          selected={null}
-          timeSeries={Array []}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+                "weights": Array [
+                  1,
+                  2,
+                ],
+              },
+            ]
+          }
           tooltipContent={[Function]}
           width="99%"
           xAxisProps={
@@ -97,8 +107,18 @@ exports[`Signals Health Score Page renders correctly 1`] = `
             }
           }
           onClick={[Function]}
-          selected={null}
-          timeSeries={Array []}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+                "weights": Array [
+                  1,
+                  2,
+                ],
+              },
+            ]
+          }
           tooltipContent={[Function]}
           width="99%"
           xAxisProps={
@@ -135,7 +155,12 @@ exports[`Signals Health Score Page renders correctly 1`] = `
       />
       <DivergingBar
         barHeight={35}
-        data={Array []}
+        data={
+          Array [
+            1,
+            2,
+          ]
+        }
         negativeFill="#DB2F2D"
         positiveFill="#8CBE3C"
         width="99%"
@@ -148,13 +173,11 @@ exports[`Signals Health Score Page renders correctly 1`] = `
         xKey="weight"
         yKey="weight_type"
       />
-      <Actions
-        actions={
+      <HealthScoreActions
+        weights={
           Array [
-            Object {
-              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
-              "link": "https://www.sparkpost.com",
-            },
+            1,
+            2,
           ]
         }
       />
@@ -193,6 +216,156 @@ exports[`Signals Health Score Page renders empty correctly 1`] = `
     Insufficient data to populate this chart
   </Callout>
 </Panel>
+`;
+
+exports[`Signals Health Score Page renders empty weights 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  primaryArea={<Connect(DateFilter) />}
+  subtitle="Health Score for test.com"
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          title="Health Score"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={250}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 5,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="health_score"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+        <ChartHeader
+          title="Injections"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={190}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 5,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="injections"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <ChartHeader
+        hideLine={true}
+        padding="1rem 0 1rem"
+        title="Health Score Components"
+      />
+      <Callout>
+        Insufficient data to populate this chart
+      </Callout>
+      <HealthScoreActions />
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
 `;
 
 exports[`Signals Health Score Page renders error correctly 1`] = `

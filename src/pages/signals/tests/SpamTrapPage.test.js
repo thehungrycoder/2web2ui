@@ -10,7 +10,7 @@ describe('Signals Spam Trap Page', () => {
     props = {
       facetId: 'test.com',
       facet: 'sending-domain',
-      data: [],
+      data: [{ relative_trap_hits: 0.1 }],
       gap: 0.25,
       loading: false,
       empty: false,

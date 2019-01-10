@@ -10,7 +10,8 @@ describe('Signals Health Score Page', () => {
     props = {
       facetId: 'test.com',
       facet: 'sending-domain',
-      data: [],
+      data: [{ date: '2017-01-01', weights: [1,2]}],
+      selected: '2017-01-01',
       gap: 0.25,
       loading: false,
       empty: false,
@@ -35,6 +36,11 @@ describe('Signals Health Score Page', () => {
 
   it('renders error correctly', () => {
     wrapper.setProps({ error: { message: 'error message' }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders empty weights', () => {
+    wrapper.setProps({ data: [{ date: '2017-01-01' }]});
     expect(wrapper).toMatchSnapshot();
   });
 

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals spam trap actions component renders atrocious message 1`] = `
+<Actions
+  actions={
+    Array [
+      Object {
+        "condition": [Function],
+        "content": <span>
+          <strong>
+            You are sending email to a very large number of known spam traps.
+          </strong>
+           Hitting spam traps is an indicator of poor list procurement and hygiene practices and has a strong negative impact on your overall email deliverability. You should take steps to improve your list hygiene immediately.
+        </span>,
+        "type": "bad",
+      },
+    ]
+  }
+  empty={false}
+/>
+`;
+
+exports[`Signals spam trap actions component renders bad message 1`] = `
+<Actions
+  actions={
+    Array [
+      Object {
+        "condition": [Function],
+        "content": <span>
+          <strong>
+            You are sending email to a large number of known spam traps.
+          </strong>
+           Hitting spam traps is an indicator of poor list procurement and hygiene practices and has a strong negative impact on your overall email deliverability. You should take steps to improve your list hygiene.
+        </span>,
+        "type": "bad",
+      },
+    ]
+  }
+  empty={false}
+/>
+`;
+
+exports[`Signals spam trap actions component renders good message 1`] = `
+<Actions
+  actions={
+    Array [
+      Object {
+        "condition": [Function],
+        "content": <span>
+          <strong>
+            You are sending email to few or no spam traps.
+          </strong>
+           Good job with your list hygiene practices!
+        </span>,
+        "type": "good",
+      },
+    ]
+  }
+  empty={false}
+/>
+`;
+
+exports[`Signals spam trap actions component renders warning message 1`] = `
+<Actions
+  actions={
+    Array [
+      Object {
+        "condition": [Function],
+        "content": <span>
+          <strong>
+            You are hitting some spam traps that could lead to future deliverability issues.
+          </strong>
+           There are ways to accomplish a healthy list of engaged subscribers. It's key that you keep your subscribers engaged and that you remove unengaged recipients and replace them with new subscribers who are interested in your email.
+        </span>,
+        "type": "warning",
+      },
+    ]
+  }
+  empty={false}
+/>
+`;

@@ -65,7 +65,13 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "top": 5,
             }
           }
-          timeSeries={Array []}
+          timeSeries={
+            Array [
+              Object {
+                "relative_trap_hits": 0.1,
+              },
+            ]
+          }
           tooltipContent={[Function]}
           width="99%"
           xAxisProps={
@@ -95,15 +101,8 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <Actions
-        actions={
-          Array [
-            Object {
-              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
-              "link": "https://www.sparkpost.com",
-            },
-          ]
-        }
+      <SpamTrapActions
+        percent={0.1}
       />
     </Grid.Column>
   </Grid>
@@ -188,18 +187,7 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
       md={5}
       mdOffset={0}
       sm={12}
-    >
-      <Actions
-        actions={
-          Array [
-            Object {
-              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
-              "link": "https://www.sparkpost.com",
-            },
-          ]
-        }
-      />
-    </Grid.Column>
+    />
   </Grid>
   <OtherChartsHeader
     facetId="test.com"

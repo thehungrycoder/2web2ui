@@ -5,7 +5,7 @@ import { Panel, Grid } from '@sparkpost/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import DivergingBar from './components/charts/divergingBar/DivergingBar';
-import Actions from './components/Actions';
+import HealthScoreActions from './components/actionContent/HealthScoreActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import withHealthScoreDetails from './containers/HealthScoreDetailsContainer';
@@ -63,6 +63,7 @@ export class HealthScorePage extends Component {
     const { selectedDate } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
+    const currentWeights = _.get(_.last(data), 'weights');
 
     let panelContent;
 
@@ -120,24 +121,23 @@ export class HealthScorePage extends Component {
                   xAxisProps={this.getXAxisProps()}
                 />
               </Fragment>
-            )
-            }
+            )}
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <ChartHeader title='Health Score Components' hideLine padding='1rem 0 1rem' />
-          {!panelContent && (
-            <Fragment>
-              <DivergingBar
-                data={selectedWeights}
-                xKey='weight'
-                yKey='weight_type'
-              />
-              <Actions actions={[
-                { content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.', link: 'https://www.sparkpost.com' }
-              ]}/>
-            </Fragment>
+          {(!loading && !selectedWeights.length) && (
+            <Callout>Insufficient data to populate this chart</Callout>
           )}
+
+          {!panelContent && Boolean(selectedWeights.length) && (
+            <DivergingBar
+              data={selectedWeights}
+              xKey='weight'
+              yKey='weight_type'
+            />
+          )}
+          {!panelContent && <HealthScoreActions weights={currentWeights} />}
         </Grid.Column>
       </Grid>
     );
