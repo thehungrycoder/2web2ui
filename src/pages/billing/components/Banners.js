@@ -80,14 +80,17 @@ export const EnterpriseBanner = () => (
   </Banner>
 );
 
-export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays, ageRangeStart = 0, ageRangeEnd = 30 }) => {
+export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays = 0, ageRangeStart = 0, ageRangeEnd = 30 }) => {
   const { subscription = {}, pending_subscription } = account;
-
-  if (pending_subscription || subscription.code !== 'free15K-1018') {
+  if (pending_subscription || !subscription.code.includes('free15K')) {
     return null;
   }
 
-  if (!accountAgeInDays || accountAgeInDays > ageRangeEnd || accountAgeInDays < ageRangeStart) {
+  if (accountAgeInDays < ageRangeStart) {
+    return null;
+  }
+
+  if (accountAgeInDays > ageRangeEnd) {
     return null;
   }
 

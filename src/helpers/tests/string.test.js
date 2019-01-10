@@ -157,5 +157,10 @@ describe('pluralString', () => {
 
   it('should return string for plural amount', () => {
     expect(pluralString(2, 'thing', 'things')).toEqual('2 things');
+    expect(pluralString(2, 'try', 'tries')).toEqual('2 tries');
+  });
+
+  it('should return string for plural amount if no plural string provided', () => {
+    expect(pluralString(2, 'thing')).toEqual('2 things');
   });
 });

@@ -97,13 +97,21 @@ describe('Billing Banners: ', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should not render if not within the limit of daysShowLeft', () => {
+    it('should not render if days account age is greater than ageRangeEnd', () => {
       wrapper.setProps({
-        accountAgeInDays: 5
+        accountAgeInDays: 31,
+        ageRageEnd: 20
       });
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('should not render if days acount age is less than ageRangeStart', () => {
+      wrapper.setProps({
+        accountAgeInDays: 20,
+        ageRangeStart: 23
+      });
+      expect(wrapper).toMatchSnapshot();
+    });
 
     it('should not render anything if pending plan change', () => {
       wrapper.setProps({
@@ -115,12 +123,12 @@ describe('Billing Banners: ', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should not render if current plan is not free15K-1018', () => {
+    it('should not render if current plan does not include free15K', () => {
       wrapper.setProps({
         account: {
           ...props.account,
           subscription: {
-            code: 'not-free15K-1018'
+            code: 'free500-1018'
           }
         }
       });
