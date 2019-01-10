@@ -121,12 +121,14 @@ export class HealthScorePage extends Component {
                   xAxisProps={this.getXAxisProps()}
                 />
               </Fragment>
-            )
-            }
+            )}
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <ChartHeader title='Health Score Components' hideLine padding='1rem 0 1rem' />
+          {(!loading && !selectedWeights.length) && (
+            <Callout>Insufficient data to populate this chart</Callout>
+          )}
           {!panelContent && (
             <Fragment>
               <DivergingBar
