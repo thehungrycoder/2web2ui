@@ -8,7 +8,7 @@ import DivergingBar from './components/charts/divergingBar/DivergingBar';
 import HealthScoreActions from './components/actionContent/HealthScoreActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
-import { HEALTH_SCORE_INFO } from './constants/info';
+import { HEALTH_SCORE_INFO, HEALTH_SCORE_COMPONENT_INFO, HEALTH_SCORE_COMPONENTS } from './constants/info';
 import withHealthScoreDetails from './containers/HealthScoreDetailsContainer';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
@@ -126,16 +126,21 @@ export class HealthScorePage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <ChartHeader title='Health Score Components' hideLine padding='1rem 0 1rem' />
+          <ChartHeader
+            title='Health Score Components'
+            hideLine
+            padding='1rem 0 1rem'
+            tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
+          />
           {(!loading && !selectedWeights.length) && (
             <Callout>Insufficient data to populate this chart</Callout>
           )}
-
           {!panelContent && Boolean(selectedWeights.length) && (
             <DivergingBar
               data={selectedWeights}
               xKey='weight'
               yKey='weight_type'
+              tooltipContent={({ payload = {}}) => HEALTH_SCORE_COMPONENTS[payload.weight_type]}
             />
           )}
           {!panelContent && <HealthScoreActions weights={currentWeights} />}

@@ -157,6 +157,10 @@ exports[`Signals Health Score Page renders correctly 1`] = `
         hideLine={true}
         padding="1rem 0 1rem"
         title="Health Score Components"
+        tooltipContent="
+  Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
+  engagement, and others.
+"
       />
       <DivergingBar
         barHeight={35}
@@ -168,6 +172,7 @@ exports[`Signals Health Score Page renders correctly 1`] = `
         }
         negativeFill="#DB2F2D"
         positiveFill="#8CBE3C"
+        tooltipContent={[Function]}
         width="99%"
         xDomain={
           Array [
@@ -250,6 +255,11 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       >
         <ChartHeader
           title="Health Score"
+          tooltipContent="
+  This is a predictive score that monitors your email health to identify problems before they
+  negagtively impact email delivery. This composite score is informed by message events, including
+  bounces, spam trap hits, user engagement, and others.
+"
         />
         <BarChart
           fill="#B157CE"
@@ -351,6 +361,10 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
         hideLine={true}
         padding="1rem 0 1rem"
         title="Health Score Components"
+        tooltipContent="
+  Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
+  engagement, and others.
+"
       />
       <Callout>
         Insufficient data to populate this chart
@@ -422,6 +436,10 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
         hideLine={true}
         padding="1rem 0 1rem"
         title="Health Score Components"
+        tooltipContent="
+  Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
+  engagement, and others.
+"
       />
     </Grid.Column>
   </Grid>
