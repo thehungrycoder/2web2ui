@@ -126,7 +126,7 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
       component={[Function]}
       dataKey="domain"
       label="Domain"
-      sortable={false}
+      sortable={true}
       width="30%"
     />
     <Column

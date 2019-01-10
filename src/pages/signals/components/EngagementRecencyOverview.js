@@ -127,7 +127,7 @@ class EngagementRecencyOverview extends React.Component {
           <Column
             dataKey={facet.key}
             label={facet.label}
-            sortable={facet.sortable}
+            sortable
             width="30%"
             component={(props) => {
               const id = props[facet.key];

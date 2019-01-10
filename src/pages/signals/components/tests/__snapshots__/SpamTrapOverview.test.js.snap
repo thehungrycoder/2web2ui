@@ -125,7 +125,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
       component={[Function]}
       dataKey="domain"
       label="Domain"
-      sortable={false}
+      sortable={true}
       width="30%"
     />
     <Column

@@ -141,7 +141,7 @@ class HealthScoreOverview extends React.Component {
             <Column
               dataKey={facet.key}
               label={facet.label}
-              sortable={facet.sortable}
+              sortable
               width={subaccountFilter === undefined ? '25%' : '30%'}
               component={(props) => (
                 <FacetDataCell
