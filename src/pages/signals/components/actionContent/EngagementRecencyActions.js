@@ -5,7 +5,7 @@ import content from '../../constants/engagementRecencyContent';
 const EngagementRecencyActions = ({ cohorts }) => {
   let actions = [];
 
-  content.forEach(({ condition = () => true, ...rest }) => {
+  content.forEach(({ condition, ...rest }) => {
     if (condition(cohorts)) {
       actions.push(rest);
     }

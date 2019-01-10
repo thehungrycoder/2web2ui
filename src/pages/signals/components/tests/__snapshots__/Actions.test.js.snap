@@ -22,17 +22,25 @@ exports[`Signals Recommended Actions Component renders correctly 1`] = `
   <Action
     content="bar"
     key="1"
+    type="good"
+  />
+  <Action
+    content="baz"
+    key="2"
+    type="warning"
   />
 </div>
 `;
 
 exports[`Signals Recommended Actions Component renders correctly 2`] = `
-<div>
+<div
+  className="ActionWrapper"
+>
   <div
     className="Action"
   >
     <div
-      className="Icon"
+      className="IconBad"
     >
       <Warning
         size={25}
@@ -56,14 +64,16 @@ exports[`Signals Recommended Actions Component renders correctly 2`] = `
 `;
 
 exports[`Signals Recommended Actions Component renders correctly 3`] = `
-<div>
+<div
+  className="ActionWrapper"
+>
   <div
     className="Action"
   >
     <div
-      className="Icon"
+      className="IconGood"
     >
-      <Warning
+      <CheckCircleOutline
         size={25}
       />
     </div>
@@ -75,5 +85,52 @@ exports[`Signals Recommended Actions Component renders correctly 3`] = `
   <hr
     className="Dash"
   />
+</div>
+`;
+
+exports[`Signals Recommended Actions Component renders correctly 4`] = `
+<div
+  className="ActionWrapper"
+>
+  <div
+    className="Action"
+  >
+    <div
+      className="IconWarning"
+    >
+      <Warning
+        size={25}
+      />
+    </div>
+    <p>
+      baz
+       
+    </p>
+  </div>
+  <hr
+    className="Dash"
+  />
+</div>
+`;
+
+exports[`Signals Recommended Actions Component renders empty state when empty 1`] = `
+<div
+  className="Wrapper"
+>
+  <div
+    className="Title"
+  >
+    <h6
+      className="TitleText"
+    >
+      Items needing attention
+       – Dec 31 2017
+    </h6>
+  </div>
+  <Callout
+    height="100px"
+  >
+    No actions to display at this time.
+  </Callout>
 </div>
 `;

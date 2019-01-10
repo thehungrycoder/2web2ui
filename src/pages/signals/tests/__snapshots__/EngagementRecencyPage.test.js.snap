@@ -83,7 +83,13 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
                 "top": 5,
               }
             }
-            timeSeries={Array []}
+            timeSeries={
+              Array [
+                Object {
+                  "c_total": 10,
+                },
+              ]
+            }
             tooltipContent={[Function]}
             width="99%"
             xAxisProps={
@@ -183,14 +189,11 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <Actions
-        actions={
-          Array [
-            Object {
-              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
-              "link": "https://www.sparkpost.com",
-            },
-          ]
+      <EngagementRecencyActions
+        cohorts={
+          Object {
+            "c_total": 10,
+          }
         }
       />
     </Grid.Column>
@@ -272,18 +275,7 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       md={5}
       mdOffset={0}
       sm={12}
-    >
-      <Actions
-        actions={
-          Array [
-            Object {
-              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
-              "link": "https://www.sparkpost.com",
-            },
-          ]
-        }
-      />
-    </Grid.Column>
+    />
   </Grid>
   <OtherChartsHeader
     facetId="test.com"

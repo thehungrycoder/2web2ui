@@ -10,7 +10,7 @@ describe('Signals Health Score Page', () => {
     props = {
       facetId: 'test.com',
       facet: 'sending-domain',
-      data: [],
+      data: [{ weights: [1,2]}],
       gap: 0.25,
       loading: false,
       empty: false,

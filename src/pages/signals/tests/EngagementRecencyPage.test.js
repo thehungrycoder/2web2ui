@@ -10,7 +10,7 @@ describe('Signals Engagement Recency Page', () => {
     props = {
       facetId: 'test.com',
       facet: 'sending-domain',
-      data: [],
+      data: [{ c_total: 10 }],
       gap: 0.25,
       loading: false,
       empty: false,

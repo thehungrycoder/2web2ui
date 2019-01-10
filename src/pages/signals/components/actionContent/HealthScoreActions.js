@@ -7,7 +7,7 @@ const HealthScoreActions = ({ weights }) => {
   const actions = weights.reduce((acc, { weight, weight_type }) => {
     const parsedWeight = parseFloat(weight);
 
-    if (parsedWeight < 0) {
+    if (parsedWeight < 0 && content[weight_type]) {
       acc.push({
         weight: parsedWeight,
         content: content[weight_type],

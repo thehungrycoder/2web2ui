@@ -10,9 +10,11 @@ describe('Signals Recommended Actions Component', () => {
     props = {
       actions: [
         { content: 'foo', link: 'http://google.com' },
-        { content: 'bar' }
+        { content: 'bar', type: 'good' },
+        { content: 'baz', type: 'warning' }
       ],
-      date: new Date('2018-01-01')
+      date: new Date('2018-01-01'),
+      empty: false
     };
     wrapper = shallow(<Actions {...props}/>);
   });
@@ -24,10 +26,8 @@ describe('Signals Recommended Actions Component', () => {
     });
   });
 
-  it('renders nothing with no actions', () => {
-    wrapper.setProps({ actions: null });
-    expect(wrapper.html()).toBeNull();
-    wrapper.setProps({ actions: []});
-    expect(wrapper.html()).toBeNull();
+  it('renders empty state when empty', () => {
+    wrapper.setProps({ empty: true });
+    expect(wrapper).toMatchSnapshot();
   });
 });

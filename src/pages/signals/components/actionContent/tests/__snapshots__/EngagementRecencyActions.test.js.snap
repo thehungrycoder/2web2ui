@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals engagement recency actions component render cases should render 14 day bad value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        Very few of your recipients have recently engaged.
+      </strong>
+       Engagement is a key factor in how mailbox providers evaluate your reputation, and this low engagement may hurt your email deliverability. Be sure you're sending relevant and desired messages. Learn more.
+    </span>,
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render 14 day warning value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        Not enough of your recipients have recently engaged with your email.
+      </strong>
+       Engagement is a key factor in your reputation, and low engagement may hurt your email deliverability. Be sure you are sending relevant and desired messages. Learn more.
+    </span>,
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render 90 day bad value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        Your recipient engagement is dropping off significantly over time.
+      </strong>
+       Even the most engaged recipients will get tired of repetitive or poorly timed messages. You should consider reevaluating your lifecycle srategy to shake things up and reengage your audience. Learn more.
+    </span>,
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render 90 day warning value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        Many recipients are no longer engaging.
+      </strong>
+       If this continues, you will risk hurting your performance. Consider segmenting your recipients and sending a reengagement series—and then removing those recipients who don’t respond. Learn more.
+    </span>,
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render 365 day bad value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        A large portion of recipients are no longer engaging.
+      </strong>
+       Removing inactive subscribers is the best way to maintain the quality of your list. First, however, consider sending them a reengagement series before saying goodbye. Learn more.
+    </span>,
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render 365 day warning value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        Many recipients are no longer engaging.
+      </strong>
+       If this continues, you will risk hurting your performance. Consider segmenting your recipients and sending a reengagement series—and then removing those recipients who don’t respond. Learn more.
+    </span>,
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render new bad value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        A large number of new recipients have yet to engage.
+      </strong>
+       This lack of engagement will have a negative impact on your reputation with mailbox providers. To reduce this, improve your email content and reevaluate your list acquisition practices. Learn more.
+    </span>,
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render new warning value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        Some new recipients have not yet engaged.
+      </strong>
+       Consider a welcome campaign to make it easy for new subscribers to engage and get value from your email. Learn more.
+    </span>,
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render only 3 items 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        Some recipients have been inactive for 365 days.
+      </strong>
+       While it could be worse, this low engagement may be hurting your email deliverability. Consider implementing a list hygiene process. Learn more.
+    </span>,
+    "type": "warning",
+  },
+  Object {
+    "content": <span>
+      <strong>
+        A large number of new recipients have yet to engage.
+      </strong>
+       This lack of engagement will have a negative impact on your reputation with mailbox providers. To reduce this, improve your email content and reevaluate your list acquisition practices. Learn more.
+    </span>,
+    "type": "bad",
+  },
+  Object {
+    "content": <span>
+      <strong>
+        Not enough of your recipients have recently engaged with your email.
+      </strong>
+       Engagement is a key factor in your reputation, and low engagement may hurt your email deliverability. Be sure you are sending relevant and desired messages. Learn more.
+    </span>,
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render unengaged bad value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        Too many of your recipients have been inactive for 365 days.
+      </strong>
+       This low engagement may be hurting your email deliverability. You should remove subscribers that have not engaged in the past year and consider segmenting your list to better target interest groups and your most engaged recipients. Learn more.
+    </span>,
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals engagement recency actions component render cases should render unengaged warning value 1`] = `
+Array [
+  Object {
+    "content": <span>
+      <strong>
+        Some recipients have been inactive for 365 days.
+      </strong>
+       While it could be worse, this low engagement may be hurting your email deliverability. Consider implementing a list hygiene process. Learn more.
+    </span>,
+    "type": "warning",
+  },
+]
+`;

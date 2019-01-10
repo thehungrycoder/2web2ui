@@ -58,7 +58,16 @@ exports[`Signals Health Score Page renders correctly 1`] = `
           }
           onClick={[Function]}
           selected={null}
-          timeSeries={Array []}
+          timeSeries={
+            Array [
+              Object {
+                "weights": Array [
+                  1,
+                  2,
+                ],
+              },
+            ]
+          }
           tooltipContent={[Function]}
           width="99%"
           xAxisProps={
@@ -98,7 +107,16 @@ exports[`Signals Health Score Page renders correctly 1`] = `
           }
           onClick={[Function]}
           selected={null}
-          timeSeries={Array []}
+          timeSeries={
+            Array [
+              Object {
+                "weights": Array [
+                  1,
+                  2,
+                ],
+              },
+            ]
+          }
           tooltipContent={[Function]}
           width="99%"
           xAxisProps={
@@ -148,13 +166,11 @@ exports[`Signals Health Score Page renders correctly 1`] = `
         xKey="weight"
         yKey="weight_type"
       />
-      <Actions
-        actions={
+      <HealthScoreActions
+        weights={
           Array [
-            Object {
-              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
-              "link": "https://www.sparkpost.com",
-            },
+            1,
+            2,
           ]
         }
       />
