@@ -156,6 +156,6 @@ describe('pluralString', () => {
   });
 
   it('should return string for plural amount', () => {
-    expect(pluralString(2, 'thing', 'things')).toEqual('2 thing');
+    expect(pluralString(2, 'thing', 'things')).toEqual('2 things');
   });
 });
