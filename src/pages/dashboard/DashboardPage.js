@@ -35,7 +35,7 @@ export class DashboardPage extends Component {
         {currentUser.email_verified === false && (
           <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
         )}
-        <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} daysLeftShow={14}/>
+        <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} ageRangeStart={16}/>
         <UsageReport accountAgeInWeeks={accountAgeInWeeks} />
         <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
         <Tutorial {...this.props} />

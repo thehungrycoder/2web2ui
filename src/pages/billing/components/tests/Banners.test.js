@@ -65,7 +65,8 @@ describe('Billing Banners: ', () => {
         }
       },
       accountAgeInDays: 16,
-      daysLeftShow: 14
+      ageRangeStart: 16,
+      ageRangeEnd: 30
     };
     beforeEach(() => {
       wrapper = shallow(<FreePlanWarningBanner {...props} />);
@@ -78,6 +79,13 @@ describe('Billing Banners: ', () => {
     it('renders correct text within 1 day of plan ending', () => {
       wrapper.setProps({
         accountAgeInDays: 29
+      });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders correct text on last day of plan', () => {
+      wrapper.setProps({
+        accountAgeInDays: 30
       });
       expect(wrapper).toMatchSnapshot();
     });
@@ -95,6 +103,7 @@ describe('Billing Banners: ', () => {
       });
       expect(wrapper).toMatchSnapshot();
     });
+
 
     it('should not render anything if pending plan change', () => {
       wrapper.setProps({

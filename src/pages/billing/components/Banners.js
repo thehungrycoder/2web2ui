@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { Banner } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
+import { pluralString } from 'src/helpers/string';
 import * as conversions from 'src/helpers/conversionTracking';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
 
@@ -79,21 +80,24 @@ export const EnterpriseBanner = () => (
   </Banner>
 );
 
-export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays = 0, daysLeftShow = 30 }) => {
+export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays, ageRangeStart = 0, ageRangeEnd = 30 }) => {
   const { subscription = {}, pending_subscription } = account;
 
-  const daysLeft = Number.parseInt(30 - accountAgeInDays);
-
-  if (daysLeft < 0 || daysLeftShow < daysLeft || accountAgeInDays > 30 ||
-    pending_subscription || subscription.code !== 'free15K-1018') {
+  if (pending_subscription || subscription.code !== 'free15K-1018') {
     return null;
   }
+
+  if (!accountAgeInDays || accountAgeInDays > ageRangeEnd || accountAgeInDays < ageRangeStart) {
+    return null;
+  }
+
+  const daysLeft = Number.parseInt(ageRangeEnd - accountAgeInDays);
 
   return (
     <Banner status='warning' title='Free Plan Downgrade'>
       <p>
         Your plan will automatically downgrade to 500 emails/month
-        in {daysLeft} day{daysLeft !== 1 && 's'}. <Link to='/account/billing/plan'>Upgrade your plan</Link> to
+        {daysLeft > 0 ? ` in ${pluralString(daysLeft, 'day', 'days')}` : ' today'}. <Link to='/account/billing/plan'>Upgrade your plan</Link> to
         keep or increase your sending limits.
       </p>
     </Banner>
