@@ -120,7 +120,7 @@ EnableTfaForm.propTypes = EnableTfaFormPropTypes;
 
 const mapStateToProps = (state) => ({
   ...state.tfa,
-  username: usernameSelector(state),
+  username: state.currentUser.email || usernameSelector(state),
   enabled: state.tfa.enabled === true
 });
 
