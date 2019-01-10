@@ -22,12 +22,7 @@ class SpamTrapOverview extends React.Component {
   }
 
   componentDidMount() {
-    const { getSubaccounts, resetSummaryTable, subaccounts, tableName } = this.props;
-
-    if (_.isEmpty(subaccounts)) {
-      getSubaccounts();
-    }
-
+    const { resetSummaryTable, tableName } = this.props;
     resetSummaryTable(tableName);
   }
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals Overview Page renders correctly 1`] = `
+exports[`Signals Overview Page renders page 1`] = `
 <SignalsPage
   primaryArea={
     <React.Fragment>

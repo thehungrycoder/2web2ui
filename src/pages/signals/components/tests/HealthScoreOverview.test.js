@@ -23,7 +23,6 @@ describe('HealthScoreOverview', () => {
         sortable: false
       }}
       getHealthScore={() => {}}
-      getSubaccounts={() => {}}
       loading={false}
       resetSummaryTable={() => {}}
       signalOptions={{
@@ -96,20 +95,6 @@ describe('HealthScoreOverview', () => {
     const resetSummaryTable = jest.fn();
     subject({ resetSummaryTable });
     expect(resetSummaryTable).toHaveBeenCalledWith('Test');
-  });
-
-  it('does not request subaccounts on mount if already loaded', () => {
-    const getSubaccounts = jest.fn();
-    subject({ getSubaccounts });
-
-    expect(getSubaccounts).not.toHaveBeenCalled();
-  });
-
-  it('requests subaccounts on mount', () => {
-    const getSubaccounts = jest.fn();
-    subject({ getSubaccounts, subaccounts: {}});
-
-    expect(getSubaccounts).toHaveBeenCalled();
   });
 
   it('requests table reset on signal options update', () => {

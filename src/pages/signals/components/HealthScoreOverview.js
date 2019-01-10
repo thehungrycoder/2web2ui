@@ -19,13 +19,7 @@ class HealthScoreOverview extends React.Component {
   }
 
   componentDidMount() {
-    const { getSubaccounts, resetSummaryTable, subaccounts, tableName } = this.props;
-
-    // todo, move to page component, so it is only called once
-    if (_.isEmpty(subaccounts)) {
-      getSubaccounts();
-    }
-
+    const { resetSummaryTable, tableName } = this.props;
     resetSummaryTable(tableName);
   }
 
