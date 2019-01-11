@@ -1,4 +1,4 @@
-import selectAccountAgeInWeeks from '../accountAge';
+import { selectAccountAgeInWeeks, selectAccountAgeInDays } from '../accountAge';
 
 describe('Selectors: accountAge', () => {
   // mock date so we can control relative age in snapshot
@@ -11,6 +11,10 @@ describe('Selectors: accountAge', () => {
 
   it('returns account age in weeks', () => {
     expect(selectAccountAgeInWeeks(state)).toMatchSnapshot();
+  });
+
+  it('returns account age in days', () => {
+    expect(selectAccountAgeInDays(state)).toMatchSnapshot();
   });
 });
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel } from '@sparkpost/matchbox';
 import { Modal, LabelledValue } from 'src/components';
-import { PremiumBanner, EnterpriseBanner, PendingPlanBanner } from './Banners';
+import { PremiumBanner, EnterpriseBanner, PendingPlanBanner, FreePlanWarningBanner } from './Banners';
 import UpdatePaymentForm from '../forms/UpdatePaymentForm';
 import UpdateContactForm from '../forms/UpdateContactForm';
 import AddIps from '../forms/AddIps';
@@ -56,7 +56,7 @@ export default class BillingSummary extends Component {
   );
 
   render() {
-    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount } = this.props;
+    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays } = this.props;
     const { show } = this.state;
     let changePlanActions = {};
 
@@ -68,7 +68,7 @@ export default class BillingSummary extends Component {
     return (
       <div>
         <PendingPlanBanner account={account} />
-
+        <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} />
         <Panel accent title='Plan Overview'>
           <Panel.Section {...changePlanActions}>
             <LabelledValue label="Your Plan">

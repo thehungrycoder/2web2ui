@@ -102,3 +102,5 @@ export const tagAsCopy = (str) => {
   const count = parseInt(matches[1] || 1);
   return str.replace(copyRegex, ` Copy ${count + 1}`);
 };
+
+export const pluralString = (count, singularLabel, pluralLabel) => `${count} ${count === 1 ? singularLabel : pluralLabel || `${singularLabel}s`}`;

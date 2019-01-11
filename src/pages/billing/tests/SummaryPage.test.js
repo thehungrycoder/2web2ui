@@ -19,7 +19,8 @@ describe('Page: BillingSummaryPage', () => {
       fetchAccount: jest.fn(),
       getPlans: jest.fn(),
       getSendingIps: jest.fn(),
-      getInvoices: jest.fn()
+      getInvoices: jest.fn(),
+      accountAgeInDays: 5
     };
     wrapper = shallow(<BillingSummaryPage {...props} />);
   });

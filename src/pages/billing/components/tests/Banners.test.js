@@ -1,5 +1,5 @@
 import React from 'react';
-import { PendingPlanBanner, PremiumBanner, EnterpriseBanner } from '../Banners';
+import { PendingPlanBanner, PremiumBanner, EnterpriseBanner, FreePlanWarningBanner } from '../Banners';
 import * as conversions from 'src/helpers/conversionTracking';
 import * as constants from 'src/constants';
 import { shallow } from 'enzyme';
@@ -53,6 +53,79 @@ describe('Billing Banners: ', () => {
     it('tracks addon request', () => {
       wrapper.prop('action').onClick();
       expect(conversions.trackAddonRequest).toHaveBeenCalledWith(constants.ANALYTICS_ENTERPRISE_SUPPORT);
+    });
+  });
+
+  describe('Free Plan Downgrade warning banner', () => {
+    let wrapper;
+    const props = {
+      account: {
+        subscription: {
+          code: 'free15K-plan'
+        }
+      },
+      accountAgeInDays: 16,
+      ageRangeStart: 16,
+      ageRangeEnd: 30
+    };
+    beforeEach(() => {
+      wrapper = shallow(<FreePlanWarningBanner {...props} />);
+    });
+
+    it('renders', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders correct text on last day of plan', () => {
+      wrapper.setProps({
+        accountAgeInDays: 29.5
+      });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render if past 30 days of creation date', () => {
+      wrapper.setProps({
+        accountAgeInDays: 31
+      });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render if days account age is greater than ageRangeEnd', () => {
+      wrapper.setProps({
+        accountAgeInDays: 31,
+        ageRangeEnd: 20
+      });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render if days acount age is less than ageRangeStart', () => {
+      wrapper.setProps({
+        accountAgeInDays: 20,
+        ageRangeStart: 23
+      });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render anything if pending plan change', () => {
+      wrapper.setProps({
+        account: {
+          ...props.account,
+          pending_subscription: true
+        }
+      });
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render if current plan does not include free15K', () => {
+      wrapper.setProps({
+        account: {
+          ...props.account,
+          subscription: {
+            code: 'free500-plan'
+          }
+        }
+      });
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });

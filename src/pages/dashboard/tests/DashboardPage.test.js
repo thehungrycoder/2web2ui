@@ -4,6 +4,8 @@ import React from 'react';
 import { DashboardPage } from '../DashboardPage';
 
 describe('Page: Dashboard tests', () => {
+  const mockDate = new Date('2018-05-15T12:00:00.000Z');
+
   const props = {
     currentUser: {
       email_verified: true
@@ -15,16 +17,19 @@ describe('Page: Dashboard tests', () => {
       subscription: {
         code: 'paid'
       },
-      status: 'active'
+      status: 'active',
+      created: mockDate
     },
     hasSuppressions: true,
     accountAgeInWeeks: 0,
-    verifyingEmail: false
+    verifyingEmail: false,
+    accountAgeInDays: 15
   };
 
   let wrapper;
 
   beforeEach(() => {
+    global.Date.now = jest.fn(() => mockDate.getTime());
     wrapper = shallow(<DashboardPage {...props} />);
   });
 

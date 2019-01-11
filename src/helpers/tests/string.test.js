@@ -1,6 +1,6 @@
 import {
   snakeToFriendly, snakeToCamel, slugify, slugToFriendly, shrinkToFit, stringToArray,
-  stringifyTypeaheadfilter, stripTags, decodeBase64, tagAsCopy, trimWhitespaces
+  stringifyTypeaheadfilter, stripTags, decodeBase64, tagAsCopy, trimWhitespaces, pluralString
 } from '../string';
 
 describe('snakeToFrindly', () => {
@@ -147,5 +147,20 @@ describe('tagAsCopy', () => {
 
   it('should increment count', () => {
     expect(tagAsCopy('Example Copy 2')).toEqual('Example Copy 3');
+  });
+});
+
+describe('pluralString', () => {
+  it('should return string for single amount', () => {
+    expect(pluralString(1, 'thing', 'things')).toEqual('1 thing');
+  });
+
+  it('should return string for plural amount', () => {
+    expect(pluralString(2, 'thing', 'things')).toEqual('2 things');
+    expect(pluralString(2, 'try', 'tries')).toEqual('2 tries');
+  });
+
+  it('should return string for plural amount if no plural string provided', () => {
+    expect(pluralString(2, 'thing')).toEqual('2 things');
   });
 });
