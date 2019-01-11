@@ -7,8 +7,9 @@ Array [
       <strong>
         Very few of your recipients have recently engaged.
       </strong>
-       Engagement is a key factor in how mailbox providers evaluate your reputation, and this low engagement may hurt your email deliverability. Be sure you're sending relevant and desired messages. Learn more.
+       Engagement is a key factor in how mailbox providers evaluate your reputation, and this low engagement may hurt your email deliverability. Be sure you're sending relevant and desired messages.
     </span>,
+    "link": "https://www.sparkpost.com/docs/deliverability/optimizing-deliverability-and-inbox-placement/",
     "type": "bad",
   },
 ]
@@ -21,8 +22,9 @@ Array [
       <strong>
         Not enough of your recipients have recently engaged with your email.
       </strong>
-       Engagement is a key factor in your reputation, and low engagement may hurt your email deliverability. Be sure you are sending relevant and desired messages. Learn more.
+       Engagement is a key factor in your reputation, and low engagement may hurt your email deliverability. Be sure you are sending relevant and desired messages.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/engagement/",
     "type": "warning",
   },
 ]
@@ -35,8 +37,9 @@ Array [
       <strong>
         Your recipient engagement is dropping off significantly over time.
       </strong>
-       Even the most engaged recipients will get tired of repetitive or poorly timed messages. You should consider reevaluating your lifecycle srategy to shake things up and reengage your audience. Learn more.
+       Even the most engaged recipients will get tired of repetitive or poorly timed messages. You should consider reevaluating your lifecycle srategy to shake things up and reengage your audience.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
     "type": "bad",
   },
 ]
@@ -49,8 +52,9 @@ Array [
       <strong>
         Many recipients are no longer engaging.
       </strong>
-       If this continues, you will risk hurting your performance. Consider segmenting your recipients and sending a reengagement series—and then removing those recipients who don’t respond. Learn more.
+       If this continues, you will risk hurting your performance. Consider segmenting your recipients and sending a reengagement series—and then removing those recipients who don’t respond.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/preference-center/",
     "type": "warning",
   },
 ]
@@ -63,8 +67,9 @@ Array [
       <strong>
         A large portion of recipients are no longer engaging.
       </strong>
-       Removing inactive subscribers is the best way to maintain the quality of your list. First, however, consider sending them a reengagement series before saying goodbye. Learn more.
+       Removing inactive subscribers is the best way to maintain the quality of your list. First, however, consider sending them a reengagement series before saying goodbye.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/re-engagement-campaign/",
     "type": "bad",
   },
 ]
@@ -77,8 +82,9 @@ Array [
       <strong>
         Many recipients are no longer engaging.
       </strong>
-       If this continues, you will risk hurting your performance. Consider segmenting your recipients and sending a reengagement series—and then removing those recipients who don’t respond. Learn more.
+       If this continues, you will risk hurting your performance. Consider segmenting your recipients and sending a reengagement series—and then removing those recipients who don’t respond.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
     "type": "warning",
   },
 ]
@@ -91,8 +97,9 @@ Array [
       <strong>
         A large number of new recipients have yet to engage.
       </strong>
-       This lack of engagement will have a negative impact on your reputation with mailbox providers. To reduce this, improve your email content and reevaluate your list acquisition practices. Learn more.
+       This lack of engagement will have a negative impact on your reputation with mailbox providers. To reduce this, improve your email content and reevaluate your list acquisition practices.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/subscriber-acquisition/",
     "type": "bad",
   },
 ]
@@ -105,8 +112,9 @@ Array [
       <strong>
         Some new recipients have not yet engaged.
       </strong>
-       Consider a welcome campaign to make it easy for new subscribers to engage and get value from your email. Learn more.
+       Consider a welcome campaign to make it easy for new subscribers to engage and get value from your email.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/welcome-campaign/",
     "type": "warning",
   },
 ]
@@ -119,8 +127,9 @@ Array [
       <strong>
         Some recipients have been inactive for 365 days.
       </strong>
-       While it could be worse, this low engagement may be hurting your email deliverability. Consider implementing a list hygiene process. Learn more.
+       While it could be worse, this low engagement may be hurting your email deliverability. Consider implementing a list hygiene process.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
     "type": "warning",
   },
   Object {
@@ -128,8 +137,9 @@ Array [
       <strong>
         A large number of new recipients have yet to engage.
       </strong>
-       This lack of engagement will have a negative impact on your reputation with mailbox providers. To reduce this, improve your email content and reevaluate your list acquisition practices. Learn more.
+       This lack of engagement will have a negative impact on your reputation with mailbox providers. To reduce this, improve your email content and reevaluate your list acquisition practices.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/subscriber-acquisition/",
     "type": "bad",
   },
   Object {
@@ -137,8 +147,9 @@ Array [
       <strong>
         Not enough of your recipients have recently engaged with your email.
       </strong>
-       Engagement is a key factor in your reputation, and low engagement may hurt your email deliverability. Be sure you are sending relevant and desired messages. Learn more.
+       Engagement is a key factor in your reputation, and low engagement may hurt your email deliverability. Be sure you are sending relevant and desired messages.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/engagement/",
     "type": "warning",
   },
 ]
@@ -151,8 +162,9 @@ Array [
       <strong>
         Too many of your recipients have been inactive for 365 days.
       </strong>
-       This low engagement may be hurting your email deliverability. You should remove subscribers that have not engaged in the past year and consider segmenting your list to better target interest groups and your most engaged recipients. Learn more.
+       This low engagement may be hurting your email deliverability. You should remove subscribers that have not engaged in the past year and consider segmenting your list to better target interest groups and your most engaged recipients.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/segmentation/",
     "type": "bad",
   },
 ]
@@ -165,8 +177,9 @@ Array [
       <strong>
         Some recipients have been inactive for 365 days.
       </strong>
-       While it could be worse, this low engagement may be hurting your email deliverability. Consider implementing a list hygiene process. Learn more.
+       While it could be worse, this low engagement may be hurting your email deliverability. Consider implementing a list hygiene process.
     </span>,
+    "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
     "type": "warning",
   },
 ]

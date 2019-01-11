@@ -12,6 +12,7 @@ exports[`Signals spam trap actions component renders atrocious message 1`] = `
           </strong>
            Hitting spam traps is an indicator of poor list procurement and hygiene practices and has a strong negative impact on your overall email deliverability. You should take steps to improve your list hygiene immediately.
         </span>,
+        "link": "https://www.sparkpost.com/docs/signals/subscriber-acquisition/",
         "type": "bad",
       },
     ]
@@ -32,6 +33,7 @@ exports[`Signals spam trap actions component renders bad message 1`] = `
           </strong>
            Hitting spam traps is an indicator of poor list procurement and hygiene practices and has a strong negative impact on your overall email deliverability. You should take steps to improve your list hygiene.
         </span>,
+        "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
         "type": "bad",
       },
     ]
@@ -72,6 +74,7 @@ exports[`Signals spam trap actions component renders warning message 1`] = `
           </strong>
            There are ways to accomplish a healthy list of engaged subscribers. It's key that you keep your subscribers engaged and that you remove unengaged recipients and replace them with new subscribers who are interested in your email.
         </span>,
+        "link": "https://www.sparkpost.com/docs/signals/engagement/",
         "type": "warning",
       },
     ]

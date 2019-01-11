@@ -10,7 +10,8 @@ const HealthScoreActions = ({ weights }) => {
     if (parsedWeight < 0 && content[weight_type]) {
       acc.push({
         weight: parsedWeight,
-        content: content[weight_type],
+        content: _.get(content[weight_type], 'content'),
+        link: _.get(content[weight_type], 'link'),
         type: 'bad'
       });
     }
