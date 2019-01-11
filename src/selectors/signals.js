@@ -111,7 +111,7 @@ export const selectHealthScoreDetails = createSelector(
     const history = _.get(match, 'history', []);
     const normalizedHistory = history.map(({ dt: date, weights, ...values }) => ({
       date,
-      weights: _.sortBy(weights, ({ weight }) => parseFloat(weight)).filter(({ weight_type }) => !weight_type.includes('eng cohorts:')),
+      weights: _.sortBy(weights, ({ weight }) => parseFloat(weight)),
       ...values
     }));
 
@@ -124,7 +124,9 @@ export const selectHealthScoreDetails = createSelector(
           { weight_type: 'Other bounces', weight: null, weight_value: null },
           { weight_type: 'Transient Failures', weight: null, weight_value: null },
           { weight_type: 'Block Bounces', weight: null, weight_value: null },
-          { weight_type: 'List Quality', weight: null, weight_value: null }
+          { weight_type: 'List Quality', weight: null, weight_value: null },
+          { weight_type: 'eng cohorts: new, 14-day', weight: null, weight_value: null },
+          { weight_type: 'eng cohorts: unengaged', weight: null, weight_value: null }
         ],
         health_score: null
       },

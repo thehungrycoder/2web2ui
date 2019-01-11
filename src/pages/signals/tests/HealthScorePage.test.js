@@ -127,9 +127,13 @@ describe('Signals Health Score Page', () => {
     });
 
     it('renders tooltip content for component weights', () => {
-
       const Tooltip = wrapper.find('DivergingBar').prop('tooltipContent');
       expect(shallow(<Tooltip payload={{ weight_type: 'Other bounces' }} />)).toMatchSnapshot();
+    });
+
+    it('renders y label content for component weights', () => {
+      const label = wrapper.find('DivergingBar').prop('yLabel');
+      expect(label({ value: 'eng cohorts: new, 14-day' })).toMatchSnapshot();
     });
 
     it('gets x axis props', () => {

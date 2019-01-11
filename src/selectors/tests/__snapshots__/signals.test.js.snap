@@ -211,6 +211,16 @@ Object {
             "weight_type": "List Quality",
             "weight_value": null,
           },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
         ],
       },
       Object {
@@ -246,6 +256,16 @@ Object {
           Object {
             "weight": null,
             "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
             "weight_value": null,
           },
         ],
@@ -285,6 +305,16 @@ Object {
             "weight_type": "List Quality",
             "weight_value": null,
           },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
         ],
       },
       Object {
@@ -320,6 +350,16 @@ Object {
           Object {
             "weight": null,
             "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
             "weight_value": null,
           },
         ],
@@ -359,6 +399,16 @@ Object {
             "weight_type": "List Quality",
             "weight_value": null,
           },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
         ],
       },
       Object {
@@ -394,6 +444,16 @@ Object {
           Object {
             "weight": null,
             "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
             "weight_value": null,
           },
         ],
@@ -433,6 +493,16 @@ Object {
             "weight_type": "List Quality",
             "weight_value": null,
           },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
         ],
       },
       Object {
@@ -468,6 +538,16 @@ Object {
           Object {
             "weight": null,
             "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
             "weight_value": null,
           },
         ],
@@ -522,6 +602,16 @@ Object {
             "weight_type": "List Quality",
             "weight_value": null,
           },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
         ],
       },
       Object {
@@ -557,6 +647,16 @@ Object {
           Object {
             "weight": null,
             "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
             "weight_value": null,
           },
         ],
@@ -596,6 +696,16 @@ Object {
             "weight_type": "List Quality",
             "weight_value": null,
           },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
         ],
       },
       Object {
@@ -631,6 +741,16 @@ Object {
           Object {
             "weight": null,
             "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
             "weight_value": null,
           },
         ],
@@ -670,6 +790,16 @@ Object {
             "weight_type": "List Quality",
             "weight_value": null,
           },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
         ],
       },
       Object {
@@ -680,6 +810,11 @@ Object {
           Object {
             "weight": -0.1,
             "weight_type": "Other bounces",
+            "weight_value": 0.5,
+          },
+          Object {
+            "weight": 0.5,
+            "weight_type": "eng cohorts: new, 14-day",
             "weight_value": 0.5,
           },
           Object {
@@ -722,6 +857,16 @@ Object {
           Object {
             "weight": null,
             "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
             "weight_value": null,
           },
         ],
@@ -924,7 +1069,7 @@ Object {
           "weights": Array [
             Object {
               "weight": 0.5,
-              "weight_type": "eng cohorts: should not be returned",
+              "weight_type": "eng cohorts: new, 14-day",
               "weight_value": 0.5,
             },
             Object {
@@ -997,7 +1142,7 @@ Array [
         "weights": Array [
           Object {
             "weight": 0.5,
-            "weight_type": "eng cohorts: should not be returned",
+            "weight_type": "eng cohorts: new, 14-day",
             "weight_value": 0.5,
           },
           Object {
