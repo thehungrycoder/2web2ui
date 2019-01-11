@@ -13,7 +13,7 @@ import Callout from 'src/components/callout';
 import OtherChartsHeader from './components/OtherChartsHeader';
 import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
-import { formatFullNumber, roundToPlaces } from 'src/helpers/units';
+import { formatFullNumber, formatNumber, roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
 
@@ -30,10 +30,13 @@ export class SpamTrapPage extends Component {
   }
 
   getYAxisProps = () => {
+    const { data } = this.props;
     const { calculation } = this.state;
 
     return {
-      tickFormatter: calculation === 'relative' ? (tick) => `${roundToPlaces(tick * 100, 2)}%` : null
+      tickFormatter: calculation === 'relative' ? (tick) => `${roundToPlaces(tick * 100, 2)}%` : (tick) => formatNumber(tick),
+      domain: data.every(({ relative_trap_hits }) => !relative_trap_hits) && calculation === 'relative'
+        ? [0, 1] : ['auto', 'auto']
     };
   }
 

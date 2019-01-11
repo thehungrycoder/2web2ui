@@ -87,7 +87,11 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
           xKey="date"
           yAxisProps={
             Object {
-              "tickFormatter": null,
+              "domain": Array [
+                "auto",
+                "auto",
+              ],
+              "tickFormatter": [Function],
             }
           }
           yKey="trap_hits"

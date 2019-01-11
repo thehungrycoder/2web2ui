@@ -63,7 +63,7 @@ export const HEALTH_SCORE_COMPONENTS = {
     label: 'Unengaged Recipients',
     chartTitle: 'Percent of Unengaged Recipients',
     info: `
-      Percent of injections that were sent to recipients who haven't engaged in over 90 or never engaged.
+      Percent of injections that were sent to recipients who haven't engaged in over 90 days or never engaged.
     `
   },
   'eng cohorts: new, 14-day': {
