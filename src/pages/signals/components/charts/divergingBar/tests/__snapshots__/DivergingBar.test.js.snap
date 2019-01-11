@@ -94,7 +94,7 @@ exports[`DivergingBar Component renders correctly 1`] = `
       tickCount={5}
       tickLine={false}
       type="category"
-      width={110}
+      width={140}
       yAxisId={0}
     />
     <XAxis
