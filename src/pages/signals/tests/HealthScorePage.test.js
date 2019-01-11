@@ -83,7 +83,12 @@ describe('Signals Health Score Page', () => {
       expect(wrapper.find('BarChart').at(0).prop('selected')).toEqual('first-date');
     });
 
-    it('uses first component weight with an existing date', () => {
+    it('handles component select', () => {
+      wrapper.find('DivergingBar').at(0).simulate('click', { payload: { weight_type: 'Complaints' }});
+      expect(wrapper.find('DivergingBar').at(0).prop('selected')).toEqual('Complaints');
+    });
+
+    it('uses first component weight with an existing date and new data', () => {
       wrapper = shallow(<HealthScorePage {...props} selected='first-date'/>);
       wrapper.setProps({ data: [{ date: 'first-date', weights: [
         { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
@@ -92,7 +97,7 @@ describe('Signals Health Score Page', () => {
       expect(wrapper.find('DivergingBar').at(0).prop('selected')).toEqual('Hard Bounces');
     });
 
-    it('uses first component weight of last date without an existing date', () => {
+    it('uses first component weight of last date without an existing date and new data', () => {
       wrapper = shallow(<HealthScorePage {...props} selected='initial-date'/>);
       wrapper.setProps({ data: [{ date: 'first-date' }, { date: 'last-date', weights: [
         { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
@@ -119,6 +124,18 @@ describe('Signals Health Score Page', () => {
       expect(shallow(<Tooltip payload={{ injections: 1000 }} />)).toMatchSnapshot();
     });
 
+    it('renders tooltip content for selected component', () => {
+      wrapper.find('DivergingBar').at(0).simulate('click', { payload: { weight_type: 'Complaints' }});
+      const Tooltip = wrapper.find('BarChart').at(2).prop('tooltipContent');
+      expect(shallow(<Tooltip payload={{ weight_value: 0.0012345 }} />)).toMatchSnapshot();
+    });
+
+    it('renders tooltip content for component weights', () => {
+
+      const Tooltip = wrapper.find('DivergingBar').prop('tooltipContent');
+      expect(shallow(<Tooltip payload={{ weight_type: 'Other bounces' }} />)).toMatchSnapshot();
+    });
+
     it('gets x axis props', () => {
       const axisProps = wrapper.find('BarChart').at(0).prop('xAxisProps');
       expect(axisProps).toMatchSnapshot();
@@ -133,6 +150,11 @@ describe('Signals Health Score Page', () => {
     it('renders injections y ticks', () => {
       const axisProps = wrapper.find('BarChart').at(1).prop('yAxisProps');
       expect(axisProps.tickFormatter(2468)).toEqual('2.47K');
+    });
+
+    it('renders component y ticks', () => {
+      const axisProps = wrapper.find('BarChart').at(2).prop('yAxisProps');
+      expect(axisProps.tickFormatter(0.003)).toEqual('0.3%');
     });
   });
 });

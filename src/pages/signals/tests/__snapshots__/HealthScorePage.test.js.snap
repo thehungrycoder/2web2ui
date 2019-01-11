@@ -7,6 +7,13 @@ Object {
 }
 `;
 
+exports[`Signals Health Score Page bar chart props renders tooltip content for component weights 1`] = `
+"
+      Other Bounces are defined as the share of attempted email injections that bounce for a variety
+      of miscellaneous technical reasons.
+    "
+`;
+
 exports[`Signals Health Score Page bar chart props renders tooltip content for health score 1`] = `
 <TooltipMetric
   label="Health Score"
@@ -18,6 +25,13 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for i
 <TooltipMetric
   label="Injections"
   value="1,000"
+/>
+`;
+
+exports[`Signals Health Score Page bar chart props renders tooltip content for selected component 1`] = `
+<TooltipMetric
+  label="Complaints"
+  value="0.1235%"
 />
 `;
 
