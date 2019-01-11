@@ -10,7 +10,22 @@ describe('Signals Health Score Page', () => {
     props = {
       facetId: 'test.com',
       facet: 'sending-domain',
-      data: [{ date: '2017-01-01', weights: [1,2]}],
+      data: [
+        {
+          date: '2017-01-01',
+          weights: [
+            { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
+            { weight_type: 'Complaints', weight: -0.5, weight_value: 0.25 }
+          ]
+        },
+        {
+          date: '2017-01-02',
+          weights: [
+            { weight_type: 'List Quality', weight: 0.8, weight_value: 0.25 },
+            { weight_type: 'Other bounces', weight: -0.8, weight_value: 0.25 }
+          ]
+        }
+      ],
       selected: '2017-01-01',
       gap: 0.25,
       loading: false,
@@ -66,6 +81,30 @@ describe('Signals Health Score Page', () => {
       wrapper = shallow(<HealthScorePage {...props} selected='first-date'/>);
       wrapper.setProps({ data: [{ date: 'first-date' }, { date: 'last-date' }]});
       expect(wrapper.find('BarChart').at(0).prop('selected')).toEqual('first-date');
+    });
+
+    it('uses first component weight with an existing date', () => {
+      wrapper = shallow(<HealthScorePage {...props} selected='first-date'/>);
+      wrapper.setProps({ data: [{ date: 'first-date', weights: [
+        { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
+        { weight_type: 'Complaints', weight: 0.5, weight_value: 0.25 }
+      ]}, { date: 'last-date' }]});
+      expect(wrapper.find('DivergingBar').at(0).prop('selected')).toEqual('Hard Bounces');
+    });
+
+    it('uses first component weight of last date without an existing date', () => {
+      wrapper = shallow(<HealthScorePage {...props} selected='initial-date'/>);
+      wrapper.setProps({ data: [{ date: 'first-date' }, { date: 'last-date', weights: [
+        { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
+        { weight_type: 'Complaints', weight: 0.5, weight_value: 0.25 }
+      ]}]});
+      expect(wrapper.find('DivergingBar').at(0).prop('selected')).toEqual('Hard Bounces');
+    });
+
+    it('uses first component weight when just changing date selection', () => {
+      wrapper = shallow(<HealthScorePage {...props} selected='initial-date'/>);
+      wrapper.instance().handleDateSelect({ payload: { date: '2017-01-01' }});
+      expect(wrapper.find('DivergingBar').at(0).prop('selected')).toEqual('Hard Bounces');
     });
   });
 

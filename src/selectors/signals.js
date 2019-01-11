@@ -118,7 +118,14 @@ export const selectHealthScoreDetails = createSelector(
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
-        weights: [],
+        weights: [
+          { weight_type: 'Hard Bounces', weight: null, weight_value: null },
+          { weight_type: 'Complaints', weight: null, weight_value: null },
+          { weight_type: 'Other bounces', weight: null, weight_value: null },
+          { weight_type: 'Transient Failures', weight: null, weight_value: null },
+          { weight_type: 'Block Bounces', weight: null, weight_value: null },
+          { weight_type: 'List Quality', weight: null, weight_value: null }
+        ],
         health_score: null
       },
       now,

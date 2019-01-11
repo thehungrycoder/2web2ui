@@ -81,7 +81,8 @@ class BarChart extends Component {
           <YAxis
             axisLine={false}
             tickLine={false}
-            width={25}
+            width={30}
+            minTickGap={2}
             domain={yDomain}
             {...yAxisProps}
           />

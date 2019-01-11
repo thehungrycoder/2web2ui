@@ -180,49 +180,297 @@ Object {
         "date": "2017-12-27",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2017-12-28",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2017-12-29",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2017-12-30",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2017-12-31",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2018-01-01",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2018-01-02",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2018-01-03",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
     ],
     "empty": true,
@@ -243,31 +491,186 @@ Object {
         "date": "2017-12-27",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2017-12-28",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2017-12-29",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2017-12-30",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2017-12-31",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2018-01-01",
@@ -290,7 +693,38 @@ Object {
         "date": "2018-01-02",
         "health_score": null,
         "injections": null,
-        "weights": Array [],
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+        ],
       },
       Object {
         "date": "2018-01-03",

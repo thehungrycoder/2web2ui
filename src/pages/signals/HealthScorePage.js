@@ -23,7 +23,8 @@ import EngagementRecencyPreview from './components/previews/EngagementRecencyPre
 
 export class HealthScorePage extends Component {
   state = {
-    selectedDate: null
+    selectedDate: null,
+    selectedComponent: null
   }
 
   componentDidMount() {
@@ -39,16 +40,27 @@ export class HealthScorePage extends Component {
     const { selectedDate } = this.state;
 
     const dataSetChanged = prevProps.data !== data;
-    const containsSelectedDay = _.find(data, ['date', selectedDate]);
+    let selectedDataByDay = _.find(data, ['date', selectedDate]);
 
-    if (dataSetChanged && !containsSelectedDay) {
-      const last = _.last(data);
-      this.setState({ selectedDate: last.date });
+    // Select last date in time series
+    if (dataSetChanged && !selectedDataByDay) {
+      selectedDataByDay = _.last(data);
+      this.setState({ selectedDate: selectedDataByDay.date });
+    }
+
+    // Select first component weight type
+    if (dataSetChanged || prevState.selectedDate !== selectedDate) {
+      const firstComponentType = _.get(selectedDataByDay, 'weights[0].weight_type');
+      this.setState({ selectedComponent: firstComponentType });
     }
   }
 
   handleDateSelect = (node) => {
     this.setState({ selectedDate: _.get(node, 'payload.date') });
+  }
+
+  handleComponentSelect = (node) => {
+    this.setState({ selectedComponent: _.get(node, 'payload.weight_type') });
   }
 
   getXAxisProps = () => {
@@ -61,10 +73,12 @@ export class HealthScorePage extends Component {
 
   renderContent = () => {
     const { data = [], loading, gap, empty, error } = this.props;
-    const { selectedDate } = this.state;
+    const { selectedDate, selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
     const currentWeights = _.get(_.last(data), 'weights');
+    const selectedWeightsAreEmpty = selectedWeights.every(({ weight }) => weight === null);
+    const dataForSelectedWeight = data.map(({ date, weights }) => ({ date, ..._.find(weights, ['weight_type', selectedComponent]) }));
 
     let panelContent;
 
@@ -121,6 +135,26 @@ export class HealthScorePage extends Component {
                   }}
                   xAxisProps={this.getXAxisProps()}
                 />
+                {(selectedComponent && !selectedWeightsAreEmpty) && (
+                  <Fragment>
+                    <ChartHeader title={HEALTH_SCORE_COMPONENTS[selectedComponent].chartTitle} />
+                    <BarChart
+                      gap={gap}
+                      height={190}
+                      onClick={this.handleDateSelect}
+                      selected={selectedDate}
+                      timeSeries={dataForSelectedWeight}
+                      tooltipContent={({ payload = {}}) => (
+                        <TooltipMetric label={selectedComponent} value={`${roundToPlaces(payload.weight_value * 100, 4)}%`} />
+                      )}
+                      yKey='weight_value'
+                      yAxisProps={{
+                        tickFormatter: (tick) => `${roundToPlaces(tick * 100, 3)}%`
+                      }}
+                      xAxisProps={this.getXAxisProps()}
+                    />
+                  </Fragment>
+                )}
               </Fragment>
             )}
           </Panel>
@@ -132,15 +166,17 @@ export class HealthScorePage extends Component {
             padding='1rem 0 1rem'
             tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
           />
-          {(!loading && !selectedWeights.length) && (
+          {(!loading && selectedWeightsAreEmpty) && (
             <Callout>Insufficient data to populate this chart</Callout>
           )}
-          {!panelContent && Boolean(selectedWeights.length) && (
+          {(!panelContent && !selectedWeightsAreEmpty) && (
             <DivergingBar
               data={selectedWeights}
               xKey='weight'
               yKey='weight_type'
-              tooltipContent={({ payload = {}}) => HEALTH_SCORE_COMPONENTS[payload.weight_type]}
+              tooltipContent={({ payload = {}}) => _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')}
+              onClick={this.handleComponentSelect}
+              selected={selectedComponent}
             />
           )}
           {!panelContent && <HealthScoreActions weights={currentWeights} />}
