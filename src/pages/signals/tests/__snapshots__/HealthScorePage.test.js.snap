@@ -7,6 +7,13 @@ Object {
 }
 `;
 
+exports[`Signals Health Score Page bar chart props renders tooltip content for component weights 1`] = `
+"
+      Other Bounces are defined as the share of attempted email injections that bounce for a variety
+      of miscellaneous technical reasons.
+    "
+`;
+
 exports[`Signals Health Score Page bar chart props renders tooltip content for health score 1`] = `
 <TooltipMetric
   label="Health Score"
@@ -21,7 +28,14 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for i
 />
 `;
 
-exports[`Signals Health Score Page renders correctly 1`] = `
+exports[`Signals Health Score Page bar chart props renders tooltip content for selected component 1`] = `
+<TooltipMetric
+  label="Complaints"
+  value="0.1235%"
+/>
+`;
+
+exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 <SignalsPage
   breadcrumbAction={
     Object {
@@ -68,8 +82,31 @@ exports[`Signals Health Score Page renders correctly 1`] = `
               Object {
                 "date": "2017-01-01",
                 "weights": Array [
-                  1,
-                  2,
+                  Object {
+                    "weight": 0.5,
+                    "weight_type": "Hard Bounces",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.5,
+                    "weight_type": "Complaints",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
+              Object {
+                "date": "2017-01-02",
+                "weights": Array [
+                  Object {
+                    "weight": 0.8,
+                    "weight_type": "List Quality",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.8,
+                    "weight_type": "Other bounces",
+                    "weight_value": 0.25,
+                  },
                 ],
               },
             ]
@@ -118,8 +155,31 @@ exports[`Signals Health Score Page renders correctly 1`] = `
               Object {
                 "date": "2017-01-01",
                 "weights": Array [
-                  1,
-                  2,
+                  Object {
+                    "weight": 0.5,
+                    "weight_type": "Hard Bounces",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.5,
+                    "weight_type": "Complaints",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
+              Object {
+                "date": "2017-01-02",
+                "weights": Array [
+                  Object {
+                    "weight": 0.8,
+                    "weight_type": "List Quality",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.8,
+                    "weight_type": "Other bounces",
+                    "weight_value": 0.25,
+                  },
                 ],
               },
             ]
@@ -139,6 +199,58 @@ exports[`Signals Health Score Page renders correctly 1`] = `
             }
           }
           yKey="injections"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+        <ChartHeader
+          title="Hard Bounces Percent"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={190}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 5,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+                "weight": 0.5,
+                "weight_type": "Hard Bounces",
+                "weight_value": 0.25,
+              },
+              Object {
+                "date": "2017-01-02",
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="weight_value"
           yRange={
             Array [
               "auto",
@@ -166,12 +278,22 @@ exports[`Signals Health Score Page renders correctly 1`] = `
         barHeight={35}
         data={
           Array [
-            1,
-            2,
+            Object {
+              "weight": 0.5,
+              "weight_type": "Hard Bounces",
+              "weight_value": 0.25,
+            },
+            Object {
+              "weight": -0.5,
+              "weight_type": "Complaints",
+              "weight_value": 0.25,
+            },
           ]
         }
         negativeFill="#DB2F2D"
+        onClick={[Function]}
         positiveFill="#8CBE3C"
+        selected="Hard Bounces"
         tooltipContent={[Function]}
         width="99%"
         xDomain={
@@ -186,8 +308,16 @@ exports[`Signals Health Score Page renders correctly 1`] = `
       <HealthScoreActions
         weights={
           Array [
-            1,
-            2,
+            Object {
+              "weight": 0.8,
+              "weight_type": "List Quality",
+              "weight_value": 0.25,
+            },
+            Object {
+              "weight": -0.8,
+              "weight_type": "Other bounces",
+              "weight_value": 0.25,
+            },
           ]
         }
       />

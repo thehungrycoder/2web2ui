@@ -75,6 +75,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
       }
       height={0}
       hide={false}
+      minTickGap={2}
       mirror={false}
       orientation="left"
       padding={
@@ -88,7 +89,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
       tickCount={5}
       tickLine={false}
       type="number"
-      width={25}
+      width={30}
       yAxisId={0}
     />
     <XAxis

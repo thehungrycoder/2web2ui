@@ -11,30 +11,48 @@ export const HEALTH_SCORE_COMPONENT_INFO = `
 `;
 
 export const HEALTH_SCORE_COMPONENTS = {
-  'Block Bounces': `
-    Block Bounces are defined as the share of attempted email injections that are undelivered for
-    various policy reasons.
-  `,
-  Complaints: `
-    Spam Complaints are defined as the shared of attempted email injections that are flagged by
-    recipients as spam.
-  `,
-  'Hard Bounces': `
-    Hard Bounces are calcuated as the share of attempted email injections that is sent to
-    non-existent or undeliverable addresses.
-  `,
-  'List Quality': `
-    List Quality is determined by the share of attempted email injections that match address
-    patterns associated with problematic list procurement and hygiene practices.
-  `,
-  'Other bounces': `
-    Other Bounces are defined as the share of attempted email injections that bounce for a variety
-    of miscellaneous technical reasons.
-  `,
-  'Transient Failures': `
-    Transient Failures are calcuated as the share of attempted email injections that exhibit
-    temporary delivery problems.
-  `
+  'Block Bounces': {
+    chartTitle: 'Block Bounces Percent',
+    info: `
+      Block Bounces are defined as the share of attempted email injections that are undelivered for
+      various policy reasons.
+    `
+  },
+  Complaints: {
+    chartTitle: 'Complaints Percent',
+    info: `
+      Spam Complaints are defined as the shared of attempted email injections that are flagged by
+      recipients as spam.
+    `
+  },
+  'Hard Bounces': {
+    chartTitle: 'Hard Bounces Percent',
+    info: `
+      Hard Bounces are calcuated as the share of attempted email injections that is sent to
+      non-existent or undeliverable addresses.
+    `
+  },
+  'List Quality': {
+    chartTitle: 'Percent of List Quality Issues',
+    info: `
+      List Quality is determined by the share of attempted email injections that match address
+      patterns associated with problematic list procurement and hygiene practices.
+    `
+  },
+  'Other bounces': {
+    chartTitle: 'Other Bounces Percent',
+    info: `
+      Other Bounces are defined as the share of attempted email injections that bounce for a variety
+      of miscellaneous technical reasons.
+    `
+  },
+  'Transient Failures': {
+    chartTitle: 'Transient Failure Percent',
+    info: `
+      Transient Failures are calcuated as the share of attempted email injections that exhibit
+      temporary delivery problems.
+    `
+  }
 };
 
 export const SPAM_TRAP_INFO = `
