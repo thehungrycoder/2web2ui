@@ -35,7 +35,7 @@ export class HealthScorePage extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const { data } = this.props;
     const { selectedDate } = this.state;
 
@@ -49,7 +49,7 @@ export class HealthScorePage extends Component {
     }
 
     // Select first component weight type
-    if (dataSetChanged || prevState.selectedDate !== selectedDate) {
+    if (dataSetChanged) {
       const firstComponentType = _.get(selectedDataByDay, 'weights[0].weight_type');
       this.setState({ selectedComponent: firstComponentType });
     }

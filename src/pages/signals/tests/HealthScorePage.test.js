@@ -5,27 +5,28 @@ import { HealthScorePage } from '../HealthScorePage';
 describe('Signals Health Score Page', () => {
   let wrapper;
   let props;
+  const data = [
+    {
+      date: '2017-01-01',
+      weights: [
+        { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
+        { weight_type: 'Complaints', weight: -0.5, weight_value: 0.25 }
+      ]
+    },
+    {
+      date: '2017-01-02',
+      weights: [
+        { weight_type: 'List Quality', weight: 0.8, weight_value: 0.25 },
+        { weight_type: 'Other bounces', weight: -0.8, weight_value: 0.25 }
+      ]
+    }
+  ];
 
   beforeEach(() => {
     props = {
       facetId: 'test.com',
       facet: 'sending-domain',
-      data: [
-        {
-          date: '2017-01-01',
-          weights: [
-            { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
-            { weight_type: 'Complaints', weight: -0.5, weight_value: 0.25 }
-          ]
-        },
-        {
-          date: '2017-01-02',
-          weights: [
-            { weight_type: 'List Quality', weight: 0.8, weight_value: 0.25 },
-            { weight_type: 'Other bounces', weight: -0.8, weight_value: 0.25 }
-          ]
-        }
-      ],
+      data: [],
       selected: '2017-01-01',
       gap: 0.25,
       loading: false,
@@ -33,9 +34,10 @@ describe('Signals Health Score Page', () => {
       xTicks: []
     };
     wrapper = shallow(<HealthScorePage {...props}/>);
+    wrapper.setProps({ data });
   });
 
-  it('renders correctly', () => {
+  it('renders correctly when recieving data', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -103,12 +105,6 @@ describe('Signals Health Score Page', () => {
         { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
         { weight_type: 'Complaints', weight: 0.5, weight_value: 0.25 }
       ]}]});
-      expect(wrapper.find('DivergingBar').at(0).prop('selected')).toEqual('Hard Bounces');
-    });
-
-    it('uses first component weight when just changing date selection', () => {
-      wrapper = shallow(<HealthScorePage {...props} selected='initial-date'/>);
-      wrapper.instance().handleDateSelect({ payload: { date: '2017-01-01' }});
       expect(wrapper.find('DivergingBar').at(0).prop('selected')).toEqual('Hard Bounces');
     });
   });

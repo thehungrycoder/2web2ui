@@ -35,7 +35,7 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for s
 />
 `;
 
-exports[`Signals Health Score Page renders correctly 1`] = `
+exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 <SignalsPage
   breadcrumbAction={
     Object {
