@@ -94,7 +94,7 @@ export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays = 0, ageR
     return null;
   }
 
-  const daysLeft = Number.parseInt(ageRangeEnd - accountAgeInDays) + 1;
+  const daysLeft = Math.floor(ageRangeEnd - accountAgeInDays) + 1;
 
   return (
     <Banner status='warning' title='Free Plan Downgrade'>
