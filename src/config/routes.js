@@ -265,7 +265,6 @@ const routes = [
   {
     path: '/signals',
     component: signals.OverviewPage,
-    condition: hasUiOption('signals'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -273,7 +272,6 @@ const routes = [
   {
     path: '/signals/health-score/:facet/:facetId',
     component: signals.HealthScorePage,
-    condition: hasUiOption('signals'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -281,7 +279,6 @@ const routes = [
   {
     path: '/signals/spam-traps/:facet/:facetId',
     component: signals.SpamTrapPage,
-    condition: hasUiOption('signals'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -289,7 +286,6 @@ const routes = [
   {
     path: '/signals/engagement-recency/:facet/:facetId',
     component: signals.EngagementRecencyPage,
-    condition: hasUiOption('signals'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
