@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import { createSelector } from 'reselect';
 import { fillByDate } from 'src/helpers/date';
+import { roundToPlaces } from 'src/helpers/units';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 import _ from 'lodash';
 import moment from 'moment';
@@ -235,13 +236,13 @@ export const selectHealthScoreOverviewData = createSelector(
   ({ data }, { now, relativeRange }) => data.map(({ current_health_score, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
-      const wholeHealthScore = Math.floor(health_score * 100);
+      const roundedHealthScore = roundToPlaces(health_score * 100, 1);
 
       return {
         ...values,
         date,
-        health_score: wholeHealthScore,
-        ranking: wholeHealthScore < 75 ? 'bad' : 'good'
+        health_score: roundedHealthScore,
+        ranking: roundedHealthScore < 75 ? 'bad' : 'good'
       };
     });
     const filledHistory = fillByDate({
@@ -258,8 +259,9 @@ export const selectHealthScoreOverviewData = createSelector(
       ...rowOfData,
       current_health_score: _.last(filledHistory).health_score,
       history: filledHistory,
-      average_health_score: Math.floor(
-        normalizedHistory.reduce((total, { health_score }) => total + health_score, 0) / normalizedHistory.length
+      average_health_score: roundToPlaces(
+        normalizedHistory.reduce((total, { health_score }) => total + health_score, 0) / normalizedHistory.length,
+        1
       )
     };
   })
