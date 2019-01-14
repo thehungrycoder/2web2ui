@@ -1,8 +1,8 @@
 
 export const HEALTH_SCORE_INFO = `
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This composite score is informed by multiple message events,
-  including bounces, spam trap hits, and user engagement across our entire network.
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
 `;
 
 export const HEALTH_SCORE_COMPONENT_INFO = `
@@ -63,7 +63,7 @@ export const HEALTH_SCORE_COMPONENTS = {
     label: 'Unengaged Recipients',
     chartTitle: 'Percent of Unengaged Recipients',
     info: `
-      Percent of injections that were sent to recipients who haven't engaged in over 90 days or never engaged.
+      Percent of injections that were sent to recipients who haven't engaged in over 365 days or never engaged.
     `
   },
   'eng cohorts: new, 14-day': {

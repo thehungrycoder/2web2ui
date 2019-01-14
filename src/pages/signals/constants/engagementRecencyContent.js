@@ -53,7 +53,7 @@ const content = [
   {
     condition: ({ c_90d }) => c_90d < 0.25,
     content: (
-      <span><strong>Your recipient engagement is dropping off significantly over time.</strong> Even the most engaged recipients will get tired of repetitive or poorly timed messages. You should consider reevaluating your lifecycle srategy to shake things up and reengage your audience.</span>
+      <span><strong>Your recipient engagement is dropping off significantly over time.</strong> Even the most engaged recipients will get tired of repetitive or poorly timed messages. You should consider reevaluating your lifecycle strategy to shake things up and reengage your audience.</span>
     ),
     type: 'bad',
     link: 'https://www.sparkpost.com/docs/signals/content-refresh/'

@@ -63,8 +63,8 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           title="Health Score"
           tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This composite score is informed by multiple message events,
-  including bounces, spam trap hits, and user engagement across our entire network.
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
 "
         />
         <BarChart
@@ -360,8 +360,8 @@ exports[`Signals Health Score Page renders empty correctly 1`] = `
     title="Health Score"
     tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This composite score is informed by multiple message events,
-  including bounces, spam trap hits, and user engagement across our entire network.
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
 "
   />
   <Callout
@@ -398,8 +398,8 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
           title="Health Score"
           tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This composite score is informed by multiple message events,
-  including bounces, spam trap hits, and user engagement across our entire network.
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
 "
         />
         <BarChart
@@ -563,8 +563,8 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
           title="Health Score"
           tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This composite score is informed by multiple message events,
-  including bounces, spam trap hits, and user engagement across our entire network.
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
 "
         />
         <Callout
@@ -619,8 +619,8 @@ exports[`Signals Health Score Page renders loading correctly 1`] = `
     title="Health Score"
     tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This composite score is informed by multiple message events,
-  including bounces, spam trap hits, and user engagement across our entire network.
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
 "
   />
   <div
