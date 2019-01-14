@@ -44,12 +44,16 @@ describe('Component: AdvancedFiltersModal', () => {
     expect(wrapper.find('Modal').props().open).toEqual(false);
   });
 
-  it('should close the modal when pressing the escape key; only when modal is open', () => {
-    wrapper.setState({ modalOpen: false });
-    wrapper.instance().handleKeyDown({ key: 'Escape' });
-    expect(wrapper.find('Modal').props().open).toEqual(false);
+  it('should close the modal when pressing the escape key; when modal is open', () => {
     wrapper.setState({ modalOpen: true });
     expect(wrapper.find('Modal').props().open).toEqual(true);
+    wrapper.instance().handleKeyDown({ key: 'Escape' });
+    expect(wrapper.find('Modal').props().open).toEqual(false);
+  });
+
+  it('should keep the modal closed when pressing the escape key; when modal is closed', () => {
+    wrapper.setState({ modalOpen: false });
+    expect(wrapper.find('Modal').props().open).toEqual(false);
     wrapper.instance().handleKeyDown({ key: 'Escape' });
     expect(wrapper.find('Modal').props().open).toEqual(false);
   });

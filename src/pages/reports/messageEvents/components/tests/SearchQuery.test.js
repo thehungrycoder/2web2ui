@@ -4,8 +4,8 @@ import SearchQuery from '../SearchQuery';
 
 jest.mock('src/constants', () => ({
   EVENTS_SEARCH_FILTERS: {
-    recipient_domains: { comma: true, wildcard: false, placeholder: '', label: 'Recipient Domains' },
-    subject: { comma: false, wildcard: true, placeholder: '', label: 'Subject' }
+    recipient_domains: { placeholder: 'Insert recipient domains placeholder', label: 'Recipient Domains' },
+    subjects: { placeholder: 'Insert subjects placeholder', label: 'Subjects' }
   }
 }));
 
@@ -30,7 +30,7 @@ describe('SearchForm', () => {
         remove: jest.fn()
       }
     };
-    filters = [{ key: 'recipient_domains', value: 'foo' }, { key: 'subject', value: 'bar' }, { key: '', value: '' } ];
+    filters = [{ key: 'recipient_domains', value: 'foo' }, { key: 'subjects', value: 'bar' }, { key: '', value: '' } ];
     wrapper = shallow(<SearchQuery {...props} />);
   });
 

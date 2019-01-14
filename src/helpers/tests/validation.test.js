@@ -50,8 +50,7 @@ const cases = {
     good: [[{ key: 'reason', value: 'fo*o' }],
       [{ key: 'campaigns', value: 'foo, bar' }]],
     bad: [[{}],
-      [{ value: 'foo' }],
-      [{ key: 'subject', value: 'foo, bar' }]],
+      [{ value: 'foo' }]],
     multiArg: true
   },
   abTestDefaultTemplate: {

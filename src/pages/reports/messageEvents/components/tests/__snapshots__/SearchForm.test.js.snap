@@ -15,6 +15,9 @@ exports[`SearchForm should render correctly 1`] = `
         component={[Function]}
         name="searchQuery"
       />
+      <p>
+        All filters accept comma-separated values.
+      </p>
     </Panel.Section>
     <Panel.Section>
       <Button

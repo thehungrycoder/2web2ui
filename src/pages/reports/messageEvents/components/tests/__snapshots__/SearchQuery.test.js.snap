@@ -48,7 +48,7 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       <Field
         component={[Function]}
         name="searchQuery[0].value"
-        placeholder=" Supports comma-separated values"
+        placeholder="Insert recipient domains placeholder"
         type="text"
         validate={[Function]}
       />
@@ -90,8 +90,8 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
           options={
             Array [
               Object {
-                "label": "Subject",
-                "value": "subject",
+                "label": "Subjects",
+                "value": "subjects",
               },
             ]
           }
@@ -107,7 +107,7 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       <Field
         component={[Function]}
         name="searchQuery[1].value"
-        placeholder=" Supports wildcards"
+        placeholder="Insert subjects placeholder"
         type="text"
         validate={[Function]}
       />
