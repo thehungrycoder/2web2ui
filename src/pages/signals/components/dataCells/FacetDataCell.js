@@ -23,7 +23,7 @@ const FacetDataCell = ({ dimension, facet, id, name, subaccountId }) => {
     label = `${name} (${id})`;
   }
 
-  if (subaccountId) {
+  if (subaccountId >= 0) {
     search = setSubaccountQuery(subaccountId);
   }
 
