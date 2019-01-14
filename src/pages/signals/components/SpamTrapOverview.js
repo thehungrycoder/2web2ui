@@ -143,7 +143,7 @@ class SpamTrapOverview extends React.Component {
                   facet={facet.key}
                   id={id}
                   name={_.get(subaccounts, `[${id}].name`)}
-                  signalOptions={signalOptions}
+                  subaccountId={_.get(signalOptions, 'subaccount.id')}
                 />
               );
             }}
