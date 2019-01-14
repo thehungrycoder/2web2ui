@@ -83,6 +83,7 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
               "health_score": 98,
             },
           ],
+          "sid": 123,
         },
       ]
     }
@@ -189,6 +190,7 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
               "health_score": 98,
             },
           ],
+          "sid": 123,
         },
       ]
     }

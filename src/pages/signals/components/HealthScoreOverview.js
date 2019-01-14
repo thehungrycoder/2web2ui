@@ -74,16 +74,16 @@ class HealthScoreOverview extends React.Component {
     this.setState({ chartType });
   }
 
-  handleClick = (facetId) => ({ date }) => {
-    const { facet, history, signalOptions } = this.props;
+  handleClick = (facetId, subaccountId) => ({ date }) => {
+    const { facet, history } = this.props;
     let search;
 
     if (facet.key === 'sid' && facetId === -1) {
       return; // ignore
     }
 
-    if (signalOptions.subaccount) {
-      search = setSubaccountQuery(signalOptions.subaccount.id);
+    if (subaccountId >= 0) {
+      search = setSubaccountQuery(subaccountId);
     }
 
     history.push({
@@ -172,7 +172,7 @@ class HealthScoreOverview extends React.Component {
                     data={_.last(history)}
                     dataKey="health_score"
                     label="Health Score"
-                    onClick={this.handleClick(id)}
+                    onClick={this.handleClick(id, data.sid)}
                     relative={false}
                   />
                 );
@@ -183,7 +183,7 @@ class HealthScoreOverview extends React.Component {
                   data={history}
                   dataKey="health_score"
                   label="Health Score"
-                  onClick={this.handleClick(id)}
+                  onClick={this.handleClick(id, data.sid)}
                   relative={false}
                 />
               );
