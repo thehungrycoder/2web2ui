@@ -10,7 +10,7 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
         hideLine={true}
         title="Engagement Recency"
         tooltipContent="
-  This reports the share over time of your email that has been sent to recipients who most recently
+  The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
       />
@@ -104,7 +104,7 @@ exports[`Signals EngagementRecencyPreview Component renders empty correctly 1`] 
         hideLine={true}
         title="Engagement Recency"
         tooltipContent="
-  This reports the share over time of your email that has been sent to recipients who most recently
+  The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
       />
@@ -131,7 +131,7 @@ exports[`Signals EngagementRecencyPreview Component renders error correctly 1`] 
         hideLine={true}
         title="Engagement Recency"
         tooltipContent="
-  This reports the share over time of your email that has been sent to recipients who most recently
+  The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
       />
