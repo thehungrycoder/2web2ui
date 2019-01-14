@@ -152,7 +152,7 @@ class EngagementRecencyOverview extends React.Component {
           <Column
             dataKey="history"
             label="Daily Recently Engaged Recipients"
-            width="30%"
+            width="40%"
             component={({ history, ...data }) => {
               const id = data[facet.key];
 
@@ -185,7 +185,7 @@ class EngagementRecencyOverview extends React.Component {
               align="right"
               dataKey="current_relative_engaged_recipients"
               label="Current Ratio"
-              width="20%"
+              width="15%"
               component={({ current_relative_engaged_recipients }) => (
                 <PercentDataCell value={current_relative_engaged_recipients} />
               )}
@@ -195,7 +195,7 @@ class EngagementRecencyOverview extends React.Component {
               align="right"
               dataKey="current_engaged_recipients"
               label="Current Count"
-              width="20%"
+              width="15%"
               component={({ current_engaged_recipients }) => (
                 <NumericDataCell value={current_engaged_recipients} />
               )}
@@ -205,7 +205,7 @@ class EngagementRecencyOverview extends React.Component {
             align="right"
             dataKey="total_engagement"
             label="Total Recipients"
-            width="20%"
+            width="15%"
             component={({ total_engagement }) => <NumericDataCell value={total_engagement} />}
           />
         </SummaryTable>
