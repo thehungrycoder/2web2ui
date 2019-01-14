@@ -35,6 +35,8 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for s
 />
 `;
 
+exports[`Signals Health Score Page bar chart props renders y label content for component weights 1`] = `"Engaged Recipients"`;
+
 exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 <SignalsPage
   breadcrumbAction={
@@ -304,6 +306,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
         }
         xKey="weight"
         yKey="weight_type"
+        yLabel={[Function]}
       />
       <HealthScoreActions
         weights={

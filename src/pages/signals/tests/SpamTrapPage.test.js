@@ -71,7 +71,15 @@ describe('Signals Spam Trap Page', () => {
     it('gets y axis props with absolute calculation', () => {
       wrapper.setState({ calculation: 'absolute' });
       const axisProps = wrapper.find('BarChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter).toEqual(null);
+      expect(axisProps.tickFormatter((2468))).toEqual('2.47K');
+      expect(axisProps.domain).toEqual(['auto', 'auto']);
+    });
+
+    it('gets y axis props with relative calculation and 0 values', () => {
+      wrapper.setState({ calculation: 'relative' });
+      wrapper.setProps({ data: [{ relative_trap_hits: 0 }, { relative_trap_hits: null }]});
+      const axisProps = wrapper.find('BarChart').prop('yAxisProps');
+      expect(axisProps.domain).toEqual([0, 1]);
     });
   });
 });

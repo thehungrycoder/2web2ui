@@ -174,6 +174,7 @@ export class HealthScorePage extends Component {
               data={selectedWeights}
               xKey='weight'
               yKey='weight_type'
+              yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
               tooltipContent={({ payload = {}}) => _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')}
               onClick={this.handleComponentSelect}
               selected={selectedComponent}

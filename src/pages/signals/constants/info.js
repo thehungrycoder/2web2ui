@@ -12,6 +12,7 @@ export const HEALTH_SCORE_COMPONENT_INFO = `
 
 export const HEALTH_SCORE_COMPONENTS = {
   'Block Bounces': {
+    label: 'Block Bounces',
     chartTitle: 'Block Bounces Percent',
     info: `
       Block Bounces are defined as the share of attempted email injections that are undelivered for
@@ -19,6 +20,7 @@ export const HEALTH_SCORE_COMPONENTS = {
     `
   },
   Complaints: {
+    label: 'Complaints',
     chartTitle: 'Complaints Percent',
     info: `
       Spam Complaints are defined as the shared of attempted email injections that are flagged by
@@ -26,6 +28,7 @@ export const HEALTH_SCORE_COMPONENTS = {
     `
   },
   'Hard Bounces': {
+    label: 'Hard Bounces',
     chartTitle: 'Hard Bounces Percent',
     info: `
       Hard Bounces are calcuated as the share of attempted email injections that is sent to
@@ -33,6 +36,7 @@ export const HEALTH_SCORE_COMPONENTS = {
     `
   },
   'List Quality': {
+    label: 'List Quality',
     chartTitle: 'Percent of List Quality Issues',
     info: `
       List Quality is determined by the share of attempted email injections that match address
@@ -40,6 +44,7 @@ export const HEALTH_SCORE_COMPONENTS = {
     `
   },
   'Other bounces': {
+    label: 'Other Bounces',
     chartTitle: 'Other Bounces Percent',
     info: `
       Other Bounces are defined as the share of attempted email injections that bounce for a variety
@@ -47,10 +52,25 @@ export const HEALTH_SCORE_COMPONENTS = {
     `
   },
   'Transient Failures': {
+    label: 'Transient Failures',
     chartTitle: 'Transient Failure Percent',
     info: `
       Transient Failures are calcuated as the share of attempted email injections that exhibit
       temporary delivery problems.
+    `
+  },
+  'eng cohorts: unengaged': {
+    label: 'Unengaged Recipients',
+    chartTitle: 'Percent of Unengaged Recipients',
+    info: `
+      Percent of injections that were sent to recipients who haven't engaged in over 90 days or never engaged.
+    `
+  },
+  'eng cohorts: new, 14-day': {
+    label: 'Engaged Recipients',
+    chartTitle: 'Percent of Engaged Recipients',
+    info: `
+      Percent of injections that were sent to new recipients or recipients who have engaged recently.
     `
   }
 };

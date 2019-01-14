@@ -37,14 +37,15 @@ class DivergingBar extends Component {
   }
 
   renderYTick = ({ payload, ...props }) => {
-    const { data, selected, yKey } = this.props;
+    const { data, selected, yKey, yLabel } = this.props;
     const match = _.find(data, [yKey, selected]) || {};
+    const label = yLabel ? yLabel(payload) : payload.value;
 
     if (payload.value === match[yKey]) {
-      return <Text {...props} fill='#0B83D6'>{payload.value}</Text>;
+      return <Text {...props} fill='#0B83D6'>{label}</Text>;
     }
 
-    return <Text {...props}>{payload.value}</Text>;
+    return <Text {...props}>{label}</Text>;
   }
 
   render() {
@@ -73,7 +74,7 @@ class DivergingBar extends Component {
             dataKey={yKey}
             padding={{ bottom: 5 }}
             tick={this.renderYTick}
-            width={110}
+            width={140}
           />
           <XAxis
             hide
@@ -103,6 +104,7 @@ DivergingBar.propTypes = {
   xDomain: PropTypes.array,
   xKey: PropTypes.string,
   yKey: PropTypes.string,
+  yLabel: PropTypes.func,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 

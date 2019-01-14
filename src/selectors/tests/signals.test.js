@@ -113,7 +113,7 @@ describe('Selectors: signals', () => {
                   health_score: 0.74321, // bad
                   weights: [
                     {
-                      weight_type: 'eng cohorts: should not be returned',
+                      weight_type: 'eng cohorts: new, 14-day',
                       weight: 0.5,
                       weight_value: 0.5
                     },
