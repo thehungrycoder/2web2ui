@@ -74,6 +74,17 @@ describe('HealthScoreOverview', () => {
     expect(wrapper.find(SummaryTable).prop('loading')).toEqual(true);
   });
 
+  it('renders both subaccount and facet columns', () => {
+    const wrapper = subject({
+      signalOptions: {
+        id: undefined,
+        name: 'Master & All Subaccounts'
+      }
+    });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('handles chart type change', () => {
     const wrapper = subject();
     wrapper.find('ChartType').simulate('change', 'bar');

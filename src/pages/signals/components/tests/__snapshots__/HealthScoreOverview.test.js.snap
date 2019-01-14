@@ -24,6 +24,112 @@ exports[`HealthScoreOverview history component renders absolute sparkline 1`] = 
 />
 `;
 
+exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
+<Panel>
+  <div
+    className="Header"
+  >
+    <h5>
+      Health Score Summary
+    </h5>
+    <div
+      className="Tooltip"
+    >
+      <Tooltip
+        bottom={true}
+        content="
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
+"
+        dark={true}
+        forcePosition={false}
+        horizontalOffset="-1rem"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
+      >
+        <InfoOutline
+          className="TooltipIcon"
+          size={18}
+        />
+      </Tooltip>
+    </div>
+    <div
+      className="Controls"
+    >
+      <ChartType
+        initialSelected="line"
+        onChange={[Function]}
+      />
+    </div>
+  </div>
+  <Connect(SummaryTable)
+    data={
+      Array [
+        Object {
+          "average_health_score": 98,
+          "current_health_score": 98,
+          "domain": "example.com",
+          "history": Array [
+            Object {
+              "date": "2018-01-13",
+              "health_score": 98,
+            },
+          ],
+        },
+      ]
+    }
+    empty={false}
+    loading={false}
+    tableName="Test"
+    totalCount={1}
+  >
+    <Column
+      component={[Function]}
+      dataKey="sid"
+      label="Subaccount"
+      sortable={true}
+      width="15%"
+    />
+    <Column
+      component={[Function]}
+      dataKey="domain"
+      label="Domain"
+      sortable={false}
+      width="25%"
+    />
+    <Column
+      component={[Function]}
+      dataKey="history"
+      label="Daily Health Score"
+      width="30%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="current_health_score"
+      label="Current Score"
+      sortable={true}
+      width="15%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="average_health_score"
+      label="Average Score"
+      width="15%"
+    />
+  </Connect(SummaryTable)>
+</Panel>
+`;
+
 exports[`HealthScoreOverview renders overview panel with controls and table 1`] = `
 <Panel>
   <div
@@ -102,7 +208,7 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
       component={[Function]}
       dataKey="history"
       label="Daily Health Score"
-      width="30%"
+      width="40%"
     />
     <Column
       align="right"
@@ -110,14 +216,14 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
       dataKey="current_health_score"
       label="Current Score"
       sortable={true}
-      width="20%"
+      width="15%"
     />
     <Column
       align="right"
       component={[Function]}
       dataKey="average_health_score"
       label="Average Score"
-      width="20%"
+      width="15%"
     />
   </Connect(SummaryTable)>
 </Panel>
