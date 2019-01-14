@@ -58,9 +58,9 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
         <ChartHeader
           title="Health Score"
           tooltipContent="
-  This is a predictive score that monitors your email health to identify problems before they
-  negagtively impact email delivery. This composite score is informed by message events, including
-  bounces, spam trap hits, user engagement, and others.
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This composite score is informed by multiple message events,
+  including bounces, spam trap hits, and user engagement across our entire network.
 "
         />
         <BarChart
@@ -135,6 +135,9 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
         />
         <ChartHeader
           title="Injections"
+          tooltipContent="
+  Injections are defined as the total number of messages successfully generated or relayed to SparkPost for delivery.
+"
         />
         <BarChart
           fill="#B157CE"
@@ -350,9 +353,9 @@ exports[`Signals Health Score Page renders empty correctly 1`] = `
   <ChartHeader
     title="Health Score"
     tooltipContent="
-  This is a predictive score that monitors your email health to identify problems before they
-  negagtively impact email delivery. This composite score is informed by message events, including
-  bounces, spam trap hits, user engagement, and others.
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This composite score is informed by multiple message events,
+  including bounces, spam trap hits, and user engagement across our entire network.
 "
   />
   <Callout
@@ -386,9 +389,9 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
         <ChartHeader
           title="Health Score"
           tooltipContent="
-  This is a predictive score that monitors your email health to identify problems before they
-  negagtively impact email delivery. This composite score is informed by message events, including
-  bounces, spam trap hits, user engagement, and others.
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This composite score is informed by multiple message events,
+  including bounces, spam trap hits, and user engagement across our entire network.
 "
         />
         <BarChart
@@ -436,6 +439,9 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
         />
         <ChartHeader
           title="Injections"
+          tooltipContent="
+  Injections are defined as the total number of messages successfully generated or relayed to SparkPost for delivery.
+"
         />
         <BarChart
           fill="#B157CE"
@@ -545,9 +551,9 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
         <ChartHeader
           title="Health Score"
           tooltipContent="
-  This is a predictive score that monitors your email health to identify problems before they
-  negagtively impact email delivery. This composite score is informed by message events, including
-  bounces, spam trap hits, user engagement, and others.
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This composite score is informed by multiple message events,
+  including bounces, spam trap hits, and user engagement across our entire network.
 "
         />
         <Callout
@@ -600,9 +606,9 @@ exports[`Signals Health Score Page renders loading correctly 1`] = `
   <ChartHeader
     title="Health Score"
     tooltipContent="
-  This is a predictive score that monitors your email health to identify problems before they
-  negagtively impact email delivery. This composite score is informed by message events, including
-  bounces, spam trap hits, user engagement, and others.
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This composite score is informed by multiple message events,
+  including bounces, spam trap hits, and user engagement across our entire network.
 "
   />
   <div
