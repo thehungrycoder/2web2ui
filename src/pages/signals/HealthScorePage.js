@@ -8,7 +8,7 @@ import DivergingBar from './components/charts/divergingBar/DivergingBar';
 import HealthScoreActions from './components/actionContent/HealthScoreActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
-import { HEALTH_SCORE_INFO, HEALTH_SCORE_COMPONENT_INFO, HEALTH_SCORE_COMPONENTS } from './constants/info';
+import { HEALTH_SCORE_INFO, HEALTH_SCORE_COMPONENT_INFO, INJECTIONS_INFO, HEALTH_SCORE_COMPONENTS } from './constants/info';
 import withHealthScoreDetails from './containers/HealthScoreDetailsContainer';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
@@ -119,7 +119,7 @@ export class HealthScorePage extends Component {
                   }}
                   xAxisProps={this.getXAxisProps()}
                 />
-                <ChartHeader title='Injections' />
+                <ChartHeader title='Injections' tooltipContent={INJECTIONS_INFO} />
                 <BarChart
                   gap={gap}
                   height={190}

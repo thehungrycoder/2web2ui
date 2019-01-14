@@ -10,13 +10,16 @@ import SubaccountFilter from './components/filters/SubaccountFilter';
 export class OverviewPage extends Component {
   render() {
     return (
-      <Page primaryArea={
-        <Fragment>
-          <SubaccountFilter />
-          <DateFilter />
-          <FacetFilter />
-        </Fragment>
-      }>
+      <Page
+        title='Signals Overview'
+        primaryArea={
+          <Fragment>
+            <SubaccountFilter />
+            <DateFilter />
+            <FacetFilter />
+          </Fragment>
+        }
+      >
         <HealthScoreOverview />
         <SpamTrapOverview />
         <EngagementRecencyOverview />
