@@ -1,8 +1,9 @@
 import React from 'react';
 import { Page } from '@sparkpost/matchbox';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
+import { getFriendlyTitle } from 'src/helpers/signals';
 
-const SignalsPage = ({ title = 'Signals', ...props }) => (
+const SignalsPage = ({ dimensionPrefix, facet, facetId, title = 'Signals', ...props }) => (
   <Page
     {...props}
     title={title}
@@ -15,7 +16,9 @@ const SignalsPage = ({ title = 'Signals', ...props }) => (
       external: true,
       to: 'https://www.sparkpost.com/docs/signals/overview/'
     }]}
+    subtitle={getFriendlyTitle({ prefix: dimensionPrefix, facet, facetId })}
   />
 );
+
 
 export default SignalsPage;

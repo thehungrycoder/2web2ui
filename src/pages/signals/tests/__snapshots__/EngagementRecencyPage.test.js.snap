@@ -54,8 +54,10 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
+  dimensionPrefix="Engagement Recency for"
+  facet="sending-domain"
+  facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
-  subtitle="Engagement Recency for test.com"
 >
   <Grid>
     <Grid.Column
@@ -207,6 +209,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
+    facet="sending-domain"
     facetId="test.com"
   />
   <Grid>
@@ -257,8 +260,10 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
+  dimensionPrefix="Engagement Recency for"
+  facet="sending-domain"
+  facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
-  subtitle="Engagement Recency for test.com"
 >
   <Grid>
     <Grid.Column
@@ -292,6 +297,7 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
     />
   </Grid>
   <OtherChartsHeader
+    facet="sending-domain"
     facetId="test.com"
   />
   <Grid>

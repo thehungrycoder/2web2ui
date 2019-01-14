@@ -46,8 +46,10 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       "to": "/signals",
     }
   }
+  dimensionPrefix="Health Score for"
+  facet="sending-domain"
+  facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
-  subtitle="Health Score for test.com"
 >
   <Grid>
     <Grid.Column
@@ -330,6 +332,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
+    facet="sending-domain"
     facetId="test.com"
   />
   <Grid>
@@ -378,8 +381,10 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       "to": "/signals",
     }
   }
+  dimensionPrefix="Health Score for"
+  facet="sending-domain"
+  facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
-  subtitle="Health Score for test.com"
 >
   <Grid>
     <Grid.Column
@@ -512,6 +517,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
+    facet="sending-domain"
     facetId="test.com"
   />
   <Grid>
@@ -540,8 +546,10 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
+  dimensionPrefix="Health Score for"
+  facet="sending-domain"
+  facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
-  subtitle="Health Score for test.com"
 >
   <Grid>
     <Grid.Column
@@ -583,6 +591,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
+    facet="sending-domain"
     facetId="test.com"
   />
   <Grid>

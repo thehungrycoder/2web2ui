@@ -5,8 +5,7 @@ exports[`Signals OtherChartsHeader Component renders correctly 1`] = `
   <h2
     className="OtherChartsHeader"
   >
-    Other charts for 
-    Foo1
+    Other charts for Foo1
   </h2>
   <hr />
 </Fragment>
