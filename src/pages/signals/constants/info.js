@@ -1,7 +1,7 @@
 
 export const HEALTH_SCORE_INFO = `
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This score is composed by message events,
+  they negatively impact email delivery. This score is informed by message events,
   including bounces, spam trap hits, and engagement across our entire network.
 `;
 

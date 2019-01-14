@@ -11,7 +11,7 @@ exports[`Signals HealthScorePreview Component renders correctly 1`] = `
         title="Health Score"
         tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This score is composed by message events,
+  they negatively impact email delivery. This score is informed by message events,
   including bounces, spam trap hits, and engagement across our entire network.
 "
       />
@@ -73,7 +73,7 @@ exports[`Signals HealthScorePreview Component renders empty correctly 1`] = `
         title="Health Score"
         tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This score is composed by message events,
+  they negatively impact email delivery. This score is informed by message events,
   including bounces, spam trap hits, and engagement across our entire network.
 "
       />
@@ -101,7 +101,7 @@ exports[`Signals HealthScorePreview Component renders error correctly 1`] = `
         title="Health Score"
         tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This score is composed by message events,
+  they negatively impact email delivery. This score is informed by message events,
   including bounces, spam trap hits, and engagement across our entire network.
 "
       />
