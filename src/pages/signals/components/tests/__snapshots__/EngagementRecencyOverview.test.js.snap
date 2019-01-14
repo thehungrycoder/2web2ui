@@ -15,7 +15,7 @@ exports[`EngagementRecencyOverview current column component renders current rate
 exports[`EngagementRecencyOverview history component renders absolute bar chart 1`] = `
 <BarChartDataCell
   dataKey="engaged_recipients"
-  label="Recently Engaged Recipients"
+  label="Recently Engaged"
   max={200}
   onClick={[Function]}
   relative={false}
@@ -25,7 +25,7 @@ exports[`EngagementRecencyOverview history component renders absolute bar chart 
 exports[`EngagementRecencyOverview history component renders absolute sparkline 1`] = `
 <SparklineDataCell
   dataKey="engaged_recipients"
-  label="Recently Engaged Recipients"
+  label="Recently Engaged"
   onClick={[Function]}
   relative={false}
 />
@@ -34,7 +34,7 @@ exports[`EngagementRecencyOverview history component renders absolute sparkline 
 exports[`EngagementRecencyOverview history component renders relative bar chart 1`] = `
 <BarChartDataCell
   dataKey="relative_engaged_recipients"
-  label="Recently Engaged Recipients"
+  label="Recently Engaged"
   max={40}
   onClick={[Function]}
   relative={true}
@@ -44,7 +44,7 @@ exports[`EngagementRecencyOverview history component renders relative bar chart 
 exports[`EngagementRecencyOverview history component renders relative sparkline 1`] = `
 <SparklineDataCell
   dataKey="relative_engaged_recipients"
-  label="Recently Engaged Recipients"
+  label="Recently Engaged"
   onClick={[Function]}
   relative={true}
 />

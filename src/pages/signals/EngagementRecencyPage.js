@@ -109,15 +109,17 @@ export class EngagementRecencyPage extends Component {
   }
 
   render() {
-    const { facetId } = this.props;
+    const { facet, facetId } = this.props;
 
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        subtitle={`Engagement Recency for ${facetId}`}
+        dimensionPrefix='Engagement Recency for'
+        facet={facet}
+        facetId={facetId}
         primaryArea={<DateFilter />}>
         {this.renderContent()}
-        <OtherChartsHeader facetId={facetId} />
+        <OtherChartsHeader facet={facet} facetId={facetId} />
         <Grid>
           <Grid.Column xs={12} sm={6}>
             <SpamTrapsPreview />

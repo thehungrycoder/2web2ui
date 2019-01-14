@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import SignalsPage from '../SignalsPage';
+import * as helpers from 'src/helpers/signals';
+jest.mock('src/helpers/signals');
 
 describe('Signals Page Component', () => {
   let wrapper;
@@ -9,13 +11,18 @@ describe('Signals Page Component', () => {
   beforeEach(() => {
     props = {
       title: 'test title',
-      pass: 'through'
+      pass: 'through',
+      facet: 'facet',
+      facetId: 'facetId',
+      dimensionPrefix: 'test prefix'
     };
+    helpers.getFriendlyTitle = jest.fn();
     wrapper = shallow(<SignalsPage {...props}/>);
   });
 
   it('renders correctly with title', () => {
     expect(wrapper).toMatchSnapshot();
+    expect(helpers.getFriendlyTitle).toHaveBeenCalledWith({ facet: 'facet', facetId: 'facetId', prefix: 'test prefix' });
   });
 
   it('renders with default title', () => {

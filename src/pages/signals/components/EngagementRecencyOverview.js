@@ -161,7 +161,7 @@ class EngagementRecencyOverview extends React.Component {
                   <BarChartDataCell
                     data={_.last(history)}
                     dataKey={calculation === 'relative' ? 'relative_engaged_recipients' : 'engaged_recipients'}
-                    label="Recently Engaged Recipients"
+                    label="Recently Engaged"
                     max={calculation === 'relative' ? metaData.currentRelativeMax : metaData.currentMax}
                     onClick={this.handleClick(id)}
                     relative={calculation === 'relative'}
@@ -173,7 +173,7 @@ class EngagementRecencyOverview extends React.Component {
                 <SparklineDataCell
                   data={history}
                   dataKey={calculation === 'relative' ? 'relative_engaged_recipients' : 'engaged_recipients'}
-                  label="Recently Engaged Recipients"
+                  label="Recently Engaged"
                   onClick={this.handleClick(id)}
                   relative={calculation === 'relative'}
                 />
