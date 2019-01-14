@@ -3,7 +3,7 @@ import PageLink from 'src/components/pageLink';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import styles from './DataCell.module.scss';
 
-const FacetDataCell = ({ dimension, facet, id, name, signalOptions }) => {
+const FacetDataCell = ({ dimension, facet, id, name, subaccountId }) => {
   let label = id;
   let search;
 
@@ -23,8 +23,8 @@ const FacetDataCell = ({ dimension, facet, id, name, signalOptions }) => {
     label = `${name} (${id})`;
   }
 
-  if (signalOptions.subaccount) {
-    search = setSubaccountQuery(signalOptions.subaccount.id);
+  if (subaccountId) {
+    search = setSubaccountQuery(subaccountId);
   }
 
   return (
