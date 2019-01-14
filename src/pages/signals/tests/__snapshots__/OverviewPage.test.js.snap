@@ -9,6 +9,7 @@ exports[`Signals Overview Page renders correctly 1`] = `
       <Connect(FacetFilter) />
     </React.Fragment>
   }
+  title="Signals Overview"
 >
   <Connect(withRouter(Connect(HealthScoreOverview))) />
   <Connect(withRouter(Connect(SpamTrapOverview))) />

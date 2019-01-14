@@ -10,9 +10,9 @@ exports[`Signals HealthScorePreview Component renders correctly 1`] = `
         hideLine={true}
         title="Health Score"
         tooltipContent="
-  This is a predictive score that monitors your email health to identify problems before they
-  negagtively impact email delivery. This composite score is informed by message events, including
-  bounces, spam trap hits, user engagement, and others.
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This composite score is informed by multiple message events,
+  including bounces, spam trap hits, and user engagement across our entire network.
 "
       />
     </Panel.Section>
@@ -72,9 +72,9 @@ exports[`Signals HealthScorePreview Component renders empty correctly 1`] = `
         hideLine={true}
         title="Health Score"
         tooltipContent="
-  This is a predictive score that monitors your email health to identify problems before they
-  negagtively impact email delivery. This composite score is informed by message events, including
-  bounces, spam trap hits, user engagement, and others.
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This composite score is informed by multiple message events,
+  including bounces, spam trap hits, and user engagement across our entire network.
 "
       />
     </Panel.Section>
@@ -100,9 +100,9 @@ exports[`Signals HealthScorePreview Component renders error correctly 1`] = `
         hideLine={true}
         title="Health Score"
         tooltipContent="
-  This is a predictive score that monitors your email health to identify problems before they
-  negagtively impact email delivery. This composite score is informed by message events, including
-  bounces, spam trap hits, user engagement, and others.
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This composite score is informed by multiple message events,
+  including bounces, spam trap hits, and user engagement across our entire network.
 "
       />
     </Panel.Section>

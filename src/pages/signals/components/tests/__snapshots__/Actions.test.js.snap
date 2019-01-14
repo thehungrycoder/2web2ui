@@ -10,7 +10,7 @@ exports[`Signals Recommended Actions Component renders correctly 1`] = `
     <h6
       className="TitleText"
     >
-      Items needing attention
+      Recommendations
        – Dec 31 2017
     </h6>
   </div>
@@ -123,7 +123,7 @@ exports[`Signals Recommended Actions Component renders empty state when empty 1`
     <h6
       className="TitleText"
     >
-      Items needing attention
+      Recommendations
        – Dec 31 2017
     </h6>
   </div>
