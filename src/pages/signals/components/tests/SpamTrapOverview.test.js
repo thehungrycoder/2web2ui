@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import SummaryTable from 'src/components/summaryTable';
+import { DEFAULT_VIEW } from '../../constants/summaryTables';
 import SpamTrapOverview from '../SpamTrapOverview';
 
 describe('SpamTrapOverview', () => {
@@ -18,8 +19,7 @@ describe('SpamTrapOverview', () => {
       ]}
       facet={{
         key: 'domain',
-        label: 'Domain',
-        sortable: false
+        label: 'Domain'
       }}
       getSpamHits={() => {}}
       loading={false}
@@ -85,10 +85,16 @@ describe('SpamTrapOverview', () => {
     expect(wrapper.state('chartType')).toEqual('bar');
   });
 
-  it('requests data on mount', () => {
+  it('requests reset on mount', () => {
     const resetSummaryTable = jest.fn();
     subject({ resetSummaryTable });
-    expect(resetSummaryTable).toHaveBeenCalledWith('Test');
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', undefined);
+  });
+
+  it('requests reset to default view for subaccount view on mount', () => {
+    const resetSummaryTable = jest.fn();
+    subject({ facet: { key: 'sid', label: 'Subaccounts' }, resetSummaryTable });
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', DEFAULT_VIEW);
   });
 
   it('requests table reset on signal options update', () => {
@@ -96,7 +102,7 @@ describe('SpamTrapOverview', () => {
     const wrapper = subject();
     wrapper.setProps({ resetSummaryTable, signalOptions: {}});
 
-    expect(resetSummaryTable).toHaveBeenCalledWith('Test');
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', undefined);
   });
 
   it('requests data on summary table update', () => {

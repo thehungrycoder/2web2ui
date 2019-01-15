@@ -6,6 +6,7 @@ import { InfoOutline } from '@sparkpost/matchbox-icons';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { HEALTH_SCORE_INFO } from '../constants/info';
+import { DEFAULT_VIEW } from '../constants/summaryTables';
 import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
@@ -19,22 +20,32 @@ class HealthScoreOverview extends React.Component {
   }
 
   componentDidMount() {
-    const { resetSummaryTable, tableName } = this.props;
-    resetSummaryTable(tableName);
+    this.resetTable();
   }
 
   // assumptions, signalOptions and summaryTable should never both change on the same update and
   // resetting signal options will trigger a summary table reset which calls getData
   componentDidUpdate(prevProps) {
-    const { resetSummaryTable, signalOptions, summaryTable, tableName } = this.props;
+    const { signalOptions, summaryTable } = this.props;
 
     if (prevProps.signalOptions !== signalOptions) {
-      resetSummaryTable(tableName);
+      this.resetTable();
     }
 
     if (prevProps.summaryTable !== summaryTable) {
       this.getData();
     }
+  }
+
+  resetTable = () => {
+    const { facet, resetSummaryTable, tableName } = this.props;
+    let options;
+
+    if (facet.key === 'sid') {
+      options = DEFAULT_VIEW;
+    }
+
+    resetSummaryTable(tableName, options);
   }
 
   getData = () => {
