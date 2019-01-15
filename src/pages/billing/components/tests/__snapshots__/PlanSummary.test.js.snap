@@ -19,7 +19,7 @@ exports[`PlanSummary renders summary for free plan 1`] = `
   >
     1,000
      emails for 
-    Free
+    free
   </h6>
 </Fragment>
 `;

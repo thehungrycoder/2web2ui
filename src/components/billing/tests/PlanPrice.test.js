@@ -59,9 +59,18 @@ describe('PlanPrice', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly for free plan', () => {
+  it('renders correctly for 30 day free plan', () => {
     plan.monthly = 0;
     plan.isFree = true;
+    plan.code = 'free15K-banana';
+    wrapper.setProps({ plan });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly for eternal free plan', () => {
+    plan.monthly = 0;
+    plan.isFree = true;
+    plan.code = 'free500-banana';
     wrapper.setProps({ plan });
     expect(wrapper).toMatchSnapshot();
   });

@@ -11,7 +11,7 @@ const PlanSummary = ({
   }
 }) => {
   const cost = recurringCharge === 0
-    ? 'Free'
+    ? 'free'
     : `$${recurringCharge.toLocaleString()} per ${period || 'month'}`;
   const volume = (planVolumePerPeriod || planVolume).toLocaleString();
 
