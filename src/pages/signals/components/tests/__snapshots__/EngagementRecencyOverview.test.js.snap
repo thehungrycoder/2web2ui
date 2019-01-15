@@ -133,21 +133,21 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
       component={[Function]}
       dataKey="history"
       label="Daily Recently Engaged Recipients"
-      width="30%"
+      width="40%"
     />
     <Column
       align="right"
       component={[Function]}
       dataKey="current_relative_engaged_recipients"
       label="Current Ratio"
-      width="20%"
+      width="15%"
     />
     <Column
       align="right"
       component={[Function]}
       dataKey="total_engagement"
       label="Total Recipients"
-      width="20%"
+      width="15%"
     />
   </Connect(SummaryTable)>
 </Panel>

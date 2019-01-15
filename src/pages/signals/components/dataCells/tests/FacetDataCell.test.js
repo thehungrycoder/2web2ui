@@ -8,7 +8,6 @@ describe('FacetDataCell', () => {
       dimension="example"
       facet="domain"
       id="example.com"
-      signalOptions={{}}
       {...props}
     />
   );
@@ -26,15 +25,7 @@ describe('FacetDataCell', () => {
   });
 
   it('renders page link with subaccount search', () => {
-    const props = {
-      signalOptions: {
-        subaccount: {
-          id: 123
-        }
-      }
-    };
-
-    expect(subject(props)).toMatchSnapshot();
+    expect(subject({ subaccountId: 123 })).toMatchSnapshot();
   });
 
   it('renders page link with name and id', () => {

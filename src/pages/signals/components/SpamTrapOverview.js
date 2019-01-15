@@ -143,7 +143,7 @@ class SpamTrapOverview extends React.Component {
                   facet={facet.key}
                   id={id}
                   name={_.get(subaccounts, `[${id}].name`)}
-                  signalOptions={signalOptions}
+                  subaccountId={_.get(signalOptions, 'subaccount.id')}
                 />
               );
             }}
@@ -151,7 +151,7 @@ class SpamTrapOverview extends React.Component {
           <Column
             dataKey="history"
             label="Daily Spam Trap Hits"
-            width="30%"
+            width="40%"
             component={({ history, ...data }) => {
               const id = data[facet.key];
 
@@ -185,7 +185,7 @@ class SpamTrapOverview extends React.Component {
               dataKey="current_relative_trap_hits"
               label="Current Ratio"
               sortable
-              width="20%"
+              width="15%"
               component={({ current_relative_trap_hits }) => (
                 <PercentDataCell value={current_relative_trap_hits} />
               )}
@@ -196,7 +196,7 @@ class SpamTrapOverview extends React.Component {
               dataKey="current_trap_hits"
               label="Current Count"
               sortable
-              width="20%"
+              width="15%"
               component={({ current_trap_hits }) => (
                 <NumericDataCell value={current_trap_hits} />
               )}
@@ -206,7 +206,7 @@ class SpamTrapOverview extends React.Component {
             align="right"
             dataKey="total_injections"
             label="Total Injections"
-            width="20%"
+            width="15%"
             component={({ total_injections }) => <NumericDataCell value={total_injections} />}
           />
         </SummaryTable>

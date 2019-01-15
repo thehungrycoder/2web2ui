@@ -132,7 +132,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
       component={[Function]}
       dataKey="history"
       label="Daily Spam Trap Hits"
-      width="30%"
+      width="40%"
     />
     <Column
       align="right"
@@ -140,14 +140,14 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
       dataKey="current_relative_trap_hits"
       label="Current Ratio"
       sortable={true}
-      width="20%"
+      width="15%"
     />
     <Column
       align="right"
       component={[Function]}
       dataKey="total_injections"
       label="Total Injections"
-      width="20%"
+      width="15%"
     />
   </Connect(SummaryTable)>
 </Panel>
