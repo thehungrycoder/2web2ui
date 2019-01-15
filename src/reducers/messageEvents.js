@@ -2,6 +2,7 @@ import { formatDocumentation, getEmptyFilters } from 'src/helpers/messageEvents'
 import { getRelativeDates } from 'src/helpers/date';
 import _ from 'lodash';
 import { EVENTS_SEARCH_FILTERS } from 'src/constants';
+import qs from 'query-string';
 
 const initialState = {
   loading: false,
@@ -17,24 +18,59 @@ const initialState = {
     recipients: [],
     events: [],
     ...getEmptyFilters(EVENTS_SEARCH_FILTERS)
-  }
+  },
+  linkByPage: [],
+  cachedResultsByPage: [],
+  totalCount: 0
 };
 
-export default (state = initialState, { type, payload, meta }) => {
+export default (state = initialState, { type, payload, meta, extra }) => {
 
   switch (type) {
 
     case 'GET_MESSAGE_EVENTS_PENDING':
       return { ...state, loading: true, error: null };
 
-    case 'GET_MESSAGE_EVENTS_SUCCESS':
-      return { ...state, loading: false, events: payload };
+    case 'GET_MESSAGE_EVENTS_SUCCESS': {
+      const currentUrlParams = qs.stringify(meta.params);
+      const { links: { next }, total_count: totalCount } = extra;
+      //next is null when we reach the end of the results
+      const nextUrlParams = next ? qs.extract(next) : null;
+      const linkByPage = [currentUrlParams, nextUrlParams ];
+      const cachedResultsByPage = [ payload ];
+      return { ...state, linkByPage, totalCount, cachedResultsByPage, loading: false, events: payload };
+    }
 
     case 'GET_MESSAGE_EVENTS_FAIL':
       return { ...state, loading: false, error: payload };
 
 
-      // History
+      // Changing Page
+
+    case 'GET_MESSAGE_EVENTS_PAGE_PENDING':
+      return { ...state, loading: true, error: null };
+
+    case 'GET_MESSAGE_EVENTS_PAGE_SUCCESS': {
+      const { links: { next }} = extra;
+      //next is null when we reach the end of the results
+      const nextUrlParams = next ? qs.extract(next) : null;
+      const { currentPageIndex } = meta;
+      const { linkByPage, cachedResultsByPage } = state;
+      linkByPage[currentPageIndex + 1] = nextUrlParams;
+      cachedResultsByPage[currentPageIndex] = payload;
+      return { ...state, linkByPage, cachedResultsByPage, loading: false, events: payload };
+    }
+
+    case 'GET_MESSAGE_EVENTS_PAGE_FAIL':
+      return { ...state, loading: false, error: payload };
+
+    case 'LOAD_EVENTS_FROM_CACHE': {
+      const events = state.cachedResultsByPage[payload];
+      return { ...state, events };
+    }
+
+
+    // History
 
     case 'GET_MESSAGE_HISTORY_PENDING':
       return { ...state, historyLoading: true, error: null };

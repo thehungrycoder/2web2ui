@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
-import { Page, Banner } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
 import DisplayDate from './components/DisplayDate';
 import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
-import { getMessageEvents } from 'src/actions/messageEvents';
+import { getMessageEvents, changePage } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
+import CollectionControls from 'src/components/collection/CollectionControls.js';
+import { defaultPerPageButtons } from 'src/components/collection/PerPageButtons.js';
+import CursorPaging from './components/CursorPaging';
+import _ from 'lodash';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMessage = 'There are no message events for your current query';
-const maxResults = 1000;
-const maxResultsTitle = 'Note: A maximum of 1,000 results displayed';
-const maxResultsText = 'You may want to narrow your search for better results. SparkPost retains message event data for 10 days.';
 
 const columns = [
   { label: 'Time', sortKey: 'timestamp' },
@@ -23,7 +24,55 @@ const columns = [
   null
 ];
 
+const perPageButtons = defaultPerPageButtons;
+
 export class MessageEventsPage extends Component {
+
+  state = {
+    currentPage: 1,
+    perPage: 25
+  }
+
+  componentDidUpdate(prevProps) {
+    const { search, getMessageEvents } = this.props;
+    const { perPage } = this.state;
+    //Refresh the page & load new data if the search filters have changed
+    if (!_.isEqual(prevProps.search, search)) {
+      this.setState({ currentPage: 1 });
+      getMessageEvents({ perPage, ...search });
+    }
+  }
+
+  handlePageChange = (currentPage) => {
+    this.setState({ currentPage });
+    const { changePage, linkByPage, cachedResultsByPage } = this.props;
+    return changePage({ linkByPage, currentPage, cachedResultsByPage });
+  }
+
+  handlePerPageChange = (perPage) => {
+    const { search, getMessageEvents } = this.props;
+    this.setState({ perPage, currentPage: 1 });
+    getMessageEvents({ perPage, ...search });
+  }
+
+  //Reload the first page w/ api call, NOT from cache
+  handleFirstPage = () => {
+    const { search, getMessageEvents } = this.props;
+    const { perPage } = this.state;
+    this.setState({ currentPage: 1 });
+    getMessageEvents({ perPage, ...search });
+  }
+
+  isPreviousDisabled = () => {
+    const { currentPage } = this.state;
+    return currentPage <= 1;
+  }
+
+  isNextDisabled = () => {
+    const { currentPage: nextLinkIndex } = this.state;
+    const { linkByPage } = this.props;
+    return !linkByPage[nextLinkIndex];
+  }
 
   getRowData = (rowData) => {
     const { timestamp, formattedDate, type, friendly_from, rcpt_to } = rowData;
@@ -48,7 +97,8 @@ export class MessageEventsPage extends Component {
   }
 
   renderCollection() {
-    const { events, empty, loading } = this.props;
+    const { events, empty, loading, totalCount } = this.props;
+    const { currentPage, perPage } = this.state;
 
     if (loading) {
       return <PanelLoading />;
@@ -58,17 +108,28 @@ export class MessageEventsPage extends Component {
       ? <Empty message={emptyMessage} />
       : (
         <div>
-          {events.length >= maxResults &&
-            <Banner status="info" title={maxResultsTitle}>{maxResultsText}</Banner>
-          }
-
           <TableCollection
             columns={columns}
             rows={events}
             getRowData={this.getRowData}
-            pagination
             defaultSortColumn='timestamp'
             defaultSortDirection='desc'
+          />
+          <CursorPaging
+            currentPage={currentPage}
+            handlePageChange = {this.handlePageChange}
+            previousDisabled={this.isPreviousDisabled()}
+            nextDisabled={this.isNextDisabled()}
+            handleFirstPage={this.handleFirstPage}
+            perPage={perPage}
+            totalCount={totalCount}
+          />
+          <CollectionControls
+            data={events}
+            onPerPageChange={this.handlePerPageChange}
+            perPageButtons={perPageButtons}
+            perPage={perPage}
+            saveCsv={true}
           />
         </div>
       );
@@ -91,14 +152,18 @@ export class MessageEventsPage extends Component {
 
 const mapStateToProps = (state) => {
   const events = selectMessageEvents(state);
-
+  const { messageEvents } = state;
+  const { loading, error, search, linkByPage, cachedResultsByPage, totalCount } = messageEvents;
   return {
     events: events,
-    loading: state.messageEvents.loading,
-    error: state.messageEvents.error,
+    loading,
+    error,
     empty: events.length === 0,
-    search: state.messageEvents.search
+    search,
+    linkByPage,
+    cachedResultsByPage,
+    totalCount
   };
 };
 
-export default connect(mapStateToProps, { getMessageEvents })(MessageEventsPage);
+export default connect(mapStateToProps, { getMessageEvents, changePage })(MessageEventsPage);

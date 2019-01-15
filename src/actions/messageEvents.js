@@ -2,11 +2,12 @@ import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import qs from 'query-string';
 
 const { apiDateFormat, messageEvents: { retentionPeriodDays }} = config;
 
 export function getMessageEvents(options = {}) {
-  const { dateOptions, ...rest } = options;
+  const { dateOptions, perPage, ...rest } = options;
   const { from, to } = dateOptions;
   const params = {};
 
@@ -24,6 +25,7 @@ export function getMessageEvents(options = {}) {
     }
   });
 
+  params.per_page = perPage ? perPage : 25;
   return sparkpostApiRequest({
     type: 'GET_MESSAGE_EVENTS',
     meta: {
@@ -35,6 +37,26 @@ export function getMessageEvents(options = {}) {
   });
 }
 
+export function changePage({ linkByPage, currentPage, cachedResultsByPage }) {
+  const currentPageIndex = currentPage - 1;
+  const params = qs.parse(linkByPage[currentPageIndex]);
+  if (cachedResultsByPage[currentPageIndex]) {
+    return {
+      type: 'LOAD_EVENTS_FROM_CACHE',
+      payload: currentPageIndex
+    };
+  }
+  return sparkpostApiRequest({
+    type: 'GET_MESSAGE_EVENTS_PAGE',
+    meta: {
+      method: 'GET',
+      url: '/v1/events/message',
+      params,
+      showErrorAlert: false,
+      currentPageIndex
+    }
+  });
+}
 
 /**
  * Refreshes the date range for message events

@@ -4,7 +4,8 @@ import CollectionPropTypes from './Collection.propTypes';
 import qs from 'query-string';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
-import Pagination, { defaultPerPageButtons } from './Pagination';
+import Pagination from './Pagination';
+import { defaultPerPageButtons } from './PerPageButtons';
 import FilterBox from './FilterBox';
 import { objectSortMatch } from 'src/helpers/sortMatch';
 

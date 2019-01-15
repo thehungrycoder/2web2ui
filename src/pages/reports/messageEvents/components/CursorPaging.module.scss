@@ -1,0 +1,26 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+
+.PageButtons {
+  margin-bottom: spacing();
+  @media screen and (min-width: breakpoint(small)) {
+    width: 50%;
+    float: left;
+  }
+}
+
+.RewindButton {
+  margin-right: spacing(small)*2;
+}
+
+.PageDisplay {
+  font-size: 80%;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.5);
+  margin-left: 20px;
+}
+
+.Bold {
+  color: black;
+  font-weight: bolder;
+}

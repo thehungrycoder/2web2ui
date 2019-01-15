@@ -30,14 +30,6 @@ export class MessageEventsSearch extends Component {
     updateMessageEventsSearchOptions(parseSearch(location.search));
   }
 
-  componentDidUpdate(prevProps) {
-    const { search, getMessageEvents } = this.props;
-
-    if (!_.isEqual(prevProps.search, search)) {
-      getMessageEvents(search);
-    }
-  }
-
   getInvalidAddresses = (addresses) => {
     const invalids = _.filter(addresses, (address) => {
       address = _.trim(address);
