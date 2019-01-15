@@ -6,21 +6,28 @@ We often want to deploy a feature "dark" and expose only a few accounts to it. H
 
 This method is built on top of our [access control strategy](access-control.md) which you may like to read first.
 
+
 ## Show/Hide A Navigation Item / Route
 These steps let you deploy a whole route visible only to those account you choose.
 
-1. When adding your route to `routes`, use the `hasUiOption` condition to tie the item to an account UI option:
+1. When adding your route to `routes`, use the `isUiOptionSet` condition to tie the item to an account UI option:
 
     ```js
     const routes = [
       {
         path: '/my-new-route',
-        condition: hasUiOption('my-new-route'),
+        condition: isUiOptionSet('my-new-route', false),
         ...
       },
       ...
     ]
     ```
+
+    The `isUiOptionSet` condition accepts 2 arguments:
+     - account UI option name
+     - default value if the option is not set
+
+    You can use the default value to control whether your feature is on or off by default.
 
     (Remember to also add your route to `navItems` or `accountNavItems` to connect it to a menu 😉 )
 
@@ -33,3 +40,9 @@ These steps let you deploy a whole route visible only to those account you choos
     ```
 
     Your navigation item will now be visible to those accounts you have blessed.
+
+1. Optional: disable the feature for a given account:
+
+  ```sh
+  echo '{"options": {"ui": {"my-new-route": false}}}' | http put app.tst.sparkpost:8888/api/v1/account/control x-msys-tenant:uat x-msys-customer:<CID>
+  ```
