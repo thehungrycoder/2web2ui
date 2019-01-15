@@ -21,5 +21,5 @@ export const isCustomBilling = ({ account }) => _.get(account, 'subscription.cus
 export const isSelfServeBilling = any(subscriptionSelfServeIsTrue, isAws);
 export const hasOnlineSupport = ({ account }) => _.get(account, 'support.online', false);
 export const hasUiOption = (option) => ({ account }) => _.has(account.options, `ui.${option}`);
-export const isUiOptionSet = (option, defaultValue) => ({ account }) => Boolean(_.get(account.options, `ui.${option}`, defaultValue));
+export const isAccountUiOptionSet = (option, defaultValue) => ({ account }) => Boolean(_.get(account.options, `ui.${option}`, defaultValue));
 export const isSubscriptionPending = ({ account }) => Boolean(account.pending_subscription);
