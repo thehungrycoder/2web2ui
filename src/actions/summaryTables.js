@@ -6,9 +6,10 @@ export const changeSummaryTable = (tableName, values) => ({
   }
 });
 
-export const resetSummaryTable = (tableName) => ({
+export const resetSummaryTable = (tableName, defaultValues = {}) => ({
   type: 'RESET_SUMMARY_TABLE',
   payload: {
+    ...defaultValues,
     tableName
   }
 });

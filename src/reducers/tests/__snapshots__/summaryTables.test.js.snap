@@ -72,3 +72,21 @@ Object {
   },
 }
 `;
+
+exports[`Summary Tables Reducer when reset with custom defaults 1`] = `
+Object {
+  "@@DEFAULT_TABLE": Object {
+    "currentPage": 1,
+    "order": undefined,
+    "perPage": 10,
+  },
+  "testTable": Object {
+    "currentPage": 2,
+    "order": Object {
+      "ascending": true,
+      "dataKey": "subaccountId",
+    },
+    "perPage": 10,
+  },
+}
+`;

@@ -35,5 +35,16 @@ cases('Summary Tables Reducer', ({ name, ...action }) => {
     payload: {
       tableName: 'testTable'
     }
+  },
+  'when reset with custom defaults': {
+    type: 'RESET_SUMMARY_TABLE',
+    payload: {
+      tableName: 'testTable',
+      currentPage: 2,
+      order: {
+        ascending: true,
+        dataKey: 'subaccountId'
+      }
+    }
   }
 });
