@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collection Pagination Component should correctly render perPageButtons 1`] = `
+<Button.Group>
+  <span
+    className="PerPageText"
+  >
+    Per Page
+  </span>
+  <Button
+    className=""
+    key="10"
+    onClick={[Function]}
+    size="default"
+  >
+    10
+  </Button>
+  <Button
+    className="Selected"
+    key="25"
+    onClick={[Function]}
+    size="default"
+  >
+    25
+  </Button>
+  <Button
+    className=""
+    key="50"
+    onClick={[Function]}
+    size="default"
+  >
+    50
+  </Button>
+  <Button
+    className=""
+    key="100"
+    onClick={[Function]}
+    size="default"
+  >
+    100
+  </Button>
+</Button.Group>
+`;
+
+exports[`Collection Pagination Component should hide PerPageButtons if data is less than minimum per page 1`] = `""`;

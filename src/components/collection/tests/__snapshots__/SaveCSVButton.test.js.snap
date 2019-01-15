@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collection Pagination Component should not show save as CSV button when false 1`] = `""`;
+
+exports[`Collection Pagination Component should render 1`] = `
+<Button
+  download="sparkpost-csv-1512509841.csv"
+  size="default"
+  to="data:text/csv;charset=utf-8,mydata"
+>
+  Save As CSV
+</Button>
+`;

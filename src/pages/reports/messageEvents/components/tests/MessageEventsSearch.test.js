@@ -32,17 +32,6 @@ describe('Component: MessageEventsSearch', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('refreshes on change', () => {
-    const search = { ...props.search, changed: 'something' };
-    wrapper.setProps({ search });
-    expect(props.getMessageEvents).toHaveBeenCalledWith(search);
-  });
-
-  it('does not refresh if search has not changed', () => {
-    wrapper.setProps({ search: props.search, changed: 'something else' });
-    expect(props.getMessageEvents).not.toHaveBeenCalled();
-  });
-
   describe('getInvalidAddresses', () => {
     it('detect invalid email addresses correctly', () => {
       expect(instance.getInvalidAddresses(['email@domain.com', 'email2m'])).toEqual(['email2m']);

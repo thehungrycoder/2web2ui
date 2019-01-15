@@ -47,6 +47,25 @@ describe('Action Creator: MessageEvents', () => {
     });
   });
 
+  describe('changePage', () => {
+    let cachedResultsByPage; let linkByPage;
+    beforeEach(() => {
+      cachedResultsByPage = [[]];
+      linkByPage = ['foo=bar1','for=bar2'];
+    });
+    it('should dispatch change page action', () => {
+      const currentPage = 2;
+
+      expect(messageEvents.changePage({ linkByPage, currentPage, cachedResultsByPage })).toMatchSnapshot();
+    });
+
+    it('should dispatch loading from cache', () => {
+      const currentPage = 1;
+
+      expect(messageEvents.changePage({ linkByPage, currentPage, cachedResultsByPage })).toMatchSnapshot();
+    });
+  });
+
   describe('getMessageHistory', () => {
     it('makes api call with defaults', () => {
       expect(messageEvents.getMessageHistory({ messageId: 'abcd,efgh' })).toMatchSnapshot();

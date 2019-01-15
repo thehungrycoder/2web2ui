@@ -22,13 +22,8 @@ describe('Collection Pagination Component', () => {
   });
 
   // render() returns null if currentPage isn't passed
-  it('should render with no props', () => {
+  it('should render null with no props', () => {
     const wrapper = shallow(<CollectionPagination />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  // data.length <= least perPageButton
-  it('should render without perPageButtons', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -37,26 +32,4 @@ describe('Collection Pagination Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render with perPageButtons and saveCsv', () => {
-    wrapper.setProps({ data: _.times(12, (i) => ({ key: i + 1 })) });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should not show save as CSV button when false', () => {
-    wrapper.setProps({ saveCsv: false, perPageButtons: [1,2]});
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should map simple collections to papa parse', () => {
-    wrapper.setProps({ saveCsv: true, perPageButtons: [1, 5, 10]});
-    expect(Papa.unparse).toHaveBeenCalledWith([{ 'key': 1 }, { 'key': 2 }, { 'key': 3 }, { 'key': 4 }, { 'key': 5 }]);
-  });
-
-  it('should stringify complex objects', () => {
-    const perPageProps = _.cloneDeep(props);
-    perPageProps.data.push({ key: { subkey: 'value' }}, { key: [1,2,3]});
-    perPageProps.perPageButtons = [1,2,3];
-    wrapper.setProps(perPageProps);
-    expect(Papa.unparse).toHaveBeenCalledWith([{ 'key': 1 }, { 'key': 2 }, { 'key': 3 }, { 'key': 4 }, { 'key': 5 }, { 'key': '{"subkey":"value"}' }, { 'key': '[1,2,3]' }]);
-  });
 });
