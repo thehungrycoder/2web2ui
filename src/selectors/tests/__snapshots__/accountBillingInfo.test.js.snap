@@ -65,6 +65,9 @@ Array [
     "code": "pub",
     "status": "public",
   },
+  Object {
+    "code": "free1",
+  },
 ]
 `;
 
@@ -103,6 +106,24 @@ Array [
     "code": "pub-free",
     "isFree": true,
     "status": "public",
+  },
+]
+`;
+
+exports[`plan selector selectVisiblePlans should show current plan regardless of status 1`] = `
+Array [
+  Object {
+    "code": "pub",
+    "status": "public",
+  },
+  Object {
+    "code": "pub-free",
+    "isFree": true,
+    "status": "public",
+  },
+  Object {
+    "code": "prv",
+    "status": "private",
   },
 ]
 `;
