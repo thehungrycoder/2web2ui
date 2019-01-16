@@ -61,7 +61,7 @@ const content = [
   {
     condition: ({ c_90d }) => c_90d >= 0.25 && c_90d < 0.35,
     content: (
-      <span><strong>Many recipients are no longer engaging.</strong> If this continues, you will risk hurting your performance. Consider segmenting your recipients and sending a reengagement series—and then removing those recipients who don’t respond.</span>
+      <span><strong>Your recipient engagement is starting to drop off over time.</strong> You should consider giving your subscribers options for what types of emails they receive.</span>
     ),
     type: 'warning',
     link: 'https://www.sparkpost.com/docs/signals/preference-center/'

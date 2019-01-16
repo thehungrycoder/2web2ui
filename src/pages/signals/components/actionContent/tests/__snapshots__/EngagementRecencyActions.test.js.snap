@@ -50,9 +50,9 @@ Array [
   Object {
     "content": <span>
       <strong>
-        Many recipients are no longer engaging.
+        Your recipient engagement is starting to drop off over time.
       </strong>
-       If this continues, you will risk hurting your performance. Consider segmenting your recipients and sending a reengagement series—and then removing those recipients who don’t respond.
+       You should consider giving your subscribers options for what types of emails they receive.
     </span>,
     "link": "https://www.sparkpost.com/docs/signals/preference-center/",
     "type": "warning",
