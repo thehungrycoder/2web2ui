@@ -25,7 +25,8 @@ const signalsActionCreator = ({ dimension, type }) => ({
   const { from , to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
   let order_by;
 
-  if (orderBy) {
+  // note, to order by subaccount, only pass order direction and do not set order_by
+  if (orderBy && orderBy !== 'sid') {
     order_by = ORDER_BY_MAPPING[orderBy] || orderBy;
   }
 
