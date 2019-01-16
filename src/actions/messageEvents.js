@@ -26,6 +26,7 @@ export function getMessageEvents(options = {}) {
   });
 
   params.per_page = perPage ? perPage : 25;
+
   return sparkpostApiRequest({
     type: 'GET_MESSAGE_EVENTS',
     meta: {
@@ -41,14 +42,15 @@ export function changePage(currentPage) {
   return (dispatch, getState) => {
     const { linkByPage, cachedResultsByPage } = getState().messageEvents;
     const currentPageIndex = currentPage - 1;
-
     const params = qs.parse(linkByPage[currentPageIndex]);
+
     if (cachedResultsByPage[currentPageIndex]) {
       dispatch({
         type: 'LOAD_EVENTS_FROM_CACHE',
         payload: currentPageIndex
       });
     }
+
     dispatch(sparkpostApiRequest({
       type: 'GET_MESSAGE_EVENTS_PAGE',
       meta: {

@@ -7,7 +7,6 @@ import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 
 const PerPageButtons = ({ data, perPage, perPageButtons = DEFAULT_PER_PAGE_BUTTONS, onPerPageChange, totalCount }) => {
 
-  //Keep this '<' and not '<=' because cursor paging will always have data.length = perPage
   if (totalCount <= Math.min(...perPageButtons)) {
     return null;
   }
