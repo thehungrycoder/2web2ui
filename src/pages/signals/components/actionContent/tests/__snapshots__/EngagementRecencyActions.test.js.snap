@@ -30,35 +30,9 @@ Array [
 ]
 `;
 
-exports[`Signals engagement recency actions component render cases should render 90 day bad value 1`] = `
-Array [
-  Object {
-    "content": <span>
-      <strong>
-        Your recipient engagement is dropping off significantly over time.
-      </strong>
-       Even the most engaged recipients will get tired of repetitive or poorly timed messages. You should consider reevaluating your lifecycle strategy to shake things up and reengage your audience.
-    </span>,
-    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
-    "type": "bad",
-  },
-]
-`;
+exports[`Signals engagement recency actions component render cases should render 90 day bad value 1`] = `Array []`;
 
-exports[`Signals engagement recency actions component render cases should render 90 day warning value 1`] = `
-Array [
-  Object {
-    "content": <span>
-      <strong>
-        Many recipients are no longer engaging.
-      </strong>
-       If this continues, you will risk hurting your performance. Consider segmenting your recipients and sending a reengagement series—and then removing those recipients who don’t respond.
-    </span>,
-    "link": "https://www.sparkpost.com/docs/signals/preference-center/",
-    "type": "warning",
-  },
-]
-`;
+exports[`Signals engagement recency actions component render cases should render 90 day warning value 1`] = `Array []`;
 
 exports[`Signals engagement recency actions component render cases should render 365 day bad value 1`] = `
 Array [
