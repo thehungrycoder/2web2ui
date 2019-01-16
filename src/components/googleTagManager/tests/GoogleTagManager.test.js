@@ -30,10 +30,13 @@ describe('Component: GoogleTagManager', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should push the username when it becomes available', () => {
+  it('should push account ID and username when it becomes available', () => {
+    const username = 'jojo';
+    const accountId = 9999999;
     expect(analytics.setup).toHaveBeenCalledTimes(1);
-    wrapper.setProps({ username: 'jojo' });
-    expect(analytics.setVariable).toHaveBeenCalledWith('username', 'jojo');
+    wrapper.setProps({ username, accountId });
+    expect(analytics.setVariable).toHaveBeenCalledWith('username', username);
+    expect(analytics.setVariable).toHaveBeenCalledWith('accountid', accountId);
   });
 
   it('should track a new page view when the location changes', () => {
