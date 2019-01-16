@@ -8,8 +8,8 @@ import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
 import { getMessageEvents, changePage } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
-import CollectionControls from 'src/components/collection/CollectionControls.js';
-import { defaultPerPageButtons } from 'src/components/collection/PerPageButtons.js';
+import CollectionControls from 'src/components/collection/CollectionControls';
+import { defaultPerPageButtons } from 'src/components/collection/PerPageButtons';
 import CursorPaging from './components/CursorPaging';
 import _ from 'lodash';
 

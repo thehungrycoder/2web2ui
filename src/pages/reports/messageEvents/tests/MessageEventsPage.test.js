@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { MessageEventsPage } from '../MessageEventsPage';
+import { CursorPaging } from '../components/CursorPaging';
 
 let wrapper;
 let instance;
@@ -74,26 +75,24 @@ describe('Page: Message Events tests', () => {
 
   it('should correctly disable previous button', () => {
     wrapper.setState({ currentPage: 1 });
-    expect(instance.isPreviousDisabled()).toEqual(true);
+    expect(wrapper.find(CursorPaging).prop('previousDisabled')).toEqual(true);
   });
 
   it('should correctly disable next button', () => {
     wrapper.setState({ currentPage: 3 });
-    expect(instance.isNextDisabled()).toEqual(true);
+    expect(wrapper.find(CursorPaging).prop('nextDisabled')).toEqual(true);
   });
 
   it('should correctly handle changing per page', () => {
+    const perPage = 100;
     const { getMessageEvents, search } = props;
-    instance.handlePerPageChange(100);
-    expect(wrapper.state().perPage).toEqual(100);
-    expect(getMessageEvents).toHaveBeenCalledWith({ ...search, perPage: 100 });
+    instance.handlePerPageChange(perPage);
+    expect(getMessageEvents).toHaveBeenCalledWith({ ...search, perPage });
   });
 
   it('should correctly handle changing page', () => {
     const { changePage, linkByPage, cachedResultsByPage } = props;
     instance.handlePageChange(1);
-    const { currentPage } = wrapper.state();
-    expect(currentPage).toEqual(1);
     expect(changePage).toHaveBeenCalledWith({ linkByPage, currentPage: 1, cachedResultsByPage });
   });
 
@@ -101,7 +100,6 @@ describe('Page: Message Events tests', () => {
     const { getMessageEvents, search } = props;
     instance.handleFirstPage();
     const { perPage } = wrapper.state();
-    expect(wrapper.state().currentPage).toEqual(1);
     expect(getMessageEvents).toHaveBeenCalledWith({ ...search, perPage });
   });
 
