@@ -28,12 +28,12 @@ describe('Signals engagement recency actions component', () => {
     'should render 365 day warning value': {
       c_365d: 0.15
     },
-    'should render 90 day bad value': {
-      c_90d: 0.15
-    },
-    'should render 90 day warning value': {
-      c_90d: 0.30
-    },
+    // 'should render 90 day bad value': {
+    //   c_90d: 0.15
+    // },
+    // 'should render 90 day warning value': {
+    //   c_90d: 0.30
+    // },
     'should render 14 day bad value': {
       c_14d: 0.15
     },

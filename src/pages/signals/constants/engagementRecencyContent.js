@@ -51,7 +51,8 @@ const content = [
     link: 'https://www.sparkpost.com/docs/signals/content-refresh/'
   },
   {
-    condition: ({ c_90d }) => c_90d < 0.25,
+    // condition: ({ c_90d }) => c_90d < 0.25,
+    condition: () => false, // Copy does not accurately represent the condition
     content: (
       <span><strong>Your recipient engagement is dropping off significantly over time.</strong> Even the most engaged recipients will get tired of repetitive or poorly timed messages. You should consider reevaluating your lifecycle strategy to shake things up and reengage your audience.</span>
     ),
@@ -59,7 +60,8 @@ const content = [
     link: 'https://www.sparkpost.com/docs/signals/content-refresh/'
   },
   {
-    condition: ({ c_90d }) => c_90d >= 0.25 && c_90d < 0.35,
+    // condition: ({ c_90d }) => c_90d >= 0.25 && c_90d < 0.35,
+    condition: () => false, // Copy does not accurately represent the condition
     content: (
       <span><strong>Your recipient engagement is starting to drop off over time.</strong> You should consider giving your subscribers options for what types of emails they receive.</span>
     ),
