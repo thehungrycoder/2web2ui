@@ -100,7 +100,7 @@ export const EVENTS_SEARCH_FILTERS = {
   messages: { placeholder: 'list of message ids (e.g. 00129004225c33cc4c45)', label: 'Message IDs' },
   transmissions: { placeholder: 'list of transmission ids (e.g. 337221619334066426)', label: 'Transmissions IDs' },
   ab_tests: { placeholder: 'list of full words in ab test ids (e.g. newsletter, fire-sale)', label: 'AB Test IDs' },
-  ab_test_version: { placeholder: 'list of version numbers; requires AB Test ID filter(e.g. 4)', label: 'AB Test Versions' }
+  ab_test_versions: { placeholder: 'list of version numbers; requires AB Test ID filter(e.g. 4)', label: 'AB Test Versions' }
 };
 export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
 
