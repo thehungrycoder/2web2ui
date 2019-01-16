@@ -9,7 +9,7 @@ import ViewDetailsButton from './components/ViewDetailsButton';
 import { getMessageEvents, changePage } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
 import CollectionControls from 'src/components/collection/CollectionControls';
-import { defaultPerPageButtons } from 'src/components/collection/PerPageButtons';
+import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import CursorPaging from './components/CursorPaging';
 import _ from 'lodash';
 
@@ -23,8 +23,6 @@ const columns = [
   { label: 'Friendly From', sortKey: 'friendly_from' },
   null
 ];
-
-const perPageButtons = defaultPerPageButtons;
 
 export class MessageEventsPage extends Component {
 
@@ -45,8 +43,8 @@ export class MessageEventsPage extends Component {
 
   handlePageChange = (currentPage) => {
     this.setState({ currentPage });
-    const { changePage, linkByPage, cachedResultsByPage } = this.props;
-    return changePage({ linkByPage, currentPage, cachedResultsByPage });
+    const { changePage } = this.props;
+    return changePage(currentPage);
   }
 
   handlePerPageChange = (perPage) => {
@@ -69,9 +67,8 @@ export class MessageEventsPage extends Component {
   }
 
   isNextDisabled = () => {
-    const { currentPage: nextLinkIndex } = this.state;
-    const { linkByPage } = this.props;
-    return !linkByPage[nextLinkIndex];
+    const { hasMorePagesAvailable } = this.props;
+    return !hasMorePagesAvailable;
   }
 
   getRowData = (rowData) => {
@@ -127,7 +124,7 @@ export class MessageEventsPage extends Component {
           <CollectionControls
             data={events}
             onPerPageChange={this.handlePerPageChange}
-            perPageButtons={perPageButtons}
+            perPageButtons={DEFAULT_PER_PAGE_BUTTONS}
             perPage={perPage}
             saveCsv={true}
           />
@@ -153,16 +150,15 @@ export class MessageEventsPage extends Component {
 const mapStateToProps = (state) => {
   const events = selectMessageEvents(state);
   const { messageEvents } = state;
-  const { loading, error, search, linkByPage, cachedResultsByPage, totalCount } = messageEvents;
+  const { loading, error, search, totalCount, hasMorePagesAvailable } = messageEvents;
   return {
     events: events,
     loading,
     error,
     empty: events.length === 0,
     search,
-    linkByPage,
-    cachedResultsByPage,
-    totalCount
+    totalCount,
+    hasMorePagesAvailable
   };
 };
 

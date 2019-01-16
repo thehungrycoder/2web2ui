@@ -5,7 +5,7 @@ import qs from 'query-string';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 import Pagination from './Pagination';
-import { defaultPerPageButtons } from './PerPageButtons';
+import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import FilterBox from './FilterBox';
 import { objectSortMatch } from 'src/helpers/sortMatch';
 
@@ -104,7 +104,7 @@ export class Collection extends Component {
   }
 
   renderFilterBox() {
-    const { filterBox, rows, perPageButtons = defaultPerPageButtons } = this.props;
+    const { filterBox, rows, perPageButtons = DEFAULT_PER_PAGE_BUTTONS } = this.props;
     if (filterBox.show && (rows.length > Math.min(...perPageButtons))) {
       return <FilterBox {...filterBox} rows={rows} onChange={this.debouncedHandleFilterChange} />;
     }

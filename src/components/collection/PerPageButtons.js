@@ -2,10 +2,10 @@ import { Button } from '@sparkpost/matchbox';
 import classnames from 'classnames';
 import styles from './Pagination.module.scss';
 import React from 'react';
+import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 
-export const defaultPerPageButtons = [10, 25, 50, 100];
 
-const PerPageButtons = ({ data, perPage, perPageButtons = defaultPerPageButtons, onPerPageChange }) => {
+const PerPageButtons = ({ data, perPage, perPageButtons = DEFAULT_PER_PAGE_BUTTONS, onPerPageChange }) => {
 
   //Keep this '<' and not '<=' because cursor paging will always have data.length = perPage
   if (data.length < Math.min(...perPageButtons)) {

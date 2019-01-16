@@ -21,7 +21,8 @@ const initialState = {
   },
   linkByPage: [],
   cachedResultsByPage: [],
-  totalCount: 0
+  totalCount: 0,
+  hasMorePagesAvailable: false
 };
 
 export default (state = initialState, { type, payload, meta, extra }) => {
@@ -36,9 +37,10 @@ export default (state = initialState, { type, payload, meta, extra }) => {
       const { links: { next }, total_count: totalCount } = extra;
       //next is null when we reach the end of the results
       const nextUrlParams = next ? qs.extract(next) : null;
+      const hasMorePagesAvailable = Boolean(next);
       const linkByPage = [currentUrlParams, nextUrlParams ];
       const cachedResultsByPage = [ payload ];
-      return { ...state, linkByPage, totalCount, cachedResultsByPage, loading: false, events: payload };
+      return { ...state, linkByPage, totalCount, cachedResultsByPage, loading: false, events: payload, hasMorePagesAvailable };
     }
 
     case 'GET_MESSAGE_EVENTS_FAIL':
@@ -54,11 +56,12 @@ export default (state = initialState, { type, payload, meta, extra }) => {
       const { links: { next }} = extra;
       //next is null when we reach the end of the results
       const nextUrlParams = next ? qs.extract(next) : null;
+      const hasMorePagesAvailable = Boolean(next);
       const { currentPageIndex } = meta;
       const { linkByPage, cachedResultsByPage } = state;
       linkByPage[currentPageIndex + 1] = nextUrlParams;
       cachedResultsByPage[currentPageIndex] = payload;
-      return { ...state, linkByPage, cachedResultsByPage, loading: false, events: payload };
+      return { ...state, linkByPage, cachedResultsByPage, loading: false, events: payload, hasMorePagesAvailable };
     }
 
     case 'GET_MESSAGE_EVENTS_PAGE_FAIL':

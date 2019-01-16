@@ -22,7 +22,7 @@ export const CursorPaging = ({ currentPage, handlePageChange, previousDisabled, 
         disabled = {nextDisabled}/>
     </Pager>
     <span className={styles.PageDisplay}
-    >Page: <strong className={styles.Bold} style={{ fontSize: '100%' }}>{currentPage}</strong> / {Math.ceil(totalCount / perPage)}</span>
+    >Page: <strong className={styles.Bold}>{currentPage}</strong> / {Math.ceil(totalCount / perPage)}</span>
   </div>
 );
 export default CursorPaging;

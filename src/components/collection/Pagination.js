@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Pagination } from '@sparkpost/matchbox';
 import styles from './Pagination.module.scss';
 import CollectionControls from './CollectionControls';
-import { defaultPerPageButtons } from './PerPageButtons';
+import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 
 
 class CollectionPagination extends Component {
@@ -47,7 +47,7 @@ class CollectionPagination extends Component {
 
 CollectionPagination.defaultProps = {
   pageRange: 5,
-  perPageButtons: defaultPerPageButtons,
+  perPageButtons: DEFAULT_PER_PAGE_BUTTONS,
   saveCsv: true
 };
 

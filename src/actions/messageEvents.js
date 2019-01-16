@@ -37,25 +37,29 @@ export function getMessageEvents(options = {}) {
   });
 }
 
-export function changePage({ linkByPage, currentPage, cachedResultsByPage }) {
-  const currentPageIndex = currentPage - 1;
-  const params = qs.parse(linkByPage[currentPageIndex]);
-  if (cachedResultsByPage[currentPageIndex]) {
-    return {
-      type: 'LOAD_EVENTS_FROM_CACHE',
-      payload: currentPageIndex
-    };
-  }
-  return sparkpostApiRequest({
-    type: 'GET_MESSAGE_EVENTS_PAGE',
-    meta: {
-      method: 'GET',
-      url: '/v1/events/message',
-      params,
-      showErrorAlert: false,
-      currentPageIndex
+export function changePage(currentPage) {
+  return (dispatch, getState) => {
+    const { linkByPage, cachedResultsByPage } = getState().messageEvents;
+    const currentPageIndex = currentPage - 1;
+
+    const params = qs.parse(linkByPage[currentPageIndex]);
+    if (cachedResultsByPage[currentPageIndex]) {
+      dispatch({
+        type: 'LOAD_EVENTS_FROM_CACHE',
+        payload: currentPageIndex
+      });
     }
-  });
+    dispatch(sparkpostApiRequest({
+      type: 'GET_MESSAGE_EVENTS_PAGE',
+      meta: {
+        method: 'GET',
+        url: '/v1/events/message',
+        params,
+        showErrorAlert: false,
+        currentPageIndex
+      }
+    }));
+  };
 }
 
 /**
