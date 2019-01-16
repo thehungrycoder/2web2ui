@@ -2,7 +2,7 @@
 
 exports[`Signal Options Reducer when init 1`] = `
 Object {
-  "relativeRange": "14days",
+  "relativeRange": "90days",
 }
 `;
 
