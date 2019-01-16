@@ -1,7 +1,7 @@
 const initialState = {
   // facet: 'sending_domain',
   // facetSearchTerm: '',
-  relativeRange: '14days'
+  relativeRange: '90days'
   // subaccount
 };
 
