@@ -6,6 +6,7 @@ import { InfoOutline } from '@sparkpost/matchbox-icons';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { SPAM_TRAP_INFO } from '../constants/info';
+import { DEFAULT_VIEW } from '../constants/summaryTables';
 import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
@@ -22,27 +23,32 @@ class SpamTrapOverview extends React.Component {
   }
 
   componentDidMount() {
-    const { getSubaccounts, resetSummaryTable, subaccounts, tableName } = this.props;
-
-    if (_.isEmpty(subaccounts)) {
-      getSubaccounts();
-    }
-
-    resetSummaryTable(tableName);
+    this.resetTable();
   }
 
   // assumptions, signalOptions and summaryTable should never both change on the same update and
   // resetting signal options will trigger a summary table reset which calls getData
   componentDidUpdate(prevProps) {
-    const { resetSummaryTable, signalOptions, summaryTable, tableName } = this.props;
+    const { signalOptions, summaryTable } = this.props;
 
     if (prevProps.signalOptions !== signalOptions) {
-      resetSummaryTable(tableName);
+      this.resetTable();
     }
 
     if (prevProps.summaryTable !== summaryTable) {
       this.getData();
     }
+  }
+
+  resetTable = () => {
+    const { facet, resetSummaryTable, tableName } = this.props;
+    let options;
+
+    if (facet.key === 'sid') {
+      options = DEFAULT_VIEW;
+    }
+
+    resetSummaryTable(tableName, options);
   }
 
   getData = () => {
@@ -132,7 +138,7 @@ class SpamTrapOverview extends React.Component {
           <Column
             dataKey={facet.key}
             label={facet.label}
-            sortable={facet.sortable}
+            sortable
             width="30%"
             component={(props) => {
               const id = props[facet.key];
@@ -142,7 +148,7 @@ class SpamTrapOverview extends React.Component {
                   dimension="spam-traps"
                   facet={facet.key}
                   id={id}
-                  name={_.get(subaccounts, `[${id}].name`)}
+                  name={_.get(_.find(subaccounts, { id }), 'name')}
                   subaccountId={_.get(signalOptions, 'subaccount.id')}
                 />
               );

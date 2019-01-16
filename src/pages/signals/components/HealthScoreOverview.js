@@ -6,6 +6,7 @@ import { InfoOutline } from '@sparkpost/matchbox-icons';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { HEALTH_SCORE_INFO } from '../constants/info';
+import { DEFAULT_VIEW } from '../constants/summaryTables';
 import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
@@ -19,28 +20,32 @@ class HealthScoreOverview extends React.Component {
   }
 
   componentDidMount() {
-    const { getSubaccounts, resetSummaryTable, subaccounts, tableName } = this.props;
-
-    // todo, move to page component, so it is only called once
-    if (_.isEmpty(subaccounts)) {
-      getSubaccounts();
-    }
-
-    resetSummaryTable(tableName);
+    this.resetTable();
   }
 
   // assumptions, signalOptions and summaryTable should never both change on the same update and
   // resetting signal options will trigger a summary table reset which calls getData
   componentDidUpdate(prevProps) {
-    const { resetSummaryTable, signalOptions, summaryTable, tableName } = this.props;
+    const { signalOptions, summaryTable } = this.props;
 
     if (prevProps.signalOptions !== signalOptions) {
-      resetSummaryTable(tableName);
+      this.resetTable();
     }
 
     if (prevProps.summaryTable !== summaryTable) {
       this.getData();
     }
+  }
+
+  resetTable = () => {
+    const { facet, resetSummaryTable, tableName } = this.props;
+    let options;
+
+    if (facet.key === 'sid') {
+      options = DEFAULT_VIEW;
+    }
+
+    resetSummaryTable(tableName, options);
   }
 
   getData = () => {
@@ -138,7 +143,7 @@ class HealthScoreOverview extends React.Component {
                   dimension="health-score"
                   facet="sid"
                   id={sid}
-                  name={_.get(subaccounts, `[${sid}].name`)}
+                  name={_.get(_.find(subaccounts, { id: sid }), 'name')}
                 />
               )}
             />
@@ -147,7 +152,7 @@ class HealthScoreOverview extends React.Component {
             <Column
               dataKey={facet.key}
               label={facet.label}
-              sortable={facet.sortable}
+              sortable
               width={subaccountFilter === undefined ? '25%' : '30%'}
               component={(props) => (
                 <FacetDataCell

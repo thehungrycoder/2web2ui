@@ -9,8 +9,8 @@ describe('Summary Table Action Creators', () => {
   });
 
   describe('.resetSummaryTable', () => {
-    it('passes on name for payload', () => {
-      const action = resetSummaryTable('testTable');
+    it('passes on name and default values for payload', () => {
+      const action = resetSummaryTable('testTable', { order: { ascending: true, dataKey: 'id' }});
       expect(action).toMatchSnapshot();
     });
   });

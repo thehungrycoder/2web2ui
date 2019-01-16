@@ -10,9 +10,13 @@ Object {
 }
 `;
 
-exports[`Summary Table Action Creators .resetSummaryTable passes on name for payload 1`] = `
+exports[`Summary Table Action Creators .resetSummaryTable passes on name and default values for payload 1`] = `
 Object {
   "payload": Object {
+    "order": Object {
+      "ascending": true,
+      "dataKey": "id",
+    },
     "tableName": "testTable",
   },
   "type": "RESET_SUMMARY_TABLE",

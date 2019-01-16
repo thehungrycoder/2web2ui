@@ -3,14 +3,17 @@ import React from 'react';
 import { OverviewPage } from '../OverviewPage';
 
 describe('Signals Overview Page', () => {
-  let wrapper;
+  const subject = (props = {}) => shallow(
+    <OverviewPage getSubaccounts={() => {}} {...props} />
+  );
 
-  beforeEach(() => {
-    const props = {};
-    wrapper = shallow(<OverviewPage {...props}/>);
+  it('renders page', () => {
+    expect(subject()).toMatchSnapshot();
   });
 
-  it('renders correctly', () => {
-    expect(wrapper).toMatchSnapshot();
+  it('calls getSubaccounts on mount', () => {
+    const getSubaccounts = jest.fn();
+    subject({ getSubaccounts });
+    expect(getSubaccounts).toHaveBeenCalled();
   });
 });

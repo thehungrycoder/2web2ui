@@ -103,7 +103,7 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
       component={[Function]}
       dataKey="domain"
       label="Domain"
-      sortable={false}
+      sortable={true}
       width="25%"
     />
     <Column
@@ -203,7 +203,7 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
       component={[Function]}
       dataKey="domain"
       label="Domain"
-      sortable={false}
+      sortable={true}
       width="30%"
     />
     <Column
