@@ -14,12 +14,26 @@ describe('CursorPaging', () => {
       nextDisabled: false,
       handleFirstPage: jest.fn(),
       perPage: 25,
-      totalCount: 50
+      totalCount: 100
     };
     wrapper = shallow(<CursorPaging {...props} />);
   });
 
   it('should render cursor paging', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should correctly render cursor paging when there is only one page', () => {
+    const newProps = {
+      currentPage: 1,
+      handlePageChange: jest.fn(),
+      previousDisabled: true,
+      nextDisabled: true,
+      handleFirstPage: jest.fn(),
+      perPage: 25,
+      totalCount: 20
+    };
+    wrapper = shallow(<CursorPaging {...newProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 

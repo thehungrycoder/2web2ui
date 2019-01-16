@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { shallow } from 'enzyme';
 
 
-describe('Collection Pagination Component', () => {
+describe('Per Page Buttons', () => {
   let wrapper;
   const props = {
     data: _.times(11, (i) => ({ key: i + 1 })),

@@ -7,7 +7,7 @@ import Papa from 'papaparse';
 jest.mock('papaparse');
 Date.now = jest.fn(() => 1512509841582);
 
-describe('Collection Pagination Component', () => {
+describe('Save CSV Button', () => {
   let wrapper;
   const props = {
     data: _.times(5, (i) => ({ key: i + 1 })),

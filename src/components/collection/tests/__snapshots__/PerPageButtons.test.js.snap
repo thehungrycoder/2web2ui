@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Collection Pagination Component should correctly render perPageButtons 1`] = `
+exports[`Per Page Buttons should correctly render perPageButtons 1`] = `
 <Button.Group>
   <span
     className="PerPageText"
@@ -42,4 +42,4 @@ exports[`Collection Pagination Component should correctly render perPageButtons 
 </Button.Group>
 `;
 
-exports[`Collection Pagination Component should hide PerPageButtons if data is less than minimum per page 1`] = `""`;
+exports[`Per Page Buttons should hide PerPageButtons if data is less than minimum per page 1`] = `""`;
