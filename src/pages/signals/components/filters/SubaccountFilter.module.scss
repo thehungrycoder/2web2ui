@@ -49,3 +49,15 @@
   padding: spacing(small) spacing();
   text-align: center;
 }
+
+.PopoverContent {
+  display: none;
+}
+
+.showSearch {
+  display: block;
+}
+
+.showOptions {
+  display: block;
+}
