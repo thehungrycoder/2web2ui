@@ -122,6 +122,7 @@ export class MessageEventsPage extends Component {
             totalCount={totalCount}
           />
           <CollectionControls
+            totalCount={totalCount}
             data={events}
             onPerPageChange={this.handlePerPageChange}
             perPageButtons={DEFAULT_PER_PAGE_BUTTONS}

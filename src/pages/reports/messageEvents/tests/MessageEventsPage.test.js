@@ -37,7 +37,8 @@ describe('Page: Message Events tests', () => {
     },
     linkByPage: ['cursor=foo', 'cursor=bar', 'cursor=foobar', null],
     cachedResultsByPage: [[]],
-    hasMorePagesAvailable: true
+    hasMorePagesAvailable: true,
+    totalCount: 100
   };
 
   beforeEach(() => {

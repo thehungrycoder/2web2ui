@@ -101,6 +101,7 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
       nextDisabled={false}
       perPage={25}
       previousDisabled={false}
+      totalCount={100}
     />
     <Component
       data={
@@ -130,6 +131,7 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
         ]
       }
       saveCsv={true}
+      totalCount={100}
     />
   </div>
 </Page>

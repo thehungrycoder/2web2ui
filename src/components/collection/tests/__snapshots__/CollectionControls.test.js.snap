@@ -15,6 +15,7 @@ exports[`CollectionControls should render correctly 1`] = `
           25,
         ]
       }
+      totalCount={0}
     />
     <SaveCSVButton
       data={Array []}

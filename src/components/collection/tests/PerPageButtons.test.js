@@ -10,7 +10,8 @@ describe('Collection Pagination Component', () => {
     data: _.times(11, (i) => ({ key: i + 1 })),
     currentPage: 1,
     onPerPageChange: jest.fn(),
-    perPage: 25
+    perPage: 25,
+    totalCount: 200
   };
 
   beforeEach(() => {
@@ -22,7 +23,7 @@ describe('Collection Pagination Component', () => {
   });
 
   it('should hide PerPageButtons if data is less than minimum per page', () => {
-    wrapper.setProps({ perPageButtons: [25,50,100]});
+    wrapper.setProps({ totalCount: 10 });
     expect(wrapper).toMatchSnapshot();
   });
 
