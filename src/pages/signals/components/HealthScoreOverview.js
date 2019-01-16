@@ -143,7 +143,7 @@ class HealthScoreOverview extends React.Component {
                   dimension="health-score"
                   facet="sid"
                   id={sid}
-                  name={_.get(subaccounts, `[${sid}].name`)}
+                  name={_.get(_.find(subaccounts, { id: sid }), 'name')}
                 />
               )}
             />

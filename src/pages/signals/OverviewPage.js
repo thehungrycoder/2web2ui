@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
-import { selectSubaccountsById } from 'src/selectors/subaccounts';
 import Page from './components/SignalsPage';
 import EngagementRecencyOverview from './containers/EngagementRecencyOverviewContainer';
 import HealthScoreOverview from './containers/HealthScoreOverviewContainer';
@@ -38,7 +37,7 @@ export class OverviewPage extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  subaccounts: selectSubaccountsById(state)
+  subaccounts: state.subaccounts.list
 });
 
 const mapDispatchToProps = {

@@ -148,7 +148,7 @@ class EngagementRecencyOverview extends React.Component {
                   dimension="engagement-recency"
                   facet={facet.key}
                   id={id}
-                  name={_.get(subaccounts, `[${id}].name`)}
+                  name={_.get(_.find(subaccounts, { id }), 'name')}
                   subaccountId={_.get(signalOptions, 'subaccount.id')}
                 />
               );
