@@ -36,7 +36,8 @@ describe('Page: Message Events tests', () => {
       recipients: []
     },
     linkByPage: ['cursor=foo', 'cursor=bar', 'cursor=foobar', null],
-    cachedResultsByPage: [[]]
+    cachedResultsByPage: [[]],
+    hasMorePagesAvailable: true
   };
 
   beforeEach(() => {
@@ -79,7 +80,7 @@ describe('Page: Message Events tests', () => {
   });
 
   it('should correctly disable next button', () => {
-    wrapper.setState({ currentPage: 3 });
+    wrapper.setProps({ hasMorePagesAvailable: false });
     expect(wrapper.find(CursorPaging).prop('nextDisabled')).toEqual(true);
   });
 
@@ -91,9 +92,10 @@ describe('Page: Message Events tests', () => {
   });
 
   it('should correctly handle changing page', () => {
-    const { changePage, linkByPage, cachedResultsByPage } = props;
-    instance.handlePageChange(1);
-    expect(changePage).toHaveBeenCalledWith({ linkByPage, currentPage: 1, cachedResultsByPage });
+    const { changePage } = props;
+    const pageNumber = 1;
+    instance.handlePageChange(pageNumber);
+    expect(changePage).toHaveBeenCalledWith(pageNumber);
   });
 
   it('should correctly handle first page reload', () => {

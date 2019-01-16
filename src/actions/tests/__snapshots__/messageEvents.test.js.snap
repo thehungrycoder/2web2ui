@@ -1,27 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Action Creator: MessageEvents changePage should dispatch change page action 1`] = `
-Object {
-  "meta": Object {
-    "currentPageIndex": 1,
-    "method": "GET",
-    "params": Object {
-      "for": "bar2",
-    },
-    "showErrorAlert": false,
-    "url": "/v1/events/message",
-  },
-  "type": "GET_MESSAGE_EVENTS_PAGE",
-}
-`;
-
-exports[`Action Creator: MessageEvents changePage should dispatch loading from cache 1`] = `
-Object {
-  "payload": 0,
-  "type": "LOAD_EVENTS_FROM_CACHE",
-}
-`;
-
 exports[`Action Creator: MessageEvents getMessageEvents should dispatch get action with from/to/recipients 1`] = `
 Object {
   "meta": Object {

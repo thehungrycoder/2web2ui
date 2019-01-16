@@ -28,11 +28,6 @@ exports[`CursorPaging should render cursor paging 1`] = `
     Page: 
     <strong
       className="Bold"
-      style={
-        Object {
-          "fontSize": "100%",
-        }
-      }
     >
       2
     </strong>
