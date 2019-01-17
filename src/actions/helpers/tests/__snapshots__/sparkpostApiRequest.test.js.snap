@@ -226,7 +226,10 @@ Array [
     "type": "TEST_PENDING",
   },
   Object {
-    "extra": Object {},
+    "extra": Object {
+      "links": Object {},
+      "total_count": undefined,
+    },
     "meta": Object {
       "method": "GET",
       "retries": 1,
@@ -356,6 +359,32 @@ Array [
 ]
 `;
 
+exports[`Helper: SparkPost API Request should get the correct response when response object has links and total_count 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "extra": Object {
+      "links": Object {
+        "next": "",
+      },
+      "total_count": 0,
+    },
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "payload": Array [],
+    "type": "TEST_SUCCESS",
+  },
+]
+`;
+
 exports[`Helper: SparkPost API Request should successfully call the API 1`] = `
 Array [
   Object {
@@ -366,12 +395,39 @@ Array [
     "type": "TEST_PENDING",
   },
   Object {
-    "extra": Object {},
+    "extra": Object {
+      "links": Object {},
+      "total_count": undefined,
+    },
     "meta": Object {
       "method": "GET",
       "url": "/some/path",
     },
     "payload": Array [],
+    "type": "TEST_SUCCESS",
+  },
+]
+`;
+
+exports[`Helper: SparkPost API Request should successfully call the API when the data response is null 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "type": "TEST_PENDING",
+  },
+  Object {
+    "extra": Object {
+      "links": Object {},
+      "total_count": undefined,
+    },
+    "meta": Object {
+      "method": "GET",
+      "url": "/some/path",
+    },
+    "payload": null,
     "type": "TEST_SUCCESS",
   },
 ]
@@ -388,6 +444,10 @@ Array [
     "type": "TEST_PENDING",
   },
   Object {
+    "extra": Object {
+      "links": Object {},
+      "total_count": undefined,
+    },
     "meta": Object {
       "method": "GET",
       "responseType": "blob",
