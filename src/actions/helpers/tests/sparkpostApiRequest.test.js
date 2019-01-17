@@ -67,6 +67,20 @@ describe('Helper: SparkPost API Request', () => {
     }));
   });
 
+  it('should successfully call the API when the data response is null', async () => {
+
+    axiosMocks.sparkpost.mockImplementation(() => Promise.resolve({ data: null }));
+
+    await mockStore.dispatch(sparkpostApiRequest(action));
+
+    expect(mockStore.getActions()).toMatchSnapshot();
+    expect(axiosMocks.sparkpost).toHaveBeenCalledWith(expect.objectContaining({
+      method: 'get',
+      url: '/some/path',
+      headers: { Authorization: 'TEST-TOKEN' }
+    }));
+  });
+
   describe('failure cases', () => {
 
     let apiErr;

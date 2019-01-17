@@ -28,13 +28,14 @@ const sparkpostRequest = requestHelperFactory({
     return transformed;
   },
   onSuccess: ({ response, dispatch, types, meta }) => {
-    const { data } = response;
-    const { results, ...extra } = data;
-    const payload = results ? { payload: results, extra } : { payload: data };
+    const results = _.get(response, 'data.results', response.data);
+    const links = _.get(response, 'data.links', {});
+    const total_count = _.get(response, 'data.total_count');
     dispatch({
       type: types.SUCCESS,
       meta,
-      ...payload
+      payload: results,
+      extra: { links, total_count }
     });
 
     return meta.onSuccess ? dispatch(meta.onSuccess({ results })) : results;
