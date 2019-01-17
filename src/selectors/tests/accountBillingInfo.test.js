@@ -170,8 +170,6 @@ describe('plan selector', () => {
       },
       billing: {
         plans: [
-          { code: 'dep', status: 'deprecated' },
-          { code: 'dep-aws', status: 'deprecated', awsMarketplace: true },
           { code: 'pub', status: 'public' },
           { code: 'pub-free', status: 'public', isFree: true },
           { code: 'pub-aws', status: 'public', awsMarketplace: true },
@@ -217,6 +215,12 @@ describe('plan selector', () => {
     it('should not return new free plans if customer on free1 plan', () => {
       state.account.subscription.code = 'free1';
       state.billing.plans.push({ code: 'free1' });
+      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+    });
+
+    it('should show current plan regardless of status', () => {
+      state.account.subscription.code = 'prv';
+      state.billing.plans.push({ code: 'prv', status: 'private' });
       expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
     });
   });

@@ -64,7 +64,6 @@ export const selectAvailablePlans = createSelector(
   [plansSelector, selectIsAws, selectIsSelfServeBilling],
   (plans, isAws, isSelfServeBilling) => {
     const availablePlans = plans
-      .filter(({ status }) => status === 'public' || status === 'secret')
       // only select AWS plans for AWS users
       .filter(({ awsMarketplace = false }) => awsMarketplace === isAws);
 
@@ -72,15 +71,16 @@ export const selectAvailablePlans = createSelector(
       _.remove(availablePlans, ({ isFree = false }) => isFree);
     }
 
-    return _.orderBy(availablePlans, 'volume', isSelfServeBilling ? 'asc' : 'desc');
+    return availablePlans;
   }
 );
 
 export const selectVisiblePlans = createSelector(
-  [selectAvailablePlans, selectIsFree1],
-  (plans, isOnLegacyFree1Plan) => plans.filter(({ isFree, status }) =>
-    status === 'public' &&
-        !(isOnLegacyFree1Plan && isFree) //hide new free plans if on legacy free1 plan
+  [selectAvailablePlans, selectIsFree1, currentPlanCodeSelector],
+  (plans, isOnLegacyFree1Plan, currentPlan) => plans.filter(({ isFree, status, code }) =>
+    currentPlan === code || //Plan only shows if currently on free15K plan
+      status === 'public' &&
+      !(isOnLegacyFree1Plan && isFree) //hide new free plans if on legacy free1 plan
   )
 );
 
