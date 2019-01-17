@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CollectionControls should render correctly 1`] = `
+<div>
+  <div
+    className="PerPageButtons"
+  >
+    <PerPageButtons
+      data={Array []}
+      onPerPageChange={[MockFunction]}
+      perPage={25}
+      perPageButtons={
+        Array [
+          10,
+          25,
+        ]
+      }
+      totalCount={0}
+    />
+    <SaveCSVButton
+      data={Array []}
+      saveCsv={true}
+    />
+  </div>
+</div>
+`;

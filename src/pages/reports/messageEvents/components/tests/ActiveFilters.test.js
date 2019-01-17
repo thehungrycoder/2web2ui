@@ -26,9 +26,9 @@ describe('Component: ActiveFilters', () => {
 
   it('should render filters correctly', () => {
     const events = ['bounce', 'click', 'spam_complaint'];
-    const message_ids = ['101', 102];
-    const campaign_ids = [];
-    wrapper.setProps({ search: { events, message_ids, campaign_ids }});
+    const messages = ['101', 102];
+    const campaigns = [];
+    wrapper.setProps({ search: { events, messages, campaigns }});
     expect(wrapper).toMatchSnapshot();
   });
 

@@ -14,21 +14,24 @@
   }
 }
 
-.FieldWrapper {
-  display: inline-block;
-  margin: 0 0 spacing();
-  width: 100%;
-  padding-right: 0;
-
-  @media screen and (min-width: breakpoint(small)) {
-    width: 50%;
-
-    &:nth-child(2n) {
-      padding-right: spacing();
-    }
-  }
-}
-
 .Cancel {
   margin-left: spacing();
 }
+
+.AddButton {
+  margin-bottom: spacing();
+}
+
+.Selector{
+  width: 100%;
+  @media screen and (max-width: breakpoint(medium)) {
+    margin-bottom: 5px;
+  }
+}
+
+.Icon {
+  margin-left: 5px;
+  margin-bottom: 1px;
+}
+
+

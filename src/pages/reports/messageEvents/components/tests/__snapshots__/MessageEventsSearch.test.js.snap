@@ -53,7 +53,7 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
         xs={12}
       >
         <TextField
-          connectRight={<Connect(AdvancedFilters) />}
+          connectRight={<Connect(AdvancedFiltersModal) />}
           error={null}
           label="Recipient Email(s)"
           labelHidden={true}

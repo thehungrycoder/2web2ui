@@ -252,7 +252,7 @@ const routes = [
     path: '/reports/message-events',
     component: reports.MessageEventsPage,
     layout: App,
-    title: 'Message Events Report',
+    title: 'Events Search Report',
     supportDocSearch: 'event'
   },
   {

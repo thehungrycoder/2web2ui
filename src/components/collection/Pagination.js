@@ -1,30 +1,11 @@
 import React, { Component } from 'react';
-import { Pagination, Button } from '@sparkpost/matchbox';
-import classnames from 'classnames';
+import { Pagination } from '@sparkpost/matchbox';
 import styles from './Pagination.module.scss';
-import Papa from 'papaparse';
-import _ from 'lodash';
+import CollectionControls from './CollectionControls';
+import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 
-export const defaultPerPageButtons = [10, 25, 50, 100];
 
 class CollectionPagination extends Component {
-  formatToCsv = () => {
-    const { data: rows } = this.props;
-    // we are doing this because certain keys are objects/array which papa parse doesn't stringify
-    const mappedRows = _.map(rows, (row) => _.mapValues(row, (value) => _.isObject(value) || _.isArray(value) ? JSON.stringify(value) : value));
-    const data = Papa.unparse(mappedRows);
-    return `data:text/csv;charset=utf-8,${encodeURI(data)}`;
-  }
-
-  renderCSVSave() {
-    const now = Math.floor(Date.now() / 1000);
-
-    if (!this.props.saveCsv) {
-      return null;
-    }
-
-    return <Button download={`sparkpost-csv-${now}.csv`} to={this.formatToCsv()}>Save As CSV</Button>;
-  }
 
   renderPageButtons() {
     const { data, perPage, currentPage, pageRange, onPageChange } = this.props;
@@ -43,44 +24,22 @@ class CollectionPagination extends Component {
     );
   }
 
-  renderPerPageButtons() {
-    const { data, perPage, perPageButtons, onPerPageChange } = this.props;
-
-    if (data.length <= Math.min(...perPageButtons)) {
-      return null;
-    }
-
-    return (
-      <Button.Group><span style={{
-        fontSize: '80%',
-        textTransform: 'uppercase',
-        color: 'rgba(0,0,0,0.5)',
-        display: 'inline-block',
-        marginRight: '10px'
-      }}>Per Page</span>
-      {perPageButtons.map((buttonAmount) => (
-        <Button
-          className={classnames(perPage === buttonAmount && styles.Selected)}
-          key={buttonAmount}
-          onClick={() => onPerPageChange(buttonAmount)}
-        >{buttonAmount}</Button>
-      ))}
-      </Button.Group>
-    );
-  }
-
   render() {
-    if (!this.props.currentPage) { return null; }
+    const { data, perPage, perPageButtons, onPerPageChange, saveCsv, currentPage } = this.props;
+    if (!currentPage) { return null; }
 
     return (
       <div>
         <div className={styles.PageButtons}>
           {this.renderPageButtons()}
         </div>
-        <div className={styles.PerPageButtons}>
-          {this.renderPerPageButtons()}
-          {this.renderCSVSave()}
-        </div>
+        <CollectionControls
+          data = {data}
+          perPage= {perPage}
+          perPageButtons={perPageButtons}
+          onPerPageChange={onPerPageChange}
+          saveCsv = {saveCsv}
+        />
       </div>
     );
   }
@@ -88,7 +47,7 @@ class CollectionPagination extends Component {
 
 CollectionPagination.defaultProps = {
   pageRange: 5,
-  perPageButtons: defaultPerPageButtons,
+  perPageButtons: DEFAULT_PER_PAGE_BUTTONS,
   saveCsv: true
 };
 

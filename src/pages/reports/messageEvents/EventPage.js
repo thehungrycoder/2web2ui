@@ -12,7 +12,7 @@ import HistoryTable from './components/HistoryTable';
 import EventDetails from './components/EventDetails';
 
 const breadcrumbAction = {
-  content: 'All Message Events',
+  content: 'All Events',
   Component: Link,
   to: '/reports/message-events'
 };

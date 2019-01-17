@@ -7,7 +7,7 @@ import { getRelativeDates } from 'src/helpers/date';
  * Translate the array of event definitions from /message-events/events/documentation
  * into an map of event type to event field descriptions.
  * [ {[fieldName]: { sampleValue, description }}, ... ] -> { type: { [fieldName]: description }, ... displayName, description }
- * 
+ *
  * Note: we treat display_name and event_description fields specially. They are not true event fields.
  * They're metadata and their sampleValue fields contain their 'value'.
  */
@@ -57,4 +57,16 @@ export function parseSearch(search) {
 
 export function getDetailsPath(messageId, eventId){
   return `/reports/message-events/details/${messageId ? `${messageId}/${eventId}` : `_noid_/${eventId}`}`;
+}
+
+/**
+ * Creates an object with all search filters set to an empty array
+ * @param {Object} filters - Object in the form of {key: value, ...}.
+ * @returns {Object} - Object in the form {key: [],...}.
+ */
+export function getEmptyFilters(filters) {
+  // Build an array of objects of form { value: [] }
+  const emptyFilters = _.map(filters,(value, key) => ({[key]: []}));
+
+  return Object.assign({}, ...emptyFilters);
 }

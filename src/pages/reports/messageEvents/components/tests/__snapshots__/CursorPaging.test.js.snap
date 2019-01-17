@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CursorPaging should correctly render cursor paging when there is only one page 1`] = `
+<div
+  className="PageButtons"
+>
+  <Button
+    className="RewindButton"
+    key="rewind"
+    onClick={[MockFunction]}
+    size="default"
+  >
+    <FirstPage />
+  </Button>
+  <Pager>
+    <Pager.Previous
+      disabled={true}
+      onClick={[Function]}
+    />
+    <Pager.Next
+      disabled={true}
+      onClick={[Function]}
+    />
+  </Pager>
+  <span
+    className="PageDisplay"
+  >
+    Page: 
+    <strong
+      className="Bold"
+    >
+      1
+    </strong>
+     / 
+    1
+  </span>
+</div>
+`;
+
+exports[`CursorPaging should render cursor paging 1`] = `
+<div
+  className="PageButtons"
+>
+  <Button
+    className="RewindButton"
+    key="rewind"
+    onClick={[MockFunction]}
+    size="default"
+  >
+    <FirstPage />
+  </Button>
+  <Pager>
+    <Pager.Previous
+      disabled={false}
+      onClick={[Function]}
+    />
+    <Pager.Next
+      disabled={false}
+      onClick={[Function]}
+    />
+  </Pager>
+  <span
+    className="PageDisplay"
+  >
+    Page: 
+    <strong
+      className="Bold"
+    >
+      2
+    </strong>
+     / 
+    4
+  </span>
+</div>
+`;

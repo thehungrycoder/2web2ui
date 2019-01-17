@@ -81,8 +81,28 @@ export const FORMS = {
   JOIN: 'joinForm',
   JOIN_PLAN: 'joinPlanForm',
   JOIN_SENDING_DOMAIN: 'joinSendingDomainForm',
-  EDIT_USER: 'userEditForm'
+  EDIT_USER: 'userEditForm',
+  EVENTS_SEARCH: 'eventsSearchForm'
 };
+
+export const EVENTS_SEARCH_FILTERS = {
+  recipient_domains: { placeholder: 'list of domain parts (e.g., gmail, yahoo.co, yahoo.co.jp, .fr)', label: 'Recipient Domains' },
+  from_addresses: { placeholder: 'list of full from addresses (e.g., john@mycompany.com)', label: 'From Addresses' },
+  sending_domains: { placeholder: 'list of domain parts (e.g., joespizza, marketing.joespizza)', label: 'Sending Domains' },
+  subjects: { placeholder: 'list of full words (e.g. happy birthday, christmas)', label: 'Subjects' },
+  bounce_classes: { placeholder: 'list of bounce classification codes (e.g. 10, 30)', label: 'Bounce Classes' },
+  reasons: { placeholder: 'list of full words in raw reasons (e.g. 5.4.7, IP, Mail rejected)', label: 'Reasons' },
+  campaigns: { placeholder: 'list of full words in campaign ids (e.g. newsletter, fire-sale)', label: 'Campaign IDs' },
+  templates: { placeholder: 'list of full words in template ids (e.g. newsletter, fire-sale)', label: 'Template IDs' },
+  sending_ips: { placeholder: 'list of ip addresses (e.g., 10.0.0.4.25)', label: 'Sending IPs' },
+  ip_pools: { placeholder: 'list of full words in ip pool id (e.g billing, administrative)', label: 'IP Pools' },
+  subaccounts: { placeholder: 'list of subaccount ids (e.g. 346, 823)', label: 'Subaccount IDs' },
+  messages: { placeholder: 'list of message ids (e.g. 00129004225c33cc4c45)', label: 'Message IDs' },
+  transmissions: { placeholder: 'list of transmission ids (e.g. 337221619334066426)', label: 'Transmissions IDs' },
+  ab_tests: { placeholder: 'list of full words in ab test ids (e.g. newsletter, fire-sale)', label: 'AB Test IDs' },
+  ab_test_versions: { placeholder: 'list of version numbers; requires AB Test ID filter(e.g. 4)', label: 'AB Test Versions' }
+};
+export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
 
 export const ANALYTICS_CREATE_ACCOUNT = 'create account';
 export const ANALYTICS_ADDON_IP = 'dedicated_ips';

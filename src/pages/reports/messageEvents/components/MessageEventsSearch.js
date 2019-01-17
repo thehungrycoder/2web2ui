@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
 import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
 import { Panel, Grid, TextField } from '@sparkpost/matchbox';
-import AdvancedFilters from './AdvancedFilters';
+import AdvancedFiltersModal from './AdvancedFiltersModal';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';
 import DatePicker from 'src/components/datePicker/DatePicker';
@@ -28,14 +28,6 @@ export class MessageEventsSearch extends Component {
     const { updateMessageEventsSearchOptions, refreshMessageEventsDateRange, location, search } = this.props;
     refreshMessageEventsDateRange({ relativeRange: search.dateOptions.relativeRange }); // Sets default dateoptions from initial state
     updateMessageEventsSearchOptions(parseSearch(location.search));
-  }
-
-  componentDidUpdate(prevProps) {
-    const { search, getMessageEvents } = this.props;
-
-    if (!_.isEqual(prevProps.search, search)) {
-      getMessageEvents(search);
-    }
   }
 
   getInvalidAddresses = (addresses) => {
@@ -97,7 +89,7 @@ export class MessageEventsSearch extends Component {
                 onKeyDown={onEnter(this.handleRecipientsChange)}
                 onFocus={() => this.setState({ recipientError: null })}
                 error={this.state.recipientError}
-                connectRight={<AdvancedFilters />}
+                connectRight={<AdvancedFiltersModal />}
               />
             </Grid.Column>
             <Grid.Column>

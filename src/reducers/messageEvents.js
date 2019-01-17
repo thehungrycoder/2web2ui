@@ -1,6 +1,8 @@
-import { formatDocumentation } from 'src/helpers/messageEvents';
+import { formatDocumentation, getEmptyFilters } from 'src/helpers/messageEvents';
 import { getRelativeDates } from 'src/helpers/date';
 import _ from 'lodash';
+import { EVENTS_SEARCH_FILTERS } from 'src/constants';
+import qs from 'query-string';
 
 const initialState = {
   loading: false,
@@ -15,29 +17,63 @@ const initialState = {
     },
     recipients: [],
     events: [],
-    friendly_froms: [],
-    subaccounts: [],
-    message_ids: [],
-    template_ids: [],
-    campaign_ids: []
-  }
+    ...getEmptyFilters(EVENTS_SEARCH_FILTERS)
+  },
+  linkByPage: [],
+  cachedResultsByPage: [],
+  totalCount: 0,
+  hasMorePagesAvailable: false
 };
 
-export default (state = initialState, { type, payload, meta }) => {
+export default (state = initialState, { type, payload, meta, extra }) => {
 
   switch (type) {
 
     case 'GET_MESSAGE_EVENTS_PENDING':
       return { ...state, loading: true, error: null };
 
-    case 'GET_MESSAGE_EVENTS_SUCCESS':
-      return { ...state, loading: false, events: payload };
+    case 'GET_MESSAGE_EVENTS_SUCCESS': {
+      const currentUrlParams = qs.stringify(meta.params);
+      const { links: { next }, total_count: totalCount } = extra;
+      //next is null when we reach the end of the results
+      const nextUrlParams = next ? qs.extract(next) : null;
+      const hasMorePagesAvailable = Boolean(next);
+      const linkByPage = [currentUrlParams, nextUrlParams ];
+      const cachedResultsByPage = [ payload ];
+      return { ...state, linkByPage, totalCount, cachedResultsByPage, loading: false, events: payload, hasMorePagesAvailable };
+    }
 
     case 'GET_MESSAGE_EVENTS_FAIL':
       return { ...state, loading: false, error: payload };
 
 
-      // History
+      // Changing Page
+
+    case 'GET_MESSAGE_EVENTS_PAGE_PENDING':
+      return { ...state, loading: true, error: null };
+
+    case 'GET_MESSAGE_EVENTS_PAGE_SUCCESS': {
+      const { links: { next }} = extra;
+      //next is null when we reach the end of the results
+      const nextUrlParams = next ? qs.extract(next) : null;
+      const hasMorePagesAvailable = Boolean(next);
+      const { currentPageIndex } = meta;
+      const { linkByPage, cachedResultsByPage } = state;
+      linkByPage[currentPageIndex + 1] = nextUrlParams;
+      cachedResultsByPage[currentPageIndex] = payload;
+      return { ...state, linkByPage, cachedResultsByPage, loading: false, events: payload, hasMorePagesAvailable };
+    }
+
+    case 'GET_MESSAGE_EVENTS_PAGE_FAIL':
+      return { ...state, loading: false, error: payload };
+
+    case 'LOAD_EVENTS_FROM_CACHE': {
+      const events = state.cachedResultsByPage[payload];
+      return { ...state, events };
+    }
+
+
+    // History
 
     case 'GET_MESSAGE_HISTORY_PENDING':
       return { ...state, historyLoading: true, error: null };
@@ -46,7 +82,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return {
         ...state,
         historyLoading: false,
-        history: { ...state.history, [meta.params.message_ids]: payload }
+        history: { ...state.history, [meta.params.messages]: payload }
       };
 
     case 'GET_MESSAGE_HISTORY_FAIL':
@@ -68,12 +104,7 @@ export default (state = initialState, { type, payload, meta }) => {
       // Search options
 
     case 'REFRESH_MESSAGE_EVENTS_DATE_OPTIONS': {
-      const dateOptions = {
-        ...state.search.dateOptions,
-        ...payload,
-        ...getRelativeDates(payload.relativeRange, { roundToPrecision: false })
-      };
-
+      const dateOptions = { ...state.search.dateOptions, ...payload, ...getRelativeDates(payload.relativeRange, false) };
       return { ...state, search: { ...state.search, dateOptions }};
     }
 
@@ -84,7 +115,7 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'ADD_MESSAGE_EVENTS_FILTERS': {
       const updatedSearch = {};
-      _.keys(payload).map((key) => {
+      Object.keys(payload).map((key) => {
         updatedSearch[key] = _.uniq([ ...state.search[key], ...payload[key]]);
       });
       return { ...state, search: { ...state.search, ...updatedSearch }};

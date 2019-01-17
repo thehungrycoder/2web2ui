@@ -36,7 +36,7 @@ export default [
         to: '/reports/engagement'
       },
       {
-        label: 'Message Events',
+        label: 'Events Search',
         to: '/reports/message-events'
       }
     ]

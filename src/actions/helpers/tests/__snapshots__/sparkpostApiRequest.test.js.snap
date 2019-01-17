@@ -226,6 +226,7 @@ Array [
     "type": "TEST_PENDING",
   },
   Object {
+    "extra": Object {},
     "meta": Object {
       "method": "GET",
       "retries": 1,
@@ -365,6 +366,7 @@ Array [
     "type": "TEST_PENDING",
   },
   Object {
+    "extra": Object {},
     "meta": Object {
       "method": "GET",
       "url": "/some/path",

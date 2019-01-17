@@ -47,6 +47,51 @@ describe('Action Creator: MessageEvents', () => {
     });
   });
 
+  describe('changePage', () => {
+    let getStateMock;
+    let dispatchMock;
+    let testState;
+
+    beforeEach(() => {
+      testState = { messageEvents: {
+        cachedResultsByPage: [[]],
+        linkByPage: ['foo=bar1', 'for=bar2']
+      }};
+      dispatchMock = jest.fn((a) => a);
+      getStateMock = jest.fn(() => testState);
+    });
+    it('should dispatch change page action', () => {
+      const currentPage = 2;
+
+      messageEvents.changePage(currentPage)(dispatchMock, getStateMock);
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
+      expect(dispatchMock).toHaveBeenCalledWith({
+        type: 'GET_MESSAGE_EVENTS_PAGE',
+        meta: {
+          currentPageIndex: currentPage - 1,
+          method: 'GET',
+          params: {
+            for: 'bar2'
+          },
+          showErrorAlert: false,
+          url: '/v1/events/message'
+        }
+
+      });
+    });
+
+    it('should dispatch loading from cache', () => {
+      const currentPage = 1;
+
+      messageEvents.changePage(currentPage)(dispatchMock, getStateMock);
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
+      expect(dispatchMock).toHaveBeenCalledWith({
+        type: 'LOAD_EVENTS_FROM_CACHE',
+        payload: currentPage - 1
+      });
+    });
+  });
+
   describe('getMessageHistory', () => {
     it('makes api call with defaults', () => {
       expect(messageEvents.getMessageHistory({ messageId: 'abcd,efgh' })).toMatchSnapshot();
@@ -58,7 +103,7 @@ describe('Action Creator: MessageEvents', () => {
       expect(messageEvents.updateMessageEventsSearchOptions({
         subaccounts: ['1','4','1','2','3'],
         message_ids: ['1'],
-        campaign_ids: [],
+        campaigns: [],
         dateOptions: {}
       })).toMatchSnapshot();
     });

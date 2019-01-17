@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Save CSV Button should not show save as CSV button when false 1`] = `""`;
+
+exports[`Save CSV Button should render 1`] = `
+<Button
+  download="sparkpost-csv-1512509841.csv"
+  size="default"
+  to="data:text/csv;charset=utf-8,mydata"
+>
+  Save As CSV
+</Button>
+`;

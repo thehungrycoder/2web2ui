@@ -2,38 +2,44 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel, Tag } from '@sparkpost/matchbox';
 import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
+import { removeEmptyFilters, getFiltersAsArray } from '../helpers/transformData.js';
 import { snakeToFriendly } from 'src/helpers/string';
+import { EVENTS_SEARCH_FILTERS } from 'src/constants';
 import _ from 'lodash';
 import styles from './ActiveFilters.module.scss';
 
+const filterTypes = [
+  { value: 'events', label: 'Event', itemToString: snakeToFriendly },
+  { value: 'recipients', label: 'Recipient' },
+  ...getFiltersAsArray(EVENTS_SEARCH_FILTERS)
+];
+
 export class ActiveFilters extends Component {
-  static defaultProps = {
-    search: {}
-  };
 
-  renderTags = ({ key, label, itemToString }) => {
+  renderTags = () => {
     const { search } = this.props;
-
-    if (!search[key]) {
-      return null;
-    }
-
-    return search[key].map((item, i) => (
-      <Tag onRemove={() => this.handleRemove({ key, item })} key={i} className={styles.TagWrapper}>
-        {label}: {itemToString ? itemToString(item) : item}
-      </Tag>
-    ));
-  }
+    const nonEmptyFilters = removeEmptyFilters(search);
+    const nonEmptyFilterTypes = filterTypes.filter((filterType) => nonEmptyFilters[filterType.value]);
+    const activeFilters = _.flatMap(nonEmptyFilterTypes,({ value, label, itemToString }, typeIndex) =>
+      nonEmptyFilters[value].map((item, valueIndex) => (
+        <Tag onRemove={() => this.handleRemove({ key: value, item })} key={`${typeIndex}-${valueIndex}`} className={styles.TagWrapper}>
+          {label}: {itemToString ? itemToString(item) : item}
+        </Tag>
+      ))
+    );
+    return activeFilters;
+  };
 
   handleRemove = (filter) => {
     this.props.removeFilter(filter);
-  }
+  };
+
 
   handleRemoveAll = () => {
     const { dateOptions, ...filters } = this.props.search;
     const clearedFilters = _.mapValues(filters, () => []);
     this.props.updateMessageEventsSearchOptions({ dateOptions, ...clearedFilters });
-  }
+  };
 
   isEmpty() {
     const { dateOptions, ...rest } = this.props.search;
@@ -48,20 +54,14 @@ export class ActiveFilters extends Component {
     return (
       <Panel.Section actions={[{ content: 'Clear All Filters', onClick: this.handleRemoveAll, color: 'blue' }]}>
         <small>Filters: </small>
-        {this.renderTags({ key: 'events', label: 'Event', itemToString: snakeToFriendly })}
-        {this.renderTags({ key: 'recipients', label: 'Recipient' })}
-        {this.renderTags({ key: 'friendly_froms', label: 'From' })}
-        {this.renderTags({ key: 'subaccounts', label: 'Subaccount' })}
-        {this.renderTags({ key: 'message_ids', label: 'Message' })}
-        {this.renderTags({ key: 'template_ids', label: 'Template' })}
-        {this.renderTags({ key: 'campaign_ids', label: 'Campaign' })}
-        {this.renderTags({ key: 'bounce_classes', label: 'Bounce Class' })}
+        {this.renderTags()}
       </Panel.Section>
     );
   }
 }
 
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state) => ({
   search: state.messageEvents.search
 });
 

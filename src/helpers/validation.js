@@ -22,6 +22,16 @@ export function recipientEmail(value) {
   return isRecipientEmailAddress(value) ? undefined : 'Invalid Email';
 }
 
+export function eventsQuery(filter) {
+  if (!filter || !filter.value) {
+    return 'Required';
+  }
+  if (!filter.key) {
+    return 'Select a Filter';
+  }
+  return undefined;
+}
+
 export function domain(value) {
   return domainRegex.test(value) ? undefined : 'Invalid Domain';
 }

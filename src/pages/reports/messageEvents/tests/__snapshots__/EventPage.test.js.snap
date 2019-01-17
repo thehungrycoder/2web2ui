@@ -29,7 +29,7 @@ exports[`Page: Event tests should render page correctly 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "All Message Events",
+      "content": "All Events",
       "to": "/reports/message-events",
     }
   }

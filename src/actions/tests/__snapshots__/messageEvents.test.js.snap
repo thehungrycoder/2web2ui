@@ -6,11 +6,12 @@ Object {
     "method": "GET",
     "params": Object {
       "from": "2018-02-01T10:10",
+      "per_page": 25,
       "recipients": "1,2,3",
       "to": "2018-02-01T10:10",
     },
     "showErrorAlert": false,
-    "url": "/v1/message-events",
+    "url": "/v1/events/message",
   },
   "type": "GET_MESSAGE_EVENTS",
 }
@@ -22,9 +23,10 @@ Object {
     "method": "GET",
     "params": Object {
       "from": "2018-02-01T10:10",
+      "per_page": 25,
     },
     "showErrorAlert": false,
-    "url": "/v1/message-events",
+    "url": "/v1/events/message",
   },
   "type": "GET_MESSAGE_EVENTS",
 }
@@ -35,10 +37,11 @@ Object {
   "meta": Object {
     "method": "GET",
     "params": Object {
+      "per_page": 25,
       "recipients": "1,2,3",
     },
     "showErrorAlert": false,
-    "url": "/v1/message-events",
+    "url": "/v1/events/message",
   },
   "type": "GET_MESSAGE_EVENTS",
 }
@@ -49,10 +52,11 @@ Object {
   "meta": Object {
     "method": "GET",
     "params": Object {
+      "per_page": 25,
       "to": "2018-02-01T10:10",
     },
     "showErrorAlert": false,
-    "url": "/v1/message-events",
+    "url": "/v1/events/message",
   },
   "type": "GET_MESSAGE_EVENTS",
 }
@@ -64,10 +68,10 @@ Object {
     "method": "GET",
     "params": Object {
       "from": "2018-02-01T10:10",
-      "message_ids": "abcd,efgh",
+      "messages": "abcd,efgh",
       "to": "2018-02-01T10:10",
     },
-    "url": "/v1/message-events",
+    "url": "/v1/events/message",
   },
   "type": "GET_MESSAGE_HISTORY",
 }
@@ -76,7 +80,7 @@ Object {
 exports[`Action Creator: MessageEvents updateMessageEventsSearchOptions dedupes filters 1`] = `
 Object {
   "payload": Object {
-    "campaign_ids": Array [],
+    "campaigns": Array [],
     "dateOptions": Object {},
     "message_ids": Array [
       "1",

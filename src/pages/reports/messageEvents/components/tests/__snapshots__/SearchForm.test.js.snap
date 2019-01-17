@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm should render correctly 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Panel
+    title="Advanced Filters"
+  >
+    <Panel.Section>
+      <EventTypeFilters />
+    </Panel.Section>
+    <Panel.Section>
+      <FieldArray
+        component={[Function]}
+        name="searchQuery"
+      />
+      <p>
+        All filters accept comma-separated values.
+      </p>
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Apply Filters
+      </Button>
+      <Button
+        className="Cancel"
+        onClick={[MockFunction]}
+        size="default"
+      >
+        Cancel
+      </Button>
+    </Panel.Section>
+  </Panel>
+</form>
+`;
