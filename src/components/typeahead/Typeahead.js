@@ -38,7 +38,21 @@ export class Typeahead extends Component {
     clearSelection,
     isOpen
   }) => {
-    const { name, results, disabled, label, placeholder = (isOpen ? 'Type to search' : 'None'), error, helpText, errorInLabel, itemToString, renderItem } = this.props;
+    const {
+      disabled,
+      error,
+      errorInLabel,
+      helpText,
+      itemToString,
+      label,
+      maxHeight = 300,
+      // must limit number of results to avoid running out of memory
+      maxNumberOfResults = 100,
+      name,
+      placeholder = (isOpen ? 'Type to search' : 'None'),
+      renderItem,
+      results
+    } = this.props;
 
     const matches = sortMatch(
       results,
@@ -46,11 +60,13 @@ export class Typeahead extends Component {
       itemToString
     );
 
-    const mappedItems = (matches.length ? matches : results).map((item, index) => ({
-      ...getItemProps({ item, index }),
-      content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
-      highlighted: highlightedIndex === index
-    }));
+    const mappedItems = (matches.length ? matches : results)
+      .slice(0, maxNumberOfResults)
+      .map((item, index) => ({
+        ...getItemProps({ item, index }),
+        content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
+        highlighted: highlightedIndex === index
+      }));
 
     const listClasses = cx('List', {
       open: isOpen && !selectedItem && (!inputValue || matches.length),
@@ -74,7 +90,7 @@ export class Typeahead extends Component {
 
     return (
       <div className={cx('Typeahead')}>
-        <ActionList className={listClasses} actions={mappedItems} maxHeight="300" />
+        <ActionList className={listClasses} actions={mappedItems} maxHeight={maxHeight} />
         <TextField {...textFieldProps} onFocus={openMenu} />
       </div>
     );

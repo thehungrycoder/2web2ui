@@ -49,6 +49,18 @@ describe('Typeahead', () => {
       expect(result).toMatchSnapshot();
     });
 
+    it('should render the list with custom maxHeight', () => {
+      wrapper.setProps({ maxHeight: 999 });
+      const result = shallow(wrapper.instance().typeaheadFn(args));
+      expect(result).toMatchSnapshot();
+    });
+
+    it('should render the list with custom limit on results', () => {
+      wrapper.setProps({ maxNumberOfResults: 1 });
+      const result = shallow(wrapper.instance().typeaheadFn(args));
+      expect(result).toMatchSnapshot();
+    });
+
     it('should switch placeholder if open', () => {
       const result = shallow(wrapper.instance().typeaheadFn({ ...args, isOpen: true }));
       expect(result.find('TextField').props().placeholder).toEqual('Type to search');
