@@ -37,7 +37,8 @@ export default [
       },
       {
         label: 'Events Search',
-        to: '/reports/message-events'
+        to: '/reports/message-events',
+        tag: 'new'
       }
     ]
   },
