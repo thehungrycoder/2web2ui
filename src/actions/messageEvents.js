@@ -49,18 +49,18 @@ export function changePage(currentPage) {
         type: 'LOAD_EVENTS_FROM_CACHE',
         payload: currentPageIndex
       });
+    } else {
+      dispatch(sparkpostApiRequest({
+        type: 'GET_MESSAGE_EVENTS_PAGE',
+        meta: {
+          method: 'GET',
+          url: '/v1/events/message',
+          params,
+          showErrorAlert: false,
+          currentPageIndex
+        }
+      }));
     }
-
-    dispatch(sparkpostApiRequest({
-      type: 'GET_MESSAGE_EVENTS_PAGE',
-      meta: {
-        method: 'GET',
-        url: '/v1/events/message',
-        params,
-        showErrorAlert: false,
-        currentPageIndex
-      }
-    }));
   };
 }
 

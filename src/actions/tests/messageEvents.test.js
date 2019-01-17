@@ -64,6 +64,7 @@ describe('Action Creator: MessageEvents', () => {
       const currentPage = 2;
 
       messageEvents.changePage(currentPage)(dispatchMock, getStateMock);
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
       expect(dispatchMock).toHaveBeenCalledWith({
         type: 'GET_MESSAGE_EVENTS_PAGE',
         meta: {
@@ -83,6 +84,7 @@ describe('Action Creator: MessageEvents', () => {
       const currentPage = 1;
 
       messageEvents.changePage(currentPage)(dispatchMock, getStateMock);
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
       expect(dispatchMock).toHaveBeenCalledWith({
         type: 'LOAD_EVENTS_FROM_CACHE',
         payload: currentPage - 1
