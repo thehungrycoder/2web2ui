@@ -10,8 +10,11 @@ import {
   isCustomBilling,
   isSelfServeBilling,
   hasOnlineSupport,
-  hasUiOption
+  hasUiOption,
+  isAccountUiOptionSet
 } from '../account';
+
+import cases from 'jest-in-case';
 
 test('Condition: onPlan', () => {
   const condition = onPlan('p1');
@@ -194,6 +197,21 @@ describe('Condition: hasUiOption', () => {
   });
 });
 
+describe('Condition: isUiOptionSet', () => {
+  cases('isUiOptionSet', (opts) => {
+    const state = { account: { options: { ui: opts.options }}};
+    expect(isAccountUiOptionSet('option', opts.defaultVal)(state)).toEqual(opts.result);
+  }, {
+    // Account option takes precedence
+    'Account option precedence: false/false=false': { options: { option: false }, defaultVal: false, result: false },
+    'Account option precedence: true/false=true': { options: { option: true }, defaultVal: false, result: true },
+    'Account option precedence: false/true=false': { options: { option: false }, defaultVal: true, result: false },
+    'Account option precedence: true/true=true': { options: { option: true }, defaultVal: true, result: true },
+    // Default used iff option is missing
+    'Default: true=true': { options: {}, defaultVal: true, result: true },
+    'Default: false=false': { options: {}, defaultVal: false, result: false }
+  });
+});
 
 describe('Condition: isCustomBilling', () => {
   it('should return false', () => {

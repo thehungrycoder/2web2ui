@@ -1,4 +1,6 @@
-import { isAdmin, isHeroku, isAzure, isSso, hasRole } from '../user';
+import { isAdmin, isHeroku, isAzure, isSso, hasRole, isUserUiOptionSet } from '../user';
+
+import cases from 'jest-in-case';
 
 describe('User Condition Tests', () => {
   it('should return true if user is heroku', () => {
@@ -54,5 +56,21 @@ describe('User Condition Tests', () => {
   it('should return true if access level does not match', () => {
     const currentUser = { access_level: 'reporting' };
     expect(hasRole('admin')({ currentUser })).toEqual(false);
+  });
+
+  describe('Condition: isUiOptionSet', () => {
+    cases('isUiOptionSet', (opts) => {
+      const state = { currentUser: { options: { ui: opts.options }}};
+      expect(isUserUiOptionSet('option', opts.defaultVal)(state)).toEqual(opts.result);
+    }, {
+      // User option takes precedence
+      'User option precedence: false/false=false': { options: { option: false }, defaultVal: false, result: false },
+      'User option precedence: true/false=true': { options: { option: true }, defaultVal: false, result: true },
+      'User option precedence: false/true=false': { options: { option: false }, defaultVal: true, result: false },
+      'User option precedence: true/true=true': { options: { option: true }, defaultVal: true, result: true },
+      // Default used iff option is missing
+      'Default: true=true': { options: {}, defaultVal: true, result: true },
+      'Default: false=false': { options: {}, defaultVal: false, result: false }
+    });
   });
 });
