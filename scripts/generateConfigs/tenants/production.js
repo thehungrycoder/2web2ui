@@ -40,7 +40,6 @@ const productionTenants = {
   spceu: {
     apiBase: 'https://api.eu.sparkpost.com/api',
     bounceDomains: {
-      allowSubaccountDefault: false,
       cnameValue: 'eu.sparkpostmail.com'
     },
     brightback: {
