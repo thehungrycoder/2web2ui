@@ -17,10 +17,10 @@ const errorMsg = 'Sorry, we seem to have had some trouble loading your message e
 const emptyMessage = 'There are no message events for your current query';
 
 const columns = [
-  { label: 'Time', sortKey: 'timestamp' },
-  { label: 'Event', sortKey: 'type' },
-  { label: 'Recipient', sortKey: 'rcpt_to' },
-  { label: 'Friendly From', sortKey: 'friendly_from' },
+  { label: 'Time' },
+  { label: 'Event' },
+  { label: 'Recipient' },
+  { label: 'From Address' },
   null
 ];
 
