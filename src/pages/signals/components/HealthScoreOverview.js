@@ -160,6 +160,7 @@ class HealthScoreOverview extends React.Component {
                   facet={facet.key}
                   id={props[facet.key]}
                   subaccountId={props.sid}
+                  truncate
                 />
               )}
             />

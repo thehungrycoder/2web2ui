@@ -2,8 +2,9 @@ import React from 'react';
 import PageLink from 'src/components/pageLink';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import styles from './DataCell.module.scss';
+import classnames from 'classnames';
 
-const FacetDataCell = ({ dimension, facet, id, name, subaccountId }) => {
+const FacetDataCell = ({ dimension, facet, id, name, subaccountId, truncate }) => {
   let label = id;
   let search;
 
@@ -28,7 +29,7 @@ const FacetDataCell = ({ dimension, facet, id, name, subaccountId }) => {
   }
 
   return (
-    <div className={styles.PaddedCell}>
+    <div className={classnames(styles.PaddedCell, truncate && styles.OverflowCell)}>
       <PageLink
         children={label}
         to={{
