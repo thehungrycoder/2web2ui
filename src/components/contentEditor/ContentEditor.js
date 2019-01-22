@@ -30,6 +30,7 @@ const fields = [
     show: ({ isAmpLive }) => isAmpLive
   },
   {
+    alwaysEditable: true,
     content: 'Test Data',
     name: 'testData',
     mode: 'json',
@@ -99,7 +100,7 @@ class ContentEditor extends React.Component {
             mode={visibleFields[selectedTab].mode}
             name={visibleFields[selectedTab].name}
             normalize={this.normalize}
-            readOnly={readOnly && selectedTab !== 2}
+            readOnly={readOnly && !visibleFields[selectedTab].alwaysEditable}
             syntaxValidation={visibleFields[selectedTab].syntaxValidation}
             validate={[requiredContentValidator, this.validTestDataJson]}
           />
