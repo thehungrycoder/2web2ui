@@ -74,7 +74,7 @@ class DivergingBar extends Component {
             dataKey={yKey}
             padding={{ bottom: 5 }}
             tick={this.renderYTick}
-            width={140}
+            width={160}
           />
           <XAxis
             hide
