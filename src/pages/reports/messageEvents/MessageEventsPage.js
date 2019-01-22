@@ -20,7 +20,7 @@ const columns = [
   { label: 'Time' },
   { label: 'Event' },
   { label: 'Recipient' },
-  { label: 'Friendly From' },
+  { label: 'From Address' },
   null
 ];
 
