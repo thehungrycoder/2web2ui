@@ -4,14 +4,14 @@ import styles from './OtherChartsHeader.module.scss';
 
 const OtherChartsHeader = ({ facet, facetId }) => (
   <Fragment>
-    <h2 className={styles.OtherChartsHeader}>
+    <h2 className={styles.Header}>
       {getFriendlyTitle({
         prefix: 'Other charts for',
         facet,
         facetId
       })}
     </h2>
-    <hr />
+    <hr className={styles.Line} />
   </Fragment>
 );
 
