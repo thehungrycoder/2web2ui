@@ -12,13 +12,15 @@ exports[`Top should render close icon when open 1`] = `
       size={24}
     />
   </UnstyledLink>
-  <div
+  <Link
     className="MobileLogo"
+    replace={false}
+    to="/landing"
   >
     <Logo
       type="halfWhite"
     />
-  </div>
+  </Link>
   <div
     className="MobileAccountDropdownWrapper"
   >
@@ -31,13 +33,15 @@ exports[`Top should render correctly on desktop 1`] = `
 <div
   className="Top"
 >
-  <div
+  <Link
     className="Logo"
+    replace={false}
+    to="/landing"
   >
     <Logo
       type="halfWhite"
     />
-  </div>
+  </Link>
   <div
     className="RightSideWrapper"
   >
@@ -64,13 +68,15 @@ exports[`Top should render correctly on mobile 1`] = `
       size={24}
     />
   </UnstyledLink>
-  <div
+  <Link
     className="MobileLogo"
+    replace={false}
+    to="/landing"
   >
     <Logo
       type="halfWhite"
     />
-  </div>
+  </Link>
   <div
     className="MobileAccountDropdownWrapper"
   >
