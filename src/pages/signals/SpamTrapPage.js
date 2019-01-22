@@ -19,6 +19,7 @@ import _ from 'lodash';
 
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
+import styles from './DetailsPages.module.scss';
 
 export class SpamTrapPage extends Component {
   state = {
@@ -104,7 +105,9 @@ export class SpamTrapPage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          {!chartPanel && <SpamTrapActions percent={_.last(data).relative_trap_hits} />}
+          <div className={styles.OffsetCol}>
+            {!chartPanel && <SpamTrapActions percent={_.last(data).relative_trap_hits} />}
+          </div>
         </Grid.Column>
       </Grid>
     );
