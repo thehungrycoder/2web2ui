@@ -7,7 +7,7 @@ const formatToCsv = (rows) => {
   // we are doing this because certain keys are objects/array which papa parse doesn't stringify
   const mappedRows = _.map(rows, (row) => _.mapValues(row, (value) => _.isObject(value) || _.isArray(value) ? JSON.stringify(value) : value));
   const data = Papa.unparse(mappedRows);
-  return `data:text/csv;charset=utf-8,${encodeURI(data)}`;
+  return `data:text/csv;charset=utf-8,${encodeURIComponent(data)}`;
 };
 
 const SaveCSVButton = ({ data, saveCsv }) => {
