@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getHealthScore, getSpamHits } from 'src/actions/signals';
+import { getHealthScore, getSpamHits } from 'src/actions/signals.fake';
 import { selectHealthScoreDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 

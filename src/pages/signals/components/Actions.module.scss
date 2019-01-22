@@ -54,12 +54,13 @@
 .Title {
   border-bottom: 1px solid color(gray, 8);
   margin-bottom: spacing();
-  padding-top: spacing(small);
+  padding-top: rem(8);
 }
 
 .TitleText {
   font-weight: 500;
   font-size: rem(15);
+  margin-bottom: rem(23);
 }
 
 .Link {
