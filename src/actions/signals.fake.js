@@ -60,7 +60,7 @@ const engagementDetails = (count) => _.range(count).map((n) => {
 
   return {
     c_new, c_14d, c_90d, c_365d, c_uneng, c_total,
-    dt: moment().subtract(count - n + 1, 'day').format('YYYY-MM-DD')
+    dt: moment().subtract(count - n, 'day').format('YYYY-MM-DD')
   };
 });
 
@@ -128,12 +128,12 @@ const healthScoreDetails = (count) => _.range(count).map((n) => {
       weight_value: randInt(100) / 100
     },
     {
-      weight_type: 'eng cohorts: 14day',
+      weight_type: 'eng cohorts: new, 14-day',
       weight: randInt(100) / 100,
       weight_value: randInt(100) / 100
     },
     {
-      weight_type: 'eng cohorts: new',
+      weight_type: 'eng cohorts: unengaged',
       weight: randInt(100) / 100,
       weight_value: randInt(100) / 100
     }
