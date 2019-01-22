@@ -7,12 +7,13 @@ exports[`Signals health score actions render cases renders an action correctly o
 exports[`Signals health score actions render cases should render block bounces action 1`] = `
 Array [
   Object {
-    "content": <span>
+    "content": <React.Fragment>
       <strong>
         You have a high rate of block bounces.
       </strong>
-       These bounces can be temporary or permanent and are the result of a low reputation at mailbox providers. You may need to contact the postmaster to request mitigation once you make changes to improve your reputation.
-    </span>,
+      <br />
+      These bounces can be temporary or permanent and are the result of a low reputation at mailbox providers. You may need to contact the postmaster to request mitigation once you make changes to improve your reputation.
+    </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/reputation-improvement/",
     "type": "bad",
     "weight": -0.1,
@@ -23,12 +24,13 @@ Array [
 exports[`Signals health score actions render cases should render compaints action 1`] = `
 Array [
   Object {
-    "content": <span>
+    "content": <React.Fragment>
       <strong>
         Your email has an unusually high rate of spam complaints.
       </strong>
-       These complaints by recipients have a strong negative impact on your overall email deliverability and point to the fact you should make improvements to your list. You should take steps to improve your list hygiene and email content.
-    </span>,
+      <br />
+      These complaints by recipients have a strong negative impact on your overall email deliverability and point to the fact you should make improvements to your list. You should take steps to improve your list hygiene and email content.
+    </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
     "type": "bad",
     "weight": -0.1,
@@ -39,12 +41,13 @@ Array [
 exports[`Signals health score actions render cases should render hard bounce action 1`] = `
 Array [
   Object {
-    "content": <span>
+    "content": <React.Fragment>
       <strong>
         You have a high rate of hard bounces.
       </strong>
-       They could simply be typos or old addresses that once existed but have been abandoned and the account deleted by the mailbox provider. Removing these non-existent addresses from your recipient lists could improve your overall email deliverability.
-    </span>,
+      <br />
+      They could simply be typos or old addresses that once existed but have been abandoned and the account deleted by the mailbox provider. Removing these non-existent addresses from your recipient lists could improve your overall email deliverability.
+    </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/subscriber-acquisition/",
     "type": "bad",
     "weight": -0.1,
@@ -55,12 +58,13 @@ Array [
 exports[`Signals health score actions render cases should render list quality action 1`] = `
 Array [
   Object {
-    "content": <span>
+    "content": <React.Fragment>
       <strong>
         You're sending to a high rate of problematic email addresses.
       </strong>
-       List quality can be an early determinant of deliverability issues to come. Improving it can help improve your email deliverability and engagement by reducing spam foldering, delays, and blocked messages.
-    </span>,
+      <br />
+      List quality can be an early determinant of deliverability issues to come. Improving it can help improve your email deliverability and engagement by reducing spam foldering, delays, and blocked messages.
+    </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/list-quality/",
     "type": "bad",
     "weight": -0.1,
@@ -71,12 +75,13 @@ Array [
 exports[`Signals health score actions render cases should render other bounces action 1`] = `
 Array [
   Object {
-    "content": <span>
+    "content": <React.Fragment>
       <strong>
         Your emails are being blocked without a clear reason.
       </strong>
-       These bounces have varied causes, but improving your list quality can help resolve many bounce types.
-    </span>,
+      <br />
+      These bounces have varied causes, but improving your list quality can help resolve many bounce types.
+    </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/list-quality/",
     "type": "bad",
     "weight": -0.1,
@@ -87,12 +92,13 @@ Array [
 exports[`Signals health score actions render cases should render transient failures action 1`] = `
 Array [
   Object {
-    "content": <span>
+    "content": <React.Fragment>
       <strong>
         You are experiencing a high level of temporary bounces.
       </strong>
-       These delays in email delivery have varied causes, but may be a sign of low reputation at mailbox providers since senders with good reputations may have their messages accepted before others. This can be an early warning sign of other issues to come such as spam foldering or block bouncing.
-    </span>,
+      <br />
+      These delays in email delivery have varied causes, but may be a sign of low reputation at mailbox providers since senders with good reputations may have their messages accepted before others. This can be an early warning sign of other issues to come such as spam foldering or block bouncing.
+    </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/reputation-improvement/",
     "type": "bad",
     "weight": -0.1,
@@ -103,23 +109,25 @@ Array [
 exports[`Signals health score actions render cases sorts by weight and only displays first 2 1`] = `
 Array [
   Object {
-    "content": <span>
+    "content": <React.Fragment>
       <strong>
         You have a high rate of block bounces.
       </strong>
-       These bounces can be temporary or permanent and are the result of a low reputation at mailbox providers. You may need to contact the postmaster to request mitigation once you make changes to improve your reputation.
-    </span>,
+      <br />
+      These bounces can be temporary or permanent and are the result of a low reputation at mailbox providers. You may need to contact the postmaster to request mitigation once you make changes to improve your reputation.
+    </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/reputation-improvement/",
     "type": "bad",
     "weight": -0.5,
   },
   Object {
-    "content": <span>
+    "content": <React.Fragment>
       <strong>
         You have a high rate of hard bounces.
       </strong>
-       They could simply be typos or old addresses that once existed but have been abandoned and the account deleted by the mailbox provider. Removing these non-existent addresses from your recipient lists could improve your overall email deliverability.
-    </span>,
+      <br />
+      They could simply be typos or old addresses that once existed but have been abandoned and the account deleted by the mailbox provider. Removing these non-existent addresses from your recipient lists could improve your overall email deliverability.
+    </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/subscriber-acquisition/",
     "type": "bad",
     "weight": -0.3,
