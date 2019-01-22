@@ -56,14 +56,6 @@ describe('ContentEditor', () => {
     expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
   });
 
-  it('should set AMP HTML syntax validation correctly', () => {
-    wrapper.setProps({ isAmpLive: true });
-    wrapper.instance().handleTab(2);
-    wrapper.update();
-    expect(wrapper.find('Field').props().name).toBe('content.amp_html');
-    expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
-  });
-
   it('should set Test Data syntax validation correctly', () => {
     wrapper.instance().handleTab(2);
     wrapper.update();
@@ -78,6 +70,27 @@ describe('ContentEditor', () => {
   it('should set required content validation correctly for HTML, Text, and AMP', () => {
     wrapper.setProps({ isAmpLive: true, contentOnly: true });
     expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlTextOrAmp);
+  });
+
+  describe('when AMP is live', () => {
+    beforeEach(() => {
+      wrapper.setProps({ isAmpLive: true });
+    });
+
+    it('should set syntax validation correctly', () => {
+      wrapper.instance().handleTab(2);
+      wrapper.update();
+      expect(wrapper.find('Field').props().name).toBe('content.amp_html');
+      expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+    });
+
+    it('should leave test data tab editable when other tabs are read only', () => {
+      wrapper.setProps({ readOnly: true });
+      wrapper.instance().handleTab(3);
+
+      expect(wrapper.find('Field')).toHaveProp('name', 'testData');
+      expect(wrapper.find('Field')).toHaveProp('readOnly', false);
+    });
   });
 
   cases('.normalize', ({ expected, value }) => {
