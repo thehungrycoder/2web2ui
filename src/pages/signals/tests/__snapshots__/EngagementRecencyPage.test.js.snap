@@ -86,7 +86,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
                 "bottom": 5,
                 "left": 18,
                 "right": 0,
-                "top": 5,
+                "top": 12,
               }
             }
             timeSeries={

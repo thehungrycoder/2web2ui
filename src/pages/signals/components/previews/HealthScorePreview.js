@@ -7,6 +7,7 @@ import withHealthScoreDetails from '../../containers/HealthScoreDetailsContainer
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { roundToPlaces } from 'src/helpers/units';
 
 export class HealthScorePreview extends Component {
   renderContent = () => {
@@ -24,11 +25,13 @@ export class HealthScorePreview extends Component {
       <BarChart
         height={170}
         disableHover
-        margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+        margin={{ top: 12, left: 12, right: 0, bottom: 12 }}
         gap={gap}
         timeSeries={data}
         yKey='health_score'
-        yAxisProps={{ hide: true }}
+        yAxisProps={{
+          tickFormatter: (tick) => `${roundToPlaces(tick * 100, 3)}%`
+        }}
         xAxisProps={{ hide: true }}
       />
     );

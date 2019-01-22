@@ -9,8 +9,15 @@ import ChartHeader from '../ChartHeader';
 import cohorts from '../../constants/cohorts';
 import _ from 'lodash';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { roundToPlaces } from 'src/helpers/units';
 
 export class EngagementRecencyPreview extends Component {
+  getYAxisProps = () => ({
+    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`,
+    domain: [0, 1],
+    ticks: [0, 0.25, 0.5, 0.75, 1.0]
+  })
+
   renderContent = () => {
     const { data, gap, empty, error } = this.props;
 
@@ -26,11 +33,11 @@ export class EngagementRecencyPreview extends Component {
       <BarChart
         height={170}
         disableHover
-        margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+        margin={{ top: 12, left: 12, right: 0, bottom: 12 }}
         gap={gap}
         timeSeries={data}
         yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
-        yAxisProps={{ hide: true, domain: [0, 1]}}
+        yAxisProps={this.getYAxisProps()}
         xAxisProps={{ hide: true }}
       />
     );

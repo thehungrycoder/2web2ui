@@ -37,4 +37,9 @@ describe('Signals SpamTrapsPreview Component', () => {
     wrapper.setProps({ error: { message: 'error message' }});
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('gets y axis props', () => {
+    const axisProps = wrapper.find('BarChart').prop('yAxisProps');
+    expect(axisProps.tickFormatter((2468))).toEqual('2.47K');
+  });
 });
