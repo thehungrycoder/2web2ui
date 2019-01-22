@@ -26,8 +26,8 @@ exports[`HorizontalBar Component renders correctly 1`] = `
       margin={
         Object {
           "bottom": 0,
-          "left": 0,
-          "right": 0,
+          "left": 18,
+          "right": 18,
           "top": 0,
         }
       }

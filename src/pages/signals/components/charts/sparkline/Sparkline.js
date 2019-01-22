@@ -16,7 +16,7 @@ import TooltipWrapper from '../tooltip/Tooltip';
 const Sparkline = ({ timeSeries, height, width, yKey, dot, yRange, activeDot, stroke, onClick, tooltipContent }) => (
   <div className='LiftTooltip'>
     <ResponsiveContainer height={height} width={width}>
-      <LineChart data={timeSeries} onClick={onClick}>
+      <LineChart data={timeSeries} onClick={onClick} margin={{ top: 2, left: 18, bottom: 2, right: 18 }}>
         <YAxis hide dataKey={yKey} type='number' domain={yRange} />
         <Line
           activeDot={activeDot}
