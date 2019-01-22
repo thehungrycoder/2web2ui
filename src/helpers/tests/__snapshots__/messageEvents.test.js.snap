@@ -17,6 +17,16 @@ Object {
 }
 `;
 
+exports[`messageEvents helpers parseSearch parses correctly when adding in unsupported filters by removing them 1`] = `
+Object {
+  "dateOptions": Object {
+    "from": "2018-02-23T03:02:32Z",
+    "relativeRange": "hour",
+    "to": "2018-03-22T03:02:32Z",
+  },
+}
+`;
+
 exports[`messageEvents helpers parseSearch parses correctly when all param exists 1`] = `
 Object {
   "dateOptions": Object {
@@ -86,6 +96,34 @@ Object {
   ],
   "filter2": Array [
     "bar",
+  ],
+}
+`;
+
+exports[`messageEvents helpers parseSearch parses correctly when using old message events filters by transforming them into the new events filters 1`] = `
+Object {
+  "ab_tests": Array [
+    "foo",
+  ],
+  "campaigns": Array [
+    "foo",
+  ],
+  "dateOptions": Object {
+    "from": "2018-02-23T03:02:32Z",
+    "relativeRange": "hour",
+    "to": "2018-03-22T03:02:32Z",
+  },
+  "from_addresses": Array [
+    "foo",
+  ],
+  "messages": Array [
+    "foo",
+  ],
+  "templates": Array [
+    "foo",
+  ],
+  "transmissions": Array [
+    "foo",
   ],
 }
 `;

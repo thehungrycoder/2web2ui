@@ -2,6 +2,7 @@
 import qs from 'query-string';
 import _ from 'lodash';
 import { getRelativeDates } from 'src/helpers/date';
+import {EVENTS_SEARCH_FILTERS} from 'src/constants';
 
 /*
  * Translate the array of event definitions from /message-events/events/documentation
@@ -47,7 +48,9 @@ export function parseSearch(search) {
     dateOptions = { ...dateOptions, ...getRelativeDates(range) };
   }
 
-  const options = _.mapValues(rest, (filter, key) => {
+  const transformedParams = transformParams(rest);
+
+  const options = _.mapValues(transformedParams, (filter, key) => {
     return typeof filter === 'string' ? [filter] : filter
   });
 
@@ -69,4 +72,34 @@ export function getEmptyFilters(filters) {
   const emptyFilters = _.map(filters,(value, key) => ({[key]: []}));
 
   return Object.assign({}, ...emptyFilters);
+}
+
+/**
+ * Transforms the query parameters object to change old ME params -> new Events params
+ * and remove unsupported params.
+ * @param {Object} params - Query parameters.
+ * @returns {Object} - Transformed and filtered query parameters.
+ */
+function transformParams(params) {
+  const oldFiltersToNewFilters = {
+    transmission_ids: 'transmissions',
+    campaign_ids: 'campaigns',
+    template_ids: 'templates',
+    ab_test_ids: 'ab_tests',
+    message_ids: 'messages',
+    friendly_froms: 'from_addresses'
+  };
+  const transformedParams = _.reduce(params, (accumulator, value, key) => {
+    if (EVENTS_SEARCH_FILTERS.hasOwnProperty(key)) {
+      accumulator[key] = value;
+      return accumulator;
+    }
+    if(oldFiltersToNewFilters.hasOwnProperty(key)){
+      const newKey = oldFiltersToNewFilters[key];
+      accumulator[newKey] = value;
+      return accumulator;
+    }
+    return accumulator;
+  }, {});
+  return transformedParams;
 }

@@ -2,6 +2,13 @@ import cases from 'jest-in-case';
 import * as messageEventHelpers from '../messageEvents';
 import * as dateHelpers from 'src/helpers/date';
 
+jest.mock('src/constants', () => ({
+  EVENTS_SEARCH_FILTERS: {
+    filter1: {},
+    filter2: {}
+  }
+}));
+
 describe('messageEvents helpers', () => {
 
   describe('formatDocumentation', () => {
@@ -45,7 +52,11 @@ describe('messageEvents helpers', () => {
     'parses correctly when from does not exist': { searchText: '?range=hour&to=2018-03-23T04:02:32Z&filter1=foo&filter2=bar' },
     'parses correctly when to does not exist': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&filter1=foo&filter2=bar' },
     'parses correctly when range does not exist (does not override from, to)': { searchText: '?from=2018-03-23T03:02:32Z&to=2018-03-23T04:02:32Z&filter1=foo&filter2=bar' },
-    'parses correctly when extra filters do not exist': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z' }
+    'parses correctly when extra filters do not exist': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z' },
+    'parses correctly when using old message events filters by transforming them into the new events filters': {
+      searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z&campaign_ids=foo&message_ids=foo&transmission_ids=foo&ab_test_ids=foo&template_ids=foo&friendly_froms=foo'
+    },
+    'parses correctly when adding in unsupported filters by removing them': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z&filter3' }
   };
   cases('parseSearch', ({ searchText }) => {
     const mockRelativeRangeToDate = { from: '2018-02-23T03:02:32Z', to: '2018-03-22T03:02:32Z', relativeRange: 'hour' };
