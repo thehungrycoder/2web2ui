@@ -114,7 +114,7 @@ export default class Form extends Component {
               component={FromEmailWrapper}
               placeholder='example@email.com'
               label='From Email'
-              disabled={!domains.length || readOnly}
+              disabled={readOnly}
               validate={[required, emailOrSubstitution, this.validateDomain]}
               domains={domains}
               helpText={this.fromEmailWarning()}
