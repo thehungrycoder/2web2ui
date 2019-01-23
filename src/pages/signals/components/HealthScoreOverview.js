@@ -144,6 +144,7 @@ class HealthScoreOverview extends React.Component {
                   facet="sid"
                   id={sid}
                   name={_.get(_.find(subaccounts, { id: sid }), 'name')}
+                  truncate
                 />
               )}
             />
