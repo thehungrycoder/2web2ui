@@ -18,6 +18,10 @@
   &.Complete {
     color: color(green, dark);
   }
+
+  &.Failed {
+    color: color(red, dark);
+  }
 }
 
 .RightAlign {

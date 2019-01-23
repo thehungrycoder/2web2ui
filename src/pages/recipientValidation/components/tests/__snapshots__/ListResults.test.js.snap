@@ -24,6 +24,18 @@ Array [
 ]
 `;
 
+exports[`ListResults polling starts shows an alert when polling results fail 1`] = `
+Array [
+  Array [
+    Object {
+      "dedupeId": "123",
+      "message": "Recipient Validation Failed",
+      "type": "error",
+    },
+  ],
+]
+`;
+
 exports[`ListResults renders Results Card with latest results 1`] = `
 <Grid>
   <Grid.Column

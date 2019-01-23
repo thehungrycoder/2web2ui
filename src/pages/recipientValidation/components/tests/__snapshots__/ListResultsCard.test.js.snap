@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ListResultsCard renders correctly when batch job fails 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    className="IconWrapper Failed"
+  >
+    <ErrorOutline
+      size={40}
+    />
+  </div>
+  <h6>
+    Validation Results
+  </h6>
+  <div
+    className="Spacer"
+  />
+  <LabelledValue
+    label="Uploaded"
+  >
+    <p
+      className="RightAlign NoWrap"
+    >
+      Nov 1 2018, 1:16pm
+    </p>
+  </LabelledValue>
+  <LabelledValue
+    label="Status"
+  >
+    <h6
+      className="RightAlign"
+    >
+      Failed
+    </h6>
+  </LabelledValue>
+</Panel>
+`;
+
 exports[`ListResultsCard renders correctly when complete 1`] = `
 <Panel
   sectioned={true}

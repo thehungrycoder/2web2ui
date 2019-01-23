@@ -39,6 +39,7 @@ export default (state = initialState, { meta, payload, type }) => {
         jobResults: {
           ...state.jobResults,
           [payload.list_id]: {
+            status: payload.batch_status,
             complete: payload.complete,
             uploaded: payload.upload_timestamp,
             rejectedUrl: payload.rejected_external_url
@@ -60,6 +61,7 @@ export default (state = initialState, { meta, payload, type }) => {
         jobResults: {
           ...state.jobResults,
           [payload.list_id]: {
+            status: payload.batch_status,
             complete: payload.complete,
             uploaded: payload.upload_timestamp,
             rejectedUrl: payload.rejected_external_url
