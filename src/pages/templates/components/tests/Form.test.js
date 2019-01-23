@@ -17,8 +17,7 @@ describe('Template Form', () => {
       change: jest.fn(),
       newTemplate: false,
       readOnly: false,
-      hasSubaccounts: false,
-      domainsLoading: false
+      hasSubaccounts: false
     };
 
     wrapper = shallow(<Form {...props} />);
@@ -32,11 +31,6 @@ describe('Template Form', () => {
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.instance().props.listDomains).toHaveBeenCalled();
     expect(wrapper.find(SubaccountSection)).toHaveLength(0);
-  });
-
-  it('renders correctly when domainsLoading', () => {
-    wrapper.setProps({ domainsLoading: true });
-    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render subaccount fields if has subaccounts', () => {

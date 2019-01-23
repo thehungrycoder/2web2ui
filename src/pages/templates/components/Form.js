@@ -7,8 +7,8 @@ import config from 'src/config';
 import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
-import { TextFieldWrapper, PanelLoading } from 'src/components';
-import FromEmailWrapper from './FromEmailWrapper';
+import { TextFieldWrapper } from 'src/components';
+import FromEmailWrapper from './FromEmail';
 
 // Helpers & Validation
 import { required, slug } from 'src/helpers/validation';
@@ -73,11 +73,7 @@ export default class Form extends Component {
   }
 
   render() {
-    const { newTemplate, readOnly, domains, hasSubaccounts, domainsLoading } = this.props;
-
-    if (domainsLoading) {
-      return <PanelLoading />;
-    }
+    const { newTemplate, readOnly, domains, hasSubaccounts } = this.props;
 
     return (
       <div>
