@@ -20,6 +20,7 @@ import _ from 'lodash';
 import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
 import cohorts from './constants/cohorts';
+import styles from './DetailsPages.module.scss';
 
 export class EngagementRecencyPage extends Component {
 
@@ -73,36 +74,33 @@ export class EngagementRecencyPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Panel>
-            <Panel.Section>
-              <ChartHeader
-                title='Engagement Recency'
-                hideLine
-                tooltipContent={ENGAGEMENT_RECENCY_INFO}
-              />
-            </Panel.Section>
-            <Panel.Section>
-              {chartPanel || (
-                <div className='LiftTooltip'>
-                  <BarChart
-                    gap={gap}
-                    timeSeries={data}
-                    tooltipContent={this.getTooltipContent}
-                    yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
-                    yAxisProps={this.getYAxisProps()}
-                    xAxisProps={this.getXAxisProps()}
-                  />
-                  <Legend
-                    items={_.values(cohorts)}
-                    tooltipContent={(label) => ENGAGEMENT_RECENCY_COHORTS[label]}
-                  />
-                </div>
-              )}
-            </Panel.Section>
+          <Panel sectioned>
+            <ChartHeader
+              title='Engagement Recency'
+              tooltipContent={ENGAGEMENT_RECENCY_INFO}
+            />
+            {chartPanel || (
+              <div className='LiftTooltip'>
+                <BarChart
+                  gap={gap}
+                  timeSeries={data}
+                  tooltipContent={this.getTooltipContent}
+                  yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
+                  yAxisProps={this.getYAxisProps()}
+                  xAxisProps={this.getXAxisProps()}
+                />
+                <Legend
+                  items={_.values(cohorts)}
+                  tooltipContent={(label) => ENGAGEMENT_RECENCY_COHORTS[label]}
+                />
+              </div>
+            )}
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          {!chartPanel && <EngagementRecencyActions cohorts={_.last(data)} />}
+          <div className={styles.OffsetCol}>
+            {!chartPanel && <EngagementRecencyActions cohorts={_.last(data)} />}
+          </div>
         </Grid.Column>
       </Grid>
     );

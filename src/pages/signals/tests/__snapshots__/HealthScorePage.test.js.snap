@@ -76,7 +76,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "bottom": 5,
               "left": 18,
               "right": 0,
-              "top": 5,
+              "top": 12,
             }
           }
           onClick={[Function]}
@@ -152,7 +152,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "bottom": 5,
               "left": 18,
               "right": 0,
-              "top": 5,
+              "top": 12,
             }
           }
           onClick={[Function]}
@@ -225,7 +225,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "bottom": 5,
               "left": 18,
               "right": 0,
-              "top": 5,
+              "top": 12,
             }
           }
           onClick={[Function]}
@@ -272,63 +272,67 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <ChartHeader
-        hideLine={true}
-        padding="1rem 0 1rem"
-        title="Health Score Components"
-        tooltipContent="
+      <div
+        className="OffsetCol"
+      >
+        <ChartHeader
+          hideLine={true}
+          padding="1rem 0 1rem"
+          title="Health Score Components"
+          tooltipContent="
   Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
   engagement, and others.
 "
-      />
-      <DivergingBar
-        barHeight={35}
-        data={
-          Array [
-            Object {
-              "weight": 0.5,
-              "weight_type": "Hard Bounces",
-              "weight_value": 0.25,
-            },
-            Object {
-              "weight": -0.5,
-              "weight_type": "Complaints",
-              "weight_value": 0.25,
-            },
-          ]
-        }
-        negativeFill="#DB2F2D"
-        onClick={[Function]}
-        positiveFill="#8CBE3C"
-        selected="Hard Bounces"
-        tooltipContent={[Function]}
-        width="99%"
-        xDomain={
-          Array [
-            "dataMin",
-            "dataMax",
-          ]
-        }
-        xKey="weight"
-        yKey="weight_type"
-        yLabel={[Function]}
-      />
-      <HealthScoreActions
-        weights={
-          Array [
-            Object {
-              "weight": 0.8,
-              "weight_type": "List Quality",
-              "weight_value": 0.25,
-            },
-            Object {
-              "weight": -0.8,
-              "weight_type": "Other bounces",
-              "weight_value": 0.25,
-            },
-          ]
-        }
-      />
+        />
+        <DivergingBar
+          barHeight={35}
+          data={
+            Array [
+              Object {
+                "weight": 0.5,
+                "weight_type": "Hard Bounces",
+                "weight_value": 0.25,
+              },
+              Object {
+                "weight": -0.5,
+                "weight_type": "Complaints",
+                "weight_value": 0.25,
+              },
+            ]
+          }
+          negativeFill="#DB2F2D"
+          onClick={[Function]}
+          positiveFill="#8CBE3C"
+          selected="Hard Bounces"
+          tooltipContent={[Function]}
+          width="99%"
+          xDomain={
+            Array [
+              "dataMin",
+              "dataMax",
+            ]
+          }
+          xKey="weight"
+          yKey="weight_type"
+          yLabel={[Function]}
+        />
+        <HealthScoreActions
+          weights={
+            Array [
+              Object {
+                "weight": 0.8,
+                "weight_type": "List Quality",
+                "weight_value": 0.25,
+              },
+              Object {
+                "weight": -0.8,
+                "weight_type": "Other bounces",
+                "weight_value": 0.25,
+              },
+            ]
+          }
+        />
+      </div>
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
@@ -411,7 +415,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "bottom": 5,
               "left": 18,
               "right": 0,
-              "top": 5,
+              "top": 12,
             }
           }
           onClick={[Function]}
@@ -460,7 +464,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "bottom": 5,
               "left": 18,
               "right": 0,
-              "top": 5,
+              "top": 12,
             }
           }
           onClick={[Function]}
@@ -501,19 +505,23 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <ChartHeader
-        hideLine={true}
-        padding="1rem 0 1rem"
-        title="Health Score Components"
-        tooltipContent="
+      <div
+        className="OffsetCol"
+      >
+        <ChartHeader
+          hideLine={true}
+          padding="1rem 0 1rem"
+          title="Health Score Components"
+          tooltipContent="
   Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
   engagement, and others.
 "
-      />
-      <Callout>
-        Insufficient data to populate this chart
-      </Callout>
-      <HealthScoreActions />
+        />
+        <Callout>
+          Insufficient data to populate this chart
+        </Callout>
+        <HealthScoreActions />
+      </div>
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
@@ -579,15 +587,19 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <ChartHeader
-        hideLine={true}
-        padding="1rem 0 1rem"
-        title="Health Score Components"
-        tooltipContent="
+      <div
+        className="OffsetCol"
+      >
+        <ChartHeader
+          hideLine={true}
+          padding="1rem 0 1rem"
+          title="Health Score Components"
+          tooltipContent="
   Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
   engagement, and others.
 "
-      />
+        />
+      </div>
     </Grid.Column>
   </Grid>
   <OtherChartsHeader

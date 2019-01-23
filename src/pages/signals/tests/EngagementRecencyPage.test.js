@@ -59,7 +59,6 @@ describe('Signals Engagement Recency Page', () => {
     });
 
     it('gets y axis props', () => {
-      wrapper.setState({ calculation: 'relative' });
       const axisProps = wrapper.find('BarChart').prop('yAxisProps');
       expect(axisProps.tickFormatter(0.2468)).toEqual('25%');
     });

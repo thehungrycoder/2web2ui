@@ -21,7 +21,7 @@ const HorizontalBar = ({ color, value, height, width, xKey, onClick, xRange, too
         barSize={height}
         data={[value]}
         layout='vertical'
-        margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+        margin={{ top: 0, left: 18, bottom: 0, right: 18 }}
       >
         <YAxis hide type='category' />
         <XAxis hide dataKey={xKey} type='number' domain={xRange} />

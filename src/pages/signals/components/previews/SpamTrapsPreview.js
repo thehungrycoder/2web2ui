@@ -7,9 +7,9 @@ import withSpamTrapDetails from '../../containers/SpamTrapDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { formatNumber } from 'src/helpers/units';
 
 export class SpamTrapsPreview extends Component {
-
   renderContent = () => {
     const { data, gap, empty, error } = this.props;
 
@@ -25,12 +25,16 @@ export class SpamTrapsPreview extends Component {
       <BarChart
         height={170}
         disableHover
-        margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+        margin={{ top: 12, left: 12, right: 0, bottom: 12 }}
         gap={gap}
         timeSeries={data}
         yKey='trap_hits'
-        yAxisProps={{ hide: true }}
+        yAxisProps={{
+          tickFormatter: (tick) => formatNumber(tick),
+          domain: ['auto', 'auto']
+        }}
         xAxisProps={{ hide: true }}
+
       />
     );
   }

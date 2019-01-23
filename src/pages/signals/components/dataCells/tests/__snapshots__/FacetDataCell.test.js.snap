@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FacetDataCell adds a class to truncate its contents 1`] = `
+<div
+  className="PaddedCell OverflowCell"
+>
+  <PageLink
+    to={
+      Object {
+        "pathname": "/signals/example/domain/example.com",
+        "search": undefined,
+      }
+    }
+  >
+    example.com
+  </PageLink>
+</div>
+`;
+
 exports[`FacetDataCell renders label for all accounts 1`] = `
 <div
   className="PaddedCell"

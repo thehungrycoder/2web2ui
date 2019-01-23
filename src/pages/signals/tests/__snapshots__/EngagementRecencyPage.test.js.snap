@@ -64,134 +64,131 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       md={7}
       sm={12}
     >
-      <Panel>
-        <Panel.Section>
-          <ChartHeader
-            hideLine={true}
-            title="Engagement Recency"
-            tooltipContent="
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          title="Engagement Recency"
+          tooltipContent="
   The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
+        />
+        <div
+          className="LiftTooltip"
+        >
+          <BarChart
+            fill="#B157CE"
+            gap={0.25}
+            height={250}
+            margin={
+              Object {
+                "bottom": 5,
+                "left": 18,
+                "right": 0,
+                "top": 12,
+              }
+            }
+            timeSeries={
+              Array [
+                Object {
+                  "c_total": 10,
+                },
+              ]
+            }
+            tooltipContent={[Function]}
+            width="99%"
+            xAxisProps={
+              Object {
+                "tickFormatter": [Function],
+                "ticks": Array [
+                  1,
+                  2,
+                ],
+              }
+            }
+            xKey="date"
+            yAxisProps={
+              Object {
+                "domain": Array [
+                  0,
+                  1,
+                ],
+                "tickFormatter": [Function],
+                "ticks": Array [
+                  0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1,
+                ],
+              }
+            }
+            yKey="value"
+            yKeys={
+              Array [
+                Object {
+                  "fill": "#3F8B93",
+                  "key": "c_new",
+                  "label": "New",
+                },
+                Object {
+                  "fill": "#44A8AD",
+                  "key": "c_14d",
+                  "label": "Recently Engaged",
+                },
+                Object {
+                  "fill": "#9AD8E3",
+                  "key": "c_90d",
+                  "label": "Semi Recently Engaged",
+                },
+                Object {
+                  "fill": "#B9E2E9",
+                  "key": "c_365d",
+                  "label": "Not Recently Engaged",
+                },
+                Object {
+                  "fill": "#E4EEF0",
+                  "key": "c_uneng",
+                  "label": "Never Engaged",
+                },
+              ]
+            }
+            yRange={
+              Array [
+                "auto",
+                "auto",
+              ]
+            }
           />
-        </Panel.Section>
-        <Panel.Section>
-          <div
-            className="LiftTooltip"
-          >
-            <BarChart
-              fill="#B157CE"
-              gap={0.25}
-              height={250}
-              margin={
+          <Legend
+            items={
+              Array [
                 Object {
-                  "bottom": 5,
-                  "left": 18,
-                  "right": 0,
-                  "top": 5,
-                }
-              }
-              timeSeries={
-                Array [
-                  Object {
-                    "c_total": 10,
-                  },
-                ]
-              }
-              tooltipContent={[Function]}
-              width="99%"
-              xAxisProps={
+                  "fill": "#E4EEF0",
+                  "label": "Never Engaged",
+                },
                 Object {
-                  "tickFormatter": [Function],
-                  "ticks": Array [
-                    1,
-                    2,
-                  ],
-                }
-              }
-              xKey="date"
-              yAxisProps={
+                  "fill": "#B9E2E9",
+                  "label": "Not Recently Engaged",
+                },
                 Object {
-                  "domain": Array [
-                    0,
-                    1,
-                  ],
-                  "tickFormatter": [Function],
-                  "ticks": Array [
-                    0,
-                    0.25,
-                    0.5,
-                    0.75,
-                    1,
-                  ],
-                }
-              }
-              yKey="value"
-              yKeys={
-                Array [
-                  Object {
-                    "fill": "#3F8B93",
-                    "key": "c_new",
-                    "label": "New",
-                  },
-                  Object {
-                    "fill": "#44A8AD",
-                    "key": "c_14d",
-                    "label": "Recently Engaged",
-                  },
-                  Object {
-                    "fill": "#9AD8E3",
-                    "key": "c_90d",
-                    "label": "Semi Recently Engaged",
-                  },
-                  Object {
-                    "fill": "#B9E2E9",
-                    "key": "c_365d",
-                    "label": "Not Recently Engaged",
-                  },
-                  Object {
-                    "fill": "#E4EEF0",
-                    "key": "c_uneng",
-                    "label": "Never Engaged",
-                  },
-                ]
-              }
-              yRange={
-                Array [
-                  "auto",
-                  "auto",
-                ]
-              }
-            />
-            <Legend
-              items={
-                Array [
-                  Object {
-                    "fill": "#E4EEF0",
-                    "label": "Never Engaged",
-                  },
-                  Object {
-                    "fill": "#B9E2E9",
-                    "label": "Not Recently Engaged",
-                  },
-                  Object {
-                    "fill": "#9AD8E3",
-                    "label": "Semi Recently Engaged",
-                  },
-                  Object {
-                    "fill": "#44A8AD",
-                    "label": "Recently Engaged",
-                  },
-                  Object {
-                    "fill": "#3F8B93",
-                    "label": "New",
-                  },
-                ]
-              }
-              tooltipContent={[Function]}
-            />
-          </div>
-        </Panel.Section>
+                  "fill": "#9AD8E3",
+                  "label": "Semi Recently Engaged",
+                },
+                Object {
+                  "fill": "#44A8AD",
+                  "label": "Recently Engaged",
+                },
+                Object {
+                  "fill": "#3F8B93",
+                  "label": "New",
+                },
+              ]
+            }
+            tooltipContent={[Function]}
+          />
+        </div>
       </Panel>
     </Grid.Column>
     <Grid.Column
@@ -199,13 +196,17 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <EngagementRecencyActions
-        cohorts={
-          Object {
-            "c_total": 10,
+      <div
+        className="OffsetCol"
+      >
+        <EngagementRecencyActions
+          cohorts={
+            Object {
+              "c_total": 10,
+            }
           }
-        }
-      />
+        />
+      </div>
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
@@ -230,24 +231,21 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
 `;
 
 exports[`Signals Engagement Recency Page renders empty correctly 1`] = `
-<Panel>
-  <Panel.Section>
-    <ChartHeader
-      hideLine={true}
-      title="Engagement Recency"
-      tooltipContent="
+<Panel
+  sectioned={true}
+>
+  <ChartHeader
+    title="Engagement Recency"
+    tooltipContent="
   The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Callout
-      title="No Data Available"
-    >
-      Insufficient data to populate this chart
-    </Callout>
-  </Panel.Section>
+  />
+  <Callout
+    title="No Data Available"
+  >
+    Insufficient data to populate this chart
+  </Callout>
 </Panel>
 `;
 
@@ -270,31 +268,32 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       md={7}
       sm={12}
     >
-      <Panel>
-        <Panel.Section>
-          <ChartHeader
-            hideLine={true}
-            title="Engagement Recency"
-            tooltipContent="
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          title="Engagement Recency"
+          tooltipContent="
   The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
-          />
-        </Panel.Section>
-        <Panel.Section>
-          <Callout
-            title="Unable to Load Data"
-          >
-            error message
-          </Callout>
-        </Panel.Section>
+        />
+        <Callout
+          title="Unable to Load Data"
+        >
+          error message
+        </Callout>
       </Panel>
     </Grid.Column>
     <Grid.Column
       md={5}
       mdOffset={0}
       sm={12}
-    />
+    >
+      <div
+        className="OffsetCol"
+      />
+    </Grid.Column>
   </Grid>
   <OtherChartsHeader
     facet="sending-domain"
@@ -318,28 +317,25 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
 `;
 
 exports[`Signals Engagement Recency Page renders loading correctly 1`] = `
-<Panel>
-  <Panel.Section>
-    <ChartHeader
-      hideLine={true}
-      title="Engagement Recency"
-      tooltipContent="
+<Panel
+  sectioned={true}
+>
+  <ChartHeader
+    title="Engagement Recency"
+    tooltipContent="
   The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <div
-      style={
-        Object {
-          "height": "220px",
-          "position": "relative",
-        }
+  />
+  <div
+    style={
+      Object {
+        "height": "220px",
+        "position": "relative",
       }
-    >
-      <Loading />
-    </div>
-  </Panel.Section>
+    }
+  >
+    <Loading />
+  </div>
 </Panel>
 `;

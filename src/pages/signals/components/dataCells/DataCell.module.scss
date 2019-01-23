@@ -10,3 +10,11 @@
 .PaddedCell {
   padding: spacing(small) spacing();
 }
+
+.OverflowCell {
+  width: 260px; // Overflow only works with pixel values
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: color(gray, 4);
+}

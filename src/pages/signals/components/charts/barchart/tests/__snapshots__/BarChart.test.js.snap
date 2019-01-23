@@ -24,7 +24,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
         "bottom": 5,
         "left": 18,
         "right": 0,
-        "top": 5,
+        "top": 12,
       }
     }
     reverseStackOrder={false}

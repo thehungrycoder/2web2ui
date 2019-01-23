@@ -24,10 +24,10 @@ exports[`Signals HealthScorePreview Component renders correctly 1`] = `
         height={170}
         margin={
           Object {
-            "bottom": 0,
-            "left": 0,
+            "bottom": 12,
+            "left": 12,
             "right": 0,
-            "top": 0,
+            "top": 12,
           }
         }
         timeSeries={
@@ -46,7 +46,7 @@ exports[`Signals HealthScorePreview Component renders correctly 1`] = `
         xKey="date"
         yAxisProps={
           Object {
-            "hide": true,
+            "tickFormatter": [Function],
           }
         }
         yKey="health_score"

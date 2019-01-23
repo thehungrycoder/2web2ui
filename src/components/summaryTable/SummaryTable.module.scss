@@ -48,10 +48,8 @@
   display: flex;
   align-items: baseline;
   background: #FAFAFA;
-  border: 1px solid color(gray, 7);
   border-top: none;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-radius: 0  0 border-radius(large) border-radius(large);
 }
 
 .Pagination {
@@ -61,17 +59,11 @@
   // Previous button
   & > button:first-child {
     border-left: none;
-    border-bottom-left-radius: 2px !important;
   }
 }
 
 .PerPageGroup {
   @include buttonOverrides;
-
-  // Last button
-  button:last-child {
-    border-bottom-right-radius: 2px !important;
-  }
 }
 
 .PerPageLabel {

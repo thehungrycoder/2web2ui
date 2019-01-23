@@ -37,4 +37,8 @@ describe('FacetDataCell', () => {
 
     expect(subject(props)).toMatchSnapshot();
   });
+
+  it('adds a class to truncate its contents', () => {
+    expect(subject({ truncate: true })).toMatchSnapshot();
+  });
 });

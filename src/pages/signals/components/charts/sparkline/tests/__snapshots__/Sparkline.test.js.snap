@@ -29,10 +29,10 @@ exports[`Sparkline Component renders correctly 1`] = `
       layout="horizontal"
       margin={
         Object {
-          "bottom": 5,
-          "left": 5,
-          "right": 5,
-          "top": 5,
+          "bottom": 2,
+          "left": 18,
+          "right": 18,
+          "top": 2,
         }
       }
       onClick={[MockFunction]}

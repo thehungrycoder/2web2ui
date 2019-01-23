@@ -68,7 +68,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "bottom": 5,
               "left": 18,
               "right": 0,
-              "top": 5,
+              "top": 12,
             }
           }
           timeSeries={
@@ -111,9 +111,13 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <SpamTrapActions
-        percent={0.1}
-      />
+      <div
+        className="OffsetCol"
+      >
+        <SpamTrapActions
+          percent={0.1}
+        />
+      </div>
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
@@ -208,7 +212,11 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
       md={5}
       mdOffset={0}
       sm={12}
-    />
+    >
+      <div
+        className="OffsetCol"
+      />
+    </Grid.Column>
   </Grid>
   <OtherChartsHeader
     facet="sending-domain"

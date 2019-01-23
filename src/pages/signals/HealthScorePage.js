@@ -20,6 +20,7 @@ import _ from 'lodash';
 
 import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
+import styles from './DetailsPages.module.scss';
 
 export class HealthScorePage extends Component {
   state = {
@@ -160,27 +161,29 @@ export class HealthScorePage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <ChartHeader
-            title='Health Score Components'
-            hideLine
-            padding='1rem 0 1rem'
-            tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
-          />
-          {(!loading && selectedWeightsAreEmpty) && (
-            <Callout>Insufficient data to populate this chart</Callout>
-          )}
-          {(!panelContent && !selectedWeightsAreEmpty) && (
-            <DivergingBar
-              data={selectedWeights}
-              xKey='weight'
-              yKey='weight_type'
-              yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
-              tooltipContent={({ payload = {}}) => _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')}
-              onClick={this.handleComponentSelect}
-              selected={selectedComponent}
+          <div className={styles.OffsetCol}>
+            <ChartHeader
+              title='Health Score Components'
+              hideLine
+              padding='1rem 0 1rem'
+              tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
             />
-          )}
-          {!panelContent && <HealthScoreActions weights={currentWeights} />}
+            {(!loading && selectedWeightsAreEmpty) && (
+              <Callout>Insufficient data to populate this chart</Callout>
+            )}
+            {(!panelContent && !selectedWeightsAreEmpty) && (
+              <DivergingBar
+                data={selectedWeights}
+                xKey='weight'
+                yKey='weight_type'
+                yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
+                tooltipContent={({ payload = {}}) => _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')}
+                onClick={this.handleComponentSelect}
+                selected={selectedComponent}
+              />
+            )}
+            {!panelContent && <HealthScoreActions weights={currentWeights} />}
+          </div>
         </Grid.Column>
       </Grid>
     );

@@ -123,7 +123,7 @@ BarChart.defaultProps = {
   gap: 1,
   height: 250,
   width: '99%',
-  margin: { top: 5, left: 18, right: 0, bottom: 5 },
+  margin: { top: 12, left: 18, right: 0, bottom: 5 },
   xKey: 'date',
   yKey: 'value',
   yRange: ['auto', 'auto']

@@ -150,6 +150,7 @@ class EngagementRecencyOverview extends React.Component {
                   id={id}
                   name={_.get(_.find(subaccounts, { id }), 'name')}
                   subaccountId={_.get(signalOptions, 'subaccount.id')}
+                  truncate
                 />
               );
             }}

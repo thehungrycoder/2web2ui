@@ -37,4 +37,9 @@ describe('Signals HealthScorePreview Component', () => {
     wrapper.setProps({ error: { message: 'error message' }});
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders y ticks', () => {
+    const axisProps = wrapper.find('BarChart').prop('yAxisProps');
+    expect(axisProps.tickFormatter(0.2468)).toEqual('24.68%');
+  });
 });
