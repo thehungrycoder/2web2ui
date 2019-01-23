@@ -33,8 +33,14 @@ describe('Signals health score actions', () => {
     'should render other bounces action': {
       weights: [{ weight_type: 'Other bounces', weight: -0.1 }]
     },
+    'should render unengaged action': {
+      weights: [{ weight_type: 'eng cohorts: unengaged', weight: -0.1 }]
+    },
+    'should render engaged action': {
+      weights: [{ weight_type: 'eng cohorts: new, 14-day', weight: -0.1 }]
+    },
     'ignores unsupported components': {
-      weights: [{ weight_type: 'eng cohort: new', weight: -0.1 }]
+      weights: [{ weight_type: 'a new comp', weight: -0.1 }]
     },
     'sorts by weight and only displays first 2': {
       weights: [
