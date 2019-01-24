@@ -2,6 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Typeahead } from '../Typeahead';
 
+jest.mock('lodash/debounce', () => jest.fn((fn) => {
+  fn.cancel = jest.fn();
+  return fn;
+}));
+
 describe('Component: Typeahead', () => {
   let props;
   let wrapper;
@@ -46,7 +51,6 @@ describe('Component: Typeahead', () => {
 
   it('should trigger on field change', () => {
     wrapper.instance().handleFieldChange({ target: { value: 'cros' }});
-    wrapper.instance().updateLookAheadDebounced.flush(); // forces debounced calls to execute
     expect(props.refreshTypeaheadCache).toHaveBeenCalledTimes(1);
   });
 
@@ -100,5 +104,11 @@ describe('Component: Typeahead', () => {
   it('should not call onSelect on clear', () => {
     wrapper.instance().handleDownshiftChange(null);
     expect(props.onSelect).not.toHaveBeenCalled();
+  });
+
+  it('should cancel any debounced lookahead updates', () => {
+    const cancel = jest.spyOn(wrapper.instance().updateLookAhead, 'cancel');
+    wrapper.unmount();
+    expect(cancel).toHaveBeenCalled();
   });
 });

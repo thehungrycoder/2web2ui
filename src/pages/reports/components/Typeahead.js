@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Downshift from 'downshift';
 import classnames from 'classnames';
-import _ from 'lodash';
+import debounce from 'lodash/debounce';
 import { METRICS_API_LIMIT, TYPEAHEAD_LIMIT } from '../../../constants';
 import { refreshTypeaheadCache } from 'src/actions/reportOptions';
 import sortMatch from 'src/helpers/sortMatch';
@@ -27,6 +27,10 @@ export class Typeahead extends Component {
     pattern: null
   };
 
+  componentWillUnmount() {
+    this.updateLookAhead.cancel();
+  }
+
   /**
    * Returns all matches of the given types that match a pattern.
    */
@@ -47,7 +51,7 @@ export class Typeahead extends Component {
    * appending the results to the existing matches.
    *
    */
-  updateLookAhead = (pattern) => {
+  updateLookAhead = debounce((pattern) => {
     if (!pattern || pattern.length < 2) {
       this.setState({ matches: [], calculatingMatches: false, pattern: null });
       return Promise.resolve();
@@ -67,12 +71,10 @@ export class Typeahead extends Component {
         this.setState({ calculatingMatches: false, matches: allMatches });
       }
     });
-  };
-
-  updateLookAheadDebounced = _.debounce(this.updateLookAhead, 250);
+  }, 300);
 
   handleFieldChange = (e) => {
-    this.updateLookAheadDebounced(e.target.value);
+    this.updateLookAhead(e.target.value);
   };
 
   // Pass only item selection events to mask the
