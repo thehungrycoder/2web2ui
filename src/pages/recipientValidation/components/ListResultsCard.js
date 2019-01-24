@@ -35,7 +35,7 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl, status }
   if (failed) {
     Icon = ErrorOutline;
     iconClass = styles.Failed;
-    statusText = 'Failed';
+    statusText = 'Failed. Please try again.';
   }
 
   if (ready) {

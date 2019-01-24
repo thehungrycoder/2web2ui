@@ -42,7 +42,7 @@ export class ListResults extends Component {
         stopPolling(id);
         showAlert({
           type: 'error',
-          message: 'Recipient Validation Failed',
+          message: 'Recipient Validation Failed. Please Try Again.',
           dedupeId: id
         });
       }

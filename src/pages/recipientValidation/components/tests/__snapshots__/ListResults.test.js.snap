@@ -29,7 +29,7 @@ Array [
   Array [
     Object {
       "dedupeId": "123",
-      "message": "Recipient Validation Failed",
+      "message": "Recipient Validation Failed. Please Try Again.",
       "type": "error",
     },
   ],

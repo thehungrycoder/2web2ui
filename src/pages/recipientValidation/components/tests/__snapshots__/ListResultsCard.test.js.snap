@@ -32,7 +32,7 @@ exports[`ListResultsCard renders correctly when batch job fails 1`] = `
     <h6
       className="RightAlign"
     >
-      Failed
+      Failed. Please try again.
     </h6>
   </LabelledValue>
 </Panel>
