@@ -38,6 +38,23 @@ Array [
 ]
 `;
 
+exports[`Signals health score actions render cases should render engaged action 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      <strong>
+        Not enough of your recipients have recently engaged with your email.
+      </strong>
+      <br />
+      Engagement is a key factor in your reputation, and low engagement may hurt your email deliverability. Be sure you are sending relevant and desired messages.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/engagement/",
+    "type": "bad",
+    "weight": -0.1,
+  },
+]
+`;
+
 exports[`Signals health score actions render cases should render hard bounce action 1`] = `
 Array [
   Object {
@@ -100,6 +117,23 @@ Array [
       These delays in email delivery have varied causes, but may be a sign of low reputation at mailbox providers since senders with good reputations may have their messages accepted before others. This can be an early warning sign of other issues to come such as spam foldering or block bouncing.
     </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/reputation-improvement/",
+    "type": "bad",
+    "weight": -0.1,
+  },
+]
+`;
+
+exports[`Signals health score actions render cases should render unengaged action 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      <strong>
+        Too many of your recipients have been inactive for 365 days.
+      </strong>
+      <br />
+      This low engagement may be hurting your email deliverability. You should remove subscribers that have not engaged in the past year and consider segmenting your list to better target interest groups and your most engaged recipients.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/segmentation/",
     "type": "bad",
     "weight": -0.1,
   },

@@ -54,6 +54,26 @@ const content = {
       </Fragment>
     ),
     link: 'https://www.sparkpost.com/docs/signals/list-quality/'
+  },
+  'eng cohorts: new, 14-day': {
+    content: (
+      <Fragment>
+        <strong>Not enough of your recipients have recently engaged with your email.</strong><br/>
+        Engagement is a key factor in your reputation, and low engagement may hurt your email deliverability. Be sure you are sending relevant and desired messages.
+      </Fragment>
+
+    ),
+    link: 'https://www.sparkpost.com/docs/signals/engagement/'
+  },
+  'eng cohorts: unengaged': {
+    content: (
+      <Fragment>
+        <strong>Too many of your recipients have been inactive for 365 days.</strong><br/>
+        This low engagement may be hurting your email deliverability. You should remove subscribers that have not engaged in the past year and consider segmenting your list to better target interest groups and your most engaged recipients.
+      </Fragment>
+
+    ),
+    link: 'https://www.sparkpost.com/docs/signals/segmentation/'
   }
 };
 
