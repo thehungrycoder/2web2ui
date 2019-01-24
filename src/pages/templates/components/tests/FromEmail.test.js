@@ -1,101 +1,83 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { shallow } from 'enzyme';
+import FromEmail from '../FromEmail';
 
-import FromEmailWrapper, { FromEmail } from '../FromEmail';
+jest.mock('lodash/debounce', () => jest.fn((fn) => fn));
 
-describe('From Email Typeahead Wrapper', () => {
-  let wrapper;
+describe('FromEmail', () => {
+  const subject = (props = {}) => shallow(
+    <FromEmail
+      domains={[
+        { domain: 'apples.com' },
+        { domain: 'apricot.com' },
+        { domain: 'aubergine.com' },
+        { domain: 'bananas.com' }
+      ]}
+      onChange={jest.fn()}
+      value="test@a"
+      {...props}
+    />
+  );
 
-  beforeEach(() => {
-    const props = {
-      input: {
-        onChange: jest.fn()
-      },
-      meta: {},
-      label: 'label'
-    };
-
-    wrapper = shallow(<FromEmailWrapper {...props} />);
+  it('derives selected item', () => {
+    expect(subject()).toHaveProp('selectedItem', 'test@a');
   });
 
-  afterEach(() => {
-    wrapper.unmount();
+  it('renders input with value and menu with matches', () => {
+    const wrapper = subject();
+    wrapper.simulate('inputValueChange', 'brian@bananas'); // to populate matches
+    expect(wrapper.shallow()).toMatchSnapshot();
   });
 
-  it('should render', () => {
-    expect(wrapper).toMatchSnapshot();
+  it('calls onChange when state changes', () => {
+    const onChange = jest.fn();
+    const wrapper = subject({ onChange });
+    const changes = { selectedItem: 'test@b' };
+    const downshift = { highlightedIndex: 1 };
+
+    wrapper.simulate('stateChange', changes, downshift);
+
+    expect(onChange).toHaveBeenCalledWith('test@b');
   });
 
-  it('should render error', () => {
-    wrapper.setProps({ meta: {
-      active: false,
-      touched: true,
-      error: 'error message'
-    }});
-    expect(wrapper).toMatchSnapshot();
-  });
-});
+  it('highlights first item when no other item is highlighted', () => {
+    const setHighlightedIndex = jest.fn();
+    const wrapper = subject();
+    const changes = {};
+    const downshift = { setHighlightedIndex };
 
-describe('From Email Typeahead', () => {
-  let wrapper;
+    wrapper.simulate('stateChange', changes, downshift);
 
-  beforeEach(() => {
-    const props = {
-      domains: [
-        { domain: 'test.com' },
-        { domain: 'another.com' }
-      ],
-      onChange: jest.fn(),
-      value: 'test@t'
-    };
-
-    wrapper = shallow(<FromEmail {...props} />);
+    expect(setHighlightedIndex).toHaveBeenCalledWith(0);
   });
 
-  afterEach(() => {
-    wrapper.unmount();
+  it('reset matches when value is missing an ampersand', () => {
+    const wrapper = subject();
+
+    wrapper.setState({ matches: ['bananas.com']}); // hydrate state
+    wrapper.simulate('inputValueChange', 'brian');
+
+    expect(wrapper).toHaveState('matches', []);
   });
 
-  it('should render list', () => {
-    const args = {
-      inputValue: 'test@t',
-      isOpen: true,
-      highlightedIndex: 0,
-      getInputProps: jest.fn(),
-      getItemProps: jest.fn((a) => a)
-    };
-
-    expect(wrapper).toHaveState('value', 'test@t');
-    const result = wrapper.instance().typeaheadFn(args);
-    expect(result).toMatchSnapshot();
+  it('matches on value change', () => {
+    const wrapper = subject();
+    wrapper.simulate('inputValueChange', 'brian@a');
+    expect(wrapper)
+      .toHaveState('matches', ['brian@apples.com', 'brian@apricot.com', 'brian@aubergine.com']);
   });
 
-  it('should update value if given a new prop value', () => {
-    wrapper.setProps({ value: 'new value through prop' });
-    expect(wrapper).toHaveState('value', 'new value through prop');
+  it('excludes an exact match', () => {
+    const wrapper = subject();
+    wrapper.simulate('inputValueChange', 'brian@bananas.com');
+    expect(wrapper).toHaveState('matches', []);
   });
 
-  it('should not call set state if a prop other than value is updated', () => {
-    const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
-    wrapper.setProps({ some: 'prop' });
-    expect(stateSpy).not.toHaveBeenCalled();
-  });
+  it('truncates matches to top 100', () => {
+    const domains = Array.from(Array(110)).map((_, index) => ({ domain: `example${index}.com` }));
+    const wrapper = subject({ domains });
+    wrapper.simulate('inputValueChange', 'brian@example');
 
-  it('should handle input value', () => {
-    wrapper.instance().handleInputValueChange('new value');
-    expect(wrapper).toHaveState('value', 'new value');
-  });
-
-  it('should handle state change', () => {
-    const changes = {
-      selectedItem: 'new value'
-    };
-    const downshift = {
-      highlightedIndex: null,
-      setHighlightedIndex: jest.fn()
-    };
-    wrapper.instance().handleStateChange(changes, downshift);
-    expect(wrapper.instance().props.onChange).toHaveBeenCalledWith('new value');
-    expect(downshift.setHighlightedIndex).toHaveBeenCalledWith(0);
+    expect(wrapper.state('matches')).toHaveLength(100);
   });
 });

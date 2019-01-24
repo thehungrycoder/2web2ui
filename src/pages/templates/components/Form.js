@@ -8,7 +8,7 @@ import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper, PanelLoading } from 'src/components';
-import FromEmailWrapper from './FromEmail';
+import FromEmailWrapper from './FromEmailWrapper';
 
 // Helpers & Validation
 import { required, slug } from 'src/helpers/validation';
