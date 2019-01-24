@@ -16,6 +16,15 @@
   text-align: right;
 }
 
+.TopDomainsCheckbox {
+  display: inline-block;
+  margin-top: spacing(larger);
+
+  @media screen and (min-width: breakpoint(small)) {
+    float: right;
+  }
+}
+
 .HeaderCell {
   font-size: rem(13);
   line-height: rem(18);
