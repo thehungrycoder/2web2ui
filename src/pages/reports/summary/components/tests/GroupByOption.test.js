@@ -19,7 +19,13 @@ describe('Group By Option', () => {
     wrapper.setState({ topDomainsOnly: true });
   });
 
-  it('should render correctly', () => {
+  it('should render correctly with both selector and checkbox', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with selector only and not the checkbox', () => {
+    wrapper.setProps({ groupBy: 'campaign' });
+    expect(wrapper.find('Checkbox')).toHaveLength(0);
     expect(wrapper).toMatchSnapshot();
   });
 

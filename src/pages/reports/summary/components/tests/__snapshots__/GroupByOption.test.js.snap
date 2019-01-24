@@ -66,7 +66,7 @@ Array [
 ]
 `;
 
-exports[`Group By Option should render correctly 1`] = `
+exports[`Group By Option should render correctly with both selector and checkbox 1`] = `
 <Grid>
   <Grid.Column
     lg={4}
@@ -131,6 +131,62 @@ exports[`Group By Option should render correctly 1`] = `
       />
     </div>
   </Grid.Column>
+</Grid>
+`;
+
+exports[`Group By Option should render correctly with selector only and not the checkbox 1`] = `
+<Grid>
+  <Grid.Column
+    lg={4}
+    md={5}
+    xs={12}
+  >
+    <Select
+      disabled={false}
+      label="Group By"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "Aggregate Total",
+            "value": "aggregate",
+          },
+          Object {
+            "label": "Recipient Domain",
+            "value": "watched-domain",
+          },
+          Object {
+            "label": "Sending Domain",
+            "value": "sending-domain",
+          },
+          Object {
+            "label": "Campaign",
+            "value": "campaign",
+          },
+          Object {
+            "label": "Template",
+            "value": "template",
+          },
+          Object {
+            "label": "Sending IP",
+            "value": "sending-ip",
+          },
+          Object {
+            "label": "IP Pool",
+            "value": "ip-pool",
+          },
+        ]
+      }
+      value="campaign"
+    />
+  </Grid.Column>
+  <Grid.Column
+    lg={3}
+    lgOffset={5}
+    md={4}
+    mdOffset={3}
+    xs={12}
+  />
 </Grid>
 `;
 
