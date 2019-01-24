@@ -112,7 +112,7 @@ export class Typeahead extends Component {
     const listClasses = classnames(styles.List, isOpen && mappedMatches.length && styles.open);
     return (
       <div className={styles.Typeahead}>
-        <div className={listClasses}><ActionList actions={mappedMatches} /></div>
+        <div className={listClasses}><ActionList actions={mappedMatches} maxHeight={300} /></div>
         <TextField {...getInputProps({
           placeholder,
           onFocus: clearSelection,
