@@ -49,7 +49,7 @@ const content = {
   'Other bounces': {
     content: (
       <Fragment>
-        <strong>Your emails are being blocked without a clear reason.</strong><br/>
+        <strong>Your emails are being bounced without a clear reason.</strong><br/>
         These bounces have varied causes, but improving your list quality can help resolve many bounce types.
       </Fragment>
     ),
