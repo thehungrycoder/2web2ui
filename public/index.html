@@ -57,6 +57,16 @@
     </script>
 
     <script type="text/javascript" src="%PUBLIC_URL%/static/tenant-config/%CONFIG_CACHE_ID%/production.js"></script>
+
+    <script>
+      (function(apiKey){
+          (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=[];
+          v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++w)(function(m){
+              o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+              y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
+              z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+      })('be87f509-b8ce-45f4-4c3e-197dcde7ec5a');
+      </script>
   </head>
   <body>
     <noscript>
