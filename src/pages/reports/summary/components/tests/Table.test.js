@@ -20,8 +20,7 @@ describe('Summary Table ', () => {
       { type: 'Subaccount', id: 555, value: 'sub 1 name' }
     ],
     tableData: [],
-    tableLoading: false,
-    hasSubaccounts: false
+    tableLoading: false
   };
 
   const data = [
@@ -48,14 +47,9 @@ describe('Summary Table ', () => {
     expect(wrapper.find('Loading')).toHaveLength(1);
   });
 
-  it('should render subaccount option', () => {
-    wrapper.setProps({ hasSubaccounts: true });
-    expect(wrapper.find('Select')).toMatchSnapshot();
-  });
-
   it('should render row data & handle click', () => {
     const snaps = [];
-    wrapper.setProps({ hasSubaccounts: true, groupBy: 'subaccount' });
+    wrapper.setProps({ groupBy: 'subaccount' });
     const func = wrapper.instance().getRowData();
     const results = _.flatten(data.map(func));
 
@@ -67,11 +61,6 @@ describe('Summary Table ', () => {
 
     snaps[0].find('UnstyledLink').simulate('click');
     expect(props.addFilters).toHaveBeenCalledWith([{ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' }]);
-  });
-
-  it('should handle select change', () => {
-    wrapper.find('Select').simulate('change', { target: { value: 'campaign' }});
-    expect(props._getTableData).toHaveBeenCalledWith({ groupBy: 'campaign' });
   });
 
   it('should render with aggregate data', () => {

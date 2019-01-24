@@ -89,51 +89,6 @@ Array [
 ]
 `;
 
-exports[`Summary Table  should render subaccount option 1`] = `
-<Select
-  disabled={false}
-  label="Group By"
-  onChange={[Function]}
-  options={
-    Array [
-      Object {
-        "label": "Aggregate Total",
-        "value": "aggregate",
-      },
-      Object {
-        "label": "Recipient Domain",
-        "value": "domain",
-      },
-      Object {
-        "label": "Sending Domain",
-        "value": "sending-domain",
-      },
-      Object {
-        "label": "Campaign",
-        "value": "campaign",
-      },
-      Object {
-        "label": "Template",
-        "value": "template",
-      },
-      Object {
-        "label": "Subaccount",
-        "value": "subaccount",
-      },
-      Object {
-        "label": "Sending IP",
-        "value": "sending-ip",
-      },
-      Object {
-        "label": "IP Pool",
-        "value": "ip-pool",
-      },
-    ]
-  }
-  value="domain"
-/>
-`;
-
 exports[`Summary Table  should render with aggregate data 1`] = `
 <TableCollection
   defaultSortColumn={null}
@@ -210,53 +165,7 @@ exports[`Summary Table  should render with data 1`] = `
 exports[`Summary Table  should render with no data 1`] = `
 <Panel>
   <Panel.Section>
-    <Grid>
-      <Grid.Column
-        lg={4}
-        md={5}
-        xs={12}
-      >
-        <Select
-          disabled={false}
-          label="Group By"
-          onChange={[Function]}
-          options={
-            Array [
-              Object {
-                "label": "Aggregate Total",
-                "value": "aggregate",
-              },
-              Object {
-                "label": "Recipient Domain",
-                "value": "domain",
-              },
-              Object {
-                "label": "Sending Domain",
-                "value": "sending-domain",
-              },
-              Object {
-                "label": "Campaign",
-                "value": "campaign",
-              },
-              Object {
-                "label": "Template",
-                "value": "template",
-              },
-              Object {
-                "label": "Sending IP",
-                "value": "sending-ip",
-              },
-              Object {
-                "label": "IP Pool",
-                "value": "ip-pool",
-              },
-            ]
-          }
-          value="domain"
-        />
-      </Grid.Column>
-      <Grid.Column />
-    </Grid>
+    <Connect(GroupByOption) />
   </Panel.Section>
   <Empty
     message="There is no data to display"
