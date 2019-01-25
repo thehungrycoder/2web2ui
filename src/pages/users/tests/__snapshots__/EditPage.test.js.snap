@@ -15,7 +15,7 @@ exports[`Page: Users Edit should not allow current user to delete 1`] = `
   secondaryActions={Array []}
   title="test-user@test.com"
 >
-  <Component
+  <EditForm
     currentUser={
       Object {
         "name": "current-user",
@@ -79,7 +79,7 @@ exports[`Page: Users Edit should not render TFA disable button if tfa enabled bu
   secondaryActions={Array []}
   title="test-user@test.com"
 >
-  <Component
+  <EditForm
     currentUser={
       Object {
         "name": "current-user",
@@ -169,7 +169,7 @@ exports[`Page: Users Edit should render TFA disable button if tfa enabled and no
   }
   title="test-user@test.com"
 >
-  <Component
+  <EditForm
     currentUser={
       Object {
         "name": "current-user",
@@ -240,7 +240,7 @@ exports[`Page: Users Edit should render correctly by default 1`] = `
   }
   title="test-user@test.com"
 >
-  <Component
+  <EditForm
     currentUser={
       Object {
         "name": "current-user",
@@ -310,7 +310,7 @@ exports[`Page: Users Edit should show a delete modal 1`] = `
   }
   title="test-user@test.com"
 >
-  <Component
+  <EditForm
     currentUser={
       Object {
         "name": "current-user",

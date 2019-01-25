@@ -115,7 +115,7 @@ exports[`Variants View Component: PercentOrSample Component: should render sampl
 
 exports[`Variants View Component: Top level Component should render correctly 1`] = `
 <Fragment>
-  <Component
+  <Variant
     showRate={false}
     title="Default Template"
     variant={
@@ -124,7 +124,7 @@ exports[`Variants View Component: Top level Component should render correctly 1`
       }
     }
   />
-  <Component
+  <Variant
     key="0"
     showRate={false}
     variant={
@@ -133,7 +133,7 @@ exports[`Variants View Component: Top level Component should render correctly 1`
       }
     }
   />
-  <Component
+  <Variant
     key="1"
     showRate={false}
     variant={
@@ -171,7 +171,7 @@ exports[`Variants View Component: Variant Component: should render correctly 1`]
         temp_id
       </h6>
     </LabelledValue>
-    <Component
+    <PercentOrSample
       variant={
         Object {
           "template_id": "temp_id",
@@ -179,7 +179,7 @@ exports[`Variants View Component: Variant Component: should render correctly 1`]
       }
     />
   </Panel.Section>
-  <Component
+  <Engagement
     variant={
       Object {
         "template_id": "temp_id",

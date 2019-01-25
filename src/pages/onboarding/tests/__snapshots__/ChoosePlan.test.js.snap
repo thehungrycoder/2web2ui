@@ -8,7 +8,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
       <Panel
         title="Select A Plan"
       >
-        <Component
+        <_default
           disabled={true}
           onChange={[Function]}
           plans={Array []}
@@ -62,7 +62,7 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
       <Panel
         title="Select A Plan"
       >
-        <Component
+        <_default
           disabled={false}
           onChange={[Function]}
           plans={Array []}
@@ -118,7 +118,7 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
       <Panel
         title="Select A Plan"
       >
-        <Component
+        <_default
           disabled={false}
           onChange={[Function]}
           plans={Array []}

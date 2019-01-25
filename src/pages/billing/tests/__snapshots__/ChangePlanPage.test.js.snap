@@ -11,7 +11,7 @@ exports[`Page: ChangePlanPage should not render form if not allowed to change pl
   }
   empty={Object {}}
 >
-  <Component
+  <PendingPlanBanner
     account={Object {}}
   />
 </Page>
@@ -28,7 +28,7 @@ exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] =
   }
   empty={Object {}}
 >
-  <Component
+  <PendingPlanBanner
     account={Object {}}
   />
   <withRouter(Connect(ReduxForm)) />

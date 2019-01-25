@@ -90,7 +90,7 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
         ]
       }
     />
-    <Component
+    <CursorPaging
       currentPage={2}
       handleFirstPage={[Function]}
       handlePageChange={[Function]}
@@ -99,7 +99,7 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
       previousDisabled={false}
       totalCount={100}
     />
-    <Component
+    <CollectionControls
       data={
         Array [
           Object {
