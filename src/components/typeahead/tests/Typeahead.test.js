@@ -1,39 +1,59 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { shallow } from 'enzyme';
 import { Typeahead, TypeaheadItem } from '../Typeahead';
 
-const results = [
-  'apples',
-  'bananas',
-  'cauliflower'
-];
+jest.mock('lodash/debounce', () => jest.fn((fn) => {
+  fn.cancel = jest.fn();
+  return fn;
+}));
 
 describe('Typeahead', () => {
   let wrapper;
 
   beforeEach(() => {
     const props = {
-      onChange: jest.fn(),
-      itemToString: jest.fn(),
       selectedItem: jest.fn(),
-      results: []
+      results: [
+        'apples',
+        'bananas',
+        'cauliflower'
+      ]
     };
 
     wrapper = shallow(<Typeahead {...props} />);
   });
 
-  afterEach(() => {
-    jest.resetAllMocks();
+  it('calls onChange callback when changed', () => {
+    const onChange = jest.fn();
+    wrapper.setProps({ onChange });
+    wrapper.simulate('change');
+    expect(onChange).toHaveBeenCalled();
+  });
+
+  it('cancels debounced updates when unmounted', () => {
+    const cancel = jest.spyOn(wrapper.instance().handleInputValueChange, 'cancel');
+    wrapper.unmount();
+    expect(cancel).toHaveBeenCalled();
+  });
+
+  it('sets matches when input value changes', () => {
+    wrapper.simulate('inputValueChange', 'a');
+    expect(wrapper).toHaveState('matches', ['apples']);
+  });
+
+  it('truncates matches to max number', () => {
+    wrapper.setProps({
+      maxNumberOfResults: 50,
+      results: Array.from(Array(110)).map((_, index) => `example${index}`)
+    });
+    wrapper.simulate('inputValueChange', 'example');
+    expect(wrapper.state('matches')).toHaveLength(50);
   });
 
   describe('render function', () => {
     let args;
 
     beforeEach(() => {
-      wrapper.setProps({
-        results
-      });
-
       args = {
         clearSelection: jest.fn(),
         inputValue: 'test@t',
@@ -55,26 +75,26 @@ describe('Typeahead', () => {
       expect(result).toMatchSnapshot();
     });
 
-    it('should render the list with custom limit on results', () => {
-      wrapper.setProps({ maxNumberOfResults: 1 });
-      const result = shallow(wrapper.instance().typeaheadFn(args));
-      expect(result).toMatchSnapshot();
-    });
-
     it('should switch placeholder if open', () => {
       const result = shallow(wrapper.instance().typeaheadFn({ ...args, isOpen: true }));
       expect(result.find('TextField').props().placeholder).toEqual('Type to search');
     });
 
+    it('should render the list with matches after input change', () => {
+      wrapper.simulate('inputValueChange', 'a');
+      const result = shallow(wrapper.instance().typeaheadFn(args));
+      expect(result).toMatchSnapshot();
+    });
+
     it('should render with selected item and not disabled', () => {
-      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: results[2] }));
+      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: 'cauliflower' }));
       expect(result.find('TextField').props().connectRight).toMatchSnapshot(); // Clear button
       expect(result.find('TextField').props().readOnly).toBe(true); // Boolean prop
     });
 
     it('should not render clear button if disabled with selected item', () => {
       wrapper.setProps({ disabled: true });
-      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: results[2] }));
+      const result = shallow(wrapper.instance().typeaheadFn({ ...args, selectedItem: 'cauliflower' }));
       expect(result.find('TextField').props().connectRight).toBe(null); // No clear button
     });
 

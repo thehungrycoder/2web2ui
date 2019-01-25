@@ -1,5 +1,6 @@
 import classnames from 'classnames/bind';
 import Downshift from 'downshift';
+import debounce from 'lodash/debounce';
 import React, { Component } from 'react';
 import { ActionList, Button, TextField } from '@sparkpost/matchbox';
 
@@ -16,9 +17,25 @@ export const TypeaheadItem = ({ id, label }) => (
 );
 
 export class Typeahead extends Component {
+  state = {
+    matches: []
+  }
+
   static defaultProps = {
     name: 'subaccount'
   };
+
+  componentWillUnmount() {
+    this.handleInputValueChange.cancel();
+  }
+
+  // note, sorting large result lists can be expensive
+  handleInputValueChange = debounce((inputValue) => {
+    const { itemToString, maxNumberOfResults = 100, results = []} = this.props;
+    const matches = sortMatch(results, inputValue, itemToString).slice(0, maxNumberOfResults);
+
+    this.setState({ matches });
+  }, 300)
 
   handleStateChange = (changes, downshift) => {
     // Highlights first item in list by default
@@ -43,33 +60,21 @@ export class Typeahead extends Component {
       error,
       errorInLabel,
       helpText,
-      itemToString,
       label,
       maxHeight = 300,
-      // must limit number of results to avoid running out of memory
-      maxNumberOfResults = 100,
       name,
       placeholder = (isOpen ? 'Type to search' : 'None'),
-      renderItem,
-      results
+      renderItem
     } = this.props;
-
-    const matches = sortMatch(
-      results,
-      inputValue,
-      itemToString
-    );
-
-    const mappedItems = (matches.length ? matches : results)
-      .slice(0, maxNumberOfResults)
-      .map((item, index) => ({
-        ...getItemProps({ item, index }),
-        content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
-        highlighted: highlightedIndex === index
-      }));
+    const { matches } = this.state;
+    const items = matches.map((item, index) => ({
+      ...getItemProps({ item, index }),
+      content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
+      highlighted: highlightedIndex === index
+    }));
 
     const listClasses = cx('List', {
-      open: isOpen && !selectedItem && (!inputValue || matches.length),
+      open: isOpen && !selectedItem && matches.length,
       hasHelp: !!helpText
     });
 
@@ -90,7 +95,7 @@ export class Typeahead extends Component {
 
     return (
       <div className={cx('Typeahead')}>
-        <ActionList className={listClasses} actions={mappedItems} maxHeight={maxHeight} />
+        <ActionList className={listClasses} actions={items} maxHeight={maxHeight} />
         <TextField {...textFieldProps} onFocus={openMenu} />
       </div>
     );
@@ -107,8 +112,9 @@ export class Typeahead extends Component {
       <Downshift
         itemToString={itemToString}
         onChange={onChange}
-        selectedItem={selectedItem}
+        onInputValueChange={this.handleInputValueChange}
         onStateChange={this.handleStateChange}
+        selectedItem={selectedItem}
       >
         {this.typeaheadFn}
       </Downshift>

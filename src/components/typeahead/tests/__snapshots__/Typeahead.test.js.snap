@@ -18,75 +18,7 @@ exports[`Typeahead render function should render the list 1`] = `
   className="Typeahead"
 >
   <ActionList
-    actions={
-      Array [
-        Object {
-          "content": <div
-            className="Item"
-          >
-            apples
-          </div>,
-          "highlighted": true,
-          "index": 0,
-          "item": "apples",
-        },
-        Object {
-          "content": <div
-            className="Item"
-          >
-            bananas
-          </div>,
-          "highlighted": false,
-          "index": 1,
-          "item": "bananas",
-        },
-        Object {
-          "content": <div
-            className="Item"
-          >
-            cauliflower
-          </div>,
-          "highlighted": false,
-          "index": 2,
-          "item": "cauliflower",
-        },
-      ]
-    }
-    className="List"
-    groupByKey="section"
-    maxHeight={300}
-  />
-  <TextField
-    connectRight={null}
-    data-lpignore={true}
-    error={null}
-    placeholder="None"
-    readOnly={false}
-    resize="both"
-    type="text"
-  />
-</div>
-`;
-
-exports[`Typeahead render function should render the list with custom limit on results 1`] = `
-<div
-  className="Typeahead"
->
-  <ActionList
-    actions={
-      Array [
-        Object {
-          "content": <div
-            className="Item"
-          >
-            apples
-          </div>,
-          "highlighted": true,
-          "index": 0,
-          "item": "apples",
-        },
-      ]
-    }
+    actions={Array []}
     className="List"
     groupByKey="section"
     maxHeight={300}
@@ -108,6 +40,28 @@ exports[`Typeahead render function should render the list with custom maxHeight 
   className="Typeahead"
 >
   <ActionList
+    actions={Array []}
+    className="List"
+    groupByKey="section"
+    maxHeight={999}
+  />
+  <TextField
+    connectRight={null}
+    data-lpignore={true}
+    error={null}
+    placeholder="None"
+    readOnly={false}
+    resize="both"
+    type="text"
+  />
+</div>
+`;
+
+exports[`Typeahead render function should render the list with matches after input change 1`] = `
+<div
+  className="Typeahead"
+>
+  <ActionList
     actions={
       Array [
         Object {
@@ -120,31 +74,11 @@ exports[`Typeahead render function should render the list with custom maxHeight 
           "index": 0,
           "item": "apples",
         },
-        Object {
-          "content": <div
-            className="Item"
-          >
-            bananas
-          </div>,
-          "highlighted": false,
-          "index": 1,
-          "item": "bananas",
-        },
-        Object {
-          "content": <div
-            className="Item"
-          >
-            cauliflower
-          </div>,
-          "highlighted": false,
-          "index": 2,
-          "item": "cauliflower",
-        },
       ]
     }
     className="List"
     groupByKey="section"
-    maxHeight={999}
+    maxHeight={300}
   />
   <TextField
     connectRight={null}
