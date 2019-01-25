@@ -40,6 +40,7 @@ exports[`FacetFilter renders facet select and search input 1`] = `
       resize="both"
       suffix={<Search />}
       type="text"
+      value=""
     />
   </div>
 </Fragment>

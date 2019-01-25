@@ -13,18 +13,24 @@ const OPTIONS = [
 
 export class FacetFilter extends React.Component {
   state = {
+    prevFacetSearchTerm: '',
     searchTerm: ''
   }
 
-  static getDerivedStateFromProps(nextProps, nextState) {
+  // note, hydrate searchTerm from signalOptions
+  static getDerivedStateFromProps(props, state) {
+    const facetSearchTerm = props.signalOptions.facetSearchTerm || '';
+
     return {
-      searchTerm: nextProps.signalOptions.facetSearchTerm
+      prevFacetSearchTerm: facetSearchTerm,
+      searchTerm: state.prevFacetSearchTerm !== facetSearchTerm ? facetSearchTerm : state.searchTerm
     };
   }
 
   handleFacetChange = (event) => {
     const { changeSignalOptions } = this.props;
     changeSignalOptions({ facet: event.currentTarget.value, facetSearchTerm: '' });
+    this.setState({ searchTerm: '' });
   }
 
   handleFacetSearch = () => {
