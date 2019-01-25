@@ -37,8 +37,17 @@ export class ListResults extends Component {
 
   handlePoll = (id) => {
     const { showAlert, getJobStatus, stopPolling } = this.props;
-    return getJobStatus(id).then(({ complete }) => {
-      if (complete) {
+    return getJobStatus(id).then(({ complete, batch_status }) => {
+      if (batch_status === 'ERROR') {
+        stopPolling(id);
+        showAlert({
+          type: 'error',
+          message: 'Recipient Validation Failed. Please Try Again.',
+          dedupeId: id
+        });
+      }
+
+      if (complete && batch_status === 'SUCCESS') {
         stopPolling(id);
         showAlert({
           type: 'success',

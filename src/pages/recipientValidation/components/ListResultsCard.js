@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Panel, Button } from '@sparkpost/matchbox';
-import { InsertDriveFile, CheckCircleOutline } from '@sparkpost/matchbox-icons';
+import { ErrorOutline, InsertDriveFile, CheckCircleOutline } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { LoadingSVG } from 'src/components/loading/Loading';
@@ -9,7 +9,7 @@ import { formatDateTime } from 'src/helpers/date';
 import moment from 'moment';
 import styles from './ListResultsCard.module.scss';
 
-const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
+const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl, status }) => {
   if (complete === 'unknown') {
     return (
       <Panel>
@@ -18,25 +18,39 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
     );
   }
 
-  const Icon = complete
-    ? CheckCircleOutline
-    : InsertDriveFile;
+  const loading = !complete && status !== 'ERROR';
+  const ready = status === 'SUCCESS';
+  const failed = status === 'ERROR';
 
-  const proccessing = !complete
-    ? <div className={styles.ProcessingWrapper}><LoadingSVG size='Small' /></div>
-    : <div className={styles.Spacer}/>;
+  let spinner = <div className={styles.Spacer}/>;
+  let Icon = InsertDriveFile;
+  let iconClass = null;
+  let statusText = null;
 
-  const download = complete && (
-    <DownloadLink component={Button} to={rejectedUrl} fullWidth color='orange'>Download Rejected Recipients</DownloadLink>
-  );
+  if (loading) {
+    spinner = <div className={styles.ProcessingWrapper}><LoadingSVG size='Small' /></div>;
+    statusText = 'Processing';
+  }
+
+  if (failed) {
+    Icon = ErrorOutline;
+    iconClass = styles.Failed;
+    statusText = 'Failed. Please try again.';
+  }
+
+  if (ready) {
+    Icon = CheckCircleOutline;
+    iconClass = styles.Complete;
+    statusText = 'Completed';
+  }
 
   return (
     <Panel sectioned>
-      <div className={classnames(styles.IconWrapper, complete && styles.Complete)}>
+      <div className={classnames(styles.IconWrapper, iconClass)}>
         <Icon size={40} />
       </div>
       <h6>Validation Results</h6>
-      {proccessing}
+      {spinner}
       {uploaded && (
         <LabelledValue label='Uploaded'>
           <p className={classnames(styles.RightAlign, styles.NoWrap)}>
@@ -46,10 +60,12 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl }) => {
       )}
       <LabelledValue label='Status'>
         <h6 className={styles.RightAlign}>
-          {complete ? 'Completed' : 'Processing'}
+          {statusText}
         </h6>
       </LabelledValue>
-      {download}
+      {ready && (
+        <DownloadLink component={Button} to={rejectedUrl} fullWidth color='orange'>Download Rejected Recipients</DownloadLink>
+      )}
     </Panel>
   );
 };
