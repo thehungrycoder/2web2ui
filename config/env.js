@@ -59,6 +59,7 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
 const REACT_APP = /^REACT_APP_/i;
+const now = new Date().getTime();
 
 function getClientEnvironment(publicUrl) {
   const raw = Object.keys(process.env)
@@ -77,6 +78,9 @@ function getClientEnvironment(publicUrl) {
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
+        // Useful for a simple, cacheable fingerprint when the server rewrites requests
+        BUILD_TIME: now,
+        CONFIG_CACHE_ID: process.env.NODE_ENV !== 'development' ? now : '',
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

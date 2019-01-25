@@ -23,6 +23,8 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const snapshotGenerator = require('../scripts/browsersSnapshotGen');
 
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -248,7 +250,7 @@ module.exports = function(webpackEnv) {
       // We placed these paths second because we want `node_modules` to "win"
       // if there are any conflicts. This matches Node resolution mechanism.
       // https://github.com/facebook/create-react-app/issues/253
-      modules: ['node_modules'].concat(
+      modules: [paths.appBase, 'node_modules'].concat(
         // It is guaranteed to exist because we tweak it in `env.js`
         process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
       ),
@@ -291,23 +293,6 @@ module.exports = function(webpackEnv) {
         // Disable require.ensure as it's not a standard language feature.
         { parser: { requireEnsure: false } },
 
-        // First, run the linter.
-        // It's important to do this before Babel processes the JS.
-        {
-          test: /\.(js|mjs|jsx)$/,
-          enforce: 'pre',
-          use: [
-            {
-              options: {
-                formatter: require.resolve('react-dev-utils/eslintFormatter'),
-                eslintPath: require.resolve('eslint'),
-                
-              },
-              loader: require.resolve('eslint-loader'),
-            },
-          ],
-          include: paths.appSrc,
-        },
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
@@ -446,6 +431,18 @@ module.exports = function(webpackEnv) {
                 'sass-loader'
               ),
             },
+            /**
+             * MDX is a tool that converts Markdown files to React components. This
+             * loader uses MDX to create Page objects for Markdown files. As it
+             * produces ES2015, the result is then passed through babel.
+             */
+            {
+              test: /\.mdx?$/,
+              use: [
+                'babel-loader',
+                'mdx-loader'
+              ]
+            },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
@@ -457,7 +454,7 @@ module.exports = function(webpackEnv) {
               // its runtime that would otherwise be processed through "file" loader.
               // Also exclude `html` and `json` extensions so they get processed
               // by webpacks internal loaders.
-              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/, /\.mdx?$/],
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
@@ -593,7 +590,37 @@ module.exports = function(webpackEnv) {
           silent: true,
           formatter: typescriptFormatter,
         }),
-    ].filter(Boolean),
+        isEnvProduction && new BundleAnalyzerPlugin({
+          // Can be `server`, `static` or `disabled`.
+          // In `server` mode analyzer will start HTTP server to show bundle report.
+          // In `static` mode single HTML file with bundle report will be generated.
+          // In `disabled` mode you can use this plugin to just generate Webpack Stats JSON file by setting `generateStatsFile` to `true`.
+          analyzerMode: 'static',
+          // Path to bundle report file that will be generated in `static` mode.
+          // Relative to bundles output directory.
+          reportFilename: '../build-reports/webpack-bundle-analyzer/index.html',
+          // Module sizes to show in report by default.
+          // Should be one of `stat`, `parsed` or `gzip`.
+          // See "Definitions" section for more information.
+          defaultSizes: 'parsed',
+          // Automatically open report in default browser
+          openAnalyzer: false,
+          // If `true`, Webpack Stats JSON file will be generated in bundles output directory
+          generateStatsFile: false,
+          // Name of Webpack Stats JSON file that will be generated if `generateStatsFile` is `true`.
+          // Relative to bundles output directory.
+          // statsFilename: '../build-reports/webpack-bundle-analyzer/stats.json',
+          // Options for `stats.toJson()` method.
+          // For example you can exclude sources of your modules from stats file with `source: false` option.
+          // See more options here: https://github.com/webpack/webpack/blob/webpack-1/lib/Stats.js#L21
+          statsOptions: null,
+          // Log level. Can be 'info', 'warn', 'error' or 'silent'.
+          logLevel: 'info'
+        }),
+        new webpack.DefinePlugin({
+          SUPPORTED_BROWSERS: JSON.stringify(snapshotGenerator())
+        }),    
+      ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
     node: {
