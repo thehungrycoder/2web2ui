@@ -2,7 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import FromEmail from '../FromEmail';
 
-jest.mock('lodash/debounce', () => jest.fn((fn) => fn));
+jest.mock('lodash/debounce', () => jest.fn((fn) => {
+  fn.cancel = jest.fn();
+  return fn;
+}));
 
 describe('FromEmail', () => {
   const subject = (props = {}) => shallow(
@@ -79,5 +82,12 @@ describe('FromEmail', () => {
     wrapper.simulate('inputValueChange', 'brian@example');
 
     expect(wrapper.state('matches')).toHaveLength(100);
+  });
+
+  it('cancels debounced updates when unmounted', () => {
+    const wrapper = subject();
+    const cancel = jest.spyOn(wrapper.instance().updateMatches, 'cancel');
+    wrapper.unmount();
+    expect(cancel).toHaveBeenCalled();
   });
 });
