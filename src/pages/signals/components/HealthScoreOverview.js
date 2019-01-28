@@ -12,6 +12,7 @@ import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
 import SparklineDataCell from './dataCells/SparklineDataCell';
 import WoWDataCell from './dataCells/WoWDataCell';
+import WoWHeaderCell from './dataCells/WoWHeaderCell';
 import ChartType from './viewControls/ChartType';
 import styles from './SpamTrapOverview.module.scss';
 
@@ -213,7 +214,7 @@ class HealthScoreOverview extends React.Component {
           <Column
             align="right"
             dataKey="WoW"
-            label="WoW"
+            label={<WoWHeaderCell/>}
             width="12.5%"
             component={({ WoW }) => (
               <WoWDataCell value={WoW} />

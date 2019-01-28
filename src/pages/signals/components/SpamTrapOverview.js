@@ -13,6 +13,7 @@ import NumericDataCell from './dataCells/NumericDataCell';
 import PercentDataCell from './dataCells/PercentDataCell';
 import SparklineDataCell from './dataCells/SparklineDataCell';
 import WoWDataCell from './dataCells/WoWDataCell';
+import WoWHeaderCell from './dataCells/WoWHeaderCell';
 import Calculation from './viewControls/Calculation';
 import ChartType from './viewControls/ChartType';
 import styles from './SpamTrapOverview.module.scss';
@@ -213,7 +214,7 @@ class SpamTrapOverview extends React.Component {
           <Column
             align="right"
             dataKey="WoW"
-            label="WoW"
+            label={<WoWHeaderCell />}
             width="12.5%"
             component={({ WoW }) => (
               <WoWDataCell value={WoW} />

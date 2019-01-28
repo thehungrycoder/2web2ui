@@ -147,7 +147,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
       align="right"
       component={[Function]}
       dataKey="WoW"
-      label="WoW"
+      label={<WoWHeaderCell />}
       width="12.5%"
     />
     <Column

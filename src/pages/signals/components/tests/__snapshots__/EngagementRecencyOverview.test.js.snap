@@ -147,7 +147,7 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
       align="right"
       component={[Function]}
       dataKey="WoW"
-      label="WoW"
+      label={<WoWHeaderCell />}
       width="12.5%"
     />
     <Column
