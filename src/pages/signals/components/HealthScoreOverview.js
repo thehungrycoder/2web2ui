@@ -109,7 +109,7 @@ class HealthScoreOverview extends React.Component {
     const { chartType } = this.state;
     const subaccountFilter = _.get(signalOptions, 'subaccount.id');
 
-    const isFacetSelected = facet.key === 'sid';
+    const noFacetSelected = facet.key === 'sid';
     const noSubaccountFilter = subaccountFilter === undefined;
 
     return (
@@ -137,12 +137,12 @@ class HealthScoreOverview extends React.Component {
           tableName={tableName}
           totalCount={totalCount}
         >
-          {(noSubaccountFilter || isFacetSelected) && (
+          {(noSubaccountFilter || noFacetSelected) && (
             <Column
               dataKey="sid"
               label="Subaccount"
               sortable
-              width={isFacetSelected ? '30%' : '15%'}
+              width={noFacetSelected ? '30%' : '15%'}
               component={({ sid }) => (
                 <FacetDataCell
                   dimension="health-score"
@@ -154,7 +154,7 @@ class HealthScoreOverview extends React.Component {
               )}
             />
           )}
-          {!isFacetSelected && (
+          {!noFacetSelected && (
             <Column
               dataKey={facet.key}
               label={facet.label}
