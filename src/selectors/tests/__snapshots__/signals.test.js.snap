@@ -1036,7 +1036,7 @@ exports[`Selectors: signals selectHealthScoreOverview returns all overview data 
 Object {
   "data": Array [
     Object {
-      "WoW": 10,
+      "WoW": -7,
       "average_health_score": 86.2,
       "current_health_score": 98,
       "current_weights": Array [],
@@ -1111,7 +1111,7 @@ Object {
 exports[`Selectors: signals selectHealthScoreOverviewData returns data 1`] = `
 Array [
   Object {
-    "WoW": 10,
+    "WoW": -7,
     "average_health_score": 86.2,
     "current_health_score": 98,
     "current_weights": Array [],
