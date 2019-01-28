@@ -233,7 +233,7 @@ export const selectEngagementRecencyOverview = createSelector(
 
 export const selectHealthScoreOverviewData = createSelector(
   getHealthScoreData, getOptions,
-  ({ data }, { now, relativeRange }) => data.map(({ current_health_score, ...rowOfData }) => {
+  ({ data }, { now, relativeRange }) => data.map(({ current_health_score, WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
       const roundedHealthScore = roundToPlaces(health_score * 100, 1);
@@ -262,7 +262,8 @@ export const selectHealthScoreOverviewData = createSelector(
       average_health_score: roundToPlaces(
         normalizedHistory.reduce((total, { health_score }) => total + health_score, 0) / normalizedHistory.length,
         1
-      )
+      ),
+      WoW: WoW ? roundToPlaces(WoW * 100, 1).toFixed(1) : null
     };
   })
 );

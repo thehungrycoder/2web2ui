@@ -107,6 +107,7 @@ describe('Selectors: signals', () => {
               current_weights: [],
               current_health_score: 0.98,
               sending_domain: 'test.com',
+              WoW: 0.1,
               history: [
                 {
                   dt: '2018-01-01',
