@@ -14,7 +14,7 @@ const FacetDataCell = ({ dimension, facet, id, name, subaccountId, truncate }) =
 
   if (facet === 'sid' && id === -1) {
     return (
-      <div className={styles.PaddedCell}>
+      <div className={classnames(styles.PaddedCell, truncate && styles.OverflowCell)}>
         Master & All Subaccounts
       </div>
     );

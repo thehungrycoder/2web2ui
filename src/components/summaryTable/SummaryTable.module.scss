@@ -26,6 +26,8 @@
   border-left: none;
   font-weight: 500;
   padding: spacing(small) spacing();
+  font-size: rem(13);
+  white-space: nowrap;
 
   &:last-child {
     border-right: none;
@@ -83,6 +85,7 @@
 .SummaryTable {
   table {
     margin: 0; // override
+    table-layout: fixed;
   }
 }
 

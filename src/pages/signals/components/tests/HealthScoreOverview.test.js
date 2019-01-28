@@ -15,6 +15,7 @@ describe('HealthScoreOverview', () => {
             { date: '2018-01-13', health_score: 98 }
           ],
           average_health_score: 98,
+          WoW: 0.1,
           sid: 123
         }
       ]}

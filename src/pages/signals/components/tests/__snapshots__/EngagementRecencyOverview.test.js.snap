@@ -103,6 +103,7 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
     data={
       Array [
         Object {
+          "WoW": 0.1,
           "current_engaged_recipients": 12,
           "current_relative_engaged_recipients": 5,
           "domain": "example.com",
@@ -133,14 +134,21 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
       component={[Function]}
       dataKey="history"
       label="Daily Recently Engaged Recipients"
-      width="40%"
+      width="30%"
     />
     <Column
       align="right"
       component={[Function]}
       dataKey="current_relative_engaged_recipients"
       label="Current Ratio"
-      width="15%"
+      width="12.5%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="WoW"
+      label={<WoWHeaderCell />}
+      width="12.5%"
     />
     <Column
       align="right"

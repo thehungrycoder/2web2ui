@@ -32,6 +32,7 @@ describe('Selectors: signals', () => {
               sending_domain: 'test.com',
               current_trap_hits: 35,
               current_relative_trap_hits: 0.001,
+              WoW: 0,
               history: [
                 {
                   dt: '2018-01-01',
@@ -51,6 +52,7 @@ describe('Selectors: signals', () => {
               sending_domain: 'null.test.com',
               current_trap_hits: null,
               current_relative_trap_hits: null,
+              WoW: null,
               history: [
                 {
                   dt: '2018-01-01',
@@ -77,6 +79,7 @@ describe('Selectors: signals', () => {
               sending_domain: 'test.com',
               current_c_14d: 10,
               current_c_total: 50,
+              WoW: 0.1,
               history: [
                 {
                   c_total: 25,
@@ -107,6 +110,7 @@ describe('Selectors: signals', () => {
               current_weights: [],
               current_health_score: 0.98,
               sending_domain: 'test.com',
+              WoW: 0.1,
               history: [
                 {
                   dt: '2018-01-01',
@@ -132,7 +136,8 @@ describe('Selectors: signals', () => {
                 {
                   dt: '2018-01-03',
                   health_score: 0.98, // good
-                  weights: []
+                  weights: [],
+                  WoW: null
                 }
               ]
             }

@@ -872,6 +872,7 @@ Object {
         ],
       },
       Object {
+        "WoW": null,
         "date": "2018-01-03",
         "health_score": 0.98,
         "injections": 35000,
@@ -892,6 +893,7 @@ exports[`Selectors: signals selectEngagementRecencyOverview returns all overview
 Object {
   "data": Array [
     Object {
+      "WoW": 10,
       "current_c_14d": 10,
       "current_c_total": 50,
       "current_engaged_recipients": 10,
@@ -967,6 +969,7 @@ Object {
 exports[`Selectors: signals selectEngagementRecencyOverviewData returns data 1`] = `
 Array [
   Object {
+    "WoW": 10,
     "current_c_14d": 10,
     "current_c_total": 50,
     "current_engaged_recipients": 10,
@@ -1033,6 +1036,7 @@ exports[`Selectors: signals selectHealthScoreOverview returns all overview data 
 Object {
   "data": Array [
     Object {
+      "WoW": 10,
       "average_health_score": 86.2,
       "current_health_score": 98,
       "current_weights": Array [],
@@ -1090,6 +1094,7 @@ Object {
           "ranking": null,
         },
         Object {
+          "WoW": null,
           "date": "2018-01-03",
           "health_score": 98,
           "ranking": "good",
@@ -1106,6 +1111,7 @@ Object {
 exports[`Selectors: signals selectHealthScoreOverviewData returns data 1`] = `
 Array [
   Object {
+    "WoW": 10,
     "average_health_score": 86.2,
     "current_health_score": 98,
     "current_weights": Array [],
@@ -1163,6 +1169,7 @@ Array [
         "ranking": null,
       },
       Object {
+        "WoW": null,
         "date": "2018-01-03",
         "health_score": 98,
         "ranking": "good",
@@ -1178,6 +1185,7 @@ exports[`Selectors: signals selectSpamHitsOverview returns all overview data 1`]
 Object {
   "data": Array [
     Object {
+      "WoW": 0,
       "current_relative_trap_hits": 0.1,
       "current_trap_hits": 35,
       "history": Array [
@@ -1242,6 +1250,7 @@ Object {
       "total_injections": 217400,
     },
     Object {
+      "WoW": null,
       "current_relative_trap_hits": null,
       "current_trap_hits": null,
       "history": Array [
@@ -1321,6 +1330,7 @@ Object {
 exports[`Selectors: signals selectSpamHitsOverviewData returns data 1`] = `
 Array [
   Object {
+    "WoW": 0,
     "current_relative_trap_hits": 0.1,
     "current_trap_hits": 35,
     "history": Array [
@@ -1385,6 +1395,7 @@ Array [
     "total_injections": 217400,
   },
   Object {
+    "WoW": null,
     "current_relative_trap_hits": null,
     "current_trap_hits": null,
     "history": Array [

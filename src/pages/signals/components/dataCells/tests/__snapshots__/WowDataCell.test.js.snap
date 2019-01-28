@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WoWDataCell renders a negative change 1`] = `
+<div
+  className="PaddedCell"
+>
+  <span
+    className="WowWrapper"
+  >
+    <span
+      className="WowCaret"
+    >
+      <ArrowDropDown
+        className="Red"
+      />
+    </span>
+    <span
+      className="WowValue"
+    >
+      -0.02
+      %
+    </span>
+  </span>
+</div>
+`;
+
+exports[`WoWDataCell renders a positive change 1`] = `
+<div
+  className="PaddedCell"
+>
+  <span
+    className="WowWrapper"
+  >
+    <span
+      className="WowCaret"
+    >
+      <ArrowDropUp
+        className="Green"
+      />
+    </span>
+    <span
+      className="WowValue"
+    >
+      0.1
+      %
+    </span>
+  </span>
+</div>
+`;
+
+exports[`WoWDataCell renders no change 1`] = `
+<div
+  className="PaddedCell"
+>
+  <span
+    className="WowWrapper"
+  >
+    <span
+      className="WowCaret"
+    />
+    <span
+      className="WowValue"
+    >
+      0
+      %
+    </span>
+  </span>
+</div>
+`;
+
+exports[`WoWDataCell renders null 1`] = `
+<div
+  className="PaddedCell"
+>
+  - - -
+</div>
+`;

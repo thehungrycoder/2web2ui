@@ -12,9 +12,38 @@
 }
 
 .OverflowCell {
-  width: 260px; // Overflow only works with pixel values
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: color(gray, 4);
+}
+
+.Red {
+  color: color(red, dark);
+}
+
+.Green {
+  color: color(green, dark);
+}
+
+.WowWrapper {
+  display: flex;
+  & > * {
+    white-space: nowrap;
+    text-align: right;
+  }
+}
+
+.WowCaret {
+  flex: 1 0 0;
+}
+
+.WowValue {
+  flex: 0 0 0;
+  min-width: rem(50);
+}
+
+.InfoIcon {
+  margin-top: -0.15em;
   color: color(gray, 4);
 }

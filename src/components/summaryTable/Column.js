@@ -9,7 +9,7 @@ Column.propTypes = {
     PropTypes.func
   ]),
   dataKey: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   sortable: PropTypes.bool,
   width: PropTypes.string
 };

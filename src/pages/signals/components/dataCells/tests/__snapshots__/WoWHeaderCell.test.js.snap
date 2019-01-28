@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WoWHeaderCell renders 1`] = `
+<Tooltip
+  bottom={true}
+  content="Week Over Week Change"
+  dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
+>
+  WoW 
+  <InfoOutline
+    className="InfoIcon"
+    size={15}
+  />
+</Tooltip>
+`;

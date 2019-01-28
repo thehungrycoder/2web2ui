@@ -12,6 +12,8 @@ import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
 import PercentDataCell from './dataCells/PercentDataCell';
 import SparklineDataCell from './dataCells/SparklineDataCell';
+import WoWDataCell from './dataCells/WoWDataCell';
+import WoWHeaderCell from './dataCells/WoWHeaderCell';
 import Calculation from './viewControls/Calculation';
 import ChartType from './viewControls/ChartType';
 import styles from './SpamTrapOverview.module.scss';
@@ -158,7 +160,7 @@ class EngagementRecencyOverview extends React.Component {
           <Column
             dataKey="history"
             label="Daily Recently Engaged Recipients"
-            width="40%"
+            width="30%"
             component={({ history, ...data }) => {
               const id = data[facet.key];
 
@@ -191,7 +193,7 @@ class EngagementRecencyOverview extends React.Component {
               align="right"
               dataKey="current_relative_engaged_recipients"
               label="Current Ratio"
-              width="15%"
+              width="12.5%"
               component={({ current_relative_engaged_recipients }) => (
                 <PercentDataCell value={current_relative_engaged_recipients} />
               )}
@@ -201,12 +203,21 @@ class EngagementRecencyOverview extends React.Component {
               align="right"
               dataKey="current_engaged_recipients"
               label="Current Count"
-              width="15%"
+              width="12.5%"
               component={({ current_engaged_recipients }) => (
                 <NumericDataCell value={current_engaged_recipients} />
               )}
             />
           )}
+          <Column
+            align="right"
+            dataKey="WoW"
+            label={<WoWHeaderCell/>}
+            width="12.5%"
+            component={({ WoW }) => (
+              <WoWDataCell value={WoW} />
+            )}
+          />
           <Column
             align="right"
             dataKey="total_engagement"
