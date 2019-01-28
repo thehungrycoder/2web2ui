@@ -217,7 +217,7 @@ class SpamTrapOverview extends React.Component {
             label={<WoWHeaderCell />}
             width="12.5%"
             component={({ WoW }) => (
-              <WoWDataCell value={WoW} />
+              <WoWDataCell value={WoW} reverse />
             )}
           />
           <Column
