@@ -3,7 +3,7 @@
 exports[`WoWHeaderCell renders 1`] = `
 <Tooltip
   bottom={true}
-  content="Weekly Change"
+  content="Week Over Week Change"
   dark={true}
   forcePosition={false}
   horizontalOffset="0px"
