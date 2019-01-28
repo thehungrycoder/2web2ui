@@ -159,7 +159,7 @@ export const selectHealthScoreDetails = createSelector(
 
 export const selectEngagementRecencyOverviewData = createSelector(
   getEngagementRecencyData, getOptions,
-  ({ data }, { now, relativeRange }) => data.map((rowOfData) => {
+  ({ data }, { now, relativeRange }) => data.map(({ WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, ...values }) => {
       const relative_engaged_recipients = (values.c_14d / values.c_total) * 100;
@@ -186,7 +186,8 @@ export const selectEngagementRecencyOverviewData = createSelector(
       current_engaged_recipients: _.last(filledHistory).engaged_recipients,
       current_relative_engaged_recipients: _.last(filledHistory).relative_engaged_recipients,
       history: filledHistory,
-      total_engagement: history.reduce((total, { c_total }) => total + c_total, 0)
+      total_engagement: history.reduce((total, { c_total }) => total + c_total, 0),
+      WoW: WoW !== null ? roundToPlaces(WoW * 100, 1).toFixed(1) : null
     };
   })
 );
@@ -263,7 +264,7 @@ export const selectHealthScoreOverviewData = createSelector(
         normalizedHistory.reduce((total, { health_score }) => total + health_score, 0) / normalizedHistory.length,
         1
       ),
-      WoW: WoW ? roundToPlaces(WoW * 100, 1).toFixed(1) : null
+      WoW: WoW !== null ? roundToPlaces(WoW * 100, 1).toFixed(1) : null
     };
   })
 );
@@ -279,7 +280,7 @@ export const selectHealthScoreOverview = createSelector(
 
 export const selectSpamHitsOverviewData = createSelector(
   getSpamHitsData, getOptions,
-  ({ data }, { now, relativeRange }) => data.map((rowOfData) => {
+  ({ data }, { now, relativeRange }) => data.map(({ WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, relative_trap_hits, ...values }) => ({
       ...values,
@@ -304,7 +305,8 @@ export const selectSpamHitsOverviewData = createSelector(
       ...rowOfData,
       current_relative_trap_hits: _.last(filledHistory).relative_trap_hits,
       history: filledHistory,
-      total_injections: history.reduce((total, { injections }) => total + injections, 0)
+      total_injections: history.reduce((total, { injections }) => total + injections, 0),
+      WoW: WoW !== null ? roundToPlaces(WoW * 100, 1).toFixed(1) : null
     };
   })
 );
