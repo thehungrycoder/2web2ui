@@ -103,6 +103,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
     data={
       Array [
         Object {
+          "WoW": 0.1,
           "current_relative_trap_hits": 5,
           "current_trap_hits": 12,
           "domain": "example.com",
@@ -132,7 +133,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
       component={[Function]}
       dataKey="history"
       label="Daily Spam Trap Hits"
-      width="40%"
+      width="30%"
     />
     <Column
       align="right"
@@ -140,7 +141,14 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
       dataKey="current_relative_trap_hits"
       label="Current Ratio"
       sortable={true}
-      width="15%"
+      width="12.5%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="WoW"
+      label="WoW"
+      width="12.5%"
     />
     <Column
       align="right"

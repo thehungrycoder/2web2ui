@@ -74,6 +74,7 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
     data={
       Array [
         Object {
+          "WoW": 0.1,
           "average_health_score": 98,
           "current_health_score": 98,
           "domain": "example.com",
@@ -104,7 +105,7 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
       dataKey="domain"
       label="Domain"
       sortable={true}
-      width="25%"
+      width="15%"
     />
     <Column
       component={[Function]}
@@ -118,7 +119,14 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
       dataKey="current_health_score"
       label="Current Score"
       sortable={true}
-      width="15%"
+      width="12.5%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="WoW"
+      label="WoW"
+      width="12.5%"
     />
     <Column
       align="right"
@@ -181,6 +189,7 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
     data={
       Array [
         Object {
+          "WoW": 0.1,
           "average_health_score": 98,
           "current_health_score": 98,
           "domain": "example.com",
@@ -210,7 +219,7 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
       component={[Function]}
       dataKey="history"
       label="Daily Health Score"
-      width="40%"
+      width="30%"
     />
     <Column
       align="right"
@@ -218,7 +227,14 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
       dataKey="current_health_score"
       label="Current Score"
       sortable={true}
-      width="15%"
+      width="12.5%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="WoW"
+      label="WoW"
+      width="12.5%"
     />
     <Column
       align="right"

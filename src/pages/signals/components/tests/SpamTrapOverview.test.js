@@ -14,7 +14,8 @@ describe('SpamTrapOverview', () => {
           domain: 'example.com',
           history: [
             { date: '2018-01-13', relative_trap_hits: 5, trap_hits: 12 }
-          ]
+          ],
+          WoW: 0.1
         }
       ]}
       facet={{

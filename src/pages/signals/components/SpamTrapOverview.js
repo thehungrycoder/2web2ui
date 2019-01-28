@@ -12,6 +12,7 @@ import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
 import PercentDataCell from './dataCells/PercentDataCell';
 import SparklineDataCell from './dataCells/SparklineDataCell';
+import WoWDataCell from './dataCells/WoWDataCell';
 import Calculation from './viewControls/Calculation';
 import ChartType from './viewControls/ChartType';
 import styles from './SpamTrapOverview.module.scss';
@@ -158,7 +159,7 @@ class SpamTrapOverview extends React.Component {
           <Column
             dataKey="history"
             label="Daily Spam Trap Hits"
-            width="40%"
+            width="30%"
             component={({ history, ...data }) => {
               const id = data[facet.key];
 
@@ -192,7 +193,7 @@ class SpamTrapOverview extends React.Component {
               dataKey="current_relative_trap_hits"
               label="Current Ratio"
               sortable
-              width="15%"
+              width="12.5%"
               component={({ current_relative_trap_hits }) => (
                 <PercentDataCell value={current_relative_trap_hits} />
               )}
@@ -203,12 +204,21 @@ class SpamTrapOverview extends React.Component {
               dataKey="current_trap_hits"
               label="Current Count"
               sortable
-              width="15%"
+              width="12.5%"
               component={({ current_trap_hits }) => (
                 <NumericDataCell value={current_trap_hits} />
               )}
             />
           )}
+          <Column
+            align="right"
+            dataKey="WoW"
+            label="WoW"
+            width="12.5%"
+            component={({ WoW }) => (
+              <WoWDataCell value={WoW} />
+            )}
+          />
           <Column
             align="right"
             dataKey="total_injections"

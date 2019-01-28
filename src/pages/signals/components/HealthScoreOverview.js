@@ -11,6 +11,7 @@ import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
 import SparklineDataCell from './dataCells/SparklineDataCell';
+import WoWDataCell from './dataCells/WoWDataCell';
 import ChartType from './viewControls/ChartType';
 import styles from './SpamTrapOverview.module.scss';
 
@@ -107,6 +108,9 @@ class HealthScoreOverview extends React.Component {
     const { chartType } = this.state;
     const subaccountFilter = _.get(signalOptions, 'subaccount.id');
 
+    const isFacetSelected = facet.key === 'sid';
+    const noSubaccountFilter = subaccountFilter === undefined;
+
     return (
       <Panel>
         <div className={styles.Header}>
@@ -132,12 +136,12 @@ class HealthScoreOverview extends React.Component {
           tableName={tableName}
           totalCount={totalCount}
         >
-          {(subaccountFilter === undefined || facet.key === 'sid') && (
+          {(noSubaccountFilter || isFacetSelected) && (
             <Column
               dataKey="sid"
               label="Subaccount"
               sortable
-              width={facet.key === 'sid' ? '30%' : '15%'}
+              width={isFacetSelected ? '30%' : '15%'}
               component={({ sid }) => (
                 <FacetDataCell
                   dimension="health-score"
@@ -149,12 +153,12 @@ class HealthScoreOverview extends React.Component {
               )}
             />
           )}
-          {facet.key !== 'sid' && (
+          {!isFacetSelected && (
             <Column
               dataKey={facet.key}
               label={facet.label}
               sortable
-              width={subaccountFilter === undefined ? '25%' : '30%'}
+              width={noSubaccountFilter ? '15%' : '30%'}
               component={(props) => (
                 <FacetDataCell
                   dimension="health-score"
@@ -169,7 +173,7 @@ class HealthScoreOverview extends React.Component {
           <Column
             dataKey="history"
             label="Daily Health Score"
-            width={(subaccountFilter === undefined && facet.key !== 'sid') ? '30%' : '40%'}
+            width='30%'
             component={({ history, ...data }) => {
               const id = data[facet.key];
 
@@ -201,9 +205,18 @@ class HealthScoreOverview extends React.Component {
             dataKey="current_health_score"
             label="Current Score"
             sortable
-            width="15%"
+            width="12.5%"
             component={({ current_health_score }) => (
               <NumericDataCell value={current_health_score} />
+            )}
+          />
+          <Column
+            align="right"
+            dataKey="WoW"
+            label="WoW"
+            width="12.5%"
+            component={({ WoW }) => (
+              <WoWDataCell value={WoW} />
             )}
           />
           <Column

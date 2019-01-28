@@ -15,7 +15,8 @@ describe('EngagementRecencyOverview', () => {
           history: [
             { date: '2018-01-13', relative_engaged_recipients: 5, engaged_recipients: 12 }
           ],
-          total_engagement: 12
+          total_engagement: 12,
+          WoW: 0.1
         }
       ]}
       facet={{
