@@ -2,16 +2,16 @@ import React from 'react';
 import styles from './DataCell.module.scss';
 import { ArrowDropUp, ArrowDropDown } from '@sparkpost/matchbox-icons';
 
-const WoWDataCell = ({ value }) => {
+const WoWDataCell = ({ value, reverse }) => {
   let caret = null;
   let content = '- - -';
 
   if (value > 0) {
-    caret = <ArrowDropUp className={styles.Green} />;
+    caret = <ArrowDropUp className={reverse ? styles.Red : styles.Green} />;
   }
 
   if (value < 0) {
-    caret = <ArrowDropDown className={styles.Red} />;
+    caret = <ArrowDropDown className={reverse ? styles.Green : styles.Red} />;
   }
 
   if (value !== null) {

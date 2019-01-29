@@ -24,6 +24,30 @@ exports[`WoWDataCell renders a negative change 1`] = `
 </div>
 `;
 
+exports[`WoWDataCell renders a negative change when reversed 1`] = `
+<div
+  className="PaddedCell"
+>
+  <span
+    className="WowWrapper"
+  >
+    <span
+      className="WowCaret"
+    >
+      <ArrowDropDown
+        className="Green"
+      />
+    </span>
+    <span
+      className="WowValue"
+    >
+      -0.02
+      %
+    </span>
+  </span>
+</div>
+`;
+
 exports[`WoWDataCell renders a positive change 1`] = `
 <div
   className="PaddedCell"
@@ -36,6 +60,30 @@ exports[`WoWDataCell renders a positive change 1`] = `
     >
       <ArrowDropUp
         className="Green"
+      />
+    </span>
+    <span
+      className="WowValue"
+    >
+      0.1
+      %
+    </span>
+  </span>
+</div>
+`;
+
+exports[`WoWDataCell renders a positive change when reversed 1`] = `
+<div
+  className="PaddedCell"
+>
+  <span
+    className="WowWrapper"
+  >
+    <span
+      className="WowCaret"
+    >
+      <ArrowDropUp
+        className="Red"
       />
     </span>
     <span
