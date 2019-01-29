@@ -4,25 +4,6 @@ exports[`Signals Page Component renders correctly with title 1`] = `
 <Page
   empty={Object {}}
   pass="through"
-  secondaryActions={
-    Array [
-      Object {
-        "content": <span>
-          Learn more about Signals 
-          <OpenInNew
-            size={13}
-            style={
-              Object {
-                "marginTop": "-0.18em",
-              }
-            }
-          />
-        </span>,
-        "external": true,
-        "to": "https://www.sparkpost.com/docs/signals/overview/",
-      },
-    ]
-  }
   title="test title"
 />
 `;
@@ -31,25 +12,6 @@ exports[`Signals Page Component renders with default title 1`] = `
 <Page
   empty={Object {}}
   pass="through"
-  secondaryActions={
-    Array [
-      Object {
-        "content": <span>
-          Learn more about Signals 
-          <OpenInNew
-            size={13}
-            style={
-              Object {
-                "marginTop": "-0.18em",
-              }
-            }
-          />
-        </span>,
-        "external": true,
-        "to": "https://www.sparkpost.com/docs/signals/overview/",
-      },
-    ]
-  }
   title="Signals"
 />
 `;

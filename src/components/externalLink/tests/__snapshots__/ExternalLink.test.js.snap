@@ -8,6 +8,11 @@ exports[`ExternalLink renders 1`] = `
    
   <OpenInNew
     size={13}
+    style={
+      Object {
+        "marginTop": "-0.1em",
+      }
+    }
   />
 </UnstyledLink>
 `;

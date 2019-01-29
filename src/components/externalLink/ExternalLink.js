@@ -8,7 +8,7 @@ export default function ExternalLink({ children, ...props }) {
       {...props}
       external
     >
-      {children} <OpenInNew size={13} />
+      {children} <OpenInNew size={13} style={{ marginTop: '-0.1em' }}/>
     </UnstyledLink>
   );
 }

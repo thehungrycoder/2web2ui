@@ -11,6 +11,7 @@ exports[`Signals Overview Page renders page 1`] = `
   }
   title="Signals Overview"
 >
+  <OverviewHelpCopy />
   <Connect(withRouter(Connect(HealthScoreOverview))) />
   <Connect(withRouter(Connect(SpamTrapOverview))) />
   <Connect(withRouter(Connect(EngagementRecencyOverview))) />
