@@ -17,24 +17,36 @@ export const TypeaheadItem = ({ id, label }) => (
 );
 
 export class Typeahead extends Component {
+  static defaultProps = {
+    name: 'subaccount',
+    results: []
+  }
+
   state = {
+    inputValue: '',
     matches: []
   }
 
-  static defaultProps = {
-    name: 'subaccount'
-  };
+  componentDidMount() {
+    this.updateMatches(this.state.inputValue);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.results.length && this.props.results.length) {
+      this.updateMatches(this.state.inputValue);
+    }
+  }
 
   componentWillUnmount() {
-    this.handleInputValueChange.cancel();
+    this.updateMatches.cancel();
   }
 
   // note, sorting large result lists can be expensive
-  handleInputValueChange = debounce((inputValue) => {
+  updateMatches = debounce((inputValue) => {
     const { itemToString, maxNumberOfResults = 100, results = []} = this.props;
-    const matches = sortMatch(results, inputValue, itemToString).slice(0, maxNumberOfResults);
+    const matches = inputValue ? sortMatch(results, inputValue, itemToString) : results;
 
-    this.setState({ matches });
+    this.setState({ inputValue, matches: matches.slice(0, maxNumberOfResults) });
   }, 300)
 
   handleStateChange = (changes, downshift) => {
@@ -45,15 +57,13 @@ export class Typeahead extends Component {
   }
 
   typeaheadFn = ({
+    clearSelection,
     getInputProps,
     getItemProps,
-    getLabelProps,
     highlightedIndex,
-    inputValue,
+    isOpen,
     openMenu,
-    selectedItem,
-    clearSelection,
-    isOpen
+    selectedItem
   }) => {
     const {
       disabled,
@@ -67,10 +77,11 @@ export class Typeahead extends Component {
       renderItem
     } = this.props;
     const { matches } = this.state;
-    const items = matches.map((item, index) => ({
-      ...getItemProps({ item, index }),
+    const items = matches.map((item, index) => getItemProps({
       content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
-      highlighted: highlightedIndex === index
+      highlighted: highlightedIndex === index,
+      index,
+      item
     }));
 
     const listClasses = cx('List', {
@@ -112,7 +123,7 @@ export class Typeahead extends Component {
       <Downshift
         itemToString={itemToString}
         onChange={onChange}
-        onInputValueChange={this.handleInputValueChange}
+        onInputValueChange={this.updateMatches}
         onStateChange={this.handleStateChange}
         selectedItem={selectedItem}
       >
@@ -121,7 +132,3 @@ export class Typeahead extends Component {
     );
   }
 }
-
-Typeahead.defaultProps = {
-  results: []
-};

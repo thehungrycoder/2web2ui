@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Typeahead render function renders a typeahead item 1`] = `
+exports[`Typeahead TypeaheadItem renders a typeahead item 1`] = `
 <div
   className="Item"
 >
@@ -13,51 +13,7 @@ exports[`Typeahead render function renders a typeahead item 1`] = `
 </div>
 `;
 
-exports[`Typeahead render function should render the list 1`] = `
-<div
-  className="Typeahead"
->
-  <ActionList
-    actions={Array []}
-    className="List"
-    groupByKey="section"
-    maxHeight={300}
-  />
-  <TextField
-    connectRight={null}
-    data-lpignore={true}
-    error={null}
-    placeholder="None"
-    readOnly={false}
-    resize="both"
-    type="text"
-  />
-</div>
-`;
-
-exports[`Typeahead render function should render the list with custom maxHeight 1`] = `
-<div
-  className="Typeahead"
->
-  <ActionList
-    actions={Array []}
-    className="List"
-    groupByKey="section"
-    maxHeight={999}
-  />
-  <TextField
-    connectRight={null}
-    data-lpignore={true}
-    error={null}
-    placeholder="None"
-    readOnly={false}
-    resize="both"
-    type="text"
-  />
-</div>
-`;
-
-exports[`Typeahead render function should render the list with matches after input change 1`] = `
+exports[`Typeahead render function renders list of matches 1`] = `
 <div
   className="Typeahead"
 >
@@ -74,6 +30,26 @@ exports[`Typeahead render function should render the list with matches after inp
           "index": 0,
           "item": "apples",
         },
+        Object {
+          "content": <div
+            className="Item"
+          >
+            bananas
+          </div>,
+          "highlighted": false,
+          "index": 1,
+          "item": "bananas",
+        },
+        Object {
+          "content": <div
+            className="Item"
+          >
+            cauliflower
+          </div>,
+          "highlighted": false,
+          "index": 2,
+          "item": "cauliflower",
+        },
       ]
     }
     className="List"
@@ -84,19 +60,12 @@ exports[`Typeahead render function should render the list with matches after inp
     connectRight={null}
     data-lpignore={true}
     error={null}
+    id="subaccount"
+    name="subaccount"
     placeholder="None"
     readOnly={false}
     resize="both"
     type="text"
   />
 </div>
-`;
-
-exports[`Typeahead render function should render with selected item and not disabled 1`] = `
-<Button
-  onClick={[MockFunction]}
-  size="default"
->
-  Clear
-</Button>
 `;
