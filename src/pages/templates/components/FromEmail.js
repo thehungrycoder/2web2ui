@@ -15,14 +15,7 @@ import styles from './FromEmail.module.scss';
  */
 class FromEmail extends Component {
   state = {
-    matches: [],
-    value: ''
-  }
-
-  static getDerivedStateFromProps(props) {
-    return {
-      value: props.value
-    };
+    matches: []
   }
 
   componentWillUnmount() {
@@ -30,7 +23,6 @@ class FromEmail extends Component {
   }
 
   handleInputValueChange = (value) => {
-    this.setState({ value });
     this.updateMatches(value);
   }
 
@@ -70,8 +62,8 @@ class FromEmail extends Component {
   }, 300);
 
   render() {
-    const { domains, onChange, ...inputProps } = this.props;
-    const { matches, value } = this.state;
+    const { domains, value, ...inputProps } = this.props;
+    const { matches } = this.state;
 
     return (
       <Downshift
@@ -81,7 +73,7 @@ class FromEmail extends Component {
       >
         {(downshift) => (
           <div className={styles.Typeahead}>
-            <FromEmailInput {...inputProps} downshift={downshift} value={value} />
+            <FromEmailInput {...inputProps} downshift={downshift} />
             <FromEmailMenu downshift={downshift} items={matches}/>
           </div>
         )}

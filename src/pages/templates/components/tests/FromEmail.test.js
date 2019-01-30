@@ -26,12 +26,6 @@ describe('FromEmail', () => {
     expect(subject()).toHaveProp('selectedItem', 'test@a');
   });
 
-  it('renders input with value and menu with matches', () => {
-    const wrapper = subject();
-    wrapper.simulate('inputValueChange', 'brian@bananas'); // to populate matches
-    expect(wrapper.shallow()).toMatchSnapshot();
-  });
-
   it('calls onChange when state changes', () => {
     const onChange = jest.fn();
     const wrapper = subject({ onChange });
@@ -54,26 +48,34 @@ describe('FromEmail', () => {
     expect(setHighlightedIndex).toHaveBeenCalledWith(0);
   });
 
-  it('reset matches when value is missing an ampersand', () => {
+  it.each([
+    ['matches on value change', {
+      inputValue: 'brian@a',
+      matched: [
+        'brian@apples.com',
+        'brian@apricot.com',
+        'brian@aubergine.com'
+      ]
+    }],
+    ['excludes an exact match', {
+      inputValue: 'brian@bananas.com',
+      matched: []
+    }],
+    ['reset matches when value is missing an at sign', {
+      initialMatches: ['bananas.com'],
+      inputValue: 'brian',
+      matched: []
+    }]
+  ])('%s', (testName, { initialMatches, inputValue, matched }) => {
     const wrapper = subject();
 
-    wrapper.setState({ matches: ['bananas.com']}); // hydrate state
-    wrapper.simulate('inputValueChange', 'brian');
+    if (initialMatches) {
+      wrapper.setState({ matches: initialMatches });
+    }
 
-    expect(wrapper).toHaveState('matches', []);
-  });
+    wrapper.simulate('inputValueChange', inputValue);
 
-  it('matches on value change', () => {
-    const wrapper = subject();
-    wrapper.simulate('inputValueChange', 'brian@a');
-    expect(wrapper)
-      .toHaveState('matches', ['brian@apples.com', 'brian@apricot.com', 'brian@aubergine.com']);
-  });
-
-  it('excludes an exact match', () => {
-    const wrapper = subject();
-    wrapper.simulate('inputValueChange', 'brian@bananas.com');
-    expect(wrapper).toHaveState('matches', []);
+    expect(wrapper.shallow().find('FromEmailMenu')).toHaveProp('items', matched);
   });
 
   it('truncates matches to top 100', () => {
