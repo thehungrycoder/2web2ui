@@ -5,6 +5,7 @@ import cx from 'classnames';
 import { _getTableData } from 'src/actions/summaryChart';
 import { addFilters } from 'src/actions/reportOptions';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import { TableCollection, TableHeader, Unit, Loading } from 'src/components';
 import GroupByOption from './GroupByOption';
@@ -137,10 +138,15 @@ export class Table extends Component {
   }
 
   render() {
+    const { groupBy, hasSubaccounts, tableLoading, _getTableData } = this.props;
     return (
       <Panel>
         <Panel.Section>
-          <GroupByOption/>
+          <GroupByOption
+            _getTableData = {_getTableData}
+            groupBy = {groupBy}
+            hasSubaccounts = {hasSubaccounts}
+            tableLoading = {tableLoading} />
         </Panel.Section>
         {this.renderTable()}
       </Panel>
@@ -150,6 +156,7 @@ export class Table extends Component {
 
 const mapStateToProps = (state) => ({
   typeaheadCache: typeaheadCacheSelector(state),
+  hasSubaccounts: hasSubaccounts(state),
   ...state.summaryChart
 });
 export default connect(mapStateToProps, { _getTableData, addFilters })(Table);

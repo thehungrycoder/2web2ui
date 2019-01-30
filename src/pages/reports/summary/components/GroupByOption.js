@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Table.module.scss';
-import { connect } from 'react-redux';
-
 import { Checkbox, Grid, Select } from '@sparkpost/matchbox';
-import { _getTableData } from 'src/actions/summaryChart';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
-
 import _ from 'lodash';
 import { GROUP_CONFIG } from './tableConfig';
 
@@ -28,15 +23,25 @@ export class GroupByOption extends Component {
   }
 
   getSelectOptions = () => {
-    const domainOmittedGroup = this.state.topDomainsOnly ? _.omit(GROUP_CONFIG, 'domain') : _.omit(GROUP_CONFIG, 'watched-domain');
-    const options = _.keys(domainOmittedGroup).map((key) => ({
-      value: key,
-      label: domainOmittedGroup[key].label
-    }));
+    const { hasSubaccounts } = this.props;
+    const { topDomainsOnly } = this.state;
 
-    if (!this.props.hasSubaccounts) {
-      _.remove(options, { value: 'subaccount' });
-    }
+    const filteredOptionsKeys = _.reduce(GROUP_CONFIG, (accumulator, value, key) => {
+      if (
+        (key === 'subaccount' && !hasSubaccounts) ||
+        (key === 'domain' && topDomainsOnly) ||
+        (key === 'watched-domain' && !topDomainsOnly)
+      ) {
+        return accumulator; // ignore
+      }
+      accumulator.push(key);
+      return accumulator;
+    },[]);
+
+    const options = filteredOptionsKeys.map((key) => ({
+      value: key,
+      label: GROUP_CONFIG[key].label
+    }));
 
     return options;
   }
@@ -46,7 +51,7 @@ export class GroupByOption extends Component {
     const { topDomainsOnly } = this.state;
 
     //Only show 'Top Domains Only' checkbox when on the recipient domains grouping
-    if (!(groupBy === 'watched-domain' || groupBy === 'domain')) {
+    if ((groupBy !== 'watched-domain' && groupBy !== 'domain')) {
       return null;
     }
     return (
@@ -63,14 +68,15 @@ export class GroupByOption extends Component {
   }
 
   render() {
+    const { groupBy, tableLoading } = this.props;
     return (
       <Grid>
         <Grid.Column xs={12} md={5} lg={4}>
           <Select
             label='Group By'
             options={this.getSelectOptions()}
-            value={this.props.groupBy}
-            disabled={this.props.tableLoading}
+            value={groupBy}
+            disabled={tableLoading}
             onChange={this.handleGroupChange}/>
         </Grid.Column>
         <Grid.Column xs={12} md={4} mdOffset={3} lg={3} lgOffset={5}>
@@ -81,8 +87,4 @@ export class GroupByOption extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  hasSubaccounts: hasSubaccounts(state),
-  ...state.summaryChart
-});
-export default connect(mapStateToProps, { _getTableData })(GroupByOption);
+export default GroupByOption;

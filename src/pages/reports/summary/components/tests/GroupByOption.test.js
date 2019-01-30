@@ -9,14 +9,12 @@ describe('Group By Option', () => {
   const props = {
     _getTableData: jest.fn(),
     groupBy: 'watched-domain',
-    tableData: [],
     tableLoading: false,
     hasSubaccounts: false
   };
 
   beforeEach(() => {
     wrapper = shallow(<GroupByOption {...props} />);
-    wrapper.setState({ topDomainsOnly: true });
   });
 
   it('should render correctly with both selector and checkbox', () => {
@@ -25,7 +23,7 @@ describe('Group By Option', () => {
 
   it('should render correctly with selector only and not the checkbox', () => {
     wrapper.setProps({ groupBy: 'campaign' });
-    expect(wrapper.find('Checkbox')).toHaveLength(0);
+    expect(wrapper.find('Checkbox')).not.toExist();
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -57,15 +55,15 @@ describe('Group By Option', () => {
 
   it('should make new domain api call when unchecking the "Only Top Domains" checkbox', () => {
     wrapper.setState({ topDomainsOnly: true });
-    wrapper.find('Checkbox').simulate('change', {});
+    wrapper.find('Checkbox').simulate('change');
     expect(props._getTableData).toHaveBeenCalledWith({ groupBy: 'domain' });
-    expect(wrapper.find('Checkbox').props().checked).toEqual(false);
+    expect(wrapper.find('Checkbox')).toHaveProp('checked', false);
   });
 
   it('should make new watched-domain api call when checking the "Only Top Domains" checkbox', () => {
     wrapper.setState({ topDomainsOnly: false });
-    wrapper.find('Checkbox').simulate('change', {});
+    wrapper.find('Checkbox').simulate('change');
     expect(props._getTableData).toHaveBeenCalledWith({ groupBy: 'watched-domain' });
-    expect(wrapper.find('Checkbox').props().checked).toEqual(true);
+    expect(wrapper.find('Checkbox')).toHaveProp('checked', true);
   });
 });

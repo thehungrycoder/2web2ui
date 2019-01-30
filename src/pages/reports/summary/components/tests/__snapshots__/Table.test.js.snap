@@ -165,7 +165,12 @@ exports[`Summary Table  should render with data 1`] = `
 exports[`Summary Table  should render with no data 1`] = `
 <Panel>
   <Panel.Section>
-    <Connect(GroupByOption) />
+    <GroupByOption
+      _getTableData={[MockFunction]}
+      groupBy="domain"
+      hasSubaccounts={false}
+      tableLoading={false}
+    />
   </Panel.Section>
   <Empty
     message="There is no data to display"

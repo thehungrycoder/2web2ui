@@ -20,7 +20,8 @@ describe('Summary Table ', () => {
       { type: 'Subaccount', id: 555, value: 'sub 1 name' }
     ],
     tableData: [],
-    tableLoading: false
+    tableLoading: false,
+    hasSubaccounts: false
   };
 
   const data = [
