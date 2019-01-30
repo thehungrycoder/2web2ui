@@ -5,7 +5,7 @@ Array [
   Object {
     "content": <React.Fragment>
       <strong>
-        Very few of your recipients have recently engaged.
+        Few of your recipients have recently engaged.
       </strong>
       <br />
       Engagement is a key factor in how mailbox providers evaluate your reputation, and this low engagement may hurt your email deliverability. Be sure you're sending relevant and desired messages.
