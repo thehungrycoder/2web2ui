@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Typeahead render function renders a typeahead item 1`] = `
+exports[`Typeahead TypeaheadItem renders a typeahead item 1`] = `
 <div
   className="Item"
 >
@@ -13,7 +13,7 @@ exports[`Typeahead render function renders a typeahead item 1`] = `
 </div>
 `;
 
-exports[`Typeahead render function should render the list 1`] = `
+exports[`Typeahead render function renders list of matches 1`] = `
 <div
   className="Typeahead"
 >
@@ -54,25 +54,18 @@ exports[`Typeahead render function should render the list 1`] = `
     }
     className="List"
     groupByKey="section"
-    maxHeight="300"
+    maxHeight={300}
   />
   <TextField
     connectRight={null}
     data-lpignore={true}
     error={null}
+    id="subaccount"
+    name="subaccount"
     placeholder="None"
     readOnly={false}
     resize="both"
     type="text"
   />
 </div>
-`;
-
-exports[`Typeahead render function should render with selected item and not disabled 1`] = `
-<Button
-  onClick={[MockFunction]}
-  size="default"
->
-  Clear
-</Button>
 `;

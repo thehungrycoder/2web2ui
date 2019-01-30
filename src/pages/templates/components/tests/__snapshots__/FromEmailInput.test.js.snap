@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FromEmailInput renders text field 1`] = `
+<TextField
+  resize="both"
+  type="text"
+/>
+`;
+
+exports[`FromEmailInput renders text field with an error when not open 1`] = `
+<TextField
+  error="Oh no!"
+  resize="both"
+  type="text"
+/>
+`;
+
+exports[`FromEmailInput renders text field without an error when open 1`] = `
+<TextField
+  resize="both"
+  type="text"
+/>
+`;

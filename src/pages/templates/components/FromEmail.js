@@ -1,9 +1,10 @@
 import Downshift from 'downshift';
+import debounce from 'lodash/debounce';
 import React, { Component } from 'react';
-import { ActionList, TextField } from '@sparkpost/matchbox';
-import cx from 'classnames';
-
 import sortMatch from 'src/helpers/sortMatch';
+
+import FromEmailInput from './FromEmailInput';
+import FromEmailMenu from './FromEmailMenu';
 import styles from './FromEmail.module.scss';
 
 /**
@@ -12,24 +13,17 @@ import styles from './FromEmail.module.scss';
  * https://github.com/paypal/downshift#oninputvaluechange
  * https://github.com/paypal/downshift/issues/217
  */
-export class FromEmail extends Component {
-
+class FromEmail extends Component {
   state = {
-    value: ''
+    matches: []
   }
 
-  componentDidMount() {
-    this.setState({ value: this.props.value });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      this.setState({ value: nextProps.value });
-    }
+  componentWillUnmount() {
+    this.updateMatches.cancel();
   }
 
   handleInputValueChange = (value) => {
-    this.setState({ value });
+    this.updateMatches(value);
   }
 
   handleStateChange = (changes, downshift) => {
@@ -46,75 +40,46 @@ export class FromEmail extends Component {
     }
   }
 
-  getMatches = (inputValue, selectedItem) => {
-    const parts = inputValue.split('@');
-    let matches = [];
+  // note, depending on size of domains this calculation to find matches could be expensive
+  updateMatches = debounce((nextValue) => {
+    const { domains, maxNumberOfResults = 100 } = this.props;
+    const [inputLocalPart] = nextValue.split('@');
 
-    // Show matches as soon as '@' exists
-    if (parts.length > 1) {
-      // Removes selected domain from options
-      matches = this.props.domains.reduce((options, { domain }) => {
-        if (!selectedItem || parts[1] !== domain) {
-          options.push(`${parts[0]}@${domain}`);
-        }
-        return options;
-      }, []);
-
-      matches = sortMatch(matches, inputValue, (item) => item);
+    if (!/@/.test(nextValue)) {
+      return this.setState({ matches: []});
     }
 
-    return matches;
-  }
-
-  typeaheadFn = ({
-    getInputProps,
-    getItemProps,
-    highlightedIndex,
-    inputValue,
-    selectedItem,
-    isOpen
-  }) => {
-    const { domains, onChange, value, error, ...rest } = this.props;
-    let matches = this.getMatches(inputValue, selectedItem);
-
-    // Create ActionList actions from matches
-    matches = matches.map((item, index) => getItemProps({
-      index, item,
-      content: item,
-      highlighted: highlightedIndex === index
-    }));
-
-    const textFieldProps = getInputProps({ ...rest, error: !isOpen && error ? error : undefined, value: this.state.value });
-    const listClasses = cx(styles.List, (isOpen && matches.length) && styles.open);
-
-    return (
-      <div className={styles.Typeahead}>
-        <TextField {...textFieldProps} />
-        <ActionList className={listClasses} actions={matches} />
-      </div>
+    const matches = sortMatch(
+      domains.map(({ domain }) => `${inputLocalPart}@${domain}`),
+      nextValue
     );
-  }
+    // note, exclude the first match if it is the current input value
+    const begin = matches[0] === nextValue ? 1 : 0;
+
+    this.setState({
+      matches: matches.slice(begin, maxNumberOfResults + begin)
+    });
+  }, 300);
 
   render() {
+    const { domains, value, ...inputProps } = this.props;
+    const { matches } = this.state;
+
     return (
       <Downshift
         onInputValueChange={this.handleInputValueChange}
         onStateChange={this.handleStateChange}
-        selectedItem={this.state.value} >
-        {this.typeaheadFn}
+        selectedItem={value}
+      >
+        {(downshift) => (
+          <div className={styles.Typeahead}>
+            <FromEmailInput {...inputProps} downshift={downshift} />
+            <FromEmailMenu downshift={downshift} items={matches}/>
+          </div>
+        )}
       </Downshift>
     );
   }
 }
 
-const FromEmailWrapper = ({ input, meta, ...rest }) => {
-  const { active, error, touched } = meta;
-  return (
-    <FromEmail
-      {...input}
-      error={!active && touched && error ? error : undefined}
-      {...rest} />
-  );
-};
-
-export default FromEmailWrapper;
+export default FromEmail;

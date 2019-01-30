@@ -57,6 +57,7 @@ export default class ImportSnippetPanel extends React.Component {
               snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
             )}
             label="Snippet"
+            name="snippetTypeahead"
             onChange={this.handleChange}
             placeholder={snippets.length === 0 ? '' : 'Type to search...'}
             renderItem={({ id, name }) => (

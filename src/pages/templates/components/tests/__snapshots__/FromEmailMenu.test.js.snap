@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FromEmailMenu renders action list 1`] = `
+<ActionList
+  actions={
+    Array [
+      Object {
+        "content": "test@a.com",
+        "highlighted": false,
+        "index": 0,
+        "item": "test@a.com",
+      },
+      Object {
+        "content": "test@b.com",
+        "highlighted": false,
+        "index": 1,
+        "item": "test@b.com",
+      },
+      Object {
+        "content": "test@c.com",
+        "highlighted": false,
+        "index": 2,
+        "item": "test@c.com",
+      },
+    ]
+  }
+  className="List"
+  groupByKey="section"
+  maxHeight={300}
+/>
+`;
+
+exports[`FromEmailMenu renders action list as open 1`] = `
+<ActionList
+  actions={
+    Array [
+      Object {
+        "content": "test@a.com",
+        "highlighted": false,
+        "index": 0,
+        "item": "test@a.com",
+      },
+      Object {
+        "content": "test@b.com",
+        "highlighted": false,
+        "index": 1,
+        "item": "test@b.com",
+      },
+      Object {
+        "content": "test@c.com",
+        "highlighted": false,
+        "index": 2,
+        "item": "test@c.com",
+      },
+    ]
+  }
+  className="List open"
+  groupByKey="section"
+  maxHeight={300}
+/>
+`;
+
+exports[`FromEmailMenu renders action list with second item highlighted 1`] = `
+<ActionList
+  actions={
+    Array [
+      Object {
+        "content": "test@a.com",
+        "highlighted": false,
+        "index": 0,
+        "item": "test@a.com",
+      },
+      Object {
+        "content": "test@b.com",
+        "highlighted": true,
+        "index": 1,
+        "item": "test@b.com",
+      },
+      Object {
+        "content": "test@c.com",
+        "highlighted": false,
+        "index": 2,
+        "item": "test@c.com",
+      },
+    ]
+  }
+  className="List"
+  groupByKey="section"
+  maxHeight={300}
+/>
+`;

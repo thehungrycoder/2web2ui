@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FromEmailWrapper renders input 1`] = `
+<FromEmail
+  label="Test Wrapper"
+  onChange={[MockFunction]}
+/>
+`;
+
+exports[`FromEmailWrapper renders input with an error message 1`] = `
+<FromEmail
+  error="Oh no!"
+  label="Test Wrapper"
+  onChange={[MockFunction]}
+/>
+`;

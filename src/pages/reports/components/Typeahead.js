@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Downshift from 'downshift';
 import classnames from 'classnames';
-import _ from 'lodash';
+import debounce from 'lodash/debounce';
 import { METRICS_API_LIMIT, TYPEAHEAD_LIMIT } from '../../../constants';
 import { refreshTypeaheadCache } from 'src/actions/reportOptions';
 import sortMatch from 'src/helpers/sortMatch';
@@ -21,11 +21,14 @@ const staticItemTypes = ['Template', 'Subaccount', 'Sending Domain'];
 
 export class Typeahead extends Component {
   state = {
-    inputValue: '',
     matches: [],
     calculatingMatches: false,
     pattern: null
   };
+
+  componentWillUnmount() {
+    this.updateLookAhead.cancel();
+  }
 
   /**
    * Returns all matches of the given types that match a pattern.
@@ -47,7 +50,7 @@ export class Typeahead extends Component {
    * appending the results to the existing matches.
    *
    */
-  updateLookAhead = (pattern) => {
+  updateLookAhead = debounce((pattern) => {
     if (!pattern || pattern.length < 2) {
       this.setState({ matches: [], calculatingMatches: false, pattern: null });
       return Promise.resolve();
@@ -67,13 +70,7 @@ export class Typeahead extends Component {
         this.setState({ calculatingMatches: false, matches: allMatches });
       }
     });
-  };
-
-  updateLookAheadDebounced = _.debounce(this.updateLookAhead, 250);
-
-  handleFieldChange = (e) => {
-    this.updateLookAheadDebounced(e.target.value);
-  };
+  }, 300);
 
   // Pass only item selection events to mask the
   // case where we call Downshift's clearSelection() which triggers
@@ -112,11 +109,10 @@ export class Typeahead extends Component {
     const listClasses = classnames(styles.List, isOpen && mappedMatches.length && styles.open);
     return (
       <div className={styles.Typeahead}>
-        <div className={listClasses}><ActionList actions={mappedMatches} /></div>
+        <div className={listClasses}><ActionList actions={mappedMatches} maxHeight={300} /></div>
         <TextField {...getInputProps({
           placeholder,
-          onFocus: clearSelection,
-          onChange: this.handleFieldChange
+          onFocus: clearSelection
         })}
         suffix={<MatchesLoading isLoading={this.state.calculatingMatches}/>}
         />
@@ -125,9 +121,15 @@ export class Typeahead extends Component {
   };
 
   render() {
-    return <Downshift onChange={this.handleDownshiftChange} itemToString={() => ''}>
-      {this.onTypeahead}
-    </Downshift>;
+    return (
+      <Downshift
+        itemToString={() => ''}
+        onChange={this.handleDownshiftChange}
+        onInputValueChange={this.updateLookAhead}
+      >
+        {this.onTypeahead}
+      </Downshift>
+    );
   }
 }
 

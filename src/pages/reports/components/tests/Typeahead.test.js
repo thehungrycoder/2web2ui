@@ -2,6 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Typeahead } from '../Typeahead';
 
+jest.mock('lodash/debounce', () => jest.fn((fn) => {
+  fn.cancel = jest.fn();
+  return fn;
+}));
+
 describe('Component: Typeahead', () => {
   let props;
   let wrapper;
@@ -45,24 +50,23 @@ describe('Component: Typeahead', () => {
   });
 
   it('should trigger on field change', () => {
-    wrapper.instance().handleFieldChange({ target: { value: 'cros' }});
-    wrapper.instance().updateLookAheadDebounced.flush(); // forces debounced calls to execute
+    wrapper.simulate('inputValueChange', 'cros');
     expect(props.refreshTypeaheadCache).toHaveBeenCalledTimes(1);
   });
 
   it('should produce matches on search', () => {
-    wrapper.instance().updateLookAhead('cross');
+    wrapper.simulate('inputValueChange', 'cross');
     expect(wrapper.state().matches).toEqual(defaultCrossMatches);
   });
 
   it('should produce no matches on empty query', () => {
-    wrapper.instance().updateLookAhead('');
+    wrapper.simulate('inputValueChange', '');
     expect(wrapper.state().matches).toEqual([]);
   });
 
   it('should first show synchronous matches while waiting for async calls to finish', () => {
     const input = 'cross';
-    wrapper.instance().updateLookAhead(input);
+    wrapper.simulate('inputValueChange', input);
     expect(wrapper.state().calculatingMatches).toEqual(true);
     expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
   });
@@ -100,5 +104,11 @@ describe('Component: Typeahead', () => {
   it('should not call onSelect on clear', () => {
     wrapper.instance().handleDownshiftChange(null);
     expect(props.onSelect).not.toHaveBeenCalled();
+  });
+
+  it('should cancel any debounced lookahead updates', () => {
+    const cancel = jest.spyOn(wrapper.instance().updateLookAhead, 'cancel');
+    wrapper.unmount();
+    expect(cancel).toHaveBeenCalled();
   });
 });

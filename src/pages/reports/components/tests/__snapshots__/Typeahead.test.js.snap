@@ -29,6 +29,7 @@ exports[`Component: Typeahead should first show synchronous matches while waitin
         ]
       }
       groupByKey="section"
+      maxHeight={300}
     />
   </div>
   <TextField
@@ -53,6 +54,7 @@ exports[`Component: Typeahead should not make any api requests nor have any matc
     <ActionList
       actions={Array []}
       groupByKey="section"
+      maxHeight={300}
     />
   </div>
   <TextField
@@ -126,6 +128,7 @@ exports[`Component: Typeahead should show sync and async matches 1`] = `
         ]
       }
       groupByKey="section"
+      maxHeight={300}
     />
   </div>
   <TextField
