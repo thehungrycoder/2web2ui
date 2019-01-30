@@ -28,6 +28,7 @@ exports[`ImportSnippetPanel renders panel 1`] = `
       helpText=""
       itemToString={[Function]}
       label="Snippet"
+      name="snippetTypeahead"
       onChange={[Function]}
       placeholder="Type to search..."
       renderItem={[Function]}
@@ -90,6 +91,7 @@ exports[`ImportSnippetPanel renders panel with no snippets 1`] = `
       }
       itemToString={[Function]}
       label="Snippet"
+      name="snippetTypeahead"
       onChange={[Function]}
       placeholder=""
       renderItem={[Function]}
