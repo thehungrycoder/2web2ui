@@ -57,7 +57,7 @@ export function changePage(currentPage) {
           url: '/v1/events/message',
           params,
           showErrorAlert: false,
-          currentPageIndex
+          currentPageIndex //may need to move to context object (see actions/templates)
         }
       }));
     }

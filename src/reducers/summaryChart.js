@@ -11,7 +11,7 @@ const initialState = {
   groupBy: 'aggregate'
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
     case 'FETCH_CHART_DATA_PENDING':
       return { ...state, chartLoading: true };
@@ -20,8 +20,10 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_CHART_DATA_FAIL':
       return { ...state, chartLoading: false };
 
-    case 'FETCH_TABLE_DATA_PENDING':
-      return { ...state, tableLoading: true };
+    case 'FETCH_TABLE_DATA_PENDING': {
+      const { context: { groupBy }} = meta;
+      return { ...state, tableLoading: true, tableData: [], groupBy };
+    }
 
     case 'FETCH_TABLE_DATA_SUCCESS':
     case 'FETCH_TABLE_DATA_FAIL':
@@ -33,8 +35,8 @@ export default (state = initialState, { type, payload }) => {
     }
 
     case 'REFRESH_SUMMARY_TABLE': {
-      const { data, metrics, groupBy } = payload;
-      return { ...state, tableData: transformData(data, metrics), groupBy };
+      const { data, metrics } = payload;
+      return { ...state, tableData: transformData(data, metrics) };
     }
 
     default:

@@ -108,7 +108,7 @@ describe('Action Creator: Refresh Summary Report', () => {
       metricsActions.fetch = jest.fn((a) => Promise.resolve(fetchResult));
     });
 
-    test('_getChartData should dispatch the correct actions', async() => {
+    test('_getChartData should dispatch the correct actions', async () => {
       const params = { precision: 'test' };
       const metrics = {};
 
@@ -130,7 +130,7 @@ describe('Action Creator: Refresh Summary Report', () => {
       });
     });
 
-    test('_getTableData should dispatch the correct actions, with passed in args', async() => {
+    test('_getTableData should dispatch the correct actions, with passed in args', async () => {
       const params = {};
       const groupBy = 'groupby-args';
       const metrics = 'metrics-args';
@@ -142,20 +142,20 @@ describe('Action Creator: Refresh Summary Report', () => {
       expect(metricsActions.fetch).toHaveBeenCalledWith({
         type: 'FETCH_TABLE_DATA',
         path: 'deliverability/groupby-args',
-        params
+        params,
+        context: { groupBy }
       });
 
       expect(dispatchMock).toHaveBeenLastCalledWith({
         type: 'REFRESH_SUMMARY_TABLE',
         payload: {
           data: fetchResult,
-          groupBy: 'groupby-args',
           metrics: 'metrics-args'
         }
       });
     });
 
-    test('_getTableData should dispatch the correct actions, with defaults', async() => {
+    test('_getTableData should dispatch the correct actions, with defaults', async () => {
       const params = {};
       testState.summaryChart.groupBy = 'groupby-state';
       testState.summaryChart.metrics = 'metrics-state';
@@ -167,14 +167,14 @@ describe('Action Creator: Refresh Summary Report', () => {
       expect(metricsActions.fetch).toHaveBeenCalledWith({
         type: 'FETCH_TABLE_DATA',
         path: 'deliverability/groupby-state',
-        params
+        params,
+        context: { groupBy: testState.summaryChart.groupBy }
       });
 
       expect(dispatchMock).toHaveBeenLastCalledWith({
         type: 'REFRESH_SUMMARY_TABLE',
         payload: {
           data: fetchResult,
-          groupBy: 'groupby-state',
           metrics: 'metrics-state'
         }
       });
@@ -192,7 +192,8 @@ describe('Action Creator: Refresh Summary Report', () => {
       expect(metricsActions.fetch).toHaveBeenCalledWith({
         type: 'FETCH_TABLE_DATA',
         path: 'deliverability',
-        params
+        params,
+        context: { groupBy: testState.summaryChart.groupBy }
       });
     });
 
