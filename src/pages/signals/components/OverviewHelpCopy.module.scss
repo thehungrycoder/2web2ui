@@ -1,0 +1,7 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Paragraph {
+  margin-top: rem(-21); // Offset Page margin bottom
+  margin-bottom: rem(21);
+  font-size: rem(13);
+}

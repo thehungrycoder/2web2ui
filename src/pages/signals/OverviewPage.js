@@ -8,6 +8,7 @@ import SpamTrapOverview from './containers/SpamTrapOverviewContainer';
 import FacetFilter from './components/filters/FacetFilter';
 import DateFilter from './components/filters/DateFilter';
 import SubaccountFilter from './components/filters/SubaccountFilter';
+import OverviewHelpCopy from './components/OverviewHelpCopy';
 
 export class OverviewPage extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ export class OverviewPage extends Component {
           </Fragment>
         }
       >
+        <OverviewHelpCopy />
         <HealthScoreOverview subaccounts={subaccounts} />
         <SpamTrapOverview subaccounts={subaccounts} />
         <EngagementRecencyOverview subaccounts={subaccounts} />

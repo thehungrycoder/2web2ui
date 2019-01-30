@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals OverviewHelpCopy Component renders correctly 1`] = `
+<Grid>
+  <Grid.Column
+    lg={5}
+    xs={12}
+  >
+    <p
+      className="Paragraph"
+    >
+      Compare your email health to the rest of the SparkPost network. Drill down into any issues you find to improve your email performance. Contact us if you have any questions! 
+      <ExternalLink
+        to="https://www.sparkpost.com/docs/signals/overview/#health-score"
+      >
+        Learn More
+      </ExternalLink>
+    </p>
+  </Grid.Column>
+</Grid>
+`;
