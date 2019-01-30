@@ -21,7 +21,6 @@ const staticItemTypes = ['Template', 'Subaccount', 'Sending Domain'];
 
 export class Typeahead extends Component {
   state = {
-    inputValue: '',
     matches: [],
     calculatingMatches: false,
     pattern: null
@@ -73,10 +72,6 @@ export class Typeahead extends Component {
     });
   }, 300);
 
-  handleFieldChange = (e) => {
-    this.updateLookAhead(e.target.value);
-  };
-
   // Pass only item selection events to mask the
   // case where we call Downshift's clearSelection() which triggers
   // onChange(null).
@@ -117,8 +112,7 @@ export class Typeahead extends Component {
         <div className={listClasses}><ActionList actions={mappedMatches} maxHeight={300} /></div>
         <TextField {...getInputProps({
           placeholder,
-          onFocus: clearSelection,
-          onChange: this.handleFieldChange
+          onFocus: clearSelection
         })}
         suffix={<MatchesLoading isLoading={this.state.calculatingMatches}/>}
         />
@@ -127,9 +121,15 @@ export class Typeahead extends Component {
   };
 
   render() {
-    return <Downshift onChange={this.handleDownshiftChange} itemToString={() => ''}>
-      {this.onTypeahead}
-    </Downshift>;
+    return (
+      <Downshift
+        itemToString={() => ''}
+        onChange={this.handleDownshiftChange}
+        onInputValueChange={this.updateLookAhead}
+      >
+        {this.onTypeahead}
+      </Downshift>
+    );
   }
 }
 

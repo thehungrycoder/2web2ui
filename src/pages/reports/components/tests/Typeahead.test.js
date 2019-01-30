@@ -50,23 +50,23 @@ describe('Component: Typeahead', () => {
   });
 
   it('should trigger on field change', () => {
-    wrapper.instance().handleFieldChange({ target: { value: 'cros' }});
+    wrapper.simulate('inputValueChange', 'cros');
     expect(props.refreshTypeaheadCache).toHaveBeenCalledTimes(1);
   });
 
   it('should produce matches on search', () => {
-    wrapper.instance().updateLookAhead('cross');
+    wrapper.simulate('inputValueChange', 'cross');
     expect(wrapper.state().matches).toEqual(defaultCrossMatches);
   });
 
   it('should produce no matches on empty query', () => {
-    wrapper.instance().updateLookAhead('');
+    wrapper.simulate('inputValueChange', '');
     expect(wrapper.state().matches).toEqual([]);
   });
 
   it('should first show synchronous matches while waiting for async calls to finish', () => {
     const input = 'cross';
-    wrapper.instance().updateLookAhead(input);
+    wrapper.simulate('inputValueChange', input);
     expect(wrapper.state().calculatingMatches).toEqual(true);
     expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
   });
