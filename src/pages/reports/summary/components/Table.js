@@ -143,10 +143,10 @@ export class Table extends Component {
       <Panel>
         <Panel.Section>
           <GroupByOption
-            _getTableData = {_getTableData}
-            groupBy = {groupBy}
-            hasSubaccounts = {hasSubaccounts}
-            tableLoading = {tableLoading} />
+            _getTableData={_getTableData}
+            groupBy={groupBy}
+            hasSubaccounts={hasSubaccounts}
+            tableLoading={tableLoading} />
         </Panel.Section>
         {this.renderTable()}
       </Panel>
