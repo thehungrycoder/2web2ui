@@ -1,15 +1,21 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
-export function fetch({ type = 'FETCH_METRICS', path, params = {}}) {
+export function fetch({ type = 'FETCH_METRICS', path, params = {}, context }) {
+  const meta = {
+    method: 'GET',
+    url: `/v1/metrics/${path}`,
+    params: {
+      ...params
+    }
+  };
+
+  if (context) {
+    meta.context = context;
+  }
+
   return sparkpostApiRequest({
     type,
-    meta: {
-      method: 'GET',
-      url: `/v1/metrics/${path}`,
-      params: {
-        ...params
-      }
-    }
+    meta
   });
 }
 

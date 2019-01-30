@@ -7,6 +7,10 @@ export const GROUP_CONFIG = {
     label: 'Recipient Domain',
     keyName: 'domain'
   },
+  'watched-domain': {
+    label: 'Recipient Domain',
+    keyName: 'watched_domain'
+  },
   'sending-domain': {
     label: 'Sending Domain',
     keyName: 'sending_domain'

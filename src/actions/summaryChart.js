@@ -69,7 +69,8 @@ export function _getTableData({ params, metrics, groupBy }) {
     const options = {
       type: 'FETCH_TABLE_DATA',
       path,
-      params
+      params,
+      context: { groupBy: activeGroup }
     };
 
     return dispatch(fetchMetrics(options)).then((results) => {
@@ -77,7 +78,6 @@ export function _getTableData({ params, metrics, groupBy }) {
         type: 'REFRESH_SUMMARY_TABLE',
         payload: {
           data: results,
-          groupBy: activeGroup,
           metrics: activeMetrics
         }
       });

@@ -8,17 +8,15 @@ import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import { TableCollection, TableHeader, Unit, Loading } from 'src/components';
+import GroupByOption from './GroupByOption';
 import { Empty } from 'src/components';
-import { Panel, Select, Grid, UnstyledLink } from '@sparkpost/matchbox';
+import { Panel, UnstyledLink } from '@sparkpost/matchbox';
 import { GROUP_CONFIG } from './tableConfig';
 import _ from 'lodash';
 
 import styles from './Table.module.scss';
 
 export class Table extends Component {
-  handleGroupChange = (e) => {
-    this.props._getTableData({ groupBy: e.target.value });
-  }
 
   handleRowClick = (item) => {
     this.props.addFilters([item]);
@@ -38,7 +36,7 @@ export class Table extends Component {
 
     const metricCols = metrics.map(({ label, key }) => ({
       key,
-      label: <div className={styles.RightAlign}>{ label }</div>,
+      label: <div className={styles.RightAlign}>{label}</div>,
       className: cx(styles.HeaderCell, styles.NumericalHeader),
       sortKey: isAggColumn ? null : key
     }));
@@ -70,7 +68,7 @@ export class Table extends Component {
         filter = { ...filter, value, id };
       }
 
-      const primaryCol = groupBy === 'aggregate' ? 'Aggregate Total' : <UnstyledLink onClick={() => this.handleRowClick(filter)}>{ value }</UnstyledLink>;
+      const primaryCol = groupBy === 'aggregate' ? 'Aggregate Total' : <UnstyledLink onClick={() => this.handleRowClick(filter)}>{value}</UnstyledLink>;
 
       const metricCols = metrics.map((metric) => (
         <div className={styles.RightAlign}>
@@ -85,16 +83,6 @@ export class Table extends Component {
   getDefaultSortColumn = () => {
     const { metrics } = this.props;
     return metrics[0].key;
-  }
-
-  getSelectOptions = () => {
-    const options = _.keys(GROUP_CONFIG).map((key) => ({ value: key, label: GROUP_CONFIG[key].label }));
-
-    if (!this.props.hasSubaccounts) {
-      _.remove(options, { value: 'subaccount' });
-    }
-
-    return options;
   }
 
   renderAggregateTable() {
@@ -150,22 +138,17 @@ export class Table extends Component {
   }
 
   render() {
+    const { groupBy, hasSubaccounts, tableLoading, _getTableData } = this.props;
     return (
       <Panel>
         <Panel.Section>
-          <Grid>
-            <Grid.Column xs={12} md={5} lg={4}>
-              <Select
-                label='Group By'
-                options={this.getSelectOptions()}
-                value={this.props.groupBy}
-                disabled={this.props.tableLoading}
-                onChange={this.handleGroupChange}/>
-            </Grid.Column>
-            <Grid.Column></Grid.Column>
-          </Grid>
+          <GroupByOption
+            _getTableData={_getTableData}
+            groupBy={groupBy}
+            hasSubaccounts={hasSubaccounts}
+            tableLoading={tableLoading} />
         </Panel.Section>
-        { this.renderTable() }
+        {this.renderTable()}
       </Panel>
     );
   }
