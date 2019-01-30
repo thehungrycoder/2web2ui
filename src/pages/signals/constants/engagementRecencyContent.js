@@ -96,7 +96,7 @@ const content = [
     condition: ({ c_14d }) => c_14d < 0.25,
     content: (
       <Fragment>
-        <strong>Very few of your recipients have recently engaged.</strong><br/>
+        <strong>Few of your recipients have recently engaged.</strong><br/>
         Engagement is a key factor in how mailbox providers evaluate your reputation, and this low engagement may hurt your email deliverability. Be sure you're sending relevant and desired messages.
       </Fragment>
     ),

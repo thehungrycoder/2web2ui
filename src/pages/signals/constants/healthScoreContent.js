@@ -13,8 +13,8 @@ const content = {
   'Hard Bounces': {
     content: (
       <Fragment>
-        <strong>You have a high rate of hard bounces.</strong><br/>
-        They could simply be typos or old addresses that once existed but have been abandoned and the account deleted by the mailbox provider. Removing these non-existent addresses from your recipient lists could improve your overall email deliverability.
+        <strong>Hard bounces are affecting your health score.</strong><br/>
+        It’s not unusual for lists to contain some typos or old addresses that once existed but now have been deleted by the mailbox provider. Removing these non-existent addresses from your recipient lists could improve your overall email deliverability.
       </Fragment>
     ),
     link: 'https://www.sparkpost.com/docs/signals/subscriber-acquisition/'
