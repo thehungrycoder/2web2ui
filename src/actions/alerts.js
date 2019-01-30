@@ -5,7 +5,7 @@ export function listAlerts() {
     type: 'LIST_ALERTS',
     meta: {
       method: 'GET',
-      url: '/v1/alerts',
+      url: '/labs/alerts',
       showErrorAlert: false
     }
   });
@@ -16,18 +16,18 @@ export function createAlert({ data }) {
     type: 'CREATE_ALERT',
     meta: {
       method: 'POST',
-      url: '/v1/alerts',
+      url: '/labs/alerts',
       data
     }
   });
 }
 
-export function updateAlert({ id, data }) {
+export function updateAlert({ id, ...data }) {
   return sparkpostApiRequest({
     type: 'UPDATE_ALERT',
     meta: {
       method: 'PUT',
-      url: `/v1/alerts/${id}`,
+      url: `/labs/alerts/${id}`,
       data
     }
   });
@@ -38,7 +38,7 @@ export function deleteAlert({ id }) {
     type: 'DELETE_ALERT',
     meta: {
       method: 'DELETE',
-      url: `/v1/alerts/${id}`
+      url: `/labs/alerts/${id}`
     }
   });
 }
