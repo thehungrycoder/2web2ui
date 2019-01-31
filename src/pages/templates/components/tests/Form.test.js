@@ -62,11 +62,16 @@ describe('Template Form', () => {
 
     // No domains available
     wrapper.setProps({ domains: []});
-    expect(wrapper.find('Field').at(3).props().helpText).toEqual('You do not have any verified sending domains to use.');
+    expect(wrapper.find('Field[name="content.from.email"]'))
+      .toHaveProp('helpText', 'You do not have any verified sending domains to use.');
 
     // No domains available for subaccount
     wrapper.setProps({ domains: [], subaccountId: 101 });
-    expect(wrapper.find('Field').at(3).props().helpText).toEqual('The selected subaccount does not have any verified sending domains.');
+    expect(wrapper.find('Field[name="content.from.email"]'))
+      .toHaveProp('helpText', 'The selected subaccount does not have any verified sending domains.');
+
+    wrapper.setProps({ domainsLoading: true });
+    expect(wrapper.find('Field[name="content.from.email"]')).toHaveProp('helpText', null);
   });
 
   it('should handle id validating correctly', () => {

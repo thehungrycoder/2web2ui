@@ -35,9 +35,9 @@ export default class Form extends Component {
   parseToggle = (value) => !!value
 
   fromEmailWarning() {
-    const { domains, subaccountId } = this.props;
+    const { domains, domainsLoading, subaccountId } = this.props;
 
-    if (!domains.length) {
+    if (!domainsLoading && !domains.length) {
       return subaccountId
         ? 'The selected subaccount does not have any verified sending domains.'
         : 'You do not have any verified sending domains to use.';

@@ -8,6 +8,7 @@ import Form from '../Form';
 
 const mapStateToProps = (state, props) => ({
   domains: selectDomainsBySubaccount(state, props),
+  domainsLoading: state.sendingDomains.listLoading,
   hasSubaccounts: hasSubaccounts(state)
 });
 
