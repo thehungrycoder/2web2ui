@@ -1,7 +1,6 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { Field } from 'redux-form';
-import config from 'src/config';
 
 // Components
 import { Panel } from '@sparkpost/matchbox';
@@ -30,16 +29,6 @@ export default class Form extends Component {
 
   componentDidMount() {
     this.props.listDomains();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { change, newTemplate, name } = this.props;
-    const { domains } = nextProps;
-
-    // If no verified sending domains, use sandbox
-    if (newTemplate && !domains.length) {
-      change(name, 'content.from.email', `${config.sandbox.localpart}@${config.sandbox.domain}`);
-    }
   }
 
   // Prevents unchecked value from equaling ""
