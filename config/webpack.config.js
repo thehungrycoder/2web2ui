@@ -23,6 +23,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const snapshotGenerator = require('../scripts/browsersSnapshotGen');
 
@@ -41,6 +42,7 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const criticalCssRegex = /critical\.scss$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -240,6 +242,13 @@ module.exports = function(webpackEnv) {
       splitChunks: {
         chunks: 'all',
         name: false,
+        cacheGroups: {
+          critical: {
+            test: criticalCssRegex,
+            name: 'critical',
+            enforce: true
+          }
+        },
       },
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985
@@ -431,6 +440,18 @@ module.exports = function(webpackEnv) {
                 'sass-loader'
               ),
             },
+            {
+              test: criticalCssRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: true,
+                },
+                'sass-loader'
+              ),
+              sideEffects: true
+            },
             /**
              * MDX is a tool that converts Markdown files to React components. This
              * loader uses MDX to create Page objects for Markdown files. As it
@@ -476,7 +497,8 @@ module.exports = function(webpackEnv) {
           },
           isEnvProduction
             ? {
-                minify: {
+              inlineSource: /critical/,
+              minify: {
                   removeComments: true,
                   collapseWhitespace: true,
                   removeRedundantAttributes: true,
@@ -492,6 +514,7 @@ module.exports = function(webpackEnv) {
             : undefined
         )
       ),
+      new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       isEnvProduction &&
@@ -619,7 +642,7 @@ module.exports = function(webpackEnv) {
         }),
         new webpack.DefinePlugin({
           SUPPORTED_BROWSERS: JSON.stringify(snapshotGenerator())
-        }),    
+        }),
       ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
