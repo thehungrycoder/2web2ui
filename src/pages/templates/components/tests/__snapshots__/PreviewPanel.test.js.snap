@@ -2,148 +2,132 @@
 
 exports[`renders AMP HTML on tab click 1`] = `
 <div
-  className="notranslate"
+  className="PreviewPanel notranslate"
 >
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={2}
+    tabs={
+      Array [
+        Object {
+          "content": "HTML",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Text",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "AMP HTML",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
   <div
-    className="PreviewPanel"
+    className="PreviewPanelWrapper"
   >
-    <Tabs
-      color="orange"
-      connectBelow={true}
-      selected={2}
-      tabs={
-        Array [
-          Object {
-            "content": "HTML",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Text",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "AMP HTML",
-            "onClick": [Function],
-          },
-        ]
-      }
+    <PreviewFrame
+      content="<h2>Test Template</h2>"
+      key="amp_html"
     />
-    <div
-      className="PreviewPanelWrapper"
-    >
-      <PreviewFrame
-        content="<h2>Test Template</h2>"
-        key="amp_html"
-      />
-    </div>
   </div>
 </div>
 `;
 
 exports[`renders HTML by default 1`] = `
 <div
-  className="notranslate"
+  className="PreviewPanel notranslate"
 >
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "HTML",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Text",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
   <div
-    className="PreviewPanel"
+    className="PreviewPanelWrapper"
   >
-    <Tabs
-      color="orange"
-      connectBelow={true}
-      selected={0}
-      tabs={
-        Array [
-          Object {
-            "content": "HTML",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Text",
-            "onClick": [Function],
-          },
-        ]
-      }
+    <PreviewFrame
+      content="<h1>Test Template</h1>"
+      key="html"
     />
-    <div
-      className="PreviewPanelWrapper"
-    >
-      <PreviewFrame
-        content="<h1>Test Template</h1>"
-        key="html"
-      />
-    </div>
   </div>
 </div>
 `;
 
 exports[`renders blank panel 1`] = `
 <div
-  className="notranslate"
+  className="PreviewPanel notranslate"
 >
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "HTML",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Text",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
   <div
-    className="PreviewPanel"
+    className="PreviewPanelWrapper"
   >
-    <Tabs
-      color="orange"
-      connectBelow={true}
-      selected={0}
-      tabs={
-        Array [
-          Object {
-            "content": "HTML",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Text",
-            "onClick": [Function],
-          },
-        ]
-      }
+    <PreviewFrame
+      content=""
+      key="html"
     />
-    <div
-      className="PreviewPanelWrapper"
-    >
-      <PreviewFrame
-        content=""
-        key="html"
-      />
-    </div>
   </div>
 </div>
 `;
 
 exports[`renders text on tab click 1`] = `
 <div
-  className="notranslate"
+  className="PreviewPanel notranslate"
 >
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={1}
+    tabs={
+      Array [
+        Object {
+          "content": "HTML",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "Text",
+          "onClick": [Function],
+        },
+      ]
+    }
+  />
   <div
-    className="PreviewPanel"
+    className="PreviewPanelWrapper"
   >
-    <Tabs
-      color="orange"
-      connectBelow={true}
-      selected={1}
-      tabs={
-        Array [
-          Object {
-            "content": "HTML",
-            "onClick": [Function],
-          },
-          Object {
-            "content": "Text",
-            "onClick": [Function],
-          },
-        ]
-      }
+    <PreviewFrame
+      content="<p style=\\"white-space: pre-wrap\\">Test Template</p>"
+      key="text"
     />
-    <div
-      className="PreviewPanelWrapper"
-    >
-      <PreviewFrame
-        content="<p style=\\"white-space: pre-wrap\\">Test Template</p>"
-        key="text"
-      />
-    </div>
   </div>
 </div>
 `;

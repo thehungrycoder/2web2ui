@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from '@sparkpost/matchbox';
+import classnames from 'classnames';
 
 import PreviewFrame from './PreviewFrame';
 import styles from './PreviewPanel.module.scss';
@@ -46,15 +47,12 @@ export default class PreviewPanel extends Component {
       : this.props[contentType];
 
     return (
-      <div className="notranslate">
-        <div className={styles.PreviewPanel}>
-          <Tabs selected={selectedTabIndex} tabs={tabs} />
-          <div className={styles.PreviewPanelWrapper}>
-            <PreviewFrame content={content} key={contentType} />
-          </div>
+      <div className={classnames(styles.PreviewPanel, 'notranslate')}>
+        <Tabs selected={selectedTabIndex} tabs={tabs} />
+        <div className={styles.PreviewPanelWrapper}>
+          <PreviewFrame content={content} key={contentType} />
         </div>
       </div>
-
     );
   }
 }
