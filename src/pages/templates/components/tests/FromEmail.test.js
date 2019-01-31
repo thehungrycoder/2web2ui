@@ -26,13 +26,13 @@ describe('FromEmail', () => {
     expect(subject()).toHaveProp('selectedItem', 'test@a');
   });
 
-  it('calls onChange when state changes', () => {
+  it('calls onChange when ', () => {
     const onChange = jest.fn();
     const wrapper = subject({ onChange });
-    const changes = { selectedItem: 'test@b' };
-    const downshift = { highlightedIndex: 1 };
 
-    wrapper.simulate('stateChange', changes, downshift);
+    wrapper.shallow()
+      .find('FromEmailInput')
+      .simulate('change', 'test@b');
 
     expect(onChange).toHaveBeenCalledWith('test@b');
   });
