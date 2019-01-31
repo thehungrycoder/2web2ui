@@ -54,7 +54,6 @@ exports[`Template Form should disable fields for read-only users 1`] = `
           Array [
             [Function],
             [Function],
-            [Function],
           ]
         }
       />
@@ -175,7 +174,6 @@ exports[`Template Form should render 1`] = `
         placeholder="example@email.com"
         validate={
           Array [
-            [Function],
             [Function],
             [Function],
           ]

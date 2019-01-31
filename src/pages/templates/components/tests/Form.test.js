@@ -91,40 +91,4 @@ describe('Template Form', () => {
     expect(parse('true')).toEqual(true);
     expect(parse(true)).toEqual(true);
   });
-
-  describe('domain validator', () => {
-    it('should not validate if input has no domain part', () => {
-      const result = wrapper.instance().validateDomain('email');
-      expect(result).toEqual(undefined);
-    });
-
-    it('should validate verified domain', () => {
-      wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
-      const result = wrapper.instance().validateDomain('email@valid.com');
-      expect(result).toEqual(undefined);
-    });
-
-    it('should validate sandbox domain', () => {
-      const result = wrapper.instance().validateDomain('sandbox@sparkpostbox.com');
-      expect(result).toEqual(undefined);
-    });
-
-    it('should validate unverified domain', () => {
-      wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
-      const result = wrapper.instance().validateDomain('email@notvalid.com');
-      expect(result).toEqual('Must use a verified sending domain');
-    });
-
-    it('should validate substituted domain', () => {
-      wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
-      const result = wrapper.instance().validateDomain('email@{{domain}}');
-      expect(result).toEqual(undefined);
-    });
-
-    it('should validate complicated substituted domain', () => {
-      wrapper.setProps({ domains: [{ domain: 'valid.com' }]});
-      const result = wrapper.instance().validateDomain('email@{{if sending_domain}}{{domain}}{{else}}domain.com{{end}}');
-      expect(result).toEqual(undefined);
-    });
-  });
 });

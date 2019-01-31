@@ -13,7 +13,7 @@ import FromEmailWrapper from './FromEmail';
 // Helpers & Validation
 import { required, slug } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { emailOrSubstitution, looseSubstitution } from './validation';
+import { emailOrSubstitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
@@ -40,21 +40,6 @@ export default class Form extends Component {
     if (newTemplate && !domains.length) {
       change(name, 'content.from.email', `${config.sandbox.localpart}@${config.sandbox.domain}`);
     }
-  }
-
-  validateDomain = (value) => {
-    const { domains } = this.props;
-
-    const parts = value.split('@');
-
-    if (parts.length > 1) {
-      const validSandboxDomain = parts[1] === config.sandbox.domain;
-      const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !looseSubstitution(parts[1]));
-
-      return validSandboxDomain || validDomain ? undefined : 'Must use a verified sending domain';
-    }
-
-    return undefined;
   }
 
   // Prevents unchecked value from equaling ""
@@ -115,7 +100,7 @@ export default class Form extends Component {
               placeholder='example@email.com'
               label='From Email'
               disabled={readOnly}
-              validate={[required, emailOrSubstitution, this.validateDomain]}
+              validate={[required, emailOrSubstitution]}
               domains={domains}
               helpText={this.fromEmailWarning()}
             />
