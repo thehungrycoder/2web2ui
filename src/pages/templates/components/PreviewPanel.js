@@ -46,12 +46,15 @@ export default class PreviewPanel extends Component {
       : this.props[contentType];
 
     return (
-      <div className={styles.PreviewPanel}>
-        <Tabs selected={selectedTabIndex} tabs={tabs} />
-        <div className={styles.PreviewPanelWrapper}>
-          <PreviewFrame content={content} key={contentType} />
+      <div className="notranslate">
+        <div className={styles.PreviewPanel}>
+          <Tabs selected={selectedTabIndex} tabs={tabs} />
+          <div className={styles.PreviewPanelWrapper}>
+            <PreviewFrame content={content} key={contentType} />
+          </div>
         </div>
       </div>
+
     );
   }
 }

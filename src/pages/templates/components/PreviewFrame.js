@@ -67,16 +67,14 @@ export default class PreviewFrame extends Component {
   // @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-srcdoc
   render() {
     return (
-      <span className='notranslate'>
-        <iframe
-          className={styles.PreviewFrame}
-          height={this.state.height}
-          ref={this.setRef}
-          onLoad={this.onLoad}
-          sandbox="allow-same-origin allow-top-navigation"
-          title="preview email template frame"
-        />
-      </span>
+      <iframe
+        className={styles.PreviewFrame}
+        height={this.state.height}
+        ref={this.setRef}
+        onLoad={this.onLoad}
+        sandbox="allow-same-origin allow-top-navigation"
+        title="preview email template frame"
+      />
     );
   }
 }
