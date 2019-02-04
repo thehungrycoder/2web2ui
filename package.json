@@ -16,7 +16,8 @@
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
     "test-examples": "node scripts/test.js --env=jsdom --config=./jest.config.js --testMatch='<rootDir>/docs/testing/**/?(*.)test.js'",
     "lint": "node node_modules/eslint/bin/eslint.js src",
-    "lintfix": "npm run lint -- --fix"
+    "lintfix": "npm run lint -- --fix",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "husky": {
     "hooks": {
@@ -97,6 +98,8 @@
   "devDependencies": {
     "@babel/core": "7.1.6",
     "@mdx-js/mdx": "^0.15.0",
+    "@storybook/addon-actions": "^4.1.11",
+    "@storybook/react": "^4.1.11",
     "autoprefixer": "^9.0.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
