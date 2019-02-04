@@ -118,7 +118,7 @@ export default [
   {
     label: 'Alerts',
     to: '/alerts',
-    tag: 'labs',
+    tag: 'new',
     divider: true,
     icon: NotificationsActive
   },
