@@ -31,9 +31,7 @@ export class RecipientValidationPage extends Component {
           tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
         />
         <Panel>
-          <Panel.Section>
-            {selectedTab === 1 ? <SingleAddressForm /> : <ListForm />}
-          </Panel.Section>
+          {selectedTab === 1 ? <SingleAddressForm /> : <ListForm />}
         </Panel>
         {selectedTab === 0 && <ListResults />}
       </Page>

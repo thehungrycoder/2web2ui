@@ -23,9 +23,7 @@ exports[`Page: Recipient Email Verification renders single email verification ta
     }
   />
   <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm) />
-    </Panel.Section>
+    <Connect(ReduxForm) />
   </Panel>
 </Page>
 `;
@@ -53,9 +51,7 @@ exports[`Page: Recipient Email Verification should render happy path 1`] = `
     }
   />
   <Panel>
-    <Panel.Section>
-      <Connect(ReduxForm) />
-    </Panel.Section>
+    <Connect(ReduxForm) />
   </Panel>
   <Connect(WithContext(ListResults)) />
 </Page>

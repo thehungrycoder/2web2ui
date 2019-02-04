@@ -2,14 +2,15 @@
 
 exports[`SingleResult renders correctly when not valid 1`] = `
 <Fragment>
-  <br />
-  <p>
+  <p
+    className="Validity"
+  >
     <span
       className="IconWrapper"
     >
       <Warning
         className="invalidIcon"
-        size={33}
+        size={27}
       />
     </span>
     <strong
@@ -27,14 +28,15 @@ exports[`SingleResult renders correctly when not valid 1`] = `
 
 exports[`SingleResult renders correctly when valid 1`] = `
 <Fragment>
-  <br />
-  <p>
+  <p
+    className="Validity"
+  >
     <span
       className="IconWrapper"
     >
       <CheckCircleOutline
         className="validIcon"
-        size={33}
+        size={27}
       />
     </span>
     <strong

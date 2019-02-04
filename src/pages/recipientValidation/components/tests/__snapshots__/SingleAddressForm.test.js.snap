@@ -2,73 +2,77 @@
 
 exports[`SingleAddressForm renders correctly 1`] = `
 <Fragment>
-  <form
-    onSubmit={[Function]}
-  >
-    <p>
-      Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
-    </p>
-    <Field
-      component={[Function]}
-      connectRight={
-        <Button
-          disabled={true}
-          primary={true}
-          size="default"
-          submit={true}
-        >
-          Validate
-        </Button>
-      }
-      label="Email address"
-      name="address"
-      normalize={[Function]}
-      placeholder="eg. example@mail.com"
-      validate={
-        Array [
-          [Function],
-          [Function],
-          [Function],
-        ]
-      }
-    />
-  </form>
+  <Panel.Section>
+    <form
+      onSubmit={[Function]}
+    >
+      <p>
+        Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
+      </p>
+      <Field
+        component={[Function]}
+        connectRight={
+          <Button
+            disabled={true}
+            primary={true}
+            size="default"
+            submit={true}
+          >
+            Validate
+          </Button>
+        }
+        label="Email address"
+        name="address"
+        normalize={[Function]}
+        placeholder="eg. example@mail.com"
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </form>
+  </Panel.Section>
 </Fragment>
 `;
 
 exports[`SingleAddressForm should disable form elements on submit 1`] = `
 <Fragment>
-  <form
-    onSubmit={[Function]}
-  >
-    <p>
-      Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
-    </p>
-    <Field
-      component={[Function]}
-      connectRight={
-        <Button
-          disabled={true}
-          primary={true}
-          size="default"
-          submit={true}
-        >
-          Validating...
-        </Button>
-      }
-      label="Email address"
-      name="address"
-      normalize={[Function]}
-      placeholder="eg. example@mail.com"
-      validate={
-        Array [
-          [Function],
-          [Function],
-          [Function],
-        ]
-      }
-    />
-  </form>
+  <Panel.Section>
+    <form
+      onSubmit={[Function]}
+    >
+      <p>
+        Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
+      </p>
+      <Field
+        component={[Function]}
+        connectRight={
+          <Button
+            disabled={true}
+            primary={true}
+            size="default"
+            submit={true}
+          >
+            Validating...
+          </Button>
+        }
+        label="Email address"
+        name="address"
+        normalize={[Function]}
+        placeholder="eg. example@mail.com"
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </form>
+  </Panel.Section>
 </Fragment>
 `;
 

@@ -1,183 +1,189 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ListForm renders CSV errors 1`] = `
-<Grid>
-  <Grid.Column
-    md={8}
-    xs={12}
-  >
-    <form
-      onSubmit={[Function]}
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={8}
+      xs={12}
     >
-      <p>
-        Validate a list of your recipients by separating out rejected or undeliverable email addresses.
-      </p>
-      <Field
-        component={[Function]}
-        fileTypes={
-          Array [
-            ".txt",
-            ".csv",
-          ]
-        }
-        helpText={
-          <span>
-            You can download an 
-            <DownloadLink
-              href="example-recipient-validation-list.csv"
-            >
-              example file here
-            </DownloadLink>
-             to use when formatting your list of addresses for upload.
-          </span>
-        }
-        labelHidden={true}
-        name="csv"
-        placeholder="Drag a file here, or click to browse"
-        style={
-          Object {
-            "paddingBottom": "3rem",
-            "paddingTop": "3rem",
-          }
-        }
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
+      <form
+        onSubmit={[Function]}
       >
-        Validate Email Addresses
-      </Button>
-    </form>
-  </Grid.Column>
-</Grid>
+        <p>
+          Validate a list of your recipients by separating out rejected or undeliverable email addresses.
+        </p>
+        <Field
+          component={[Function]}
+          fileTypes={
+            Array [
+              ".txt",
+              ".csv",
+            ]
+          }
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-recipient-validation-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of addresses for upload.
+            </span>
+          }
+          labelHidden={true}
+          name="csv"
+          placeholder="Drag a file here, or click to browse"
+          style={
+            Object {
+              "paddingBottom": "3rem",
+              "paddingTop": "3rem",
+            }
+          }
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Validate Email Addresses
+        </Button>
+      </form>
+    </Grid.Column>
+  </Grid>
+</Panel.Section>
 `;
 
 exports[`ListForm renders correctly 1`] = `
-<Grid>
-  <Grid.Column
-    md={8}
-    xs={12}
-  >
-    <form
-      onSubmit={[Function]}
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={8}
+      xs={12}
     >
-      <p>
-        Validate a list of your recipients by separating out rejected or undeliverable email addresses.
-      </p>
-      <Field
-        component={[Function]}
-        fileTypes={
-          Array [
-            ".txt",
-            ".csv",
-          ]
-        }
-        helpText={
-          <span>
-            You can download an 
-            <DownloadLink
-              href="example-recipient-validation-list.csv"
-            >
-              example file here
-            </DownloadLink>
-             to use when formatting your list of addresses for upload.
-          </span>
-        }
-        labelHidden={true}
-        name="csv"
-        placeholder="Drag a file here, or click to browse"
-        style={
-          Object {
-            "paddingBottom": "3rem",
-            "paddingTop": "3rem",
-          }
-        }
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
+      <form
+        onSubmit={[Function]}
       >
-        Validate Email Addresses
-      </Button>
-    </form>
-  </Grid.Column>
-</Grid>
+        <p>
+          Validate a list of your recipients by separating out rejected or undeliverable email addresses.
+        </p>
+        <Field
+          component={[Function]}
+          fileTypes={
+            Array [
+              ".txt",
+              ".csv",
+            ]
+          }
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-recipient-validation-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of addresses for upload.
+            </span>
+          }
+          labelHidden={true}
+          name="csv"
+          placeholder="Drag a file here, or click to browse"
+          style={
+            Object {
+              "paddingBottom": "3rem",
+              "paddingTop": "3rem",
+            }
+          }
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Validate Email Addresses
+        </Button>
+      </form>
+    </Grid.Column>
+  </Grid>
+</Panel.Section>
 `;
 
 exports[`ListForm should disable form elements on submit 1`] = `
-<Grid>
-  <Grid.Column
-    md={8}
-    xs={12}
-  >
-    <form
-      onSubmit={[Function]}
+<Panel.Section>
+  <Grid>
+    <Grid.Column
+      md={8}
+      xs={12}
     >
-      <p>
-        Validate a list of your recipients by separating out rejected or undeliverable email addresses.
-      </p>
-      <Field
-        component={[Function]}
-        fileTypes={
-          Array [
-            ".txt",
-            ".csv",
-          ]
-        }
-        helpText={
-          <span>
-            You can download an 
-            <DownloadLink
-              href="example-recipient-validation-list.csv"
-            >
-              example file here
-            </DownloadLink>
-             to use when formatting your list of addresses for upload.
-          </span>
-        }
-        labelHidden={true}
-        name="csv"
-        placeholder="Drag a file here, or click to browse"
-        style={
-          Object {
-            "paddingBottom": "3rem",
-            "paddingTop": "3rem",
-          }
-        }
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
+      <form
+        onSubmit={[Function]}
       >
-        Validate Email Addresses
-      </Button>
-    </form>
-  </Grid.Column>
-</Grid>
+        <p>
+          Validate a list of your recipients by separating out rejected or undeliverable email addresses.
+        </p>
+        <Field
+          component={[Function]}
+          fileTypes={
+            Array [
+              ".txt",
+              ".csv",
+            ]
+          }
+          helpText={
+            <span>
+              You can download an 
+              <DownloadLink
+                href="example-recipient-validation-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               to use when formatting your list of addresses for upload.
+            </span>
+          }
+          labelHidden={true}
+          name="csv"
+          placeholder="Drag a file here, or click to browse"
+          style={
+            Object {
+              "paddingBottom": "3rem",
+              "paddingTop": "3rem",
+            }
+          }
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Validate Email Addresses
+        </Button>
+      </form>
+    </Grid.Column>
+  </Grid>
+</Panel.Section>
 `;
 
 exports[`ListForm should submit csv 1`] = `

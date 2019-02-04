@@ -5,23 +5,29 @@ import styles from './SingleAddressForm.module.scss';
 const validText = ' is a valid recipient.';
 const invalidText = ' is NOT a valid recipient.';
 
-const SingleResult = ({ singleResults }) => {
-  const { valid, reason, email } = singleResults;
+const SingleResult = ({ singleResults = {}}) => {
+  const { valid, reason, email, is_role, is_disposable } = singleResults;
   const text = valid ? validText : `${invalidText} ${reason}.`;
+
   const icon = valid
-    ? <CheckCircleOutline className={styles.validIcon} size={33} />
-    : <Warning className={styles.invalidIcon} size={33} />;
+    ? <CheckCircleOutline className={styles.validIcon} size={27} />
+    : <Warning className={styles.invalidIcon} size={27} />;
 
   return (
     <Fragment>
-      <br/>
-      <p>
+      <p className={styles.Validity}>
         <span className={styles.IconWrapper}>
           {icon}
         </span>
         <strong className={styles.email}> {email}</strong>
         <span>{text}</span>
       </p>
+      {is_role && (
+        <p className={styles.Paragraph}>This is a <strong>role-based</strong> email address.</p>
+      )}
+      {is_disposable && (
+        <p className={styles.Paragraph}>This is a <strong>disposable</strong> email address.</p>
+      )}
     </Fragment>
   );
 };

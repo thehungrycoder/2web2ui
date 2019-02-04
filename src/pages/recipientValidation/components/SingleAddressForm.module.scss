@@ -14,5 +14,15 @@
 
 .IconWrapper {
   display: inline-block;
+  width: rem(36);
   padding-right: spacing(small);
+}
+
+.Paragraph {
+  margin-bottom: 0;
+  padding-left: rem(40)
+}
+
+.Validity {
+  margin-bottom: 0;
 }

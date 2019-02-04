@@ -30,8 +30,10 @@ Object {
   "latestJobLoading": false,
   "singleResults": Object {
     "email": "invalid@address.com",
-    "reason": undefined,
-    "valid": undefined,
+    "singleResults": Object {
+      "reason": "not valid because mx lookup failed",
+      "valid": false,
+    },
   },
   "uploadLoading": false,
 }
@@ -45,8 +47,9 @@ Object {
   "latestJobLoading": false,
   "singleResults": Object {
     "email": "valid@address.com",
-    "reason": undefined,
-    "valid": undefined,
+    "singleResults": Object {
+      "valid": true,
+    },
   },
   "uploadLoading": false,
 }
