@@ -22,12 +22,12 @@ const SingleResult = ({ singleResults = {}}) => {
         <strong className={styles.email}> {email}</strong>
         <span>{text}</span>
       </p>
-      {is_role && (
-        <p className={styles.Paragraph}>This is a <strong>role-based</strong> email address.</p>
-      )}
-      {is_disposable && (
-        <p className={styles.Paragraph}>This is a <strong>disposable</strong> email address.</p>
-      )}
+      <p className={styles.Paragraph}>
+        This is {is_role && 'not '}a <strong>role-based</strong> email address.
+      </p>
+      <p className={styles.Paragraph}>
+          This is {is_disposable && 'not '}a <strong>disposable</strong> email address.
+      </p>
     </Fragment>
   );
 };

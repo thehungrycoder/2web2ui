@@ -1,5 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SingleResult renders correctly when disposable and role-based 1`] = `
+<Fragment>
+  <p
+    className="Validity"
+  >
+    <span
+      className="IconWrapper"
+    >
+      <Warning
+        className="invalidIcon"
+        size={27}
+      />
+    </span>
+    <strong
+      className="email"
+    >
+       
+      role@disposable.com
+    </strong>
+    <span>
+       is NOT a valid recipient. invalid domain.
+    </span>
+  </p>
+  <p
+    className="Paragraph"
+  >
+    This is 
+    not 
+    a 
+    <strong>
+      role-based
+    </strong>
+     email address.
+  </p>
+  <p
+    className="Paragraph"
+  >
+    This is 
+    not 
+    a 
+    <strong>
+      disposable
+    </strong>
+     email address.
+  </p>
+</Fragment>
+`;
+
 exports[`SingleResult renders correctly when not valid 1`] = `
 <Fragment>
   <p
@@ -22,6 +70,26 @@ exports[`SingleResult renders correctly when not valid 1`] = `
     <span>
        is NOT a valid recipient. invalid domain.
     </span>
+  </p>
+  <p
+    className="Paragraph"
+  >
+    This is 
+    a 
+    <strong>
+      role-based
+    </strong>
+     email address.
+  </p>
+  <p
+    className="Paragraph"
+  >
+    This is 
+    a 
+    <strong>
+      disposable
+    </strong>
+     email address.
   </p>
 </Fragment>
 `;
@@ -48,6 +116,26 @@ exports[`SingleResult renders correctly when valid 1`] = `
     <span>
        is a valid recipient.
     </span>
+  </p>
+  <p
+    className="Paragraph"
+  >
+    This is 
+    a 
+    <strong>
+      role-based
+    </strong>
+     email address.
+  </p>
+  <p
+    className="Paragraph"
+  >
+    This is 
+    a 
+    <strong>
+      disposable
+    </strong>
+     email address.
   </p>
 </Fragment>
 `;
