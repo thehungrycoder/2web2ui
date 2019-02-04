@@ -1,19 +1,18 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { Field } from 'redux-form';
-import config from 'src/config';
 
 // Components
 import { Panel } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
-import { TextFieldWrapper, PanelLoading } from 'src/components';
+import { TextFieldWrapper } from 'src/components';
 import FromEmailWrapper from './FromEmailWrapper';
 
 // Helpers & Validation
 import { required, slug } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { emailOrSubstitution, looseSubstitution } from './validation';
+import { emailOrSubstitution } from './validation';
 
 import styles from './FormEditor.module.scss';
 
@@ -32,38 +31,13 @@ export default class Form extends Component {
     this.props.listDomains();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { change, newTemplate, name } = this.props;
-    const { domains } = nextProps;
-
-    // If no verified sending domains, use sandbox
-    if (newTemplate && !domains.length) {
-      change(name, 'content.from.email', `${config.sandbox.localpart}@${config.sandbox.domain}`);
-    }
-  }
-
-  validateDomain = (value) => {
-    const { domains } = this.props;
-
-    const parts = value.split('@');
-
-    if (parts.length > 1) {
-      const validSandboxDomain = parts[1] === config.sandbox.domain;
-      const validDomain = parts[1] && (domains.map(({ domain }) => domain).includes(parts[1]) || !looseSubstitution(parts[1]));
-
-      return validSandboxDomain || validDomain ? undefined : 'Must use a verified sending domain';
-    }
-
-    return undefined;
-  }
-
   // Prevents unchecked value from equaling ""
   parseToggle = (value) => !!value
 
   fromEmailWarning() {
-    const { domains, subaccountId } = this.props;
+    const { domains, domainsLoading, subaccountId } = this.props;
 
-    if (!domains.length) {
+    if (!domainsLoading && !domains.length) {
       return subaccountId
         ? 'The selected subaccount does not have any verified sending domains.'
         : 'You do not have any verified sending domains to use.';
@@ -73,11 +47,7 @@ export default class Form extends Component {
   }
 
   render() {
-    const { newTemplate, readOnly, domains, hasSubaccounts, domainsLoading } = this.props;
-
-    if (domainsLoading) {
-      return <PanelLoading />;
-    }
+    const { newTemplate, readOnly, domains, hasSubaccounts } = this.props;
 
     return (
       <div>
@@ -118,8 +88,8 @@ export default class Form extends Component {
               component={FromEmailWrapper}
               placeholder='example@email.com'
               label='From Email'
-              disabled={!domains.length || readOnly}
-              validate={[required, emailOrSubstitution, this.validateDomain]}
+              disabled={readOnly}
+              validate={[required, emailOrSubstitution]}
               domains={domains}
               helpText={this.fromEmailWarning()}
             />

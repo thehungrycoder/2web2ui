@@ -27,13 +27,6 @@ class FromEmail extends Component {
   }
 
   handleStateChange = (changes, downshift) => {
-    const { onChange } = this.props;
-
-    // Push changes to redux form store
-    if (changes.hasOwnProperty('selectedItem')) {
-      onChange && onChange(changes.selectedItem);
-    }
-
     // Highlights first item in list by default
     if (!downshift.highlightedIndex) {
       downshift.setHighlightedIndex(0);

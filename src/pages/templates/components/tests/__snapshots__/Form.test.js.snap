@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Template Form renders correctly when domainsLoading 1`] = `
-<PanelLoading
-  minHeight="400px"
-/>
-`;
-
 exports[`Template Form should disable fields for read-only users 1`] = `
 <div>
   <Panel
@@ -58,7 +52,6 @@ exports[`Template Form should disable fields for read-only users 1`] = `
         placeholder="example@email.com"
         validate={
           Array [
-            [Function],
             [Function],
             [Function],
           ]
@@ -181,7 +174,6 @@ exports[`Template Form should render 1`] = `
         placeholder="example@email.com"
         validate={
           Array [
-            [Function],
             [Function],
             [Function],
           ]
