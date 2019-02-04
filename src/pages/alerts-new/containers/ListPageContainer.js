@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { listAlerts } from 'src/actions/alerts';
 
-class ListPageContainer extends Component {
+export class ListPageContainer extends Component {
+  componentDidMount() {
+    this.props.listAlerts();
+  }
+
   render() {
     const { component: Component } = this.props;
     return <Component />;
