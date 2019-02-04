@@ -23,10 +23,10 @@ const SingleResult = ({ singleResults = {}}) => {
         <span>{text}</span>
       </p>
       <p className={styles.Paragraph}>
-        This is {is_role && 'not '}a <strong>role-based</strong> email address.
+        This is {!is_role && 'not '}a <strong>role-based</strong> email address.
       </p>
       <p className={styles.Paragraph}>
-          This is {is_disposable && 'not '}a <strong>disposable</strong> email address.
+          This is {!is_disposable && 'not '}a <strong>disposable</strong> email address.
       </p>
     </Fragment>
   );
