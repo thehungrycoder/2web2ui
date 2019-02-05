@@ -55,7 +55,7 @@ export class AccountDropdown extends Component {
 
   render() {
     return (
-      <Popover popoverId='popover-portal-2' left trigger={this.renderActivator()} open={this.state.open} onClose={this.toggleDropdown}>
+      <Popover portalId='popover-portal' left trigger={this.renderActivator()} open={this.state.open} onClose={this.toggleDropdown}>
         <ActionList
           className={styles.AccountList}
           onClick={this.toggleDropdown}

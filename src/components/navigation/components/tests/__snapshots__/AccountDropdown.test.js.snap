@@ -39,6 +39,7 @@ exports[`AccountDropdown should render correctly 1`] = `
   left={true}
   onClose={[Function]}
   open={false}
+  portalId="popover-portal"
   right={true}
   trigger={
     <Context.Consumer>
