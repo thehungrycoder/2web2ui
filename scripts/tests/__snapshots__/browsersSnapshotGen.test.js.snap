@@ -3,19 +3,19 @@
 exports[`BrowsersSnapshotGenerator returns list of supported browser 1`] = `
 Object {
   "desktop": Object {
-    "chrome": ">66.0.0",
-    "edge": ">16.0.0",
-    "firefox": ">52.0.0",
-    "opera": ">52.0.0",
-    "safari": ">11.0.0",
+    "chrome": ">58.0.0",
+    "edge": ">17.0.0",
+    "firefox": ">60.0.0",
+    "opera": ">56.0.0",
+    "safari": ">11.1.0",
   },
   "mobile": Object {
     "android": ">4.4.3",
     "baidu": ">7.12.0",
     "blackberry": ">7.0.0",
-    "chrome": ">67.0.0",
-    "firefox": ">60.0.0",
-    "ios": ">11.0.0",
+    "chrome": ">71.0.0",
+    "firefox": ">64.0.0",
+    "ios": ">11.3.0",
     "operamini": ">all.0.0",
     "operamobile": ">12.1.0",
     "qqandroid": ">1.2.0",
