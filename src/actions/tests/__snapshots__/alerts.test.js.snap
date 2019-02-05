@@ -4,7 +4,9 @@ exports[`Action Creator: Alerts should dispatch a create action 1`] = `
 Array [
   Object {
     "meta": Object {
-      "data": "data",
+      "data": Object {
+        "name": "Mock Name",
+      },
       "method": "POST",
       "url": "/labs/alerts",
     },
@@ -43,7 +45,7 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "data": "data",
+        "name": "Mock Name",
       },
       "method": "PUT",
       "url": "/labs/alerts/alert-id",

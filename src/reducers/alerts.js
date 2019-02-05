@@ -26,8 +26,6 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, createPending: true };
 
     case 'CREATE_ALERT_SUCCESS':
-      return { ...state, createPending: false };
-
     case 'CREATE_ALERT_FAIL':
       return { ...state, createPending: false };
 
@@ -37,8 +35,6 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, updatePending: true };
 
     case 'UPDATE_ALERT_SUCCESS':
-      return { ...state, updatePending: false };
-
     case 'UPDATE_ALERT_FAIL':
       return { ...state, updatePending: false };
 
@@ -48,8 +44,6 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, deletePending: true };
 
     case 'DELETE_ALERT_SUCCESS':
-      return { ...state, deletePending: false };
-
     case 'DELETE_ALERT_FAIL':
       return { ...state, deletePending: false };
 

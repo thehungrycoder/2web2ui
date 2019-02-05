@@ -22,7 +22,7 @@ export function createAlert({ data }) {
   });
 }
 
-export function updateAlert({ id, ...data }) {
+export function updateAlert({ id, data }) {
   return sparkpostApiRequest({
     type: 'UPDATE_ALERT',
     meta: {

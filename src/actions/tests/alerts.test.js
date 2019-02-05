@@ -16,12 +16,12 @@ describe('Action Creator: Alerts', () => {
   });
 
   it('should dispatch a create action', () => {
-    mockStore.dispatch(alerts.createAlert({ data: 'data' }));
+    mockStore.dispatch(alerts.createAlert({ data: { name: 'Mock Name' }}));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
   it('should dispatch an update action', () => {
-    mockStore.dispatch(alerts.updateAlert({ id: 'alert-id', data: 'data' }));
+    mockStore.dispatch(alerts.updateAlert({ id: 'alert-id', data: { name: 'Mock Name' }}));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
