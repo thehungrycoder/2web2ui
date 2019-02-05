@@ -30,6 +30,7 @@ export class NotificationCenter extends Component {
 
     return (
       <Popover
+        portalId='popover-portal'
         left
         onClose={this.props.markAllAsRead}
         trigger={<UnstyledLink className={styles.IconWrapper}>{icon}</UnstyledLink>}>

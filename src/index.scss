@@ -11,6 +11,23 @@ html {
   @media screen and (min-width: breakpoint(larger)) { font-size: rem(20); }
 }
 
+#popover-portal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#popover-portal-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden !important;
+}
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #aaa;
 }
