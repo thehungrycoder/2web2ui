@@ -5,7 +5,7 @@ exports[`Collection Pagination Component should hide pagination if data is less 
   <div
     className="PageButtons"
   />
-  <Component
+  <CollectionControls
     data={
       Array [
         Object {

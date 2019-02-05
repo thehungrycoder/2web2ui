@@ -13,7 +13,7 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
   secondaryActions={null}
   title="IP Pools"
 >
-  <Component />
+  <IPWarmupReminderBanner />
   <TableCollection
     columns={
       Array [
@@ -73,7 +73,7 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
   secondaryActions={null}
   title="IP Pools"
 >
-  <Component />
+  <IPWarmupReminderBanner />
   <TableCollection
     columns={
       Array [
@@ -185,7 +185,7 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
   }
   title="IP Pools"
 >
-  <Component />
+  <IPWarmupReminderBanner />
   <TableCollection
     columns={
       Array [
@@ -266,7 +266,7 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
   }
   title="IP Pools"
 >
-  <Component />
+  <IPWarmupReminderBanner />
   <ApiErrorBanner
     errorDetails="Uh oh! It broke."
     message="Sorry, we seem to have had some trouble loading your ip pools."

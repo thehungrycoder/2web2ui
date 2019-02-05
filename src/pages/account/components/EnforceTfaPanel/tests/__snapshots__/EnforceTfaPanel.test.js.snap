@@ -14,7 +14,7 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
   }
   title="Two-factor Authentication"
 >
-  <Component
+  <TogglePanel
     readOnly={false}
     tfaRequired={false}
     toggleTfaRequired={[Function]}
@@ -97,7 +97,7 @@ exports[`Component: EnforceTfaPanel renders with sso enabled 1`] = `
       Mandatory two-factor authentication is not available while single sign-on is enabled.
     </p>
   </Panel.Section>
-  <Component
+  <TogglePanel
     readOnly={true}
     tfaRequired={false}
     toggleTfaRequired={[Function]}
@@ -169,7 +169,7 @@ exports[`Component: EnforceTfaPanel renders with tfa enabled 1`] = `
   }
   title="Two-factor Authentication"
 >
-  <Component
+  <TogglePanel
     readOnly={false}
     tfaRequired={false}
     toggleTfaRequired={[Function]}

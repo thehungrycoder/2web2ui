@@ -33,7 +33,7 @@ exports[`Sending Domains Edit Page should renders correctly 1`] = `
   title="Edit example.com"
 >
   <div>
-    <Component
+    <DomainStatus
       domain={
         Object {
           "dkim": Object {
@@ -177,7 +177,7 @@ exports[`Sending Domains Edit Page should show a delete modal 1`] = `
   title="Edit example.com"
 >
   <div>
-    <Component
+    <DomainStatus
       domain={
         Object {
           "dkim": Object {

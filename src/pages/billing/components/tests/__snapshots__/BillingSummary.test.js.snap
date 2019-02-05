@@ -2,7 +2,7 @@
 
 exports[`Component: Billing Summary should render correctly for a paid plan 1`] = `
 <div>
-  <Component
+  <PendingPlanBanner
     account={
       Object {
         "billing": Object {},
@@ -12,7 +12,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
       }
     }
   />
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "billing": Object {},
@@ -101,8 +101,8 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Component />
-  <Component />
+  <PremiumBanner />
+  <EnterpriseBanner />
   <Modal
     onClose={[Function]}
     open={false}
@@ -112,7 +112,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
 
 exports[`Component: Billing Summary should render correctly for a standard free plan 1`] = `
 <div>
-  <Component
+  <PendingPlanBanner
     account={
       Object {
         "billing": Object {},
@@ -122,7 +122,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
       }
     }
   />
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "billing": Object {},
@@ -162,8 +162,8 @@ exports[`Component: Billing Summary should render correctly for a standard free 
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Component />
-  <Component />
+  <PremiumBanner />
+  <EnterpriseBanner />
   <Modal
     onClose={[Function]}
     open={false}
@@ -173,7 +173,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
 
 exports[`Component: Billing Summary should render correctly if you can't buy IPs 1`] = `
 <div>
-  <Component
+  <PendingPlanBanner
     account={
       Object {
         "billing": Object {},
@@ -183,7 +183,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
       }
     }
   />
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "billing": Object {},
@@ -263,8 +263,8 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Component />
-  <Component />
+  <PremiumBanner />
+  <EnterpriseBanner />
   <Modal
     onClose={[Function]}
     open={false}
@@ -274,7 +274,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
 
 exports[`Component: Billing Summary should render correctly if you can't change your plan 1`] = `
 <div>
-  <Component
+  <PendingPlanBanner
     account={
       Object {
         "billing": Object {},
@@ -284,7 +284,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
       }
     }
   />
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "billing": Object {},
@@ -362,8 +362,8 @@ exports[`Component: Billing Summary should render correctly if you can't change 
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Component />
-  <Component />
+  <PremiumBanner />
+  <EnterpriseBanner />
   <Modal
     onClose={[Function]}
     open={false}
@@ -373,7 +373,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
 
 exports[`Component: Billing Summary should render correctly if you can't update your billing info 1`] = `
 <div>
-  <Component
+  <PendingPlanBanner
     account={
       Object {
         "billing": Object {},
@@ -383,7 +383,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
       }
     }
   />
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "billing": Object {},
@@ -432,8 +432,8 @@ exports[`Component: Billing Summary should render correctly if you can't update 
       }
     />
   </Panel>
-  <Component />
-  <Component />
+  <PremiumBanner />
+  <EnterpriseBanner />
   <Modal
     onClose={[Function]}
     open={false}
@@ -443,7 +443,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
 
 exports[`Component: Billing Summary should render with IP modal open 1`] = `
 <div>
-  <Component
+  <PendingPlanBanner
     account={
       Object {
         "billing": Object {},
@@ -453,7 +453,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
       }
     }
   />
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "billing": Object {},
@@ -542,8 +542,8 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Component />
-  <Component />
+  <PremiumBanner />
+  <EnterpriseBanner />
   <Modal
     onClose={[Function]}
     open={true}
@@ -557,7 +557,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
 
 exports[`Component: Billing Summary should render with the billing contact modal open 1`] = `
 <div>
-  <Component
+  <PendingPlanBanner
     account={
       Object {
         "billing": Object {},
@@ -567,7 +567,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
       }
     }
   />
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "billing": Object {},
@@ -656,8 +656,8 @@ exports[`Component: Billing Summary should render with the billing contact modal
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Component />
-  <Component />
+  <PremiumBanner />
+  <EnterpriseBanner />
   <Modal
     onClose={[Function]}
     open={true}
@@ -671,7 +671,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
 
 exports[`Component: Billing Summary should render with the payment info modal open 1`] = `
 <div>
-  <Component
+  <PendingPlanBanner
     account={
       Object {
         "billing": Object {},
@@ -681,7 +681,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
       }
     }
   />
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "billing": Object {},
@@ -770,8 +770,8 @@ exports[`Component: Billing Summary should render with the payment info modal op
       </LabelledValue>
     </Panel.Section>
   </Panel>
-  <Component />
-  <Component />
+  <PremiumBanner />
+  <EnterpriseBanner />
   <Modal
     onClose={[Function]}
     open={true}
@@ -785,7 +785,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
 
 exports[`Component: Billing Summary should show the invoice history if there are invoices 1`] = `
 <div>
-  <Component
+  <PendingPlanBanner
     account={
       Object {
         "billing": Object {},
@@ -795,7 +795,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
       }
     }
   />
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "billing": Object {},
@@ -892,8 +892,8 @@ exports[`Component: Billing Summary should show the invoice history if there are
       ]
     }
   />
-  <Component />
-  <Component />
+  <PremiumBanner />
+  <EnterpriseBanner />
   <Modal
     onClose={[Function]}
     open={false}

@@ -5,7 +5,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
   empty={Object {}}
   title="Dashboard"
 >
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "created": 2018-05-15T12:00:00.000Z,
@@ -81,7 +81,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
   empty={Object {}}
   title="Dashboard"
 >
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "status": "active",
@@ -155,7 +155,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
   empty={Object {}}
   title="Dashboard"
 >
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "created": 2018-05-15T12:00:00.000Z,
@@ -231,7 +231,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
   empty={Object {}}
   title="Dashboard"
 >
-  <Component
+  <FreePlanWarningBanner
     account={
       Object {
         "created": 2018-05-15T12:00:00.000Z,

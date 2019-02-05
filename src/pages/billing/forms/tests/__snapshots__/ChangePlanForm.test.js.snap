@@ -52,7 +52,7 @@ exports[`Form Container: Change Plan should render 1`] = `
       <Panel
         title="Select A Plan"
       >
-        <Component
+        <_default
           onChange={[Function]}
           plans={
             Array [
@@ -115,7 +115,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
       <Panel
         title="Select A Plan"
       >
-        <Component
+        <_default
           onChange={[Function]}
           plans={
             Array [

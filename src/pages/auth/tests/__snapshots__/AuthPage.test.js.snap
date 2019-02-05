@@ -27,16 +27,16 @@ exports[`AuthPage tests renders correctly 1`] = `
 </Fragment>
 `;
 
-exports[`AuthPage tests should redirect after login 1`] = `<withRouter() />`;
+exports[`AuthPage tests should redirect after login 1`] = `<withRouter(RedirectAfterLogin) />`;
 
 exports[`AuthPage tests should redirect to TFA iff enabled 1`] = `
-<withRouter()
+<withRouter(RedirectBeforeLogin)
   to="/auth/tfa"
 />
 `;
 
 exports[`AuthPage tests should redirect to enable-tfa iff required 1`] = `
-<withRouter()
+<withRouter(RedirectBeforeLogin)
   to="/auth/enable-tfa"
 />
 `;

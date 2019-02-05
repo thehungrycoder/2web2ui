@@ -7,7 +7,7 @@ exports[`Page: BillingSummaryPage should render correctly when not loading 1`] =
   empty={Object {}}
   title="Billing"
 >
-  <Connect(Component)>
+  <Connect(ConditionSwitch)>
     <SuspendedForBilling
       account={
         Object {
@@ -40,6 +40,6 @@ exports[`Page: BillingSummaryPage should render correctly when not loading 1`] =
         }
       }
     />
-  </Connect(Component)>
+  </Connect(ConditionSwitch)>
 </Page>
 `;
