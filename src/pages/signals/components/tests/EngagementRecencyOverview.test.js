@@ -79,6 +79,7 @@ describe('EngagementRecencyOverview', () => {
     const wrapper = subject();
     wrapper.find('Calculation').simulate('change', 'absolute');
     expect(wrapper.state('calculation')).toEqual('absolute');
+    expect(wrapper.find('Column[dataKey="current_engaged_recipients"]')).toMatchSnapshot();
   });
 
   it('handles chart type change', () => {
