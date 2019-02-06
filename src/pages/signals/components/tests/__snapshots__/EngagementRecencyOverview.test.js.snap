@@ -12,6 +12,17 @@ exports[`EngagementRecencyOverview current column component renders current rate
 />
 `;
 
+exports[`EngagementRecencyOverview handles calculation change 1`] = `
+<Column
+  align="right"
+  component={[Function]}
+  dataKey="current_engaged_recipients"
+  label="Current Count"
+  sortable={true}
+  width="12.5%"
+/>
+`;
+
 exports[`EngagementRecencyOverview history component renders absolute bar chart 1`] = `
 <BarChartDataCell
   dataKey="engaged_recipients"
@@ -141,6 +152,7 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
       component={[Function]}
       dataKey="current_relative_engaged_recipients"
       label="Current Ratio"
+      sortable={true}
       width="12.5%"
     />
     <Column

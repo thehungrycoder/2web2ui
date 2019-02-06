@@ -193,6 +193,7 @@ class EngagementRecencyOverview extends React.Component {
               align="right"
               dataKey="current_relative_engaged_recipients"
               label="Current Ratio"
+              sortable
               width="12.5%"
               component={({ current_relative_engaged_recipients }) => (
                 <PercentDataCell value={current_relative_engaged_recipients} />
@@ -203,6 +204,7 @@ class EngagementRecencyOverview extends React.Component {
               align="right"
               dataKey="current_engaged_recipients"
               label="Current Count"
+              sortable
               width="12.5%"
               component={({ current_engaged_recipients }) => (
                 <NumericDataCell value={current_engaged_recipients} />
