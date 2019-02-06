@@ -14,6 +14,7 @@ exports[`Signals ChartHeader Component renders correctly 1`] = `
       className="Title"
     >
       Foo
+       – Feb 15 2018
     </h6>
   </div>
   <hr
@@ -36,6 +37,7 @@ exports[`Signals ChartHeader Component renders padding correctly 1`] = `
       className="Title"
     >
       Foo
+       – Feb 15 2018
     </h6>
   </div>
   <hr
@@ -58,6 +60,7 @@ exports[`Signals ChartHeader Component renders primaryArea correctly 1`] = `
       className="Title"
     >
       Foo
+       – Feb 15 2018
     </h6>
     <div
       className="PrimaryArea"
@@ -87,6 +90,7 @@ exports[`Signals ChartHeader Component renders tooltip content correctly 1`] = `
       className="Title"
     >
       Foo
+       – Feb 15 2018
     </h6>
     <div
       className="Tooltip"
@@ -113,6 +117,28 @@ exports[`Signals ChartHeader Component renders tooltip content correctly 1`] = `
         />
       </Tooltip>
     </div>
+  </div>
+  <hr
+    className="Line"
+  />
+</Fragment>
+`;
+
+exports[`Signals ChartHeader Component renders without date 1`] = `
+<Fragment>
+  <div
+    className="ChartHeader"
+    style={
+      Object {
+        "padding": "",
+      }
+    }
+  >
+    <h6
+      className="Title"
+    >
+      Foo
+    </h6>
   </div>
   <hr
     className="Line"
