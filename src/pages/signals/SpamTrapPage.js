@@ -23,7 +23,7 @@ import styles from './DetailsPages.module.scss';
 
 export class SpamTrapPage extends Component {
   state = {
-    calculation: 'absolute'
+    calculation: 'relative'
   }
 
   handleCalculationToggle = (value) => {

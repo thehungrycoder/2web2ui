@@ -49,7 +49,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
         <ChartHeader
           primaryArea={
             <Calculation
-              initialSelected="absolute"
+              initialSelected="relative"
               onChange={[Function]}
             />
           }
@@ -96,7 +96,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "tickFormatter": [Function],
             }
           }
-          yKey="trap_hits"
+          yKey="relative_trap_hits"
           yRange={
             Array [
               "auto",
@@ -148,7 +148,7 @@ exports[`Signals Spam Trap Page renders empty correctly 1`] = `
   <ChartHeader
     primaryArea={
       <Calculation
-        initialSelected="absolute"
+        initialSelected="relative"
         onChange={[Function]}
       />
     }
@@ -191,7 +191,7 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
         <ChartHeader
           primaryArea={
             <Calculation
-              initialSelected="absolute"
+              initialSelected="relative"
               onChange={[Function]}
             />
           }
@@ -246,7 +246,7 @@ exports[`Signals Spam Trap Page renders loading correctly 1`] = `
   <ChartHeader
     primaryArea={
       <Calculation
-        initialSelected="absolute"
+        initialSelected="relative"
         onChange={[Function]}
       />
     }
