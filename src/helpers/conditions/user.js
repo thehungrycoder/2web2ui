@@ -9,6 +9,8 @@ export const hasRole = (role) => ({ currentUser }) => currentUser.access_level =
 
 export const isAdmin = any(hasRole('admin'), hasRole('superuser'));
 
+export const isSubaccountUser = ({ currentUser }) => currentUser.access_level && currentUser.access_level.includes('subaccount');
+
 export const isSso = ({ currentUser }) => currentUser.is_sso;
 
 export const isEmailVerified = ({ currentUser }) => currentUser.email_verified;

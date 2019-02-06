@@ -1,4 +1,4 @@
-import { isAdmin, isHeroku, isAzure, isSso, hasRole, isUserUiOptionSet } from '../user';
+import { isAdmin, isHeroku, isAzure, isSso, hasRole, isUserUiOptionSet, isSubaccountUser } from '../user';
 
 import cases from 'jest-in-case';
 
@@ -51,6 +51,16 @@ describe('User Condition Tests', () => {
   it('should return true if access level matches', () => {
     const currentUser = { access_level: 'admin' };
     expect(hasRole('admin')({ currentUser })).toEqual(true);
+  });
+
+  it('should return true if user is subaccount user', () => {
+    const currentUser = { access_level: 'subaccount-testing' };
+    expect(isSubaccountUser({ currentUser })).toEqual(true);
+  });
+
+  it('should return false if user is not subaccount user', () => {
+    const currentUser = { access_level: 'admin' };
+    expect(isSubaccountUser({ currentUser })).toEqual(false);
   });
 
   it('should return true if access level does not match', () => {
