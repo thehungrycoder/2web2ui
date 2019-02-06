@@ -23,6 +23,35 @@ import cohorts from './constants/cohorts';
 import styles from './DetailsPages.module.scss';
 
 export class EngagementRecencyPage extends Component {
+  state = {
+    selectedDate: null
+  }
+
+  componentDidMount() {
+    const { selected } = this.props;
+
+    if (selected) {
+      this.setState({ selectedDate: selected });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+    const { selectedDate } = this.state;
+
+    const dataSetChanged = prevProps.data !== data;
+    let selectedDataByDay = _.find(data, ['date', selectedDate]);
+
+    // Select last date in time series
+    if (dataSetChanged && !selectedDataByDay) {
+      selectedDataByDay = _.last(data);
+      this.setState({ selectedDate: selectedDataByDay.date });
+    }
+  }
+
+  handleDateSelect = (node) => {
+    this.setState({ selectedDate: _.get(node, 'payload.date') });
+  }
 
   getYAxisProps = () => ({
     tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`,
@@ -53,6 +82,8 @@ export class EngagementRecencyPage extends Component {
 
   renderContent = () => {
     const { data = [], loading, gap, empty, error } = this.props;
+    const { selectedDate } = this.state;
+    const selectedData = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
     if (empty) {
@@ -83,6 +114,8 @@ export class EngagementRecencyPage extends Component {
               <div className='LiftTooltip'>
                 <BarChart
                   gap={gap}
+                  onClick={this.handleDateSelect}
+                  selected={selectedDate}
                   timeSeries={data}
                   tooltipContent={this.getTooltipContent}
                   yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
@@ -99,7 +132,7 @@ export class EngagementRecencyPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <EngagementRecencyActions cohorts={_.last(data)} />}
+            {!chartPanel && <EngagementRecencyActions cohorts={selectedData} date={selectedDate} />}
           </div>
         </Grid.Column>
       </Grid>

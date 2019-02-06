@@ -45,6 +45,18 @@ exports[`Signals Engagement Recency Page bar chart props renders tooltip content
 </Fragment>
 `;
 
+exports[`Signals Engagement Recency Page local state handles date select 1`] = `
+<EngagementRecencyActions
+  cohorts={
+    Object {
+      "c_total": 10,
+      "date": "2017-01-02",
+    }
+  }
+  date="2017-01-02"
+/>
+`;
+
 exports[`Signals Engagement Recency Page renders correctly 1`] = `
 <SignalsPage
   breadcrumbAction={
@@ -89,10 +101,17 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
                 "top": 12,
               }
             }
+            onClick={[Function]}
+            selected="2017-01-02"
             timeSeries={
               Array [
                 Object {
+                  "c_total": 1,
+                  "date": "2017-01-01",
+                },
+                Object {
                   "c_total": 10,
+                  "date": "2017-01-02",
                 },
               ]
             }
@@ -203,8 +222,10 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
           cohorts={
             Object {
               "c_total": 10,
+              "date": "2017-01-02",
             }
           }
+          date="2017-01-02"
         />
       </div>
     </Grid.Column>

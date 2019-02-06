@@ -2,7 +2,7 @@ import React from 'react';
 import Actions from '../Actions';
 import content from '../../constants/engagementRecencyContent';
 
-const EngagementRecencyActions = ({ cohorts }) => {
+const EngagementRecencyActions = ({ cohorts, date }) => {
   let actions = [];
 
   content.forEach(({ condition, ...rest }) => {
@@ -12,7 +12,7 @@ const EngagementRecencyActions = ({ cohorts }) => {
   });
 
   actions = actions.slice(0, 3);
-  return <Actions actions={actions} empty={cohorts.c_total === null} />;
+  return <Actions actions={actions} date={date} empty={cohorts.c_total === null} />;
 };
 
 export default EngagementRecencyActions;
