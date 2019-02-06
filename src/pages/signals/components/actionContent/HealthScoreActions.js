@@ -3,7 +3,7 @@ import Actions from '../Actions';
 import content from '../../constants/healthScoreContent.js';
 import _ from 'lodash';
 
-const HealthScoreActions = ({ weights }) => {
+const HealthScoreActions = ({ date, weights }) => {
   const actions = weights.reduce((acc, { weight, weight_type }) => {
     const parsedWeight = parseFloat(weight);
 
@@ -20,7 +20,7 @@ const HealthScoreActions = ({ weights }) => {
   }, []);
 
   const sorted = _.orderBy(actions, 'weight', 'asc').slice(0, 2);
-  return <Actions actions={sorted} empty={!actions.length}/>;
+  return <Actions actions={sorted} date={date} empty={!actions.length} />;
 };
 
 export default HealthScoreActions;

@@ -63,26 +63,31 @@ describe('Signals Health Score Page', () => {
 
   describe('local state', () => {
     it('handles date select', () => {
-      wrapper.find('BarChart').at(0).simulate('click', { payload: { date: 'test' }});
-      expect(wrapper.find('BarChart').at(0).prop('selected')).toEqual('test');
-      expect(wrapper.find('BarChart').at(1).prop('selected')).toEqual('test');
+      wrapper.find('BarChart').at(0).simulate('click', { payload: { date: '2017-01-02' }});
+      expect(wrapper.find('BarChart').at(0).prop('selected')).toEqual('2017-01-02');
+      expect(wrapper.find('BarChart').at(1).prop('selected')).toEqual('2017-01-02');
+      expect(wrapper.find('ChartHeader').at(3).prop('date')).toEqual('2017-01-02');
+      expect(wrapper.find('HealthScoreActions')).toMatchSnapshot();
     });
 
     it('sets selected date on mount if provided one', () => {
       wrapper = shallow(<HealthScorePage {...props} selected='initial-selected'/>);
       expect(wrapper.find('BarChart').at(0).prop('selected')).toEqual('initial-selected');
+      expect(wrapper.find('HealthScoreActions').prop('date')).toEqual('initial-selected');
     });
 
     it('uses last selected date if selected date is not in data', () => {
       wrapper = shallow(<HealthScorePage {...props} loading={true} selected='initial-selected'/>);
       wrapper.setProps({ data: [1, { date: 'last-date' }], loading: false });
       expect(wrapper.find('BarChart').at(0).prop('selected')).toEqual('last-date');
+      expect(wrapper.find('HealthScoreActions').prop('date')).toEqual('last-date');
     });
 
     it('does not use last selected date if selected date is in data', () => {
       wrapper = shallow(<HealthScorePage {...props} selected='first-date'/>);
       wrapper.setProps({ data: [{ date: 'first-date' }, { date: 'last-date' }]});
       expect(wrapper.find('BarChart').at(0).prop('selected')).toEqual('first-date');
+      expect(wrapper.find('HealthScoreActions').prop('date')).toEqual('first-date');
     });
 
     it('handles component select', () => {

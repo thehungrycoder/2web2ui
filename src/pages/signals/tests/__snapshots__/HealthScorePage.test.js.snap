@@ -37,6 +37,26 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for s
 
 exports[`Signals Health Score Page bar chart props renders y label content for component weights 1`] = `"Engaged Recipients"`;
 
+exports[`Signals Health Score Page local state handles date select 1`] = `
+<HealthScoreActions
+  date="2017-01-02"
+  weights={
+    Array [
+      Object {
+        "weight": 0.8,
+        "weight_type": "List Quality",
+        "weight_value": 0.25,
+      },
+      Object {
+        "weight": -0.8,
+        "weight_type": "Other bounces",
+        "weight_value": 0.25,
+      },
+    ]
+  }
+/>
+`;
+
 exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 <SignalsPage
   breadcrumbAction={
@@ -276,6 +296,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
         className="OffsetCol"
       >
         <ChartHeader
+          date="2017-01-01"
           hideLine={true}
           padding="1rem 0 1rem"
           title="Health Score Components"
@@ -317,16 +338,17 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           yLabel={[Function]}
         />
         <HealthScoreActions
+          date="2017-01-01"
           weights={
             Array [
               Object {
-                "weight": 0.8,
-                "weight_type": "List Quality",
+                "weight": 0.5,
+                "weight_type": "Hard Bounces",
                 "weight_value": 0.25,
               },
               Object {
-                "weight": -0.8,
-                "weight_type": "Other bounces",
+                "weight": -0.5,
+                "weight_type": "Complaints",
                 "weight_value": 0.25,
               },
             ]
@@ -509,6 +531,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
         className="OffsetCol"
       >
         <ChartHeader
+          date="2017-01-01"
           hideLine={true}
           padding="1rem 0 1rem"
           title="Health Score Components"
@@ -520,7 +543,10 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
         <Callout>
           Insufficient data to populate this chart
         </Callout>
-        <HealthScoreActions />
+        <HealthScoreActions
+          date="2017-01-01"
+          weights={Array []}
+        />
       </div>
     </Grid.Column>
   </Grid>
@@ -591,6 +617,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
         className="OffsetCol"
       >
         <ChartHeader
+          date="2017-01-01"
           hideLine={true}
           padding="1rem 0 1rem"
           title="Health Score Components"

@@ -77,7 +77,6 @@ export class HealthScorePage extends Component {
     const { selectedDate, selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
-    const currentWeights = _.get(_.last(data), 'weights');
     const selectedWeightsAreEmpty = selectedWeights.every(({ weight }) => weight === null);
     const dataForSelectedWeight = data.map(({ date, weights }) => ({ date, ..._.find(weights, ['weight_type', selectedComponent]) }));
 
@@ -164,6 +163,7 @@ export class HealthScorePage extends Component {
           <div className={styles.OffsetCol}>
             <ChartHeader
               title='Health Score Components'
+              date={selectedDate}
               hideLine
               padding='1rem 0 1rem'
               tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
@@ -182,7 +182,7 @@ export class HealthScorePage extends Component {
                 selected={selectedComponent}
               />
             )}
-            {!panelContent && <HealthScoreActions weights={currentWeights} />}
+            {!panelContent && <HealthScoreActions weights={selectedWeights} date={selectedDate} />}
           </div>
         </Grid.Column>
       </Grid>
