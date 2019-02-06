@@ -6,6 +6,7 @@ import accessControlReady from './accessControlReady';
 import account from './account';
 import accountSingleSignOn from './accountSingleSignOn';
 import abTesting from './abTesting';
+import alerts from './alerts';
 import apiKeys from './api-keys';
 import auth from './auth';
 import billing from './billing';
@@ -50,6 +51,7 @@ const appReducer = combineReducers({
   accessControlReady,
   account,
   accountSingleSignOn,
+  alerts,
   auth,
   billing,
   bounceReport,

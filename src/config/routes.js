@@ -2,6 +2,7 @@
 import {
   abTesting,
   AlertsPage,
+  AlertsListPage,
   apiKeys,
   AccountSettingsPage,
   AuthPage,
@@ -673,8 +674,16 @@ const routes = [
     supportDocsSearch: 'A/B test'
   },
   {
-    path: '/alerts',
+    path: '/alerts', // TODO Remove
     component: AlertsPage,
+    layout: App,
+    title: 'Alerts',
+    supportDocsSearch: 'Alerts'
+  },
+  {
+    path: '/alerts-new', // TODO Replace with '/alerts'
+    component: AlertsListPage,
+    condition: hasUiOption('feature_alerts'),
     layout: App,
     title: 'Alerts',
     supportDocsSearch: 'Alerts'
