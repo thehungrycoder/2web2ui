@@ -22,4 +22,9 @@ describe('Signals TooltipMetric Component', () => {
     wrapper.setProps({ color: '#abc' });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correctly with description', () => {
+    wrapper.setProps({ description: 'lorem ipsum dolor' });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

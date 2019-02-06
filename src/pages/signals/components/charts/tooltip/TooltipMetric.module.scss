@@ -6,16 +6,15 @@
   display: inline-block;
   width: 100%;
   height: rem(50);
-  margin-top: spacing(small);
+
+  &:not(:last-child) {
+    margin-bottom: spacing();
+  }
 }
 
 .TooltipMetric {
   display: flex;
   justify-content: flex-start;
-}
-
-.Content {
-  flex: 1 0 0;
 }
 
 .Color {
@@ -27,12 +26,32 @@
   background: red;
 }
 
+.Content {
+  flex: 1 0 0;
+  display: flex;
+  height: rem(50);
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.hasDescription {
+  justify-content: space-between;
+}
+
 .Label {
   font-size: rem(12);
   font-weight: 400;
+  line-height: 0.8em;
+}
+
+.Description {
+  font-size: rem(11);
+  line-height: 1em;
+  color: rgba(color(gray, 5), 0.8)
 }
 
 .Value {
   font-size: rem(22);
   font-weight: 500;
+  line-height: 0.7em;
 }

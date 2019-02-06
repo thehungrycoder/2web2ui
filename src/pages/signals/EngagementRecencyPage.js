@@ -45,6 +45,7 @@ export class EngagementRecencyPage extends Component {
           key={key}
           color={cohorts[key].fill}
           label={cohorts[key].label}
+          description={cohorts[key].description}
           value={`${roundToPlaces(payload[key] * 100, 1)}%`}
         />
       ))}

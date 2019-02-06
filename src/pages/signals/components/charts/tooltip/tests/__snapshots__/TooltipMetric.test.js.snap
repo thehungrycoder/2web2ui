@@ -65,3 +65,41 @@ exports[`Signals TooltipMetric Component renders correctly with color 1`] = `
   </div>
 </div>
 `;
+
+exports[`Signals TooltipMetric Component renders correctly with description 1`] = `
+<div
+  className="Wrapper"
+>
+  <div
+    className="TooltipMetric"
+  >
+    <div
+      className="Color"
+      style={
+        Object {
+          "background": "#6e6e73",
+        }
+      }
+    />
+    <div
+      className="Content hasDescription"
+    >
+      <div
+        className="Label"
+      >
+        Foo
+      </div>
+      <div
+        className="Description"
+      >
+        lorem ipsum dolor
+      </div>
+      <div
+        className="Value"
+      >
+        101
+      </div>
+    </div>
+  </div>
+</div>
+`;
