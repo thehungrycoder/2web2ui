@@ -77,8 +77,7 @@ export default (state = initialState, { meta, payload, type }) => {
       return {
         ...state,
         singleResults: {
-          valid: payload.valid,
-          reason: payload.reason,
+          ...payload,
           email: meta.email
         }
       };

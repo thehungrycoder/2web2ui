@@ -31,4 +31,17 @@ describe('SingleResult', () => {
     });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correctly when disposable and role-based', () => {
+    wrapper.setProps({
+      singleResults: {
+        email: 'role@disposable.com',
+        is_role: true,
+        is_disposable: true,
+        valid: false,
+        reason: 'invalid domain'
+      }
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

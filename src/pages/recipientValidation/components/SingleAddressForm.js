@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Button } from '@sparkpost/matchbox';
+import { Button, Panel } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required, email, maxLength } from 'src/helpers/validation';
 import { singleAddress } from 'src/actions/recipientValidation';
@@ -19,19 +19,25 @@ export class SingleAddressForm extends Component {
 
     return (
       <Fragment>
-        <form onSubmit={handleSubmit(this.singleAddressForm)}>
-          <p>Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
-          <Field
-            name='address'
-            component={TextFieldWrapper}
-            label='Email address'
-            placeholder={'eg. example@mail.com'}
-            validate={[required, email, maxLength(254)]}
-            normalize={(value = '') => value.trim()}
-            connectRight={<Button primary submit disabled={submitDisabled}>{buttonContent}</Button>}
-          />
-        </form>
-        {singleResults && <SingleResult singleResults={singleResults}/>}
+        <Panel.Section>
+          <form onSubmit={handleSubmit(this.singleAddressForm)}>
+            <p>Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
+            <Field
+              name='address'
+              component={TextFieldWrapper}
+              label='Email address'
+              placeholder={'eg. example@mail.com'}
+              validate={[required, email, maxLength(254)]}
+              normalize={(value = '') => value.trim()}
+              connectRight={<Button primary submit disabled={submitDisabled}>{buttonContent}</Button>}
+            />
+          </form>
+        </Panel.Section>
+        {singleResults && (
+          <Panel.Section>
+            <SingleResult singleResults={singleResults}/>
+          </Panel.Section>
+        )}
       </Fragment>
     );
   }

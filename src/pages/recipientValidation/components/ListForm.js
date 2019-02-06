@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Button, Grid } from '@sparkpost/matchbox';
+import { Button, Grid, Panel } from '@sparkpost/matchbox';
 import { DownloadLink } from 'src/components';
 import { required, maxFileSize } from 'src/helpers/validation';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
@@ -35,28 +35,30 @@ export class ListForm extends Component {
     const buttonContent = (submitting) ? 'Uploading...' : 'Validate Email Addresses';
 
     return (
-      <Grid>
-        <Grid.Column xs={12} md={8}>
-          <form onSubmit={handleSubmit(this.handleUpload)}>
-            <p>{headerContent}</p>
-            <Field
-              component={FileFieldWrapper}
-              disabled={submitting}
-              fileTypes={fileTypes}
-              helpText={<span>You can download an <DownloadLink href={exampleRecipientValidationListPath}>example file here</DownloadLink> to use when formatting your list of addresses for upload.</span>}
-              name='csv'
-              validate={uploadValidators}
-              labelHidden
-              placeholder='Drag a file here, or click to browse'
-              style={{
-                paddingTop: '3rem',
-                paddingBottom: '3rem'
-              }}
-            />
-            <Button primary submit disabled={submitDisabled}>{buttonContent}</Button>
-          </form>
-        </Grid.Column>
-      </Grid>
+      <Panel.Section>
+        <Grid>
+          <Grid.Column xs={12} md={8}>
+            <form onSubmit={handleSubmit(this.handleUpload)}>
+              <p>{headerContent}</p>
+              <Field
+                component={FileFieldWrapper}
+                disabled={submitting}
+                fileTypes={fileTypes}
+                helpText={<span>You can download an <DownloadLink href={exampleRecipientValidationListPath}>example file here</DownloadLink> to use when formatting your list of addresses for upload.</span>}
+                name='csv'
+                validate={uploadValidators}
+                labelHidden
+                placeholder='Drag a file here, or click to browse'
+                style={{
+                  paddingTop: '3rem',
+                  paddingBottom: '3rem'
+                }}
+              />
+              <Button primary submit disabled={submitDisabled}>{buttonContent}</Button>
+            </form>
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
     );
   }
 }
