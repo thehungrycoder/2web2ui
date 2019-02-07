@@ -93,7 +93,9 @@ exports[`Sparkline Component renders correctly 1`] = `
         animationDuration={400}
         animationEasing="ease"
         content={
-          <Tooltip>
+          <Tooltip
+            width="200px"
+          >
             [MockFunction]
           </Tooltip>
         }

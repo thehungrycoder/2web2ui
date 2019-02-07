@@ -32,4 +32,9 @@ describe('Signals Tooltip Component', () => {
     wrapper.setProps({ children: () => 'test' });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders with a custom width correctly', () => {
+    wrapper.setProps({ width: '1200px' });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

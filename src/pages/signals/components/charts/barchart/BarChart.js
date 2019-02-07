@@ -63,7 +63,7 @@ class BarChart extends Component {
   }
 
   render() {
-    const { gap, height, disableHover, margin, timeSeries, tooltipContent, width, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
+    const { gap, height, disableHover, margin, timeSeries, tooltipContent, tooltipWidth, width, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
 
     return (
       <ResponsiveContainer height={height} width={width} className='SignalsBarChart'>
@@ -101,6 +101,7 @@ class BarChart extends Component {
               cursor={false}
               isAnimationActive={false}
               content={<TooltipWrapper children={tooltipContent} />}
+              width={tooltipWidth}
             />
           )}
           {this.renderBars()}
@@ -115,6 +116,7 @@ BarChart.propTypes = {
   gap: PropTypes.number,
   onClick: PropTypes.func,
   tooltipContent: PropTypes.func,
+  tooltipWidth: PropTypes.string,
   yKeys: PropTypes.arrayOf(PropTypes.object)
 };
 
