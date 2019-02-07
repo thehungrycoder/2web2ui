@@ -8,6 +8,16 @@ const ROLES = [
     helpText: 'Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting.'
   },
   {
+    label: <strong>Developer</strong>,
+    value: 'developer',
+    helpText: 'Access to all system settings that are related to the use of SparkPost.'
+  },
+  {
+    label: <strong>Marketing</strong>,
+    value: 'marketing',
+    helpText: 'Access to all email and sending related features on our SparkPost account.'
+  },
+  {
     label: <strong>Reporting</strong>,
     value: 'reporting',
     helpText: 'Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them.'
