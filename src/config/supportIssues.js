@@ -16,8 +16,9 @@ const defaultMessageLabel = 'Tell us more about your issue';
 const defaultCondition = all(hasOnlineSupport, hasStatus('active'));
 const idConditionsMap = {
   general_billing: all(isAdmin, any(isSuspendedForBilling, hasStatus('active'))),
-  account_suspension: all(hasStatus('suspended'), not(hasStatusReasonCategory('100.01'))),
-  account_cancellation: isAdmin
+  account_suspension: all(isAdmin, hasStatus('suspended'), not(hasStatusReasonCategory('100.01'))),
+  account_cancellation: isAdmin,
+  'account_upgrade/downgrade_issue': isAdmin
 };
 
 
