@@ -14,33 +14,38 @@ exports[`Signals Engagement Recency Page bar chart props renders tooltip content
 <Fragment>
   <TooltipMetric
     color="#E4EEF0"
+    description="Never engaged, first email in last 7 days"
+    key="c_new"
+    label="New"
+    value="50%"
+  />
+  <TooltipMetric
+    color="#B9E2E9"
+    description="365+ days since last engagement"
     key="c_uneng"
     label="Never Engaged"
     value="10%"
   />
   <TooltipMetric
-    color="#B9E2E9"
+    color="#9AD8E3"
+    description="90-365 days since last engagement"
     key="c_365d"
     label="Not Recently Engaged"
     value="20%"
   />
   <TooltipMetric
-    color="#9AD8E3"
+    color="#44A8AD"
+    description="14-90 days since last engagement"
     key="c_90d"
     label="Semi Recently Engaged"
     value="30%"
   />
   <TooltipMetric
-    color="#44A8AD"
+    color="#3F8B93"
+    description="0-14 days since last engagement"
     key="c_14d"
     label="Recently Engaged"
     value="40%"
-  />
-  <TooltipMetric
-    color="#3F8B93"
-    key="c_new"
-    label="New"
-    value="50%"
   />
 </Fragment>
 `;
@@ -128,29 +133,34 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
             yKeys={
               Array [
                 Object {
+                  "description": "0-14 days since last engagement",
                   "fill": "#3F8B93",
-                  "key": "c_new",
-                  "label": "New",
-                },
-                Object {
-                  "fill": "#44A8AD",
                   "key": "c_14d",
                   "label": "Recently Engaged",
                 },
                 Object {
-                  "fill": "#9AD8E3",
+                  "description": "14-90 days since last engagement",
+                  "fill": "#44A8AD",
                   "key": "c_90d",
                   "label": "Semi Recently Engaged",
                 },
                 Object {
-                  "fill": "#B9E2E9",
+                  "description": "90-365 days since last engagement",
+                  "fill": "#9AD8E3",
                   "key": "c_365d",
                   "label": "Not Recently Engaged",
                 },
                 Object {
-                  "fill": "#E4EEF0",
+                  "description": "365+ days since last engagement",
+                  "fill": "#B9E2E9",
                   "key": "c_uneng",
                   "label": "Never Engaged",
+                },
+                Object {
+                  "description": "Never engaged, first email in last 7 days",
+                  "fill": "#E4EEF0",
+                  "key": "c_new",
+                  "label": "New",
                 },
               ]
             }
@@ -165,24 +175,29 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
             items={
               Array [
                 Object {
+                  "description": "Never engaged, first email in last 7 days",
                   "fill": "#E4EEF0",
+                  "label": "New",
+                },
+                Object {
+                  "description": "365+ days since last engagement",
+                  "fill": "#B9E2E9",
                   "label": "Never Engaged",
                 },
                 Object {
-                  "fill": "#B9E2E9",
+                  "description": "90-365 days since last engagement",
+                  "fill": "#9AD8E3",
                   "label": "Not Recently Engaged",
                 },
                 Object {
-                  "fill": "#9AD8E3",
+                  "description": "14-90 days since last engagement",
+                  "fill": "#44A8AD",
                   "label": "Semi Recently Engaged",
                 },
                 Object {
-                  "fill": "#44A8AD",
-                  "label": "Recently Engaged",
-                },
-                Object {
+                  "description": "0-14 days since last engagement",
                   "fill": "#3F8B93",
-                  "label": "New",
+                  "label": "Recently Engaged",
                 },
               ]
             }
