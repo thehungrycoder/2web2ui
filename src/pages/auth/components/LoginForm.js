@@ -15,7 +15,7 @@ export const LoginForm = ({ loginPending, loginError, handleSubmit }) => <React.
       errorInLabel
       name='username'
       id='username'
-      label='Email or Username'
+      label='LALALAALA'
       placeholder='email@example.com'
       normalize={trimWhitespaces}
       component={TextFieldWrapper}
