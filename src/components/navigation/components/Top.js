@@ -12,8 +12,6 @@ import styles from './Top.module.scss';
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 import { hasGrants } from 'src/helpers/conditions';
 import { AccessControl } from 'src/components/auth';
-import { isSubaccountUser } from 'src/helpers/conditions/user';
-import not from 'src/helpers/conditions/not';
 
 export class Top extends Component {
   renderMobile = () => (
@@ -32,9 +30,7 @@ export class Top extends Component {
     <div className={styles.Top}>
       <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.Logo}><SparkPost.Logo type='halfWhite' /></Link>
       <div className={styles.RightSideWrapper}>
-        <AccessControl condition={not(isSubaccountUser)}>
-          <NotificationCenter />
-        </AccessControl>
+        <NotificationCenter />
         <AccessControl condition={hasGrants('support/manage')}>
           <HelpOutline className={styles.SupportIcon} onClick={this.openSupportPanel} size={22} />}
         </AccessControl>

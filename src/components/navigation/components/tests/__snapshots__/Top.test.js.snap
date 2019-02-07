@@ -45,11 +45,7 @@ exports[`Top should render correctly on desktop 1`] = `
   <div
     className="RightSideWrapper"
   >
-    <Connect(AccessControl)
-      condition={[Function]}
-    >
-      <Connect(NotificationCenter) />
-    </Connect(AccessControl)>
+    <Connect(NotificationCenter) />
     <Connect(AccessControl)
       condition={[Function]}
     >
