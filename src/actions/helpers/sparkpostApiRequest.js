@@ -67,7 +67,7 @@ const sparkpostRequest = requestHelperFactory({
       return useRefreshToken(auth.refreshToken)
 
         // dispatch a refresh action to save new token results in cookie and store
-        .then(({ data } = {}) => dispatch(refresh(data.access_token, data.refresh_token)))
+        .then(({ data } = {}) => dispatch(refresh(data.access_token, auth.refreshToken)))
 
         // dispatch the original action again, now that we have a new token ...
         // if anything in this refresh flow blew up, log out
