@@ -14,7 +14,8 @@ describe('Signals Page Component', () => {
       pass: 'through',
       facet: 'facet',
       facetId: 'facetId',
-      dimensionPrefix: 'test prefix'
+      dimensionPrefix: 'test prefix',
+      subaccountId: 22
     };
     helpers.getFriendlyTitle = jest.fn();
     wrapper = shallow(<SignalsPage {...props}/>);
@@ -22,7 +23,7 @@ describe('Signals Page Component', () => {
 
   it('renders correctly with title', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(helpers.getFriendlyTitle).toHaveBeenCalledWith({ facet: 'facet', facetId: 'facetId', prefix: 'test prefix' });
+    expect(helpers.getFriendlyTitle).toHaveBeenCalledWith({ facet: 'facet', facetId: 'facetId', prefix: 'test prefix', subaccountId: 22 });
   });
 
   it('renders with default title', () => {

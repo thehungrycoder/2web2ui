@@ -1,17 +1,30 @@
-export const getFriendlyTitle = ({ prefix, facet, facetId }) => {
+import _ from 'lodash';
+
+const translateSubaccount = (id) => {
+  // Note: Subaccount -1 (aggregate of all subaccounts) does not have a details Page
+
+  if (String(id) === '0') {
+    return 'Master Account';
+  }
+
+  return `Subaccount ${id}`;
+};
+
+export const getFriendlyTitle = ({ prefix, facet, facetId, subaccountId }) => {
   if (!prefix) {
     return null;
   }
 
   let subtitle = `${prefix} ${facetId}`;
+  let suffix = '';
 
   if (facet === 'sid') {
-    subtitle = `${prefix} Subaccount ${facetId}`;
-
-    if (String(facetId) === '0') {
-      subtitle = `${prefix} Master Account`;
-    }
+    subtitle = `${prefix} ${translateSubaccount(facetId)}`;
   }
 
-  return subtitle;
+  if (!_.isNil(subaccountId)) {
+    suffix = ` (${translateSubaccount(subaccountId)})`;
+  }
+
+  return `${subtitle}${suffix}`;
 };

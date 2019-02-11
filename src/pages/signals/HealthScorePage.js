@@ -190,7 +190,7 @@ export class HealthScorePage extends Component {
   }
 
   render() {
-    const { facet, facetId } = this.props;
+    const { facet, facetId, subaccountId } = this.props;
 
     return (
       <Page
@@ -198,6 +198,7 @@ export class HealthScorePage extends Component {
         dimensionPrefix='Health Score for'
         facet={facet}
         facetId={facetId}
+        subaccountId={subaccountId}
         primaryArea={<DateFilter />}>
         {this.renderContent()}
         <OtherChartsHeader facet={facet} facetId={facetId} />

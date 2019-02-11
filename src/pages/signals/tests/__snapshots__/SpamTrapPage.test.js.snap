@@ -33,7 +33,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Spam Trap Monitoring for"
+  dimensionPrefix="Spam Traps for"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -175,7 +175,7 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Spam Trap Monitoring for"
+  dimensionPrefix="Spam Traps for"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}

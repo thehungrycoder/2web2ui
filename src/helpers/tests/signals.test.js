@@ -32,4 +32,22 @@ describe('.getFriendlyTitle', () => {
       facetId: 0
     })).toEqual('title for Master Account');
   });
+
+  it('returns correct suffix with a facet and non-master subaccount', () => {
+    expect(getFriendlyTitle({
+      prefix: 'title for',
+      facet: 'facet',
+      facetId: 'facetId',
+      subaccountId: 23
+    })).toEqual('title for facetId (Subaccount 23)');
+  });
+
+  it('returns correct suffix with a facet and master subaccount', () => {
+    expect(getFriendlyTitle({
+      prefix: 'title for',
+      facet: 'facet',
+      facetId: 'facetId',
+      subaccountId: 0
+    })).toEqual('title for facetId (Master Account)');
+  });
 });
